@@ -1,0 +1,11 @@
+resources:
+  project_name: paper-bridge
+  stage: dev
+  bedrock_region_name: us-west-2
+
+indexing:
+  papers_per_day: 5
+  days_to_fetch: 1
+  min_upvotes:
+  main_content_extraction_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
+
