@@ -34,19 +34,20 @@ variable "public_subnet_ids" {
  }
 }
 
-variable "deploy_notebook" {
-  description = "Whether to deploy a SageMaker notebook instance"
+variable "deploy_bastion_host" {
+  description = "Whether to deploy a bastion host"
   type        = bool
   default     = false
 }
 
-variable "notebook_instance_type" {
-  description = "Instance type for SageMaker notebook"
-  type        = string
-  default = null
+variable "allowed_ip_ranges" {
+  description = "List of allowed IP CIDR ranges"
+  type        = list(string)
 
   validation {
-    condition     = var.deploy_notebook ? contains(["ml.m5.xlarge", "ml.p3.2xlarge"], var.notebook_instance_type) : true
-    error_message = "When deploy_notebook is true, instance type must be either ml.m5.xlarge or ml.p3.2xlarge"
+    condition     = length(var.allowed_ip_ranges) > 0 && alltrue([
+      for cidr in var.allowed_ip_ranges : can(cidrhost(cidr, 0))
+    ])
+    error_message = "At least one valid CIDR range must be provided (e.g. 10.0.0.0/16)"
   }
 }

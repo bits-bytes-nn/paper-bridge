@@ -34,27 +34,60 @@ variable "private_subnet_ids" {
   }
 }
 
-variable "client_security_group_ids" {
-  description = "Security group IDs for client access"
-  type        = list(string)
+variable "deploy_bastion_host" {
+  description = "Whether to deploy a bastion host"
+  type        = bool
+  default     = false
+}
+
+variable "bastion_user_name" {
+  description = "Name of the IAM user for bastion host access"
+  type        = string
+  default     = null
 
   validation {
-    condition     = length(var.client_security_group_ids) > 0
-    error_message = "At least one security group ID is required"
+    condition     = !var.deploy_bastion_host || var.bastion_user_name != null
+    error_message = "bastion_user_name must be provided when deploy_bastion_host is true"
+  }
+}
+
+variable "bastion_host_security_group_ids" {
+  description = "Security group IDs for bastion host access"
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition     = !var.deploy_bastion_host || length(var.bastion_host_security_group_ids) > 0
+    error_message = "At least one security group ID is required when deploy_bastion_host is true"
   }
 
   validation {
-    condition     = alltrue([for id in var.client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    condition     = alltrue([for id in var.bastion_host_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
     error_message = "All security group IDs must be valid sg-* identifiers"
   }
 }
 
-variable "client_role_arn" {
-  description = "ARN of the client IAM role"
+variable "app_client_security_group_ids" {
+  description = "Security group IDs for app client access"
+  type        = list(string)
+
+  validation {
+    condition     = length(var.app_client_security_group_ids) > 0
+    error_message = "At least one security group ID is required"
+  }
+
+  validation {
+    condition     = alltrue([for id in var.app_client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    error_message = "All security group IDs must be valid sg-* identifiers"
+  }
+}
+
+variable "workload_role_arn" {
+  description = "ARN of the workload IAM role"
   type        = string
 
   validation {
-    condition     = can(regex("^arn:aws:iam::[0-9]{12}:role/.+$", var.client_role_arn))
-    error_message = "Client role ARN must be a valid IAM role ARN in the format arn:aws:iam::[account-id]:role/[role-name]"
+    condition     = can(regex("^arn:aws:iam::[0-9]{12}:role/.+$", var.workload_role_arn))
+    error_message = "Workload role ARN must be a valid IAM role ARN in the format arn:aws:iam::[account-id]:role/[role-name]"
   }
 }

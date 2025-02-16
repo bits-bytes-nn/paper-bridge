@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 from .logger import logger
 
 
@@ -28,3 +29,14 @@ def get_cross_inference_model_id(
         logger.error(f"Error checking cross-inference support: {str(e)}")
 
     return model_id
+
+
+def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> str:
+    ssm_client = boto3_session.client("ssm")
+    try:
+        response = ssm_client.get_parameter(Name=param_name, WithDecryption=True)
+        return response["Parameter"]["Value"]
+
+    except ClientError as error:
+        logger.error("Failed to get SSM parameter value: %s", str(error))
+        raise error

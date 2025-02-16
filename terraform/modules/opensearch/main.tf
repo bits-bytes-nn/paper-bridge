@@ -40,9 +40,8 @@ resource "aws_opensearchserverless_security_policy" "network" {
     SourceVPCEs     = [aws_opensearchserverless_vpc_endpoint.vpce.id]
   }])
 }
-
-resource "aws_opensearchserverless_access_policy" "client_access" {
-  name        = "${var.project_name}-access"
+resource "aws_opensearchserverless_access_policy" "data" {
+  name        = "${var.project_name}-data"
   type        = "data"
   description = "Data access policy for OpenSearch Serverless"
   policy = jsonencode([{
@@ -58,7 +57,10 @@ resource "aws_opensearchserverless_access_policy" "client_access" {
         Permission   = ["aoss:*"]
       }
     ]
-    Principal = [var.client_role_arn]
+    Principal = concat(
+      [var.workload_role_arn],
+      var.deploy_bastion_host ? ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/${var.bastion_user_name}"] : []
+    )
   }])
 }
 
@@ -82,8 +84,14 @@ resource "aws_iam_policy" "opensearch_api_access" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "client_opensearch_access" {
-  role       = split("/", var.client_role_arn)[1]
+resource "aws_iam_user_policy_attachment" "bastion_user_opensearch_access" {
+  count      = var.deploy_bastion_host ? 1 : 0
+  user       = var.bastion_user_name
+  policy_arn = aws_iam_policy.opensearch_api_access.arn
+}
+
+resource "aws_iam_role_policy_attachment" "workload_opensearch_access" {
+  role       = split("/", var.workload_role_arn)[1]
   policy_arn = aws_iam_policy.opensearch_api_access.arn
 }
 
@@ -94,7 +102,7 @@ resource "aws_opensearchserverless_collection" "collection" {
   depends_on = [
     aws_opensearchserverless_security_policy.encryption,
     aws_opensearchserverless_security_policy.network,
-    aws_opensearchserverless_access_policy.client_access
+    aws_opensearchserverless_access_policy.data
   ]
 
   tags = merge(var.tags, {
@@ -108,11 +116,19 @@ resource "aws_security_group" "opensearch" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "HTTPS from client security groups"
+    description     = "HTTPS from bastion host security groups"
     from_port       = 443
     to_port         = 443
     protocol        = "tcp"
-    security_groups = var.client_security_group_ids
+    security_groups = var.bastion_host_security_group_ids
+  }
+
+  ingress {
+    description     = "HTTPS from app client security groups"
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = var.app_client_security_group_ids
   }
 
   egress {

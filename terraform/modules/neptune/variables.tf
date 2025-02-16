@@ -34,17 +34,32 @@ variable "private_subnet_ids" {
   }
 }
 
-variable "client_security_group_ids" {
-  description = "Security group IDs for client access"
+variable "bastion_host_security_group_ids" {
+  description = "Security group IDs for bastion host access"
   type        = list(string)
 
   validation {
-    condition     = length(var.client_security_group_ids) > 0
+    condition     = length(var.bastion_host_security_group_ids) > 0
     error_message = "At least one security group ID is required"
   }
 
   validation {
-    condition     = alltrue([for id in var.client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    condition     = alltrue([for id in var.bastion_host_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    error_message = "All security group IDs must be valid sg-* identifiers"
+  }
+}
+
+variable "app_client_security_group_ids" {
+  description = "Security group IDs for app client access"
+  type        = list(string)
+
+  validation {
+    condition     = length(var.app_client_security_group_ids) > 0
+    error_message = "At least one security group ID is required"
+  }
+
+  validation {
+    condition     = alltrue([for id in var.app_client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
     error_message = "All security group IDs must be valid sg-* identifiers"
   }
 }

@@ -69,7 +69,6 @@ resource "aws_neptune_cluster_instance" "instance" {
     Name = "${var.project_name}-instance"
   })
 }
-
 resource "aws_security_group" "neptune" {
   name_prefix = "${var.project_name}-neptune-sg"
   description = "Security group for Neptune cluster"
@@ -79,8 +78,16 @@ resource "aws_security_group" "neptune" {
     from_port       = 8182
     to_port         = 8182
     protocol        = "tcp"
-    security_groups = var.client_security_group_ids
-    description     = "Allow inbound access from client security groups"
+    security_groups = var.bastion_host_security_group_ids
+    description     = "Allow inbound access from bastion host security group"
+  }
+
+  ingress {
+    from_port       = 8182
+    to_port         = 8182
+    protocol        = "tcp"
+    security_groups = var.app_client_security_group_ids
+    description     = "Allow inbound access from app client security groups"
   }
 
   egress {
@@ -97,7 +104,7 @@ resource "aws_security_group" "neptune" {
 }
 
 resource "aws_ssm_parameter" "neptune_endpoint" {
-  name        = "/${var.project_name}/neptune/cluster-endpoint"
+  name        = "/${var.project_name}/neptune/endpoint"
   description = "Neptune cluster endpoint"
   type        = "String"
   value       = aws_neptune_cluster.cluster.endpoint

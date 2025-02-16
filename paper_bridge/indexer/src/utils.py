@@ -1,4 +1,5 @@
 import functools
+import os
 import time
 from typing import Callable, Dict, Union, Tuple, Type, Optional
 from bs4 import BeautifulSoup
@@ -69,3 +70,13 @@ def measure_execution_time(func: Callable) -> Callable:
         return result
 
     return wrapper
+
+
+def is_aws_env() -> bool:
+    aws_env_vars = [
+        "AWS_BATCH_JOB_ID",
+        "AWS_LAMBDA_FUNCTION_NAME",
+        "ECS_CONTAINER_METADATA_URI",
+    ]
+
+    return any(env_var in os.environ for env_var in aws_env_vars)
