@@ -38,3 +38,18 @@ variable "nat_gateways" {
     error_message = "Number of NAT gateways must be between 1 and max_azs"
   }
 }
+variable "enable_vpn" {
+  description = "Whether to enable Client VPN endpoint"
+  type        = bool
+  default     = false
+}
+
+variable "vpn_client_cidr_block" {
+  description = "CIDR block to assign to VPN clients"
+  type        = string
+  default     = "10.100.0.0/22"
+  validation {
+    condition     = can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[1-2][0-9]|3[0-2])$", var.vpn_client_cidr_block))
+    error_message = "VPN client CIDR must be a valid IPv4 CIDR block"
+  }
+}

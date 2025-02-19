@@ -10,28 +10,26 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "deploy_bastion_host" {
-  description = "Whether to deploy a bastion host"
+variable "enable_vpn" {
+  description = "Whether to enable Client VPN endpoint"
   type        = bool
   default     = false
 }
 
-variable "bastion_user_name" {
-  description = "Name of the IAM user for bastion host access"
+variable "vpn_client_cidr_block" {
+  description = "CIDR block to assign to VPN clients"
   type        = string
-  default     = null
+  default     = "10.100.0.0/22"
+  validation {
+    condition     = can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}/([0-9]|[1-2][0-9]|3[0-2])$", var.vpn_client_cidr_block))
+    error_message = "VPN client CIDR must be a valid IPv4 CIDR block"
+  }
 }
 
-variable "allowed_ip_ranges" {
-  description = "List of allowed IP CIDR ranges"
-  type        = list(string)
-
-  validation {
-    condition     = length(var.allowed_ip_ranges) > 0 && alltrue([
-      for cidr in var.allowed_ip_ranges : can(cidrhost(cidr, 0))
-    ])
-    error_message = "At least one valid CIDR range must be provided (e.g. 10.0.0.0/16)"
-  }
+variable "client_user_name" {
+  description = "Name of the IAM user for DB access"
+  type        = string
+  default     = null
 }
 
 variable "db_instance_type" {

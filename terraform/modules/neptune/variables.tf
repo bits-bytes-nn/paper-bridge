@@ -10,7 +10,7 @@ variable "tags" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID where Neptune will be deployed"
+  description = "VPC ID"
   type        = string
 
   validation {
@@ -34,32 +34,17 @@ variable "private_subnet_ids" {
   }
 }
 
-variable "bastion_host_security_group_ids" {
-  description = "Security group IDs for bastion host access"
+variable "client_security_group_ids" {
+  description = "Security group IDs for client access"
   type        = list(string)
 
   validation {
-    condition     = length(var.bastion_host_security_group_ids) > 0
+    condition     = length(var.client_security_group_ids) > 0
     error_message = "At least one security group ID is required"
   }
 
   validation {
-    condition     = alltrue([for id in var.bastion_host_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
-    error_message = "All security group IDs must be valid sg-* identifiers"
-  }
-}
-
-variable "app_client_security_group_ids" {
-  description = "Security group IDs for app client access"
-  type        = list(string)
-
-  validation {
-    condition     = length(var.app_client_security_group_ids) > 0
-    error_message = "At least one security group ID is required"
-  }
-
-  validation {
-    condition     = alltrue([for id in var.app_client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    condition     = alltrue([for id in var.client_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
     error_message = "All security group IDs must be valid sg-* identifiers"
   }
 }
@@ -112,4 +97,24 @@ variable "enable_audit_log" {
   description = "Enable audit logging"
   type        = bool
   default     = false
+}
+
+
+variable "enable_vpn" {
+  description = "Whether to enable Client VPN endpoint"
+  type        = bool
+  default     = false
+}
+variable "vpn_security_group_ids" {
+  description = "Security group IDs for VPN access"
+  type        = list(string)
+  default     = []
+  validation {
+    condition     = !var.enable_vpn || length(var.vpn_security_group_ids) > 0
+    error_message = "At least one security group ID is required when VPN is enabled"
+  }
+  validation {
+    condition     = !var.enable_vpn || alltrue([for id in var.vpn_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    error_message = "All security group IDs must be valid sg-* identifiers"
+  }
 }

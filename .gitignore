@@ -247,3 +247,4 @@ cython_debug/
 .run/
 .virtual_documents
 logs/
+terraform/modules/base/certificates/*

@@ -1,8 +1,3 @@
-output "bastion_instance_id" {
-  description = "ID of the bastion host instance"
-  value       = module.workload.bastion_host_instance_id
-}
-
 output "neptune_endpoint" {
   description = "Neptune cluster endpoint URL"
   value       = module.neptune.cluster.cluster_endpoint

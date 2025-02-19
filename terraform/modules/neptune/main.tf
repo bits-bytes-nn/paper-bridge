@@ -74,20 +74,13 @@ resource "aws_security_group" "neptune" {
   description = "Security group for Neptune cluster"
   vpc_id      = var.vpc_id
 
-  ingress {
-    from_port       = 8182
-    to_port         = 8182
-    protocol        = "tcp"
-    security_groups = var.bastion_host_security_group_ids
-    description     = "Allow inbound access from bastion host security group"
-  }
 
   ingress {
     from_port       = 8182
     to_port         = 8182
     protocol        = "tcp"
-    security_groups = var.app_client_security_group_ids
-    description     = "Allow inbound access from app client security groups"
+    security_groups = concat(var.client_security_group_ids, var.vpn_security_group_ids)
+    description     = "Allow inbound access from client security groups"
   }
 
   egress {
