@@ -1,8 +1,0 @@
-Research Papers on Knowledge Editing and Language Model Interventions
-Anton Sinitsin, Vsevolod Plokhotnyuk, Dmitriy Pyrkin, Sergei Popov, and Artem Babenko published a paper on editable neural networks in 2020.
-Zeyu Huang, Yikang Shen, Xiaofeng Zhang, Jie Zhou, Wenge Rong, and Zhang Xiong proposed Transformer-patcher in 2023.
-Kevin Meng, Arnab Sen Sharma, Alex Andonian, Yonatan Belinkov, and David Bau researched mass-editing memory in a transformer in 2022.
-Jiaxin Qin, Zixuan Zhang, Chi Han, Manling Li, Pengfei Yu, and Heng Ji investigated why new knowledge creates messy ripple effects in Large Language Models at EMNLP 2024.
-Jiateng Liu, Pengfei Yu, Yuji Zhang, Sha Li, Zixuan Zhang, and Heng Ji presented EVEDIT: Event-based Knowledge Editing with Deductive Editing Boundaries at EMNLP 2024.
-Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov studied locating and editing factual associations in GPT in 2022.
-Kenneth Li, Oam Patel, Fernanda Viégas, Hanspeter Pfister, and Martin Wattenberg proposed Inference-Time Intervention for eliciting truthful answers from a language model in 2023.

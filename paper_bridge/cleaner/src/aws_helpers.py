@@ -1,5 +1,4 @@
 import re
-import time
 from typing import Any, Dict, List, Optional
 import boto3
 from botocore.exceptions import ClientError
@@ -641,42 +640,6 @@ class OpenSearchClient:
         return bool(re.match(pattern, date_str))
 
 
-def get_account_id(boto3_session: boto3.Session) -> str:
-    try:
-        sts_client = boto3_session.client("sts")
-        return sts_client.get_caller_identity()["Account"]
-    except ClientError as e:
-        logger.error("Failed to get account ID: '%s'", str(e))
-        raise
-
-
-def get_cross_inference_model_id(
-    boto3_session: boto3.Session, model_id: str, region_name: str
-) -> str:
-    if not all([boto3_session, model_id, region_name]):
-        raise ValueError("All parameters must be provided")
-
-    prefix = "apac" if region_name.startswith("ap-") else region_name[:2]
-    cr_model_id = f"{prefix}.{model_id}"
-
-    try:
-        bedrock_client = boto3_session.client("bedrock", region_name=region_name)
-        response = bedrock_client.list_inference_profiles(
-            maxResults=1000, typeEquals="SYSTEM_DEFINED"
-        )
-        profile_list = [
-            p["inferenceProfileId"] for p in response["inferenceProfileSummaries"]
-        ]
-
-        if cr_model_id in profile_list:
-            return cr_model_id
-
-    except Exception as e:
-        logger.error(f"Error checking cross-inference support: {str(e)}")
-
-    return model_id
-
-
 def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Optional[str]:
     if not param_name:
         raise ValueError("Parameter name must not be empty")
@@ -689,53 +652,3 @@ def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Option
     except ClientError as error:
         logger.error("Failed to get SSM parameter value: %s", str(error))
         return None
-
-
-def submit_batch_job(
-    boto3_session: boto3.Session,
-    job_name: str,
-    job_queue_name: str,
-    job_definition_name: str,
-    parameters: Optional[Dict[str, str]] = None,
-) -> str:
-    batch_client = boto3_session.client("batch")
-    try:
-        response = batch_client.submit_job(
-            jobName=job_name,
-            jobQueue=job_queue_name,
-            jobDefinition=job_definition_name,
-            parameters=parameters or {},
-        )
-        job_id = response["jobId"]
-        logger.info(
-            "Successfully submitted batch job '%s' (Job ID: %s)",
-            job_name,
-            job_id,
-        )
-        return job_id
-
-    except ClientError as error:
-        logger.error("Failed to submit batch job '%s': %s", job_name, str(error))
-        raise
-
-
-def wait_for_batch_job_completion(boto3_session: boto3.Session, job_id: str) -> bool:
-    batch_client = boto3_session.client("batch")
-
-    print("Waiting for job completion", end="", flush=True)
-    while True:
-        response = batch_client.describe_jobs(jobs=[job_id])
-        if not response["jobs"]:
-            print("\nJob not found")
-            return False
-
-        status = response["jobs"][0]["status"]
-        if status == "SUCCEEDED":
-            print("\nJob completed successfully!")
-            return True
-        elif status in ["FAILED", "CANCELLED"]:
-            print(f"\nJob {status.lower()}!")
-            return False
-
-        print(".", end="", flush=True)
-        time.sleep(30)

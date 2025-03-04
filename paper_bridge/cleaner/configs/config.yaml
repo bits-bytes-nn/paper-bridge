@@ -1,0 +1,8 @@
+resources:
+  project_name: paper-bridge
+  stage: dev
+  default_region_name: us-west-2
+
+cleaning:
+  days_back: 365
+  days_range: 7

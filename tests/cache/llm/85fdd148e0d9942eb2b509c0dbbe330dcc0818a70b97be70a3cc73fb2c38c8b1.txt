@@ -1,9 +1,0 @@
-Research Papers on Vision-Language Model Robustness and Evaluation
-
-Tony Lee, Haoqin Tu, Chi Heem Wong, Wenhao Zheng, Yiyang Zhou, Yifan Mai, Josselin Somerville Roberts, Michihiro Yasunaga, Huaxiu Yao, and Cihang Xie published a paper titled "VHELM: A Holistic Evaluation of Vision Language Models" on arXiv in 2024.
-Dong Lu, Tianyu Pang, Chao Du, Qian Liu, Xianjun Yang, and Min Lin published a paper on "Test-time backdoor attacks on multimodal large language models" on arXiv in 2024.
-Multiple research papers explore the adversarial robustness and evaluation of vision-language models.
-Researchers are investigating various aspects of robustness, including adversarial attacks, prompt tuning, and model evaluation methodologies.
-Key research areas include understanding and mitigating vulnerabilities in large multimodal models.
-Evaluation techniques range from holistic assessments to specific robustness benchmarks.
-The research spans topics such as zero-shot adversarial robustness, frequency-domain prompting, and adversarial prompt tuning.

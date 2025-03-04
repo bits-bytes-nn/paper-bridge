@@ -13,11 +13,11 @@ from llama_parse import LlamaParse
 from llama_parse.base import ResultType
 from pydantic import BaseModel, Field, field_validator
 from unstructured.partition.pdf import partition_pdf
-from .aws_helpers import get_cross_inference_model_id
-from .constants import URLs
+from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
+from .constants import EnvVars, SSMParams, URLs
 from .logger import logger
 from .prompts import MainContentExtractionPrompt
-from .utils import HTMLTagOutputParser, measure_execution_time
+from .utils import HTMLTagOutputParser, is_aws_env, measure_execution_time
 from paper_bridge.indexer.configs.config import Config
 
 
@@ -90,7 +90,19 @@ class PaperFetcher:
             else None
         )
         self.timeout = max(1, timeout)
+        base_path = f"/{config.resources.project_name}-{config.resources.stage}"
+        llama_cloud_api_key = (
+            get_ssm_param_value(
+                self.boto3_session, f"{base_path}/{SSMParams.LLAMA_CLOUD_API_KEY.value}"
+            )
+            if is_aws_env()
+            else os.getenv(EnvVars.LLAMA_CLOUD_API_KEY.name)
+        )
+        if llama_cloud_api_key is None:
+            raise ValueError("LLAMA Cloud API key not found")
+
         self.llama_parser = LlamaParse(
+            api_key=llama_cloud_api_key,
             max_timeout=self.LLAMA_PARSE_MAX_TIMEOUT,
             num_workers=self.LLAMA_PARSE_NUM_WORKERS,
             result_type=ResultType.MD,
@@ -103,16 +115,17 @@ class PaperFetcher:
         self.output_parser = None
 
         if config.indexing.main_content_extraction_model_id:
-            logger.info("Initializing LLM for extracting main content from papers")
             self.prompt_template = MainContentExtractionPrompt
             self.llm = Bedrock(
-                model=get_cross_inference_model_id(
+                get_cross_inference_model_id(
                     self.boto3_session,
                     config.indexing.main_content_extraction_model_id.value,
                     config.resources.bedrock_region_name,
                 ),
-                aws_region=config.resources.bedrock_region_name,
+                temperature=0.0,
+                max_tokens=4096,
                 profile_name=profile_name,
+                region_name=config.resources.bedrock_region_name,
             )
             self.output_parser = HTMLTagOutputParser(
                 tag_names=self.prompt_template.OUTPUT_VARIABLES
@@ -120,11 +133,17 @@ class PaperFetcher:
 
     @measure_execution_time
     def fetch_papers_for_date_range(
-        self, target_date: Optional[datetime] = None
+        self,
+        target_date: Optional[datetime] = None,
+        days_to_fetch: Optional[int] = None,
     ) -> Dict[str, List[Paper]]:
         try:
             target_date = self._get_target_date(target_date)
-            papers_by_date = self._fetch_papers_by_date_range(target_date)
+            if days_to_fetch == 0:
+                days_to_fetch = None
+            papers_by_date = self._fetch_papers_by_date_range(
+                target_date, days_to_fetch=days_to_fetch
+            )
             filtered_papers = self._filter_and_sort_papers(papers_by_date)
             return self._process_papers_concurrently(filtered_papers)
         except requests.RequestException as e:
@@ -142,9 +161,12 @@ class PaperFetcher:
             hour=0, minute=0, second=0, microsecond=0
         ).astimezone(timezone.utc) - timedelta(days=1)
 
-    def _fetch_papers_by_date_range(self, end_date: datetime) -> Dict[str, List[Paper]]:
+    def _fetch_papers_by_date_range(
+        self, end_date: datetime, days_to_fetch: Optional[int] = None
+    ) -> Dict[str, List[Paper]]:
         papers_by_date: Dict[str, List[Paper]] = {}
-        start_date = end_date - timedelta(days=self.days_to_fetch - 1)
+        start_date = end_date - timedelta(days=days_to_fetch or self.days_to_fetch - 1)
+        logger.info(f"Fetching papers from '{start_date}' to '{end_date}'")
 
         for current_date in self._date_range(start_date, end_date):
             date_str = current_date.strftime("%Y-%m-%d")
@@ -209,7 +231,7 @@ class PaperFetcher:
             )
             if self._meets_upvote_threshold(paper.upvotes):
                 return paper
-        except (ValueError, KeyError) as e:
+        except (KeyError, ValueError) as e:
             logger.error(f"Error creating Paper object: {e}")
 
         return None
@@ -281,14 +303,16 @@ class PaperFetcher:
                 paper.download_pdf(temp_dir)
                 pdf_files = [f for f in os.listdir(temp_dir) if f.endswith(".pdf")]
                 if not pdf_files:
-                    logger.error(f"No PDF file found in temp directory for {arxiv_id}")
+                    logger.error(
+                        f"No PDF file found in temp directory for '{arxiv_id}'"
+                    )
                     return None
 
                 pdf_path = os.path.join(temp_dir, pdf_files[0])
                 return self._process_pdf_content(pdf_path)
 
         except Exception as e:
-            logger.error(f"Error downloading/parsing paper {arxiv_id}: {str(e)}")
+            logger.error(f"Error downloading/parsing paper '{arxiv_id}': {str(e)}")
             return None
 
     @staticmethod
@@ -298,10 +322,10 @@ class PaperFetcher:
             search = arxiv.Search(id_list=[arxiv_id])
             return next(client.results(search))
         except StopIteration:
-            logger.error(f"Paper not found: {arxiv_id}")
+            logger.error(f"Paper not found: '{arxiv_id}'")
             return None
         except Exception as e:
-            logger.error(f"Error downloading paper {arxiv_id}: {str(e)}")
+            logger.error(f"Error downloading paper '{arxiv_id}': {str(e)}")
             return None
 
     def _process_pdf_content(self, pdf_path: str) -> Optional[str]:
@@ -377,7 +401,7 @@ class PaperFetcher:
             end_idx = text_content.find(end_marker, start_idx + offset)
 
             logger.debug(
-                "start_idx: %s, start_marker: %s, end_idx: %s, end_marker: %s",
+                "Content extraction markers - start_idx: %s, start_marker: %s, end_idx: %s, end_marker: %s",
                 start_idx,
                 start_marker,
                 end_idx,

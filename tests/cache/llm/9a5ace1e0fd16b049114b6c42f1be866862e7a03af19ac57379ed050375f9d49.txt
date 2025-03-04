@@ -1,4 +1,0 @@
-Acknowledgment and Support for Max Lamparth
-Max Lamparth is partially supported by the Stanford Center for AI Safety.
-Max Lamparth is partially supported by the Center for International Security and Cooperation.
-Max Lamparth is partially supported by the Stanford Existential Risk Initiative.

@@ -6,15 +6,10 @@ resources:
   s3_bucket_name: sagemaker-us-west-2-998601677581
   s3_key_prefix: paper-bridge/batch-extract
 
-logging:
-  level: INFO
-  include_prefixes: []
-  exclude_prefixes: []
-
 indexing:
-  papers_per_day: 1
+  papers_per_day: 5
   days_to_fetch: 1
-  min_upvotes:
+  min_upvotes: 10
   main_content_extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
   extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
   response_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0

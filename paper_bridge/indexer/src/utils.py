@@ -1,7 +1,8 @@
+import argparse
 import functools
 import os
 import time
-from typing import Callable, Dict, Union, Tuple, Type, Optional
+from typing import Any, Callable, Dict, Union, Tuple, Type, Optional
 from bs4 import BeautifulSoup
 from llama_index.core.types import BaseOutputParser
 from .logger import logger
@@ -57,6 +58,20 @@ class HTMLTagOutputParser(BaseOutputParser):
     @property
     def output_type(self) -> Type[Union[str, Dict[str, str]]]:
         return Dict[str, str] if isinstance(self.tag_names, tuple) else str
+
+
+def arg_as_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+
+    if isinstance(value, str):
+        value = value.lower().strip()
+        if value in ("yes", "true", "t", "y", "1"):
+            return True
+        if value in ("no", "false", "f", "n", "0"):
+            return False
+
+    raise argparse.ArgumentTypeError("Boolean value expected")
 
 
 def measure_execution_time(func: Callable) -> Callable:

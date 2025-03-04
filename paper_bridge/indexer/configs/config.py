@@ -1,4 +1,3 @@
-import os
 from enum import Enum
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -18,6 +17,7 @@ class LanguageModelId(str, Enum):
     CLAUDE_V3_5_HAIKU = "anthropic.claude-3-5-haiku-20241022-v1:0"
     CLAUDE_V3_5_SONNET = "anthropic.claude-3-5-sonnet-20240620-v1:0"
     CLAUDE_V3_5_SONNET_V2 = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    CLAUDE_V3_7_SONNET = "anthropic.claude-3-7-sonnet-20250219-v1:0"
 
 
 ModelIdType = Union[EmbeddingsModelId, LanguageModelId]
@@ -128,12 +128,6 @@ class Resources(BaseModelWithDefaults):
         return v
 
 
-class Logging(BaseModelWithDefaults):
-    level: str = Field(default=os.getenv("LOG_LEVEL", "INFO"))
-    include_prefixes: List[str] = Field(default_factory=list)
-    exclude_prefixes: List[str] = Field(default_factory=list)
-
-
 class Indexing(BaseModelWithDefaults):
     papers_per_day: int = Field(default=5, ge=1)
     days_to_fetch: int = Field(default=7, ge=1)
@@ -164,7 +158,6 @@ class Config(BaseModelWithDefaults):
     resources: Resources = Field(
         default_factory=lambda: Resources(project_name="paper-bridge")
     )
-    logging: Logging = Field(default_factory=Logging)
     indexing: Indexing = Field(default_factory=Indexing)
 
     @classmethod

@@ -21,7 +21,7 @@ requests-aws4auth = "^1.3.1"
 unstructured = "^0.16.23"
 unstructured-inference = "^0.8.7"
 unstructured-pytesseract = "^0.3.13"
-graphrag-toolkit = {url = "https://github.com/awslabs/graphrag-toolkit/archive/refs/tags/v1.1.3.zip"}
+graphrag-toolkit = {url = "https://github.com/awslabs/graphrag-toolkit/archive/refs/tags/v2.0.1.zip"}
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"

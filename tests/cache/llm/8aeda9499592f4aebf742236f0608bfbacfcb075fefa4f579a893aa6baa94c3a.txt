@@ -1,8 +1,0 @@
-Research Papers on Bias and Stereotypes in Text-to-Image Generative Models
-
-Hanjun Luo, Haoyu Huang, Ziye Deng, Xuecheng Liu, Ruizhe Chen, and Zuozhu Liu published a paper titled "BIGbench: A Unified Benchmark for Social Bias in Text-to-Image Generative Models Based on Multi-modal LLM" in 2024.
-Federico Bianchi and colleagues studied how text-to-image generation amplifies demographic stereotypes at large scale in the 2023 ACM Conference on Fairness, Accountability, and Transparency.
-Felix Friedrich et al. investigated how multilingual text-to-image generation magnifies gender stereotypes in an arXiv preprint in 2024.
-Akshita Jha and researchers conducted a global-scale analysis of visual stereotypes in text-to-image generation, published in the 62nd Annual Meeting of the Association for Computational Linguistics in 2024.
-Aditya Chinchure and team developed Tibet, a method for identifying and evaluating biases in text-to-image generative models, in an arXiv preprint in 2023.
-Hanjun Luo, Ziye Deng, Ruizhe Chen, and Zuozhu Liu created FAIntbench, a holistic and precise benchmark for bias evaluation in text-to-image models, in an arXiv preprint in 2024.

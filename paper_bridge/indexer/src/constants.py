@@ -41,6 +41,8 @@ ENTITY_CLASSIFICATIONS: List[str] = [
 
 class EnvVars(str, Enum):
     AWS_PROFILE_NAME = "AWS_PROFILE_NAME"
+    LLAMA_CLOUD_API_KEY = "LLAMA_CLOUD_API_KEY"
+    TOPIC_ARN = "TOPIC_ARN"
 
     @property
     def value(self) -> Optional[str]:
@@ -52,6 +54,12 @@ class LocalPaths(str, Enum):
 
     CONFIG_FILE = "config.yaml"
     LOGS_FILE = "logs.txt"
+
+
+class SSMParams(str, Enum):
+    BATCH_JOB_DEFINITION = "batch/job-definition"
+    BATCH_JOB_QUEUE = "batch/job-queue"
+    LLAMA_CLOUD_API_KEY = "batch/llama-cloud-api-key"
 
 
 class URLs(str, Enum):

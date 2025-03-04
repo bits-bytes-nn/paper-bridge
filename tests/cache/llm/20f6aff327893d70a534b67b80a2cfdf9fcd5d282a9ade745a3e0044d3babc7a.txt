@@ -1,6 +1,0 @@
-Research Publications on Large Multimodal and AI Models
-
-xGen-MM (BLIP-3) is a family of open large multimodal models published in an arXiv preprint in 2024.
-Dongxu Li, Junnan Li, and Steven Hoi published a paper on BLIP-Diffusion for controllable text-to-image generation and editing in Advances in Neural Information Processing Systems in 2024.
-Can Qin and colleagues published a paper on UniControl, a unified diffusion model for controllable visual generation, in an arXiv preprint in 2023.
-Tom Gunter and colleagues published a paper on Apple Intelligence Foundation Language Models in an arXiv preprint in 2024.
