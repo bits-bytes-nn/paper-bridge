@@ -1,0 +1,19 @@
+Research Papers on Fairness and Bias in Vision-Language Models
+
+Yue Xu, Xiuyuan Qi, Zhan Qin, and Wenjie Wang published a paper on defending jailbreak attacks in Vision-Language Models using a cross-modality information detector.
+Xiaoyu Zhang et al. proposed a mutation-based method for multi-modal jailbreaking attack detection.
+Zaitang Li, Pin-Yu Chen, and Tsung-Yi Ho developed a Retention Score to quantify jailbreak risks for Vision Language Models.
+Deyao Zhu et al. enhanced vision-language understanding with MiniGPT-4 using advanced large language models.
+Otavio Parraga et al. conducted a survey on fairness in deep learning research focusing on vision and language.
+Tosin Adewumi et al. published a survey on fairness and bias in multimodal AI.
+Nayeon Lee et al. conducted a survey of social bias in vision-language models.
+Ali Abdollahi et al. explored gender-activity binding bias in Vision-Language Models through GABInsight.
+Phillip Howard et al. developed SocialCounterfactuals to probe and mitigate intersectional social biases in Vision-Language Models.
+Xuyang Wu et al. evaluated fairness in Large Vision-Language Models across diverse demographic attributes and prompts.
+Christopher Teo et al. researched measuring fairness in generative models.
+Messi HJ Lee et al. found that more distinctively Black and feminine faces lead to increased stereotyping in Vision-Language Models.
+Amith Ananthram et al. diagnosed Western cultural bias in large Vision-Language Models' image understanding.
+Meiqi Chen et al. quantified and mitigated unimodal biases in Multimodal Large Language Models from a causal perspective.
+Moreno D'Incà et al. improved fairness using vision-language driven image augmentation.
+Ashish Seth et al. developed DeAR method for debiasing Vision-Language Models with additive residuals.
+Yi Zhang et al. worked on counterfactually measuring and eliminating social bias in Vision-Language Pre-training Models.

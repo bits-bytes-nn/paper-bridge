@@ -1,0 +1,19 @@
+Research Papers on Large Language Models and Cybersecurity Vulnerabilities
+
+"Do Anything Now" paper characterizes and evaluates jailbreak prompts on large language models.
+Rusheb Shah et al. proposed scalable and transferable black-box jailbreaks for language models via persona modulation.
+Xuan Li et al. introduced DeepInception technique to hypnotize large language models to become jailbreakers.
+Anselm Paulus et al. developed AdvPrompter for fast adaptive adversarial prompting for large language models.
+Carlos E Jimenez et al. created SWE-bench to evaluate if language models can resolve real-world GitHub issues.
+Zhenguo Hu et al. explored automated penetration testing using deep reinforcement learning.
+Chenyuan Yang et al. developed WhiteFox, a white-box compiler fuzzing tool empowered by large language models.
+Jincheng Wang et al. created LLMIF for augmenting large language models to fuzz IoT devices.
+Ruijie Meng et al. proposed large language model guided protocol fuzzing.
+Yinlin Deng et al. demonstrated that large language models can be zero-shot fuzzers for deep-learning libraries.
+Xiaoyue Ma et al. used large language models to unveil hidden bugs in Matter IoT device specifications.
+Saad Ullah et al. conducted a comprehensive evaluation of LLMs' ability to identify and reason about security vulnerabilities.
+OpenAI published a report on influence and cyber operations.
+Richard Fang et al. showed that teams of LLM agents can exploit zero-day vulnerabilities.
+Xiangmin Shen et al. developed PentestAgent for incorporating LLM agents in automated penetration testing.
+Dan Ristea et al. created an AI Cyber Risk Benchmark for automated exploitation capabilities.
+Polra Victor Falade analyzed the threat landscape of ChatGPT, FraudGPT, and WormGPT in social engineering attacks.

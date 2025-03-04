@@ -1,0 +1,113 @@
+topic: Test Case Builder Module
+
+  entities:
+    Test Case Builder Module|Module
+    Generative Model|Model
+    Programmatic Operations|Method
+    Social Norm Descriptions|Social Concept
+    Key-Value Pairs|Technological Concept
+    Contextual Variator|Tool
+    Transform Question Format|Method
+    Paraphrase Sentence|Method
+    TrustGen|Project
+    Human Evaluation|Method
+    Trustworthiness Score|Metric
+
+  proposition: Test case builder module generates test cases using generative models or programmatic operations
+    entity-entity relationships:
+    Test Case Builder Module|USES|Generative Model
+    Test Case Builder Module|USES|Programmatic Operations
+
+  proposition: Test case builder uses social norm descriptions to generate test queries
+    entity-entity relationships:
+    Test Case Builder Module|USES|Social Norm Descriptions
+
+  proposition: Generative model paraphrases queries and answers without generating ground-truth labels
+    entity-attribute relationships:
+    Generative Model|CAPABILITY|paraphrases queries
+    Generative Model|CAPABILITY|paraphrases answers
+    Generative Model|LIMITATION|does not generate ground-truth labels
+
+  proposition: Programmatic operations test model robustness by adding noise to text or images
+    entity-attribute relationships:
+    Programmatic Operations|PURPOSE|test model robustness
+    Programmatic Operations|METHOD|add noise to text
+    Programmatic Operations|METHOD|add noise to images
+
+  proposition: Existing key-value pairs from structured datasets can generate test questions without AI models
+    entity-entity relationships:
+    Key-Value Pairs|GENERATES|Test Questions
+
+topic: Contextual Variator Transformation Methods
+
+  proposition: Transform Question Format converts questions between open-ended, multiple-choice, and binary judgment formats
+    entity-attribute relationships:
+    Transform Question Format|CAPABILITY|convert open-ended questions
+    Transform Question Format|CAPABILITY|convert multiple-choice questions
+    Transform Question Format|CAPABILITY|convert binary judgment questions
+
+  proposition: Transform by Length adjusts sentence length while preserving original meaning
+    entity-attribute relationships:
+    Transform by Length|CAPABILITY|adjust sentence length
+    Transform by Length|CAPABILITY|preserve original meaning
+
+  proposition: Paraphrase Sentence rewrites sentences using different vocabulary and structures
+    entity-attribute relationships:
+    Paraphrase Sentence|CAPABILITY|rewrite sentences
+    Paraphrase Sentence|METHOD|use different vocabulary
+    Paraphrase Sentence|METHOD|use different structures
+
+topic: TrustGen Design Principles
+
+  proposition: Contextual Variator addresses prompt sensitivity in model evaluation
+    entity-attribute relationships:
+    Contextual Variator|PURPOSE|address prompt sensitivity
+    Contextual Variator|FOCUS|model evaluation
+
+  proposition: Contextual Variator introduces diversity to programmatic generation operations
+    entity-attribute relationships:
+    Contextual Variator|CAPABILITY|introduce diversity
+    Contextual Variator|APPLIES_TO|programmatic generation operations
+
+  proposition: Human evaluation assesses semantic shifts and data quality for generated instances
+    entity-attribute relationships:
+    Human Evaluation|PURPOSE|assess semantic shifts
+    Human Evaluation|PURPOSE|assess data quality
+    Human Evaluation|APPLIES_TO|generated instances
+
+  proposition: Trustworthiness score standardizes metric results on a 0-100 scale
+    entity-attribute relationships:
+    Trustworthiness Score|PURPOSE|standardize metric results
+    Trustworthiness Score|RANGE|0-100 scale
+
+  proposition: Trustworthiness score inverts metrics where lower values indicate better performance
+    entity-attribute relationships:
+    Trustworthiness Score|CHARACTERISTIC|invert metrics
+    Trustworthiness Score|INTERPRETATION|lower values indicate better performance
+
+topic: Model Selection Principles
+
+  proposition: Prioritize latest and cutting-edge generative foundation models
+    entity-attribute relationships:
+    Model Selection|PRINCIPLE|prioritize latest models
+    Model Selection|PRINCIPLE|prioritize cutting-edge models
+
+  proposition: Select models from most recent model series like Llama 3 and Llama 3.1
+    entity-attribute relationships:
+    Model Selection|CRITERIA|select from recent model series
+
+  proposition: Exclude outdated models with lagging performance
+    entity-attribute relationships:
+    Model Selection|PRINCIPLE|exclude outdated models
+    Model Selection|CRITERIA|performance
+
+  proposition: Ensure broad representation from major model developers
+    entity-attribute relationships:
+    Model Selection|PRINCIPLE|ensure broad representation
+
+  proposition: Include models from OpenAI, Meta, Google, and Anthropic
+    entity-entity relationships:
+    Model Selection|INCLUDES|OpenAI
+    Model Selection|INCLUDES|Meta
+    Model Selection|INCLUDES|Google
+    Model Selection|INCLUDES|Anthropic

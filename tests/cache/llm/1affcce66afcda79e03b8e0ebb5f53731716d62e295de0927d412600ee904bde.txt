@@ -1,0 +1,91 @@
+topic: TrustGen Benchmark System
+
+  entities:
+    TrustGen|Benchmark
+    Metadata Curator|Module
+    Test Case Builder|Module
+    Contextual Variator|Module
+    Web-browsing agents|Agent
+    Large language models|Model
+    Generative models|Model
+
+  proposition: TrustGen establishes the first dynamic evaluation framework for generative foundation model trustworthiness.
+    entity-attribute relationships:
+    TrustGen|DESCRIBED_BY|dynamic evaluation framework
+    TrustGen|FOCUSES_ON|generative foundation model trustworthiness
+
+    entity-entity relationships:
+    TrustGen|EVALUATES|Generative models
+
+  proposition: The benchmark system is designed to be effective, reproducible, user-friendly, and fully open-source.
+    entity-attribute relationships:
+    TrustGen|CHARACTERIZED_BY|effective
+    TrustGen|CHARACTERIZED_BY|reproducible
+    TrustGen|CHARACTERIZED_BY|user-friendly
+    TrustGen|CHARACTERIZED_BY|open-source
+
+  proposition: TrustGen continuously adapts to evolving ethical standards and provides authentic assessments of model behavior.
+    entity-attribute relationships:
+    TrustGen|ADAPTS_TO|evolving ethical standards
+    TrustGen|PROVIDES|authentic assessments of model behavior
+
+  proposition: The benchmark recognizes the importance of balancing both utility and trustworthiness in generative models.
+    entity-attribute relationships:
+    TrustGen|BALANCES|utility and trustworthiness
+
+    entity-entity relationships:
+    TrustGen|EVALUATES|Generative models
+
+  proposition: TrustGen leverages three core modules to create an iterative pipeline for continuous evaluation.
+    entity-entity relationships:
+    TrustGen|USES|Metadata Curator
+    TrustGen|USES|Test Case Builder
+    TrustGen|USES|Contextual Variator
+
+  proposition: The three core modules are Metadata Curator, Test Case Builder, and Contextual Variator.
+    entity-attribute relationships:
+    Metadata Curator|TYPE|core module
+    Test Case Builder|TYPE|core module
+    Contextual Variator|TYPE|core module
+
+  proposition: The Metadata Curator handles preprocessing and transforming metadata into usable test cases.
+    entity-attribute relationships:
+    Metadata Curator|FUNCTION|preprocessing
+    Metadata Curator|FUNCTION|transforming metadata
+    Metadata Curator|CREATES|usable test cases
+
+  proposition: Three types of metadata curators are employed:
+    entity-attribute relationships:
+    Metadata Curator|INCLUDES|Dataset pool maintainers
+    Metadata Curator|INCLUDES|Web-browsing agents
+    Metadata Curator|INCLUDES|Model-based data generators
+
+  proposition: Web-browsing agents powered by large language models retrieve up-to-date information.
+    entity-entity relationships:
+    Web-browsing agents|POWERED_BY|Large language models
+
+    entity-attribute relationships:
+    Web-browsing agents|FUNCTION|retrieve up-to-date information
+
+  proposition: The Test Case Builder module generates test cases using generative models or programmatic operations.
+    entity-attribute relationships:
+    Test Case Builder|GENERATES|test cases
+    Test Case Builder|USES|generative models
+    Test Case Builder|USES|programmatic operations
+
+  proposition: The benchmark prioritizes practical, low-cost evaluation methods.
+    entity-attribute relationships:
+    TrustGen|PRIORITIZES|practical evaluation methods
+    TrustGen|PRIORITIZES|low-cost evaluation methods
+
+  proposition: It focuses on realistic challenges users are likely to encounter.
+    entity-attribute relationships:
+    TrustGen|FOCUSES_ON|realistic challenges
+    TrustGen|FOCUSES_ON|user-likely challenges
+
+  proposition: Human oversight is integrated with automated processes to ensure benchmark quality and scalability.
+    entity-attribute relationships:
+    TrustGen|INTEGRATES|human oversight
+    TrustGen|INTEGRATES|automated processes
+    TrustGen|ENSURES|benchmark quality
+    TrustGen|ENSURES|scalability

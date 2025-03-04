@@ -1,0 +1,174 @@
+topic: Large Language Models Research
+
+  entities:
+    Nina Panickssery|Researcher
+    Nick Gabrieli|Researcher
+    Julian Schulz|Researcher
+    Meg Tong|Researcher
+    Evan Hubinger|Researcher
+    Alexander Matt Turner|Researcher
+    Llama 2|Model
+    Elias Stengel-Eskin|Researcher
+    Peter Hase|Researcher
+    Mohit Bansal|Researcher
+    Philippe Laban|Researcher
+    Lidiya Murakhovs'ka|Researcher
+    Caiming Xiong|Researcher
+    Chien-Sheng Wu|Researcher
+    Zihao Yi|Researcher
+    Jiarui Ouyang|Researcher
+    Yuwen Liu|Researcher
+    Tianhao Liao|Researcher
+    Zhe Xu|Researcher
+    Ying Shen|Researcher
+    Qiaoyu Tang|Researcher
+    Ziliang Deng|Researcher
+    Hongyu Lin|Researcher
+    Xianpei Han|Researcher
+    Qiao Liang|Researcher
+    Le Sun|Researcher
+    Toolalpaca|Tool
+    Rui Yang|Researcher
+    Lin Song|Researcher
+    Yanwei Li|Researcher
+    Sijie Zhao|Researcher
+    Yixiao Ge|Researcher
+    Xiu Li|Researcher
+    Ying Shan|Researcher
+    GPT4Tools|Tool
+    Hanning Zhang|Researcher
+    R-Tuning|Approach
+    NAACL 2024|Conference
+    Yuqing Yang|Researcher
+    Ethan Chern|Researcher
+    Xipeng Qiu|Researcher
+    Graham Neubig|Researcher
+    Pengfei Liu|Researcher
+    Qinyuan Cheng|Researcher
+    Amanda Askell|Researcher
+    Rongwu Xu|Researcher
+    Yuchen Zhuang|Researcher
+    ToolQA|Dataset
+    Hyuhng Joon Kim|Researcher
+    Duzhen Zhang|Researcher
+    Baolin Peng|Researcher
+    Kyle Mahowald|Researcher
+
+  proposition: Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg Tong, Evan Hubinger, and Alexander Matt Turner authored a paper on steering Llama 2 via contrastive activation addition.
+    entity-entity relationships:
+    Nina Panickssery|AUTHORED|Research Paper
+    Nick Gabrieli|AUTHORED|Research Paper
+    Julian Schulz|AUTHORED|Research Paper
+    Meg Tong|AUTHORED|Research Paper
+    Evan Hubinger|AUTHORED|Research Paper
+    Alexander Matt Turner|AUTHORED|Research Paper
+    Nina Panickssery|RESEARCHED|Llama 2
+    Nick Gabrieli|RESEARCHED|Llama 2
+    Julian Schulz|RESEARCHED|Llama 2
+    Meg Tong|RESEARCHED|Llama 2
+    Evan Hubinger|RESEARCHED|Llama 2
+    Alexander Matt Turner|RESEARCHED|Llama 2
+
+  proposition: Elias Stengel-Eskin, Peter Hase, and Mohit Bansal researched teaching models to balance resisting and accepting persuasion.
+    entity-entity relationships:
+    Elias Stengel-Eskin|RESEARCHED|Model
+    Peter Hase|RESEARCHED|Model
+    Mohit Bansal|RESEARCHED|Model
+
+  proposition: Philippe Laban, Lidiya Murakhovs'ka, Caiming Xiong, and Chien-Sheng Wu investigated performance drops in LLMs through challenging experiments.
+    entity-entity relationships:
+    Philippe Laban|INVESTIGATED|Large Language Models
+    Lidiya Murakhovs'ka|INVESTIGATED|Large Language Models
+    Caiming Xiong|INVESTIGATED|Large Language Models
+    Chien-Sheng Wu|INVESTIGATED|Large Language Models
+
+  proposition: Zihao Yi, Jiarui Ouyang, Yuwen Liu, Tianhao Liao, Zhe Xu, and Ying Shen conducted a survey on recent advances in LLM-based multi-turn dialogue systems.
+    entity-entity relationships:
+    Zihao Yi|CONDUCTED|Survey
+    Jiarui Ouyang|CONDUCTED|Survey
+    Yuwen Liu|CONDUCTED|Survey
+    Tianhao Liao|CONDUCTED|Survey
+    Zhe Xu|CONDUCTED|Survey
+    Ying Shen|CONDUCTED|Survey
+    Zihao Yi|RESEARCHED|Multi-turn Dialogue Systems
+    Jiarui Ouyang|RESEARCHED|Multi-turn Dialogue Systems
+    Yuwen Liu|RESEARCHED|Multi-turn Dialogue Systems
+    Tianhao Liao|RESEARCHED|Multi-turn Dialogue Systems
+    Zhe Xu|RESEARCHED|Multi-turn Dialogue Systems
+    Ying Shen|RESEARCHED|Multi-turn Dialogue Systems
+
+  proposition: Qiaoyu Tang, Ziliang Deng, Hongyu Lin, Xianpei Han, Qiao Liang, and Le Sun developed Toolalpaca for generalized tool learning with 3000 simulated cases.
+    entity-attribute relationships:
+    Toolalpaca|DEVELOPED_WITH|3000 simulated cases
+    
+    entity-entity relationships:
+    Qiaoyu Tang|DEVELOPED|Toolalpaca
+    Ziliang Deng|DEVELOPED|Toolalpaca
+    Hongyu Lin|DEVELOPED|Toolalpaca
+    Xianpei Han|DEVELOPED|Toolalpaca
+    Qiao Liang|DEVELOPED|Toolalpaca
+    Le Sun|DEVELOPED|Toolalpaca
+
+  proposition: Rui Yang, Lin Song, Yanwei Li, Sijie Zhao, Yixiao Ge, Xiu Li, and Ying Shan created GPT4Tools for teaching large language models to use tools via self-instruction.
+    entity-entity relationships:
+    Rui Yang|CREATED|GPT4Tools
+    Lin Song|CREATED|GPT4Tools
+    Yanwei Li|CREATED|GPT4Tools
+    Sijie Zhao|CREATED|GPT4Tools
+    Yixiao Ge|CREATED|GPT4Tools
+    Xiu Li|CREATED|GPT4Tools
+    Ying Shan|CREATED|GPT4Tools
+
+  proposition: Hanning Zhang and colleagues developed R-Tuning to teach large language models to refuse unknown questions, winning an Outstanding Paper Award at NAACL 2024.
+    entity-attribute relationships:
+    R-Tuning|AWARDED|Outstanding Paper Award
+    
+    entity-entity relationships:
+    Hanning Zhang|DEVELOPED|R-Tuning
+    Hanning Zhang|AWARDED|Outstanding Paper Award at NAACL 2024
+
+  proposition: Yuqing Yang, Ethan Chern, Xipeng Qiu, Graham Neubig, and Pengfei Liu researched alignment for honesty in language models.
+    entity-entity relationships:
+    Yuqing Yang|RESEARCHED|Language Model Honesty
+    Ethan Chern|RESEARCHED|Language Model Honesty
+    Xipeng Qiu|RESEARCHED|Language Model Honesty
+    Graham Neubig|RESEARCHED|Language Model Honesty
+    Pengfei Liu|RESEARCHED|Language Model Honesty
+
+  proposition: Qinyuan Cheng and team investigated whether AI assistants can recognize their own knowledge limitations.
+    entity-entity relationships:
+    Qinyuan Cheng|INVESTIGATED|AI Assistants
+    Qinyuan Cheng|RESEARCHED|AI Assistant Knowledge Limitations
+
+  proposition: Amanda Askell and colleagues explored a general language assistant as a laboratory for alignment.
+    entity-entity relationships:
+    Amanda Askell|EXPLORED|Language Assistant
+    Amanda Askell|RESEARCHED|Alignment
+
+  proposition: Rongwu Xu and researchers examined LLMs' beliefs towards misinformation through persuasive conversations.
+    entity-entity relationships:
+    Rongwu Xu|EXAMINED|Large Language Models
+    Rongwu Xu|RESEARCHED|Misinformation Beliefs
+
+  proposition: Yuchen Zhuang and team created ToolQA, a dataset for LLM question answering with external tools.
+    entity-entity relationships:
+    Yuchen Zhuang|CREATED|ToolQA
+    Yuchen Zhuang|DEVELOPED|Dataset for LLM Question Answering
+
+  proposition: Hyuhng Joon Kim and colleagues worked on aligning language models to explicitly handle ambiguity.
+    entity-entity relationships:
+    Hyuhng Joon Kim|RESEARCHED|Language Model Alignment
+    Hyuhng Joon Kim|WORKED_ON|Ambiguity Handling
+
+  proposition: Duzhen Zhang and researchers reviewed recent advances in multimodal large language models.
+    entity-entity relationships:
+    Duzhen Zhang|REVIEWED|Multimodal Large Language Models
+
+  proposition: Baolin Peng and team conducted instruction tuning with GPT-4.
+    entity-entity relationships:
+    Baolin Peng|CONDUCTED|Instruction Tuning
+    Baolin Peng|USED|GPT-4
+
+  proposition: Kyle Mahowald and colleagues investigated the dissociation of language and thought in large language models.
+    entity-entity relationships:
+    Kyle Mahowald|INVESTIGATED|Language and Thought Dissociation in Large Language Models

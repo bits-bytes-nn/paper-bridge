@@ -1,0 +1,19 @@
+Propositions from Adversarial AI Interaction Examples and Technical Proof
+
+AI systems demonstrate varied responses to potentially harmful queries
+Some AI systems provide ethical disclaimers when presented with harmful scenarios
+AI responses range from direct ethical warnings to partially descriptive explanations
+AI systems have different thresholds for engaging with potentially dangerous queries
+
+Technical Proof: Indirect Question Generation Methodology
+
+Mutual information between domain knowledge and generated questions can be mathematically modeled
+Indirect question generation through image description reduces domain knowledge contamination
+Conditional mutual information can be calculated using entropy functions
+Compressed image representations filter certain detailed information
+Direct question generation retains more image-specific details
+Indirect generation method introduces more uncertainty in question creation
+Mutual information varies between direct and indirect generation processes
+Domain knowledge space contains prior knowledge, biases, and latent representations
+Mutual information quantifies relationship between knowledge and generated questions
+Contamination degree of a generation process is proportional to mutual information between knowledge and generated output

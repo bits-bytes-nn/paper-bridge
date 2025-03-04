@@ -1,0 +1,143 @@
+topic: Hallucination Detection in Large Language Models
+
+  entities:
+    Large Language Models|Model
+    HaluEval|Benchmark
+    TruthfulQA|Benchmark
+    FACTOR|Method
+    REALTIMEQA|Benchmark
+    FreshQA|Benchmark
+    EvolvingQA|Benchmark
+    HalluQA|Benchmark
+    ChineseFactEval|Benchmark
+    SelfCheckGPT-Wikibio|Dataset
+    FELM|Benchmark
+    PHD|Benchmark
+    ChatGPT|Model
+    ROME|Method
+    SCOTT|Method
+    RAG|Approach
+
+  proposition: Previous research on hallucination detection in Large Language Models (LLMs) focuses on two primary aspects: factuality and faithfulness.
+    entity-attribute relationships:
+    Large Language Models|DESCRIBED_BY|factuality
+    Large Language Models|DESCRIBED_BY|faithfulness
+
+  proposition: Detecting factual errors in LLM responses involves comparing model-generated content against reliable knowledge sources.
+    entity-entity relationships:
+    Large Language Models|COMPARED_WITH|knowledge sources
+
+  proposition: Some research addresses hallucination detection in a zero-source setting by estimating the uncertainty of generated factual content.
+    entity-attribute relationships:
+    Large Language Models|DETECTION_METHOD|uncertainty estimation
+
+  proposition: Methods for detecting unfaithful generation can be categorized into fact-based metrics, classifier-based metrics, QA-based metrics, uncertainty estimation, and prompting-based metrics.
+    entity-attribute relationships:
+    Large Language Models|DETECTION_METHODS|fact-based metrics
+    Large Language Models|DETECTION_METHODS|classifier-based metrics
+    Large Language Models|DETECTION_METHODS|QA-based metrics
+    Large Language Models|DETECTION_METHODS|uncertainty estimation
+    Large Language Models|DETECTION_METHODS|prompting-based metrics
+
+topic: Hallucination Detection Benchmarks
+
+  proposition: HaluEval provides a comprehensive collection of generated and human-annotated hallucinated samples.
+    entity-attribute relationships:
+    HaluEval|TYPE|benchmark
+    HaluEval|CONTAINS|generated samples
+    HaluEval|CONTAINS|human-annotated samples
+
+  proposition: TruthfulQA consists of adversarially curated questions that mimic human falsehoods.
+    entity-attribute relationships:
+    TruthfulQA|TYPE|benchmark
+    TruthfulQA|CONTAINS|adversarial questions
+
+  proposition: FACTOR introduces a method for automatically creating benchmarks by perturbing factual statements.
+    entity-attribute relationships:
+    FACTOR|TYPE|method
+    FACTOR|PURPOSE|benchmark creation
+
+  proposition: REALTIMEQA, FreshQA, and EvolvingQA offer questions to evaluate factual accuracy of LLMs in relation to evolving real-world knowledge.
+    entity-attribute relationships:
+    REALTIMEQA|TYPE|benchmark
+    FreshQA|TYPE|benchmark
+    EvolvingQA|TYPE|benchmark
+    REALTIMEQA|PURPOSE|evaluate factual accuracy
+    FreshQA|PURPOSE|evaluate factual accuracy
+    EvolvingQA|PURPOSE|evaluate factual accuracy
+
+  proposition: HalluQA and ChineseFactEval are benchmarks designed to measure hallucination in Chinese large language models.
+    entity-attribute relationships:
+    HalluQA|TYPE|benchmark
+    ChineseFactEval|TYPE|benchmark
+    HalluQA|PURPOSE|measure hallucination
+    ChineseFactEval|PURPOSE|measure hallucination
+
+topic: Hallucination Mitigation Strategies
+
+  proposition: Enhancing the factual accuracy of the pre-training corpus can improve the model's parametric knowledge.
+    entity-attribute relationships:
+    Large Language Models|IMPROVEMENT_METHOD|pre-training corpus enhancement
+
+  proposition: Refining training data quality during supervised fine-tuning can help mitigate hallucinations.
+    entity-attribute relationships:
+    Large Language Models|IMPROVEMENT_METHOD|training data quality refinement
+
+  proposition: Alignment processes can help language models recognize their knowledge boundaries.
+    entity-attribute relationships:
+    Large Language Models|IMPROVEMENT_METHOD|alignment processes
+
+  proposition: Inference-time interventions have become a focus for reducing hallucinations.
+    entity-attribute relationships:
+    Large Language Models|IMPROVEMENT_METHOD|inference-time interventions
+
+topic: Prompting Techniques for Hallucination Mitigation
+
+  proposition: Prompting plays a crucial role in providing context and controlling model outputs.
+    entity-attribute relationships:
+    Large Language Models|CONTROL_METHOD|prompting
+
+  proposition: Chain-of-thought and least-to-most prompting help reveal faulty logic or assumptions.
+    entity-attribute relationships:
+    Large Language Models|PROMPTING_TECHNIQUES|chain-of-thought
+    Large Language Models|PROMPTING_TECHNIQUES|least-to-most prompting
+
+  proposition: Self-consistency, SCOTT, and self-ask methods involve multiple prompts to identify potential hallucinations.
+    entity-attribute relationships:
+    Large Language Models|PROMPTING_TECHNIQUES|self-consistency
+    Large Language Models|PROMPTING_TECHNIQUES|SCOTT
+    Large Language Models|PROMPTING_TECHNIQUES|self-ask
+
+topic: Retrieval-Augmented Generation
+
+  proposition: RAG methods retrieve information from reliable knowledge sources to reduce hallucinations.
+    entity-attribute relationships:
+    RAG|PURPOSE|reduce hallucinations
+
+  proposition: These methods can use external knowledge bases, structured databases, websites like Wikipedia, search engine APIs, or various external tools.
+    entity-attribute relationships:
+    RAG|KNOWLEDGE_SOURCES|external knowledge bases
+    RAG|KNOWLEDGE_SOURCES|structured databases
+    RAG|KNOWLEDGE_SOURCES|Wikipedia
+    RAG|KNOWLEDGE_SOURCES|search engine APIs
+    RAG|KNOWLEDGE_SOURCES|external tools
+
+topic: Model Editing Approaches
+
+  proposition: Model editing allows modification of LLM behavior in a data- and computation-efficient manner.
+    entity-attribute relationships:
+    Large Language Models|MODIFICATION_METHOD|model editing
+
+  proposition: Methods include incorporating auxiliary sub-networks or directly modifying model parameters.
+    entity-attribute relationships:
+    Large Language Models|MODIFICATION_TECHNIQUES|auxiliary sub-networks
+    Large Language Models|MODIFICATION_TECHNIQUES|direct parameter modification
+
+  proposition: ROME modifies feedforward weights to update specific factual associations.
+    entity-attribute relationships:
+    ROME|MODIFICATION_METHOD|feedforward weight modification
+
+  proposition: Inference-time intervention (ITI) identifies attention heads associated with truthfulness and shifts activations to elicit truthful answers.
+    entity-attribute relationships:
+    ITI|MODIFICATION_METHOD|attention head identification
+    ITI|PURPOSE|elicit truthful answers

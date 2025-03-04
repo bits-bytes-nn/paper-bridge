@@ -1,0 +1,22 @@
+Research Papers on Language Model Hallucination and Factual Consistency Detection
+
+Ayush Agrawal, Mirac Suzgun, Lester Mackey, and Adam Tauman Kalai investigated language models' ability to recognize their own hallucinated references.
+Roi Cohen, May Hamri, Mor Geva, and Amir Globerson proposed detecting factual errors through cross-examination of language models.
+Chin-Yew Lin developed ROUGE, a package for automatic evaluation of summaries.
+Feng Nan et al. studied entity-level factual consistency in abstractive text summarization.
+Zhenyi Wang et al. explored faithful neural table-to-text generation with content-matching constraints.
+Ben Goodrich et al. assessed the factual accuracy of generated text.
+Kurt Shuster et al. demonstrated that retrieval augmentation reduces hallucination in conversation.
+Anshuman Mishra et al. examined natural language inference beyond sentence-level for question answering and text summarization.
+Mario Barrantes, Benedikt Herudek, and Richard Wang proposed adversarial NLI for factual correctness in text summarization models.
+Tanya Goyal and Greg Durrett evaluated factuality in generation using dependency-level entailment.
+Philippe Laban et al. revisited NLI-based models for inconsistency detection in summarization.
+Wojciech Kryściński et al. evaluated the factual consistency of abstractive text summarization.
+Chunting Zhou et al. developed methods for detecting hallucinated content in neural sequence generation.
+
+Nouha Dziri et al. created the BEGIN benchmark for evaluating attribution in dialogue systems.
+Esin Durmus, He He, and Mona Diab introduced FEQA, a question answering evaluation framework for faithfulness assessment.
+Alex Wang, Kyunghyun Cho, and Mike Lewis proposed asking and answering questions to evaluate summary factual consistency.
+Thomas Scialom et al. developed QuestEval for fact-based summarization evaluation.
+Alexander R Fabbri et al. improved QA-based factual consistency evaluation for summarization.
+Yijun Xiao and William Yang Wang studied hallucination and predictive uncertainty in conditional language generation.

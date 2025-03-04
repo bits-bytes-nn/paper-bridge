@@ -1,0 +1,67 @@
+topic: Stereotype Mitigation in Language Models
+
+  entities:
+    REFINE-LM|Research Method
+    CrowS-pairs|Dataset
+    StereoSet|Dataset
+    BBQ|Dataset
+    LLM-as-a-Judge|Approach
+    LDFighter|Approach
+    Prejudice-Volatility Framework|Framework
+    Causality-Guided Debiasing Framework|Framework
+
+  proposition: REFINE-LM: Reinforcement Learning for Stereotype Mitigation in Language Models
+    entity-attribute relationships:
+    REFINE-LM|FOCUSES_ON|Stereotype Mitigation
+    REFINE-LM|USES|Reinforcement Learning
+
+    entity-entity relationships:
+    REFINE-LM|APPLIES|Reinforcement Learning
+
+  proposition: REFINE-LM introduces a method to mitigate stereotypes in pre-trained language models using reinforcement learning.
+    entity-attribute relationships:
+    REFINE-LM|GOAL|Mitigate Stereotypes
+    REFINE-LM|TARGETS|Pre-trained Language Models
+
+    entity-entity relationships:
+    REFINE-LM|USES|Reinforcement Learning
+
+  proposition: The method aims to preserve model performance while reducing stereotypical content.
+    entity-attribute relationships:
+    REFINE-LM|OBJECTIVE|Preserve Model Performance
+    REFINE-LM|OBJECTIVE|Reduce Stereotypical Content
+
+  proposition: Stereotype Evaluation Methods:
+    entity-attribute relationships:
+    Stereotype Evaluation Methods|TYPE|Keyword Matching
+    Stereotype Evaluation Methods|TYPE|Accuracy
+    Stereotype Evaluation Methods|TYPE|LLM-as-a-Judge
+    Stereotype Evaluation Methods|METRIC|Percentage of Refusing to Answer
+
+  proposition: Dynamic Stereotype Dataset Construction:
+    entity-attribute relationships:
+    Dynamic Stereotype Dataset Construction|USES|CrowS-pairs
+    Dynamic Stereotype Dataset Construction|USES|StereoSet
+    Dynamic Stereotype Dataset Construction|USES|BBQ
+
+    entity-entity relationships:
+    Dynamic Stereotype Dataset Construction|GENERATES|Queries
+
+  proposition: Disparagement in Large Language Models:
+    entity-attribute relationships:
+    Disparagement|DEFINITION|Reinforcing Less Valuable Group Notions
+    Disparagement|RELATED_TO|Toxicity
+    Disparagement|RELATED_TO|Hate Speech
+
+  proposition: Disparagement Detection Approaches:
+    entity-entity relationships:
+    Dong et al.|PROPOSED|LDFighter
+    An et al.|DISCOVERED|White Applicant Favoritism
+    Liu et al.|INTRODUCED|Prejudice-Volatility Framework
+    Li et al.|DEVELOPED|Causality-Guided Debiasing Framework
+
+  proposition: Preference Bias in Large Language Models:
+    entity-attribute relationships:
+    Preference Bias|CHARACTERISTIC|Political Left-Leaning Tendency
+    Preference Bias|POTENTIAL_IMPACT|Influence User Decisions
+    Preference Bias|POTENTIAL_IMPACT|Influence User Perceptions

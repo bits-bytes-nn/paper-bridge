@@ -1,0 +1,46 @@
+topic: Dataset Prompt Template Design
+
+  entities:
+    Dataset Prompt Template|Toolkit
+    Ethics|Dataset
+    NormBank|Dataset
+    Moral Stories|Dataset
+    CultureBank|Dataset
+
+  proposition: Dataset Prompt Template Characteristics
+    entity-attribute relationships:
+    Dataset Prompt Template|DESIGNED_FOR|scenario generation
+    Dataset Prompt Template|FOCUS_ON|ethical scenarios
+    Dataset Prompt Template|FOCUS_ON|cultural scenarios
+    Dataset Prompt Template|FOCUS_ON|behavioral scenarios
+
+  proposition: Dataset Prompt Template Components
+    entity-attribute relationships:
+    Dataset Prompt Template|CONTAINS|scenario description
+    Dataset Prompt Template|CONTAINS|specific action
+    Dataset Prompt Template|CONTAINS|action options
+    Dataset Prompt Template|CONTAINS|ethical judgment basis
+    Dataset Prompt Template|CONTAINS|evaluation question
+
+  proposition: Dataset Types
+    entity-attribute relationships:
+    Ethics|SIZE|400
+    NormBank|SIZE|1110
+    Moral Stories|SIZE|1111
+    CultureBank|SIZE|401
+
+  proposition: Prompt Template Generation Principles
+    entity-attribute relationships:
+    Dataset Prompt Template|CHARACTERISTIC|concise
+    Dataset Prompt Template|CHARACTERISTIC|relevant
+    Dataset Prompt Template|AVOID|additional context
+    Dataset Prompt Template|AVOID|background information
+
+  proposition: Prompt Template Structural Guidelines
+    entity-attribute relationships:
+    Dataset Prompt Template|PERSPECTIVE|first-person
+    Dataset Prompt Template|REQUIRES|clear action options
+    Dataset Prompt Template|REQUIRES|specific evaluation question
+    Dataset Prompt Template|REQUIRES|consistency
+    Dataset Prompt Template|AVOID|prefixes
+    Dataset Prompt Template|AVOID|explanatory text

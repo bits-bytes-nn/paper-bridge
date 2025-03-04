@@ -1,0 +1,96 @@
+topic: Malicious Query Generation Pipeline
+
+  entities:
+    Case Generator|Module
+    LLM-powered Diversity Enhancer|Module
+    Web-Browsing Agent|Agent
+
+  proposition: A case generator formulates malicious questions based on predefined scenarios.
+    entity-attribute relationships:
+    Case Generator|GENERATES|malicious questions
+    Case Generator|OPERATES_WITH|predefined scenarios
+
+  proposition: A case generator enhances malicious questions with role-play context to add justification and complexity.
+    entity-attribute relationships:
+    Case Generator|ENHANCES|malicious questions
+    Case Generator|ADDS|role-play context
+    Case Generator|PROVIDES|justification
+    Case Generator|INCREASES|complexity
+
+  proposition: An LLM-powered diversity enhancer paraphrases questions to introduce variations.
+    entity-attribute relationships:
+    LLM-powered Diversity Enhancer|PARAPHRASES|questions
+    LLM-powered Diversity Enhancer|INTRODUCES|variations
+
+  proposition: An LLM-powered diversity enhancer ensures a diverse set of question formulations.
+    entity-attribute relationships:
+    LLM-powered Diversity Enhancer|ENSURES|diverse question formulations
+
+topic: Privacy Preservation Analysis of Large Language Models
+
+  entities:
+    GPT-4o|Model
+    Claude-3-haiku|Model
+    Gemini-1.5-pro|Model
+    Llama-3.1-70B|Model
+    Llama-3.1-8B|Model
+
+  proposition: Higher model utility does not necessarily imply stronger privacy preservation.
+    entity-attribute relationships:
+    Model|RELATIONSHIP|utility
+    Model|RELATIONSHIP|privacy preservation
+
+  proposition: GPT-4o has a higher utility (Arena Score) of [1034].
+    entity-attribute relationships:
+    GPT-4o|UTILITY|1034
+    GPT-4o|MEASURED_BY|Arena Score
+
+  proposition: GPT-4o's average privacy preservation rate is 75.32%.
+    entity-attribute relationships:
+    GPT-4o|PRIVACY_PRESERVATION_RATE|75.32%
+
+  proposition: Smaller-scale LLMs generally demonstrate higher privacy preservation rates compared to larger counterparts.
+    entity-attribute relationships:
+    Smaller-scale LLMs|PRIVACY_PRESERVATION_RATE|higher
+
+  proposition: Claude-3-haiku and Gemini-1.5-pro consistently surpass larger models like Llama-3.1-70B in privacy preservation.
+    entity-entity relationships:
+    Claude-3-haiku|SURPASSES|Llama-3.1-70B
+    Gemini-1.5-pro|SURPASSES|Llama-3.1-70B
+
+  proposition: Llama-3.1-8B achieves 79.82% privacy preservation rate.
+    entity-attribute relationships:
+    Llama-3.1-8B|PRIVACY_PRESERVATION_RATE|79.82%
+
+  proposition: Llama-3.1-70B has a lower privacy preservation rate of 57.78%.
+    entity-attribute relationships:
+    Llama-3.1-70B|PRIVACY_PRESERVATION_RATE|57.78%
+
+  proposition: Gemini and Claude models show exceptional privacy preservation rates across organizational, personal, and legal categories.
+    entity-attribute relationships:
+    Gemini|PRIVACY_PRESERVATION_RATE|exceptional
+    Claude|PRIVACY_PRESERVATION_RATE|exceptional
+
+  proposition: Gemini and Claude models achieve privacy preservation rates exceeding 90%.
+    entity-attribute relationships:
+    Gemini|PRIVACY_PRESERVATION_RATE|>90%
+    Claude|PRIVACY_PRESERVATION_RATE|>90%
+
+  proposition: LLMs with advanced reasoning capabilities are likely to exhibit higher privacy preservation rates.
+    entity-attribute relationships:
+    LLMs|REASONING_CAPABILITY|advanced
+    LLMs|PRIVACY_PRESERVATION_RATE|higher
+
+topic: Machine Ethics
+
+  entities:
+    Machine Ethics|Technological Concept
+
+  proposition: Machine ethics is dedicated to integrating ethical principles into machines.
+    entity-attribute relationships:
+    Machine Ethics|FOCUSES_ON|integrating ethical principles
+    Machine Ethics|TARGET|machines
+
+  proposition: Machine ethics focuses particularly on artificial intelligence-powered machines.
+    entity-attribute relationships:
+    Machine Ethics|CONCENTRATES_ON|artificial intelligence-powered machines

@@ -1,0 +1,90 @@
+topic: Research on Bias in Text-to-Image Generative Models
+
+  entities:
+    Hanjun Luo|Researcher
+    Haoyu Huang|Researcher
+    Ziye Deng|Researcher
+    Xuecheng Liu|Researcher
+    Ruizhe Chen|Researcher
+    Zuozhu Liu|Researcher
+    Federico Bianchi|Researcher
+    Felix Friedrich|Researcher
+    Akshita Jha|Researcher
+    Aditya Chinchure|Researcher
+    BIGbench|Benchmark
+    FAIntbench|Benchmark
+    Tibet|Method
+    ACM Conference on Fairness, Accountability, and Transparency|Conference
+    Annual Meeting of the Association for Computational Linguistics|Conference
+
+  proposition: Hanjun Luo, Haoyu Huang, Ziye Deng, Xuecheng Liu, Ruizhe Chen, and Zuozhu Liu published a paper titled "BIGbench: A Unified Benchmark for Social Bias in Text-to-Image Generative Models Based on Multi-modal LLM" in 2024.
+    entity-attribute relationships:
+    Hanjun Luo|PUBLISHED|Research Paper
+    Haoyu Huang|PUBLISHED|Research Paper
+    Ziye Deng|PUBLISHED|Research Paper
+    Xuecheng Liu|PUBLISHED|Research Paper
+    Ruizhe Chen|PUBLISHED|Research Paper
+    Zuozhu Liu|PUBLISHED|Research Paper
+    BIGbench|PUBLICATION_YEAR|2024
+    BIGbench|DESCRIBED_BY|Unified Benchmark for Social Bias in Text-to-Image Generative Models
+
+    entity-entity relationships:
+    Hanjun Luo|AUTHOR_OF|BIGbench
+    Haoyu Huang|AUTHOR_OF|BIGbench
+    Ziye Deng|AUTHOR_OF|BIGbench
+    Xuecheng Liu|AUTHOR_OF|BIGbench
+    Ruizhe Chen|AUTHOR_OF|BIGbench
+    Zuozhu Liu|AUTHOR_OF|BIGbench
+
+  proposition: Federico Bianchi and colleagues studied how text-to-image generation amplifies demographic stereotypes at large scale in the 2023 ACM Conference on Fairness, Accountability, and Transparency.
+    entity-attribute relationships:
+    Federico Bianchi|PUBLISHED|Research Paper
+    ACM Conference on Fairness, Accountability, and Transparency|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Federico Bianchi|PRESENTED_AT|ACM Conference on Fairness, Accountability, and Transparency
+
+  proposition: Felix Friedrich et al. investigated how multilingual text-to-image generation magnifies gender stereotypes in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Felix Friedrich|PUBLISHED|Research Paper
+    Research Paper|PUBLICATION_YEAR|2024
+    Research Paper|PUBLICATION_PLATFORM|arXiv
+
+    entity-entity relationships:
+    Felix Friedrich|AUTHOR_OF|Research Paper
+
+  proposition: Akshita Jha and researchers conducted a global-scale analysis of visual stereotypes in text-to-image generation, published in the 62nd Annual Meeting of the Association for Computational Linguistics in 2024.
+    entity-attribute relationships:
+    Akshita Jha|PUBLISHED|Research Paper
+    Annual Meeting of the Association for Computational Linguistics|PUBLICATION_YEAR|2024
+    Research Paper|SCOPE|Global-scale
+
+    entity-entity relationships:
+    Akshita Jha|PRESENTED_AT|Annual Meeting of the Association for Computational Linguistics
+
+  proposition: Aditya Chinchure and team developed Tibet, a method for identifying and evaluating biases in text-to-image generative models, in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Aditya Chinchure|PUBLISHED|Research Paper
+    Tibet|PUBLICATION_YEAR|2023
+    Tibet|TYPE|Method
+    Research Paper|PUBLICATION_PLATFORM|arXiv
+
+    entity-entity relationships:
+    Aditya Chinchure|DEVELOPED|Tibet
+
+  proposition: Hanjun Luo, Ziye Deng, Ruizhe Chen, and Zuozhu Liu created FAIntbench, a holistic and precise benchmark for bias evaluation in text-to-image models, in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Hanjun Luo|PUBLISHED|Research Paper
+    Ziye Deng|PUBLISHED|Research Paper
+    Ruizhe Chen|PUBLISHED|Research Paper
+    Zuozhu Liu|PUBLISHED|Research Paper
+    FAIntbench|PUBLICATION_YEAR|2024
+    FAIntbench|TYPE|Benchmark
+    FAIntbench|DESCRIBED_BY|Holistic and Precise
+    Research Paper|PUBLICATION_PLATFORM|arXiv
+
+    entity-entity relationships:
+    Hanjun Luo|CREATED|FAIntbench
+    Ziye Deng|CREATED|FAIntbench
+    Ruizhe Chen|CREATED|FAIntbench
+    Zuozhu Liu|CREATED|FAIntbench

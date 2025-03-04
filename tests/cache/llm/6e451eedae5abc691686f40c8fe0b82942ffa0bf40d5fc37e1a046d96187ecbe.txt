@@ -1,0 +1,17 @@
+Research Papers on LLM Agents: Security, Safety, and Risks
+
+Yuan Ling et al. published a paper on Multimodal Learning with Foundation Models at the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining in 2023.
+Boyuan Zheng et al. argue that GPT-4V is a generalist web agent when grounded, in an arXiv preprint from 2024.
+Chen Qian et al. introduced ChatDev, communicative agents for software development, at the 62nd Annual Meeting of the Association for Computational Linguistics in 2024.
+Weize Chen et al. proposed the Internet of Agents concept for collaborative intelligence in an arXiv preprint from 2024.
+Yuan Li et al. developed MetaAgents for simulating human behavior interactions in LLM-based task-oriented coordination in 2023.
+Feng He et al. conducted a survey on the emerging security and privacy challenges of LLM agents in an arXiv preprint from 2024.
+Yuyou Gan et al. published a survey on security, privacy, and ethical threats in LLM-based agents in an arXiv preprint from 2024.
+OpenAI released a research paper on practices for governing agentic AI systems in December 2023.
+Zhexin Zhang et al. created Agent-SafetyBench for evaluating the safety of LLM agents in an arXiv preprint from 2024.
+Sheng Yin et al. developed SafeAgentBench for benchmarking safe task planning of embodied LLM agents in an arXiv preprint from 2024.
+Maksym Andriushchenko et al. created AgentHarm, a benchmark for measuring the harmfulness of LLM agents, in an arXiv preprint from 2024.
+Wei Zou et al. investigated knowledge poisoning attacks to retrieval-augmented generation of large language models in an arXiv preprint from 2024.
+Jiaqi Xue et al. identified vulnerabilities in Retrieval Augmented Generation of Large Language Models in an arXiv preprint from 2024.
+Wenkai Yang et al. investigated backdoor threats to LLM-based agents in an arXiv preprint from 2024.
+Yifei Wang et al. explored inserting and activating backdoor attacks in LLM agents in an arXiv preprint from 2024.

@@ -1,0 +1,15 @@
+Research Papers on AI Security, Privacy, and Vulnerabilities
+Jinhao Duan et al. conducted a study on membership inference attacks on diffusion models in the International Conference on Machine Learning.
+Nicolas Carlini et al. investigated extracting training data from diffusion models at the 32nd USENIX Security Symposium.
+Tao Wang et al. published a survey on security and privacy concerns in generative AI content.
+Gong Zhang et al. developed a method for forgetting information in text-to-image diffusion models.
+Qipan Xu completed a master's thesis on PAC Privacy Preserving Diffusion Models at Rutgers University.
+Fahad Shamshad et al. proposed CLIP2Protect, a method for protecting facial privacy using text-guided makeup via adversarial latent search.
+Håkon Hukkelås et al. created DeepPrivacy, a generative adversarial network for face anonymization.
+Xiao He et al. developed Diff-Privacy, a diffusion-based face privacy protection technique.
+Jiang Liu et al. introduced DiffProtect for generating adversarial examples to protect facial privacy.
+Claudio Novelli et al. examined generative AI in EU law, covering liability, privacy, intellectual property, and cybersecurity.
+Jinyuan Jia et al. identified 10 security and privacy problems in large foundation models.
+Michael Duan et al. investigated membership inference attacks on large language models.
+Jiawen Shi et al. explored security vulnerabilities of ChatGPT through backdoor attacks on InstructGPT.
+Several researchers studied large language models in various domains, including education, finance, and software engineering.

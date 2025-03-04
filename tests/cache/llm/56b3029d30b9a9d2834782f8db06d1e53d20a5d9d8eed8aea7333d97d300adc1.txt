@@ -1,0 +1,114 @@
+topic: Trustworthiness and Security in Generative Foundation Models
+
+  entities:
+    V2X communication systems|Platform
+    Generative Foundation Models|Model
+    AI-enabled transportation platforms|Platform
+    Intelligent transportation networks|Platform
+
+  proposition: V2X communication systems are vulnerable to adversarial attacks in the GenFM era.
+    entity-entity relationships:
+    V2X communication systems|VULNERABLE_TO|Adversarial Attacks
+    V2X communication systems|IMPACTED_BY|Generative Foundation Models
+
+  proposition: Trustworthiness in V2X requires robust sensor synchronization, secure communication, and adaptive design principles.
+    entity-attribute relationships:
+    V2X communication systems|REQUIRES|Robust sensor synchronization
+    V2X communication systems|REQUIRES|Secure communication
+    V2X communication systems|REQUIRES|Adaptive design principles
+
+  proposition: GenFMs at a system-wide scale introduce challenges in security, privacy, safety, and robustness.
+    entity-attribute relationships:
+    Generative Foundation Models|INTRODUCES_CHALLENGES|Security
+    Generative Foundation Models|INTRODUCES_CHALLENGES|Privacy
+    Generative Foundation Models|INTRODUCES_CHALLENGES|Safety
+    Generative Foundation Models|INTRODUCES_CHALLENGES|Robustness
+
+  proposition: Security breaches pose a critical threat to AI-enabled transportation platforms with sensitive traveler and infrastructure information.
+    entity-entity relationships:
+    Security breaches|THREATENS|AI-enabled transportation platforms
+    AI-enabled transportation platforms|CONTAINS|Sensitive traveler information
+    AI-enabled transportation platforms|CONTAINS|Infrastructure information
+
+  proposition: Preserving privacy in large-scale federated or decentralized learning is significant for data confidentiality.
+    entity-attribute relationships:
+    Large-scale learning|REQUIRES|Privacy preservation
+    Large-scale learning|REQUIRES|Data confidentiality
+
+  proposition: Transportation systems must be robust against adversarial and jailbreak attacks.
+    entity-attribute relationships:
+    Transportation systems|REQUIRES|Robustness
+    Transportation systems|MUST_DEFEND_AGAINST|Adversarial attacks
+    Transportation systems|MUST_DEFEND_AGAINST|Jailbreak attacks
+
+  proposition: A holistic framework is needed to support encryption, federated aggregation, and adversarial defense in intelligent transportation networks.
+    entity-attribute relationships:
+    Intelligent transportation networks|REQUIRES|Encryption
+    Intelligent transportation networks|REQUIRES|Federated aggregation
+    Intelligent transportation networks|REQUIRES|Adversarial defense
+
+topic: Copyright and Intellectual Property Challenges in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Large language models|Model
+    Text-to-image models|Model
+    Li et al.|Researcher
+    Wei et al.|Researcher
+
+  proposition: GenFMs can inadvertently replicate or generate content resembling copyrighted material from training data.
+    entity-attribute relationships:
+    Generative Foundation Models|RISK|Content replication
+    Generative Foundation Models|RISK|Copyrighted material generation
+
+  proposition: High-profile lawsuits have highlighted copyright concerns with generative foundation models.
+    entity-attribute relationships:
+    Generative Foundation Models|FACES|Copyright concerns
+
+  proposition: Researchers are developing tools to address potential copyright violations in large language models.
+    entity-entity relationships:
+    Researchers|DEVELOPING|Tools
+    Tools|ADDRESSES|Copyright violations
+    Tools|TARGETS|Large language models
+
+  proposition: Methods for detecting copyrighted text in training data include Li et al.'s detection approach and Wei et al.'s evaluation framework.
+    entity-entity relationships:
+    Li et al.|DEVELOPED|Detection approach
+    Wei et al.|DEVELOPED|Evaluation framework
+    Detection approach|TARGETS|Copyrighted text
+    Evaluation framework|TARGETS|Copyrighted text
+
+  proposition: Text-to-image models raise significant copyright concerns due to potential content memorization.
+    entity-attribute relationships:
+    Text-to-image models|RAISES|Copyright concerns
+    Text-to-image models|RISK|Content memorization
+
+  proposition: Memorization is more frequent in models trained on small to medium-sized datasets.
+    entity-attribute relationships:
+    Models|CHARACTERISTIC|Frequent memorization
+    Models|CONDITION|Small to medium-sized datasets
+
+topic: Synthetic Data Generation in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Self-Instruct|Tool
+    Constitutional AI|Framework
+    Evol-Instruct|Tool
+
+  proposition: GenFMs increasingly rely on synthetic data generation to address data scarcity.
+    entity-attribute relationships:
+    Generative Foundation Models|STRATEGY|Synthetic data generation
+    Generative Foundation Models|ADDRESSES|Data scarcity
+
+  proposition: Synthetic data generation has been effective in instruction tuning, code generation, and complex reasoning tasks.
+    entity-attribute relationships:
+    Synthetic data generation|EFFECTIVE_IN|Instruction tuning
+    Synthetic data generation|EFFECTIVE_IN|Code generation
+    Synthetic data generation|EFFECTIVE_IN|Complex reasoning tasks
+
+  proposition: Groundbreaking approaches include Self-Instruct for automated instruction generation, Constitutional AI for recursive refinement, and Evol-Instruct for enhancing instruction complexity.
+    entity-entity relationships:
+    Self-Instruct|USED_FOR|Automated instruction generation
+    Constitutional AI|USED_FOR|Recursive refinement
+    Evol-Instruct|USED_FOR|Enhancing instruction complexity

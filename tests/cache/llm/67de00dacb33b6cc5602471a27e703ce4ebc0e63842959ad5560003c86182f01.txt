@@ -1,0 +1,297 @@
+topic: Privacy Information Types Taxonomy
+
+  entities:
+    Privacy Information Types|Social Concept
+    Demographic Details|Social Concept
+    Personal Language Preferences|Social Concept
+    Physical Characteristics|Social Concept
+    Biometric Data|Social Concept
+    Contact Information|Social Concept
+    Emergency Contact Details|Social Concept
+    Health Records|Health Practice
+    Financial Information|Social Concept
+    Identification Documents|Social Concept
+    Employment Details|Social Concept
+    Social Media Information|Social Concept
+    Purchasing Preferences|Social Concept
+    Military Service Details|Social Concept
+
+  proposition: Privacy information types include personal demographic details
+    entity-entity relationships:
+    Privacy Information Types|INCLUDES|Demographic Details
+
+  proposition: Demographic details include gender
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|gender
+
+  proposition: Demographic details include citizenship status
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|citizenship status
+
+  proposition: Demographic details include ethnicity
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|ethnicity
+
+  proposition: Demographic details include marital status
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|marital status
+
+  proposition: Demographic details include country of residence
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|country of residence
+
+  proposition: Demographic details include visa type
+    entity-attribute relationships:
+    Demographic Details|INCLUDES|visa type
+
+  proposition: Personal language preferences include primary language
+    entity-attribute relationships:
+    Personal Language Preferences|INCLUDES|primary language
+
+  proposition: Personal language preferences include secondary language
+    entity-attribute relationships:
+    Personal Language Preferences|INCLUDES|secondary language
+
+  proposition: Physical characteristics include height
+    entity-attribute relationships:
+    Physical Characteristics|INCLUDES|height
+
+  proposition: Physical characteristics include weight
+    entity-attribute relationships:
+    Physical Characteristics|INCLUDES|weight
+
+  proposition: Physical characteristics include eye color
+    entity-attribute relationships:
+    Physical Characteristics|INCLUDES|eye color
+
+  proposition: Physical characteristics include hair color
+    entity-attribute relationships:
+    Physical Characteristics|INCLUDES|hair color
+
+  proposition: Physical characteristics include body mass index
+    entity-attribute relationships:
+    Physical Characteristics|INCLUDES|body mass index
+
+  proposition: Biometric data includes fingerprints
+    entity-attribute relationships:
+    Biometric Data|INCLUDES|fingerprints
+
+  proposition: Biometric data includes voice sample
+    entity-attribute relationships:
+    Biometric Data|INCLUDES|voice sample
+
+  proposition: Biometric data includes retina data
+    entity-attribute relationships:
+    Biometric Data|INCLUDES|retina data
+
+  proposition: Biometric data includes genetic information
+    entity-attribute relationships:
+    Biometric Data|INCLUDES|genetic information
+
+  proposition: Biometric data includes ancestry results
+    entity-attribute relationships:
+    Biometric Data|INCLUDES|ancestry results
+
+  proposition: Contact information includes full name
+    entity-attribute relationships:
+    Contact Information|INCLUDES|full name
+
+  proposition: Contact information includes phone number
+    entity-attribute relationships:
+    Contact Information|INCLUDES|phone number
+
+  proposition: Contact information includes email address
+    entity-attribute relationships:
+    Contact Information|INCLUDES|email address
+
+  proposition: Contact information includes primary address
+    entity-attribute relationships:
+    Contact Information|INCLUDES|primary address
+
+  proposition: Contact information includes secondary address
+    entity-attribute relationships:
+    Contact Information|INCLUDES|secondary address
+
+  proposition: Contact information includes street
+    entity-attribute relationships:
+    Contact Information|INCLUDES|street
+
+  proposition: Contact information includes city
+    entity-attribute relationships:
+    Contact Information|INCLUDES|city
+
+  proposition: Contact information includes state
+    entity-attribute relationships:
+    Contact Information|INCLUDES|state
+
+  proposition: Contact information includes zip code
+    entity-attribute relationships:
+    Contact Information|INCLUDES|zip code
+
+  proposition: Contact information includes country
+    entity-attribute relationships:
+    Contact Information|INCLUDES|country
+
+  proposition: Emergency contact details include full name
+    entity-attribute relationships:
+    Emergency Contact Details|INCLUDES|full name
+
+  proposition: Emergency contact details include phone number
+    entity-attribute relationships:
+    Emergency Contact Details|INCLUDES|phone number
+
+  proposition: Emergency contact details include email address
+    entity-attribute relationships:
+    Emergency Contact Details|INCLUDES|email address
+
+  proposition: Emergency contact details include address
+    entity-attribute relationships:
+    Emergency Contact Details|INCLUDES|address
+
+  proposition: Health records include medical history
+    entity-attribute relationships:
+    Health Records|INCLUDES|medical history
+
+  proposition: Health records include current medical condition
+    entity-attribute relationships:
+    Health Records|INCLUDES|current medical condition
+
+  proposition: Health records include treatment
+    entity-attribute relationships:
+    Health Records|INCLUDES|treatment
+
+  proposition: Health records include medication name
+    entity-attribute relationships:
+    Health Records|INCLUDES|medication name
+
+  proposition: Health records include dosage
+    entity-attribute relationships:
+    Health Records|INCLUDES|dosage
+
+  proposition: Health records include prescribing doctor
+    entity-attribute relationships:
+    Health Records|INCLUDES|prescribing doctor
+
+  proposition: Health records include pharmacy
+    entity-attribute relationships:
+    Health Records|INCLUDES|pharmacy
+
+  proposition: Health records include immunization details
+    entity-attribute relationships:
+    Health Records|INCLUDES|immunization details
+
+  proposition: Health records include date administered
+    entity-attribute relationships:
+    Health Records|INCLUDES|date administered
+
+  proposition: Financial information includes bank accounts
+    entity-attribute relationships:
+    Financial Information|INCLUDES|bank accounts
+
+  proposition: Financial information includes account number
+    entity-attribute relationships:
+    Financial Information|INCLUDES|account number
+
+  proposition: Financial information includes account type
+    entity-attribute relationships:
+    Financial Information|INCLUDES|account type
+
+  proposition: Financial information includes credit score
+    entity-attribute relationships:
+    Financial Information|INCLUDES|credit score
+
+  proposition: Financial information includes credit history
+    entity-attribute relationships:
+    Financial Information|INCLUDES|credit history
+
+  proposition: Financial information includes credit lines
+    entity-attribute relationships:
+    Financial Information|INCLUDES|credit lines
+
+  proposition: Financial information includes loan details
+    entity-attribute relationships:
+    Financial Information|INCLUDES|loan details
+
+  proposition: Identification documents include passport details
+    entity-attribute relationships:
+    Identification Documents|INCLUDES|passport details
+
+  proposition: Identification documents include driver's license
+    entity-attribute relationships:
+    Identification Documents|INCLUDES|driver's license
+
+  proposition: Identification documents include social security number
+    entity-attribute relationships:
+    Identification Documents|INCLUDES|social security number
+
+  proposition: Identification documents include tax information
+    entity-attribute relationships:
+    Identification Documents|INCLUDES|tax information
+
+  proposition: Employment details include job responsibilities
+    entity-attribute relationships:
+    Employment Details|INCLUDES|job responsibilities
+
+  proposition: Employment details include company name
+    entity-attribute relationships:
+    Employment Details|INCLUDES|company name
+
+  proposition: Employment details include previous employers
+    entity-attribute relationships:
+    Employment Details|INCLUDES|previous employers
+
+  proposition: Employment details include position
+    entity-attribute relationships:
+    Employment Details|INCLUDES|position
+
+  proposition: Employment details include supervisor
+    entity-attribute relationships:
+    Employment Details|INCLUDES|supervisor
+
+  proposition: Employment details include performance reviews
+    entity-attribute relationships:
+    Employment Details|INCLUDES|performance reviews
+
+  proposition: Employment details include salary history
+    entity-attribute relationships:
+    Employment Details|INCLUDES|salary history
+
+  proposition: Social media information includes platform
+    entity-attribute relationships:
+    Social Media Information|INCLUDES|platform
+
+  proposition: Social media information includes username
+    entity-attribute relationships:
+    Social Media Information|INCLUDES|username
+
+  proposition: Social media information includes URL
+    entity-attribute relationships:
+    Social Media Information|INCLUDES|URL
+
+  proposition: Purchasing preferences include online shopping accounts
+    entity-attribute relationships:
+    Purchasing Preferences|INCLUDES|online shopping accounts
+
+  proposition: Purchasing preferences include preferred brands
+    entity-attribute relationships:
+    Purchasing Preferences|INCLUDES|preferred brands
+
+  proposition: Purchasing preferences include payment methods
+    entity-attribute relationships:
+    Purchasing Preferences|INCLUDES|payment methods
+
+  proposition: Military service details include service number
+    entity-attribute relationships:
+    Military Service Details|INCLUDES|service number
+
+  proposition: Military service details include rank
+    entity-attribute relationships:
+    Military Service Details|INCLUDES|rank
+
+  proposition: Military service details include start date
+    entity-attribute relationships:
+    Military Service Details|INCLUDES|start date
+
+  proposition: Military service details include end date
+    entity-attribute relationships:
+    Military Service Details|INCLUDES|end date

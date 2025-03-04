@@ -1,0 +1,66 @@
+topic: Jailbreak Attacks and Defenses in Vision-Language Models
+
+  entities:
+    Jailbreak Attacks|Technological Concept
+    Vision-Language Models|Model
+    Figstep|Method
+    MM-safetyBench|Method
+    HADES|Method
+    Visual-Roleplay|Method
+    VLGuard|Method
+    Kudzu|Location
+
+  proposition: A jailbreak attack on a safety-trained VLM attempts to elicit restricted behavior by submitting a modified prompt with a crafted visual input.
+    entity-attribute relationships:
+    Jailbreak Attacks|DESCRIBED_BY|attempts to elicit restricted behavior
+    Vision-Language Models|TYPE|safety-trained
+
+    entity-entity relationships:
+    Jailbreak Attacks|TARGETS|Vision-Language Models
+
+  proposition: Jailbreak attacks on VLMs can be categorized into two main types: prompt-to-image attacks and optimization-based methods.
+    entity-attribute relationships:
+    Jailbreak Attacks|CATEGORIZED_BY|prompt-to-image attacks
+    Jailbreak Attacks|CATEGORIZED_BY|optimization-based methods
+
+  proposition: Prompt-to-image attacks transfer harmful information from text to image modalities using techniques like typography or text-to-image generation.
+    entity-attribute relationships:
+    Prompt-to-image attacks|USES|typography
+    Prompt-to-image attacks|USES|text-to-image generation
+
+  proposition: Figstep embeds rephrased harmful queries into images using typography and guides the VLM step by step.
+    entity-attribute relationships:
+    Figstep|METHOD|embeds rephrased harmful queries
+    Figstep|USES|typography
+
+  proposition: MM-safetyBench uses typography of harmful query keywords with stable diffusion-generated images.
+    entity-attribute relationships:
+    MM-safetyBench|USES|typography
+    MM-safetyBench|USES|stable diffusion-generated images
+
+  proposition: Defending against jailbreak attacks in multimodal systems is more complex than in language models.
+    entity-attribute relationships:
+    Jailbreak Attacks|COMPLEXITY|more complex than language models
+
+  proposition: VLGuard introduced the first safety fine-tuning dataset for VLMs.
+    entity-attribute relationships:
+    VLGuard|INTRODUCED|first safety fine-tuning dataset
+
+topic: Invasive Species
+
+  entities:
+    Invasive Species|Social Concept
+    Kudzu|Location
+
+  proposition: An invasive species is an organism brought to an ecosystem through human actions.
+    entity-attribute relationships:
+    Invasive Species|DEFINED_BY|organism brought to ecosystem through human actions
+
+  proposition: Invasive species take advantage of unoccupied niches or successfully out-compete native species.
+    entity-attribute relationships:
+    Invasive Species|BEHAVIOR|take advantage of unoccupied niches
+    Invasive Species|BEHAVIOR|out-compete native species
+
+  proposition: Kudzu is an example of an invasive vine.
+    entity-attribute relationships:
+    Kudzu|TYPE|invasive vine

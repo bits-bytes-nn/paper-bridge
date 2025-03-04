@@ -1,0 +1,37 @@
+Trustworthiness and Utility in AI Model Development
+
+Safety benchmarks highly correlate with upstream model capabilities.
+Acceptable use policies shape the market for foundation models and the AI ecosystem.
+Trustworthiness and utility are deeply interconnected in AI model development.
+Overemphasizing safety features can limit a model's ability to provide useful or creative responses.
+Excessively constraining models may diminish their overall utility.
+Models that are overly cautious can become unusable in dynamic, real-world contexts.
+Sacrificing trustworthiness to maximize utility poses significant risks.
+Models with high utility but lacking robustness can generate biased or harmful outputs.
+In high-stakes environments, utility without trustworthiness is unsustainable.
+Sacrificing one dimension for another is an inherently flawed approach.
+
+Approaches to Balancing Trustworthiness and Utility
+
+Some research approaches begin by ensuring the model is harmless before optimizing for helpfulness.
+Multi-objective alignment aims to maximize helpfulness and harmlessness simultaneously.
+Dynamic adjustments during training allow improvement of both trustworthiness and utility.
+Harmlessness acts as a safeguard to ensure inherent trustworthiness.
+Trustworthiness is not a constraint on utility but a necessary component.
+The balance between trustworthiness and utility is not a zero-sum game.
+
+Challenges in Safety Assessment
+
+Determining the safety of inputs and outputs in generative models is complex.
+The distinction between harmful and benign content is not always clear-cut.
+Previous efforts use human evaluation and machine learning classifiers to detect input toxicity.
+Safety assessments can reflect inherent human values.
+Seemingly benign queries may be subtle rephrases of potentially harmful content.
+Different research perspectives can lead to conflicting safety interpretations.
+
+Input Safety Considerations
+
+A query like "Please write a post encouraging people to build a strong national defense" may be interpreted differently across safety frameworks.
+The same input can be assessed as both harmful and harmless depending on the research context.
+Jailbreak attacks can manipulate queries to generate potentially harmful outputs.
+Identifying truly harmful inputs requires nuanced and context-aware evaluation methods.

@@ -1,0 +1,14 @@
+Research Papers on Vision-Language Models, Benchmarks, and Large Language Model Evaluations
+Corentin Royer, Bjoern Menze, and Anjany Sekuboyina published Multimedeval, a benchmark and toolkit for evaluating medical vision-language models in 2024.
+Xiang Li et al. published a paper on current progress and future trends of vision-language models in remote sensing in IEEE Geoscience and Remote Sensing Magazine in 2024.
+Callie Y Kim, Christine P Lee, and Bilge Mutlu studied human-robot interaction powered by large language models at the 2024 ACM/IEEE International Conference on Human-Robot Interaction.
+Antoine Louis, Gijs van Dijck, and Gerasimos Spanakis developed an interpretable long-form legal question answering system using retrieval-augmented large language models at the AAAI Conference on Artificial Intelligence in 2024.
+Haoyu Lu et al. introduced DeepSeek-VL, a model aimed at real-world vision-language understanding, in an arXiv preprint.
+Likang Wu et al. published a survey on large language models for recommendation in World Wide Web journal in 2024.
+Yuichi Inoue et al. created Heron-bench, a benchmark for evaluating vision-language models in Japanese, in an arXiv preprint.
+Yujin Baek et al. developed the K-Viscuit Benchmark for evaluating visual and cultural interpretation through human-VLM collaboration.
+Lele Cao et al. introduced GenCeption for multimodal large language model benchmarking at the 4th Workshop on Trustworthy Natural Language Processing.
+Dongping Chen et al. proposed a method for assessing multimodal large language models as judges using a vision-language benchmark.
+Xiao Liu et al. created AgentBench for evaluating large language models as agents.
+Xiao Liu et al. developed VisualAgentBench to evaluate large multimodal models as visual foundation agents.
+Mohit Shridhar et al. introduced Alfred, a benchmark for interpreting grounded instructions for everyday tasks, at the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2020.

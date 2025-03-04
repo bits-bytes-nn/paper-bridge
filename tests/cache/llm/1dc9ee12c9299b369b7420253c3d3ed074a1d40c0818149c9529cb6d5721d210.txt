@@ -1,0 +1,109 @@
+topic: Large Language Models Overview
+
+  entities:
+    Gemma-2-27B|Model
+    Llama-3.1-70B|Model
+    Llama-3.1-8B|Model
+    Mixtral-8x22B|Model
+    Mixtral-8x7B|Model
+    GLM-4-Plus|Model
+    Qwen2.5-72B|Model
+    DeepSeek-V2.5|Model
+    Yi-Lightning|Model
+    Llama-3.2-90B-V|Model
+    Google|Organization
+    Meta AI|Organization
+    Mistral AI|Organization
+    Zhipu AI|Organization
+    Alibaba's DAMO Academy|Organization
+    DeepSeek AI|Organization
+    01.AI|Organization
+
+  proposition: A model with 1 million token context window enables handling extensive documents effectively.
+    entity-attribute relationships:
+    Model|CONTEXT_WINDOW|1 million tokens
+    Model|CAPABILITY|handling extensive documents
+
+  proposition: Gemma-2-27B is an open-source Large Language Model developed by Google.
+    entity-attribute relationships:
+    Gemma-2-27B|DEVELOPED_BY|Google
+    Gemma-2-27B|TYPE|open-source Large Language Model
+
+  proposition: Gemma-2-27B features 27 billion parameters.
+    entity-attribute relationships:
+    Gemma-2-27B|PARAMETERS|27 billion
+
+  proposition: Gemma-2-27B has a context length of 8,192 tokens.
+    entity-attribute relationships:
+    Gemma-2-27B|CONTEXT_LENGTH|8,192 tokens
+
+  proposition: Gemma-2-27B uses Rotary Position Embedding for enhanced performance.
+    entity-attribute relationships:
+    Gemma-2-27B|EMBEDDING_TYPE|Rotary Position Embedding
+
+  proposition: Gemma-2-27B allows deployment in environments with limited resources.
+    entity-attribute relationships:
+    Gemma-2-27B|DEPLOYMENT_CAPABILITY|limited resource environments
+
+topic: Multilingual Large Language Models
+
+  entities:
+    Llama-3.1-70B|Model
+    Llama-3.1-8B|Model
+    Qwen2.5-72B|Model
+
+  proposition: Llama-3.1-70B is a multilingual Large Language Model developed by Meta AI.
+    entity-attribute relationships:
+    Llama-3.1-70B|DEVELOPED_BY|Meta AI
+    Llama-3.1-70B|TYPE|multilingual Large Language Model
+
+  proposition: Llama-3.1-70B supports eight languages: English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai.
+    entity-attribute relationships:
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|English
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|German
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|French
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|Italian
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|Portuguese
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|Hindi
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|Spanish
+    Llama-3.1-70B|SUPPORTED_LANGUAGES|Thai
+
+  proposition: Llama-3.1-70B has a context length of 128,000 tokens.
+    entity-attribute relationships:
+    Llama-3.1-70B|CONTEXT_LENGTH|128,000 tokens
+
+topic: Multimodal Large Language Models
+
+  entities:
+    GLM-4V-Plus|Model
+    Qwen2-VL-72B|Model
+    Llama-3.2-90B-V|Model
+    Llama-3.2-11B-V|Model
+    DALL-E 3|Model
+    Stable Diffusion-3.5 Large|Model
+
+  proposition: GLM-4V-Plus is a multimodal Large Language Model developed by Zhipu AI.
+    entity-attribute relationships:
+    GLM-4V-Plus|DEVELOPED_BY|Zhipu AI
+    GLM-4V-Plus|TYPE|multimodal Large Language Model
+
+  proposition: GLM-4V-Plus excels in high-resolution image analysis.
+    entity-attribute relationships:
+    GLM-4V-Plus|CAPABILITY|high-resolution image analysis
+
+  proposition: GLM-4V-Plus has an 8K context window.
+    entity-attribute relationships:
+    GLM-4V-Plus|CONTEXT_WINDOW|8K
+
+  proposition: DALL-E 3 is a text-to-image generation model developed by OpenAI.
+    entity-attribute relationships:
+    DALL-E 3|DEVELOPED_BY|OpenAI
+    DALL-E 3|TYPE|text-to-image generation model
+
+  proposition: Stable Diffusion-3.5 Large features 8.1 billion parameters.
+    entity-attribute relationships:
+    Stable Diffusion-3.5 Large|PARAMETERS|8.1 billion
+
+  proposition: Stable Diffusion-3.5 Large supports 1-megapixel resolution.
+    entity-attribute relationships:
+    Stable Diffusion-3.5 Large|RESOLUTION|1-megapixel

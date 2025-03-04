@@ -1,0 +1,19 @@
+Research Papers on Jailbreaking Large Language Models
+
+Bo Hui, Haolin Yuan, Neil Gong, Philippe Burlina, and Yinzhi Cao published "PLeak: Prompt Leaking Attacks against Large Language Model Applications" in arXiv preprint in 2024.
+Zedian Shao, Hongbin Liu, Jaden Mu, and Neil Zhenqiang Gong published "Making LLMs Vulnerable to Prompt Injection via Poisoning Alignment" in arXiv preprint in 2024.
+Sibo Yi, Yule Liu, Zhen Sun, Tianshuo Cong, Xinlei He, Jiaxing Song, Ke Xu, and Qi Li published a survey on "Jailbreak Attacks and Defenses Against Large Language Models" in 2024.
+Chung-En Sun, Xiaodong Liu, Weiwei Yang, Tsui-Wei Weng, Hao Cheng, Aidan San, Michel Galley, and Jianfeng Gao published "Iterative Self-Tuning LLMs for Enhanced Jailbreaking Capabilities" in arXiv preprint in 2024.
+Zeyi Liao and Huan Sun published "AmpleGCG: Learning a Universal and Transferable Generative Model of Adversarial Suffixes for Jailbreaking Both Open and Closed LLMs" in 2024.
+Vishal Kumar, Zeyi Liao, Jaylen Jones, and Huan Sun published "AmpleGCG-Plus: A Strong Generative Model of Adversarial Suffixes to Jailbreak LLMs with Higher Success Rates in Fewer Attempts" in arXiv preprint in 2024.
+Xiao Li, Zhuhong Li, Qiongxiu Li, Bingze Lee, Jinghao Cui, and Xiaolin Hu published "Faster-GCG: Efficient Discrete Optimization Jailbreak Attacks against Aligned Large Language Models" in arXiv preprint in 2024.
+Xiaogeng Liu, Nan Xu, Muhao Chen, and Chaowei Xiao published "AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models" in 2023.
+Xiaogeng Liu, Peiran Li, Edward Suh, Yevgeniy Vorobeychik, Zhuoqing Mao, Somesh Jha, Patrick McDaniel, Huan Sun, Bo Li, and Chaowei Xiao published "Autodan-turbo: A lifelong agent for strategy self-exploration to jailbreak llms" in arXiv preprint in 2024.
+Patrick Chao, Alexander Robey, Edgar Dobriban, Hamed Hassani, George J Pappas, and Eric Wong published "Jailbreaking black box large language models in twenty queries" in arXiv preprint in 2023.
+Yangsibo Huang, Samyak Gupta, Mengzhou Xia, Kai Li, and Danqi Chen published "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation" in arXiv preprint in 2023.
+Raz Lapid, Ron Langberg, and Moshe Sipper published "Open Sesame! Universal Black Box Jailbreaking of Large Language Models" in arXiv preprint in 2023.
+Xiaoxia Li, Siyuan Liang, Jiyi Zhang, Han Fang, Aishan Liu, and Ee-Chien Chang published "Semantic Mirror Jailbreak: Genetic Algorithm Based Jailbreak Prompts Against Open-source LLMs" in arXiv preprint in 2024.
+Dongyu Yao, Jianshu Zhang, Ian G Harris, and Marcel Carlsson published "Fuzzllm: A novel and universal fuzzing framework for proactively discovering jailbreak vulnerabilities in large language models" in IEEE ICASSP 2024.
+Jiahao Yu, Xingwei Lin, and Xinyu Xing published "GPTfuzzer: Red teaming large language models with auto-generated jailbreak prompts" in arXiv preprint in 2023.
+Youliang Yuan, Wenxiang Jiao, Wenxuan Wang, Jen-tse Huang, Pinjia He, Shuming Shi, and Zhaopeng Tu published "GPT-4 Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher" in arXiv preprint in 2023.
+Huijie Lv, Xiao Wang, Yuansen Zhang, Caishuang Huang, Shihan Dou, Junjie Ye, Tao Gui, Qi Zhang, and Xuanjing Huang published "Codechameleon: Personalized encryption framework for jailbreaking large language models" in arXiv preprint in 2024.

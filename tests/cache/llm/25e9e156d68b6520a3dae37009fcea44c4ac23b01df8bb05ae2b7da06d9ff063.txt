@@ -1,0 +1,15 @@
+Research Papers on Multimodal Large Language Models and Benchmarks
+
+MMMU-Pro is a multi-discipline multimodal understanding benchmark.
+CMMMU is a Chinese massive multi-discipline multimodal understanding benchmark.
+MathVista evaluates mathematical reasoning of foundation models in visual contexts.
+LogicVista is a multimodal LLM logical reasoning benchmark in visual contexts.
+MMRel is a relation understanding dataset and benchmark in the MLLM era.
+MIA-Bench aims to evaluate instruction following of multimodal LLMs.
+MMDU is a multi-turn multi-image dialog understanding benchmark and instruction-tuning dataset for LVLMs.
+A survey explores multimodal large language models for autonomous driving.
+DriveVLM represents the convergence of autonomous driving and large vision-language models.
+LOC-ZSON is a language-driven object-centric zero-shot object retrieval and navigation approach.
+CLIP-Nav uses CLIP for zero-shot vision-and-language navigation.
+ViNT is a foundation model for visual navigation.
+Robot navigation research explores using physically grounded vision-language models in outdoor environments.

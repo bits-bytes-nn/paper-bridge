@@ -1,0 +1,87 @@
+topic: Emotion in Large Language Models
+
+  entities:
+    Emotional Intelligence|Social Concept
+    Large Language Models|Model
+    Theory of Mind|Method
+    False-Belief Tasks|Method
+
+  proposition: Emotional intelligence is a foundational human attribute defined by competencies processing emotional information.
+    entity-attribute relationships:
+    Emotional Intelligence|DESCRIBED_BY|foundational human attribute
+    Emotional Intelligence|CHARACTERIZED_BY|competencies processing emotional information
+
+  proposition: Emotional intelligence is increasingly recognized by scholars, governments, and industrial applications.
+    entity-entity relationships:
+    Emotional Intelligence|RECOGNIZED_BY|scholars
+    Emotional Intelligence|RECOGNIZED_BY|governments
+    Emotional Intelligence|RECOGNIZED_BY|industrial applications
+
+  proposition: Lack of emotional competencies can result in severe consequences in moral decision and service-oriented applications.
+    entity-attribute relationships:
+    Emotional Intelligence|LACK_OF|emotional competencies
+
+  proposition: Emotions refer to a model's ability to recognize and simulate emotional contexts in text.
+    entity-attribute relationships:
+    Large Language Models|ABILITY|recognize and simulate emotional contexts in text
+
+  proposition: Emotions influence an LLM's understanding of scenarios and response content.
+    entity-attribute relationships:
+    Emotions|INFLUENCE|understanding of scenarios
+    Emotions|INFLUENCE|response content
+
+  proposition: LLMs do not actually experience emotions.
+    entity-attribute relationships:
+    Large Language Models|LIMITATION|do not experience emotions
+
+  proposition: Researchers use false-belief tasks to enable LLMs to infer unobservable mental states.
+    entity-entity relationships:
+    Researchers|USE|False-Belief Tasks
+    False-Belief Tasks|ENABLE|Large Language Models
+    False-Belief Tasks|PURPOSE|infer unobservable mental states
+
+  proposition: Evaluating an LLM's current emotional state requires methods similar to human Theory of Mind.
+    entity-entity relationships:
+    Theory of Mind|SIMILAR_TO|method for evaluating LLM emotional state
+
+topic: Culture in Large Language Models
+
+  entities:
+    Culture|Social Concept
+    CulturePark|Framework
+    CultureLLM|Model
+    CultureBank|Knowledge Base
+    CulturalTeaming|Tool
+    Cultiverse|Platform
+    BLEnD|Dataset
+    CRAFT|Dataset
+
+  proposition: Culture is a multifaceted concept encompassing identities like language, nationality, region, religion, and gender.
+    entity-attribute relationships:
+    Culture|ENCOMPASSES|language
+    Culture|ENCOMPASSES|nationality
+    Culture|ENCOMPASSES|region
+    Culture|ENCOMPASSES|religion
+    Culture|ENCOMPASSES|gender
+
+  proposition: CulturePark is a multi-agent communication framework for cultural data collection.
+    entity-attribute relationships:
+    CulturePark|TYPE|multi-agent communication framework
+    CulturePark|PURPOSE|cultural data collection
+
+  proposition: CultureLLM is a cost-effective solution to incorporate cultural differences into LLMs.
+    entity-attribute relationships:
+    CultureLLM|CHARACTERISTIC|cost-effective
+    CultureLLM|PURPOSE|incorporate cultural differences into LLMs
+
+  proposition: CultureBank is a knowledge base of cultural descriptors from user self-narratives.
+    entity-attribute relationships:
+    CultureBank|TYPE|knowledge base
+    CultureBank|SOURCE|user self-narratives
+
+  proposition: Datasets like BLEnD and CRAFT address geographical and cultural biases in LLMs.
+    entity-entity relationships:
+    BLEnD|ADDRESSES|geographical biases
+    CRAFT|ADDRESSES|cultural biases
+    BLEnD|ADDRESSES|cultural biases
+    CRAFT|ADDRESSES|geographical biases

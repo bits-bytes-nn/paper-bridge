@@ -1,0 +1,16 @@
+Research Papers on Multimodal Language and Vision Models
+Yu Shu and colleagues published a paper titled "Llasm: Large Language and Speech Model" in 2023.
+Tsai-Shien Chen and colleagues published a paper titled "Panda-70m: Captioning 70m videos with multiple cross-modality teachers" in the IEEE/CVF Conference on Computer Vision in 2024.
+Chenqiang Gao and colleagues published a paper titled "Infar dataset: Infrared action recognition at different times" in Neurocomputing in 2016.
+Letian Fu and colleagues published a paper titled "A touch, vision, and language dataset for multimodal alignment" in 2024.
+Jiaming Han and colleagues published a paper titled "Imagebind-llm: Multi-modality instruction tuning" in 2023.
+Bin Zhu and colleagues published two papers: "Languagebind: Extending video-language pretraining to n-modality by language-based semantic alignment" in 2023 and "LLMBind: A unified modality-task integration framework" in 2024.
+Rohit Girdhar and colleagues published a paper titled "Imagebind: One embedding space to bind them all" in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2023.
+Shengqiong Wu and colleagues published a paper titled "NExT-GPT: Any-to-Any Multimodal LLM" in the Forty-first International Conference on Machine Learning.
+Jun Zhan and colleagues published a paper titled "Anygpt: Unified multimodal llm with discrete sequence modeling" in 2024.
+Zineng Tang and colleagues published a paper titled "CoDi-2: In-Context Interleaved and Interactive Any-to-Any Generation" in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+Yanwei Li and colleagues published a paper titled "Mini-gemini: Mining the potential of multi-modality vision language models" in 2024.
+OpenAI published a paper titled "GPT-4O Mini: Advancing Cost-Efficient Intelligence" in 2024.
+Dongping Chen and colleagues published a paper titled "Interleaved Scene Graph for Interleaved Text-and-Image Generation Assessment" in 2024.
+Tanmay Gupta and Aniruddha Kembhavi published a paper titled "Visual programming: Compositional visual reasoning without training" in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2023.
+Dídac Surís, Sachit Menon, and Carl Vondrick published a paper titled "Vipergpt: Visual inference via python execution for reasoning".

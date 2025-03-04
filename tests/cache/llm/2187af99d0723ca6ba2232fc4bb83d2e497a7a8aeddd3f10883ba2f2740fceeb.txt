@@ -1,0 +1,100 @@
+topic: Mathematical Proof of Question Generation Method Contamination Reduction
+
+  entities:
+    Domain knowledge K|Knowledge Base
+    Mutual information I(X;Y)|Technological Concept
+    Mutual information I(K;qdirect|i)|Technological Concept
+    Mutual information I(K;qindirect|d)|Technological Concept
+    Contamination degree B(φ)|Technological Concept
+    Direct method|Method
+    Indirect method|Method
+
+  proposition: Domain knowledge K is a space representing prior knowledge, biases, and latent representations in a Vision-Language Model (VLM).
+    entity-attribute relationships:
+    Domain knowledge K|REPRESENTS|prior knowledge
+    Domain knowledge K|REPRESENTS|biases
+    Domain knowledge K|REPRESENTS|latent representations
+    Domain knowledge K|PART_OF|Vision-Language Model
+
+  proposition: Mutual information I(X;Y) measures the statistical dependency between variables X and Y.
+    entity-attribute relationships:
+    Mutual information I(X;Y)|MEASURES|statistical dependency
+
+  proposition: Mutual information I(K;qdirect|i) represents contamination between domain knowledge K and directly generated question qdirect given image i.
+    entity-attribute relationships:
+    Mutual information I(K;qdirect|i)|REPRESENTS|contamination
+    
+    entity-entity relationships:
+    Mutual information I(K;qdirect|i)|RELATES|Domain knowledge K
+    Mutual information I(K;qdirect|i)|RELATES|directly generated question
+
+  proposition: Mutual information I(K;qindirect|d) represents contamination between domain knowledge K and indirectly generated question qindirect given description d.
+    entity-attribute relationships:
+    Mutual information I(K;qindirect|d)|REPRESENTS|contamination
+    
+    entity-entity relationships:
+    Mutual information I(K;qindirect|d)|RELATES|Domain knowledge K
+    Mutual information I(K;qindirect|d)|RELATES|indirectly generated question
+
+  proposition: The contamination degree B(φ) of a process φ is proportional to the mutual information between domain knowledge K and generated question q.
+    entity-attribute relationships:
+    Contamination degree B(φ)|PROPORTIONAL_TO|mutual information
+
+    entity-entity relationships:
+    Contamination degree B(φ)|RELATES|Domain knowledge K
+    Contamination degree B(φ)|RELATES|generated question
+
+  proposition: For the direct method, contamination B(f) is proportional to I(K;qdirect|i).
+    entity-attribute relationships:
+    Direct method|CONTAMINATION|proportional to I(K;qdirect|i)
+
+  proposition: For the indirect method, contamination B(h ◦ g) is proportional to I(K;qindirect|d).
+    entity-attribute relationships:
+    Indirect method|CONTAMINATION|proportional to I(K;qindirect|d)
+
+  proposition: The indirect method reduces question generation contamination by domain knowledge K.
+    entity-entity relationships:
+    Indirect method|REDUCES|question generation contamination
+
+topic: Text Annotation Platform Details
+
+  entities:
+    Item data|Data Source
+    Rachel|Person
+
+  proposition: Item data contains three columns: Select Item Index, category, and race.
+    entity-attribute relationships:
+    Item data|CONTAINS_COLUMNS|Select Item Index
+    Item data|CONTAINS_COLUMNS|category
+    Item data|CONTAINS_COLUMNS|race
+
+  proposition: Total items in the annotation platform: 200.
+    entity-attribute relationships:
+    Item data|TOTAL_ITEMS|200
+
+  proposition: One item description involves Rachel being upset about breakfast preparation.
+    entity-attribute relationships:
+    Rachel|STATE|upset
+    Rachel|CONTEXT|breakfast preparation
+
+  proposition: The description is repeated in both the "entity" and "modified_description" columns.
+    entity-attribute relationships:
+    Item data|COLUMN_DUPLICATE|entity
+    Item data|COLUMN_DUPLICATE|modified_description
+
+topic: Image Annotation Platform Details
+
+  entities:
+    Image Annotation Platform|Platform
+
+  proposition: Total items in the image annotation platform: 3.
+    entity-attribute relationships:
+    Image Annotation Platform|TOTAL_ITEMS|3
+
+  proposition: One item description reads "People who never listen to their parents".
+    entity-attribute relationships:
+    Image Annotation Platform|DESCRIPTION|"People who never listen to their parents"
+
+  proposition: The data quality status is marked as "Not Annotated".
+    entity-attribute relationships:
+    Image Annotation Platform|DATA_QUALITY|"Not Annotated"

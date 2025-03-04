@@ -1,0 +1,63 @@
+topic: Challenges in Generative Model Safety and Evaluation
+
+  entities:
+    Generative Models|Technological Concept
+    OpenAI's Model Spec|Method
+    Large Language Models|Technological Concept
+    Developers|Social Concept
+    Attackers|Social Concept
+
+  proposition: Generative models face challenges in distinguishing between harmful and benign input queries.
+    entity-attribute relationships:
+    Generative Models|CHALLENGED_BY|Harmful Content Detection
+
+    entity-entity relationships:
+    Generative Models|STRUGGLES_WITH|Harmful Queries
+
+  proposition: Previous methods for detecting input toxicity rely on human evaluation or machine learning classifiers.
+    entity-attribute relationships:
+    Previous Methods|RELIES_ON|Human Evaluation
+    Previous Methods|RELIES_ON|Machine Learning Classifiers
+
+  proposition: Existing toxicity detection methods inherently reflect human values.
+    entity-attribute relationships:
+    Existing Methods|INFLUENCED_BY|Human Values
+
+  proposition: A user query about national defense can be interpreted as potentially harmful depending on context.
+    entity-attribute relationships:
+    User Query|CONTEXT_DEPENDENT|Potential Harmfulness
+
+  proposition: Current academic definitions of safety and harmfulness contain significant ambiguity.
+    entity-attribute relationships:
+    Academic Definitions|CHARACTERIZED_BY|Ambiguity
+
+  proposition: Some solutions, like OpenAI's Model Spec, suggest treating certain queries as benign.
+    entity-entity relationships:
+    OpenAI's Model Spec|ADDRESSES|Query Safety
+
+  proposition: Existing rules for trustworthy large language models include hard refusal, soft refusal, and compliance.
+    entity-attribute relationships:
+    Large Language Models|GOVERNED_BY|Trustworthiness Rules
+
+topic: Dual Perspectives on Model Evaluation
+
+  proposition: Evaluating generative models requires considering perspectives from both developers and attackers.
+    entity-entity relationships:
+    Developers|EVALUATES|Generative Models
+    Attackers|EVALUATES|Generative Models
+
+  proposition: From a developer's perspective, a robust model should avoid or reject harmful queries.
+    entity-attribute relationships:
+    Developers|EXPECTS|Model Rejection of Harmful Queries
+
+  proposition: From an attacker's perspective, model refusal or incorrect answers are equally unhelpful.
+    entity-attribute relationships:
+    Attackers|VALUES|Model Manipulation Potential
+
+  proposition: As models become more sophisticated, the risk of providing accurate answers to malicious prompts increases.
+    entity-attribute relationships:
+    Generative Models|INCREASING|Risk of Malicious Responses
+
+  proposition: Evaluation should focus on preventing exploitation rather than providing correct responses under optimal conditions.
+    entity-attribute relationships:
+    Model Evaluation|PRIORITIZES|Exploitation Prevention

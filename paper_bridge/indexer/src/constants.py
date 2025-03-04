@@ -1,30 +1,42 @@
 import os
 from enum import Enum
-from typing import Optional
+from typing import List, Optional
 
 
-class LanguageModelId(str, Enum):
-    CLAUDE_V3_HAIKU = "anthropic.claude-3-haiku-20240307-v1:0"
-    CLAUDE_V3_SONNET = "anthropic.claude-3-sonnet-20240229-v1:0"
-    CLAUDE_V3_OPUS = "anthropic.claude-3-opus-20240229-v1:0"
-    CLAUDE_V3_5_HAIKU = "anthropic.claude-3-5-haiku-20241022-v1:0"
-    CLAUDE_V3_5_SONNET = "anthropic.claude-3-5-sonnet-20240620-v1:0"
-    CLAUDE_V3_5_SONNET_V2 = "anthropic.claude-3-5-sonnet-20241022-v2:0"
-
-    COMMAND_R = "cohere.command-r-v1:0"
-    COMMAND_R_PLUS = "cohere.command-r-plus-v1:0"
-
-    LLAMA_V3_1_8B = "meta.llama3-1-8b-instruct-v1:0"
-    LLAMA_V3_1_70B = "meta.llama3-1-70b-instruct-v1:0"
-    LLAMA_V3_1_405B = "meta.llama3-1-405b-instruct-v1:0"
-
-    MISTRAL_7B = "mistral.mistral-7b-instruct-v0:2"
-    MISTRAL_8X7B = "mistral.mixtral-8x7b-instruct-v0:1"
-    MISTRAL_SMALL = "mistral.mistral-small-2402-v1:0"
-    MISTRAL_LARGE = "mistral.mistral-large-2407-v1:0"
-
-    NOVA_MICRO = "amazon.nova-micro-v1:0"
-    NOVA_PRO = "amazon.nova-pro-v1:0"
+ENTITY_CLASSIFICATIONS: List[str] = [
+    "Ablation Study",
+    "Algorithm",
+    "Baseline",
+    "Benchmark",
+    "Computing Infrastructure",
+    "Conference",
+    "Data Augmentation",
+    "Data Preprocessing",
+    "Dataset",
+    "Domain",
+    "Framework",
+    "Future Work",
+    "Hardware",
+    "Hyperparameter",
+    "Journal",
+    "Library",
+    "Limitation",
+    "Loss Function",
+    "Metric",
+    "Model Architecture",
+    "Optimization Method",
+    "Performance Result",
+    "Prior Work",
+    "Research Field",
+    "Research Group",
+    "Research Institution",
+    "Research Problem",
+    "Researcher",
+    "Task",
+    "Training Data",
+    "Use Case",
+    "Validation Data",
+]
 
 
 class EnvVars(str, Enum):

@@ -1,0 +1,81 @@
+topic: AI Safety and Multimodal Models Research
+
+  entities:
+    Gemini|Model
+    ShieldGemma|Approach
+    DeepMind|Organization
+    Jerry Wei|Researcher
+    IBM|Organization
+    Swapnaja Achintalwar|Researcher
+    BLIP|Approach
+    BLIP-2|Approach
+    xGen-MM|Model
+    BLIP-Diffusion|Approach
+    Unicontrol|Model
+    Salesforce|Organization
+
+  proposition: Gemini is a family of highly capable multimodal models published by Google researchers.
+    entity-attribute relationships:
+    Gemini|DESCRIBED_BY|highly capable multimodal models
+    Gemini|PUBLISHED_BY|Google researchers
+
+    entity-entity relationships:
+    Gemini|DEVELOPED_BY|Google researchers
+
+  proposition: ShieldGemma is a generative AI content moderation approach based on the Gemini model.
+    entity-attribute relationships:
+    ShieldGemma|TYPE|generative AI content moderation approach
+
+    entity-entity relationships:
+    ShieldGemma|BASED_ON|Gemini
+
+  proposition: DeepMind introduced the Frontier Safety Framework in 2023.
+    entity-attribute relationships:
+    DeepMind|INTRODUCED|Frontier Safety Framework
+    Frontier Safety Framework|YEAR_INTRODUCED|2023
+
+  proposition: Jerry Wei et al. published research on long-form factuality in large language models in 2024.
+    entity-attribute relationships:
+    Jerry Wei|PUBLISHED|research on long-form factuality
+    Research|YEAR_PUBLISHED|2024
+    Research|FOCUS|long-form factuality in large language models
+
+  proposition: IBM developed the Granite Foundation Models and a framework for securing generative AI.
+    entity-attribute relationships:
+    IBM|DEVELOPED|Granite Foundation Models
+    IBM|DEVELOPED|framework for securing generative AI
+
+  proposition: Researchers Swapnaja Achintalwar et al. published a study on detectors for safe and reliable large language models.
+    entity-attribute relationships:
+    Swapnaja Achintalwar|PUBLISHED|study on detectors for safe and reliable large language models
+
+  proposition: BLIP is a bootstrapping language-image pre-training approach for vision-language understanding.
+    entity-attribute relationships:
+    BLIP|TYPE|bootstrapping language-image pre-training approach
+    BLIP|PURPOSE|vision-language understanding
+
+  proposition: BLIP-2 extended the initial BLIP model by using frozen image encoders and large language models.
+    entity-attribute relationships:
+    BLIP-2|EXTENDS|BLIP model
+
+    entity-entity relationships:
+    BLIP-2|USES|frozen image encoders
+    BLIP-2|USES|large language models
+
+  proposition: xGen-MM (BLIP-3) is a family of open large multimodal models.
+    entity-attribute relationships:
+    xGen-MM|TYPE|open large multimodal models
+
+  proposition: BLIP-Diffusion enables pre-trained subject representation for controllable text-to-image generation and editing.
+    entity-attribute relationships:
+    BLIP-Diffusion|ENABLES|pre-trained subject representation
+    BLIP-Diffusion|PURPOSE|controllable text-to-image generation and editing
+
+  proposition: Unicontrol is a unified diffusion model for controllable visual generation.
+    entity-attribute relationships:
+    Unicontrol|TYPE|unified diffusion model
+    Unicontrol|PURPOSE|controllable visual generation
+
+  proposition: Salesforce has developed principles for trusted generative AI.
+    entity-attribute relationships:
+    Salesforce|DEVELOPED|principles for trusted generative AI

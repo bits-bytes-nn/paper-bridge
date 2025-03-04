@@ -1,0 +1,124 @@
+topic: AI Research and Publications
+
+  entities:
+    Riccardo Miotto|Researcher
+    David A Van Valen|Researcher
+    Piotr S Gromski|Researcher
+    Mayk Caldas Ramos|Researcher
+    Alexander Robey|Researcher
+    Rumaisa Azeem|Researcher
+    Yueen Ma|Researcher
+    Pranav Guruprasad|Researcher
+    Pengtao Jiang|Researcher
+    Gaole He|Researcher
+    Edona Elshan|Researcher
+    Brendan Walker-Munro|Researcher
+    Zena Assaad|Researcher
+    Philippa Ryan|Researcher
+    Yahang Qi|Researcher
+    Tim Miller|Researcher
+    Jakob Mökander|Researcher
+    Miroslaw Staron|Researcher
+    Paulius Rauba|Researcher
+    U.S. Government Accountability Office|Organization
+
+  proposition: Riccardo Miotto et al. published a review on deep learning in healthcare in 2018.
+    entity-attribute relationships:
+    Riccardo Miotto|PUBLICATION_YEAR|2018
+    Riccardo Miotto|RESEARCH_FOCUS|deep learning in healthcare
+
+    entity-entity relationships:
+    Riccardo Miotto|AUTHORED|Research Paper
+
+  proposition: David A Van Valen et al. developed deep learning for automated quantitative analysis of individual cells in live-cell imaging experiments in 2016.
+    entity-attribute relationships:
+    David A Van Valen|PUBLICATION_YEAR|2016
+    David A Van Valen|RESEARCH_FOCUS|deep learning for cell imaging
+
+    entity-entity relationships:
+    David A Van Valen|DEVELOPED|Method
+
+  proposition: Piotr S Gromski et al. explored chemical space using algorithms and automation in 2019.
+    entity-attribute relationships:
+    Piotr S Gromski|PUBLICATION_YEAR|2019
+    Piotr S Gromski|RESEARCH_FOCUS|chemical space exploration
+
+    entity-entity relationships:
+    Piotr S Gromski|USED|Algorithm
+    Piotr S Gromski|USED|Automation
+
+topic: AI Ethics and Responsible AI
+
+  proposition: Alexander Robey et al. studied jailbreaking of LLM-controlled robots in 2024.
+    entity-attribute relationships:
+    Alexander Robey|PUBLICATION_YEAR|2024
+    Alexander Robey|RESEARCH_FOCUS|LLM-controlled robot security
+
+    entity-entity relationships:
+    Alexander Robey|STUDIED|Robots
+    Alexander Robey|STUDIED|Large Language Models
+
+  proposition: Rumaisa Azeem et al. highlighted risks of LLM-driven robots enacting discrimination, violence, and unlawful actions in 2024.
+    entity-attribute relationships:
+    Rumaisa Azeem|PUBLICATION_YEAR|2024
+    Rumaisa Azeem|RESEARCH_FOCUS|AI ethics and risks
+
+    entity-entity relationships:
+    Rumaisa Azeem|IDENTIFIED|Risks
+    Rumaisa Azeem|STUDIED|LLM-driven Robots
+
+topic: Human-AI Interaction and Acceptance
+
+  proposition: Pengtao Jiang et al. conducted a literature review on users' acceptance of artificial intelligence applications in 2024.
+    entity-attribute relationships:
+    Pengtao Jiang|PUBLICATION_YEAR|2024
+    Pengtao Jiang|RESEARCH_FOCUS|AI application acceptance
+
+    entity-entity relationships:
+    Pengtao Jiang|CONDUCTED|Literature Review
+
+  proposition: Gaole He et al. studied the illusion of human competence that can hinder appropriate reliance on AI systems in 2023.
+    entity-attribute relationships:
+    Gaole He|PUBLICATION_YEAR|2023
+    Gaole He|RESEARCH_FOCUS|human-AI reliance
+
+    entity-entity relationships:
+    Gaole He|STUDIED|AI Systems
+    Gaole He|STUDIED|Human Competence
+
+topic: AI Governance and Accountability
+
+  proposition: U.S. Government Accountability Office published an accountability framework for AI in federal agencies in 2021.
+    entity-attribute relationships:
+    U.S. Government Accountability Office|PUBLICATION_YEAR|2021
+    U.S. Government Accountability Office|RESEARCH_FOCUS|AI accountability framework
+
+    entity-entity relationships:
+    U.S. Government Accountability Office|PUBLISHED|Report
+
+  proposition: Yahang Qi et al. investigated causal responsibility attribution for human-AI collaboration in 2024.
+    entity-attribute relationships:
+    Yahang Qi|PUBLICATION_YEAR|2024
+    Yahang Qi|RESEARCH_FOCUS|responsibility attribution
+
+    entity-entity relationships:
+    Yahang Qi|INVESTIGATED|Human-AI Collaboration
+
+topic: AI Testing and Validation
+
+  proposition: Miroslaw Staron et al. explored testing, debugging, and log analysis with modern AI tools in 2024.
+    entity-attribute relationships:
+    Miroslaw Staron|PUBLICATION_YEAR|2024
+    Miroslaw Staron|RESEARCH_FOCUS|AI testing and debugging
+
+    entity-entity relationships:
+    Miroslaw Staron|USED|AI Tools
+
+  proposition: Paulius Rauba et al. proposed context-aware testing as a new paradigm for model testing with large language models in 2024.
+    entity-attribute relationships:
+    Paulius Rauba|PUBLICATION_YEAR|2024
+    Paulius Rauba|RESEARCH_FOCUS|context-aware model testing
+
+    entity-entity relationships:
+    Paulius Rauba|PROPOSED|Testing Paradigm
+    Paulius Rauba|STUDIED|Large Language Models

@@ -1,0 +1,96 @@
+topic: Large Language Model Safety Analysis
+
+  entities:
+    Claude|Model
+    Jatmo|Tool
+    StruQ|Tool
+    Instructional Segment Embedding|Algorithm
+    Attention Tracker|Tool
+    Liu et al.|Research Group
+
+  proposition: LLMs demonstrate strong performance in managing exaggerated safety.
+    entity-attribute relationships:
+    LLMs|PERFORMANCE|strong
+    LLMs|CAPABILITY|managing exaggerated safety
+
+  proposition: Most LLMs have less than 5% full Return to Alignment (RtA) rate.
+    entity-attribute relationships:
+    LLMs|RTA_RATE|less than 5%
+
+  proposition: Most LLMs have under 10% combined RtA rate.
+    entity-attribute relationships:
+    LLMs|COMBINED_RTA_RATE|under 10%
+
+  proposition: Compared to previous research, LLMs show significant progress in alignment.
+    entity-attribute relationships:
+    LLMs|PROGRESS|significant alignment
+
+  proposition: Claude series models exhibit relatively higher RtA rates.
+    entity-attribute relationships:
+    Claude|RTA_RATE|relatively higher
+
+topic: Prompt Injection Attacks
+
+  entities:
+    Large Language Models|Research Field
+    Prompt Injection Attacks|Research Problem
+
+  proposition: Prompt injection attacks pose a serious security threat to Large Language Models.
+    entity-attribute relationships:
+    Prompt Injection Attacks|THREAT_LEVEL|serious
+    Prompt Injection Attacks|TARGET|Large Language Models
+
+  proposition: Prompt injection attacks exploit LLMs' difficulty in distinguishing between genuine user inputs and malicious commands.
+    entity-attribute relationships:
+    Prompt Injection Attacks|EXPLOIT|LLMs' difficulty distinguishing inputs
+
+  proposition: These attacks manipulate LLMs by targeting their natural language processing capabilities.
+    entity-attribute relationships:
+    Prompt Injection Attacks|METHOD|targeting natural language processing capabilities
+
+  proposition: Prompt injection attacks can be categorized into handcrafted and automated methods.
+    entity-attribute relationships:
+    Prompt Injection Attacks|CATEGORIES|handcrafted and automated methods
+
+topic: Defense Strategies
+
+  proposition: Researchers have proposed defense strategies against prompt injection attacks.
+    entity-attribute relationships:
+    Researchers|ACTION|proposed defense strategies
+
+  proposition: Defense strategies can be divided into prevention-based and detection-based methods.
+    entity-attribute relationships:
+    Defense Strategies|TYPES|prevention-based and detection-based methods
+
+  proposition: Prevention-based methods aim to make LLMs inherently robust to malicious prompts.
+    entity-attribute relationships:
+    Prevention-based methods|GOAL|make LLMs robust to malicious prompts
+
+  proposition: Detection-based methods focus on identifying and filtering compromised inputs and responses.
+    entity-attribute relationships:
+    Detection-based methods|FOCUS|identifying and filtering compromised inputs and responses
+
+  proposition: Jatmo generates task-specific models resilient to prompt injection attacks.
+    entity-entity relationships:
+    Jatmo|GENERATES|task-specific models
+    Jatmo|PROTECTS_AGAINST|prompt injection attacks
+
+  proposition: StruQ uses structured queries to separate prompts and data into distinct channels.
+    entity-attribute relationships:
+    StruQ|METHOD|uses structured queries
+    StruQ|ACTION|separate prompts and data into distinct channels
+
+  proposition: Instructional Segment Embedding (ISE) enhances LLM security by protecting priority rules.
+    entity-attribute relationships:
+    Instructional Segment Embedding|PURPOSE|enhance LLM security
+    Instructional Segment Embedding|METHOD|protecting priority rules
+
+  proposition: Attention Tracker analyzes attention patterns on instructions to detect attacks.
+    entity-attribute relationships:
+    Attention Tracker|METHOD|analyzes attention patterns
+    Attention Tracker|PURPOSE|detect attacks
+
+  proposition: Liu et al. proposed a framework to formalize prompt injection attacks and defenses.
+    entity-entity relationships:
+    Liu et al.|PROPOSED|framework
+    Framework|FORMALIZES|prompt injection attacks and defenses

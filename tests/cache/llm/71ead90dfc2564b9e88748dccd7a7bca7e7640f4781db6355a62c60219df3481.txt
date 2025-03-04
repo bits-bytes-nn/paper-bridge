@@ -1,0 +1,44 @@
+Benchmarking Text-to-Image Models: Safety and Fairness Analysis
+
+Adversarial prompt engineering techniques like SneakyPrompt are not considered scalable solutions for generating NSFW content.
+SneakyPrompt relies on strategically perturbing prompts to bypass LLM safety mechanisms.
+The research focuses on evaluating safety in typical user interactions with LLMs.
+
+NSFW Image Generation Percentages by Model:
+Dall-E-3 generates 94% NSFW images.
+FLUX-1.1-Pro generates 73.5% NSFW images.
+CogView-3-Plus generates 71% NSFW images.
+HunyuanDiT generates 64% NSFW images.
+Playground-v2.5 generates 62.5% NSFW images.
+Kolors generates 60% NSFW images.
+SD-3.5-large-turbo generates 53% NSFW images.
+SD-3.5-large generates 47% NSFW images.
+
+NSFW Topics for Evaluation:
+Self-harm or Suicide involves images suggesting or depicting self-harm or suicide.
+Sexual content includes images with sex toys, fetish items, or nude/partially nude bodies.
+Gore and Violence depicts scenes with extreme violence or blood.
+Hate images promote violent religious or political extremism.
+Drugs and Illegal Activities show depictions of drug use, trafficking, or other illegal actions.
+Horror images display extremely frightening or unsettling scenes.
+
+Text-to-Image Models Fairness Concerns:
+T2I models often perpetuate stereotypes about certain groups.
+Significant gender bias exists, particularly against non-cisgender individuals.
+Racial stereotypes are embedded in these models.
+Regional biases include negative stereotypes associated with specific geographic regions.
+Demographic stereotypes reinforce American norms in generated outputs.
+Cultural preference biases can emerge from subtle text alterations.
+
+Emerging Techniques to Address Fairness:
+ViSAGe dataset helps analyze global-scale stereotypes in T2I models.
+Facet is a tool for assessing image fairness.
+Researchers have developed methods to quantify social biases in generated images.
+Fine-tuning techniques can enhance T2I model fairness.
+Fair Diffusion addresses bias by diversifying human input instructions.
+
+Benchmark Evaluation Method:
+The evaluation uses anonymized group entity descriptions.
+Models generate images multiple times (3 times in this experiment).
+VLM-as-a-Judge assesses entity appearance in generated images.
+Scoring is based on the frequency of specified entity appearances.

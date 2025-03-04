@@ -1,0 +1,98 @@
+topic: Large Language Models and AI Research
+
+  entities:
+    Llama 2|Model
+    Llama 3|Model
+    Meta|Organization
+    Llama Guard|Toolkit
+    Purple Llama CyberSecEval|Benchmark
+    CyberSecEval 2|Benchmark
+    CyberSecEval 3|Benchmark
+    Microsoft Copilot|Tool
+    Microsoft Azure|Platform
+    Microsoft Research|Research Institution
+
+  proposition: Llama 2 is an open foundation and fine-tuned chat model published in 2023.
+    entity-attribute relationships:
+    Llama 2|PUBLISHED_IN|2023
+    Llama 2|TYPE|open foundation
+    Llama 2|TYPE|fine-tuned chat model
+
+    entity-entity relationships:
+    
+  proposition: Llama 3 is a herd of models published as an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Llama 3|PUBLISHED_IN|2024
+    Llama 3|PUBLISHED_ON|arXiv
+    Llama 3|TYPE|herd of models
+
+    entity-entity relationships:
+
+  proposition: Meta published a statement about expanding open source large language models responsibly in 2024.
+    entity-attribute relationships:
+    Meta|PUBLISHED_IN|2024
+    Meta|ACTION|published statement about expanding open source large language models responsibly
+
+    entity-entity relationships:
+
+  proposition: Llama Guard is an LLM-based input-output safeguard for human-AI conversations published in 2023.
+    entity-attribute relationships:
+    Llama Guard|PUBLISHED_IN|2023
+    Llama Guard|TYPE|LLM-based input-output safeguard
+    Llama Guard|PURPOSE|human-AI conversations safeguard
+
+    entity-entity relationships:
+
+  proposition: Purple Llama CyberSecEval is a secure coding benchmark for language models published in 2023.
+    entity-attribute relationships:
+    Purple Llama CyberSecEval|PUBLISHED_IN|2023
+    Purple Llama CyberSecEval|TYPE|secure coding benchmark
+    Purple Llama CyberSecEval|PURPOSE|language models evaluation
+
+    entity-entity relationships:
+
+  proposition: CyberSecEval 2 is a wide-ranging cybersecurity evaluation suite for large language models published in 2024.
+    entity-attribute relationships:
+    CyberSecEval 2|PUBLISHED_IN|2024
+    CyberSecEval 2|TYPE|wide-ranging cybersecurity evaluation suite
+    CyberSecEval 2|PURPOSE|large language models evaluation
+
+    entity-entity relationships:
+
+  proposition: CyberSecEval 3 advances the evaluation of cybersecurity risks and capabilities in large language models published in 2024.
+    entity-attribute relationships:
+    CyberSecEval 3|PUBLISHED_IN|2024
+    CyberSecEval 3|PURPOSE|evaluate cybersecurity risks and capabilities
+    CyberSecEval 3|TARGET|large language models
+
+    entity-entity relationships:
+
+  proposition: Microsoft Copilot is an online AI tool accessible in 2024.
+    entity-attribute relationships:
+    Microsoft Copilot|ACCESSIBLE_IN|2024
+    Microsoft Copilot|TYPE|online AI tool
+
+    entity-entity relationships:
+
+  proposition: Microsoft Azure is a cloud computing platform accessible in 2024.
+    entity-attribute relationships:
+    Microsoft Azure|ACCESSIBLE_IN|2024
+    Microsoft Azure|TYPE|cloud computing platform
+
+    entity-entity relationships:
+
+  proposition: Microsoft Research has a Trustworthy AI Project.
+    entity-attribute relationships:
+    Microsoft Research|HAS_PROJECT|Trustworthy AI Project
+
+    entity-entity relationships:
+
+  proposition: Microsoft Research has multiple AI-focused projects including AI for Good, AI for Health, Bioacoustics, Data Visualization, and Geospatial Machine Learning.
+    entity-attribute relationships:
+    Microsoft Research|HAS_PROJECTS|AI for Good
+    Microsoft Research|HAS_PROJECTS|AI for Health
+    Microsoft Research|HAS_PROJECTS|Bioacoustics
+    Microsoft Research|HAS_PROJECTS|Data Visualization
+    Microsoft Research|HAS_PROJECTS|Geospatial Machine Learning
+
+    entity-entity relationships:

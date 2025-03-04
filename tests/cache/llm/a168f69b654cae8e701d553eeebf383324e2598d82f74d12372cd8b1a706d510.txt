@@ -1,0 +1,125 @@
+topic: Language Model Bias Research
+
+  entities:
+    Yunfan Gao|Researcher
+    Xiaolei Wang|Researcher
+    Sunhao Dai|Researcher
+    Luyang Lin|Researcher
+    Irene Solaiman|Researcher
+    Christy Dennison|Researcher
+    Ahmed Allam|Researcher
+    Hanzhang Zhou|Researcher
+    Shijia Huang|Researcher
+    Chat-rec|Project
+    PALMS|Approach
+    BiasDPO|Method
+    UniBias|Method
+
+  proposition: Yunfan Gao et al. published a paper on Chat-rec, an interactive and explainable LLMs-augmented recommender system in 2023.
+    entity-attribute relationships:
+    Yunfan Gao|PUBLISHED|Research Paper
+    Chat-rec|TYPE|Recommender System
+    Chat-rec|CHARACTERISTIC|Interactive
+    Chat-rec|CHARACTERISTIC|Explainable
+    Chat-rec|YEAR|2023
+
+    entity-entity relationships:
+    Yunfan Gao|AUTHOR_OF|Chat-rec
+
+  proposition: Xiaolei Wang et al. examined the evaluation of conversational recommendation in the era of large language models in 2023.
+    entity-attribute relationships:
+    Xiaolei Wang|PUBLISHED|Research Paper
+    Xiaolei Wang|RESEARCH_FOCUS|Conversational Recommendation
+    Xiaolei Wang|RESEARCH_CONTEXT|Large Language Models
+    Xiaolei Wang|YEAR|2023
+
+  proposition: Sunhao Dai et al. investigated ChatGPT's capabilities in recommender systems in 2023.
+    entity-attribute relationships:
+    Sunhao Dai|PUBLISHED|Research Paper
+    Sunhao Dai|RESEARCH_FOCUS|ChatGPT Capabilities
+    Sunhao Dai|RESEARCH_DOMAIN|Recommender Systems
+    Sunhao Dai|YEAR|2023
+
+  proposition: Luyang Lin et al. studied bias in LLM-based bias detection and disparities between LLMs and human perception in 2024.
+    entity-attribute relationships:
+    Luyang Lin|PUBLISHED|Research Paper
+    Luyang Lin|RESEARCH_FOCUS|LLM Bias Detection
+    Luyang Lin|RESEARCH_TOPIC|Disparities between LLMs and Human Perception
+    Luyang Lin|YEAR|2024
+
+  proposition: Irene Solaiman and Christy Dennison proposed a process for adapting language models to society (PALMS) with values-targeted datasets in 2021.
+    entity-attribute relationships:
+    Irene Solaiman|PUBLISHED|Research Paper
+    Christy Dennison|PUBLISHED|Research Paper
+    PALMS|TYPE|Language Model Adaptation Process
+    PALMS|CHARACTERISTIC|Values-Targeted
+    PALMS|YEAR|2021
+
+    entity-entity relationships:
+    Irene Solaiman|COLLABORATOR|Christy Dennison
+
+  proposition: Ahmed Allam introduced BiasDPO for mitigating bias in language models through direct preference optimization in 2024.
+    entity-attribute relationships:
+    Ahmed Allam|PUBLISHED|Research Paper
+    BiasDPO|TYPE|Bias Mitigation Method
+    BiasDPO|TECHNIQUE|Direct Preference Optimization
+    BiasDPO|YEAR|2024
+
+  proposition: Hanzhang Zhou et al. developed UniBias to unveil and mitigate LLM bias through internal attention and FFN manipulation in 2024.
+    entity-attribute relationships:
+    Hanzhang Zhou|PUBLISHED|Research Paper
+    UniBias|TYPE|Bias Mitigation Method
+    UniBias|TECHNIQUE|Internal Attention Manipulation
+    UniBias|TECHNIQUE|FFN Manipulation
+    UniBias|YEAR|2024
+
+  proposition: Shijia Huang et al. explored learning preference models for LLMs via automatic preference data generation in 2023.
+    entity-attribute relationships:
+    Shijia Huang|PUBLISHED|Research Paper
+    Shijia Huang|RESEARCH_FOCUS|LLM Preference Models
+    Shijia Huang|RESEARCH_TECHNIQUE|Automatic Preference Data Generation
+    Shijia Huang|YEAR|2023
+
+topic: Adversarial Examples and NLP Model Evaluation
+
+  entities:
+    Yichen Jiang|Researcher
+    Mohit Bansal|Researcher
+    Jinfeng Li|Researcher
+    Freda Shi|Researcher
+
+  proposition: Yichen Jiang and Mohit Bansal worked on avoiding reasoning shortcuts through adversarial evaluation and training in 2019.
+    entity-attribute relationships:
+    Yichen Jiang|RESEARCH_FOCUS|Reasoning Shortcuts
+    Mohit Bansal|RESEARCH_FOCUS|Reasoning Shortcuts
+    Yichen Jiang|RESEARCH_METHOD|Adversarial Evaluation
+    Mohit Bansal|RESEARCH_METHOD|Adversarial Evaluation
+    Yichen Jiang|RESEARCH_METHOD|Adversarial Training
+    Mohit Bansal|RESEARCH_METHOD|Adversarial Training
+    Yichen Jiang|YEAR|2019
+    Mohit Bansal|YEAR|2019
+
+    entity-entity relationships:
+    Yichen Jiang|COLLABORATOR|Mohit Bansal
+
+  proposition: Researchers like Jinfeng Li et al. developed techniques for generating adversarial text against real-world applications.
+    entity-attribute relationships:
+    Jinfeng Li|RESEARCH_TECHNIQUE|Adversarial Text Generation
+    Jinfeng Li|RESEARCH_DOMAIN|Real-World Applications
+
+  proposition: Various papers examined how synthetic and natural noise can break neural machine translation and deep learning classifiers.
+    entity-attribute relationships:
+    Researchers|RESEARCH_FOCUS|Synthetic Noise Impact
+    Researchers|RESEARCH_FOCUS|Natural Noise Impact
+    Researchers|RESEARCH_DOMAIN|Neural Machine Translation
+    Researchers|RESEARCH_DOMAIN|Deep Learning Classifiers
+
+  proposition: Researchers proposed methods for generating natural language adversarial examples to test the robustness of NLP models.
+    entity-attribute relationships:
+    Researchers|RESEARCH_METHOD|Natural Language Adversarial Example Generation
+    Researchers|RESEARCH_GOAL|NLP Model Robustness Testing
+
+  proposition: Freda Shi et al. demonstrated that large language models can be easily distracted by irrelevant context.
+    entity-attribute relationships:
+    Freda Shi|RESEARCH_FINDING|LLM Distraction by Irrelevant Context
+    Freda Shi|RESEARCH_DOMAIN|Large Language Models

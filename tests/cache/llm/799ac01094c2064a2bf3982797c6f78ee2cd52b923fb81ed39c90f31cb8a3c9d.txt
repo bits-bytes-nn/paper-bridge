@@ -1,0 +1,21 @@
+Research Papers on Large Language Model Evaluation and Capabilities
+
+Mingqi Gao et al. published a paper on human-like summarization evaluation using ChatGPT in 2023.
+Nick McKenna et al. investigated sources of hallucination by large language models on inference tasks in 2023.
+Jason Wei et al. studied emergent abilities of large language models in a 2022 research paper.
+Simon Frieder et al. examined the mathematical capabilities of ChatGPT in 2023.
+Hanmeng Liu et al. evaluated the logical reasoning ability of ChatGPT and GPT-4 in 2023.
+Liangming Pan et al. proposed Logic-LM to empower large language models with symbolic solvers for faithful logical reasoning in 2023.
+Zhenwen Liang et al. created MathChat, a benchmark for mathematical reasoning and instruction following in multi-turn interactions in 2024.
+Karl Cobbe et al. worked on training verifiers to solve math word problems in 2021.
+Zheng Yuan et al. investigated large language models' performance in arithmetic tasks in 2023.
+Tianwen Wei et al. developed CMATH to test language models on Chinese elementary school math tests in 2023.
+Wenxuan Zhang et al. created M3Exam, a multilingual, multimodal, multilevel benchmark for examining large language models in 2023.
+Dan Hendrycks et al. published a paper on measuring massive multitask language understanding in 2020.
+Zhenwen Liang et al. developed SceMQA, a scientific college entrance level multimodal question answering benchmark in 2024.
+Liangtai Sun et al. created SciEval, a multi-level large language model evaluation benchmark for scientific research in 2023.
+Pranav Rajpurkar et al. published SQuAD, a dataset with 100,000+ questions for machine comprehension of text in 2016.
+Pranav Rajpurkar et al. also worked on identifying unanswerable questions for SQuAD in 2018.
+Zhilin Yang et al. developed HotpotQA, a dataset for diverse, explainable multi-hop question answering in 2018.
+Mandar Joshi et al. created TriviaQA, a large-scale distantly supervised challenge dataset for reading comprehension in 2017.
+Qiao Jin et al. published PubMedQA, a dataset for biomedical research question answering in 2019.

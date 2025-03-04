@@ -1,0 +1,18 @@
+References in Machine Learning and AI Research (2021-2024)
+Andreas Krause, Emma Brunskill, Kyunghyun Cho, Barbara Engelhardt, Sivan Sabato, and Jonathan Scarlett edited Proceedings of the 40th International Conference on Machine Learning in July 2023.
+Shuai Jia et al. published "Adv-attribute: Inconspicuous and transferable adversarial attack on face recognition" in Advances in Neural Information Processing Systems in 2022.
+Shengming Yuan et al. published "Natural color fool: Towards boosting black-box unrestricted attacks" in Advances in Neural Information Processing Systems in 2022.
+Jianqi Chen et al. published "Diffusion models for imperceptible and transferable adversarial attack" as an arXiv preprint in 2023.
+Samuele Poppi et al. will publish "Safe-CLIP: Removing NSFW Concepts from Vision-and-Language Models" in the Proceedings of the European Conference on Computer Vision in 2024.
+Han Bao et al. published "AutoBench-V: Can Large Vision-Language Models Benchmark Themselves?" as an arXiv preprint in 2024.
+Felix Friedrich et al. published "Fair diffusion: Instructing text-to-image generation models on fairness" as an arXiv preprint in 2023.
+Ziyi Kou et al. published "RAt: Injecting Implicit Bias for Text-To-Image Prompt Refinement Models" in the Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing in November 2024.
+Ninareh Mehrabi et al. published a survey on bias and fairness in machine learning in ACM computing surveys in 2021.
+Virginia Dignum discussed the myth of complete AI-fairness in the 19th International Conference on Artificial Intelligence in Medicine in 2021.
+Ajil Jalal et al. explored fairness for image generation with uncertain sensitive attributes in the International Conference on Machine Learning in 2021.
+Jialu Wang et al. published "T2iat: Measuring valence and stereotypical biases in text-to-image generation" as an arXiv preprint in 2023.
+Kathleen C Fraser and Svetlana Kiritchenko examined gender and racial bias in large vision-language models using a novel dataset of parallel images in an arXiv preprint in 2024.
+Eddie L Ungless et al. studied stereotypes and representation of non-cisgender identities by text-to-image models in an arXiv preprint in 2023.
+Abhipsa Basu et al. investigated the geographical representativeness of images from text-to-image models in the IEEE/CVF International Conference on Computer Vision in 2023.
+Rida Qadri et al. conducted a community-centered study of text-to-image models in South Asia in the ACM Conference on Fairness, Accountability, and Transparency in 2023.
+Lukas Struppek et al. explored exploiting cultural biases via homoglyphs in text-to-image synthesis.

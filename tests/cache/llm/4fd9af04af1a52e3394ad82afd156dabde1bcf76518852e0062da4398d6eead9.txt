@@ -1,0 +1,41 @@
+Jailbreak Evaluation and Benchmarking of Vision-Language Models
+
+[Inference-time Alignment Methods]
+[1178] proposed an inference-time alignment method using cross-model guidance to ensure harmlessness alignment.
+JailGuard [1180] mutates untrusted inputs to generate variants.
+JailGuard leverages discrepancies in model responses to differentiate between attack samples and benign ones.
+CIDER [1179] employs a diffusion-based denoiser to mitigate harmful information in adversarial images.
+
+[Jailbreak Benchmarks]
+Multiple benchmarks have been proposed to evaluate Vision-Language Models' defense against jailbreak attacks.
+MM-safetybench [383] generated 5,040 text-image pairs using typography and stable diffusion.
+jailbreakV-28K [1152] combined LLM jailbreak methods with images.
+jailbreakV-28K created 28,000 visual-text samples for evaluation.
+SIUO [396] proposed a cross-modality benchmark covering nine critical safety domains.
+MMJ-Bench [395] provides a standardized evaluation of VLM jailbreak attack and defense techniques.
+Li et al. proposed Retention Score [1181] to quantify jailbreak risks using diffusion models.
+
+[Benchmark Settings]
+The benchmark uses 45 unsafe topics from Sorry-Bench [363].
+Llama3 Guard [824] is used as the evaluator to detect jailbreak success.
+Percentage of Refuse to Answer (RtA) is used as the primary metric.
+
+[Jailbreak Attack Methods]
+VLM jailbreak attacks focus on concealing jailbreak intentions through images.
+Attack methods include prompt-to-image and optimization-based approaches.
+
+[Implementation Details]
+MMSafetyBench [383] uses GPT-4o-mini for key phrase extraction.
+VisualRolePlay (VRP) [1150] generates role descriptions and diffusion prompts using GPT-4o-mini.
+Jailbreak In Pieces [448] extracts key phrases and optimizes images using CLIP model embeddings.
+Visual Adversarial Examples [1125] focuses on attacks against MiniGPT-4 [1183].
+
+[Results Analysis]
+Larger models tend to have higher Refuse to Answer (RtA) rates.
+Claude-3.5-sonnet has a 99.9% RtA rate against FigStep attacks.
+GPT-4o shows high resistance to various attacks.
+Llama-3.2-90B-V has a 79.2% RtA rate.
+GLM-4v-Plus has a 43% RtA rate.
+Visual Roleplay attacks show a 100% attack rate.
+MMSafetyBench attacks have an 80% success rate.
+FigStep attacks have a 60% success rate.

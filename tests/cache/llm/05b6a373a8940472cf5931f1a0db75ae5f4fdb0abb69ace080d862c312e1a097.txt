@@ -1,0 +1,87 @@
+topic: Hallucination Evaluation in Vision-Language Models
+
+  entities:
+    AutoHallusion|Project
+    GPT-4o|Model
+    Claude-3.5-Sonnet|Model
+    HallusionBench|Benchmark
+    Vision-Language Models|Technological Concept
+    Large Language Models|Technological Concept
+
+  proposition: Questions are constructed based on manipulated objects within a scene.
+    entity-attribute relationships:
+    Questions|DESCRIBED_BY|constructed based on manipulated objects
+    Questions|TYPE|existence or spatial relationship
+
+    entity-entity relationships:
+    Questions|PART_OF|AutoHallusion
+
+  proposition: An LLM-powered contextual variator paraphrases questions to increase diversity.
+    entity-attribute relationships:
+    Contextual Variator|POWERED_BY|LLM
+    Contextual Variator|PURPOSE|increase question diversity
+
+    entity-entity relationships:
+    Contextual Variator|PART_OF|AutoHallusion
+
+  proposition: GPT-4o and Claude-3.5-Sonnet are top performers in hallucination evaluation.
+    entity-attribute relationships:
+    GPT-4o|PERFORMANCE|top performer
+    Claude-3.5-Sonnet|PERFORMANCE|top performer
+
+    entity-entity relationships:
+    GPT-4o|COMPARED_WITH|Claude-3.5-Sonnet
+
+  proposition: There is a performance gap of up to 17.91% between top and lower-performing models.
+    entity-attribute relationships:
+    Performance Gap|VALUE|17.91%
+
+  proposition: Claude-3.5-Sonnet excels in counterfactual visual question answering.
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|PERFORMANCE|excel in counterfactual visual question answering
+
+  proposition: On HallusionBench, easy questions align with common sense knowledge.
+    entity-attribute relationships:
+    Questions|TYPE|easy
+    Questions|ALIGNED_WITH|common sense knowledge
+
+    entity-entity relationships:
+    Questions|EVALUATED_ON|HallusionBench
+
+  proposition: Hard questions are counterfactual and require answers based on provided context.
+    entity-attribute relationships:
+    Questions|TYPE|hard
+    Questions|CHARACTERISTIC|counterfactual
+    Questions|REQUIREMENT|answers based on provided context
+
+topic: Vision-Language Model Security Vulnerabilities
+
+  proposition: Vision-Language Models introduce new vulnerabilities for potential attacks.
+    entity-attribute relationships:
+    Vision-Language Models|VULNERABILITY|potential attacks
+
+  proposition: The vision space's continuity makes it easier to generate harmful images that evade detection.
+    entity-attribute relationships:
+    Vision Space|CHARACTERISTIC|continuity
+    Vision Space|VULNERABILITY|easier generation of harmful images
+
+  proposition: Jailbreaking VLMs poses a significant safety risk.
+    entity-attribute relationships:
+    Vision-Language Models|SAFETY_RISK|significant
+
+  proposition: VLMs can be more easily jailbroken compared to Large Language Models.
+    entity-attribute relationships:
+    Vision-Language Models|VULNERABILITY|easier to jailbreak
+
+    entity-entity relationships:
+    Vision-Language Models|COMPARED_WITH|Large Language Models
+
+  proposition: Attackers can format harmful queries into images to bypass safety filters.
+    entity-attribute relationships:
+    Attacks|METHOD|format harmful queries into images
+    Attacks|PURPOSE|bypass safety filters
+
+  proposition: Jailbreak attack types include prompt-to-image attacks and optimization-based methods.
+    entity-attribute relationships:
+    Jailbreak Attacks|TYPES|prompt-to-image attacks
+    Jailbreak Attacks|TYPES|optimization-based methods

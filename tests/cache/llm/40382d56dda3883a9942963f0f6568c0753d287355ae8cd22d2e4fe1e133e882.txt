@@ -1,0 +1,31 @@
+Privacy Attacks and Preservation in Large Language Models
+
+Large Language Models (LLMs) are vulnerable to privacy leaks and information extraction attacks.
+Several studies have demonstrated LLMs can leak private information.
+LLMs are susceptible to data extraction attacks.
+Research efforts have focused on developing Privacy-Preserving Large Language Models.
+Techniques like differential privacy have been employed to protect model privacy.
+Privacy attack methods include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+Privacy concerns can be categorized into Privacy Awareness and Privacy Leakage.
+Governments, communities, and stakeholders demand LLMs comply with privacy laws.
+Refusal to answer sensitive questions is considered the true indicator of privacy understanding.
+
+Privacy Attack Methods:
+Researchers have explored user-generated text to infer private information.
+Structured template-based attacks evaluate LLMs' propensity for privacy information leakage.
+Some studies employed templated approaches to jailbreak privacy-preserving mechanisms.
+Carlini et al. introduced data extraction attacks.
+Shokri et al. developed membership inference attacks.
+Embedding-level privacy attacks have been utilized.
+Li et al. proposed a perturbation-based attack model.
+A recent study introduced Janus, an attack that recovers forgotten personally identifiable information during fine-tuning.
+
+Privacy Preservation Techniques:
+Differential privacy methods introduce noise during fine-tuning.
+Some approaches inject noise into intermediate LLM representations.
+Prompt tuning has been used to maintain model privacy.
+In-context learning serves as a privacy-preserving method.
+Frameworks have been developed to evaluate and mitigate privacy risks.
+ProPILE assesses privacy intrusion levels in LLMs.
+Auditing mechanisms help measure and understand privacy vulnerabilities.
+The no free lunch theorem highlights inherent trade-offs in privacy-preserving techniques.

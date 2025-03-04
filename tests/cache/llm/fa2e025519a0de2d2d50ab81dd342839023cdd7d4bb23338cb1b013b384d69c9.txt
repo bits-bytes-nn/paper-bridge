@@ -1,0 +1,15 @@
+Academic Publications in Machine Learning and AI Ethics (2024)
+
+Rishabh Bhardwaj, Duc Anh Do, and Soujanya Poria published "Language Models are Homer Simpson!" at the 62nd Annual Meeting of the Association for Computational Linguistics.
+The publication focuses on safety re-alignment of fine-tuned language models through task arithmetic.
+The conference was held in Bangkok, Thailand in August 2024.
+
+Upol Ehsan, Q. Vera Liao, Samir Passi, Mark O. Riedl, and Hal Daumé published "Seamful XAI: Operationalizing Seamful Design in Explainable AI" in Proceedings of the ACM Human-Computer Interaction.
+The publication was released in April 2024.
+
+Margaret Mitchell and colleagues published "Model Cards for Model Reporting" at the Conference on Fairness, Accountability, and Transparency.
+The conference was held in January 2019.
+
+Omar Shaikh, Michelle Lam, Joey Hejna, Yijia Shao, Michael Bernstein, and Diyi Yang authored "Show, Don't Tell: Aligning Language Models with Demonstrated Feedback" in 2024.
+
+Shujin Wu, May Fung, Cheng Qian, Jeonghwan Kim, Dilek Hakkani-Tur, and Heng Ji wrote "Aligning LLMs with Individual Preferences via Interaction" in 2024.

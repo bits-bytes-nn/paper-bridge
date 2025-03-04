@@ -1,0 +1,32 @@
+Train-Test Splits and Model Training Configurations for Knowledge Acquisition
+
+Total dataset contains 21,036 question-answer pairs from DBpedia triples
+Dataset categorized into Unknown, MaybeKnown, and HighlyKnown knowledge categories
+Training process involves randomly sampling Unknown questions
+Training configurations include adding paraphrases or HighlyKnown samples to Unknown questions
+Example configuration: 10 HighlyKnown + 10 Unknown samples per question creates 110 total training samples
+Initial 21,036 questions serve as the test dataset
+
+Model Learning and Knowledge Acquisition Characteristics
+
+Models can learn up to 500 unknown samples with 100% reliability
+3,000 unknown samples require more than 10 epochs to fully learn
+Adding paraphrases helps model convergence
+Adding HighlyKnown data can potentially harm training process
+Training with HighlyKnown samples maximizes positive knowledge shifts
+Training with additional samples can lead to variations in model answer diversity
+
+Model Performance Observations
+
+Default model initially has 48,136 unique answers
+Some training configurations significantly increase or decrease unique answer count
+Certain configurations cause model to converge on specific answer variants
+Training with extra samples can impact reasoning capabilities
+Performance varies across different benchmark tests like MMLU, TruthfulQA, ARC, and LogiQA
+
+Knowledge Shift Dynamics
+
+Positive shifts include Unknown → HighlyKnown, Unknown → MaybeKnown, and MaybeKnown → HighlyKnown
+Negative shifts include HighlyKnown → Unknown, HighlyKnown → MaybeKnown, and MaybeKnown → Unknown
+HighlyKnown sample training minimizes negative knowledge shifts
+Number of positive and negative shifts varies with training sample count

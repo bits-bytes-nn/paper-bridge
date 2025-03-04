@@ -1,0 +1,16 @@
+Research Papers on Language Model Bias, Adversarial Examples, and Evaluation
+
+Yunfan Gao et al. published a paper on Chat-rec, an interactive and explainable LLMs-augmented recommender system in 2023.
+Xiaolei Wang et al. examined the evaluation of conversational recommendation in the era of large language models in 2023.
+Sunhao Dai et al. investigated ChatGPT's capabilities in recommender systems in 2023.
+Luyang Lin et al. studied bias in LLM-based bias detection and disparities between LLMs and human perception in 2024.
+Irene Solaiman and Christy Dennison proposed a process for adapting language models to society (PALMS) with values-targeted datasets in 2021.
+Ahmed Allam introduced BiasDPO for mitigating bias in language models through direct preference optimization in 2024.
+Hanzhang Zhou et al. developed UniBias to unveil and mitigate LLM bias through internal attention and FFN manipulation in 2024.
+Shijia Huang et al. explored learning preference models for LLMs via automatic preference data generation in 2023.
+Multiple researchers conducted studies on adversarial examples and evaluation techniques for natural language processing models.
+Yichen Jiang and Mohit Bansal worked on avoiding reasoning shortcuts through adversarial evaluation and training in 2019.
+Researchers like Jinfeng Li et al. developed techniques for generating adversarial text against real-world applications.
+Various papers examined how synthetic and natural noise can break neural machine translation and deep learning classifiers.
+Researchers proposed methods for generating natural language adversarial examples to test the robustness of NLP models.
+Freda Shi et al. demonstrated that large language models can be easily distracted by irrelevant context.

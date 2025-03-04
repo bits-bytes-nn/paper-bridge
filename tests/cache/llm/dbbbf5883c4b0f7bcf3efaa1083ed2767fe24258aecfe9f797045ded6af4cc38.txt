@@ -1,0 +1,88 @@
+topic: Text-to-Image Model Fairness and Robustness Research
+
+  entities:
+    Shen et al.|Researcher
+    Friedrich et al.|Researcher
+    Liu et al.|Researcher
+    Wu et al.|Researcher
+    Zhuang et al.|Researcher
+    HunyuanDiT|Model
+    SD-3.5-large|Model
+    FLUX-1.1-Pro|Model
+    Playground-v2.5|Model
+    SD-3.5-large-turbo|Model
+    Dall-E-3|Model
+    Kolors|Model
+    CrowS-Pairs|Dataset
+    StereoSet|Dataset
+    Do-Not-Answer|Dataset
+    BBQ|Dataset
+    VLM-as-a-Judge|Tool
+    Fair Diffusion|Approach
+    RIATIG|Approach
+
+  proposition: Shen et al. enhanced T2I model fairness through fine-tuning techniques.
+    entity-attribute relationships:
+    Shen et al.|DEVELOPED|fine-tuning techniques
+    
+    entity-entity relationships:
+    Shen et al.|RESEARCHED|T2I model fairness
+
+  proposition: Friedrich et al. developed Fair Diffusion to address bias by diversifying human input instructions across identities.
+    entity-attribute relationships:
+    Friedrich et al.|DEVELOPED|Fair Diffusion
+    
+    entity-entity relationships:
+    Friedrich et al.|ADDRESSED|model bias
+
+  proposition: Evaluation involves providing an anonymized group entity image description.
+    entity-attribute relationships:
+    Evaluation|METHOD|anonymized group entity image description
+
+  proposition: T2I models generate corresponding images multiple times.
+    entity-attribute relationships:
+    T2I models|GENERATE|corresponding images
+
+  proposition: VLM-as-a-Judge assesses entity appearance in generated images.
+    entity-attribute relationships:
+    VLM-as-a-Judge|ASSESSES|entity appearance
+
+  proposition: Fairness score calculates entity appearance frequency across image generations.
+    entity-attribute relationships:
+    Fairness score|CALCULATES|entity appearance frequency
+
+  proposition: Data is sourced from four primary datasets: CrowS-Pairs, StereoSet, Do-Not-Answer, and BBQ dataset.
+    entity-entity relationships:
+    Data|SOURCED_FROM|CrowS-Pairs
+    Data|SOURCED_FROM|StereoSet
+    Data|SOURCED_FROM|Do-Not-Answer
+    Data|SOURCED_FROM|BBQ
+
+  proposition: Large Language Models paraphrase data into image descriptions.
+    entity-attribute relationships:
+    Large Language Models|PARAPHRASES|data into image descriptions
+
+  proposition: Entities associated with stereotypes are extracted and fuzzified.
+    entity-attribute relationships:
+    Entities|ASSOCIATED_WITH|stereotypes
+
+  proposition: HunyuanDiT achieved the highest fairness score of 95.5.
+    entity-attribute relationships:
+    HunyuanDiT|FAIRNESS_SCORE|95.5
+
+  proposition: SD-3.5-large scored the lowest at 91.83.
+    entity-attribute relationships:
+    SD-3.5-large|FAIRNESS_SCORE|91.83
+
+  proposition: Robustness refers to a T2I model's ability to maintain result consistency with text input variations.
+    entity-attribute relationships:
+    Robustness|DEFINED_AS|model's ability to maintain result consistency
+
+  proposition: Liu et al. proposed RIATIG for generating imperceptible prompts.
+    entity-attribute relationships:
+    Liu et al.|PROPOSED|RIATIG
+    RIATIG|PURPOSE|generating imperceptible prompts
+
+  proposition: Kolors achieved the highest robustness score of 94.77.
+    entity-attribute relationships:
+    Kolors|ROBUSTNESS_SCORE|94.77

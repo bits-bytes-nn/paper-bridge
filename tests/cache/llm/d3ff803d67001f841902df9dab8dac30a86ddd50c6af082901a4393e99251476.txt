@@ -1,0 +1,31 @@
+Research Papers on Large Language Model Jailbreak Techniques and Safety Vulnerabilities
+
+Jiahao Yu, Xingwei Lin, and Xinyu Xing published a research paper titled "GPTFuzzer" about red teaming large language models with auto-generated jailbreak prompts.
+The paper was published as an arXiv preprint in 2023.
+
+Youliang Yuan and colleagues published a research paper titled "GPT-4 Is Too Smart To Be Safe" about stealthy chat with large language models via cipher.
+The paper was published as an arXiv preprint in 2023.
+
+Huijie Lv and colleagues developed "CodeChameleon", a personalized encryption framework for jailbreaking large language models.
+The paper was published as an arXiv preprint in 2024.
+
+George Kour and colleagues published a research paper about unveiling safety vulnerabilities of large language models.
+The paper was published as an arXiv preprint in 2023.
+
+Yue Huang and colleagues proposed "ObscurePrompt", a method for jailbreaking large language models via obscure input.
+The paper was published as an arXiv preprint in 2024.
+
+Yuanwei Wu and colleagues investigated whether large language models can automatically jailbreak GPT-4V.
+The paper was published as an arXiv preprint in 2024.
+
+Yue Deng and colleagues studied multilingual jailbreak challenges in large language models.
+The paper was published as an arXiv preprint in 2023.
+
+Yifan Cao and colleagues conducted a cross-language investigation into jailbreak attacks in large language models.
+The paper was published as an arXiv preprint in 2023.
+
+Mark Russinovich and colleagues developed the "Crescendo" multi-turn LLM jailbreak attack.
+The paper was published as an arXiv preprint in 2024.
+
+Guangyu Shen and colleagues proposed a method for rapid optimization of jailbreaking LLMs via subconscious exploitation and echopraxia.
+The paper was published as an arXiv preprint in 2024.

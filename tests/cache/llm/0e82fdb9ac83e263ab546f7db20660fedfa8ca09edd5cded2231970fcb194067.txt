@@ -1,0 +1,60 @@
+topic: Multimodal AI Models
+
+  entities:
+    Llama-3.2-11B-V|Model
+    DALL-E 3|Model
+    Stable Diffusion 3.5 Large|Model
+    Stable Diffusion 3.5 Large Turbo|Model
+    FLUX-1.1-Pro|Model
+    Playground 2.5|Model
+    Hunyuan-DiT|Model
+    Kolors|Model
+    CogView-3-Plus|Model
+    Meta|Organization
+    OpenAI|Organization
+    Black Forest Labs|Organization
+    Playground AI|Organization
+    Tencent|Organization
+    Kuaishou|Organization
+    Tsinghua University|Research Institution
+
+  proposition: Llama-3.2-11B-V is a multimodal Large Language Model developed by Meta.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|DEVELOPED_BY|Meta
+    Llama-3.2-11B-V|TYPE|Multimodal Large Language Model
+
+  proposition: Llama-3.2-11B-V has 11 billion parameters.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|PARAMETER_COUNT|11 billion
+
+  proposition: Llama-3.2-11B-V can handle both text and image inputs.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|INPUT_TYPE|text and image
+
+  proposition: Llama-3.2-11B-V is particularly effective for healthcare and retail industries.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|EFFECTIVE_IN|healthcare
+    Llama-3.2-11B-V|EFFECTIVE_IN|retail
+
+  proposition: Llama-3.2-11B-V enables real-time visual and textual analysis.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|CAPABILITY|real-time visual and textual analysis
+
+  proposition: DALL-E 3 is a text-to-image generation model developed by OpenAI.
+    entity-attribute relationships:
+    DALL-E 3|DEVELOPED_BY|OpenAI
+    DALL-E 3|TYPE|text-to-image generation model
+
+  proposition: DALL-E 3 excels in translating nuanced textual descriptions into detailed images.
+    entity-attribute relationships:
+    DALL-E 3|CAPABILITY|translating nuanced textual descriptions into detailed images
+
+  proposition: DALL-E 3 has native integration with ChatGPT.
+    entity-entity relationships:
+    DALL-E 3|INTEGRATED_WITH|ChatGPT
+
+  proposition: DALL-E 3 allows image generation through conversational prompts.
+    entity-attribute relationships:
+    DALL-E 3|GENERATION_METHOD|conversational prompts
+
+  # (Continued for other models with similar detailed extraction)

@@ -1,0 +1,14 @@
+Research Publications on Artificial Intelligence and Bias in Medical Imaging and Simulation
+
+Chenbin Liu and colleagues published a study on artificial general intelligence for radiation oncology in Meta-radiology in 2023.
+Zhengliang Liu and team evaluated large language models for radiology natural language processing in 2023.
+Andreas Schaich and researchers discovered an own-age bias in recognizing faces with horizontal information in a 2016 study.
+Agostina J Larrazabal and colleagues found that gender imbalance in medical imaging datasets produces biased classifiers for computer-aided diagnosis.
+Ian L Alberts and team explored the potential impact of large language models and ChatGPT on nuclear medicine in a 2023 publication.
+Chengshu Li and researchers introduced BEHAVIOR-1K, a benchmark for embodied AI with 1,000 everyday activities and realistic simulation in 2022.
+Matt Deitke and colleagues developed RoboTHOR, an open simulation-to-real embodied AI platform presented at CVPR in 2020.
+Xavi Puig and team created Habitat 3.0, a co-habitat for humans, avatars, and robots in 2023.
+Yang Liu and researchers conducted a comprehensive survey on aligning cyber space with the physical world through embodied AI in 2024.
+Guanzhi Wang and colleagues developed Voyager, an open-ended embodied agent with large language models in 2024.
+Yunfan Jiang and team introduced VIMA, a general robot manipulation system with multimodal prompts in 2023.
+Angel Chang and researchers published Matterport3D, a study on learning from RGB-D data in indoor environments in 2017.

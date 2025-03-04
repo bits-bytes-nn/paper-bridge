@@ -1,0 +1,128 @@
+topic: Diffusion Model Attacks and Security Research
+
+  entities:
+    Weixin Chen|Researcher
+    Dawn Song|Researcher
+    Bo Li|Researcher
+    Sheng-Yen Chou|Researcher
+    Pin-Yu Chen|Researcher
+    Tsung-Yi Ho|Researcher
+    Shengwei An|Researcher
+    Rongke Liu|Researcher
+    Ouxiang Li|Researcher
+    Pucheng Dang|Researcher
+    Anudeep Das|Researcher
+    Seongbeom Park|Researcher
+    Jessica Quaye|Researcher
+    Yimeng Zhang|Researcher
+    Yang Sui|Researcher
+    Jinhao Duan|Researcher
+    TrojDiff|Research Paper
+    Villandiffusion|Research Paper
+    Elijah|Research Paper
+    Unstoppable Attack|Research Paper
+    Model Inversion Attacks|Research Paper
+    DALLE-2|Model
+    DiffZOO|Research Paper
+    Espresso|Research Paper
+    Localization and Manipulation of Immoral Visual Cues|Research Paper
+    Adversarial Nibbler|Research Paper
+    DisDet|Research Paper
+    IEEE/CVF Conference on Computer Vision and Pattern Recognition|Conference
+    Advances in Neural Information Processing Systems|Conference
+    AAAI Conference on Artificial Intelligence|Conference
+    IEEE Transactions on Information Forensics and Security|Publication
+    IEEE/CVF Winter Conference on Applications of Computer Vision|Conference
+    ACM Conference on Fairness, Accountability, and Transparency|Conference
+    International Conference on Machine Learning|Conference
+
+  proposition: Weixin Chen, Dawn Song, and Bo Li published a research paper titled "TrojDiff: Trojan Attacks on Diffusion Models With Diverse Targets" in the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) in June 2023.
+    entity-attribute relationships:
+    Weixin Chen|AUTHOR_OF|TrojDiff
+    Dawn Song|AUTHOR_OF|TrojDiff
+    Bo Li|AUTHOR_OF|TrojDiff
+    TrojDiff|PUBLISHED_IN|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+    TrojDiff|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Weixin Chen|CO_AUTHOR|Dawn Song
+    Weixin Chen|CO_AUTHOR|Bo Li
+    Dawn Song|CO_AUTHOR|Bo Li
+
+  proposition: Sheng-Yen Chou, Pin-Yu Chen, and Tsung-Yi Ho proposed "Villandiffusion: A unified backdoor attack framework for diffusion models" in Advances in Neural Information Processing Systems in 2024.
+    entity-attribute relationships:
+    Sheng-Yen Chou|AUTHOR_OF|Villandiffusion
+    Pin-Yu Chen|AUTHOR_OF|Villandiffusion
+    Tsung-Yi Ho|AUTHOR_OF|Villandiffusion
+    Villandiffusion|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Villandiffusion|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Sheng-Yen Chou|CO_AUTHOR|Pin-Yu Chen
+    Sheng-Yen Chou|CO_AUTHOR|Tsung-Yi Ho
+    Pin-Yu Chen|CO_AUTHOR|Tsung-Yi Ho
+
+  proposition: Shengwei An and colleagues developed "Elijah: Eliminating backdoors injected in diffusion models via distribution shift" in the AAAI Conference on Artificial Intelligence in 2024.
+    entity-attribute relationships:
+    Shengwei An|AUTHOR_OF|Elijah
+    Elijah|PUBLISHED_IN|AAAI Conference on Artificial Intelligence
+    Elijah|PUBLICATION_YEAR|2024
+
+  proposition: Rongke Liu and collaborators published "Unstoppable Attack: Label-Only Model Inversion Via Conditional Diffusion Model" in IEEE Transactions on Information Forensics and Security in 2024.
+    entity-attribute relationships:
+    Rongke Liu|AUTHOR_OF|Unstoppable Attack
+    Unstoppable Attack|PUBLISHED_IN|IEEE Transactions on Information Forensics and Security
+    Unstoppable Attack|PUBLICATION_YEAR|2024
+
+  proposition: Ouxiang Li and team proposed "Model Inversion Attacks Through Target-Specific Conditional Diffusion Models" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Ouxiang Li|AUTHOR_OF|Model Inversion Attacks
+    Model Inversion Attacks|PUBLISHED_IN|arXiv
+    Model Inversion Attacks|PUBLICATION_YEAR|2024
+
+  proposition: OpenAI released DALLE-2 in 2021.
+    entity-attribute relationships:
+    OpenAI|CREATOR_OF|DALLE-2
+    DALLE-2|RELEASE_YEAR|2021
+
+  proposition: Pucheng Dang and researchers introduced "DiffZOO: A Purely Query-Based Black-Box Attack for Red-teaming Text-to-Image Generative Model via Zeroth Order Optimization" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Pucheng Dang|AUTHOR_OF|DiffZOO
+    DiffZOO|PUBLISHED_IN|arXiv
+    DiffZOO|PUBLICATION_YEAR|2024
+
+  proposition: Anudeep Das and colleagues presented "Espresso: Robust Concept Filtering in Text-to-Image Models" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Anudeep Das|AUTHOR_OF|Espresso
+    Espresso|PUBLISHED_IN|arXiv
+    Espresso|PUBLICATION_YEAR|2024
+
+  proposition: Seongbeom Park and team published "Localization and Manipulation of Immoral Visual Cues for Safe Text-to-Image Generation" in the IEEE/CVF Winter Conference on Applications of Computer Vision in January 2024.
+    entity-attribute relationships:
+    Seongbeom Park|AUTHOR_OF|Localization and Manipulation of Immoral Visual Cues
+    Localization and Manipulation of Immoral Visual Cues|PUBLISHED_IN|IEEE/CVF Winter Conference on Applications of Computer Vision
+    Localization and Manipulation of Immoral Visual Cues|PUBLICATION_YEAR|2024
+
+  proposition: Jessica Quaye and collaborators developed "Adversarial Nibbler: An Open Red-Teaming Method for Identifying Diverse Harms in Text-to-Image Generation" in the ACM Conference on Fairness, Accountability, and Transparency in 2024.
+    entity-attribute relationships:
+    Jessica Quaye|AUTHOR_OF|Adversarial Nibbler
+    Adversarial Nibbler|PUBLISHED_IN|ACM Conference on Fairness, Accountability, and Transparency
+    Adversarial Nibbler|PUBLICATION_YEAR|2024
+
+  proposition: Yimeng Zhang and researchers explored safety challenges in "To generate or not? Safety-driven unlearned diffusion models are still easy to generate unsafe images... for now" in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Yimeng Zhang|AUTHOR_OF|To generate or not? Safety-driven unlearned diffusion models are still easy to generate unsafe images... for now
+    To generate or not? Safety-driven unlearned diffusion models are still easy to generate unsafe images... for now|PUBLISHED_IN|arXiv
+    To generate or not? Safety-driven unlearned diffusion models are still easy to generate unsafe images... for now|PUBLICATION_YEAR|2023
+
+  proposition: Yang Sui and team proposed "DisDet: Exploring Detectability of Backdoor Attack on Diffusion Models" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Yang Sui|AUTHOR_OF|DisDet
+    DisDet|PUBLISHED_IN|arXiv
+    DisDet|PUBLICATION_YEAR|2024
+
+  proposition: Jinhao Duan and colleagues investigated "Are Diffusion Models Vulnerable to Membership Inference Attacks?" in the International Conference on Machine Learning in 2023.
+    entity-attribute relationships:
+    Jinhao Duan|AUTHOR_OF|Are Diffusion Models Vulnerable to Membership Inference Attacks?
+    Are Diffusion Models Vulnerable to Membership Inference Attacks?|PUBLISHED_IN|International Conference on Machine Learning
+    Are Diffusion Models Vulnerable to Membership Inference Attacks?|PUBLICATION_YEAR|2023

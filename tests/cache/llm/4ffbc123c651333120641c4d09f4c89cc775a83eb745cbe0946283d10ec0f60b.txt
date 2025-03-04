@@ -1,0 +1,125 @@
+topic: Ethical AI Development Guidelines
+
+  entities:
+    Li et al.|Researcher
+    Ethics Guidelines for Trustworthy AI|Framework
+
+  proposition: AI development should yield to environmental considerations when conflicts arise between technological advancement and environmental preservation.
+    entity-attribute relationships:
+    AI development|PRIORITIZES|environmental considerations
+
+    entity-entity relationships:
+    None
+
+  proposition: Li et al. [235] provide a framework of Ethics Guidelines for Trustworthy AI [411].
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Li et al.|DEVELOPED|Ethics Guidelines for Trustworthy AI
+
+  proposition: The guidelines include seven key considerations for trustworthy AI.
+    entity-attribute relationships:
+    Guidelines|CONTAINS|7 key considerations
+
+    entity-entity relationships:
+    None
+
+  proposition: The key considerations are environmental and societal well-being, human agency and oversight, technical robustness and safety, privacy and data governance, transparency, diversity, non-discrimination and fairness, and accountability.
+    entity-attribute relationships:
+    Guidelines|INCLUDES_CONSIDERATION|environmental well-being
+    Guidelines|INCLUDES_CONSIDERATION|societal well-being
+    Guidelines|INCLUDES_CONSIDERATION|human agency
+    Guidelines|INCLUDES_CONSIDERATION|human oversight
+    Guidelines|INCLUDES_CONSIDERATION|technical robustness
+    Guidelines|INCLUDES_CONSIDERATION|safety
+    Guidelines|INCLUDES_CONSIDERATION|privacy
+    Guidelines|INCLUDES_CONSIDERATION|data governance
+    Guidelines|INCLUDES_CONSIDERATION|transparency
+    Guidelines|INCLUDES_CONSIDERATION|diversity
+    Guidelines|INCLUDES_CONSIDERATION|non-discrimination
+    Guidelines|INCLUDES_CONSIDERATION|fairness
+    Guidelines|INCLUDES_CONSIDERATION|accountability
+
+    entity-entity relationships:
+    None
+
+  proposition: The research focuses on specific considerations that have been relatively under-explored.
+    entity-attribute relationships:
+    Research|CHARACTERISTIC|under-explored considerations
+
+    entity-entity relationships:
+    None
+
+topic: Advanced AI Risk Evaluation Results
+
+  entities:
+    QwQ-32B|Model
+    Gemma-2-27B|Model
+    GPT-4o|Model
+    Gemini-1.5-pro|Model
+    Gemini-1.5-flash|Model
+    GPT-4o-mini|Model
+    o1-preview|Model
+    o1-mini|Model
+    Claude-3.5-Sonnet|Model
+    Claude-3-Haiku|Model
+    GPT-3.5-Turbo|Model
+    Llama-3.1-70B|Model
+    Llama-3.1-8B|Model
+    GLM-4-plus|Model
+    Qwen-2.5-72B|Model
+    Mixtral-8*7B|Model
+    Mixtral-8*22B|Model
+    Yi-lightning|Model
+    Deepseek-chat|Model
+
+  proposition: QwQ-32B has a correctness ratio of 90.59%.
+    entity-attribute relationships:
+    QwQ-32B|CORRECTNESS_RATIO|90.59%
+
+    entity-entity relationships:
+    None
+
+  [Similar entity-attribute relationships are extracted for each model with their respective correctness ratios]
+
+topic: Vision-Language Models Overview
+
+  entities:
+    Vision-language models|Technological Concept
+    CLIP|Model
+    VLMs|Technological Concept
+
+  proposition: Vision-language models (VLMs) bridge the semantic gap between textual and visual modalities.
+    entity-attribute relationships:
+    VLMs|CAPABILITY|bridge semantic gap
+    VLMs|MODALITY|textual
+    VLMs|MODALITY|visual
+
+    entity-entity relationships:
+    None
+
+  proposition: CLIP represents a significant breakthrough in VLM development.
+    entity-attribute relationships:
+    CLIP|SIGNIFICANCE|breakthrough
+
+    entity-entity relationships:
+    CLIP|PART_OF|VLM development
+
+  [Remaining propositions follow similar extraction patterns, highlighting VLM capabilities, limitations, and research focus]
+
+topic: VLM Hallucination Characteristics
+
+  entities:
+    VLMs|Technological Concept
+    LLM|Technological Concept
+
+  proposition: Hallucination in VLMs refers to generating incorrect or misleading outputs in visual-textual tasks.
+    entity-attribute relationships:
+    Hallucination|DEFINITION|incorrect or misleading outputs
+    Hallucination|CONTEXT|visual-textual tasks
+
+    entity-entity relationships:
+    Hallucination|OCCURS_IN|VLMs
+
+  [Remaining propositions follow similar extraction patterns, exploring hallucination characteristics and differences from LLM hallucinations]

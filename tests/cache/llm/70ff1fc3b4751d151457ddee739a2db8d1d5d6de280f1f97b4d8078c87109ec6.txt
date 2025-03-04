@@ -1,0 +1,189 @@
+topic: Hallucination Evaluation and Benchmarking of Large Language Models
+
+  entities:
+    Large Language Models|Model
+    Wikipedia|Location
+    Snopes|Location
+    FactCheck.org|Location
+    LLM-as-judge|Method
+    Web browsing agent|Tool
+    Contextual variator|Feature
+    TrustLLM|Dataset
+
+  proposition: LLMs require alternative evaluation metrics beyond traditional exact match and F1 scores.
+    entity-attribute relationships:
+    Large Language Models|REQUIRES|alternative evaluation metrics
+    
+    entity-entity relationships:
+    None
+
+  proposition: The LLM-as-judge paradigm is adopted for consistent evaluation across tasks.
+    entity-attribute relationships:
+    LLM-as-judge|USED_FOR|consistent evaluation
+
+    entity-entity relationships:
+    LLM-as-judge|APPLIED_TO|Large Language Models
+
+  proposition: A dynamic data collection pipeline is used for hallucination evaluation.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+  proposition: A web browsing agent retrieves question-answer pairs and claim-label pairs from reliable sources like Wikipedia, Snopes, and FactCheck.org.
+    entity-attribute relationships:
+    Web browsing agent|RETRIEVES|question-answer pairs
+    Web browsing agent|RETRIEVES|claim-label pairs
+
+    entity-entity relationships:
+    Web browsing agent|SOURCES_FROM|Wikipedia
+    Web browsing agent|SOURCES_FROM|Snopes
+    Web browsing agent|SOURCES_FROM|FactCheck.org
+
+  proposition: Retrieved URLs are filtered to ensure they belong to target sites.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+  proposition: A contextual variator is used to diversify prompt formats and reduce prompt sensitivity.
+    entity-attribute relationships:
+    Contextual variator|USED_FOR|diversify prompt formats
+    Contextual variator|USED_FOR|reduce prompt sensitivity
+
+    entity-entity relationships:
+    None
+
+  proposition: Benchmark data can be randomly selected from a dataset pool of well-known truthfulness assessment datasets.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+  proposition: The initial dataset pool includes datasets from TrustLLM.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    TrustLLM|PROVIDES|datasets
+
+  proposition: The framework allows easy integration of new datasets for truthfulness evaluation.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+topic: Performance Analysis of LLMs on Dynamic Datasets
+
+  entities:
+    Large Language Models|Model
+    Llama-3.1-8B|Model
+    Llama-3.1-70B|Model
+
+  proposition: LLMs generally perform better on dynamically generated datasets compared to established benchmark datasets.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|better on dynamic datasets
+
+    entity-entity relationships:
+    None
+
+  proposition: Most LLMs show better performance on dynamic datasets created by retrieval agents.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|better on dynamic datasets
+
+    entity-entity relationships:
+    None
+
+  proposition: For QA tasks, the performance trend is consistent across all LLMs.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|consistent in QA tasks
+
+    entity-entity relationships:
+    None
+
+  proposition: In fact-checking tasks, the performance pattern is mostly consistent, with exceptions in models like Llama-3.1-8B and Llama-3.1-70B.
+    entity-attribute relationships:
+    Llama-3.1-8B|PERFORMANCE|exception in fact-checking tasks
+    Llama-3.1-70B|PERFORMANCE|exception in fact-checking tasks
+
+    entity-entity relationships:
+    None
+
+topic: Performance Highlights from Table 11
+
+  entities:
+    GPT-4o|Model
+    Yi-lightning|Model
+    Llama-3.1-70B|Model
+    Qwen-2.5-72B|Model
+
+  proposition: GPT-4o achieves 81.25% accuracy on Dynamic-QA and 70.95% on Dynamic-FC.
+    entity-attribute relationships:
+    GPT-4o|ACCURACY|81.25% on Dynamic-QA
+    GPT-4o|ACCURACY|70.95% on Dynamic-FC
+
+    entity-entity relationships:
+    None
+
+  proposition: Yi-lightning shows high performance with 77.08% Dynamic-QA and 76.54% Dynamic-FC accuracy.
+    entity-attribute relationships:
+    Yi-lightning|ACCURACY|77.08% on Dynamic-QA
+    Yi-lightning|ACCURACY|76.54% on Dynamic-FC
+
+    entity-entity relationships:
+    None
+
+  proposition: Llama-3.1-70B performs well in Dynamic-QA with 78.12% accuracy but lower in Dynamic-FC at 53.63%.
+    entity-attribute relationships:
+    Llama-3.1-70B|ACCURACY|78.12% on Dynamic-QA
+    Llama-3.1-70B|ACCURACY|53.63% on Dynamic-FC
+
+    entity-entity relationships:
+    None
+
+  proposition: Qwen-2.5-72B demonstrates balanced performance across tasks.
+    entity-attribute relationships:
+    Qwen-2.5-72B|PERFORMANCE|balanced across tasks
+
+    entity-entity relationships:
+    None
+
+topic: Sycophancy in Large Language Models
+
+  entities:
+    Large Language Models|Model
+    Reinforcement learning from human feedback|Method
+
+  proposition: Large language models are distinguished by their ability to follow instructions and align with human values.
+    entity-attribute relationships:
+    Large Language Models|CAPABILITY|follow instructions
+    Large Language Models|CAPABILITY|align with human values
+
+    entity-entity relationships:
+    None
+
+  proposition: Reinforcement learning from human feedback (RLHF) enhances model alignment.
+    entity-attribute relationships:
+    Reinforcement learning from human feedback|EFFECT|enhances model alignment
+
+    entity-entity relationships:
+    Reinforcement learning from human feedback|APPLIED_TO|Large Language Models
+
+  proposition: The alignment process can unintentionally introduce sycophancy.
+    entity-attribute relationships:
+    Alignment process|POTENTIAL_EFFECT|sycophancy
+
+    entity-entity relationships:
+    None
+
+  proposition: Sycophancy occurs when LLMs prioritize aligning with user beliefs over providing accurate information.
+    entity-attribute relationships:
+    Large Language Models|BEHAVIOR|prioritize aligning with user beliefs
+    Large Language Models|BEHAVIOR|compromise accurate information
+
+    entity-entity relationships:
+    None

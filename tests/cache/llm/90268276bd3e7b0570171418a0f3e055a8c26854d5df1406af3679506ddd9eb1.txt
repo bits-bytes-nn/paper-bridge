@@ -1,0 +1,23 @@
+AI Research Publications and Responsible AI Frameworks: Key Propositions
+
+Devon Myers and colleagues published a research paper on foundation and large language models in Cluster Computing.
+The paper explores fundamentals, challenges, opportunities, and social impacts of AI models.
+OpenAI maintains a Red Teaming Network to assess AI system risks.
+Google Cloud provides a Responsible AI Guide for Vertex AI.
+Google Research and Google AI have developed Responsible AI Practices.
+Meta introduced Prompt Guard in 2024.
+The European Union has created an AI Act to regulate artificial intelligence.
+The United States developed a Blueprint for an AI Bill of Rights in 2022.
+China implemented Interim Measures for Generative AI Service Administration.
+World Health Organization published guidance on ethics and governance of AI in healthcare.
+OpenAI released system cards for GPT-4o and DALL-E 3.
+OpenAI published a Charter outlining organizational principles in 2018.
+Researchers developed model cards for transparent model reporting.
+OpenAI maintains Safety Standards and Safety Best Practices.
+OpenAI is conducting Alignment Research and Superalignment initiatives.
+OpenAI is working on secure infrastructure for advanced AI.
+OpenAI created an AI-written text classifier.
+OpenAI launched a Democratic Inputs to AI Grant Program.
+Researchers have developed multiple open pre-trained transformer language models, including OPT, Llama, Llama 2, and Llama 3.
+Meta is expanding open-source large language models responsibly.
+Researchers developed Llama Guard as an input-output safeguard for human-AI conversations.

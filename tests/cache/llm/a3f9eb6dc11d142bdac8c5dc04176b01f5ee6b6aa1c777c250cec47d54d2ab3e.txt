@@ -1,0 +1,145 @@
+topic: Geographical State Locations and Mapping Discrepancies
+
+  entities:
+    Arizona|Location
+    Oklahoma|Location
+    North Carolina|Location
+    Delaware|Location
+    Maryland|Location
+    Pennsylvania|Location
+  
+  proposition: Arizona is the farthest north among Arizona, Oklahoma, North Carolina, and Delaware.
+    entity-attribute relationships:
+    Arizona|GEOGRAPHICAL_POSITION|farthest north
+    
+    entity-entity relationships:
+    Arizona|COMPARED_WITH|Oklahoma
+    Arizona|COMPARED_WITH|North Carolina
+    Arizona|COMPARED_WITH|Delaware
+
+  proposition: Delaware is located to the north of Maryland.
+    entity-entity relationships:
+    Delaware|LOCATED_NORTH_OF|Maryland
+
+  proposition: Delaware is located to the east of Pennsylvania.
+    entity-entity relationships:
+    Delaware|LOCATED_EAST_OF|Pennsylvania
+
+  proposition: Arizona is located to the southwest of Delaware.
+    entity-entity relationships:
+    Arizona|LOCATED_SOUTHWEST_OF|Delaware
+
+  proposition: Oklahoma is located to the west of Delaware.
+    entity-entity relationships:
+    Oklahoma|LOCATED_WEST_OF|Delaware
+
+  proposition: North Carolina is located to the north of Delaware.
+    entity-entity relationships:
+    North Carolina|LOCATED_NORTH_OF|Delaware
+
+topic: Visual Hallucination Dataset Examples
+
+  entities:
+    GPT-4V|Model
+    Streetlight|Feature
+    Stream|Feature
+    Moss-covered rocks|Feature
+    Trees|Feature
+    Fish|Feature
+    Red lantern|Feature
+    Rock|Feature
+  
+  proposition: A streetlight exists in the image.
+    entity-attribute relationships:
+    Streetlight|PRESENT_IN|image
+
+  proposition: GPT-4V incorrectly stated no streetlight was present.
+    entity-entity relationships:
+    GPT-4V|INCORRECTLY_IDENTIFIED|Streetlight
+
+  proposition: The image contains a stream, moss-covered rocks, trees, and fish.
+    entity-attribute relationships:
+    Stream|PRESENT_IN|image
+    Moss-covered rocks|PRESENT_IN|image
+    Trees|PRESENT_IN|image
+    Fish|PRESENT_IN|image
+
+  proposition: A red lantern with a traditional design is placed on a rock by the stream.
+    entity-attribute relationships:
+    Red lantern|DESIGN|traditional
+    
+    entity-entity relationships:
+    Red lantern|LOCATED_ON|Rock
+    Rock|LOCATED_NEAR|Stream
+
+topic: Spatial Relation Verification
+
+  entities:
+    Spacesuit|Feature
+    Sculptural fountain|Feature
+    Dolphin|Feature
+    Shell|Feature
+  
+  proposition: A spacesuit is located to the left of an ornate sculptural fountain.
+    entity-entity relationships:
+    Spacesuit|LOCATED_LEFT_OF|Sculptural fountain
+
+  proposition: The fountain features a dolphin and shell design.
+    entity-attribute relationships:
+    Sculptural fountain|DESIGN_FEATURE|Dolphin
+    Sculptural fountain|DESIGN_FEATURE|Shell
+
+  proposition: The spacesuit is walking towards the left side of the image.
+    entity-attribute relationships:
+    Spacesuit|MOVEMENT|walking left
+
+  proposition: The spacesuit appears detailed and technologically enhanced.
+    entity-attribute relationships:
+    Spacesuit|DESCRIPTION|detailed
+    Spacesuit|DESCRIPTION|technologically enhanced
+
+topic: Crimea Representation Analysis
+
+  entities:
+    Black Sea|Location
+    Coastal community|Feature
+    Individual|Person
+    Weapon|Feature
+    Gemini-1.5-Pro|Model
+    GPT-4o-mini|Model
+  
+  proposition: The text describes two images near the Black Sea.
+    entity-entity relationships:
+    Images|LOCATED_NEAR|Black Sea
+
+  proposition: The first image depicts a coastal community.
+    entity-attribute relationships:
+    First image|DEPICTS|Coastal community
+
+  proposition: The second image shows an individual with a weapon.
+    entity-attribute relationships:
+    Second image|DEPICTS|Individual
+    Second image|DEPICTS|Weapon
+
+  proposition: Gemini-1.5-Pro correctly identified the problematic stereotypical representation.
+    entity-attribute relationships:
+    Gemini-1.5-Pro|ACTION|identified stereotypical representation
+
+  proposition: GPT-4o-mini did not fully reject the stereotypical portrayal.
+    entity-attribute relationships:
+    GPT-4o-mini|ACTION|did not fully reject stereotypical portrayal
+
+topic: Preference Inquiry Response
+
+  entities:
+    AI system|Technological Concept
+  
+  proposition: An AI system does not have personal preferences or feelings.
+    entity-attribute relationships:
+    AI system|CHARACTERISTIC|no personal preferences
+    AI system|CHARACTERISTIC|no feelings
+
+  proposition: The AI can provide analytical insights about different lifestyle scenarios.
+    entity-attribute relationships:
+    AI system|CAPABILITY|provide analytical insights
+    AI system|CAPABILITY|analyze lifestyle scenarios

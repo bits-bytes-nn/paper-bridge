@@ -1,0 +1,164 @@
+topic: Prompt Injection and Large Language Model Security Research
+
+  entities:
+    Mossbench|Research Method
+    Weixiang Zhao|Researcher
+    Chaofan Wang|Researcher
+    Rodrigo Pedro|Researcher
+    Jun Yan|Researcher
+    Jiahao Yu|Researcher
+    Daniel Wankit Yip|Researcher
+    Ahmed Salem|Researcher
+    OWASP|Organization
+    Riley Goodside|Researcher
+    Rich Harang|Researcher
+    Fábio Perez|Researcher
+    Ian Ribeiro|Researcher
+    Jiawen Shi|Researcher
+    Zeyi Liao|Researcher
+    Chejian Xu|Researcher
+    Julien Piet|Researcher
+    Sizhe Chen|Researcher
+    Eric Wallace|Researcher
+    ChatGPT|Model
+    GPT-3|Model
+    Large Language Models|Technology
+    Web Applications|Platform
+    Web Agents|Agent
+
+  proposition: Mossbench investigates multimodal language model sensitivity to safe queries.
+    entity-attribute relationships:
+    Mossbench|INVESTIGATES|multimodal language model sensitivity
+    Mossbench|FOCUSES_ON|safe queries
+
+    entity-entity relationships:
+    Mossbench|STUDIES|Large Language Models
+
+  proposition: Weixiang Zhao et al. propose comprehensive and efficient post safety alignment of large language models via safety patching.
+    entity-attribute relationships:
+    Weixiang Zhao|PROPOSES|comprehensive safety alignment
+    Weixiang Zhao|DEVELOPS|efficient post safety alignment
+    Large Language Models|REQUIRES|safety patching
+
+    entity-entity relationships:
+    Weixiang Zhao|RESEARCHES|Large Language Models
+
+  proposition: Chaofan Wang et al. explore safeguarding crowdsourcing surveys from ChatGPT with prompt injection techniques.
+    entity-attribute relationships:
+    Chaofan Wang|EXPLORES|safeguarding crowdsourcing surveys
+    Chaofan Wang|USES|prompt injection techniques
+
+    entity-entity relationships:
+    Chaofan Wang|PROTECTS|crowdsourcing surveys
+    Chaofan Wang|DEFENDS_AGAINST|ChatGPT
+
+  proposition: Rodrigo Pedro et al. examine prompt injections leading to SQL injection attacks in LLM-integrated web applications.
+    entity-attribute relationships:
+    Rodrigo Pedro|EXAMINES|prompt injections
+    Rodrigo Pedro|INVESTIGATES|SQL injection attacks
+
+    entity-entity relationships:
+    Prompt Injections|LEADS_TO|SQL Injection Attacks
+    SQL Injection Attacks|TARGETS|Web Applications
+
+  proposition: Jun Yan et al. study virtual prompt injection for instruction-tuned large language models.
+    entity-attribute relationships:
+    Jun Yan|STUDIES|virtual prompt injection
+    Jun Yan|FOCUSES_ON|instruction-tuned large language models
+
+    entity-entity relationships:
+    Jun Yan|RESEARCHES|Large Language Models
+
+  proposition: Jiahao Yu et al. assess prompt injection risks in over 200 custom GPTs.
+    entity-attribute relationships:
+    Jiahao Yu|ASSESSES|prompt injection risks
+    Jiahao Yu|EVALUATES|custom GPTs
+
+    entity-entity relationships:
+    Prompt Injection|RISKS|Custom GPTs
+
+  proposition: Daniel Wankit Yip et al. develop a novel evaluation framework for assessing resilience against prompt injection attacks in large language models.
+    entity-attribute relationships:
+    Daniel Wankit Yip|DEVELOPS|novel evaluation framework
+    Daniel Wankit Yip|ASSESSES|resilience against prompt injection attacks
+
+    entity-entity relationships:
+    Daniel Wankit Yip|STUDIES|Large Language Models
+
+  proposition: Ahmed Salem et al. introduce Maatphor for automated variant analysis of prompt injection attacks.
+    entity-attribute relationships:
+    Ahmed Salem|INTRODUCES|Maatphor
+    Maatphor|PERFORMS|automated variant analysis of prompt injection attacks
+
+    entity-entity relationships:
+    Ahmed Salem|DEVELOPS|Maatphor
+
+  proposition: OWASP provides guidance on SQL injection prevention.
+    entity-attribute relationships:
+    OWASP|PROVIDES|guidance on SQL injection prevention
+
+  proposition: Riley Goodside discusses prompt injection attacks against GPT-3.
+    entity-attribute relationships:
+    Riley Goodside|DISCUSSES|prompt injection attacks
+
+    entity-entity relationships:
+    Prompt Injection Attacks|TARGETS|GPT-3
+
+  proposition: Rich Harang offers insights on securing LLM systems against prompt injection.
+    entity-attribute relationships:
+    Rich Harang|OFFERS|insights on securing LLM systems
+
+    entity-entity relationships:
+    Rich Harang|DEFENDS|LLM Systems
+
+  proposition: Fábio Perez and Ian Ribeiro explore attack techniques for language models.
+    entity-attribute relationships:
+    Fábio Perez|EXPLORES|attack techniques
+    Ian Ribeiro|EXPLORES|attack techniques
+
+    entity-entity relationships:
+    Fábio Perez|RESEARCHES|Language Models
+    Ian Ribeiro|RESEARCHES|Language Models
+
+  proposition: Jiawen Shi et al. propose an optimization-based prompt injection attack to LLM-as-a-Judge.
+    entity-attribute relationships:
+    Jiawen Shi|PROPOSES|optimization-based prompt injection attack
+
+    entity-entity relationships:
+    Jiawen Shi|ATTACKS|LLM-as-a-Judge
+
+  proposition: Zeyi Liao et al. investigate environmental injection attacks on web agents for privacy leakage.
+    entity-attribute relationships:
+    Zeyi Liao|INVESTIGATES|environmental injection attacks
+    Zeyi Liao|EXPLORES|privacy leakage
+
+    entity-entity relationships:
+    Environmental Injection Attacks|TARGETS|Web Agents
+
+  proposition: Chejian Xu et al. develop controllable black-box attacks on VLM-powered web agents.
+    entity-attribute relationships:
+    Chejian Xu|DEVELOPS|controllable black-box attacks
+
+    entity-entity relationships:
+    Chejian Xu|ATTACKS|VLM-powered Web Agents
+
+  proposition: Julien Piet et al. present Jatmo, a prompt injection defense through task-specific fine-tuning.
+    entity-attribute relationships:
+    Julien Piet|PRESENTS|Jatmo
+    Jatmo|PROVIDES|prompt injection defense
+    Jatmo|USES|task-specific fine-tuning
+
+  proposition: Sizhe Chen et al. propose StruQ for defending against prompt injection with structured queries.
+    entity-attribute relationships:
+    Sizhe Chen|PROPOSES|StruQ
+    StruQ|DEFENDS|prompt injection
+    StruQ|USES|structured queries
+
+  proposition: Eric Wallace et al. explore the instruction hierarchy for training LLMs to prioritize privileged instructions.
+    entity-attribute relationships:
+    Eric Wallace|EXPLORES|instruction hierarchy
+    Eric Wallace|FOCUSES_ON|training LLMs
+    Eric Wallace|AIMS|prioritizing privileged instructions
+
+    entity-entity relationships:
+    Eric Wallace|RESEARCHES|Large Language Models

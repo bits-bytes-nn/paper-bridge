@@ -1,0 +1,105 @@
+topic: Large Language Model Robustness and Adversarial Challenges
+
+  entities:
+    Javad Rafiei Asl|Researcher
+    Terry Yue Zhuo|Researcher
+    Freda Shi|Researcher
+    Seyed Mahed Mousavi|Researcher
+    Yue Huang|Researcher
+    Jindong Wang|Researcher
+    Ridong Han|Researcher
+    Xinyue Shen|Researcher
+    Sungwon Park|Researcher
+    Ming Jiang|Researcher
+    Zi Xiong|Researcher
+    IEEE Transactions on Dependable and Secure Computing|Journal
+    Codex|Model
+    International Conference on Machine Learning|Conference
+    ChatGPT|Model
+    arXiv|Data Source
+
+  proposition: Javad Rafiei Asl et al. proposed a semantic, syntactic, and context-aware natural language adversarial example generator in IEEE Transactions on Dependable and Secure Computing in 2024.
+    entity-attribute relationships:
+    Javad Rafiei Asl|PUBLISHED_IN|IEEE Transactions on Dependable and Secure Computing
+    Javad Rafiei Asl|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Javad Rafiei Asl|PROPOSED|natural language adversarial example generator
+
+  proposition: Terry Yue Zhuo et al. conducted an empirical study on the robustness of prompt-based semantic parsing with large pre-trained language models like Codex in 2023.
+    entity-attribute relationships:
+    Terry Yue Zhuo|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Terry Yue Zhuo|STUDIED|Codex
+    Terry Yue Zhuo|STUDIED|prompt-based semantic parsing
+
+  proposition: Freda Shi et al. demonstrated that large language models can be easily distracted by irrelevant context in the 2023 International Conference on Machine Learning.
+    entity-attribute relationships:
+    Freda Shi|PUBLICATION_YEAR|2023
+    Freda Shi|PRESENTED_AT|International Conference on Machine Learning
+    
+    entity-entity relationships:
+    Freda Shi|DEMONSTRATED|large language models
+
+  proposition: Seyed Mahed Mousavi et al. investigated the robustness of large language models for spoken dialogues in 2024.
+    entity-attribute relationships:
+    Seyed Mahed Mousavi|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Seyed Mahed Mousavi|INVESTIGATED|large language models
+    Seyed Mahed Mousavi|INVESTIGATED|spoken dialogues
+
+  proposition: Yue Huang et al. explored the contextual distraction curse in large language models in an arXiv preprint in 2025.
+    entity-attribute relationships:
+    Yue Huang|PUBLICATION_YEAR|2025
+    Yue Huang|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Yue Huang|EXPLORED|contextual distraction curse
+    Yue Huang|EXPLORED|large language models
+
+  proposition: Jindong Wang et al. analyzed the robustness of ChatGPT from adversarial and out-of-distribution perspectives in 2023.
+    entity-attribute relationships:
+    Jindong Wang|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Jindong Wang|ANALYZED|ChatGPT
+
+  proposition: Ridong Han et al. examined ChatGPT's performance, evaluation criteria, robustness, and errors in information extraction in 2023.
+    entity-attribute relationships:
+    Ridong Han|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Ridong Han|EXAMINED|ChatGPT
+
+  proposition: Xinyue Shen et al. measured and characterized the reliability of ChatGPT in 2023.
+    entity-attribute relationships:
+    Xinyue Shen|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Xinyue Shen|MEASURED|ChatGPT
+
+  proposition: Sungwon Park et al. proposed an adversarial style augmentation method for robust fake news detection using large language models in 2024.
+    entity-attribute relationships:
+    Sungwon Park|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Sungwon Park|PROPOSED|adversarial style augmentation method
+    Sungwon Park|APPLIED_TO|fake news detection
+
+  proposition: Ming Jiang et al. developed a method for enhancing robustness in large language models by mitigating the impact of irrelevant information in 2024.
+    entity-attribute relationships:
+    Ming Jiang|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Ming Jiang|DEVELOPED|method for enhancing robustness
+    Ming Jiang|FOCUSED_ON|large language models
+
+  proposition: Zi Xiong et al. suggested enhancing language model robustness against variation attacks through graph integration in 2024.
+    entity-attribute relationships:
+    Zi Xiong|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Zi Xiong|SUGGESTED|method for enhancing language model robustness
+    Zi Xiong|PROPOSED|graph integration approach

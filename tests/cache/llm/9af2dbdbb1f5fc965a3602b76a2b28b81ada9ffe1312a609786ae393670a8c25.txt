@@ -1,0 +1,160 @@
+topic: Research Papers on Privacy and Security in Vision-Language Models
+
+  entities:
+    Amit Agarwal|Researcher
+    Yash Goyal|Researcher
+    Dan Hendrycks|Researcher
+    Thomas G. Dietterich|Researcher
+    Olivia Bennett|Researcher
+    Katharine Miller|Researcher
+    Ruoyu Zhao|Researcher
+    Xudong Pan|Researcher
+    Simone Caldarella|Researcher
+    Jieren Deng|Researcher
+    Dong Lu|Researcher
+    Haodi Wang|Researcher
+    Jingwei Sun|Researcher
+    Ximeng Liu|Researcher
+    Reshabh K Sharma|Researcher
+    Bernardo Breve|Researcher
+    Sunder Ali Khowaja|Researcher
+    Cunxiang Wang|Researcher
+    Yixin Wu|Researcher
+    MVTamperBench|Research Paper
+    Stanford HAI|Research Platform
+    IEEE Symposium on Security and Privacy|Conference
+    IEEE Symposium|Conference
+
+  proposition: Amit Agarwal et al. published a paper titled "MVTamperBench: Evaluating Robustness of Vision-Language Models" in 2024.
+    entity-attribute relationships:
+    Amit Agarwal|PUBLISHED|MVTamperBench
+    MVTamperBench|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Amit Agarwal|AUTHOR_OF|MVTamperBench
+
+  proposition: Yash Goyal et al. investigated the importance of image understanding in visual question answering in a 2017 conference paper.
+    entity-attribute relationships:
+    Yash Goyal|PUBLICATION_YEAR|2017
+    
+    entity-entity relationships:
+    Yash Goyal|RESEARCHED|Visual Question Answering
+
+  proposition: Dan Hendrycks and Thomas G. Dietterich conducted a benchmark study on neural network robustness to common corruptions in 2019.
+    entity-attribute relationships:
+    Dan Hendrycks|PUBLICATION_YEAR|2019
+    Thomas G. Dietterich|PUBLICATION_YEAR|2019
+    
+    entity-entity relationships:
+    Dan Hendrycks|COLLABORATED_WITH|Thomas G. Dietterich
+    Dan Hendrycks|CONDUCTED|Benchmark Study
+    Thomas G. Dietterich|CONDUCTED|Benchmark Study
+
+  proposition: Olivia Bennett wrote an article about large vision models, exploring their examples, use cases, and challenges in 2024.
+    entity-attribute relationships:
+    Olivia Bennett|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Olivia Bennett|WROTE_ABOUT|Large Vision Models
+
+  proposition: Katharine Miller discussed privacy protection of personal information in the AI era in a 2024 Stanford HAI article.
+    entity-attribute relationships:
+    Katharine Miller|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Katharine Miller|AFFILIATED_WITH|Stanford HAI
+    Katharine Miller|DISCUSSED|Privacy Protection
+
+  proposition: Ruoyu Zhao et al. published a comprehensive survey on visual content privacy protection in 2023.
+    entity-attribute relationships:
+    Ruoyu Zhao|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Ruoyu Zhao|PUBLISHED|Survey on Visual Content Privacy Protection
+
+  proposition: Xudong Pan et al. examined privacy risks of general-purpose language models in a 2020 IEEE Symposium on Security and Privacy.
+    entity-attribute relationships:
+    Xudong Pan|PUBLICATION_YEAR|2020
+    
+    entity-entity relationships:
+    Xudong Pan|PRESENTED_AT|IEEE Symposium on Security and Privacy
+    Xudong Pan|RESEARCHED|Privacy Risks of Language Models
+
+  proposition: Simone Caldarella et al. investigated privacy leakages in vision-language models in a 2024 research paper.
+    entity-attribute relationships:
+    Simone Caldarella|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Simone Caldarella|RESEARCHED|Privacy Leakages in Vision-Language Models
+
+  proposition: Jieren Deng et al. proposed a gradient attack method on transformer-based language models in 2021.
+    entity-attribute relationships:
+    Jieren Deng|PUBLICATION_YEAR|2021
+    
+    entity-entity relationships:
+    Jieren Deng|PROPOSED|Gradient Attack Method
+
+  proposition: Dong Lu et al. developed a set-level guidance attack to boost adversarial transferability of vision-language pre-training models in 2023.
+    entity-attribute relationships:
+    Dong Lu|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Dong Lu|DEVELOPED|Set-Level Guidance Attack
+
+  proposition: Haodi Wang et al. explored transferable multimodal attacks on vision-language pre-training models in a 2024 IEEE Symposium.
+    entity-attribute relationships:
+    Haodi Wang|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Haodi Wang|PRESENTED_AT|IEEE Symposium
+    Haodi Wang|EXPLORED|Transferable Multimodal Attacks
+
+  proposition: Jingwei Sun et al. introduced Soteria, a provable defense against privacy leakage in federated learning in 2021.
+    entity-attribute relationships:
+    Jingwei Sun|PUBLICATION_YEAR|2021
+    
+    entity-entity relationships:
+    Jingwei Sun|INTRODUCED|Soteria
+    Soteria|DEFENDS_AGAINST|Privacy Leakage
+
+  proposition: Ximeng Liu et al. conducted a survey on privacy and security issues in deep learning in 2020.
+    entity-attribute relationships:
+    Ximeng Liu|PUBLICATION_YEAR|2020
+    
+    entity-entity relationships:
+    Ximeng Liu|PUBLISHED|Survey on Privacy and Security in Deep Learning
+
+  proposition: Reshabh K Sharma et al. proposed a method for defending language models against image-based prompt attacks in 2024.
+    entity-attribute relationships:
+    Reshabh K Sharma|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Reshabh K Sharma|PROPOSED|Defense Method for Language Models
+
+  proposition: Bernardo Breve et al. developed an approach for identifying security and privacy violation rules in IoT platforms using NLP models in 2022.
+    entity-attribute relationships:
+    Bernardo Breve|PUBLICATION_YEAR|2022
+    
+    entity-entity relationships:
+    Bernardo Breve|DEVELOPED|Approach for Identifying Security and Privacy Violation Rules
+
+  proposition: Sunder Ali Khowaja et al. reviewed ChatGPT through a SPADE (Sustainability, Privacy, Digital Divide, and Ethics) evaluation in 2024.
+    entity-attribute relationships:
+    Sunder Ali Khowaja|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Sunder Ali Khowaja|REVIEWED|ChatGPT
+
+  proposition: Cunxiang Wang et al. evaluated open question answering evaluation methods in 2023.
+    entity-attribute relationships:
+    Cunxiang Wang|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Cunxiang Wang|EVALUATED|Open Question Answering Methods
+
+  proposition: Yixin Wu et al. quantified privacy risks of prompts in visual prompt learning in 2024.
+    entity-attribute relationships:
+    Yixin Wu|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Yixin Wu|QUANTIFIED|Privacy Risks of Prompts in Visual Prompt Learning

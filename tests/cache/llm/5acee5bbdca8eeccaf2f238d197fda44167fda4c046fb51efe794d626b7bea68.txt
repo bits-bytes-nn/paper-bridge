@@ -1,0 +1,156 @@
+topic: Dataset Generation and Evaluation Techniques
+
+  entities:
+    Dyval|Project
+    Dyval-1|Project
+    Dyval-2|Project
+    UniGen|Framework
+    AutoBencher|Framework
+    Large Language Models|Model
+    ChatEval|Tool
+    EvaluLLM|Tool
+    Prometheus|Tool
+    Vision-Language Models|Model
+    Seed-bench|Benchmark
+    Chen et al.|Research Group
+    Liu et al.|Research Group
+
+  proposition: Dyval series is a dynamic protocol for reasoning data generation.
+    entity-attribute relationships:
+    Dyval|TYPE|dynamic protocol
+    Dyval|PURPOSE|reasoning data generation
+
+  proposition: Dyval-1 aims to construct reasoning data dynamically.
+    entity-attribute relationships:
+    Dyval-1|PURPOSE|construct reasoning data dynamically
+
+  proposition: Dyval-2 utilizes probing and judging Large Language Models to transform evaluation problems automatically.
+    entity-entity relationships:
+    Dyval-2|USES|Large Language Models
+
+  proposition: UniGen is a unified framework for textual dataset generation.
+    entity-attribute relationships:
+    UniGen|TYPE|unified framework
+    UniGen|PURPOSE|textual dataset generation
+
+  proposition: UniGen ensures truthfulness and diversity of generated data.
+    entity-attribute relationships:
+    UniGen|CHARACTERISTIC|ensures truthfulness
+    UniGen|CHARACTERISTIC|ensures diversity
+
+  proposition: Wang et al. use a multi-agent framework to evolve evaluation datasets.
+    entity-attribute relationships:
+    Wang et al.|METHOD|multi-agent framework
+    Wang et al.|PURPOSE|evolve evaluation datasets
+
+  proposition: AutoBencher is an automatic benchmark framework using language models.
+    entity-attribute relationships:
+    AutoBencher|TYPE|automatic benchmark framework
+    AutoBencher|USES|language models
+
+  proposition: AutoBencher searches for datasets meeting salience, novelty, and difficulty criteria.
+    entity-attribute relationships:
+    AutoBencher|PURPOSE|search for datasets
+    AutoBencher|CRITERIA|salience
+    AutoBencher|CRITERIA|novelty
+    AutoBencher|CRITERIA|difficulty
+
+  proposition: Large Language Models have emerged as promising evaluation tools.
+    entity-attribute relationships:
+    Large Language Models|ROLE|evaluation tools
+
+  proposition: Zheng et al. introduced the "LLM-as-a-Judge" concept.
+    entity-attribute relationships:
+    Zheng et al.|CONTRIBUTION|introduced "LLM-as-a-Judge" concept
+
+  proposition: "LLM-as-a-Judge" offers a cost-effective alternative to traditional human evaluations.
+    entity-attribute relationships:
+    "LLM-as-a-Judge"|CHARACTERISTIC|cost-effective
+    "LLM-as-a-Judge"|ALTERNATIVE|traditional human evaluations
+
+  proposition: ChatEval, EvaluLLM, and Prometheus are popular LLM-powered evaluation methods.
+    entity-attribute relationships:
+    ChatEval|TYPE|LLM-powered evaluation method
+    EvaluLLM|TYPE|LLM-powered evaluation method
+    Prometheus|TYPE|LLM-powered evaluation method
+
+topic: Vision-Language Models
+
+  entities:
+    Vision-Language Models|Model
+    Seed-bench|Benchmark
+
+  proposition: Vision-Language Models have rapidly developed alongside computer vision and Large Language Models.
+    entity-attribute relationships:
+    Vision-Language Models|DEVELOPMENT_STATUS|rapidly developed
+
+  proposition: Vision-Language Models enable downstream tasks integrating visual and linguistic information.
+    entity-attribute relationships:
+    Vision-Language Models|CAPABILITY|enable downstream tasks
+    Vision-Language Models|CHARACTERISTIC|integrates visual and linguistic information
+
+  proposition: Vision-Language Models are evaluated on multiple tasks.
+    entity-attribute relationships:
+    Vision-Language Models|EVALUATION_TASKS|object detection
+    Vision-Language Models|EVALUATION_TASKS|image classification
+    Vision-Language Models|EVALUATION_TASKS|object tracking
+    Vision-Language Models|EVALUATION_TASKS|facial recognition
+    Vision-Language Models|EVALUATION_TASKS|human pose estimation
+    Vision-Language Models|EVALUATION_TASKS|optical character recognition
+
+  proposition: Vision-Language Models demonstrate abilities in multiple image scene recognition.
+    entity-attribute relationships:
+    Vision-Language Models|CAPABILITY|multiple image scene recognition
+
+  proposition: Vision-Language Models demonstrate abilities in visual question answering.
+    entity-attribute relationships:
+    Vision-Language Models|CAPABILITY|visual question answering
+
+  proposition: Seed-bench comprehensively evaluates the hierarchical abilities of Vision-Language Models.
+    entity-entity relationships:
+    Seed-bench|EVALUATES|Vision-Language Models
+
+  proposition: Some benchmarks test Vision-Language Models' reasoning skills.
+    entity-attribute relationships:
+    Vision-Language Models|EVALUATION_FOCUS|reasoning skills
+
+  proposition: Vision-Language Models are applied in multiple domains.
+    entity-attribute relationships:
+    Vision-Language Models|APPLICATION_DOMAINS|autonomous driving
+    Vision-Language Models|APPLICATION_DOMAINS|robotics
+    Vision-Language Models|APPLICATION_DOMAINS|healthcare
+    Vision-Language Models|APPLICATION_DOMAINS|psychology
+    Vision-Language Models|APPLICATION_DOMAINS|legal
+    Vision-Language Models|APPLICATION_DOMAINS|economic
+    Vision-Language Models|APPLICATION_DOMAINS|financial
+    Vision-Language Models|APPLICATION_DOMAINS|recommendation
+
+topic: Multimodal Research
+
+  entities:
+    Chen et al.|Research Group
+    Liu et al.|Research Group
+
+  proposition: Some studies investigate cross-cultural and multilingual capabilities of Vision-Language Models.
+    entity-attribute relationships:
+    Vision-Language Models|RESEARCH_FOCUS|cross-cultural capabilities
+    Vision-Language Models|RESEARCH_FOCUS|multilingual capabilities
+
+  proposition: Multimodal agent research explores Vision-Language Models in diverse environments.
+    entity-attribute relationships:
+    Multimodal agent research|EXPLORATION_ENVIRONMENTS|household
+    Multimodal agent research|EXPLORATION_ENVIRONMENTS|gaming
+    Multimodal agent research|EXPLORATION_ENVIRONMENTS|web
+    Multimodal agent research|EXPLORATION_ENVIRONMENTS|mobile phone
+    Multimodal agent research|EXPLORATION_ENVIRONMENTS|desktop
+
+  proposition: Chen et al. introduced a comprehensive multimodal dataset for agent-based research.
+    entity-attribute relationships:
+    Chen et al.|CONTRIBUTION|comprehensive multimodal dataset
+    Chen et al.|RESEARCH_FOCUS|agent-based research
+
+  proposition: Liu et al. developed the first systematic benchmark for complex spaces and digital interfaces.
+    entity-attribute relationships:
+    Liu et al.|CONTRIBUTION|first systematic benchmark
+    Liu et al.|BENCHMARK_FOCUS|complex spaces
+    Liu et al.|BENCHMARK_FOCUS|digital interfaces

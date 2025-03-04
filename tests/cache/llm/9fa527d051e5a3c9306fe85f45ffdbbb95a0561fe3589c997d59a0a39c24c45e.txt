@@ -1,0 +1,19 @@
+Research Papers on Visual Hallucination and Large Language Models
+
+Nicholas Carlini et al. investigate adversarial alignment in neural networks.
+Tianrui Guan et al. developed HallusionBench, a diagnostic suite for language hallucination and visual illusion in large vision-language models.
+Anku Rani et al. provide a comprehensive study on visual hallucination, including definition, quantification, and remediation strategies.
+Wen Huang et al. examine visual hallucinations in multi-modal large language models.
+Anna Rohrbach et al. studied object hallucination in image captioning.
+Ali Furkan Biten et al. proposed methods for reducing object hallucination in image captioning.
+Weihao Yu et al. created MM-Vet to evaluate integrated capabilities of large multimodal models.
+Xiyang Wu et al. highlighted safety concerns of deploying large language and vision-language models in robotics.
+Haokun Liu et al. developed an LLM-based human-robot collaboration framework for manipulation tasks.
+Sheng Wang et al. introduced ChatCAD, an interactive computer-aided diagnosis system using large language models.
+Mingzhe Hu et al. explored the advancement of medical imaging through language models.
+Paul Brie et al. evaluated a large language model for searching GUI layouts.
+Xiyang Wu et al. created AUTOHALLUSION for generating hallucination benchmarks.
+Anish Gunjal et al. focused on detecting and preventing hallucinations in large vision-language models.
+Yiyang Zhou et al. analyzed and proposed mitigation strategies for object hallucination.
+Yifan Li et al. evaluated object hallucination in large vision-language models.
+Jae Myung Kim et al. investigated spurious correlations in cross-modal retrieval.

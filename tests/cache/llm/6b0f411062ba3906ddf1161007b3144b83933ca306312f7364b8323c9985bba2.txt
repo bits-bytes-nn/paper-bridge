@@ -1,0 +1,130 @@
+topic: Microsoft AI Research and Responsible Technology
+
+  entities:
+    Microsoft|Organization
+    Microsoft Research|Project
+    Copilot|Tool
+
+  proposition: Microsoft operates multiple AI research projects focused on responsible and beneficial technology
+    entity-attribute relationships:
+    Microsoft Research|FOCUS|responsible technology
+    Microsoft Research|FOCUS|beneficial technology
+
+    entity-entity relationships:
+    Microsoft|OPERATES|Microsoft Research
+
+  proposition: Microsoft maintains AI projects in domains including health, bioacoustics, data visualization, and geospatial machine learning
+    entity-attribute relationships:
+    Microsoft Research|DOMAIN|health
+    Microsoft Research|DOMAIN|bioacoustics
+    Microsoft Research|DOMAIN|data visualization
+    Microsoft Research|DOMAIN|geospatial machine learning
+
+  proposition: Microsoft has developed six trustworthy AI principles to guide responsible AI adoption
+    entity-attribute relationships:
+    Microsoft|DEVELOPED|trustworthy AI principles
+
+  proposition: Microsoft publishes commitments to advance safe, secure, and trustworthy AI systems
+    entity-attribute relationships:
+    Microsoft|PUBLISHES|commitments
+    Microsoft|FOCUS|safe AI systems
+    Microsoft|FOCUS|secure AI systems
+    Microsoft|FOCUS|trustworthy AI systems
+
+  proposition: Microsoft provides frameworks for building AI systems responsibly
+    entity-attribute relationships:
+    Microsoft|PROVIDES|AI system frameworks
+
+  proposition: Microsoft offers Copilot with specific trustworthy commitments
+    entity-attribute relationships:
+    Copilot|CHARACTERIZED_BY|trustworthy commitments
+
+    entity-entity relationships:
+    Microsoft|OFFERS|Copilot
+
+topic: Anthropic AI Safety Research
+
+  entities:
+    Anthropic|Organization
+    AI Safety|Research Field
+    API Trust & Safety|Service
+    Collective Constitutional AI|Approach
+
+  proposition: Anthropic conducts research on AI safety and responsible development
+    entity-attribute relationships:
+    Anthropic|CONDUCTS|AI safety research
+    Anthropic|FOCUS|responsible development
+
+  proposition: Anthropic has core views on AI safety published in 2024
+    entity-attribute relationships:
+    Anthropic|PUBLISHED|core views on AI safety
+    Anthropic|PUBLICATION_YEAR|2024
+
+  proposition: Anthropic maintains an API Trust & Safety program
+    entity-attribute relationships:
+    Anthropic|MAINTAINS|API Trust & Safety program
+
+  proposition: Anthropic operates a model safety bug bounty program
+    entity-attribute relationships:
+    Anthropic|OPERATES|model safety bug bounty program
+
+  proposition: Anthropic researches AI frontier challenges
+    entity-attribute relationships:
+    Anthropic|RESEARCHES|AI frontier challenges
+
+  proposition: Anthropic investigates elections-related AI risks
+    entity-attribute relationships:
+    Anthropic|INVESTIGATES|elections-related AI risks
+
+  proposition: Anthropic explores Collective Constitutional AI with public input
+    entity-attribute relationships:
+    Anthropic|EXPLORES|Collective Constitutional AI
+
+    entity-entity relationships:
+    Collective Constitutional AI|INVOLVES|public input
+
+topic: Amazon Web Services AI Responsibility
+
+  entities:
+    Amazon Web Services|Organization
+    Comprehend Trust and Safety|Service
+    Amazon Science|Research Platform
+
+  proposition: Amazon Web Services announces tools for responsible AI innovation
+    entity-attribute relationships:
+    Amazon Web Services|ANNOUNCES|responsible AI innovation tools
+
+  proposition: Amazon offers model evaluation capabilities
+    entity-attribute relationships:
+    Amazon Web Services|OFFERS|model evaluation capabilities
+
+  proposition: Amazon provides Comprehend Trust and Safety services
+    entity-attribute relationships:
+    Amazon Web Services|PROVIDES|Comprehend Trust and Safety services
+
+  proposition: Amazon develops image generation with watermark detection
+    entity-attribute relationships:
+    Amazon Web Services|DEVELOPS|image generation
+    Amazon Web Services|IMPLEMENTS|watermark detection
+
+  proposition: Amazon Science hosts a Trusted AI Challenge
+    entity-attribute relationships:
+    Amazon Science|HOSTS|Trusted AI Challenge
+
+topic: Academic AI Research
+
+  entities:
+    Research Paper|Publication
+    ECML-PKDD|Conference
+
+  proposition: Research paper on leveraging weak social supervision for fake news detection was presented at ECML-PKDD 2020
+    entity-attribute relationships:
+    Research Paper|TOPIC|weak social supervision
+    Research Paper|TOPIC|fake news detection
+    Research Paper|PRESENTED_AT|ECML-PKDD
+    Research Paper|YEAR|2020
+
+  proposition: Academic research explores measurement opportunities and challenges in AI policy
+    entity-attribute relationships:
+    Academic Research|EXPLORES|measurement opportunities in AI policy
+    Academic Research|EXPLORES|measurement challenges in AI policy

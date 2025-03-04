@@ -1,0 +1,20 @@
+Research Papers on AI, Transportation, Security, and Copyright Issues
+
+V2X-DGW is a research paper on domain generalization for multi-agent perception under adverse weather conditions.
+A survey explores security and privacy issues in V2X communication systems.
+Researchers propose a new perspective on trustworthy intelligent vehicle systems based on TRUE autonomous organizations and operations.
+A study discusses security and privacy protection technology for AIoT intelligent transportation teaching systems using 5G technology.
+Researchers survey the applications of large language models in traffic management, transportation safety, and autonomous driving.
+A survey examines data poisoning attacks in intelligent transportation systems.
+Researchers conduct a survey on jailbreak attacks and defenses against large language models.
+Concerns exist about AI-generated images and their potential impact on personal identity.
+Researchers argue that fears about generative AI's impact on misinformation may be overblown.
+Experts warn about the potential for AI to create disinformation challenges in the 2024 election.
+Concord Music Group has filed a lawsuit against Anthropic PBC.
+The New York Times Company has initiated a lawsuit against Microsoft Corporation.
+A research paper explores the books known to ChatGPT/GPT-4.
+Researchers investigate copyright violations in large language models.
+A study examines LLM memorization through the lens of adversarial compression.
+Researchers propose a method to leverage data-driven biases in GenAI copyright disputes.
+A research paper presents a tool for detecting copyright content misuse in LLM training.
+A study evaluates copyright takedown methods for language models.

@@ -1,0 +1,38 @@
+Microsoft AI for Social Good Initiatives
+Microsoft leverages AI for social good through multiple initiatives.
+Microsoft AI for Health project aims to improve healthcare capability of large language models.
+Microsoft Bioacoustics project focuses on wildlife conservation through sound analysis.
+Microsoft Data Visualization project enhances data interpretation.
+Microsoft Geospatial Machine Learning addresses environmental and urban challenges.
+Microsoft Open Data platform promotes transparency by providing an accessible platform.
+
+Microsoft Responsible AI Adoption Principles
+Microsoft has six trustworthy AI principles guiding Azure cloud services.
+Microsoft 365 is committed to trustworthy AI practices.
+Microsoft extends trustworthy AI initiatives to government agencies.
+
+Microsoft AI System Development Framework
+Microsoft has outlined a framework for building AI systems responsibly.
+Microsoft emphasizes Copilot Trustworthy Commitments focusing on data security and user privacy.
+
+Anthropic AI Safety Research Approach
+Anthropic focuses on improving trustworthiness of generative models through empirically-driven approaches.
+Anthropic implements multiple levels of API trust and safety tools.
+Anthropic operates a safety bug bounty program to identify model mitigation flaws.
+Anthropic conducts extensive research on interpretability, alignment, and societal impacts of AI.
+Anthropic provides research assistance to policymakers on generative AI regulations.
+
+Amazon Generative AI Trustworthiness Measures
+Amazon provides Bedrock Guardrails to enforce safety in generative model interactions.
+Amazon Bedrock enables model evaluation against accuracy, robustness, and toxicity benchmarks.
+Amazon Comprehend supports identifying and classifying toxic content.
+Amazon Titan integrates invisible watermarks in generated images to combat disinformation.
+Amazon hosts a Trusted AI Challenge to advance trust-related AI solutions.
+
+Google Responsible AI Development
+Google is committed to developing generative models with enhanced capabilities and responsible practices.
+Google implements responsible AI practices focusing on fairness, interpretability, privacy, safety, and security.
+Google offers configurable safety settings for generative models like PaLM and Gemini.
+Google developed the Secure AI Framework to mitigate AI-specific risks.
+ShieldGemma provides advanced safety risk predictions and filtering.
+DeepMind introduced the Frontier Safety Framework to evaluate critical model capabilities.

@@ -1,0 +1,121 @@
+topic: Robustness Assessment of Vision-Language Models
+
+  entities:
+    MLLM-as-a-Judge|Method
+    GPT-4o-mini|Model
+    Claude-3.5-Sonnet|Model
+    Qwen-2-VL-72B|Model
+    Llama|Model
+    VQA|Task
+    Image Captioning|Task
+
+  proposition: MLLM-as-a-Judge is used to calculate the robustness score for image captioning
+    entity-attribute relationships:
+    MLLM-as-a-Judge|USED_FOR|Robustness Score Calculation
+    
+    entity-entity relationships:
+    MLLM-as-a-Judge|EVALUATES|Image Captioning
+
+  proposition: Robustness score is determined by comparing descriptions under perturbed and unperturbed conditions
+    entity-attribute relationships:
+    Robustness Score|DETERMINED_BY|Description Comparison
+
+  proposition: An instance is considered robust if the MLLM rates the descriptions as a "Tie"
+    entity-attribute relationships:
+    Instance|CONSIDERED_ROBUST_IF|Tie Rating
+
+  proposition: Final robustness score is the proportion of "Tie" rated instances
+    entity-attribute relationships:
+    Robustness Score|CALCULATED_AS|Tie Proportion
+
+topic: Perturbation Domains
+
+  entities:
+    Image Domain|Domain
+    Text Domain|Domain
+    Image-text Domain|Domain
+
+  proposition: Three distinct perturbation domains are designed: image, text, and image-text
+    entity-attribute relationships:
+    Perturbation|INCLUDES|Image Domain
+    Perturbation|INCLUDES|Text Domain
+    Perturbation|INCLUDES|Image-text Domain
+
+  proposition: Image domain includes 23 perturbation types
+    entity-attribute relationships:
+    Image Domain|CONTAINS|23 Perturbation Types
+
+  proposition: Image perturbations include 19 existing corruptions and 4 new transformations
+    entity-attribute relationships:
+    Image Perturbations|INCLUDES|19 Existing Corruptions
+    Image Perturbations|INCLUDES|4 New Transformations
+
+  proposition: New image perturbations are quarter turn right, quarter turn left, upside down, and horizontal flip
+    entity-attribute relationships:
+    New Image Perturbations|TYPES|Quarter Turn Right
+    New Image Perturbations|TYPES|Quarter Turn Left
+    New Image Perturbations|TYPES|Upside Down
+    New Image Perturbations|TYPES|Horizontal Flip
+
+topic: Dynamic Dataset Creation
+
+  entities:
+    VQA|Dataset
+    Image Caption Dataset|Dataset
+    Data Pool|Data Source
+
+  proposition: VQA and image caption datasets are collected to build a data pool
+    entity-entity relationships:
+    VQA|COLLECTED_IN|Data Pool
+    Image Caption Dataset|COLLECTED_IN|Data Pool
+
+  proposition: Data pool will be regularly updated with benchmark datasets
+    entity-attribute relationships:
+    Data Pool|UPDATED_WITH|Benchmark Datasets
+
+  proposition: 400 VQA questions and 400 image caption questions were randomly selected
+    entity-attribute relationships:
+    VQA|SAMPLE_SIZE|400 Questions
+    Image Caption Dataset|SAMPLE_SIZE|400 Questions
+
+  proposition: Perturbations were randomly applied across image, text, or image-text domains
+    entity-attribute relationships:
+    Perturbations|APPLIED_TO|Image Domain
+    Perturbations|APPLIED_TO|Text Domain
+    Perturbations|APPLIED_TO|Image-text Domain
+
+topic: Robustness Score Observations
+
+  proposition: VQA robustness scores range from 82.25% to 97.50%
+    entity-attribute relationships:
+    VQA|ROBUSTNESS_SCORE|82.25% to 97.50%
+
+  proposition: Image captioning robustness scores range from 9.44% to 51.90%
+    entity-attribute relationships:
+    Image Captioning|ROBUSTNESS_SCORE|9.44% to 51.90%
+
+  proposition: Qwen-2-VL-72B achieves highest VQA robustness score of 97.50%
+    entity-attribute relationships:
+    Qwen-2-VL-72B|VQA_ROBUSTNESS_SCORE|97.50%
+
+  proposition: GPT-4o-mini leads image captioning robustness with 51.90%
+    entity-attribute relationships:
+    GPT-4o-mini|IMAGE_CAPTIONING_ROBUSTNESS_SCORE|51.90%
+
+  proposition: Models consistently demonstrate higher robustness in VQA compared to image captioning
+    entity-attribute relationships:
+    Models|ROBUSTNESS_PERFORMANCE|Higher in VQA
+
+topic: Top Performing Models
+
+  proposition: GPT-4o-mini has highest average robustness score of 69.70%
+    entity-attribute relationships:
+    GPT-4o-mini|AVERAGE_ROBUSTNESS_SCORE|69.70%
+
+  proposition: Claude-3.5-Sonnet has highest VQA robustness score of 96.00%
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|VQA_ROBUSTNESS_SCORE|96.00%
+
+  proposition: Llama models show lowest robustness in image captioning
+    entity-attribute relationships:
+    Llama|IMAGE_CAPTIONING_ROBUSTNESS|Lowest Performance

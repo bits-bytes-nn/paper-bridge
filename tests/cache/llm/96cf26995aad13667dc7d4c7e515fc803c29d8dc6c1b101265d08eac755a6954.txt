@@ -1,0 +1,37 @@
+Milestones and Developments in Generative Foundation Models (Oct 2022 - Jan 2025)
+
+Stephen R. Covey defines trust as the glue of life and the most essential ingredient in effective communication.
+Trust is the foundational principle that holds all relationships.
+Generative models are machine learning models trained to learn underlying data distribution.
+Generative models can generate new data instances resembling training dataset characteristics.
+Generative models have applications in generating realistic images, texts, and videos.
+Generative models potentially drive advancements in scientific discovery, healthcare, and autonomous systems.
+Common generative models include Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), Diffusion Models, and Large Language Models (LLMs).
+LLMs can generate content often indistinguishable from human-produced content.
+Foundation models are large-scale pre-trained models serving as general-purpose systems for various downstream tasks.
+Foundation models are distinguished by extensive use of massive datasets and computational resources during pre-training.
+Foundation models can generalize effectively across diverse applications.
+Non-generative foundation models like BERT are primarily designed for text classification or language understanding.
+Generative foundation models (GenFMs) are specifically adapted for generative tasks.
+GenFMs excel in creating new instances such as images, texts, or other data forms based on their training.
+GenFMs are poised to revolutionize industries by pushing boundaries of content creation, decision-making, and autonomous systems.
+Ensuring trustworthiness of GenFMs has become a pressing concern as they gain widespread adoption.
+
+Key Milestones:
+OpenAI released GPT-4 in December 2022.
+Anthropic released Claude Series in October 2022.
+OpenAI released ChatGPT in November 2022, gaining over 100 million users in two months.
+Google made Palm public in September & October 2023.
+US government ruled AI-generated images from text can't be copyrighted in September & October 2023.
+CRFM within Stanford HAI introduced "The Foundation Model Transparency Index" in June 2023.
+Mistral was released in June 2023.
+Stable Diffusion XL 1.0 and Llama 2 were released in July 2023.
+Meta introduced Llama Guard in December 2023.
+Mixtral was released in December 2023.
+The European Artificial Intelligence Act entered into force in August & September 2024.
+The Seoul Declaration was adopted at the 2024 AI Seoul Summit in April & May 2024.
+GPT-4o, Llama 3, and Gemini 1.5 Flash were released in April & May 2024.
+Deepseek-R1 was released in December 2024 & January 2025.
+OpenAI o3-mini was released in December 2024 & January 2025.
+International AI Safety Report was released in December 2024 & January 2025.
+IBM Granite Guardian was released in December 2024 & January 2025.

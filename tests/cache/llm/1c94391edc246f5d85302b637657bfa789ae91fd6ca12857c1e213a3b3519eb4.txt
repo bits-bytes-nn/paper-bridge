@@ -1,0 +1,34 @@
+Interdisciplinary Collaboration in Trustworthy AI Research
+
+Computational social scientists and HCI experts provide perspectives on fairness, societal biases, machine ethics, and human-centric safety considerations.
+Security experts guide model evaluation for robustness against adversarial attacks and privacy preservation mechanisms.
+Roboticists, medical and AI for science researchers help evaluate model truthfulness and reliability in physical interactions, healthcare, and scientific research scenarios.
+Legal scholars assess advanced AI risks and develop guidelines aligned with global regulatory requirements and ethical standards.
+The interdisciplinary collaboration enables a comprehensive evaluation of models across multiple dimensions.
+TrustGen is proposed as a dynamic evaluation framework that adapts to evolving ethical standards and social norms.
+The research spans technical challenges in model trustworthiness and ethical considerations in downstream applications like medicine, robotics, AI for sciences, and human-AI collaboration.
+
+Student Contributors' Involvement in Research Paper
+
+H. B contributed to visualization, introduction, background, text-to-image, visual language models, and applications.
+D. C contributed to introduction and visual language models, and participated in discussion.
+R. C contributed to coding, text-to-image, large language models, and visual language models.
+C. G was a leader in visualization, guidelines, benchmarking, introduction, text-to-image, large language models, visual language models, applications, and discussion.
+K. G contributed to text-to-image research.
+T. G contributed to introduction, background, text-to-image, and large language models.
+Y. H was a leader in coding, visualization, guidelines, benchmarking, introduction, background, text-to-image, large language models, visual language models, applications, and discussion.
+Y. L contributed to visualization, guidelines, background, large language models, and discussion.
+Z. L contributed to benchmarking, introduction, text-to-image, large language models, visual language models, applications, and discussion.
+J. S contributed to coding, benchmarking, background, and text-to-image research.
+H. W contributed to guidelines, background, text-to-image, visual language models, and discussion.
+S. W was a leader in coding, visualization, benchmarking, background, text-to-image, visual language models, and discussion.
+X. W contributed to guidelines, background, text-to-image, and visual language models.
+Y. W contributed to coding and benchmarking.
+J. Y contributed to coding and benchmarking.
+K. Z contributed to large language models and visual language models.
+Q. Z contributed to coding, guidelines, benchmarking, introduction, text-to-image, large language models, visual language models, and discussion.
+Y. Z contributed to guidelines, background, large language models, visual language models, and applications.
+
+Acknowledgment Support
+
+Max Lamparth received partial support from the Stanford Center for AI Safety, the Center for International Security and Cooperation, and the Stanford Existential Risk Initiative.

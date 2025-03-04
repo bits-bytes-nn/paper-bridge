@@ -1,0 +1,72 @@
+topic: Generative AI Guidelines
+
+  entities:
+    Generative Foundation Models|Model
+    UK AI Regulation|Social System
+    Privacy-Enhancing Technologies|Tool
+    Trustworthiness Framework|Framework
+
+  proposition: Accountability is a key principle to be improved in multiple laws and acts.
+    entity-attribute relationships:
+    Accountability|DESCRIBED_BY|key principle
+    Accountability|REQUIRES|improvement in laws and acts
+
+  proposition: Generative models should demonstrate robustness against adversarial attacks.
+    entity-attribute relationships:
+    Generative Foundation Models|REQUIRES|robustness
+    Generative Foundation Models|MUST_WITHSTAND|adversarial attacks
+
+  proposition: Generative models must be capable of handling rare or unusual inputs.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|handling rare or unusual inputs
+
+  proposition: Continuous updates and testing are necessary to maintain model robustness.
+    entity-attribute relationships:
+    Generative Foundation Models|REQUIRES|continuous updates
+    Generative Foundation Models|REQUIRES|continuous testing
+
+  proposition: UK AI regulation defines robustness as one of five core principles.
+    entity-attribute relationships:
+    UK AI Regulation|DEFINES|robustness as core principle
+
+  proposition: The model must prioritize harmlessness while maximizing helpfulness.
+    entity-attribute relationships:
+    Generative Foundation Models|MUST_PRIORITIZE|harmlessness
+    Generative Foundation Models|MUST_MAXIMIZE|helpfulness
+
+  proposition: Models should not generate content causing potential harm in human interactions.
+    entity-attribute relationships:
+    Generative Foundation Models|MUST_AVOID|generating harmful content
+
+  proposition: Models must generate reliable and accurate information.
+    entity-attribute relationships:
+    Generative Foundation Models|MUST_GENERATE|reliable information
+    Generative Foundation Models|MUST_GENERATE|accurate information
+
+  proposition: Generative models must ensure privacy protection for user inputs and generated information.
+    entity-attribute relationships:
+    Generative Foundation Models|MUST_ENSURE|privacy protection
+    Generative Foundation Models|MUST_PROTECT|user inputs
+    Generative Foundation Models|MUST_PROTECT|generated information
+
+  proposition: Privacy-Enhancing Technologies can be used to protect user data.
+    entity-attribute relationships:
+    Privacy-Enhancing Technologies|PURPOSE|protect user data
+
+  proposition: Trustworthiness is a multifaceted concept without rigid universal rules.
+    entity-attribute relationships:
+    Trustworthiness|DESCRIBED_BY|multifaceted concept
+    Trustworthiness|LACKS|rigid universal rules
+
+  proposition: Guidelines address fairness, transparency, human oversight, accountability, and ethical norms.
+    entity-attribute relationships:
+    Trustworthiness Framework|ADDRESSES|fairness
+    Trustworthiness Framework|ADDRESSES|transparency
+    Trustworthiness Framework|ADDRESSES|human oversight
+    Trustworthiness Framework|ADDRESSES|accountability
+    Trustworthiness Framework|ADDRESSES|ethical norms
+
+  proposition: The approach accommodates innovation while managing potential risks.
+    entity-attribute relationships:
+    Trustworthiness Framework|ACCOMMODATES|innovation
+    Trustworthiness Framework|MANAGES|potential risks

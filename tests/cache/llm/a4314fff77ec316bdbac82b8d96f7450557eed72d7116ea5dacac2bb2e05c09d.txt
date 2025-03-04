@@ -1,0 +1,145 @@
+topic: Large Language Model Evaluation and Benchmarking
+
+  entities:
+    SuperCLUE|Benchmark
+    CMMLU|Benchmark
+    ChatGPT Beyond English|Research Paper
+    Dyval|Research Method
+    DyVal 2|Research Method
+    Benchmark Self-Evolving|Framework
+    AutoBencher|Tool
+    Judging LLM-as-a-judge|Research Paper
+    From Generation to Judgment|Research Paper
+    ChatEval|Research Method
+    EvaluLLM|Research Method
+    Prometheus|Model
+    Prometheus 2|Model
+    ArXiv|Publication Platform
+    IUI '24 Companion|Publication Platform
+    International Conference on Learning Representations|Conference
+
+  proposition: SuperCLUE is a comprehensive Chinese large language model benchmark published in ArXiv in 2023.
+    entity-attribute relationships:
+    SuperCLUE|PUBLISHED_IN|ArXiv
+    SuperCLUE|PUBLICATION_YEAR|2023
+    SuperCLUE|FOCUS|Chinese large language model
+
+    entity-entity relationships:
+    SuperCLUE|TYPE_OF|Benchmark
+
+  proposition: CMMLU measures massive multitask language understanding in Chinese, published in 2023.
+    entity-attribute relationships:
+    CMMLU|PUBLICATION_YEAR|2023
+    CMMLU|FOCUS|Chinese language understanding
+
+    entity-entity relationships:
+    CMMLU|TYPE_OF|Benchmark
+
+  proposition: ChatGPT Beyond English explores comprehensive evaluation of large language models in multilingual learning, published in ArXiv in 2023.
+    entity-attribute relationships:
+    ChatGPT Beyond English|PUBLISHED_IN|ArXiv
+    ChatGPT Beyond English|PUBLICATION_YEAR|2023
+    ChatGPT Beyond English|FOCUS|Multilingual learning evaluation
+
+    entity-entity relationships:
+    ChatGPT Beyond English|TYPE_OF|Research Paper
+
+  proposition: Dyval is a graph-informed dynamic evaluation method for large language models, published in arXiv in 2023.
+    entity-attribute relationships:
+    Dyval|PUBLISHED_IN|ArXiv
+    Dyval|PUBLICATION_YEAR|2023
+    Dyval|APPROACH|Graph-informed dynamic evaluation
+
+    entity-entity relationships:
+    Dyval|TYPE_OF|Research Method
+
+  proposition: DyVal 2 is a dynamic evaluation approach for large language models using meta probing agents, published in ArXiv in 2024.
+    entity-attribute relationships:
+    DyVal 2|PUBLISHED_IN|ArXiv
+    DyVal 2|PUBLICATION_YEAR|2024
+    DyVal 2|APPROACH|Dynamic evaluation with meta probing agents
+
+    entity-entity relationships:
+    DyVal 2|TYPE_OF|Research Method
+
+  proposition: Benchmark Self-Evolving is a multi-agent framework for dynamic LLM evaluation, published in arXiv in 2024.
+    entity-attribute relationships:
+    Benchmark Self-Evolving|PUBLISHED_IN|ArXiv
+    Benchmark Self-Evolving|PUBLICATION_YEAR|2024
+    Benchmark Self-Evolving|APPROACH|Multi-agent dynamic evaluation
+
+    entity-entity relationships:
+    Benchmark Self-Evolving|TYPE_OF|Framework
+
+  proposition: AutoBencher creates salient, novel, and difficult datasets for language models, published in ArXiv in 2024.
+    entity-attribute relationships:
+    AutoBencher|PUBLISHED_IN|ArXiv
+    AutoBencher|PUBLICATION_YEAR|2024
+    AutoBencher|FUNCTION|Create challenging datasets
+
+    entity-entity relationships:
+    AutoBencher|TYPE_OF|Tool
+
+  proposition: Judging LLM-as-a-judge uses MT-Bench and Chatbot Arena to evaluate language models, published in arXiv in 2023.
+    entity-attribute relationships:
+    Judging LLM-as-a-judge|PUBLISHED_IN|ArXiv
+    Judging LLM-as-a-judge|PUBLICATION_YEAR|2023
+    Judging LLM-as-a-judge|EVALUATION_TOOLS|MT-Bench, Chatbot Arena
+
+    entity-entity relationships:
+    Judging LLM-as-a-judge|TYPE_OF|Research Paper
+
+  proposition: From Generation to Judgment explores opportunities and challenges of LLM-as-a-judge, published in arXiv in 2024.
+    entity-attribute relationships:
+    From Generation to Judgment|PUBLISHED_IN|ArXiv
+    From Generation to Judgment|PUBLICATION_YEAR|2024
+    From Generation to Judgment|FOCUS|LLM-as-a-judge challenges
+
+    entity-entity relationships:
+    From Generation to Judgment|TYPE_OF|Research Paper
+
+  proposition: ChatEval uses multi-agent debate for better LLM-based evaluators, published in arXiv in 2023.
+    entity-attribute relationships:
+    ChatEval|PUBLISHED_IN|ArXiv
+    ChatEval|PUBLICATION_YEAR|2023
+    ChatEval|APPROACH|Multi-agent debate
+
+    entity-entity relationships:
+    ChatEval|TYPE_OF|Research Method
+
+  proposition: EvaluLLM is an LLM-assisted evaluation of generative outputs, published in the IUI '24 Companion proceedings.
+    entity-attribute relationships:
+    EvaluLLM|PUBLISHED_IN|IUI '24 Companion
+    EvaluLLM|PUBLICATION_YEAR|2024
+    EvaluLLM|FOCUS|LLM-assisted generative output evaluation
+
+    entity-entity relationships:
+    EvaluLLM|TYPE_OF|Research Method
+
+  proposition: Prometheus induces fine-grained evaluation capability in language models, published in the International Conference on Learning Representations in 2023.
+    entity-attribute relationships:
+    Prometheus|PUBLISHED_IN|International Conference on Learning Representations
+    Prometheus|PUBLICATION_YEAR|2023
+    Prometheus|CAPABILITY|Fine-grained evaluation
+
+    entity-entity relationships:
+    Prometheus|TYPE_OF|Model
+
+  proposition: Prometheus 2 is an open-source language model specialized in evaluating other language models, published in arXiv in 2024.
+    entity-attribute relationships:
+    Prometheus 2|PUBLISHED_IN|ArXiv
+    Prometheus 2|PUBLICATION_YEAR|2024
+    Prometheus 2|CHARACTERISTIC|Open-source
+    Prometheus 2|SPECIALIZATION|Evaluating language models
+
+    entity-entity relationships:
+    Prometheus 2|TYPE_OF|Model
+
+  proposition: Multiple surveys explore benchmarks and evaluation of multimodal large language models, published in arXiv in 2024.
+    entity-attribute relationships:
+    Multiple surveys|PUBLISHED_IN|ArXiv
+    Multiple surveys|PUBLICATION_YEAR|2024
+    Multiple surveys|FOCUS|Multimodal large language model benchmarks
+
+    entity-entity relationships:
+    Multiple surveys|TYPE_OF|Research Paper

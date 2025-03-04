@@ -1,0 +1,142 @@
+topic: AI Research and Publications in 2024
+
+  entities:
+    Merlyn.org|Organization
+    Ahmed M Abuzuraiq|Person
+    Philippe Pasquier|Person
+    Tessa Han|Person
+    Cheng Peng|Person
+    Yiqiao Jin|Person
+    AgentReview|Tool
+    Mohammed Salah|Person
+    Andy K Zhang|Person
+    Cybench|Framework
+    Yusuf Roohani|Person
+    BioDiscoveryAgent|Tool
+    Deloitte|Organization
+    WTW|Organization
+    Han Bao|Person
+    Lizhou Fan|Person
+    NPHardEval4V|Benchmark
+    Eldar Kurtic|Person
+    Mathador-LM|Benchmark
+    Peng Xia|Person
+    CARES|Benchmark
+    California|Location
+    Senate Bill No. 1047|Regulation
+    Wenxuan Zhang|Person
+
+  proposition: Merlyn.org developed first-ever education-specific language models for trustworthy generative AI in education.
+    entity-attribute relationships:
+    Merlyn.org|DEVELOPED|education-specific language models
+    Merlyn.org|FOCUS|trustworthy generative AI in education
+
+  proposition: Ahmed M Abuzuraiq and Philippe Pasquier explored personalizing generative AI with small data for visual arts co-creation.
+    entity-attribute relationships:
+    Ahmed M Abuzuraiq|RESEARCHED|personalizing generative AI
+    Philippe Pasquier|RESEARCHED|personalizing generative AI
+    
+    entity-entity relationships:
+    Ahmed M Abuzuraiq|COLLABORATED_WITH|Philippe Pasquier
+
+  proposition: Tessa Han and colleagues investigated approaches towards safe large language models for medicine.
+    entity-attribute relationships:
+    Tessa Han|RESEARCHED|safe large language models for medicine
+
+  proposition: Cheng Peng et al. conducted a study on generative large language models for medical research and healthcare.
+    entity-attribute relationships:
+    Cheng Peng|RESEARCHED|generative large language models
+    Cheng Peng|FOCUS|medical research and healthcare
+
+  proposition: Yiqiao Jin et al. created AgentReview to explore peer review dynamics using LLM agents.
+    entity-attribute relationships:
+    Yiqiao Jin|CREATED|AgentReview
+    AgentReview|PURPOSE|explore peer review dynamics
+
+  proposition: Mohammed Salah et al. examined the potential of generative AI for social psychology research.
+    entity-attribute relationships:
+    Mohammed Salah|RESEARCHED|generative AI
+    Mohammed Salah|FOCUS|social psychology research
+
+  proposition: Andy K Zhang et al. developed Cybench, a framework for evaluating cybersecurity capabilities and risks of language models.
+    entity-attribute relationships:
+    Andy K Zhang|DEVELOPED|Cybench
+    Cybench|PURPOSE|evaluating cybersecurity capabilities and risks of language models
+
+  proposition: Yusuf Roohani et al. created BioDiscoveryAgent, an AI agent for designing genetic perturbation experiments.
+    entity-attribute relationships:
+    Yusuf Roohani|CREATED|BioDiscoveryAgent
+    BioDiscoveryAgent|PURPOSE|designing genetic perturbation experiments
+
+  proposition: Deloitte advocated for evolving AI governance from static to dynamic approaches.
+    entity-attribute relationships:
+    Deloitte|ADVOCATED|evolving AI governance
+    Deloitte|PROPOSED|dynamic approaches to AI governance
+
+  proposition: WTW emphasized the need for dynamic AI governance to seize opportunities and manage risks.
+    entity-attribute relationships:
+    WTW|EMPHASIZED|need for dynamic AI governance
+    WTW|FOCUS|seizing opportunities and managing risks
+
+  proposition: Han Bao et al. investigated whether large vision-language models can benchmark themselves.
+    entity-attribute relationships:
+    Han Bao|RESEARCHED|large vision-language models self-benchmarking
+
+  proposition: Lizhou Fan et al. developed NPHardEval4V, a dynamic reasoning benchmark for multimodal large language models.
+    entity-attribute relationships:
+    Lizhou Fan|DEVELOPED|NPHardEval4V
+    NPHardEval4V|PURPOSE|dynamic reasoning benchmark for multimodal large language models
+
+  proposition: Eldar Kurtic et al. created Mathador-LM, a dynamic benchmark for mathematical reasoning on large language models.
+    entity-attribute relationships:
+    Eldar Kurtic|CREATED|Mathador-LM
+    Mathador-LM|PURPOSE|dynamic benchmark for mathematical reasoning
+
+  proposition: Peng Xia et al. developed CARES, a comprehensive benchmark of trustworthiness in medical vision language models.
+    entity-attribute relationships:
+    Peng Xia|DEVELOPED|CARES
+    CARES|PURPOSE|comprehensive benchmark of trustworthiness in medical vision language models
+
+  proposition: California introduced Senate Bill No. 1047 (Safe and Secure Innovation for Frontier Artificial Intelligence Models Act).
+    entity-attribute relationships:
+    California|INTRODUCED|Senate Bill No. 1047
+    Senate Bill No. 1047|PURPOSE|Safe and Secure Innovation for Frontier Artificial Intelligence Models
+
+  proposition: California Chamber of Commerce reported that the 'Godmother of AI' warned SB 1047 AI bill could restrict innovation.
+    entity-attribute relationships:
+    California Chamber of Commerce|REPORTED|warning about SB 1047
+    SB 1047|POTENTIAL_IMPACT|restrict innovation
+
+  proposition: Wenxuan Zhang et al. proposed Bi-Factorial Preference Optimization to balance safety and helpfulness in language models.
+    entity-attribute relationships:
+    Wenxuan Zhang|PROPOSED|Bi-Factorial Preference Optimization
+    Bi-Factorial Preference Optimization|PURPOSE|balance safety and helpfulness in language models
+
+topic: AI Governance and Regulation
+
+  entities:
+    California|Location
+    Senate Bill No. 1047|Regulation
+    California Chamber of Commerce|Organization
+    Deloitte|Organization
+    WTW|Organization
+
+  proposition: Deloitte advocated for evolving AI governance from static to dynamic approaches.
+    entity-attribute relationships:
+    Deloitte|ADVOCATED|evolving AI governance
+    Deloitte|PROPOSED|dynamic approaches to AI governance
+
+  proposition: WTW emphasized the need for dynamic AI governance to seize opportunities and manage risks.
+    entity-attribute relationships:
+    WTW|EMPHASIZED|need for dynamic AI governance
+    WTW|FOCUS|seizing opportunities and managing risks
+
+  proposition: California introduced Senate Bill No. 1047 (Safe and Secure Innovation for Frontier Artificial Intelligence Models Act).
+    entity-attribute relationships:
+    California|INTRODUCED|Senate Bill No. 1047
+    Senate Bill No. 1047|PURPOSE|Safe and Secure Innovation for Frontier Artificial Intelligence Models
+
+  proposition: California Chamber of Commerce reported that the 'Godmother of AI' warned SB 1047 AI bill could restrict innovation.
+    entity-attribute relationships:
+    California Chamber of Commerce|REPORTED|warning about SB 1047
+    SB 1047|POTENTIAL_IMPACT|restrict innovation

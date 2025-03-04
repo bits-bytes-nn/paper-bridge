@@ -1,0 +1,117 @@
+topic: TrustGen Model Selection and Evaluation Principles
+
+  entities:
+    Llama 3|Model
+    Llama 3.1|Model
+    Vicuna|Model
+    OpenAI|Organization
+    Meta|Organization
+    Google|Organization
+    Anthropic|Organization
+    Dall-E 3|Model
+    Table 5|Publication
+
+  proposition: The authors follow two key principles for model selection in their evaluation.
+    entity-attribute relationships:
+    authors|FOLLOWS|Model Selection Principles
+
+    entity-entity relationships:
+    None
+
+  proposition: Latest and Cutting-edge Models: The model selection prioritizes the most recent and powerful models available.
+    entity-attribute relationships:
+    Model Selection|PRIORITIZES|Recent Models
+    Model Selection|PRIORITIZES|Powerful Models
+
+    entity-entity relationships:
+    None
+
+  proposition: The authors choose models like Llama 3 and Llama 3.1 as they represent the latest advancements.
+    entity-attribute relationships:
+    Llama 3|REPRESENTS|Latest Advancements
+    Llama 3.1|REPRESENTS|Latest Advancements
+
+    entity-entity relationships:
+    None
+
+  proposition: The Vicuna series is not selected because its current performance lags behind newer models.
+    entity-attribute relationships:
+    Vicuna|PERFORMANCE|Lagging
+
+    entity-entity relationships:
+    None
+
+  proposition: The selection focuses on state-of-the-art models to capture the frontier of generative foundation model capabilities.
+    entity-attribute relationships:
+    Model Selection|FOCUSES_ON|State-of-the-art Models
+    Model Selection|CAPTURES|Generative Foundation Model Capabilities
+
+    entity-entity relationships:
+    None
+
+  proposition: Coverage of Major Model Developers: The selection includes models from a diverse range of mainstream developers.
+    entity-attribute relationships:
+    Model Selection|INCLUDES|Diverse Developers
+
+    entity-entity relationships:
+    None
+
+  proposition: The selected models come from leading organizations such as OpenAI, Meta, Google, and Anthropic.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    OpenAI|DEVELOPS|Models
+    Meta|DEVELOPS|Models
+    Google|DEVELOPS|Models
+    Anthropic|DEVELOPS|Models
+
+  proposition: This approach enables a comprehensive comparison of diverse approaches to generative foundation model development.
+    entity-attribute relationships:
+    Approach|ENABLES|Comprehensive Comparison
+    Approach|COMPARES|Generative Foundation Model Development
+
+    entity-entity relationships:
+    None
+
+  proposition: The selected models span multiple categories including Text-to-Image (T2I), Large Language Models (LLM), and Vision-Language Models (VLM).
+    entity-attribute relationships:
+    Models|CATEGORIES|Text-to-Image
+    Models|CATEGORIES|Large Language Models
+    Models|CATEGORIES|Vision-Language Models
+
+    entity-entity relationships:
+    None
+
+  proposition: The models are evaluated across various trustworthiness dimensions using different implementation strategies.
+    entity-attribute relationships:
+    Models|EVALUATED_BY|Trustworthiness Dimensions
+    Models|EVALUATED_WITH|Implementation Strategies
+
+    entity-entity relationships:
+    None
+
+  proposition: Implementation strategies include Dataset Pool Maintainer, Web-Browsing Agent, Model Generation, and LLM-Based Paraphrasing.
+    entity-attribute relationships:
+    Implementation Strategies|INCLUDES|Dataset Pool Maintainer
+    Implementation Strategies|INCLUDES|Web-Browsing Agent
+    Implementation Strategies|INCLUDES|Model Generation
+    Implementation Strategies|INCLUDES|LLM-Based Paraphrasing
+
+    entity-entity relationships:
+    None
+
+  proposition: Text-to-image models like Dall-E 3 have emerged as powerful generative models capable of synthesizing high-quality images from textual descriptions.
+    entity-attribute relationships:
+    Dall-E 3|TYPE|Text-to-Image Model
+    Dall-E 3|CAPABILITY|Synthesizing High-Quality Images
+
+    entity-entity relationships:
+    None
+
+  proposition: The complete list of selected models is detailed in Table 5 of the original document.
+    entity-attribute relationships:
+    Selected Models|DETAILED_IN|Table 5
+
+    entity-entity relationships:
+    None

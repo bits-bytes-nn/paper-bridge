@@ -1,0 +1,123 @@
+topic: Large Language Models and AI Safety Research
+
+  entities:
+    Josef Dai|Researcher
+    Tianyu Yu|Researcher
+    Afra Feyza Akyürek|Researcher
+    Bochuan Cao|Researcher
+    OpenAI|Organization
+    Shusheng Xu|Researcher
+    Yotam Wolf|Researcher
+    Gokul Puthumanaillam|Researcher
+    Collin Burns|Researcher
+    Pierre Colombo|Researcher
+    Yue Guo|Researcher
+    Yi Yang|Researcher
+    Ali Maatouk|Researcher
+    Muhammad Usman Hadi|Researcher
+    Xingxuan Li|Researcher
+    Dongping Chen|Researcher
+    Jen-tse Huang|Researcher
+    Safe RLHF|Approach
+    RLHF-V|Approach
+    RL4F|Approach
+    Direct Preference Optimization|Method
+    Proximal Policy Optimization|Method
+    SAULLM-7B|Model
+    EconNLI|Tool
+    Sora|Model
+    GPT-3|Model
+
+  proposition: Josef Dai et al. proposed Safe Reinforcement Learning from Human Feedback (Safe RLHF) in 2023.
+    entity-attribute relationships:
+    Josef Dai|PUBLISHED_IN|2023
+    Safe RLHF|PROPOSED_BY|Josef Dai
+
+    entity-entity relationships:
+    Josef Dai|RESEARCHER_OF|Safe RLHF
+
+  proposition: Tianyu Yu et al. introduced RLHF-V for behavior alignment of multimodal large language models in 2024.
+    entity-attribute relationships:
+    Tianyu Yu|PUBLISHED_IN|2024
+    RLHF-V|PUBLISHED_IN|2024
+
+    entity-entity relationships:
+    Tianyu Yu|RESEARCHER_OF|RLHF-V
+
+  proposition: Afra Feyza Akyürek et al. developed RL4F for generating natural language feedback using reinforcement learning in 2023.
+    entity-attribute relationships:
+    Afra Feyza Akyürek|PUBLISHED_IN|2023
+    RL4F|PUBLISHED_IN|2023
+
+    entity-entity relationships:
+    Afra Feyza Akyürek|RESEARCHER_OF|RL4F
+
+  proposition: Bochuan Cao et al. explored defending against alignment-breaking attacks in large language models in 2023.
+    entity-attribute relationships:
+    Bochuan Cao|PUBLISHED_IN|2023
+
+  proposition: OpenAI published a report on the Safety of Sora in 2024.
+    entity-attribute relationships:
+    OpenAI|PUBLISHED_IN|2024
+    Sora|SAFETY_REPORT_BY|OpenAI
+
+  proposition: Shusheng Xu et al. conducted a comprehensive study comparing Direct Preference Optimization (DPO) and Proximal Policy Optimization (PPO) for language model alignment in 2024.
+    entity-attribute relationships:
+    Shusheng Xu|PUBLISHED_IN|2024
+    Direct Preference Optimization|COMPARED_WITH|Proximal Policy Optimization
+
+  proposition: Yotam Wolf et al. examined fundamental limitations of alignment in large language models in 2023.
+    entity-attribute relationships:
+    Yotam Wolf|PUBLISHED_IN|2023
+
+  proposition: Gokul Puthumanaillam et al. discussed the moral imperative of continual superalignment of large language models in 2024.
+    entity-attribute relationships:
+    Gokul Puthumanaillam|PUBLISHED_IN|2024
+
+  proposition: Collin Burns et al. from OpenAI explored weak-to-strong generalization and eliciting strong capabilities with weak supervision in 2024.
+    entity-attribute relationships:
+    Collin Burns|PUBLISHED_IN|2024
+    Collin Burns|AFFILIATED_WITH|OpenAI
+
+  proposition: Pierre Colombo et al. developed SAULLM-7B, a pioneering large language model for law in 2024.
+    entity-attribute relationships:
+    Pierre Colombo|PUBLISHED_IN|2024
+    SAULLM-7B|DOMAIN|Law
+
+    entity-entity relationships:
+    Pierre Colombo|RESEARCHER_OF|SAULLM-7B
+
+  proposition: Yue Guo and Yi Yang created EconNLI for evaluating economics reasoning in large language models in 2024.
+    entity-attribute relationships:
+    Yue Guo|PUBLISHED_IN|2024
+    Yi Yang|PUBLISHED_IN|2024
+    EconNLI|DOMAIN|Economics
+
+    entity-entity relationships:
+    Yue Guo|RESEARCHER_OF|EconNLI
+    Yi Yang|RESEARCHER_OF|EconNLI
+
+  proposition: Ali Maatouk et al. examined the potential impact of large language models on the telecommunications industry in 2024.
+    entity-attribute relationships:
+    Ali Maatouk|PUBLISHED_IN|2024
+
+  proposition: OpenAI published a report on Cooperation on Safety in 2024.
+    entity-attribute relationships:
+    OpenAI|PUBLISHED_IN|2024
+
+  proposition: Muhammad Usman Hadi et al. conducted a survey on large language models, exploring their applications, challenges, and limitations in 2023.
+    entity-attribute relationships:
+    Muhammad Usman Hadi|PUBLISHED_IN|2023
+
+  proposition: Xingxuan Li et al. evaluated psychological aspects of GPT-3 in 2022.
+    entity-attribute relationships:
+    Xingxuan Li|PUBLISHED_IN|2022
+    GPT-3|EVALUATED_FOR|Psychological Aspects
+
+  proposition: Dongping Chen et al. conducted an exploratory study on self-cognition in large language models in 2024.
+    entity-attribute relationships:
+    Dongping Chen|PUBLISHED_IN|2024
+
+  proposition: Jen-tse Huang et al. evaluated the psychological portrayal of conversational AI at the International Conference on Learning Representations in 2024.
+    entity-attribute relationships:
+    Jen-tse Huang|PUBLISHED_IN|2024

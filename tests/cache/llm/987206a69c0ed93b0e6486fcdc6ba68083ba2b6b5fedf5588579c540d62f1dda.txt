@@ -1,0 +1,25 @@
+Research Papers on AI and Technology in Various Domains
+
+Abe Bohan Hou, William Jurayj, Nils Holzenberger, Andrew Blair-Stanek, and Benjamin Van Durme published a paper on machine-generated legal analysis.
+The paper is titled "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations".
+The paper was published as an arXiv preprint in 2024.
+
+Dietrich Trautmann, Natalia Ostapuk, Quentin Grail, Adrian Alan Pol, Guglielmo Bonifazi, Shang Gao, and Martin Gajek published a paper on legal question-answering systems.
+The paper is titled "Measuring the Groundedness of Legal Question-Answering Systems".
+The paper was published as an arXiv preprint in 2024.
+
+Chong Zhang and colleagues explored AI in finance with a paper on stock trading.
+The paper is titled "When AI Meets Finance (StockAgent): Large Language Model-based Stock Trading in Simulated Real-world Environments".
+The paper was published as an arXiv preprint in 2024.
+
+Ying Nie and colleagues developed a Chinese financial benchmark for large language models.
+The paper is titled "CFinBench: A Comprehensive Chinese Financial Benchmark for Large Language Models".
+The paper was published as an arXiv preprint in 2024.
+
+Jillian Ross, Yoon Kim, and Andrew W Lo examined behavioral biases of large language models.
+The paper is titled "LLM Economicus? Mapping the Behavioral Biases of LLMs via Utility Theory".
+The paper was published as an arXiv preprint in 2024.
+
+Hui Zhong, Songsheng Chen, and Mian Liang studied gender bias in large language models from an existentialism perspective.
+The paper is titled "Gender Bias of LLM in Economics: An Existentialism Perspective".
+The paper was published as an arXiv preprint in 2024.

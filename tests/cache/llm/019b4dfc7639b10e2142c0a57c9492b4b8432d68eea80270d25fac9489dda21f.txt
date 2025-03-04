@@ -1,0 +1,111 @@
+topic: Large Language Model Fairness and Bias Detection
+
+  entities:
+    Tailored queries|Method
+    LLM-powered diversity enhancer|Tool
+    Evaluation framework|Framework
+    Domains|Social Concept
+    Fairness analysis|Method
+    GLM-4-Plus|Model
+    Gemini-1.5-Pro|Model
+    Mixtral-8*22B|Model
+    Claude-3.5-Sonnet|Model
+    Llama-3.1-8B|Model
+    Llama-3.1-70B|Model
+    Large language models|Technological Concept
+    Robustness|Feature
+
+  proposition: Tailored queries facilitate the detection of unintended biases in large language models.
+    entity-entity relationships:
+    Tailored queries|DETECTS|Unintended biases
+    Tailored queries|APPLIES_TO|Large language models
+
+  proposition: An LLM-powered diversity enhancer paraphrases preference queries to introduce variations in style, length, and format.
+    entity-attribute relationships:
+    LLM-powered diversity enhancer|FUNCTION|Paraphrases preference queries
+    LLM-powered diversity enhancer|INTRODUCES|Variations in style
+    LLM-powered diversity enhancer|INTRODUCES|Variations in length
+    LLM-powered diversity enhancer|INTRODUCES|Variations in format
+
+  proposition: The diversity enhancer supports robust evaluation by providing a comprehensive range of examples.
+    entity-entity relationships:
+    Diversity enhancer|SUPPORTS|Robust evaluation
+    Diversity enhancer|PROVIDES|Comprehensive range of examples
+
+  proposition: The evaluation framework enables adaptability to nuanced biases across different contexts and query formats.
+    entity-attribute relationships:
+    Evaluation framework|ENABLES|Adaptability to nuanced biases
+    Evaluation framework|WORKS_ACROSS|Different contexts
+    Evaluation framework|WORKS_ACROSS|Query formats
+
+  proposition: Domains for preference assessment include ideology, culture and lifestyle, social equality and diversity, health and well-being, and technology, science, and education.
+    entity-attribute relationships:
+    Domains|INCLUDES|Ideology
+    Domains|INCLUDES|Culture and lifestyle
+    Domains|INCLUDES|Social equality and diversity
+    Domains|INCLUDES|Health and well-being
+    Domains|INCLUDES|Technology, science, and education
+
+  proposition: Fairness analysis of large language models involves measuring stereotype accuracy, disparagement Refuse-to-Answer (RtA) rate, and preference RtA rate.
+    entity-attribute relationships:
+    Fairness analysis|MEASURES|Stereotype accuracy
+    Fairness analysis|MEASURES|Disparagement Refuse-to-Answer rate
+    Fairness analysis|MEASURES|Preference Refuse-to-Answer rate
+
+  proposition: GLM-4-Plus achieved the highest stereotype accuracy at 91.08%.
+    entity-attribute relationships:
+    GLM-4-Plus|STEREOTYPE_ACCURACY|91.08%
+
+  proposition: Gemini-1.5-Pro demonstrated a disparagement response accuracy of 65.48%.
+    entity-attribute relationships:
+    Gemini-1.5-Pro|DISPARAGEMENT_RESPONSE_ACCURACY|65.48%
+
+  proposition: Higher stereotype accuracy does not necessarily correlate with improved disparagement response across models.
+    entity-entity relationships:
+    Stereotype accuracy|NOT_CORRELATED_WITH|Disparagement response
+
+  proposition: Most models demonstrate strong performance in preference responses.
+    entity-attribute relationships:
+    Models|PERFORMANCE|Strong preference responses
+
+  proposition: Mixtral-8*22B achieved an outstanding preference response accuracy of 99.56%.
+    entity-attribute relationships:
+    Mixtral-8*22B|PREFERENCE_RESPONSE_ACCURACY|99.56%
+
+  proposition: Claude-3.5-Sonnet and Gemini-1.5-Pro achieved 98.22% preference response accuracy.
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|PREFERENCE_RESPONSE_ACCURACY|98.22%
+    Gemini-1.5-Pro|PREFERENCE_RESPONSE_ACCURACY|98.22%
+
+  proposition: Smaller models tend to underperform across fairness metrics compared to larger models within the same series.
+    entity-entity relationships:
+    Smaller models|UNDERPERFORMS|Larger models
+
+  proposition: Llama-3.1-8B scored 73.25% in stereotype, 60.00% in disparagement, and 88.89% in preference.
+    entity-attribute relationships:
+    Llama-3.1-8B|STEREOTYPE_ACCURACY|73.25%
+    Llama-3.1-8B|DISPARAGEMENT_RESPONSE_ACCURACY|60.00%
+    Llama-3.1-8B|PREFERENCE_RESPONSE_ACCURACY|88.89%
+
+  proposition: Llama-3.1-70B scored 85.99% in stereotype, 63.00% in disparagement, and 89.33% in preference.
+    entity-attribute relationships:
+    Llama-3.1-70B|STEREOTYPE_ACCURACY|85.99%
+    Llama-3.1-70B|DISPARAGEMENT_RESPONSE_ACCURACY|63.00%
+    Llama-3.1-70B|PREFERENCE_RESPONSE_ACCURACY|89.33%
+
+  proposition: Robustness in large language models refers to their capacity to maintain consistent performance when faced with diverse, unexpected, or perturbed inputs.
+    entity-attribute relationships:
+    Robustness|DEFINITION|Capacity to maintain consistent performance
+    Robustness|APPLIES_TO|Diverse inputs
+    Robustness|APPLIES_TO|Unexpected inputs
+    Robustness|APPLIES_TO|Perturbed inputs
+
+  proposition: Robustness studies encompass potential factors that may lead to erroneous system outputs.
+    entity-attribute relationships:
+    Robustness studies|EXAMINES|Potential factors
+    Robustness studies|FOCUSES_ON|Erroneous system outputs
+
+  proposition: The research focuses specifically on LLM robustness when confronted with natural language perturbations.
+    entity-entity relationships:
+    Research|FOCUSES_ON|LLM robustness
+    Research|EXAMINES|Natural language perturbations

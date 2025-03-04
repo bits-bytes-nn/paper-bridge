@@ -1,0 +1,62 @@
+Multimodal AI Models Overview
+
+Llama-3.2-11B-V is a multimodal Large Language Model developed by Meta.
+Llama-3.2-11B-V has 11 billion parameters.
+Llama-3.2-11B-V can handle both text and image inputs.
+Llama-3.2-11B-V is particularly effective for healthcare and retail industries.
+Llama-3.2-11B-V enables real-time visual and textual analysis.
+
+DALL-E 3 is a text-to-image generation model developed by OpenAI.
+DALL-E 3 excels in translating nuanced textual descriptions into detailed images.
+DALL-E 3 has native integration with ChatGPT.
+DALL-E 3 allows image generation through conversational prompts.
+
+Stable Diffusion 3.5 Large is an 8.1 billion parameter model.
+Stable Diffusion 3.5 Large supports 1-megapixel resolution.
+Stable Diffusion 3.5 Large delivers high-quality, prompt-accurate images.
+
+Stable Diffusion 3.5 Large Turbo is a distilled version of the Large model.
+Stable Diffusion 3.5 Large Turbo is optimized for faster generation.
+Stable Diffusion 3.5 Large Turbo can generate images in four steps.
+Stable Diffusion 3.5 Large Turbo maintains high image fidelity.
+
+FLUX-1.1-Pro is developed by Black Forest Labs.
+FLUX-1.1-Pro is a text-to-image generation model.
+FLUX-1.1-Pro offers six times faster image generation.
+FLUX-1.1-Pro enhances image quality and prompt adherence.
+FLUX-1.1-Pro increases output diversity.
+FLUX-1.1-Pro supports ultra-high-resolution image generation up to 2K.
+
+Playground 2.5 is developed by Playground AI.
+Playground 2.5 is an open-source, diffusion-based text-to-image generative model.
+Playground 2.5 focuses on enhancing aesthetic quality.
+Playground 2.5 improves color and contrast.
+Playground 2.5 supports multi-aspect ratio generation.
+Playground 2.5 uses the Efficient Diffusion Model (EDM) framework.
+
+Hunyuan-DiT is developed by Tencent.
+Hunyuan-DiT is a text-to-image diffusion transformer model.
+Hunyuan-DiT understands both English and Chinese.
+Hunyuan-DiT uses a pre-trained Variational Autoencoder (VAE).
+Hunyuan-DiT compresses images into low-dimensional latent spaces.
+Hunyuan-DiT uses a transformer-based diffusion model.
+Hunyuan-DiT leverages pre-trained bilingual CLIP and multilingual T5 encoder.
+Hunyuan-DiT supports multi-turn text-to-image generation.
+
+Kolors is developed by Kuaishou.
+Kolors is a large-scale text-to-image generation model.
+Kolors is based on latent diffusion.
+Kolors is trained on billions of text-image pairs.
+Kolors supports both Chinese and English inputs.
+Kolors exhibits high visual quality.
+Kolors provides complex semantic accuracy.
+Kolors supports text rendering.
+
+CogView-3-Plus is developed by Tsinghua University.
+CogView-3-Plus is an advanced text-to-image generation model.
+CogView-3-Plus uses the latest DiT architecture.
+CogView-3-Plus employs Zero-SNR diffusion noise scheduling.
+CogView-3-Plus incorporates a joint text-image attention mechanism.
+CogView-3-Plus reduces training and inference costs.
+CogView-3-Plus uses a VAE with a latent dimension of 16.
+CogView-3-Plus supports image resolutions from 512×512 to 2048×2048 pixels.

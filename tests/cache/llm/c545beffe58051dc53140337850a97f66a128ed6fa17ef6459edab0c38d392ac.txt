@@ -1,0 +1,116 @@
+topic: Research on Large Language Model Jailbreaking and Safety
+
+  entities:
+    Haibo Jin|Person
+    Andy Zhou|Person
+    Joe D Menke|Person
+    Haohan Wang|Person
+    ShengYun Peng|Person
+    Pin-Yu Chen|Person
+    Matthew Daniel Hull|Person
+    Duen Horng Chau|Person
+    Hakan Inan|Person
+    Yi Zeng|Person
+    Hongpeng Lin|Person
+    Jingwen Zhang|Person
+    Diyi Yang|Person
+    Ruoxi Jia|Person
+    Weiyan Shi|Person
+    Omar Shaikh|Person
+    Hongxin Zhang|Person
+    William Held|Person
+    Michael Bernstein|Person
+    Zeguan Xiao|Person
+    Yan Yang|Person
+    Guanhua Chen|Person
+    Yun Chen|Person
+    Daniel Kang|Person
+    Xuechen Li|Person
+    Ion Stoica|Person
+    Carlos Guestrin|Person
+    Matei Zaharia|Person
+    Tatsunori Hashimoto|Person
+    Zeming Wei|Person
+    Yifei Wang|Person
+    Ang Li|Person
+    Yichuan Mo|Person
+    Yisen Wang|Person
+    Xiaosen Zheng|Person
+    Tianyu Pang|Person
+    Chao Du|Person
+    Qian Liu|Person
+    Jing Jiang|Person
+    Min Lin|Person
+    Qizhang Li|Person
+    Xiaochen Yang|Person
+    Wangmeng Zuo|Person
+    Yiwen Guo|Person
+    Abhinav Rao|Person
+    Sachin Vashistha|Person
+    Atharva Naik|Person
+    Somak Aditya|Person
+    Monojit Choudhury|Person
+    Kai Greshake|Person
+    Gelei Deng|Person
+    Yi Liu|Person
+    Yuekang Li|Person
+    Llama Guard|Module
+    Large Language Models|Technology
+
+  proposition: Haibo Jin, Andy Zhou, Joe D Menke, and Haohan Wang published a paper on jailbreaking large language models using cipher characters.
+    entity-attribute relationships:
+    Haibo Jin|AUTHOR_OF|Research Paper
+    Andy Zhou|AUTHOR_OF|Research Paper
+    Joe D Menke|AUTHOR_OF|Research Paper
+    Haohan Wang|AUTHOR_OF|Research Paper
+
+    entity-entity relationships:
+    Haibo Jin|CO_AUTHOR|Andy Zhou
+    Haibo Jin|CO_AUTHOR|Joe D Menke
+    Haibo Jin|CO_AUTHOR|Haohan Wang
+    Andy Zhou|CO_AUTHOR|Joe D Menke
+    Andy Zhou|CO_AUTHOR|Haohan Wang
+    Joe D Menke|CO_AUTHOR|Haohan Wang
+
+  proposition: ShengYun Peng, Pin-Yu Chen, Matthew Daniel Hull, and Duen Horng Chau studied risks in fine-tuning large language models.
+    entity-attribute relationships:
+    ShengYun Peng|AUTHOR_OF|Research Paper
+    Pin-Yu Chen|AUTHOR_OF|Research Paper
+    Matthew Daniel Hull|AUTHOR_OF|Research Paper
+    Duen Horng Chau|AUTHOR_OF|Research Paper
+
+    entity-entity relationships:
+    ShengYun Peng|CO_AUTHOR|Pin-Yu Chen
+    ShengYun Peng|CO_AUTHOR|Matthew Daniel Hull
+    ShengYun Peng|CO_AUTHOR|Duen Horng Chau
+    Pin-Yu Chen|CO_AUTHOR|Matthew Daniel Hull
+    Pin-Yu Chen|CO_AUTHOR|Duen Horng Chau
+    Matthew Daniel Hull|CO_AUTHOR|Duen Horng Chau
+
+  [Additional propositions processed similarly...]
+
+topic: Supplementary Research on LLM Toxicity and Safety
+
+  entities:
+    Guillermo Villate-Castillo|Person
+    Javier Del Ser Lorente|Person
+    Borja Sanz Urquijo|Person
+    Lilian Weng|Person
+    Yahan Yang|Person
+    Soham Dan|Person
+    Dan Roth|Person
+    Insup Lee|Person
+    Johannes Welbl|Person
+
+  proposition: Guillermo Villate-Castillo, Javier Del Ser Lorente, and Borja Sanz Urquijo conducted a systematic review of toxicity in large language models.
+    entity-attribute relationships:
+    Guillermo Villate-Castillo|AUTHOR_OF|Research Paper
+    Javier Del Ser Lorente|AUTHOR_OF|Research Paper
+    Borja Sanz Urquijo|AUTHOR_OF|Research Paper
+
+    entity-entity relationships:
+    Guillermo Villate-Castillo|CO_AUTHOR|Javier Del Ser Lorente
+    Guillermo Villate-Castillo|CO_AUTHOR|Borja Sanz Urquijo
+    Javier Del Ser Lorente|CO_AUTHOR|Borja Sanz Urquijo
+
+  [Additional propositions processed similarly...]

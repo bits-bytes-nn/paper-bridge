@@ -1,0 +1,98 @@
+topic: Vision-Language Model Research
+
+  entities:
+    Tony Lee|Researcher
+    Haoqin Tu|Researcher
+    Chi Heem Wong|Researcher
+    Wenhao Zheng|Researcher
+    Yiyang Zhou|Researcher
+    Yifan Mai|Researcher
+    Josselin Somerville Roberts|Researcher
+    Michihiro Yasunaga|Researcher
+    Huaxiu Yao|Researcher
+    Cihang Xie|Researcher
+    Dong Lu|Researcher
+    Tianyu Pang|Researcher
+    Chao Du|Researcher
+    Qian Liu|Researcher
+    Xianjun Yang|Researcher
+    Min Lin|Researcher
+    VHELM|Research Paper
+    arXiv|Publication Platform
+    Vision Language Models|Model
+
+  proposition: Tony Lee, Haoqin Tu, Chi Heem Wong, Wenhao Zheng, Yiyang Zhou, Yifan Mai, Josselin Somerville Roberts, Michihiro Yasunaga, Huaxiu Yao, and Cihang Xie published a paper titled "VHELM: A Holistic Evaluation of Vision Language Models" on arXiv in 2024.
+    entity-attribute relationships:
+    VHELM|PUBLISHED_IN|arXiv
+    VHELM|PUBLICATION_YEAR|2024
+    VHELM|DESCRIBED_BY|Holistic Evaluation of Vision Language Models
+
+    entity-entity relationships:
+    Tony Lee|AUTHOR_OF|VHELM
+    Haoqin Tu|AUTHOR_OF|VHELM
+    Chi Heem Wong|AUTHOR_OF|VHELM
+    Wenhao Zheng|AUTHOR_OF|VHELM
+    Yiyang Zhou|AUTHOR_OF|VHELM
+    Yifan Mai|AUTHOR_OF|VHELM
+    Josselin Somerville Roberts|AUTHOR_OF|VHELM
+    Michihiro Yasunaga|AUTHOR_OF|VHELM
+    Huaxiu Yao|AUTHOR_OF|VHELM
+    Cihang Xie|AUTHOR_OF|VHELM
+
+  proposition: Dong Lu, Tianyu Pang, Chao Du, Qian Liu, Xianjun Yang, and Min Lin published a paper on "Test-time backdoor attacks on multimodal large language models" on arXiv in 2024.
+    entity-attribute relationships:
+    Research Paper|PUBLISHED_IN|arXiv
+    Research Paper|PUBLICATION_YEAR|2024
+    Research Paper|DESCRIBED_BY|Test-time backdoor attacks on multimodal large language models
+
+    entity-entity relationships:
+    Dong Lu|AUTHOR_OF|Research Paper
+    Tianyu Pang|AUTHOR_OF|Research Paper
+    Chao Du|AUTHOR_OF|Research Paper
+    Qian Liu|AUTHOR_OF|Research Paper
+    Xianjun Yang|AUTHOR_OF|Research Paper
+    Min Lin|AUTHOR_OF|Research Paper
+
+  proposition: Multiple research papers explore the adversarial robustness and evaluation of vision-language models.
+    entity-attribute relationships:
+    Research Papers|RESEARCH_FOCUS|Adversarial Robustness
+    Research Papers|RESEARCH_FOCUS|Vision-Language Model Evaluation
+
+    entity-entity relationships:
+    None
+
+  proposition: Researchers are investigating various aspects of robustness, including adversarial attacks, prompt tuning, and model evaluation methodologies.
+    entity-attribute relationships:
+    Researchers|INVESTIGATING|Robustness
+    Researchers|INVESTIGATING|Adversarial Attacks
+    Researchers|INVESTIGATING|Prompt Tuning
+    Researchers|INVESTIGATING|Model Evaluation Methodologies
+
+    entity-entity relationships:
+    None
+
+  proposition: Key research areas include understanding and mitigating vulnerabilities in large multimodal models.
+    entity-attribute relationships:
+    Research Areas|FOCUS|Understanding Vulnerabilities
+    Research Areas|FOCUS|Mitigating Vulnerabilities
+    Research Areas|MODEL_TYPE|Large Multimodal Models
+
+    entity-entity relationships:
+    None
+
+  proposition: Evaluation techniques range from holistic assessments to specific robustness benchmarks.
+    entity-attribute relationships:
+    Evaluation Techniques|TYPE|Holistic Assessments
+    Evaluation Techniques|TYPE|Robustness Benchmarks
+
+    entity-entity relationships:
+    None
+
+  proposition: The research spans topics such as zero-shot adversarial robustness, frequency-domain prompting, and adversarial prompt tuning.
+    entity-attribute relationships:
+    Research|TOPIC|Zero-Shot Adversarial Robustness
+    Research|TOPIC|Frequency-Domain Prompting
+    Research|TOPIC|Adversarial Prompt Tuning
+
+    entity-entity relationships:
+    None

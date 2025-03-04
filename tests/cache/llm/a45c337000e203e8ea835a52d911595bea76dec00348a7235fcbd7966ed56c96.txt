@@ -1,0 +1,78 @@
+topic: Sycophancy in Large Language Models
+
+  entities:
+    Freedom to Vote Act|Regulation
+    Large Language Models|Model
+    Sycophancy|Social Concept
+
+  proposition: Sycophancy is categorized into three distinct types
+    entity-attribute relationships:
+    Sycophancy|TYPES|3
+
+    entity-entity relationships:
+
+  proposition: Persona Sycophancy involves LLMs producing responses that align with a user's potential beliefs based on their persona
+    entity-attribute relationships:
+    Persona Sycophancy|DESCRIBED_BY|producing responses that align with a user's potential beliefs based on their persona
+
+    entity-entity relationships:
+    Persona Sycophancy|TYPE_OF|Sycophancy
+
+  proposition: Preconception Sycophancy involves LLMs generating responses that conform to or endorse user-expressed beliefs
+    entity-attribute relationships:
+    Preconception Sycophancy|DESCRIBED_BY|generating responses that conform to or endorse user-expressed beliefs
+
+    entity-entity relationships:
+    Preconception Sycophancy|TYPE_OF|Sycophancy
+
+  proposition: Self-Doubt Sycophancy involves LLMs exhibiting uncertainty by altering their original responses when challenged
+    entity-attribute relationships:
+    Self-Doubt Sycophancy|DESCRIBED_BY|exhibiting uncertainty by altering their original responses when challenged
+
+    entity-entity relationships:
+    Self-Doubt Sycophancy|TYPE_OF|Sycophancy
+
+  proposition: Evaluation methodology for sycophantic behavior uses question-answering tasks
+    entity-attribute relationships:
+    Sycophancy|EVALUATED_BY|question-answering tasks
+
+    entity-entity relationships:
+
+  proposition: Persona sycophancy evaluation involves presenting claims with a persona prefix that could influence the model's response
+    entity-attribute relationships:
+    Persona Sycophancy|EVALUATION_METHOD|presenting claims with a persona prefix
+
+    entity-entity relationships:
+
+  proposition: Preconception sycophancy evaluation involves asking factual questions with uncertainty-introducing postfixes
+    entity-attribute relationships:
+    Preconception Sycophancy|EVALUATION_METHOD|asking factual questions with uncertainty-introducing postfixes
+
+    entity-entity relationships:
+
+  proposition: Self-doubt sycophancy evaluation involves multi-round conversations that challenge the model's initial correct answer
+    entity-attribute relationships:
+    Self-Doubt Sycophancy|EVALUATION_METHOD|multi-round conversations that challenge the model's initial correct answer
+
+    entity-entity relationships:
+
+  proposition: Persona sycophancy example involves evaluating a claim about the Freedom to Vote Act using a liberal persona
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Freedom to Vote Act|EXAMPLE_OF|Persona Sycophancy
+
+  proposition: The research builds on previous studies of sycophantic behaviors in Large Language Models
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Research|FOCUSES_ON|Large Language Models
+    Research|BUILDS_ON|Previous Studies
+
+  proposition: The evaluation aims to identify how models modify responses based on user context and perceived expectations
+    entity-attribute relationships:
+    Evaluation|AIM|identify how models modify responses
+
+    entity-entity relationships:
+    Evaluation|CONSIDERS|User Context
+    Evaluation|CONSIDERS|Perceived Expectations

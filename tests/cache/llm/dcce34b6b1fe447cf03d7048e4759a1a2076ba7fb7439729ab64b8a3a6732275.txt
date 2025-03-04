@@ -1,0 +1,23 @@
+Text-to-Image Models: Technical Details and Architectures
+
+Hunyuan-DiT uses a pre-trained Variational Autoencoder (VAE) to compress images into low-dimensional latent spaces.
+Hunyuan-DiT uses a transformer-based diffusion model to learn the data distribution.
+Hunyuan-DiT leverages a combination of pre-trained bilingual CLIP and multilingual T5 encoder for text prompt encoding.
+Hunyuan-DiT supports multi-turn text-to-image generation.
+
+Kolors is a large-scale text-to-image generation model developed by Kuaishou.
+Kolors is based on latent diffusion.
+Kolors is trained on billions of text-image pairs.
+Kolors supports both Chinese and English inputs.
+Kolors exhibits significant advantages in visual quality.
+Kolors demonstrates complex semantic accuracy.
+Kolors shows strong text rendering capabilities.
+
+CogView-3-Plus is a text-to-image generation model developed by Tsinghua University.
+CogView-3-Plus introduces the latest DiT architecture.
+CogView-3-Plus employs Zero-SNR diffusion noise scheduling.
+CogView-3-Plus incorporates a joint text-image attention mechanism.
+CogView-3-Plus reduces training and inference costs.
+CogView-3-Plus maintains high-quality outputs.
+CogView-3-Plus utilizes a VAE with a latent dimension of 16.
+CogView-3-Plus supports image resolutions ranging from 512×512 to 2048×2048 pixels.

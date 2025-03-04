@@ -1,0 +1,176 @@
+topic: Benchmarking Vision-Language Models
+
+  entities:
+    GPT-4o|Model
+    GPT-4o-mini|Model
+    Claude-3.5-sonnet|Model
+    Claude-3-haiku|Model
+    Gemini-1.5-Pro|Model
+    Gemini-1.5-flash|Model
+    Llama-3.2-90B-V|Model
+    Llama-3.2-11B-V|Model
+    Qwen-2-VL-72B|Model
+    GLM-4v-Plus|Model
+    Large Language Models|Technological Concept
+    Vision-Language Models|Technological Concept
+    Jailbreak in Pieces|Method
+    Prompt-to-image attacks|Method
+    Optimization-based attacks|Method
+
+  proposition: A dynamic harmful query dataset was developed for evaluating jailbreaks on Large Language Models and Vision-Language Models.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Large Language Models|EVALUATED_BY|Dynamic harmful query dataset
+    Vision-Language Models|EVALUATED_BY|Dynamic harmful query dataset
+
+  proposition: The same dataset will be used for VLMs with attack methods from Table 25.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Vision-Language Models|EVALUATED_WITH|Attack methods
+
+  proposition: Figure 38 and Table 31 present the refuse to answer (RtA) rate of various VLMs across five different jailbreak attacks.
+    entity-attribute relationships:
+    Various VLMs|MEASURED_BY|Refuse to answer (RtA) rate
+
+    entity-entity relationships:
+    Various VLMs|ANALYZED_IN|Five different jailbreak attacks
+
+  proposition: Larger models tend to have higher RtA rates, indicating better defense against attacks.
+    entity-attribute relationships:
+    Larger models|CHARACTERIZED_BY|Higher RtA rates
+    Larger models|DEMONSTRATES|Better defense against attacks
+
+    entity-entity relationships:
+    None
+
+  proposition: This trend is consistent across model pairs like GPT-4o and GPT-4o-mini, Claude-3.5-sonnet and Claude-3-haiku, Gemini-1.5-Pro and Gemini-1.5-flash, and Llama-3.2-90B-V and Llama-3.2-11B-V.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    GPT-4o|COMPARED_WITH|GPT-4o-mini
+    Claude-3.5-sonnet|COMPARED_WITH|Claude-3-haiku
+    Gemini-1.5-Pro|COMPARED_WITH|Gemini-1.5-flash
+    Llama-3.2-90B-V|COMPARED_WITH|Llama-3.2-11B-V
+
+  proposition: Prompt-to-image attacks typically yield lower RtAs compared to optimization-based attacks.
+    entity-attribute relationships:
+    Prompt-to-image attacks|CHARACTERIZED_BY|Lower RtA rates
+
+    entity-entity relationships:
+    Prompt-to-image attacks|COMPARED_WITH|Optimization-based attacks
+
+  proposition: Optimization-based attacks often generate jailbreak images using an open-source VLM.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Optimization-based attacks|USES|Open-source VLM
+
+  proposition: The effectiveness of these attacks varies depending on the specific model implementation.
+    entity-attribute relationships:
+    Attacks|VARIES_BY|Model implementation
+
+    entity-entity relationships:
+    None
+
+  proposition: Jailbreak in Pieces attack shows lower RtAs for models with similar adaptor architectures like Qwen-2-VL-72B and GLM-4v-Plus.
+    entity-attribute relationships:
+    Qwen-2-VL-72B|CHARACTERIZED_BY|Similar adaptor architecture
+    GLM-4v-Plus|CHARACTERIZED_BY|Similar adaptor architecture
+
+    entity-entity relationships:
+    Jailbreak in Pieces attack|ANALYZED_ON|Qwen-2-VL-72B
+    Jailbreak in Pieces attack|ANALYZED_ON|GLM-4v-Plus
+
+  proposition: Some models like GPT-4o cannot understand optimized noisy images.
+    entity-attribute relationships:
+    GPT-4o|UNABLE_TO|Understand optimized noisy images
+
+    entity-entity relationships:
+    None
+
+  proposition: Prompt-to-image attacks produce semantically meaningful images that all VLMs can interpret, leading to better transferability and lower RtAs.
+    entity-attribute relationships:
+    Prompt-to-image attacks|PRODUCES|Semantically meaningful images
+    Prompt-to-image attacks|LEADS_TO|Better transferability
+    Prompt-to-image attacks|LEADS_TO|Lower RtAs
+
+    entity-entity relationships:
+    Prompt-to-image attacks|INTERPRETED_BY|All VLMs
+
+topic: Fairness in Vision-Language Models
+
+  entities:
+    Vision-Language Models|Technological Concept
+    GenderBias benchmark|Benchmark
+    StereoSet-VL|Benchmark
+    CounterBias|Method
+
+  proposition: Fairness in VLMs is more complex due to the introduction of visual modality.
+    entity-attribute relationships:
+    Vision-Language Models|CHARACTERIZED_BY|Complex fairness
+
+    entity-entity relationships:
+    None
+
+  proposition: There is limited understanding of VLM fairness.
+    entity-attribute relationships:
+    Vision-Language Models|CHARACTERIZED_BY|Limited fairness understanding
+
+    entity-entity relationships:
+    None
+
+  proposition: Researchers are studying VLM fairness through: Creating related datasets, Evaluating and identifying fairness in VLMs, Mitigating biases in VLM outputs
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Researchers|STUDY|Vision-Language Models fairness
+    Researchers|CREATE|Datasets
+    Researchers|EVALUATE|Vision-Language Models fairness
+    Researchers|MITIGATE|VLM biases
+
+  proposition: Stereotypes and disparagement exist in VLMs.
+    entity-attribute relationships:
+    Vision-Language Models|CONTAINS|Stereotypes
+    Vision-Language Models|CONTAINS|Disparagement
+
+    entity-entity relationships:
+    None
+
+  proposition: Researchers have proposed various methods to measure and address bias:
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    Researchers|PROPOSE|Methods to measure bias
+    Researchers|PROPOSE|Methods to address bias
+
+  proposition: GenderBias benchmark uses text-to-image diffusion models to generate occupation images with gender counterfactuals.
+    entity-attribute relationships:
+    GenderBias benchmark|USES|Text-to-image diffusion models
+    GenderBias benchmark|GENERATES|Occupation images with gender counterfactuals
+
+    entity-entity relationships:
+    None
+
+  proposition: StereoSet-VL extends StereoSet to measure stereotypical bias in multimodal contexts.
+    entity-attribute relationships:
+    StereoSet-VL|EXTENDS|StereoSet
+    StereoSet-VL|MEASURES|Stereotypical bias in multimodal contexts
+
+    entity-entity relationships:
+    None
+
+  proposition: CounterBias quantifies social bias by comparing masked prediction probabilities between factual and counterfactual samples.
+    entity-attribute relationships:
+    CounterBias|QUANTIFIES|Social bias
+    CounterBias|COMPARES|Masked prediction probabilities
+
+    entity-entity relationships:
+    None

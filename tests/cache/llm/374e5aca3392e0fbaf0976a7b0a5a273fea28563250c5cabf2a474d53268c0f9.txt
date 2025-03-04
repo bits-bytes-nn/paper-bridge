@@ -1,0 +1,153 @@
+topic: Hybrid AI-Human Collaboration and Trustworthiness
+
+  entities:
+    Generative Foundation Models|Model
+    AI|Technological Concept
+    Robots|Tool
+    Scientific Discovery|Research Field
+
+  proposition: A hybrid approach combines AI speed and creativity with human oversight.
+    entity-attribute relationships:
+    Hybrid Approach|DESCRIBED_BY|speed
+    Hybrid Approach|DESCRIBED_BY|creativity
+    Hybrid Approach|INVOLVES|human oversight
+
+    entity-entity relationships:
+    AI|COLLABORATES_WITH|Humans
+
+  proposition: Generative models guide humans in experimental operations and safety-related decision-making.
+    entity-attribute relationships:
+    Generative Models|ROLE|guide
+    Generative Models|FOCUSES_ON|experimental operations
+    Generative Models|FOCUSES_ON|safety-related decision-making
+
+  proposition: Regulatory and institutional oversight defines standards and evolves with technological advances.
+    entity-attribute relationships:
+    Regulatory Oversight|ROLE|defines standards
+    Regulatory Oversight|ADAPTS_TO|technological advances
+
+  proposition: Trust in generative models within scientific domains is multidimensional.
+    entity-attribute relationships:
+    Generative Models|TRUST_CHARACTERISTIC|multidimensional
+    Generative Models|DOMAIN|scientific
+
+  proposition: Transparency, validation, ethical compliance, and human-AI collaboration are crucial for responsible scientific discovery.
+    entity-attribute relationships:
+    Scientific Discovery|REQUIRES|transparency
+    Scientific Discovery|REQUIRES|validation
+    Scientific Discovery|REQUIRES|ethical compliance
+    Scientific Discovery|REQUIRES|human-AI collaboration
+
+topic: Robotics and Generative Foundation Models Safety Concerns
+
+  entities:
+    Large Language Models|Model
+    Visual Language Models|Model
+    Robots|Tool
+
+  proposition: Large Language Models (LLMs) and Visual Language Models (VLMs) have improved robots' natural language processing and visual recognition capabilities.
+    entity-attribute relationships:
+    Large Language Models|IMPROVES|natural language processing
+    Visual Language Models|IMPROVES|visual recognition
+
+    entity-entity relationships:
+    Large Language Models|ENHANCES|Robots
+    Visual Language Models|ENHANCES|Robots
+
+  proposition: Integrating these models into robots poses significant risks due to potential errors and limitations.
+    entity-attribute relationships:
+    Models|POTENTIAL_RISK|errors
+    Models|POTENTIAL_RISK|limitations
+
+  proposition: LLMs and VLMs can produce language hallucinations and visual illusions.
+    entity-attribute relationships:
+    Large Language Models|PRODUCES|language hallucinations
+    Visual Language Models|PRODUCES|visual illusions
+
+  proposition: Safety in robotic systems involves efficient task performance while preventing unintended harm.
+    entity-attribute relationships:
+    Robotic Systems|REQUIRES|efficient task performance
+    Robotic Systems|REQUIRES|preventing unintended harm
+
+topic: Reasoning and Planning Risks
+
+  entities:
+    Embodied AI Agents|Technological Concept
+    LLM-driven Robots|Tool
+
+  proposition: Embodied AI agents can exhibit decision-making ambiguity and overconfidence.
+    entity-attribute relationships:
+    Embodied AI Agents|CHARACTERISTIC|decision-making ambiguity
+    Embodied AI Agents|CHARACTERISTIC|overconfidence
+
+  proposition: LLM-driven robots may potentially enact discrimination, violence, or unlawful actions.
+    entity-attribute relationships:
+    LLM-driven Robots|POTENTIAL_RISK|discrimination
+    LLM-driven Robots|POTENTIAL_RISK|violence
+    LLM-driven Robots|POTENTIAL_RISK|unlawful actions
+
+  proposition: Robots may fail to identify hazards and proceed without considering potential risks.
+    entity-attribute relationships:
+    Robots|LIMITATION|fail to identify hazards
+    Robots|LIMITATION|proceed without risk consideration
+
+  proposition: Scene graphs and LLMs can help model object relationships and detect anomalies.
+    entity-attribute relationships:
+    Scene Graphs|ROLE|model object relationships
+    Scene Graphs|ROLE|detect anomalies
+    Large Language Models|ROLE|model object relationships
+    Large Language Models|ROLE|detect anomalies
+
+topic: Human-AI Collaboration Trust Challenges
+
+  entities:
+    Users|Person
+    Generative Foundation Models|Model
+
+  proposition: Trust calibration is critical in human-AI collaboration.
+    entity-attribute relationships:
+    Human-AI Collaboration|REQUIRES|trust calibration
+
+  proposition: Users struggle to understand generative foundation models' functioning.
+    entity-attribute relationships:
+    Users|CHALLENGE|understanding model functioning
+
+  proposition: Opaque marketing, incomplete documentation, and model complexity create trust challenges.
+    entity-attribute relationships:
+    Generative Foundation Models|TRUST_BARRIER|opaque marketing
+    Generative Foundation Models|TRUST_BARRIER|incomplete documentation
+    Generative Foundation Models|TRUST_BARRIER|model complexity
+
+  proposition: Users may overtrust or undertrust AI outputs.
+    entity-attribute relationships:
+    Users|POTENTIAL_BEHAVIOR|overtrust AI outputs
+    Users|POTENTIAL_BEHAVIOR|undertrust AI outputs
+
+topic: Trust Calibration Strategies
+
+  entities:
+    AI|Technological Concept
+    Users|Person
+
+  proposition: Providing explanations for AI predictions helps build trust.
+    entity-attribute relationships:
+    AI|TRUST_BUILDING_STRATEGY|providing explanations
+
+  proposition: Detailing model limitations and output uncertainties is important.
+    entity-attribute relationships:
+    AI|TRUST_BUILDING_STRATEGY|detailing limitations
+    AI|TRUST_BUILDING_STRATEGY|explaining output uncertainties
+
+  proposition: Strategies include verbalized confidence scores and uncertainty estimation.
+    entity-attribute relationships:
+    AI|TRUST_CALIBRATION_METHOD|verbalized confidence scores
+    AI|TRUST_CALIBRATION_METHOD|uncertainty estimation
+
+  proposition: Explainability mechanisms should be intuitive and accessible to users.
+    entity-attribute relationships:
+    Explainability Mechanisms|CHARACTERISTIC|intuitive
+    Explainability Mechanisms|CHARACTERISTIC|accessible to users
+
+  proposition: Trust calibration aims to help users understand when AI guidance is reliable.
+    entity-attribute relationships:
+    Trust Calibration|GOAL|help users understand AI guidance reliability

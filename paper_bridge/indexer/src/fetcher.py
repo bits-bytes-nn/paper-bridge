@@ -1,24 +1,30 @@
 import os
-import requests
 import tempfile
 import time
-import traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional, Union
+from enum import Enum, auto
+from typing import Any, Dict, List, Optional, Sequence, Union, cast
 import arxiv
 import boto3
-import cv2
-import numpy as np
-import pdf2image
-import pytesseract
-from layoutparser.elements.layout import Layout
-from layoutparser.models import Detectron2LayoutModel
-from pydantic import BaseModel, field_validator
-from paper_bridge.indexer.configs.config import Config
+import requests
+from llama_index.llms.bedrock import Bedrock
+from llama_parse import LlamaParse
+from llama_parse.base import ResultType
+from pydantic import BaseModel, Field, field_validator
+from unstructured.partition.pdf import partition_pdf
+from .aws_helpers import get_cross_inference_model_id
 from .constants import URLs
 from .logger import logger
-from .utils import measure_execution_time
+from .prompts import MainContentExtractionPrompt
+from .utils import HTMLTagOutputParser, measure_execution_time
+from paper_bridge.indexer.configs.config import Config
+
+
+class PaperStatus(Enum):
+    FAILED = auto()
+    PENDING = auto()
+    PROCESSED = auto()
 
 
 class Paper(BaseModel):
@@ -30,13 +36,14 @@ class Paper(BaseModel):
     upvotes: int
     thumbnail: Optional[str] = None
     content: Optional[str] = None
+    status: PaperStatus = Field(default=PaperStatus.PENDING)
 
     @field_validator("authors")
     @classmethod
-    def validate_authors(cls, v: List[str]) -> List[str]:
-        if not v:
+    def validate_authors(cls, authors: List[str]) -> List[str]:
+        if not authors:
             raise ValueError("Authors list cannot be empty")
-        return v
+        return authors
 
     def to_dict(self) -> Dict[str, Any]:
         return self.model_dump()
@@ -47,20 +54,13 @@ class PaperFetcher:
     MAX_RETRIES: int = 3
     RETRY_DELAY: int = 1
     MAX_WORKERS: int = 4
-
-    EXCLUDED_SECTIONS: frozenset[str] = frozenset(
-        {
-            "acknowledgments",
-            "abstract",
-            "appendix",
-            "bibliography",
-            "references",
-        }
-    )
-    VALID_BLOCK_TYPES: frozenset[str] = frozenset({"List", "Text", "Title"})
-    MODEL_CONFIG: str = "lp://PubLayNet/mask_rcnn_X_101_32x8d_FPN_3x/config"
-    SCORE_THRESHOLD: float = 0.8
-    LAYOUT_SCORE_THRESHOLD: float = 0.5
+    MIN_PAPERS_PER_DAY: int = 1
+    MIN_DAYS_TO_FETCH: int = 1
+    MIN_UPVOTES: int = 0
+    LLAMA_PARSE_RETRY_DELAY: int = 1
+    LLAMA_PARSE_MAX_RETRIES: int = 5
+    LLAMA_PARSE_MAX_TIMEOUT: int = 300
+    LLAMA_PARSE_NUM_WORKERS: int = 8
 
     def __init__(
         self,
@@ -68,28 +68,55 @@ class PaperFetcher:
         profile_name: Optional[str] = None,
         timeout: int = DEFAULT_TIMEOUT,
     ) -> None:
-        self.boto3_session = self._init_boto3_session(profile_name)
-        self.layout_model = self._init_layout_model()
-        self._init_config_values(config, timeout)
-
-    def _init_boto3_session(self, profile_name: Optional[str]) -> boto3.Session:
-        return boto3.Session(profile_name=profile_name)
-
-    def _init_layout_model(self) -> Detectron2LayoutModel:
-        return Detectron2LayoutModel(
-            self.MODEL_CONFIG,
-            extra_config=["MODEL.ROI_HEADS.SCORE_THRESH_TEST", self.SCORE_THRESHOLD],
+        self.boto3_session = self._create_boto3_session(
+            config.resources.bedrock_region_name, profile_name
         )
+        self._configure(config, timeout)
+        self._init_llm_components(config, profile_name)
 
-    def _init_config_values(self, config: Config, timeout: int) -> None:
-        self.papers_per_day = max(1, config.indexing.papers_per_day)
-        self.days_to_fetch = max(1, config.indexing.days_to_fetch)
+    def _create_boto3_session(
+        self, region_name: str, profile_name: Optional[str]
+    ) -> boto3.Session:
+        return boto3.Session(region_name=region_name, profile_name=profile_name)
+
+    def _configure(self, config: Config, timeout: int) -> None:
+        self.papers_per_day = max(
+            self.MIN_PAPERS_PER_DAY, config.indexing.papers_per_day
+        )
+        self.days_to_fetch = max(self.MIN_DAYS_TO_FETCH, config.indexing.days_to_fetch)
         self.min_upvotes = (
-            max(0, config.indexing.min_upvotes)
+            max(self.MIN_UPVOTES, config.indexing.min_upvotes)
             if config.indexing.min_upvotes is not None
             else None
         )
         self.timeout = max(1, timeout)
+        self.llama_parser = LlamaParse(
+            max_timeout=self.LLAMA_PARSE_MAX_TIMEOUT,
+            num_workers=self.LLAMA_PARSE_NUM_WORKERS,
+            result_type=ResultType.MD,
+            language="en",
+        )
+
+    def _init_llm_components(self, config: Config, profile_name: Optional[str]) -> None:
+        self.prompt_template = None
+        self.llm = None
+        self.output_parser = None
+
+        if config.indexing.main_content_extraction_model_id:
+            logger.info("Initializing LLM for extracting main content from papers")
+            self.prompt_template = MainContentExtractionPrompt
+            self.llm = Bedrock(
+                model=get_cross_inference_model_id(
+                    self.boto3_session,
+                    config.indexing.main_content_extraction_model_id.value,
+                    config.resources.bedrock_region_name,
+                ),
+                aws_region=config.resources.bedrock_region_name,
+                profile_name=profile_name,
+            )
+            self.output_parser = HTMLTagOutputParser(
+                tag_names=self.prompt_template.OUTPUT_VARIABLES
+            )
 
     @measure_execution_time
     def fetch_papers_for_date_range(
@@ -99,7 +126,7 @@ class PaperFetcher:
             target_date = self._get_target_date(target_date)
             papers_by_date = self._fetch_papers_by_date_range(target_date)
             filtered_papers = self._filter_and_sort_papers(papers_by_date)
-            return self._process_selected_papers(filtered_papers)
+            return self._process_papers_concurrently(filtered_papers)
         except requests.RequestException as e:
             logger.error("Error fetching papers: %s", e)
             return {}
@@ -109,11 +136,11 @@ class PaperFetcher:
 
     @staticmethod
     def _get_target_date(target_date: Optional[datetime]) -> datetime:
-        if target_date is None:
-            return datetime.now(timezone.utc).replace(
-                hour=0, minute=0, second=0, microsecond=0
-            ).astimezone(timezone.utc) - timedelta(days=1)
-        return target_date
+        if target_date is not None:
+            return target_date
+        return datetime.now(timezone.utc).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        ).astimezone(timezone.utc) - timedelta(days=1)
 
     def _fetch_papers_by_date_range(self, end_date: datetime) -> Dict[str, List[Paper]]:
         papers_by_date: Dict[str, List[Paper]] = {}
@@ -121,30 +148,29 @@ class PaperFetcher:
 
         for current_date in self._date_range(start_date, end_date):
             date_str = current_date.strftime("%Y-%m-%d")
-            papers_by_date[current_date.date().isoformat()] = self._fetch_daily_papers(
-                date_str, current_date
-            )
+            papers = self._fetch_daily_papers(date_str, current_date)
+            if papers:
+                papers_by_date[current_date.date().isoformat()] = papers
 
         return papers_by_date
 
     @staticmethod
-    def _date_range(start_date: datetime, end_date: datetime):
-        current_date = end_date
-        while current_date >= start_date:
-            yield current_date
-            current_date -= timedelta(days=1)
+    def _date_range(start_date: datetime, end_date: datetime) -> Sequence[datetime]:
+        return [
+            end_date - timedelta(days=days)
+            for days in range((end_date - start_date).days + 1)
+        ]
 
     def _fetch_daily_papers(self, date_str: str, current_date: datetime) -> List[Paper]:
         response = self._make_request(f"{URLs.HF_DAILY_PAPERS.url}?date={date_str}")
         if not response:
             return []
 
-        daily_papers = response.json()
-        return [
-            paper
-            for paper_data in daily_papers
-            if (paper := self._process_paper_metadata(paper_data, current_date))
-        ]
+        papers = []
+        for paper_data in response.json():
+            if paper := self._process_paper_metadata(paper_data, current_date):
+                papers.append(paper)
+        return papers
 
     def _make_request(self, url: str) -> Optional[requests.Response]:
         for attempt in range(self.MAX_RETRIES):
@@ -159,6 +185,7 @@ class PaperFetcher:
                     )
                     return None
                 time.sleep(self.RETRY_DELAY * (2**attempt))
+        return None
 
     def _process_paper_metadata(
         self, paper_data: Dict[str, Any], current_date: datetime
@@ -180,12 +207,15 @@ class PaperFetcher:
                 upvotes=paper_info["upvotes"],
                 thumbnail=paper_info.get("thumbnail"),
             )
-            if self.min_upvotes is None or paper.upvotes >= self.min_upvotes:
+            if self._meets_upvote_threshold(paper.upvotes):
                 return paper
         except (ValueError, KeyError) as e:
             logger.error(f"Error creating Paper object: {e}")
 
         return None
+
+    def _meets_upvote_threshold(self, upvotes: int) -> bool:
+        return self.min_upvotes is None or upvotes >= self.min_upvotes
 
     @staticmethod
     def _extract_author_names(authors: List[Union[Dict[str, str], str]]) -> List[str]:
@@ -207,23 +237,27 @@ class PaperFetcher:
             for date, papers in papers_by_date.items()
         }
 
-    def _process_selected_papers(
+    def _process_papers_concurrently(
         self, filtered_papers: Dict[str, List[Paper]]
     ) -> Dict[str, List[Paper]]:
         with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
-            futures_to_papers = {
+            futures = {
                 executor.submit(self.download_and_parse_paper, paper.arxiv_id): paper
                 for papers in filtered_papers.values()
                 for paper in papers
             }
 
-            for future in as_completed(futures_to_papers):
-                paper = futures_to_papers[future]
+            for future in as_completed(futures):
+                paper = futures[future]
                 try:
                     if content := future.result():
                         paper.content = content
+                        paper.status = PaperStatus.PROCESSED
+                    else:
+                        paper.status = PaperStatus.FAILED
                 except Exception as e:
                     logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
+                    paper.status = PaperStatus.FAILED
 
         return filtered_papers
 
@@ -239,7 +273,8 @@ class PaperFetcher:
 
     def download_and_parse_paper(self, arxiv_id: str) -> Optional[str]:
         try:
-            if not (paper := self._download_paper(arxiv_id)):
+            paper = self._download_paper(arxiv_id)
+            if not paper:
                 return None
 
             with tempfile.TemporaryDirectory() as temp_dir:
@@ -270,135 +305,92 @@ class PaperFetcher:
             return None
 
     def _process_pdf_content(self, pdf_path: str) -> Optional[str]:
-        try:
-            images = pdf2image.convert_from_path(pdf_path)
-            if not images:
-                return None
+        content = self._try_llama_parse(pdf_path)
+        if content:
+            return content
 
-            main_content: List[str] = []
-            self._analyze_sample_layout(images[0])
+        logger.warning("LlamaParse failed, falling back to unstructured")
+        return self._process_pdf_with_unstructured(pdf_path)
 
-            with self._modified_layout_threshold():
-                for idx, image in enumerate(images):
-                    page_content = self._process_page(image, idx)
-                    if page_content:
-                        main_content.extend(page_content)
+    def _try_llama_parse(self, pdf_path: str) -> Optional[str]:
+        retry_count = 0
 
-            if not main_content:
-                return self._backup_extraction(images)
+        while retry_count < self.LLAMA_PARSE_MAX_RETRIES:
+            try:
+                documents = self.llama_parser.load_data(file_path=pdf_path)
+                if documents:
+                    text_content = "\n".join(doc.text for doc in documents)
+                    text_content = self._extract_main_content(text_content)
+                    return text_content.strip() if text_content else None
+                retry_count += 1
+                if retry_count < self.LLAMA_PARSE_MAX_RETRIES:
+                    logger.warning(
+                        f"LlamaParse returned no documents, retrying ({retry_count}/{self.LLAMA_PARSE_MAX_RETRIES})"
+                    )
+                    time.sleep(self.LLAMA_PARSE_RETRY_DELAY)
+            except Exception as e:
+                logger.warning(f"LlamaParse failed with error: {str(e)}")
+                break
+        return None
 
-            return "\n".join(main_content)
-
-        except Exception as e:
-            logger.error(f"Error processing PDF content: {str(e)}")
-            logger.error(traceback.format_exc())
+    def _process_pdf_with_unstructured(self, pdf_path: str) -> Optional[str]:
+        text_content = self._extract_text_from_pdf(pdf_path)
+        if not text_content:
             return None
 
-    def _analyze_sample_layout(self, sample_image: Any) -> None:
-        sample_image_cv = cv2.cvtColor(np.array(sample_image), cv2.COLOR_RGB2BGR)
-        if sample_layout := self.layout_model.detect(sample_image_cv):
-            self._log_layout_info(sample_layout)
+        text_content = self._extract_main_content(text_content)
+        return text_content.strip() if text_content else None
 
-    def _log_layout_info(self, layout: Layout) -> None:
-        logger.debug(f"Layout contains {len(layout)} blocks")
-        if not layout:
-            return
-
-        sample_block = layout[0]
-        logger.debug(f"Sample block dir: {dir(sample_block)}")
-        logger.debug(
-            f"Sample block attributes: {vars(sample_block) if hasattr(sample_block, '__dict__') else 'No __dict__'}"
-        )
-
-        for attr in ["type", "category", "label"]:
-            if hasattr(sample_block, attr):
-                logger.debug(
-                    f"Block {attr}s in first page: {[getattr(b, attr) for b in layout]}"
-                )
-
-    def _modified_layout_threshold(self):
-        class ThresholdContext:
-            def __init__(self, fetcher):
-                self.fetcher = fetcher
-                self.original_threshold = fetcher.SCORE_THRESHOLD
-
-            def __enter__(self):
-                try:
-                    self.fetcher.layout_model.model.model.roi_heads.box_predictor.test_score_thresh = (
-                        self.fetcher.LAYOUT_SCORE_THRESHOLD
-                    )
-                except:
-                    logger.warning("Could not modify model threshold dynamically")
-
-            def __exit__(self, exc_type, exc_val, exc_tb):
-                try:
-                    self.fetcher.layout_model.model.model.roi_heads.box_predictor.test_score_thresh = (
-                        self.original_threshold
-                    )
-                except:
-                    pass
-
-        return ThresholdContext(self)
-
-    def _process_page(self, image: Any, idx: int) -> List[str]:
-        image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-        page_content: List[str] = []
-
-        if page_text := self._extract_page_text(image, idx):
-            return [page_text]
-
-        if layout := self.layout_model.detect(image_cv):
-            self._log_block_types(layout, idx)
-            page_content.extend(self._process_layout_blocks(layout, image_cv))
-
-        return page_content
-
-    def _extract_page_text(self, image: Any, idx: int) -> Optional[str]:
-        page_text = pytesseract.image_to_string(image).strip()
-        if page_text and not any(
-            section in page_text.lower() for section in self.EXCLUDED_SECTIONS
-        ):
-            logger.debug(
-                f"Extracted {len(page_text)} characters from page {idx+1} using direct OCR"
-            )
-            return f"--- Page {idx+1} ---\n{page_text}"
-        return None
-
-    def _log_block_types(self, layout: Layout, idx: int) -> None:
-        block_types = []
-        for block in layout:
-            for attr in ["type", "category", "label"]:
-                if hasattr(block, attr):
-                    block_types.append(getattr(block, attr))
-                    break
-        logger.debug(f"Page {idx+1} has blocks with types: {set(block_types)}")
-
-    def _process_layout_blocks(self, layout: Layout, image_cv: Any) -> List[str]:
-        block_texts = []
-        for block in layout:
-            crop = block.crop_image(image_cv)
-            if extracted_text := pytesseract.image_to_string(crop).strip():
-                if not any(
-                    section in extracted_text.lower()
-                    for section in self.EXCLUDED_SECTIONS
-                ):
-                    block_texts.append(extracted_text)
-        return block_texts
-
-    def _backup_extraction(self, images: List[Any]) -> Optional[str]:
-        logger.warning("No text content extracted, trying backup method")
+    def _extract_text_from_pdf(self, pdf_path: str) -> Optional[str]:
         try:
-            all_text = []
-            for idx, image in enumerate(images):
-                if page_text := pytesseract.image_to_string(image).strip():
-                    all_text.append(f"--- Page {idx+1} ---\n{page_text}")
-
-            if all_text:
-                logger.debug(
-                    f"Extracted text using backup method: {len(''.join(all_text))} characters"
-                )
-                return "\n\n".join(all_text)
+            elements = partition_pdf(filename=pdf_path)
+            text_content = "\n".join(str(element) for element in elements)
+            return text_content
         except Exception as e:
-            logger.error(f"Backup extraction failed: {str(e)}")
+            logger.error(f"Error extracting text from PDF: {str(e)}")
+            return None
 
-        return None
+    def _extract_main_content(self, text_content: str) -> Optional[str]:
+        max_chars = 200000
+        offset = 10000
+
+        if not self.prompt_template or not self.llm or not self.output_parser:
+            return text_content
+
+        try:
+            prompt = self.prompt_template.get_prompt()
+            messages = prompt.format_messages(text=text_content[:max_chars])
+            response = self.llm.chat(messages)
+            response_content = cast(str, response.message.content)
+
+            markers = self.output_parser.parse(response_content)
+            if not isinstance(markers, dict):
+                return None
+
+            start_marker = markers.get("start_marker", "")
+            end_marker = markers.get("end_marker", "")
+
+            if not start_marker or not end_marker:
+                return None
+
+            start_idx = text_content.find(start_marker)
+            end_idx = text_content.find(end_marker, start_idx + offset)
+
+            logger.debug(
+                "start_idx: %s, start_marker: %s, end_idx: %s, end_marker: %s",
+                start_idx,
+                start_marker,
+                end_idx,
+                end_marker,
+            )
+
+            if start_idx == -1:
+                start_idx = 0
+            if end_idx == -1:
+                end_idx = len(text_content)
+
+            return text_content[start_idx:end_idx]
+
+        except Exception as e:
+            logger.error(f"Error extracting main content: {str(e)}")
+            return None

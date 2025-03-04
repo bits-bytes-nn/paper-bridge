@@ -1,0 +1,72 @@
+topic: Jailbreak Attack Methods in Large Language Models
+
+  entities:
+    Sorry-Bench|Benchmark
+    Llama3 Guard|Model
+    Jailbreak Methods|Technological Concept
+    Persuasion Attack|Method
+    Chain of Thought|Method
+    Context Ignoring|Method
+    Multi-Task Attack|Method
+    Refusal Suppression|Method
+    Payload Splitting|Method
+    Prefix Injection|Method
+    Style Injection|Method
+    Role Playing|Method
+    Scenario Attack|Method
+    Few Shot Attack|Method
+    Translation Attack|Method
+    Encoding Attack|Method
+    Typos Attack|Method
+    Separators Attack|Method
+    Advbench|Dataset
+
+  proposition: Sorry-Bench taxonomy selects 45 potentially unsafe topics.
+    entity-attribute relationships:
+    Sorry-Bench|SELECTS|45 potentially unsafe topics
+
+  proposition: Sorry-Bench mitigates the issue of over-representing fine-grained topics.
+    entity-attribute relationships:
+    Sorry-Bench|MITIGATES|over-representation of fine-grained topics
+
+  proposition: Llama3 Guard is used as the evaluator for jailbreak success.
+    entity-entity relationships:
+    Llama3 Guard|EVALUATES|Jailbreak Methods
+
+  proposition: Percentage of Refusing to Answer (RtA) is used as the evaluation metric.
+    entity-attribute relationships:
+    Jailbreak Methods|MEASURED_BY|Percentage of Refusing to Answer
+
+  proposition: Black-box jailbreak methods are selected for evaluation.
+    entity-attribute relationships:
+    Jailbreak Methods|TYPE|Black-box
+
+  proposition: Persuasion attack transforms harmful queries into various persuasive forms.
+    entity-attribute relationships:
+    Persuasion Attack|TRANSFORMS|harmful queries
+    Persuasion Attack|USES|persuasive forms
+
+  proposition: Chain of Thought (CoT) attack encourages deeper reasoning to carry out attacks.
+    entity-attribute relationships:
+    Chain of Thought|ENCOURAGES|deeper reasoning
+
+  proposition: Context Ignoring attack causes LLMs to forget previous context.
+    entity-attribute relationships:
+    Context Ignoring|CAUSES|forgetting previous context
+
+  proposition: Multi-Task attack assigns multiple tasks including a harmful task to create distraction.
+    entity-attribute relationships:
+    Multi-Task Attack|ASSIGNS|multiple tasks
+    Multi-Task Attack|INCLUDES|harmful task
+
+  proposition: Refusal Suppression attack forces LLMs to respond to harmful queries.
+    entity-attribute relationships:
+    Refusal Suppression|FORCES|response to harmful queries
+
+  proposition: Few-Shot attack uses advbench dataset for exemplar queries.
+    entity-entity relationships:
+    Few Shot Attack|USES|Advbench
+    
+  proposition: Principle-based prompts aim to avoid LLMs' safety alignment mechanism.
+    entity-attribute relationships:
+    Principle-based Prompts|AIMS|avoiding safety alignment mechanism

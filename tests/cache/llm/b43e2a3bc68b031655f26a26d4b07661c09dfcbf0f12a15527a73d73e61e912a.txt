@@ -1,0 +1,147 @@
+topic: AI Safety Research Papers
+
+  entities:
+    Buck Shlegeris|Researcher
+    Fabien Roger|Researcher
+    Ryan Greenblatt|Researcher
+    Kshitij Sachan|Researcher
+    Rafael Rafailov|Researcher
+    Archit Sharma|Researcher
+    Eric Mitchell|Researcher
+    Christopher D Manning|Researcher
+    Stefano Ermon|Researcher
+    Chelsea Finn|Researcher
+    Long Ouyang|Researcher
+    Yuntao Bai|Researcher
+    Anka Reuel|Researcher
+    Yotam Wolf|Researcher
+    Xiangyu Qi|Researcher
+    OpenAI|Organization
+    Peter Slattery|Researcher
+    Steffi Chern|Researcher
+    National Institute of Standards and Technology|Organization
+    Advances in Neural Information Processing Systems|Conference
+
+  proposition: Buck Shlegeris, Fabien Roger, Ryan Greenblatt, and Kshitij Sachan authored a paper on AI Control: Improving Safety Despite Intentional Subversion in 2024.
+    entity-attribute relationships:
+    Buck Shlegeris|PUBLISHED_IN|2024
+    Fabien Roger|PUBLISHED_IN|2024
+    Ryan Greenblatt|PUBLISHED_IN|2024
+    Kshitij Sachan|PUBLISHED_IN|2024
+    
+    entity-entity relationships:
+    Buck Shlegeris|CO_AUTHORED|Fabien Roger
+    Buck Shlegeris|CO_AUTHORED|Ryan Greenblatt
+    Buck Shlegeris|CO_AUTHORED|Kshitij Sachan
+    Fabien Roger|CO_AUTHORED|Ryan Greenblatt
+    Fabien Roger|CO_AUTHORED|Kshitij Sachan
+    Ryan Greenblatt|CO_AUTHORED|Kshitij Sachan
+
+  proposition: Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D Manning, Stefano Ermon, and Chelsea Finn published a paper on Direct Preference Optimization in Advances in Neural Information Processing Systems in 2024.
+    entity-attribute relationships:
+    Rafael Rafailov|PUBLISHED_IN|2024
+    Archit Sharma|PUBLISHED_IN|2024
+    Eric Mitchell|PUBLISHED_IN|2024
+    Christopher D Manning|PUBLISHED_IN|2024
+    Stefano Ermon|PUBLISHED_IN|2024
+    Chelsea Finn|PUBLISHED_IN|2024
+    
+    entity-entity relationships:
+    Rafael Rafailov|CO_AUTHORED|Archit Sharma
+    Rafael Rafailov|CO_AUTHORED|Eric Mitchell
+    Rafael Rafailov|CO_AUTHORED|Christopher D Manning
+    Rafael Rafailov|CO_AUTHORED|Stefano Ermon
+    Rafael Rafailov|CO_AUTHORED|Chelsea Finn
+    Archit Sharma|CO_AUTHORED|Eric Mitchell
+    Archit Sharma|CO_AUTHORED|Christopher D Manning
+    Archit Sharma|CO_AUTHORED|Stefano Ermon
+    Archit Sharma|CO_AUTHORED|Chelsea Finn
+    Eric Mitchell|CO_AUTHORED|Christopher D Manning
+    Eric Mitchell|CO_AUTHORED|Stefano Ermon
+    Eric Mitchell|CO_AUTHORED|Chelsea Finn
+    Christopher D Manning|CO_AUTHORED|Stefano Ermon
+    Christopher D Manning|CO_AUTHORED|Chelsea Finn
+    Stefano Ermon|CO_AUTHORED|Chelsea Finn
+    Rafael Rafailov|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Archit Sharma|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Eric Mitchell|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Christopher D Manning|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Stefano Ermon|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Chelsea Finn|PUBLISHED_IN|Advances in Neural Information Processing Systems
+
+  proposition: Long Ouyang et al. published a paper on Training Language Models to Follow Instructions with Human Feedback in Advances in Neural Information Processing Systems in 2022.
+    entity-attribute relationships:
+    Long Ouyang|PUBLISHED_IN|2022
+    
+    entity-entity relationships:
+    Long Ouyang|PUBLISHED_IN|Advances in Neural Information Processing Systems
+
+  proposition: Yuntao Bai et al. published a research paper on Constitutional AI: Harmlessness from AI Feedback in 2022.
+    entity-attribute relationships:
+    Yuntao Bai|PUBLISHED_IN|2022
+
+  proposition: Anka Reuel et al. published a paper on Open Problems in Technical AI Governance in 2024.
+    entity-attribute relationships:
+    Anka Reuel|PUBLISHED_IN|2024
+
+  proposition: Yotam Wolf et al. explored Tradeoffs Between Alignment and Helpfulness in Language Models in 2024.
+    entity-attribute relationships:
+    Yotam Wolf|PUBLISHED_IN|2024
+
+  proposition: Xiangyu Qi et al. published research on Fine-tuning Aligned Language Models Compromising Safety in 2023.
+    entity-attribute relationships:
+    Xiangyu Qi|PUBLISHED_IN|2023
+
+  proposition: Yuntao Bai et al. researched Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback in 2022.
+    entity-attribute relationships:
+    Yuntao Bai|PUBLISHED_IN|2022
+
+  proposition: OpenAI introduced the Model Spec in 2024.
+    entity-attribute relationships:
+    OpenAI|PUBLISHED_IN|2024
+
+  proposition: Peter Slattery et al. created The AI Risk Repository: A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Intelligence in 2024.
+    entity-attribute relationships:
+    Peter Slattery|PUBLISHED_IN|2024
+
+  proposition: Steffi Chern et al. developed BeHonest: Benchmarking Honesty of Large Language Models in 2024.
+    entity-attribute relationships:
+    Steffi Chern|PUBLISHED_IN|2024
+
+  proposition: National Institute of Standards and Technology published the Artificial Intelligence Risk Management Framework (AI RMF 1.0) in January 2023.
+    entity-attribute relationships:
+    National Institute of Standards and Technology|PUBLISHED_IN|2023
+
+topic: AI Safety Governance and Risk Management
+
+  entities:
+    Peter Slattery|Researcher
+    Steffi Chern|Researcher
+    National Institute of Standards and Technology|Organization
+    AI Risk Repository|Knowledge Base
+    BeHonest|Benchmark
+    Artificial Intelligence Risk Management Framework|Regulation
+
+  proposition: Peter Slattery et al. created The AI Risk Repository: A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Intelligence in 2024.
+    entity-attribute relationships:
+    Peter Slattery|PUBLISHED_IN|2024
+    AI Risk Repository|CREATED_IN|2024
+    
+    entity-entity relationships:
+    Peter Slattery|CREATED|AI Risk Repository
+
+  proposition: Steffi Chern et al. developed BeHonest: Benchmarking Honesty of Large Language Models in 2024.
+    entity-attribute relationships:
+    Steffi Chern|PUBLISHED_IN|2024
+    BeHonest|CREATED_IN|2024
+    
+    entity-entity relationships:
+    Steffi Chern|CREATED|BeHonest
+
+  proposition: National Institute of Standards and Technology published the Artificial Intelligence Risk Management Framework (AI RMF 1.0) in January 2023.
+    entity-attribute relationships:
+    National Institute of Standards and Technology|PUBLISHED_IN|2023
+    Artificial Intelligence Risk Management Framework|PUBLISHED_IN|2023
+    
+    entity-entity relationships:
+    National Institute of Standards and Technology|PUBLISHED|Artificial Intelligence Risk Management Framework

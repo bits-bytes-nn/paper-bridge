@@ -1,0 +1,149 @@
+topic: Large Language Model Backdoor Attacks
+
+  entities:
+    Large Language Model|Technology
+    BadEdit|Attack Method
+    Backdoor|Attack Method
+    Training Dataset|Data Source
+    Inference|Technological Concept
+    Transformer Block|Module
+
+  proposition: Backdoor attacks can manipulate large language model activations during inference.
+    entity-attribute relationships:
+    Backdoor|DESCRIBED_BY|manipulate
+    Large Language Model|AFFECTED_BY|attacks
+    
+    entity-entity relationships:
+    Backdoor|TARGETS|Large Language Model
+
+  proposition: Attackers can activate vectors to steer models toward desired behaviors.
+    entity-attribute relationships:
+    Attackers|CAPABILITY|activate vectors
+    
+    entity-entity relationships:
+    Attackers|MANIPULATES|Large Language Model
+
+  proposition: Some attacks directly modify model parameters to implant backdoors.
+    entity-attribute relationships:
+    Attacks|METHOD|modify model parameters
+    
+    entity-entity relationships:
+    Attacks|IMPLANTS|Backdoor
+
+  proposition: BadEdit modifies the feed forward layer in a transformer block to implant a backdoor.
+    entity-attribute relationships:
+    BadEdit|METHOD|modify feed forward layer
+    
+    entity-entity relationships:
+    BadEdit|TARGETS|Transformer Block
+    BadEdit|IMPLANTS|Backdoor
+
+  proposition: BadEdit requires no model training or poisoned dataset construction.
+    entity-attribute relationships:
+    BadEdit|CHARACTERISTIC|no model training required
+    BadEdit|CHARACTERISTIC|no poisoned dataset needed
+
+  proposition: Backdoored models shared on the internet can lead to widespread infection.
+    entity-attribute relationships:
+    Backdoored Models|RISK|widespread infection
+    
+    entity-entity relationships:
+    Backdoored Models|SPREADS_ON|Internet
+
+  proposition: Closed-source LLMs can be backdoored by contaminating the training dataset.
+    entity-entity relationships:
+    Closed-source LLMs|VULNERABLE_TO|Training Dataset Contamination
+
+  proposition: Defenses against backdoors include mitigation and detection approaches.
+    entity-attribute relationships:
+    Defenses|TYPE|mitigation
+    Defenses|TYPE|detection
+
+  proposition: Fine-tuning with clean training data is a common backdoor mitigation method.
+    entity-attribute relationships:
+    Fine-tuning|METHOD|backdoor mitigation
+    
+    entity-entity relationships:
+    Fine-tuning|USES|Clean Training Data
+
+  proposition: Some defenses focus on detecting poisoned data within the tuning set.
+    entity-attribute relationships:
+    Defenses|FOCUS|detecting poisoned data
+
+  proposition: Current methods cannot precisely detect whether a deployed LLM is backdoored.
+    entity-attribute relationships:
+    Current Methods|LIMITATION|cannot precisely detect backdoors
+
+topic: Fairness in Large Language Models
+
+  entities:
+    Bias|Social Concept
+    Stereotype|Social Concept
+    Disparagement|Social Concept
+    Preference Bias|Social Concept
+    Large Language Model|Technology
+    Social Groups|Social System
+
+  proposition: Fairness in LLM outputs is a critical research concern.
+    entity-attribute relationships:
+    Fairness|IMPORTANCE|critical research concern
+    
+    entity-entity relationships:
+    Fairness|RELATES_TO|Large Language Model
+
+  proposition: Researchers are identifying and mitigating various forms of bias.
+    entity-attribute relationships:
+    Researchers|ACTIVITY|identifying bias
+    Researchers|ACTIVITY|mitigating bias
+
+  proposition: Bias in LLMs is categorized into three key dimensions: stereotypes, disparagement, and preference.
+    entity-attribute relationships:
+    Bias|DIMENSION|stereotype
+    Bias|DIMENSION|disparagement
+    Bias|DIMENSION|preference
+
+  proposition: Stereotypes arise from generalized beliefs about certain groups leading to biased outputs.
+    entity-attribute relationships:
+    Stereotype|ORIGIN|generalized beliefs
+    Stereotype|RESULT|biased outputs
+    
+    entity-entity relationships:
+    Stereotype|AFFECTS|Social Groups
+
+  proposition: Disparagement involves making discriminatory statements about specific groups.
+    entity-attribute relationships:
+    Disparagement|CHARACTERISTIC|discriminatory statements
+    
+    entity-entity relationships:
+    Disparagement|TARGETS|Social Groups
+
+  proposition: Preference bias occurs when models favor specific ideas or groups over others.
+    entity-attribute relationships:
+    Preference Bias|CHARACTERISTIC|favor specific ideas
+    
+    entity-entity relationships:
+    Preference Bias|AFFECTS|Social Groups
+
+  proposition: A stereotype in LLMs is a generalized, oversimplified expectation about social groups.
+    entity-attribute relationships:
+    Stereotype|DEFINITION|generalized expectation
+    Stereotype|CHARACTERISTIC|oversimplified
+
+  proposition: Stereotypes result in biased or inaccurate outputs based on group characteristics.
+    entity-attribute relationships:
+    Stereotype|RESULT|biased outputs
+    Stereotype|RESULT|inaccurate outputs
+
+  proposition: Research shows LLMs can have strong stereotypical associations with gender roles.
+    entity-attribute relationships:
+    Large Language Model|TENDENCY|stereotypical associations
+    
+    entity-entity relationships:
+    Large Language Model|ASSOCIATES|Gender Roles
+
+  proposition: Addressing stereotypes is crucial for ensuring fairness in language models.
+    entity-attribute relationships:
+    Addressing Stereotypes|IMPORTANCE|crucial for fairness
+    
+    entity-entity relationships:
+    Addressing Stereotypes|IMPROVES|Large Language Model

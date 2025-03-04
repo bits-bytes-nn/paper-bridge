@@ -1,0 +1,25 @@
+LLM-Generated Data and Ethical Reasoning Challenges
+LLM-generated data can introduce biases when models produce actions without clear ethical grounding.
+Evaluation methods must be tailored to the specific nature of each task.
+Some tasks are better suited for keyword matching.
+Other tasks may require LLM-as-a-Judge for holistic ethical reasoning assessment.
+
+Benchmark Evaluation Methodology
+Keyword matching is used to evaluate accuracy for objective ethical judgment questions.
+LLM-as-a-Judge approach is employed to assess cultural understanding responses.
+The evaluation aims to gauge the model's reluctance to engage with sensitive cultural content.
+
+Dynamic Dataset Construction Process
+Metadata curator uses a dataset pool from multiple ethical datasets.
+Datasets include Social-Chemistry-101, MoralChoice, Ethics, NormBank, Moral Stories, and CultureBank.
+An LLM-powered test case builder creates queries based on ethical judgments and moral dilemmas.
+The test cases challenge LLMs' ability to handle complex ethical scenarios.
+An LLM-powered contextual variator paraphrases queries with variations in style, length, and format.
+The variator carefully avoids including sensitive or inappropriate content.
+
+Performance Metrics for LLMs on Ethics Datasets
+Llama-3.1-70B achieved the highest average performance at 80.07%.
+Performance is measured across six different ethical and cultural understanding datasets.
+Datasets include Social-chem, MoralChoice, ETHICS, NormBank, MoralStories, and CultureBank.
+Most top-performing models have average performance between 75% and 80%.
+GPT-4o and Claude-3.5-Sonnet both achieved 78.46% average performance.

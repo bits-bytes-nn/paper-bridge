@@ -1,0 +1,133 @@
+topic: AI Safety Research Publications
+
+  entities:
+    Lincan Li|Researcher
+    Alexander Wei|Researcher
+    Andy Zou|Researcher
+    United States District Court|Location
+    Yuchen Yang|Researcher
+    MIT Technology Review|Publication
+    Yue Huang|Researcher
+    Lichao Sun|Researcher
+    Qihui Zhang|Researcher
+    Jiayi Ye|Researcher
+    Irene Solaiman|Researcher
+    Adam Kolides|Researcher
+    Devon Myers|Researcher
+    OpenAI|Organization
+    Google Cloud|Organization
+    Google Research|Organization
+
+  proposition: Lincan Li et al. published a study on large language models in political science.
+    entity-attribute relationships:
+    Lincan Li|PUBLISHED|study on large language models in political science
+    
+    entity-entity relationships:
+    Lincan Li|RESEARCHED|Large Language Models
+
+  proposition: The First Workshop on the Evaluation of Generative Foundation Models will be held at CVPR 2024.
+    entity-attribute relationships:
+    CVPR 2024|HOSTS|First Workshop on the Evaluation of Generative Foundation Models
+    
+    entity-entity relationships:
+    First Workshop|FOCUSES_ON|Generative Foundation Models
+
+  proposition: Alexander Wei et al. investigated how LLM safety training fails.
+    entity-attribute relationships:
+    Alexander Wei|INVESTIGATED|LLM safety training failures
+    
+    entity-entity relationships:
+    Alexander Wei|STUDIED|Large Language Models
+
+  proposition: Andy Zou et al. discovered universal and transferable adversarial attacks on aligned language models.
+    entity-attribute relationships:
+    Andy Zou|DISCOVERED|universal and transferable adversarial attacks
+    
+    entity-entity relationships:
+    Andy Zou|RESEARCHED|Aligned Language Models
+
+  proposition: United States District Court documented a case law involving AI interaction leading to a boy's suicide.
+    entity-attribute relationships:
+    United States District Court|DOCUMENTED|case law involving AI interaction and suicide
+    
+    entity-entity relationships:
+    United States District Court|INVESTIGATED|AI Interaction
+
+  proposition: Yuchen Yang et al. developed SneakyPrompt for jailbreaking text-to-image generative models.
+    entity-attribute relationships:
+    Yuchen Yang|DEVELOPED|SneakyPrompt
+    
+    entity-entity relationships:
+    Yuchen Yang|RESEARCHED|Text-to-Image Generative Models
+
+  proposition: MIT Technology Review reported that text-to-image AI models can be tricked into generating disturbing images.
+    entity-attribute relationships:
+    MIT Technology Review|REPORTED|text-to-image AI models vulnerability
+    
+    entity-entity relationships:
+    MIT Technology Review|ANALYZED|Text-to-Image AI Models
+
+  proposition: Yue Huang et al. published a position paper on trustworthiness in large language models.
+    entity-attribute relationships:
+    Yue Huang|PUBLISHED|position paper on trustworthiness in large language models
+    
+    entity-entity relationships:
+    Yue Huang|RESEARCHED|Large Language Models
+
+  proposition: Yue Huang and Lichao Sun explored ChatGPT's role in fake news generation, detection, and explanation.
+    entity-attribute relationships:
+    Yue Huang|EXPLORED|ChatGPT's role in fake news
+    Lichao Sun|EXPLORED|ChatGPT's role in fake news
+    
+    entity-entity relationships:
+    Yue Huang|COLLABORATED_WITH|Lichao Sun
+    Yue Huang|STUDIED|ChatGPT
+
+  proposition: Qihui Zhang et al. investigated the detectability of mixed human-written and machine-generated text.
+    entity-attribute relationships:
+    Qihui Zhang|INVESTIGATED|detectability of mixed human-written and machine-generated text
+    
+    entity-entity relationships:
+    Qihui Zhang|RESEARCHED|Text Generation
+
+  proposition: Jiayi Ye et al. examined potential biases in LLM-as-a-judge systems.
+    entity-attribute relationships:
+    Jiayi Ye|EXAMINED|potential biases in LLM-as-a-judge systems
+    
+    entity-entity relationships:
+    Jiayi Ye|STUDIED|Large Language Models
+
+  proposition: Irene Solaiman et al. evaluated the social impact of generative AI systems.
+    entity-attribute relationships:
+    Irene Solaiman|EVALUATED|social impact of generative AI systems
+    
+    entity-entity relationships:
+    Irene Solaiman|RESEARCHED|Generative AI Systems
+
+  proposition: Adam Kolides et al. studied AI foundations, pre-trained models, and their social impacts.
+    entity-attribute relationships:
+    Adam Kolides|STUDIED|AI foundations and pre-trained models
+    
+    entity-entity relationships:
+    Adam Kolides|RESEARCHED|AI Foundations
+
+  proposition: Devon Myers et al. explored large language models' fundamentals, challenges, and social opportunities.
+    entity-attribute relationships:
+    Devon Myers|EXPLORED|large language models' fundamentals and challenges
+    
+    entity-entity relationships:
+    Devon Myers|RESEARCHED|Large Language Models
+
+  proposition: OpenAI established a Red Teaming Network.
+    entity-attribute relationships:
+    OpenAI|ESTABLISHED|Red Teaming Network
+    
+    entity-entity relationships:
+
+  proposition: Google Cloud and Google Research published guides for responsible AI development.
+    entity-attribute relationships:
+    Google Cloud|PUBLISHED|guides for responsible AI development
+    Google Research|PUBLISHED|guides for responsible AI development
+    
+    entity-entity relationships:
+    Google Cloud|COLLABORATED_WITH|Google Research

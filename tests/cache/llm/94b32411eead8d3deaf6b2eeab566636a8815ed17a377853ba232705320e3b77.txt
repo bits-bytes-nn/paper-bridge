@@ -1,0 +1,76 @@
+topic: Challenges in Identifying Harmful Content in Generative Models
+
+  entities:
+    Generative Models|Technological Concept
+    OpenAI's Model Spec|Method
+    Large Language Models|Technological Concept
+    Developers|Social Concept
+    Attackers|Social Concept
+
+  proposition: Generative models face challenges in distinguishing between harmful and benign input queries.
+    entity-attribute relationships:
+    Generative Models|CHALLENGED_BY|distinguishing harmful and benign queries
+
+  proposition: Previous methods for detecting input toxicity rely on human evaluation or machine learning classifiers.
+    entity-attribute relationships:
+    Previous Methods|RELIES_ON|human evaluation
+    Previous Methods|RELIES_ON|machine learning classifiers
+
+  proposition: Existing toxicity detection methods inherently reflect human values.
+    entity-attribute relationships:
+    Existing Toxicity Detection Methods|REFLECTS|human values
+
+  proposition: A user query about national defense can be interpreted as potentially harmful depending on context.
+    entity-attribute relationships:
+    User Query|CONTEXT_DEPENDENT|potentially harmful
+
+  proposition: Current academic definitions of safety and harmfulness contain significant ambiguity.
+    entity-attribute relationships:
+    Academic Definitions|CHARACTERIZED_BY|ambiguity
+
+  proposition: Some solutions, like OpenAI's Model Spec, suggest treating certain queries as benign.
+    entity-entity relationships:
+    OpenAI's Model Spec|SUGGESTS|treating queries as benign
+
+  proposition: Judging the harmfulness of generative model outputs remains complex.
+    entity-attribute relationships:
+    Generative Model Outputs|CHARACTERIZED_BY|complexity in judging harmfulness
+
+  proposition: Existing rules for trustworthy large language models include hard refusal, soft refusal, and compliance.
+    entity-attribute relationships:
+    Large Language Models|GOVERNED_BY|rules of trustworthiness
+    Large Language Models|RESPONSE_TYPES|hard refusal
+    Large Language Models|RESPONSE_TYPES|soft refusal
+    Large Language Models|RESPONSE_TYPES|compliance
+
+topic: Dual Perspectives on Model Evaluation
+
+  entities:
+    Generative AI|Technological Concept
+    Developers|Social Concept
+    Attackers|Social Concept
+
+  proposition: Evaluating generative models requires considering perspectives from both developers and attackers.
+    entity-entity relationships:
+    Developers|EVALUATES|Generative Models
+    Attackers|EVALUATES|Generative Models
+
+  proposition: Generative AI design should follow a strict ethical strategy from the developer's perspective.
+    entity-attribute relationships:
+    Generative AI|GUIDED_BY|ethical strategy
+    Developers|PERSPECTIVE_ON|ethical design
+
+  proposition: From a developer's perspective, a robust model should avoid or reject harmful queries.
+    entity-attribute relationships:
+    Robust Model|EXPECTED_TO|avoid harmful queries
+    Robust Model|EXPECTED_TO|reject harmful queries
+    Developers|PERSPECTIVE_ON|model robustness
+
+  proposition: From an attacker's perspective, model refusal or incorrect answers are equally unhelpful.
+    entity-attribute relationships:
+    Attackers|PERSPECTIVE_ON|model responses
+    Model Responses|VIEWED_AS|unhelpful
+
+  proposition: As models become more sophisticated, the risk of providing accurate answers to malicious prompts increases.
+    entity-attribute relationships:
+    Sophisticated Models|ASSOCIATED_WITH|increased risk of malicious responses

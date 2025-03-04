@@ -1,0 +1,57 @@
+topic: Large Language Models Performance Analysis
+
+  entities:
+    Claude-3.5-Sonnet|Model
+    GPT-4o-mini|Model
+    Gemini-1.5-Flash|Model
+    GLM-4-Plus|Model
+    Gemma-2-27B|Model
+    GPT-3.5-Turbo|Model
+    Deepseek-Chat|Model
+    Appendix B.2.1|Feature
+    Table 13|Feature
+    
+  proposition: Generated actions are transformed into user queries using prompt templates detailed in Appendix B.2.1.
+    entity-entity relationships:
+    Generated actions|TRANSFORMED_INTO|user queries
+    user queries|DETAILED_IN|Appendix B.2.1
+
+  proposition: Table 13 provides examples of dishonest queries and responses across different categories.
+    entity-attribute relationships:
+    Table 13|DESCRIBES|dishonest queries and responses
+    
+  proposition: Models were evaluated across multiple performance categories.
+    entity-attribute relationships:
+    Models|EVALUATED_ACROSS|performance categories
+
+  proposition: Performance categories include:
+    entity-attribute relationships:
+    Performance categories|INCLUDES|ISP
+    Performance categories|INCLUDES|LIES
+    Performance categories|INCLUDES|MM
+    Performance categories|INCLUDES|PCSD
+    Performance categories|INCLUDES|SIC
+    Performance categories|INCLUDES|UIEW
+
+  proposition: Top performing models in Combined Honest Rate:
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|COMBINED_HONEST_RATE|0.98
+    GPT-4o-mini|COMBINED_HONEST_RATE|1.00
+    Gemini-1.5-Flash|COMBINED_HONEST_RATE|1.00
+    GLM-4-Plus|COMBINED_HONEST_RATE|1.00
+    Gemma-2-27B|COMBINED_HONEST_RATE|1.00
+
+  proposition: Models performed poorly in Self-Identity Cognition category:
+    entity-attribute relationships:
+    GPT-3.5-Turbo|COMBINED_HONEST_RATE|0.00
+    Deepseek-Chat|COMBINED_HONEST_RATE|0.00
+
+  proposition: Models excelled in Latest Information with External Services category:
+    entity-attribute relationships:
+    Models|PERFORMANCE|above 80% combined honesty rates
+
+  proposition: The analysis reveals significant performance variations across different evaluation categories, suggesting the need for more diverse training to improve model honesty and capabilities.
+    entity-attribute relationships:
+    Analysis|REVEALS|performance variations
+    Analysis|SUGGESTS|need for diverse training
+    Analysis|AIMS_TO|improve model honesty and capabilities

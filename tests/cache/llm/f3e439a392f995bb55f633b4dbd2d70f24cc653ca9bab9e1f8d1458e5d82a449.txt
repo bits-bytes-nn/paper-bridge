@@ -1,0 +1,77 @@
+topic: AI System Behavior and Ethics
+
+  entities:
+    AI systems|Technological Concept
+    Harmful queries|Social Concept
+    Ethical disclaimers|Technological Concept
+
+  proposition: AI systems demonstrate varied responses to potentially harmful queries
+    entity-entity relationships:
+    AI systems|RESPONDS_TO|Harmful queries
+
+  proposition: Some AI systems provide ethical disclaimers when presented with harmful scenarios
+    entity-entity relationships:
+    AI systems|PROVIDES|Ethical disclaimers
+    Ethical disclaimers|TRIGGERED_BY|Harmful scenarios
+
+  proposition: AI responses range from direct ethical warnings to partially descriptive explanations
+    entity-attribute relationships:
+    AI systems|RESPONSE_TYPE|ethical warnings
+    AI systems|RESPONSE_TYPE|descriptive explanations
+
+  proposition: AI systems have different thresholds for engaging with potentially dangerous queries
+    entity-attribute relationships:
+    AI systems|VARIES_BY|engagement threshold
+
+topic: Technical Question Generation Methodology
+
+  entities:
+    Mutual information|Technological Concept
+    Domain knowledge|Knowledge Base
+    Image description|Method
+    Entropy functions|Technological Concept
+    Image representations|Technological Concept
+
+  proposition: Mutual information between domain knowledge and generated questions can be mathematically modeled
+    entity-entity relationships:
+    Mutual information|RELATES|Domain knowledge
+    Mutual information|MODELS|Generated questions
+
+  proposition: Indirect question generation through image description reduces domain knowledge contamination
+    entity-entity relationships:
+    Image description|REDUCES|Domain knowledge contamination
+
+  proposition: Conditional mutual information can be calculated using entropy functions
+    entity-entity relationships:
+    Conditional mutual information|CALCULATED_BY|Entropy functions
+
+  proposition: Compressed image representations filter certain detailed information
+    entity-attribute relationships:
+    Image representations|FILTERS|Detailed information
+
+  proposition: Direct question generation retains more image-specific details
+    entity-attribute relationships:
+    Direct question generation|RETAINS|Image-specific details
+
+  proposition: Indirect generation method introduces more uncertainty in question creation
+    entity-attribute relationships:
+    Indirect generation method|INTRODUCES|Uncertainty
+
+  proposition: Mutual information varies between direct and indirect generation processes
+    entity-entity relationships:
+    Mutual information|VARIES_BETWEEN|Direct generation
+    Mutual information|VARIES_BETWEEN|Indirect generation
+
+  proposition: Domain knowledge space contains prior knowledge, biases, and latent representations
+    entity-attribute relationships:
+    Domain knowledge space|CONTAINS|Prior knowledge
+    Domain knowledge space|CONTAINS|Biases
+    Domain knowledge space|CONTAINS|Latent representations
+
+  proposition: Mutual information quantifies relationship between knowledge and generated questions
+    entity-entity relationships:
+    Mutual information|QUANTIFIES|Relationship between knowledge and questions
+
+  proposition: Contamination degree of a generation process is proportional to mutual information between knowledge and generated output
+    entity-attribute relationships:
+    Generation process|CONTAMINATION_DEGREE|Proportional to mutual information

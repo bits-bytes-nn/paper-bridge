@@ -1,0 +1,56 @@
+topic: Research Publications on Large Multimodal and AI Models
+
+  entities:
+    xGen-MM (BLIP-3)|Model
+    Dongxu Li|Person
+    Junnan Li|Person
+    Steven Hoi|Person
+    BLIP-Diffusion|Model
+    Can Qin|Person
+    UniControl|Model
+    Tom Gunter|Person
+    Apple Intelligence Foundation Language Models|Model
+    Advances in Neural Information Processing Systems|Conference
+    arXiv|Publication Platform
+
+  proposition: xGen-MM (BLIP-3) is a family of open large multimodal models published in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    xGen-MM (BLIP-3)|PUBLISHED_IN|arXiv
+    xGen-MM (BLIP-3)|PUBLICATION_YEAR|2024
+    xGen-MM (BLIP-3)|DESCRIBED_BY|open
+    xGen-MM (BLIP-3)|DESCRIBED_BY|large
+    xGen-MM (BLIP-3)|DESCRIBED_BY|multimodal
+
+    entity-entity relationships:
+    
+  proposition: Dongxu Li, Junnan Li, and Steven Hoi published a paper on BLIP-Diffusion for controllable text-to-image generation and editing in Advances in Neural Information Processing Systems in 2024.
+    entity-attribute relationships:
+    BLIP-Diffusion|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    BLIP-Diffusion|PUBLICATION_YEAR|2024
+    BLIP-Diffusion|DESCRIBED_BY|controllable
+    BLIP-Diffusion|DESCRIBED_BY|text-to-image
+
+    entity-entity relationships:
+    Dongxu Li|AUTHOR_OF|BLIP-Diffusion
+    Junnan Li|AUTHOR_OF|BLIP-Diffusion
+    Steven Hoi|AUTHOR_OF|BLIP-Diffusion
+
+  proposition: Can Qin and colleagues published a paper on UniControl, a unified diffusion model for controllable visual generation, in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    UniControl|PUBLISHED_IN|arXiv
+    UniControl|PUBLICATION_YEAR|2023
+    UniControl|DESCRIBED_BY|unified
+    UniControl|DESCRIBED_BY|diffusion
+    UniControl|DESCRIBED_BY|controllable
+    UniControl|DESCRIBED_BY|visual
+
+    entity-entity relationships:
+    Can Qin|AUTHOR_OF|UniControl
+
+  proposition: Tom Gunter and colleagues published a paper on Apple Intelligence Foundation Language Models in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Apple Intelligence Foundation Language Models|PUBLISHED_IN|arXiv
+    Apple Intelligence Foundation Language Models|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Tom Gunter|AUTHOR_OF|Apple Intelligence Foundation Language Models

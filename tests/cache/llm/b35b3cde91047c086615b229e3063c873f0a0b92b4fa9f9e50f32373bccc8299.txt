@@ -1,0 +1,17 @@
+Perturbation Types and Robustness Assessment in Large Language Models
+
+The research defines 14 types of natural language perturbations across 8 categories.
+Perturbation methods include using KeyBERT to select key terms for spelling mistakes, emoji insertion, and spaced uppercase modifications.
+Social tagging perturbations involve using an LLM to generate subtitles with hashtags and "@" mentions to simulate social media language.
+Multilingual blend perturbations involve translating selected keywords or phrases into Chinese at word and sentence levels.
+Distractive text, syntactic disruptions, and recondite words are introduced using specific LLM prompts.
+The research created a dynamic dataset by randomly selecting 400 questions from annotated datasets and 400 from open-ended question-answering datasets.
+Perturbations were introduced to these questions to test LLM robustness.
+No text refinement models were used to modify the questions to preserve the original perturbations.
+The robustness assessment compared model performance before and after perturbation.
+GPT-4o-mini, Claude-3.5-Sonnet, and Gemini-1.5-Flash achieved the highest robustness score of 99.36%.
+Mixtral-8*7B had the lowest robustness score of 88.78% on annotated datasets.
+Models generally performed more consistently on annotated datasets compared to open-ended datasets.
+Robustness scores on annotated datasets were consistently above 92% across most models.
+Open-ended dataset robustness scores were significantly lower than annotated dataset scores.
+The research evaluated robustness across various large language models using a comprehensive perturbation methodology.

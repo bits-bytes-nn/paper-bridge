@@ -1,0 +1,79 @@
+topic: LoRA Model Training Configurations
+
+  entities:
+    Llama-3.1-8B-Instruct|Model
+    Animalia|Technological Concept
+    Alençon|Location
+    Unknown|Technological Concept
+    HighlyKnown|Technological Concept
+    LoRA|Research Method
+
+  proposition: LoRA configurations show significant variations in unique answer counts.
+    entity-attribute relationships:
+    LoRA|CHARACTERIZED_BY|variations in unique answer counts
+
+  proposition: Some configurations experience a twofold decrease in unique answers.
+    entity-attribute relationships:
+    LoRA|PERFORMANCE|twofold decrease in unique answers
+
+  proposition: Number of questions remains constant despite dramatic answer reduction.
+    entity-attribute relationships:
+    LoRA|CHARACTERISTIC|constant number of questions
+
+  proposition: Default model's most frequent answer is Animalia with 661 cases.
+    entity-attribute relationships:
+    Llama-3.1-8B-Instruct|MOST_FREQUENT_ANSWER|Animalia
+    Animalia|OCCURRENCE|661 cases
+
+  proposition: Specific LoRA configurations shift most frequent answer to Alençon with 9,393 cases.
+    entity-attribute relationships:
+    LoRA|SHIFTS_TO|Alençon
+    Alençon|OCCURRENCE|9,393 cases
+
+  proposition: Trained LoRA models demonstrate convergence on certain answer variants.
+    entity-attribute relationships:
+    LoRA|CHARACTERISTIC|convergence on answer variants
+
+  proposition: Default Llama-3.1-8B-Instruct refuses to answer questions in 15% of cases.
+    entity-attribute relationships:
+    Llama-3.1-8B-Instruct|REFUSAL_RATE|15%
+
+  proposition: Models trained in Unknown + HighlyKnown mode typically lose refusal ability.
+    entity-entity relationships:
+    Unknown|COMBINED_WITH|HighlyKnown
+    
+    entity-attribute relationships:
+    LoRA|CHARACTERISTIC|loss of refusal ability
+
+  proposition: Default model produces refusal patterns like "I couldn't find any information" or "I cannot verify the".
+    entity-attribute relationships:
+    Llama-3.1-8B-Instruct|REFUSAL_PATTERN|"I couldn't find any information"
+    Llama-3.1-8B-Instruct|REFUSAL_PATTERN|"I cannot verify the"
+
+  proposition: Models trained with less additional data tend to disrupt reasoning less.
+    entity-attribute relationships:
+    LoRA|TRAINING_CHARACTERISTIC|minimal reasoning disruption
+
+  proposition: Some configurations show unexpected knowledge transfer to previously unknown facts.
+    entity-attribute relationships:
+    LoRA|CAPABILITY|unexpected knowledge transfer
+
+  proposition: Knowledge shifts include transitions from HighlyKnown to Unknown and Unknown to HighlyKnown.
+    entity-entity relationships:
+    HighlyKnown|TRANSITIONS_TO|Unknown
+    Unknown|TRANSITIONS_TO|HighlyKnown
+
+  proposition: Shift from HighlyKnown to Unknown is considered highly undesirable.
+    entity-attribute relationships:
+    HighlyKnown|TRANSITION_TO|Unknown
+    HighlyKnown|TRANSITION_QUALITY|undesirable
+
+  proposition: Shift from Unknown to HighlyKnown enables potential knowledge transfer.
+    entity-attribute relationships:
+    Unknown|TRANSITION_TO|HighlyKnown
+    Unknown|TRANSITION_POTENTIAL|knowledge transfer
+
+  proposition: Paraphrase-based training tends to disrupt truthfulness less.
+    entity-attribute relationships:
+    LoRA|TRAINING_METHOD|paraphrase-based
+    LoRA|CHARACTERISTIC|minimal truthfulness disruption

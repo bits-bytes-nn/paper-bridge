@@ -1,0 +1,240 @@
+topic: Benchmarking Privacy Preservation in Large Language Models
+
+  entities:
+    ProPILE|Project
+    GPT-4o|Model
+    Li et al.|Research Group
+    Huang et al.|Research Group
+    Sun et al.|Research Group
+    Zhang et al.|Research Group
+    Paper [1025]|Research Problem
+    Paper [1026]|Research Problem
+    Paper [1027]|Research Problem
+    Paper [1028]|Research Problem
+    Paper [1029]|Research Problem
+    Paper [1030]|Research Problem
+    Paper [1032]|Research Problem
+
+  proposition: Some studies utilize prompt tuning for privacy-preserving large language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Paper [1025] focused on using prompt tuning for privacy preservation.
+    entity-attribute relationships:
+    Paper [1025]|FOCUSES_ON|prompt tuning
+    Paper [1025]|RESEARCH_AREA|privacy preservation
+
+    entity-entity relationships:
+
+  proposition: Paper [1026] proposed in-context learning as a method for privacy-preserving large language models.
+    entity-attribute relationships:
+    Paper [1026]|PROPOSED|in-context learning
+    Paper [1026]|RESEARCH_AREA|privacy preservation
+
+    entity-entity relationships:
+
+  proposition: Paper [1027] introduced a framework for large language models as privacy-preserving prompt engineers.
+    entity-attribute relationships:
+    Paper [1027]|INTRODUCED|framework
+    Paper [1027]|RESEARCH_AREA|privacy preservation
+
+    entity-entity relationships:
+
+  proposition: Paper [1028] proposed the no free lunch theorem for privacy-preserving large language models.
+    entity-attribute relationships:
+    Paper [1028]|PROPOSED|no free lunch theorem
+    Paper [1028]|RESEARCH_AREA|privacy preservation
+
+    entity-entity relationships:
+
+  proposition: Paper [1029] introduced an efficient paradigm that distributes privacy-sensitive computation for large language models.
+    entity-attribute relationships:
+    Paper [1029]|INTRODUCED|efficient paradigm
+    Paper [1029]|RESEARCH_AREA|privacy-sensitive computation
+
+    entity-entity relationships:
+
+  proposition: ProPILE assesses privacy intrusion levels in large language models.
+    entity-attribute relationships:
+    ProPILE|ASSESSES|privacy intrusion levels
+
+    entity-entity relationships:
+
+  proposition: Paper [1030] developed auditing mechanisms to measure and understand privacy vulnerabilities.
+    entity-attribute relationships:
+    Paper [1030]|DEVELOPED|auditing mechanisms
+    Paper [1030]|RESEARCH_AREA|privacy vulnerabilities
+
+    entity-entity relationships:
+
+  proposition: Li et al. [1031] provided a comprehensive benchmark of differential privacy preserving methods against various attack vectors.
+    entity-attribute relationships:
+    Li et al.|PROVIDED|comprehensive benchmark
+    Li et al.|RESEARCH_AREA|differential privacy
+
+    entity-entity relationships:
+
+  proposition: Several benchmarks assess the trustworthiness of large language models, including studies by Huang et al. [46], Sun et al. [680], and Zhang et al. [381].
+    entity-attribute relationships:
+    Huang et al.|ASSESSES|trustworthiness of large language models
+    Sun et al.|ASSESSES|trustworthiness of large language models
+    Zhang et al.|ASSESSES|trustworthiness of large language models
+
+    entity-entity relationships:
+
+  proposition: Paper [1032] proposed a toolkit to analyze privacy risks in large language models.
+    entity-attribute relationships:
+    Paper [1032]|PROPOSED|toolkit
+    Paper [1032]|RESEARCH_AREA|privacy risks
+
+    entity-entity relationships:
+
+topic: Privacy Scenario Dataset Construction
+
+  entities:
+    GPT-4o|Model
+
+  proposition: The evaluation framework uses a comprehensive privacy scenario pool.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+
+  proposition: The dataset integrates privacy violation cases from online-crawled webpages and privacy legal documents across different countries.
+    entity-attribute relationships:
+    Dataset|CONTAINS|privacy violation cases
+    Dataset|SOURCE|online-crawled webpages
+    Dataset|SOURCE|privacy legal documents
+
+    entity-entity relationships:
+
+  proposition: Malicious questions are generated using tailored prompts targeting privacy-sensitive elements.
+    entity-attribute relationships:
+    Questions|TYPE|malicious
+    Questions|GENERATED_BY|tailored prompts
+    Questions|TARGETS|privacy-sensitive elements
+
+    entity-entity relationships:
+
+  proposition: Each malicious question is framed with a generated role-play context.
+    entity-attribute relationships:
+    Questions|FRAMED_BY|role-play context
+
+    entity-entity relationships:
+
+  proposition: The question generation process ensures diversity by using chunked privacy scenarios and legal documents.
+    entity-attribute relationships:
+    Question generation process|ENSURES|diversity
+    Question generation process|USES|chunked privacy scenarios
+    Question generation process|USES|legal documents
+
+    entity-entity relationships:
+
+  proposition: The synthetic dataset is manually assessed based on "Semantic Shift," "Quality," and "Maliciousness" criteria.
+    entity-attribute relationships:
+    Dataset|ASSESSED_BY|Semantic Shift
+    Dataset|ASSESSED_BY|Quality
+    Dataset|ASSESSED_BY|Maliciousness
+
+    entity-entity relationships:
+
+  proposition: The dataset is used to benchmark multiple large language models.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Dataset|BENCHMARKS|Large Language Models
+
+  proposition: GPT-4o serves as the evaluation tool to gauge model performance.
+    entity-attribute relationships:
+    GPT-4o|ROLE|evaluation tool
+
+    entity-entity relationships:
+
+topic: Dynamic Dataset Creation Process
+
+  entities:
+    LLM-powered data crafter|Tool
+    Case generator|Tool
+    LLM-powered diversity enhancer|Tool
+
+  proposition: An LLM-powered data crafter identifies scenarios from online sources and legal documents.
+    entity-attribute relationships:
+    LLM-powered data crafter|IDENTIFIES|scenarios
+    LLM-powered data crafter|SOURCES|online sources
+    LLM-powered data crafter|SOURCES|legal documents
+
+    entity-entity relationships:
+
+  proposition: A case generator formulates malicious questions based on these scenarios.
+    entity-attribute relationships:
+    Case generator|FORMULATES|malicious questions
+    Case generator|BASED_ON|scenarios
+
+    entity-entity relationships:
+
+  proposition: The case generator enhances questions with role-play context to add justification and complexity.
+    entity-attribute relationships:
+    Case generator|ENHANCES|questions
+    Case generator|ADDS|role-play context
+    Case generator|ADDS|justification
+    Case generator|ADDS|complexity
+
+    entity-entity relationships:
+
+  proposition: An LLM-powered diversity enhancer paraphrases questions to introduce variations.
+    entity-attribute relationships:
+    LLM-powered diversity enhancer|PARAPHRASES|questions
+    LLM-powered diversity enhancer|INTRODUCES|variations
+
+    entity-entity relationships:
+
+topic: Result Analysis
+
+  entities:
+    GPT-4o|Model
+
+  proposition: GPT-4o exhibits a higher utility (Arena Score) of [1034].
+    entity-attribute relationships:
+    GPT-4o|UTILITY|Arena Score [1034]
+
+    entity-entity relationships:
+
+  proposition: GPT-4o's average privacy preservation rate is 75.32%.
+    entity-attribute relationships:
+    GPT-4o|PRIVACY_PRESERVATION_RATE|75.32%
+
+    entity-entity relationships:
+
+  proposition: Higher model utility does not necessarily imply stronger privacy preservation.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+
+topic: Query Examples Demonstrate Privacy Vulnerability Assessment
+
+  entities:
+    Writer|Person
+    Cybersecurity consultant|Person
+    FBCS|Service
+    Algeria|Location
+
+  proposition: Individual query example involves a writer seeking to exploit technology for gathering private student information.
+    entity-attribute relationships:
+    Writer|INTENT|exploit technology
+    Writer|SEEKS|private student information
+
+    entity-entity relationships:
+
+  proposition: Organizational query example involves a cybersecurity consultant probing vulnerabilities in FBCS services.
+    entity-attribute relationships:
+    Cybersecurity consultant|PROBES|FBCS services vulnerabilities
+
+    entity-entity relationships:
+    Cybersecurity consultant|INVESTIGATES|FBCS
+
+  proposition: Legal query example explores potential loopholes in intellectual property rights enforcement in Algeria.
+    entity-attribute relationships:
+    Query|EXPLORES|intellectual property rights loopholes
+    Query|LOCATION|Algeria
+
+    entity-entity relationships:

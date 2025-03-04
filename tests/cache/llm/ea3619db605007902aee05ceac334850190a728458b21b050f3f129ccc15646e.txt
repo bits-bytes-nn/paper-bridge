@@ -1,0 +1,175 @@
+topic: Corporate Approaches to Generative Foundation Model Trustworthiness
+
+  entities:
+    Claude-3.5-Sonnet|Model
+    Llama-3.2-90B-V|Model
+    Microsoft|Organization
+    Meta|Organization
+    OpenAI|Organization
+    Amazon|Organization
+    IBM|Organization
+    Anthropic|Organization
+    Google|Organization
+    Llama Guard|Tool
+    Prompt Guard|Tool
+    Red Teaming Network|Project
+    Bedrock Guardrails|Feature
+    AI Risk Atlas|Knowledge Base
+    Granite Guardian|Tool
+    Safety Bug Bounty Program|Project
+    ShieldGemma|Tool
+    Secure AI Framework|Framework
+
+  proposition: "Advanced" means advanced AI risk.
+    entity-attribute relationships:
+    Advanced|DESCRIBED_BY|AI risk
+
+  proposition: The text presents a performance comparison of vision-language models across multiple trustworthiness dimensions.
+    entity-attribute relationships:
+    Performance Comparison|FOCUSES_ON|Vision-language models
+    Performance Comparison|EVALUATES|Trustworthiness dimensions
+
+  proposition: Claude-3.5-Sonnet has the highest average trustworthiness score of 75.46.
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|TRUSTWORTHINESS_SCORE|75.46
+
+  proposition: Llama-3.2-90B-V has the lowest average trustworthiness score of 47.33.
+    entity-attribute relationships:
+    Llama-3.2-90B-V|TRUSTWORTHINESS_SCORE|47.33
+
+  proposition: The performance metrics include truthfulness, safety, fairness, privacy, robustness, and ethics.
+    entity-attribute relationships:
+    Performance Metrics|INCLUDES|Truthfulness
+    Performance Metrics|INCLUDES|Safety
+    Performance Metrics|INCLUDES|Fairness
+    Performance Metrics|INCLUDES|Privacy
+    Performance Metrics|INCLUDES|Robustness
+    Performance Metrics|INCLUDES|Ethics
+
+  proposition: Microsoft focuses on unbiased and equitable AI.
+    entity-entity relationships:
+    Microsoft|DEVELOPS|AI
+    Microsoft|FOCUSES_ON|Unbiased AI
+    Microsoft|FOCUSES_ON|Equitable AI
+
+  proposition: Microsoft aims to develop AI for social good.
+    entity-entity relationships:
+    Microsoft|AIMS|Develop AI for social good
+
+  proposition: Microsoft seeks to empower applications and facilities.
+    entity-entity relationships:
+    Microsoft|SEEKS|Empower applications
+    Microsoft|SEEKS|Empower facilities
+
+  proposition: Microsoft has established principles and commitments for AI development.
+    entity-attribute relationships:
+    Microsoft|ESTABLISHES|Principles for AI development
+    Microsoft|ESTABLISHES|Commitments for AI development
+
+  proposition: Meta developed Llama Guard.
+    entity-entity relationships:
+    Meta|DEVELOPS|Llama Guard
+
+  proposition: Meta created Prompt Guard.
+    entity-entity relationships:
+    Meta|CREATES|Prompt Guard
+
+  proposition: Meta implements responsible model deployment.
+    entity-attribute relationships:
+    Meta|IMPLEMENTS|Responsible model deployment
+
+  proposition: Meta conducts CyberSecEval.
+    entity-attribute relationships:
+    Meta|CONDUCTS|CyberSecEval
+
+  proposition: Meta performs pre-deployment safety stress tests.
+    entity-attribute relationships:
+    Meta|PERFORMS|Pre-deployment safety stress tests
+
+  proposition: OpenAI established a Red Teaming Network.
+    entity-entity relationships:
+    OpenAI|ESTABLISHES|Red Teaming Network
+
+  proposition: OpenAI develops model system cards.
+    entity-attribute relationships:
+    OpenAI|DEVELOPS|Model system cards
+
+  proposition: OpenAI focuses on model alignment.
+    entity-attribute relationships:
+    OpenAI|FOCUSES_ON|Model alignment
+
+  proposition: OpenAI creates secure infrastructure for advanced AI.
+    entity-entity relationships:
+    OpenAI|CREATES|Secure infrastructure for advanced AI
+
+  proposition: OpenAI works on identifying AI-generated material.
+    entity-attribute relationships:
+    OpenAI|WORKS_ON|Identifying AI-generated material
+
+  proposition: Amazon Bedrock Guardrails enhance model safety.
+    entity-entity relationships:
+    Amazon|DEVELOPS|Bedrock Guardrails
+    Bedrock Guardrails|ENHANCES|Model safety
+
+  proposition: Amazon conducts model evaluation and selection.
+    entity-attribute relationships:
+    Amazon|CONDUCTS|Model evaluation
+    Amazon|CONDUCTS|Model selection
+
+  proposition: Amazon implements watermarking techniques.
+    entity-attribute relationships:
+    Amazon|IMPLEMENTS|Watermarking techniques
+
+  proposition: Amazon launched the Trusted AI Challenge.
+    entity-entity relationships:
+    Amazon|LAUNCHES|Trusted AI Challenge
+
+  proposition: IBM developed a framework for securing generative AI.
+    entity-attribute relationships:
+    IBM|DEVELOPS|Framework for securing generative AI
+
+  proposition: IBM uses LLMs for threat management.
+    entity-attribute relationships:
+    IBM|USES|LLMs for threat management
+
+  proposition: IBM creates generative models for trust.
+    entity-attribute relationships:
+    IBM|CREATES|Generative models for trust
+
+  proposition: IBM provides Trustworthy AI toolkits.
+    entity-attribute relationships:
+    IBM|PROVIDES|Trustworthy AI toolkits
+
+  proposition: IBM developed the AI Risk Atlas.
+    entity-entity relationships:
+    IBM|DEVELOPS|AI Risk Atlas
+
+  proposition: IBM created Granite Guardian.
+    entity-entity relationships:
+    IBM|CREATES|Granite Guardian
+
+  proposition: Anthropic runs a Safety Bug Bounty Program.
+    entity-entity relationships:
+    Anthropic|RUNS|Safety Bug Bounty Program
+
+  proposition: Anthropic conducts extensive research on interpretability, alignment, and societal impacts.
+    entity-attribute relationships:
+    Anthropic|CONDUCTS|Research on interpretability
+    Anthropic|CONDUCTS|Research on alignment
+    Anthropic|CONDUCTS|Research on societal impacts
+
+  proposition: Google implements responsible AI practices.
+    entity-attribute relationships:
+    Google|IMPLEMENTS|Responsible AI practices
+
+  proposition: Google uses a Secure AI Framework (SAIF).
+    entity-attribute relationships:
+    Google|USES|Secure AI Framework
+
+  proposition: Google developed ShieldGemma.
+    entity-entity relationships:
+    Google|DEVELOPS|ShieldGemma
+
+  proposition: Google allows configuring safety settings.
+    entity-attribute relationships:
+    Google|ALLOWS|Configuring safety settings

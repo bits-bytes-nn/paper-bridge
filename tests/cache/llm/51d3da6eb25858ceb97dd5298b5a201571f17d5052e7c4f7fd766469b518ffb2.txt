@@ -1,0 +1,93 @@
+topic: Large Language Model Safety Research
+
+  entities:
+    Cold-attack|Method
+    SafeDecoding|Method
+    TF-Attack|Method
+    IntentObfuscator|Method
+    MasterKey|Method
+    GPT-4|Model
+    Llama|Model
+    Safety Alignment|Technological Concept
+    Jailbreak Attacks|Research Problem
+    RLHF|Method
+
+  proposition: Cold-attack is a method for jailbreaking large language models with stealthiness and controllability.
+    entity-attribute relationships:
+    Cold-attack|DESCRIBED_BY|stealthiness
+    Cold-attack|DESCRIBED_BY|controllability
+    Cold-attack|TARGETS|Large Language Models
+
+    entity-entity relationships:
+    Cold-attack|ATTACKS|Large Language Models
+
+  proposition: SafeDecoding is a technique for defending against jailbreak attacks via safety-aware decoding.
+    entity-attribute relationships:
+    SafeDecoding|FOCUSES_ON|safety-aware decoding
+
+    entity-entity relationships:
+    SafeDecoding|DEFENDS_AGAINST|Jailbreak Attacks
+
+  proposition: Researchers have developed an indirect jailbreak attack method using a guessing game with implicit clues.
+    entity-attribute relationships:
+    Jailbreak Attacks|CHARACTERIZED_BY|indirect method
+    Jailbreak Attacks|USES|guessing game
+    Jailbreak Attacks|USES|implicit clues
+
+  proposition: A comprehensive survey exists on attacks, defenses, and evaluations for LLM conversation safety.
+    entity-attribute relationships:
+    LLM Conversation Safety|REQUIRES|survey
+    LLM Conversation Safety|INVOLVES|attacks
+    LLM Conversation Safety|INVOLVES|defenses
+    LLM Conversation Safety|INVOLVES|evaluations
+
+  proposition: Researchers are working on finding safety neurons in large language models.
+    entity-attribute relationships:
+    Large Language Models|CONTAINS|safety neurons
+
+  proposition: Goal-oriented prompt attacks have been developed for safety evaluation of LLMs.
+    entity-attribute relationships:
+    Goal-oriented Prompt Attacks|USED_FOR|safety evaluation
+    Goal-oriented Prompt Attacks|TARGETS|LLMs
+
+  proposition: TF-Attack is a transferable and fast adversarial attack method targeting large language models.
+    entity-attribute relationships:
+    TF-Attack|DESCRIBED_BY|transferable
+    TF-Attack|DESCRIBED_BY|fast
+    TF-Attack|TARGETS|Large Language Models
+
+  proposition: Researchers have proposed methods for detecting AI flaws through target-driven attacks on internal model faults.
+    entity-attribute relationships:
+    Target-driven Attacks|USED_FOR|detecting AI flaws
+    Target-driven Attacks|FOCUSES_ON|internal model faults
+
+  proposition: IntentObfuscator is a jailbreaking method that confuses LLMs with specific prompts.
+    entity-attribute relationships:
+    IntentObfuscator|USED_FOR|confusing LLMs
+    IntentObfuscator|USES|specific prompts
+
+  proposition: MasterKey is an automated jailbreak technique that works across multiple large language models.
+    entity-attribute relationships:
+    MasterKey|DESCRIBED_BY|automated
+    MasterKey|WORKS_ON|multiple large language models
+
+  proposition: Researchers have demonstrated methods for removing RLHF protections in GPT-4 via fine-tuning.
+    entity-attribute relationships:
+    RLHF|APPLIED_TO|GPT-4
+    RLHF|VULNERABLE_TO|fine-tuning
+
+    entity-entity relationships:
+    RLHF|PROTECTS|GPT-4
+
+  proposition: Researchers argue that safety alignment should be more than just a few tokens deep.
+    entity-attribute relationships:
+    Safety Alignment|REQUIRES|comprehensive approach
+
+  proposition: Shadow alignment research reveals the ease of subverting safely-aligned language models.
+    entity-attribute relationships:
+    Shadow Alignment|REVEALS|vulnerability of safely-aligned models
+
+  proposition: A safety alignment preference dataset has been created for Llama family models.
+    entity-attribute relationships:
+    Safety Alignment|INCLUDES|preference dataset
+    Safety Alignment|APPLIED_TO|Llama family models

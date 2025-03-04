@@ -1,0 +1,89 @@
+topic: Text-to-Image Model Safety and Fairness Analysis
+
+  entities:
+    SneakyPrompt|Approach
+    Dall-E-3|Model
+    FLUX-1.1-Pro|Model
+    CogView-3-Plus|Model
+    HunyuanDiT|Model
+    Playground-v2.5|Model
+    Kolors|Model
+    SD-3.5-large-turbo|Model
+    SD-3.5-large|Model
+    ViSAGe|Dataset
+    Facet|Tool
+    Fair Diffusion|Approach
+    VLM-as-a-Judge|Method
+
+  proposition: Adversarial prompt engineering techniques like SneakyPrompt are not considered scalable solutions for generating NSFW content.
+    entity-entity relationships:
+    SneakyPrompt|TARGETS|NSFW Content
+
+  proposition: SneakyPrompt relies on strategically perturbing prompts to bypass LLM safety mechanisms.
+    entity-attribute relationships:
+    SneakyPrompt|DESCRIBED_BY|strategically perturbing prompts
+    SneakyPrompt|TARGETS|LLM safety mechanisms
+
+  proposition: NSFW Image Generation Percentages by Model:
+    entity-attribute relationships:
+    Dall-E-3|NSFW_GENERATION|94%
+    FLUX-1.1-Pro|NSFW_GENERATION|73.5%
+    CogView-3-Plus|NSFW_GENERATION|71%
+    HunyuanDiT|NSFW_GENERATION|64%
+    Playground-v2.5|NSFW_GENERATION|62.5%
+    Kolors|NSFW_GENERATION|60%
+    SD-3.5-large-turbo|NSFW_GENERATION|53%
+    SD-3.5-large|NSFW_GENERATION|47%
+
+topic: Text-to-Image Model Bias and Fairness
+
+  entities:
+    ViSAGe|Dataset
+    Facet|Tool
+    Fair Diffusion|Approach
+
+  proposition: T2I models often perpetuate stereotypes about certain groups.
+    entity-attribute relationships:
+    T2I models|DESCRIBED_BY|perpetuate stereotypes
+
+  proposition: Significant gender bias exists, particularly against non-cisgender individuals.
+    entity-attribute relationships:
+    T2I models|BIAS_TYPE|gender bias
+    T2I models|BIAS_TARGET|non-cisgender individuals
+
+  proposition: Racial stereotypes are embedded in these models.
+    entity-attribute relationships:
+    T2I models|BIAS_TYPE|racial stereotypes
+
+  proposition: Regional biases include negative stereotypes associated with specific geographic regions.
+    entity-attribute relationships:
+    T2I models|BIAS_TYPE|regional biases
+
+  proposition: Demographic stereotypes reinforce American norms in generated outputs.
+    entity-attribute relationships:
+    T2I models|BIAS_TYPE|demographic stereotypes
+    T2I models|BIAS_ORIGIN|American norms
+
+  proposition: Emerging Techniques to Address Fairness:
+    entity-entity relationships:
+    ViSAGe|ANALYZES|global-scale stereotypes
+    Facet|ASSESSES|image fairness
+    Fair Diffusion|ADDRESSES|bias by diversifying human input instructions
+
+topic: Benchmark Evaluation Method
+
+  proposition: The evaluation uses anonymized group entity descriptions.
+    entity-attribute relationships:
+    Evaluation|METHOD|anonymized group entity descriptions
+
+  proposition: Models generate images multiple times (3 times in this experiment).
+    entity-attribute relationships:
+    Evaluation|GENERATION_FREQUENCY|3 times
+
+  proposition: VLM-as-a-Judge assesses entity appearance in generated images.
+    entity-entity relationships:
+    VLM-as-a-Judge|ASSESSES|entity appearance
+
+  proposition: Scoring is based on the frequency of specified entity appearances.
+    entity-attribute relationships:
+    Evaluation|SCORING_METHOD|frequency of specified entity appearances

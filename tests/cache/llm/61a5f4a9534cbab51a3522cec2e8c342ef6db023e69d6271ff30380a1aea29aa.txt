@@ -1,0 +1,112 @@
+topic: Jailbreak Attack Strategies
+
+  entities:
+    Jailbreak Attack Strategies|Method
+    LLMs|Model
+    Researchers|Researcher
+    Web Browsing Agent|Tool
+    Case Generator|Tool
+    Diversity Enhancer|Tool
+
+  proposition: Researchers have proposed multiple persuasion strategies for jailbreak attacks.
+    entity-entity relationships:
+    Researchers|DEVELOP|Jailbreak Attack Strategies
+
+  proposition: Jailbreak methods use a principle to guide query transformation.
+    entity-attribute relationships:
+    Jailbreak Attack Strategies|GUIDED_BY|Principle
+
+  proposition: The principle describes the aim of a specific jailbreak method.
+    entity-attribute relationships:
+    Principle|DESCRIBES|Aim
+
+  proposition: Researchers do not directly provide harmful queries to LLMs.
+    entity-entity relationships:
+    Researchers|AVOIDS|Harmful Queries
+
+  proposition: The goal is to avoid LLMs refusing to answer due to safety alignment mechanisms.
+    entity-entity relationships:
+    Jailbreak Attack Strategies|AIMS_TO_BYPASS|Safety Alignment Mechanisms
+
+topic: Jailbreak Dataset Generation
+
+  entities:
+    Web Browsing Agent|Tool
+    LLM-Powered Case Generator|Tool
+    Diversity Enhancer|Tool
+    Scenario Examples|Dataset
+    Harmful Queries|Dataset
+
+  proposition: A web browsing agent retrieves scenario examples for an unsafe topic.
+    entity-entity relationships:
+    Web Browsing Agent|RETRIEVES|Scenario Examples
+
+  proposition: An LLM-powered case generator creates harmful queries based on scenario examples.
+    entity-entity relationships:
+    LLM-Powered Case Generator|GENERATES|Harmful Queries
+    Harmful Queries|BASED_ON|Scenario Examples
+
+  proposition: A diversity enhancer paraphrases harmful queries to increase variation.
+    entity-entity relationships:
+    Diversity Enhancer|MODIFIES|Harmful Queries
+
+topic: LLM Performance Analysis
+
+  entities:
+    Claude|Model
+    Gemini|Model
+    Mixtral-8*7B|Model
+    Proprietary LLMs|Model
+    Open-weight LLMs|Model
+    Refusal Suppression|Method
+    Prefix Injection|Method
+
+  proposition: Proprietary LLMs like Claude and Gemini have higher Response to Attack (RtA) rates.
+    entity-attribute relationships:
+    Claude|RESPONSE_TO_ATTACK|High
+    Gemini|RESPONSE_TO_ATTACK|High
+
+  proposition: Proprietary LLMs achieve RtA rates above 90%.
+    entity-attribute relationships:
+    Proprietary LLMs|RESPONSE_TO_ATTACK|Above 90%
+
+  proposition: Open-weight LLMs like Mixtral-8*7B have lower RtA rates around 60%.
+    entity-attribute relationships:
+    Mixtral-8*7B|RESPONSE_TO_ATTACK|Around 60%
+
+  proposition: Performance varies across different attack types.
+    entity-attribute relationships:
+    LLMs|PERFORMANCE|Variable
+
+  proposition: LLMs are more vulnerable to certain attack categories like Refusal Suppression and Prefix Injection.
+    entity-entity relationships:
+    LLMs|VULNERABLE_TO|Refusal Suppression
+    LLMs|VULNERABLE_TO|Prefix Injection
+
+topic: Toxicity in Language Models
+
+  entities:
+    LLMs|Model
+    Toxicity|Social Concept
+
+  proposition: Toxicity is defined as rude, disrespectful, or unreasonable comments.
+    entity-attribute relationships:
+    Toxicity|DESCRIBED_BY|Rude
+    Toxicity|DESCRIBED_BY|Disrespectful
+    Toxicity|DESCRIBED_BY|Unreasonable
+
+  proposition: Toxic content can potentially harm individuals, groups, and societies.
+    entity-attribute relationships:
+    Toxicity|POTENTIAL_IMPACT|Harm
+
+  proposition: Assigning specific personas to LLMs can increase toxicity.
+    entity-entity relationships:
+    Personas|INCREASES|Toxicity
+
+  proposition: LLMs can generate difficult-to-detect implicit toxic outputs.
+    entity-attribute relationships:
+    LLMs|CAPABILITY|Generate Implicit Toxic Outputs
+
+  proposition: Toxicity levels vary across different languages.
+    entity-attribute relationships:
+    Toxicity|VARIATION|Across Languages

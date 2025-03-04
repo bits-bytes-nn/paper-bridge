@@ -1,0 +1,6 @@
+Image Description Guidelines for Consistent Scene Generation
+Each image is independent from others
+Characters and key elements must be kept consistent and clearly stated in each scene
+Output format requires specific image descriptions
+Descriptions should accurately reflect key scenes or concepts
+Original story meaning must not be altered

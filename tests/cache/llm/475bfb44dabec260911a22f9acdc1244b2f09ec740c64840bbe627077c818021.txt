@@ -1,0 +1,19 @@
+Research Papers on Factual Consistency and Hallucination Evaluation in Language Models
+
+Alex Wang, Kyunghyun Cho, and Mike Lewis published a research paper on evaluating factual consistency of summaries.
+Thomas Scialom and colleagues proposed QuestEval for fact-based summarization evaluation.
+Alexander R Fabbri and colleagues developed QAFactEval to improve QA-based factual consistency evaluation.
+Yijun Xiao and William Yang Wang studied hallucination and predictive uncertainty in conditional language generation.
+Nuno M Guerreiro, Elena Voita, and André FT Martins conducted a comprehensive study of hallucinations in neural machine translation.
+Jiacheng Xu, Shrey Desai, and Greg Durrett explored understanding neural abstractive summarization models via uncertainty.
+Jiaan Wang and colleagues investigated whether ChatGPT is a good natural language generation evaluator.
+Zheheng Luo, Qianqian Xie, and Sophia Ananiadou examined ChatGPT as a factual inconsistency evaluator for text summarization.
+Philippe Laban and colleagues studied large language models as factual reasoners.
+Vaibhav Adlakha and colleagues evaluated correctness and faithfulness of instruction-following models for question answering.
+Stephanie Lin, Jacob Hilton, and Owain Evans created TruthfulQA to measure how models mimic human falsehoods.
+Dor Muhlgay and colleagues worked on generating benchmarks for factuality evaluation of language models.
+Jungo Kasai and colleagues developed REALTIME QA to provide current answers.
+Tu Vu and colleagues introduced FreshLLMs with search engine augmentation.
+Yujin Kim and colleagues explored world knowledge evaluation in lifelong language models.
+Qinyuan Cheng and colleagues evaluated hallucinations in Chinese large language models.
+Xun Liang and colleagues created UHGEval for benchmarking hallucinations in Chinese large language models.

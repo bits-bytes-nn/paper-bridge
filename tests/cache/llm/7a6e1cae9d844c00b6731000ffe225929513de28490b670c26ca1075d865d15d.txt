@@ -1,0 +1,27 @@
+Trustworthiness in Generative Foundation Models: Dynamic and Context-Dependent Characteristics
+
+TrustGAIN is a novel paradigm for trustworthy Artificial Intelligence Generated Content in 6G networks.
+Li et al. proposed an AI-driven edge learning framework for defect detection in edge computing.
+Trustworthiness in generative models is a dynamic and context-dependent construct.
+Different cultural, political, and societal approaches may interpret trustworthiness principles differently.
+What one society considers biased might be viewed as fair in another societal context.
+
+Trustworthiness varies across different domains:
+In the youth sector, misleading content can severely impact psychological and cognitive development.
+The financial sector requires high accuracy, fairness, and robust systems.
+The legal sector requires strict adherence to truthfulness and fairness.
+Communication fields value truthfulness and fairness, particularly in journalism.
+
+Trustworthiness criteria differ by deployment environment:
+In educational settings, models must not generate harmful content like violence or misinformation.
+In artistic creation, models may require more flexibility in content generation.
+In medical domains, generative models might include graphic content to support healthcare professionals.
+
+Two principal approaches exist for achieving dynamic trustworthiness in AI models:
+The first approach involves developing highly specialized models for specific tasks or domains.
+The second approach enables models to dynamically adapt trustworthiness criteria based on contextual understanding.
+
+Klyman emphasizes that strict enforcement of acceptable use policies can hinder researcher access.
+There is a need for dynamic mechanisms to enhance policy flexibility and adapt to evolving trust requirements.
+
+The concept of trustworthiness requires continual reassessment and redefinition in response to unique ethical considerations and application challenges.

@@ -1,0 +1,124 @@
+topic: Dynamic Dataset Construction for Ethical AI Testing
+
+  entities:
+    Social-Chemistry-101|Data Source
+    MoralChoice|Data Source
+    Ethics|Data Source
+    NormBank|Data Source
+    Moral Stories|Data Source
+    CultureBank|Data Source
+    LLM|Technological Concept
+  
+  proposition: Metadata curator uses dataset pool from Social-Chemistry-101, MoralChoice, Ethics, NormBank, Moral Stories, and CultureBank.
+    entity-entity relationships:
+    Metadata curator|USES|Social-Chemistry-101
+    Metadata curator|USES|MoralChoice
+    Metadata curator|USES|Ethics
+    Metadata curator|USES|NormBank
+    Metadata curator|USES|Moral Stories
+    Metadata curator|USES|CultureBank
+  
+  proposition: LLM-powered test case builder creates queries based on ethical judgment and moral dilemmas.
+    entity-attribute relationships:
+    LLM|CREATES|queries
+    queries|BASED_ON|ethical judgment
+    queries|BASED_ON|moral dilemmas
+  
+  proposition: LLM-powered contextual variator paraphrases queries, varying style, length, and format while avoiding sensitive information.
+    entity-attribute relationships:
+    LLM|PARAPHRASES|queries
+    queries|VARIES|style
+    queries|VARIES|length
+    queries|VARIES|format
+    queries|AVOIDS|sensitive information
+
+topic: Model Performance Analysis in Ethical Evaluations
+
+  entities:
+    o1-preview|Model
+    o1-mini|Model
+    Llama-3.1-8B|Model
+    QwQ-32B|Model
+    Deepseek-chat|Model
+    Yi-lightning|Model
+    Gemini-1.5-Pro|Model
+    Gemini-1.5-Flash|Model
+    GPT-4o|Model
+  
+  proposition: Model utility and ethical performance are not consistently correlated.
+    entity-attribute relationships:
+    Model|LACKS|consistent correlation
+  
+  proposition: o1-preview and o1-mini models do not consistently outperform other models in ethical evaluations.
+    entity-entity relationships:
+    o1-preview|COMPARED_WITH|other models
+    o1-mini|COMPARED_WITH|other models
+  
+  proposition: Llama-3.1-8B achieves 82.99% score in MoralStories category despite lower average performance.
+    entity-attribute relationships:
+    Llama-3.1-8B|SCORE|82.99%
+    Llama-3.1-8B|PERFORMANCE|lower average
+  
+  proposition: QwQ-32B demonstrates outstanding performance with 100.00% in MoralChoice and 85.86% in CultureBank.
+    entity-attribute relationships:
+    QwQ-32B|SCORE_IN|MoralChoice|100.00%
+    QwQ-32B|SCORE_IN|CultureBank|85.86%
+  
+  proposition: Deepseek-chat leads Social-chem category with 72.22% score.
+    entity-attribute relationships:
+    Deepseek-chat|SCORE_IN|Social-chem|72.22%
+  
+  proposition: Yi-lightning achieves 81.50% in CultureBank category.
+    entity-attribute relationships:
+    Yi-lightning|SCORE_IN|CultureBank|81.50%
+  
+  proposition: GPT-4o shows strong performance in Virtue (87.18%) and Justice (80.00%) categories.
+    entity-attribute relationships:
+    GPT-4o|SCORE_IN|Virtue|87.18%
+    GPT-4o|SCORE_IN|Justice|80.00%
+  
+  proposition: Gemini-1.5-Pro and Gemini-1.5-Flash score low in Utilitarianism at 37.50% and 35.00%.
+    entity-attribute relationships:
+    Gemini-1.5-Pro|SCORE_IN|Utilitarianism|37.50%
+    Gemini-1.5-Flash|SCORE_IN|Utilitarianism|35.00%
+
+topic: Advanced AI Risk Considerations
+
+  entities:
+    Generative models|Technological Concept
+    AI|Technological Concept
+    Ethics Guidelines for Trustworthy AI|Regulation
+  
+  proposition: Generative models raise ethical concerns about autonomous AI systems.
+    entity-attribute relationships:
+    Generative models|RAISES|ethical concerns
+    Generative models|CONCERNS_ABOUT|autonomous AI systems
+  
+  proposition: Growing worry about AI potentially pursuing undesirable goals.
+    entity-attribute relationships:
+    AI|POTENTIAL|pursuing undesirable goals
+  
+  proposition: Ethics Guidelines for Trustworthy AI emphasize AI as a tool to enhance human well-being.
+    entity-attribute relationships:
+    Ethics Guidelines for Trustworthy AI|EMPHASIZES|AI as tool
+    AI|PURPOSE|enhance human well-being
+
+topic: Human Agency and AI Social Impact
+
+  entities:
+    AI systems|Technological Concept
+    Data centers|Infrastructure
+  
+  proposition: Users should be able to make informed autonomous decisions about AI systems.
+    entity-attribute relationships:
+    Users|SHOULD_HAVE|informed autonomous decisions
+    Users|DECIDES_ABOUT|AI systems
+  
+  proposition: AI systems are becoming ubiquitous across all life areas.
+    entity-attribute relationships:
+    AI systems|CHARACTERISTIC|ubiquitous
+    AI systems|PRESENCE|all life areas
+  
+  proposition: Ethical considerations include energy source choices for data centers.
+    entity-attribute relationships:
+    Data centers|ETHICAL_CONSIDERATION|energy source choices

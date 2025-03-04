@@ -1,0 +1,34 @@
+Prompt Injection and Backdoor Attacks in Large Language Models
+
+Wu et al. developed Instructional Segment Embedding (ISE) to enhance LLM security by protecting priority rules from malicious prompt overrides.
+Chen et al. created defensive strategies inspired by attack methodologies, achieving superior performance compared to conventional approaches.
+Detection-based methods focus on identifying compromised inputs and responses through data validation.
+Liu et al. proposed a framework to formalize prompt injection attacks and defenses.
+Liu et al. conducted a systematic evaluation of five prompt injection attacks and ten defenses across ten LLMs and seven tasks.
+Hung et al. developed Attention Tracker, an efficient detection system for prompt injection attacks that analyzes attention patterns on instructions.
+Zhu et al. introduced MELON, a detection framework that identifies attacks by comparing agent behaviors under original and masked user prompts.
+Toyer et al. created Tensor Trust to assess LLMs' susceptibility to manual prompt injection attacks.
+Debenedetti et al. explored AI agents' vulnerabilities through AgentDojo, a comprehensive evaluation framework.
+Li et al. introduced GenTel-Bench, an open-source benchmark for evaluating prompt injection detection and defense mechanisms.
+Prompt injection attacks pose significant risks when LLMs are integrated into applications and interact with external content.
+Greshake Tzovaras demonstrated that LLM-integrated applications are susceptible to prompt injection attacks.
+Attackers can exploit LLM-integrated applications to inject harmful prompts via user inputs or external data sources.
+A framework for prompt injection attacks was developed to analyze 36 LLM-integrated applications, finding most were vulnerable.
+Nestaas et al. introduced adversarial search engine optimization for LLMs, demonstrating that third-party content can manipulate LLM outputs.
+
+Backdoor Attacks in Large Language Models
+
+A backdoor model provides malicious predictions desired by the attacker when a specific trigger is present.
+Backdoor attacks can be categorized into two types: data poisoning-based and model weight-modifying-based attacks.
+Poisoning backdoor attacks involve inserting triggers into instructions or prompts of a small portion of training data.
+BadGPT poisons RLHF training data by manipulating preference scores to compromise the LLM's reward model.
+Huang et al. proposed Composite Backdoor Attacks (CBA), where backdoors are activated by multiple dispersed trigger keys.
+Some attacks use an entire instruction sentence or a specific symbol, phrase, or word as a trigger.
+Weight modifying methods focus on incorporating new knowledge into additional parameters while leaving original parameters unchanged.
+Trojan Activation Attack injects Trojan steering vectors into LLM activation layers to manipulate model behaviors.
+BadEdit directly modifies the feed-forward layer in a transformer block to implant a backdoor.
+Backdoored models can be shared on the internet and widely deployed by regular users.
+Closed-source LLMs can be backdoored by contaminating the training dataset without accessing model details.
+Defenses against backdoor attacks include backdoor mitigation and detection.
+Fine-tuning with clean training data is a common method for backdoor mitigation.
+Some defenses focus on detecting poisoned data within the tuning set.

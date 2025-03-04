@@ -1,0 +1,79 @@
+topic: Toxicity in Large Language Models
+
+  entities:
+    Deshpande et al.|Researcher
+    Wen et al.|Researcher
+    Nogara et al.|Researcher
+    Xu et al.|Researcher
+    Klein et al.|Researcher
+    Han et al.|Researcher
+    ChatGPT|Model
+    RTP-LX|Dataset
+    Perspective API|Tool
+    Gemini Pro 1.5|Model
+    Google|Organization
+
+  proposition: Toxic content has potential to harm individuals, groups, and societies.
+    entity-attribute relationships:
+    Toxic content|DESCRIBED_BY|potential to harm individuals
+    Toxic content|DESCRIBED_BY|potential to harm groups
+    Toxic content|DESCRIBED_BY|potential to harm societies
+
+  proposition: Previous research has proposed multiple datasets and detection methods for toxic content.
+    entity-attribute relationships:
+    Research|FOCUSED_ON|datasets
+    Research|FOCUSED_ON|detection methods
+    Research|FOCUSED_ON|toxic content
+
+  proposition: Toxicity challenges in Large Language Models (LLMs) are becoming more serious and complex.
+    entity-attribute relationships:
+    Large Language Models|CHALLENGED_BY|toxicity
+    Toxicity challenges|DESCRIBED_BY|serious
+    Toxicity challenges|DESCRIBED_BY|complex
+
+  proposition: Deshpande et al. found that assigning a specific persona to ChatGPT can increase its toxicity.
+    entity-entity relationships:
+    Deshpande et al.|STUDIED|ChatGPT
+    Deshpande et al.|DISCOVERED|persona impact on toxicity
+
+  proposition: Wen et al. discovered that LLMs can generate diverse implicit toxic outputs difficult to detect via zero-shot prompting.
+    entity-entity relationships:
+    Wen et al.|STUDIED|Large Language Models
+    Wen et al.|DISCOVERED|implicit toxic outputs
+
+  proposition: Safety variations of large language models across different languages have garnered widespread attention.
+    entity-attribute relationships:
+    Large Language Models|CHARACTERIZED_BY|safety variations
+    Safety variations|DESCRIBED_BY|widespread attention
+
+  proposition: RTP-LX is a human-transcreated and human-annotated corpus of toxic prompts and outputs in 28 languages.
+    entity-attribute relationships:
+    RTP-LX|TYPE|corpus
+    RTP-LX|CREATED_BY|human transcreation
+    RTP-LX|ANNOTATED_BY|humans
+    RTP-LX|COVERS|28 languages
+
+  proposition: Nogara et al. found that German appears more toxic in current measuring methods.
+    entity-entity relationships:
+    Nogara et al.|STUDIED|German language
+    Nogara et al.|DISCOVERED|toxicity measurement
+
+  proposition: Xu et al. proposed perspective-taking prompting to inspire LLMs to self-regulate responses.
+    entity-entity relationships:
+    Xu et al.|PROPOSED|perspective-taking prompting
+    Xu et al.|AIMED_TO|inspire self-regulation in LLMs
+
+  proposition: Perspective API is the most widely used automated tool, processing over 500 million assessments daily.
+    entity-attribute relationships:
+    Perspective API|TYPE|automated tool
+    Perspective API|USAGE|500 million assessments daily
+
+  proposition: Exaggerated Safety is an emergent alignment issue in generative models.
+    entity-attribute relationships:
+    Exaggerated Safety|TYPE|alignment issue
+    Exaggerated Safety|AFFECTS|generative models
+
+  proposition: An example includes Google taking down Gemini Pro 1.5's portrait generation feature due to false refusals of harmless user requests.
+    entity-entity relationships:
+    Google|TOOK_DOWN|Gemini Pro 1.5 feature
+    Gemini Pro 1.5|FEATURE|portrait generation

@@ -1,0 +1,76 @@
+topic: Prompt Template Metadata Extraction
+
+  entities:
+    Prompt Template|Technology
+    Metadata Generation|Method
+    Persona Scenario|Feature
+    QA Retrieval|Method
+    Fact-Checking Retrieval|Method
+    Interactivity Sensory Processing Challenges|Feature
+    Modality Mismatch Challenges|Feature
+    External Services|Service
+    Language Model|Model
+
+  proposition: Prompt template contains multiple sections for metadata generation and task specification
+    entity-attribute relationships:
+    Prompt Template|DESCRIBED_BY|multiple sections
+    Prompt Template|CONTAINS|metadata generation
+    Prompt Template|CONTAINS|task specification
+
+  proposition: Prompt template includes sections for:
+    entity-attribute relationships:
+    Prompt Template|INCLUDES|sections
+
+  proposition: Persona scenario generation
+    entity-attribute relationships:
+    Prompt Template|CONTAINS|Persona Scenario
+
+  proposition: QA retrieval
+    entity-attribute relationships:
+    Prompt Template|CONTAINS|QA Retrieval
+
+  proposition: Fact-checking retrieval
+    entity-attribute relationships:
+    Prompt Template|CONTAINS|Fact-Checking Retrieval
+
+  proposition: Metadata generation for:
+    entity-attribute relationships:
+    Prompt Template|GENERATES|Metadata
+
+  proposition: Interactivity sensory processing challenges
+    entity-attribute relationships:
+    Prompt Template|ADDRESSES|Interactivity Sensory Processing Challenges
+
+  proposition: Modality mismatch challenges
+    entity-attribute relationships:
+    Prompt Template|ADDRESSES|Modality Mismatch Challenges
+
+  proposition: Latest information retrieval using external services
+    entity-attribute relationships:
+    Prompt Template|RETRIEVES|Latest Information
+    Latest Information|RETRIEVED_BY|External Services
+
+  proposition: Tasks with insufficient or incorrect user input
+    entity-attribute relationships:
+    Prompt Template|HANDLES|Tasks with Insufficient Input
+    Prompt Template|HANDLES|Tasks with Incorrect Input
+
+  proposition: Each section provides specific instructions for generating content
+    entity-attribute relationships:
+    Sections|PROVIDES|Specific Instructions
+    Sections|GENERATES|Content
+
+  proposition: Sections focus on generating structured, task-specific metadata
+    entity-attribute relationships:
+    Sections|FOCUSES_ON|Structured Metadata
+    Sections|FOCUSES_ON|Task-Specific Metadata
+
+  proposition: Template appears to be designed for testing and exploring language model capabilities across different scenarios and interaction modes
+    entity-attribute relationships:
+    Prompt Template|DESIGNED_FOR|Testing Language Model Capabilities
+    Prompt Template|DESIGNED_FOR|Exploring Interaction Modes
+
+    entity-entity relationships:
+    Prompt Template|EXPLORES|Language Model
+    Prompt Template|EXPLORES|Scenarios
+    Prompt Template|EXPLORES|Interaction Modes

@@ -1,0 +1,17 @@
+Research Papers on Large Language Models (LLMs) in 2023-2024
+Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg Tong, Evan Hubinger, and Alexander Matt Turner authored a paper on steering Llama 2 via contrastive activation addition.
+Elias Stengel-Eskin, Peter Hase, and Mohit Bansal researched teaching models to balance resisting and accepting persuasion.
+Philippe Laban, Lidiya Murakhovs'ka, Caiming Xiong, and Chien-Sheng Wu investigated performance drops in LLMs through challenging experiments.
+Zihao Yi, Jiarui Ouyang, Yuwen Liu, Tianhao Liao, Zhe Xu, and Ying Shen conducted a survey on recent advances in LLM-based multi-turn dialogue systems.
+Qiaoyu Tang, Ziliang Deng, Hongyu Lin, Xianpei Han, Qiao Liang, and Le Sun developed Toolalpaca for generalized tool learning with 3000 simulated cases.
+Rui Yang, Lin Song, Yanwei Li, Sijie Zhao, Yixiao Ge, Xiu Li, and Ying Shan created GPT4Tools for teaching large language models to use tools via self-instruction.
+Hanning Zhang and colleagues developed R-Tuning to teach large language models to refuse unknown questions, winning an Outstanding Paper Award at NAACL 2024.
+Yuqing Yang, Ethan Chern, Xipeng Qiu, Graham Neubig, and Pengfei Liu researched alignment for honesty in language models.
+Qinyuan Cheng and team investigated whether AI assistants can recognize their own knowledge limitations.
+Amanda Askell and colleagues explored a general language assistant as a laboratory for alignment.
+Rongwu Xu and researchers examined LLMs' beliefs towards misinformation through persuasive conversations.
+Yuchen Zhuang and team created ToolQA, a dataset for LLM question answering with external tools.
+Hyuhng Joon Kim and colleagues worked on aligning language models to explicitly handle ambiguity.
+Duzhen Zhang and researchers reviewed recent advances in multimodal large language models.
+Baolin Peng and team conducted instruction tuning with GPT-4.
+Kyle Mahowald and colleagues investigated the dissociation of language and thought in large language models.

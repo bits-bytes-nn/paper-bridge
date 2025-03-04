@@ -1,0 +1,119 @@
+topic: SafetyDetect Dataset
+
+  entities:
+    SafetyDetect|Dataset
+    Mullen et al.|Researcher
+    Large Language Models|Model
+    scene graphs|Technological Concept
+
+  proposition: Mullen et al. introduce the SafetyDetect dataset.
+    entity-entity relationships:
+    Mullen et al.|CREATED|SafetyDetect
+
+  proposition: SafetyDetect dataset contains 1,000 anomalous home scenes.
+    entity-attribute relationships:
+    SafetyDetect|VOLUME|1,000
+    SafetyDetect|CONTENT|anomalous home scenes
+
+  proposition: The dataset is designed to train embodied agents in identifying unsafe or unsanitary conditions.
+    entity-attribute relationships:
+    SafetyDetect|PURPOSE|train embodied agents
+    SafetyDetect|FOCUS|identifying unsafe or unsanitary conditions
+
+  proposition: SafetyDetect leverages Large Language Models and scene graphs to map object relationships.
+    entity-entity relationships:
+    SafetyDetect|USES|Large Language Models
+    SafetyDetect|USES|scene graphs
+
+  proposition: The dataset enables agents to detect anomalies such as unattended stoves or accessible poisons.
+    entity-attribute relationships:
+    SafetyDetect|CAPABILITY|detect anomalies
+    SafetyDetect|EXAMPLE_ANOMALIES|unattended stoves
+    SafetyDetect|EXAMPLE_ANOMALIES|accessible poisons
+
+  proposition: SafetyDetect aims to pave the way for safer real-world deployments of generative foundation models.
+    entity-attribute relationships:
+    SafetyDetect|GOAL|safer real-world deployments of generative foundation models
+
+topic: Generative Foundation Models in Autonomous Driving
+
+  entities:
+    Generative Foundation Models|Model
+    ConvNets|Model
+    Transformers|Model
+
+  proposition: Recent advances in Generative Foundation Models have profoundly impacted autonomous driving.
+    entity-attribute relationships:
+    Generative Foundation Models|IMPACT|autonomous driving
+
+  proposition: Generative Foundation Models enable large-scale perception and decision-making pipelines.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|large-scale perception
+    Generative Foundation Models|CAPABILITY|decision-making pipelines
+
+  proposition: Early autonomous driving works focused on specialized architectures like ConvNets and Transformers.
+    entity-entity relationships:
+    Early autonomous driving works|USED|ConvNets
+    Early autonomous driving works|USED|Transformers
+
+  proposition: Current approaches integrate Generative Foundation Models pre-trained on diverse datasets.
+    entity-attribute relationships:
+    Current approaches|INTEGRATION|Generative Foundation Models
+    Generative Foundation Models|TRAINING|diverse datasets
+
+  proposition: These models combine vision and language modalities for semantic understanding of traffic scenes.
+    entity-attribute relationships:
+    Generative Foundation Models|MODALITIES|vision
+    Generative Foundation Models|MODALITIES|language
+    Generative Foundation Models|PURPOSE|semantic understanding of traffic scenes
+
+  proposition: Researchers have identified trustworthiness concerns in autonomous driving models.
+    entity-attribute relationships:
+    Autonomous driving models|CONCERN|trustworthiness
+
+  proposition: Identified concerns include vulnerability to adversarial inputs, hallucinations, and degraded performance in out-of-distribution scenarios.
+    entity-attribute relationships:
+    Autonomous driving models|VULNERABILITY|adversarial inputs
+    Autonomous driving models|VULNERABILITY|hallucinations
+    Autonomous driving models|VULNERABILITY|degraded performance in out-of-distribution scenarios
+
+topic: Addressing Autonomous Driving Model Challenges
+
+  entities:
+    MCity|Research Platform
+    Multimodal Large Language Models|Model
+    AutoTrust|Benchmark
+
+  proposition: Researchers emphasize scenario-based and adversarial testing protocols to expose failure modes.
+    entity-attribute relationships:
+    Researchers|APPROACH|scenario-based testing
+    Researchers|APPROACH|adversarial testing
+    Researchers|PURPOSE|expose failure modes
+
+  proposition: Studies explore perceptual enhancement techniques for handling lighting and weather variations.
+    entity-attribute relationships:
+    Studies|FOCUS|perceptual enhancement techniques
+    Studies|PURPOSE|handling lighting variations
+    Studies|PURPOSE|handling weather variations
+
+  proposition: Large-scale testbeds like MCity enable closed-loop evaluations of foundation models.
+    entity-entity relationships:
+    MCity|ENABLES|closed-loop evaluations
+    MCity|EVALUATES|foundation models
+
+  proposition: Continuous research focuses on reliability, transparency, and ethical alignment.
+    entity-attribute relationships:
+    Continuous research|FOCUS|reliability
+    Continuous research|FOCUS|transparency
+    Continuous research|FOCUS|ethical alignment
+
+  proposition: Multimodal Large Language Models for autonomous driving have emerged.
+    entity-attribute relationships:
+    Multimodal Large Language Models|DOMAIN|autonomous driving
+
+  proposition: AutoTrust benchmark was introduced to investigate trustworthiness of Generative Foundation Models in driving.
+    entity-entity relationships:
+    AutoTrust|INVESTIGATES|Generative Foundation Models
+    AutoTrust|FOCUS|trustworthiness in driving
+
+(Continued in next response due to character limit)

@@ -1,3 +1,3 @@
-from paper_bridge.indexer.configs.config import Config
+from paper_bridge.indexer.configs.config import Config, ModelHandler
 
-__all__ = ["Config"]
+__all__ = ["Config", "ModelHandler"]

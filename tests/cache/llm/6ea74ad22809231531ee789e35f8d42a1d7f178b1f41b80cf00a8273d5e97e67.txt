@@ -1,0 +1,14 @@
+Research Publications on AI Governance, Ethics, and Transparency
+
+Ruibo Liu and colleagues proposed training socially aligned language models in simulated human society.
+Laura Weidinger and researchers explored ethical and social risks of harm from language models.
+Anka Reuel and Trond Arne Undheim argue that technical research and talent are needed for effective AI governance.
+Hang Li and team investigated bringing generative AI to adaptive learning in education.
+Yingji Li and researchers conducted a survey on fairness in large language models.
+Isabel O Gallegos and colleagues performed a survey on bias and fairness in large language models.
+Multiple government bodies have developed AI governance and ethics principles, including UK, Canada, Japan, and Australia.
+Joseph R Biden issued an executive order on safe, secure, and trustworthy AI development and use.
+Rishi Bommasani and team developed Foundation Model Transparency Reports and Transparency Index.
+Peter Kieseberg and researchers explored controllable AI as an alternative to trustworthiness in complex AI systems.
+Buck Shlegeris and colleagues researched AI control and improving safety despite intentional subversion.
+Rafael Rafailov and team investigated direct preference optimization for language models.

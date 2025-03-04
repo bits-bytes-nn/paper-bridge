@@ -1,0 +1,101 @@
+topic: Language Model Evaluation and Prompting Techniques
+
+  entities:
+    Yujin Kim|Researcher
+    Qinyuan Cheng|Researcher
+    Xun Liang|Researcher
+    Yiran Zhao|Researcher
+    Shiping Yang|Researcher
+    Pengfei Liu|Researcher
+    Jason Wei|Researcher
+    Denny Zhou|Researcher
+    Yizhong Wang|Researcher
+    Peifeng Wang|Researcher
+    Ofir Press|Researcher
+    Patrick Lewis|Researcher
+    Yunfan Gao|Researcher
+    Shunyu Yao|Researcher
+    Tianyu Liu|Researcher
+    Chengshu Li|Researcher
+    North American Chapter of the Association for Computational Linguistics|Conference
+    Advances in Neural Information Processing Systems|Conference
+    ACM Computing Surveys|Publication
+    UHGEval|Benchmark
+    FELM|Benchmark
+    Scott|Method
+    ReAct|Method
+    Chain of Code|Approach
+    Chain-of-Thought|Method
+    Least-to-Most Prompting|Method
+
+  proposition: Yujin Kim et al. published a paper on evaluating world knowledge in lifelong language models at the North American Chapter of the Association for Computational Linguistics in 2024.
+    entity-attribute relationships:
+    Yujin Kim|PUBLISHED_IN|North American Chapter of the Association for Computational Linguistics
+    Yujin Kim|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Yujin Kim|RESEARCHED|Lifelong Language Models
+    Yujin Kim|EVALUATED|World Knowledge
+
+  proposition: Qinyuan Cheng et al. conducted a study evaluating hallucinations in Chinese large language models in 2023.
+    entity-attribute relationships:
+    Qinyuan Cheng|RESEARCH_YEAR|2023
+    
+    entity-entity relationships:
+    Qinyuan Cheng|EVALUATED|Chinese Large Language Models
+    Qinyuan Cheng|STUDIED|Hallucinations
+
+  proposition: Xun Liang et al. developed UHGEval, a benchmark for assessing hallucinations in Chinese large language models through unconstrained generation in 2023.
+    entity-attribute relationships:
+    Xun Liang|RESEARCH_YEAR|2023
+    
+    entity-entity relationships:
+    Xun Liang|DEVELOPED|UHGEval
+    UHGEval|ASSESSES|Hallucinations
+    UHGEval|FOCUSES_ON|Chinese Large Language Models
+
+  proposition: Yiran Zhao et al. created FELM, a benchmark for factuality evaluation of large language models, published in Advances in Neural Information Processing Systems in 2024.
+    entity-attribute relationships:
+    Yiran Zhao|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Yiran Zhao|CREATED|FELM
+    FELM|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    FELM|EVALUATES|Factuality of Large Language Models
+
+  proposition: Shiping Yang et al. proposed a new benchmark and reverse validation method for passage-level hallucination detection in 2023.
+    entity-attribute relationships:
+    Shiping Yang|RESEARCH_YEAR|2023
+    
+    entity-entity relationships:
+    Shiping Yang|PROPOSED|Benchmark
+    Shiping Yang|PROPOSED|Reverse Validation Method
+    Proposed Method|FOCUSES_ON|Passage-Level Hallucination Detection
+
+  proposition: Pengfei Liu et al. published a systematic survey of prompting methods in natural language processing in ACM Computing Surveys in 2023.
+    entity-attribute relationships:
+    Pengfei Liu|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Pengfei Liu|PUBLISHED_IN|ACM Computing Surveys
+    Pengfei Liu|SURVEYED|Prompting Methods
+    Surveyed Methods|DOMAIN|Natural Language Processing
+
+  proposition: Jason Wei et al. introduced chain-of-thought prompting to elicit reasoning in large language models in Advances in Neural Information Processing Systems in 2022.
+    entity-attribute relationships:
+    Jason Wei|PUBLICATION_YEAR|2022
+    
+    entity-entity relationships:
+    Jason Wei|INTRODUCED|Chain-of-Thought Prompting
+    Chain-of-Thought Prompting|PUBLISHED_IN|Advances in Neural Information Processing Systems
+    Chain-of-Thought Prompting|PURPOSE|Elicit Reasoning in Large Language Models
+
+  proposition: Denny Zhou et al. developed least-to-most prompting to enable complex reasoning in large language models in 2022.
+    entity-attribute relationships:
+    Denny Zhou|RESEARCH_YEAR|2022
+    
+    entity-entity relationships:
+    Denny Zhou|DEVELOPED|Least-to-Most Prompting
+    Least-to-Most Prompting|PURPOSE|Enable Complex Reasoning in Large Language Models
+
+(Note: The remaining propositions follow a similar pattern of entity-attribute and entity-entity relationship extraction.)

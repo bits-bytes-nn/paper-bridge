@@ -1,0 +1,19 @@
+Research Papers on Large Language Model Evaluation Platforms and Benchmarks
+
+Large language models are not fair evaluators.
+OpenCompass is a universal evaluation platform for foundation models.
+SC-Safety is a multi-round open-ended question adversarial safety benchmark for large language models in Chinese.
+Wenxuan Wang et al. published a paper on multilingual safety of large language models at ACL 2024.
+Qinyuan Cheng et al. conducted research on evaluating hallucinations in Chinese large language models.
+Shiqi Chen et al. developed FELM, a benchmark for factuality evaluation of large language models.
+Mi Zhang et al. created JADE, a linguistics-based safety evaluation platform for large language models.
+Haoran Li et al. developed P-Bench, a multi-level privacy evaluation benchmark for language models.
+Niloofar Mireshghallah et al. tested privacy implications of language models via contextual integrity theory.
+Yanyang Li et al. created CLEVA, a Chinese language models evaluation platform.
+Allen Nie et al. developed MoCa for measuring human-language model alignment on causal and moral judgment tasks.
+Kexin Huang et al. created Flames, a benchmark for value alignment of Chinese large language models.
+David Esiobu et al. developed ROBBIE, a robust bias evaluation tool for large generative language models.
+Shiyao Cui et al. created FFT for evaluating large language models' harmlessness across factuality, fairness, and toxicity.
+Tinghao Xie et al. developed SORRY-Bench to systematically evaluate large language model safety refusal behaviors.
+Hari Shrawgi et al. investigated uncovering stereotypes in large language models using a task complexity-based approach.
+Lijun Li et al. created SALAD-Bench, a hierarchical and comprehensive safety benchmark for large language models.

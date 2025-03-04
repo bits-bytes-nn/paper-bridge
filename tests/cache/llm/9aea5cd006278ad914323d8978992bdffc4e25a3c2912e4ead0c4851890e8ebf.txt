@@ -1,0 +1,17 @@
+Research Papers on AI Alignment, Optimization, and Risks
+
+Research paper by Luccioni et al. examines power consumption and cost of AI deployment.
+Research paper by Brown et al. discusses language models as few-shot learners.
+Schulman et al. published research on proximal policy optimization algorithms.
+Ji et al. conducted a comprehensive survey on AI alignment.
+Wang et al. published a comprehensive survey of LLM alignment techniques.
+Yao et al. surveyed alignment goals for big models from instructions to intrinsic human values.
+Cao et al. explored scalable automated alignment of Large Language Models.
+Lin et al. investigated unlocking base LLMs through in-context learning.
+Zhou et al. proposed LIMA: Less is More for Alignment approach.
+Hubinger et al. studied risks from learned optimization in advanced machine learning systems.
+McKenzie et al. researched inverse scaling phenomenon in machine learning.
+Turner et al. explored how optimal policies tend to seek power.
+Krakovna and Kramar examined power-seeking behavior in trained agents.
+Ngo et al. analyzed the alignment problem from a deep learning perspective.
+Shevlane et al. conducted research on model evaluation for extreme risks.

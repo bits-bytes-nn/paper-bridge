@@ -1,0 +1,121 @@
+topic: Text-to-Image Models Challenges and Applications
+
+  entities:
+    Text-to-image models|Model
+    Art|Domain
+    Design|Domain
+    Healthcare|Domain
+    Fashion|Domain
+    Jailbreak attacks|Technological Concept
+    Training data|Training Data
+    Sensitive information|Social Concept
+    Biased content|Social Concept
+    Adversarial prompts|Technological Concept
+
+  proposition: Text-to-image models have been widely applied in art and design, healthcare, and fashion domains.
+    entity-entity relationships:
+    Text-to-image models|APPLIED_IN|Art
+    Text-to-image models|APPLIED_IN|Design
+    Text-to-image models|APPLIED_IN|Healthcare
+    Text-to-image models|APPLIED_IN|Fashion
+
+  proposition: Text-to-image models are susceptible to jailbreak attacks through adversarial prompts.
+    entity-entity relationships:
+    Text-to-image models|VULNERABLE_TO|Jailbreak attacks
+    Jailbreak attacks|EXECUTED_THROUGH|Adversarial prompts
+
+  proposition: Jailbreak attacks can lead to unexpected or undesirable image outputs.
+    entity-attribute relationships:
+    Jailbreak attacks|RESULT_IN|Unexpected image outputs
+    Jailbreak attacks|RESULT_IN|Undesirable image outputs
+
+  proposition: Text-to-image models may inadvertently leak sensitive information from training data.
+    entity-entity relationships:
+    Text-to-image models|POTENTIAL_TO|Sensitive information
+    Sensitive information|SOURCE|Training data
+
+  proposition: Models might memorize and reproduce elements from the training set.
+    entity-entity relationships:
+    Text-to-image models|MEMORIZE|Training data
+    Text-to-image models|REPRODUCE|Training data
+
+  proposition: Memorization of training data can lead to privacy issues.
+    entity-attribute relationships:
+    Training data|CAUSE|Privacy issues
+
+  proposition: Text-to-image models may produce biased content due to biases in training data.
+    entity-entity relationships:
+    Text-to-image models|PRODUCE|Biased content
+    Biased content|ORIGIN|Training data
+
+topic: Truthfulness in Text-to-Image Models
+
+  entities:
+    Truthfulness|Social Concept
+    User queries|Technological Concept
+    Metric-based methods|Method
+    FID|Metric
+    SSIM|Metric
+    LPIPS|Metric
+    Model-based methods|Method
+    Inception Score|Metric
+    CLIP-score|Metric
+    Large language models|Model
+    Visual question-answer approaches|Method
+    Visual language models|Model
+
+  proposition: Truthfulness in text-to-image models refers to generating images precisely according to user queries.
+    entity-entity relationships:
+    Truthfulness|DEFINED_BY|User queries
+    Text-to-image models|GENERATE|Images
+
+  proposition: Traditional truthfulness evaluation uses metric-based methods like FID, SSIM, and LPIPS.
+    entity-entity relationships:
+    Truthfulness|EVALUATED_BY|Metric-based methods
+    Metric-based methods|INCLUDES|FID
+    Metric-based methods|INCLUDES|SSIM
+    Metric-based methods|INCLUDES|LPIPS
+
+  proposition: Traditional truthfulness evaluation also uses model-based methods like Inception Score and CLIP-score.
+    entity-entity relationships:
+    Truthfulness|EVALUATED_BY|Model-based methods
+    Model-based methods|INCLUDES|Inception Score
+    Model-based methods|INCLUDES|CLIP-score
+
+  proposition: Recent research focuses on decomposing textual conditions using large language models.
+    entity-entity relationships:
+    Research|FOCUS_ON|Large language models
+    Large language models|USED_FOR|Decomposing textual conditions
+
+topic: Truthfulness Evaluation Methodology
+
+  entities:
+    GenVerse|Project
+    Vocabularies|Technological Concept
+    Entities|Technological Concept
+    Attributes|Technological Concept
+    Relations|Technological Concept
+    Large language model|Model
+    Visual Question Answering|Method
+    TIFA|Method
+
+  proposition: GenVerse is used to generate a dataset of image captions for benchmarking truthfulness.
+    entity-attribute relationships:
+    GenVerse|PURPOSE|Generate image captions
+    GenVerse|USED_FOR|Benchmarking truthfulness
+
+  proposition: GenVerse maintains vocabularies of entities, attributes, and relations.
+    entity-attribute relationships:
+    GenVerse|MAINTAINS|Vocabularies
+    Vocabularies|INCLUDES|Entities
+    Vocabularies|INCLUDES|Attributes
+    Vocabularies|INCLUDES|Relations
+
+  proposition: The evaluation uses a Visual Question Answering (VQA) based approach.
+    entity-entity relationships:
+    Evaluation|USES|Visual Question Answering
+
+  proposition: TIFA is leveraged for atomic and interpretable evaluation.
+    entity-attribute relationships:
+    TIFA|PURPOSE|Atomic evaluation
+    TIFA|PURPOSE|Interpretable evaluation

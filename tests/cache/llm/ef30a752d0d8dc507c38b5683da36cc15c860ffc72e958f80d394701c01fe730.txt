@@ -1,0 +1,98 @@
+topic: Privacy Score Analysis of Text-to-Image Models
+
+  entities:
+    CogView-3-Plus|Model
+    SD-3.5-large-turbo|Model
+    SD-3.5-large|Model
+    Kolors|Model
+    Playground-v2.5|Model
+    Dall-E-3|Model
+    FLXU-1.1-Pro|Model
+    HunyuanDiT|Model
+    Privacy Score|Method
+    Privacy Leakage|Social Concept
+
+  proposition: CogView-3-Plus has a privacy score of 91.36
+    entity-attribute relationships:
+    CogView-3-Plus|PRIVACY_SCORE|91.36
+
+  proposition: CogView-3-Plus has a privacy score of 90.4
+    entity-attribute relationships:
+    CogView-3-Plus|PRIVACY_SCORE|90.4
+
+  proposition: SD-3.5-large-turbo has a privacy score of 84.57
+    entity-attribute relationships:
+    SD-3.5-large-turbo|PRIVACY_SCORE|84.57
+
+  proposition: SD-3.5-large has a privacy score of 83.85
+    entity-attribute relationships:
+    SD-3.5-large|PRIVACY_SCORE|83.85
+
+  proposition: Kolors has a privacy score of 82.72
+    entity-attribute relationships:
+    Kolors|PRIVACY_SCORE|82.72
+
+  proposition: Playground-v2.5 has a privacy score of 79.01
+    entity-attribute relationships:
+    Playground-v2.5|PRIVACY_SCORE|79.01
+
+  proposition: Dall-E-3 has a privacy score of 72.22
+    entity-attribute relationships:
+    Dall-E-3|PRIVACY_SCORE|72.22
+
+  proposition: FLXU-1.1-Pro has a privacy score of 62.89
+    entity-attribute relationships:
+    FLXU-1.1-Pro|PRIVACY_SCORE|62.89
+
+  proposition: HunyuanDiT has a privacy score of 59.26
+    entity-attribute relationships:
+    HunyuanDiT|PRIVACY_SCORE|59.26
+
+  proposition: Privacy Score is calculated as 1 minus the percentage of images with privacy leakage
+    entity-attribute relationships:
+    Privacy Score|CALCULATED_BY|percentage of images with privacy leakage
+
+  proposition: Privacy Score = 1 − #Images with privacy leakage × 100% / #Total images
+    entity-attribute relationships:
+    Privacy Score|FORMULA|1 − #Images with privacy leakage × 100% / #Total images
+
+  proposition: The evaluation method involves generating three regressive yes/no questions to assess privacy risks
+    entity-attribute relationships:
+    Privacy Score|EVALUATION_METHOD|three regressive yes/no questions
+
+  proposition: HunyuanDiT has the lowest individual-related privacy score at 59.26
+    entity-entity relationships:
+    HunyuanDiT|HAS_LOWEST|individual-related privacy score
+
+  proposition: FLXU-1.1-Pro and Dall-E-3 also show low individual privacy protection
+    entity-entity relationships:
+    FLXU-1.1-Pro|LOW_PRIVACY_PROTECTION|individual
+    Dall-E-3|LOW_PRIVACY_PROTECTION|individual
+
+  proposition: SD-3.5-large-Turbo and CogView-3-Plus demonstrate stronger individual privacy protections
+    entity-entity relationships:
+    SD-3.5-large-Turbo|STRONG_PRIVACY_PROTECTION|individual
+    CogView-3-Plus|STRONG_PRIVACY_PROTECTION|individual
+
+  proposition: Dall-E-3, FLXU-1.1-Pro, and HunyuanDiT are more likely to generate organization-specific content
+    entity-entity relationships:
+    Dall-E-3|GENERATES|organization-specific content
+    FLXU-1.1-Pro|GENERATES|organization-specific content
+    HunyuanDiT|GENERATES|organization-specific content
+
+  proposition: CogView-3-Plus and Kolors show stricter handling of organization-related prompts
+    entity-entity relationships:
+    CogView-3-Plus|STRICT_HANDLING|organization-related prompts
+    Kolors|STRICT_HANDLING|organization-related prompts
+
+  proposition: Dall-E-3 shows different privacy protection levels for individual and organizational content
+    entity-attribute relationships:
+    Dall-E-3|PRIVACY_PROTECTION_LEVEL|varies by content type
+
+  proposition: Dall-E-3 has a low organization-related privacy score of 59.38
+    entity-attribute relationships:
+    Dall-E-3|ORGANIZATION_PRIVACY_SCORE|59.38
+
+  proposition: Dall-E-3 has a higher individual-related privacy score of 72.22
+    entity-attribute relationships:
+    Dall-E-3|INDIVIDUAL_PRIVACY_SCORE|72.22

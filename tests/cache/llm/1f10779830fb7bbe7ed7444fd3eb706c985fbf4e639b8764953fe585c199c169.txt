@@ -1,0 +1,62 @@
+topic: Vision-Language Model Adversarial Attacks and Robustness
+
+  entities:
+    Adversarial Attacks|Technological Concept
+    Vision-Language Models|Model
+    MiniGPT-4|Model
+    BLIP-2|Model
+    AVIBench|Benchmark
+    Visual Question Answering|Task
+    Image Captioning|Task
+    Multi-Modal Language Model|Model
+
+  proposition: Adversarial attacks can control model behavior in vision-language models (VLMs).
+    entity-entity relationships:
+    Adversarial Attacks|TARGETS|Vision-Language Models
+
+  proposition: Adversarial attacks can mislead VLMs' vision understanding.
+    entity-entity relationships:
+    Adversarial Attacks|IMPACTS|Vision-Language Models
+
+  proposition: Researchers have demonstrated various attack techniques in white-box, gray-box, and black-box settings.
+    entity-attribute relationships:
+    Adversarial Attacks|DESCRIBED_BY|white-box
+    Adversarial Attacks|DESCRIBED_BY|gray-box
+    Adversarial Attacks|DESCRIBED_BY|black-box
+
+  proposition: Adversaries can implant 'backdoors' in VLMs triggered by specific text inputs.
+    entity-attribute relationships:
+    Adversarial Attacks|TYPE|backdoors
+
+  proposition: Imperceptible white-box adversarial attacks can change image caption outputs.
+    entity-entity relationships:
+    Adversarial Attacks|IMPACTS|Image Captioning
+
+  proposition: Adversarial attacks can manipulate visual inputs to deceive models like MiniGPT-4 and BLIP-2.
+    entity-entity relationships:
+    Adversarial Attacks|TARGETS|MiniGPT-4
+    Adversarial Attacks|TARGETS|BLIP-2
+
+  proposition: Combating adversarial images remains an unresolved challenge in VLMs.
+    entity-attribute relationships:
+    Vision-Language Models|CHALLENGE|Adversarial Images
+
+  proposition: Adversarial defenses for VLMs include input denoising and model robustification methods.
+    entity-attribute relationships:
+    Vision-Language Models|DEFENSE|input denoising
+    Vision-Language Models|DEFENSE|model robustification
+
+  proposition: AVIBench is a framework for assessing VLM robustness against adversarial visual instructions.
+    entity-entity relationships:
+    AVIBench|ASSESSES|Vision-Language Models
+
+  proposition: Robustness evaluation uses two primary data types: Visual Question Answering (VQA) and image captioning.
+    entity-entity relationships:
+    AVIBench|EVALUATES|Visual Question Answering
+    AVIBench|EVALUATES|Image Captioning
+
+  proposition: The image domain includes 23 perturbation types: 19 existing image corruptions and 4 new transformations.
+    entity-attribute relationships:
+    Image Domain|PERTURBATION_COUNT|23
+    Image Domain|EXISTING_CORRUPTIONS|19
+    Image Domain|NEW_TRANSFORMATIONS|4

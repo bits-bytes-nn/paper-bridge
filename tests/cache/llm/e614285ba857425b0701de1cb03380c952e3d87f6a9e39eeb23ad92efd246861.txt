@@ -1,0 +1,16 @@
+Research Papers on Multimodal Large Language Model Security Vulnerabilities
+
+Unbridled Icarus is a survey exploring potential security risks in multimodal large language model image inputs.
+Researchers have published multiple studies investigating jailbreaking and vulnerability attacks on multimodal large language models.
+JailbreakV-28k is a benchmark for assessing multimodal large language models' robustness against jailbreak attacks.
+Safety fine-tuning can be achieved with minimal computational cost for vision large language models.
+Jailbreaking attacks specifically target multimodal large language models.
+JailGuard is a universal detection framework for large language model prompt-based attacks.
+Researchers have developed techniques like typographic visual prompts to jailbreak large vision-language models.
+A single image can potentially jailbreak multiple multimodal language model agents exponentially fast.
+Researchers have tested the robustness of models like Google's Bard against adversarial image attacks.
+Self-adversarial attacks with system prompts can be used to jailbreak models like GPT-4V.
+Images have been identified as a potential vulnerability in multimodal large language model alignment.
+Multiple research papers explore strategies for safeguarding vision-language models against visual prompt injectors.
+Researchers are developing methods like image-to-text transformation to protect multimodal large language models.
+Studies are unveiling visual information leakage in multimodal model safety mechanisms.

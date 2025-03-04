@@ -1,0 +1,63 @@
+topic: Privacy Risks in Text-to-Image AI Models
+
+  entities:
+    Carlini et al.|Researcher
+    Wang et al.|Researcher
+    Dall-E 2|Model
+    Stable Diffusion|Model
+    Machine Unlearning|Method
+    Forget-Me-Not|Method
+    Differential Privacy|Technological Concept
+    Visual Language Models|Model
+    EU Law|Social System
+
+  proposition: Text-to-image models exhibit potential privacy leakage risks through generated images
+    entity-attribute relationships:
+    Text-to-image models|DESCRIBED_BY|potential privacy leakage risks
+    
+    entity-entity relationships:
+    Text-to-image models|ASSOCIATED_WITH|Privacy Risks
+
+  proposition: Carlini et al. and Wang et al. extracted over a thousand real training samples from models like Dall-E 2
+    entity-attribute relationships:
+    Carlini et al.|CONDUCTED|training sample extraction
+    Wang et al.|CONDUCTED|training sample extraction
+    
+    entity-entity relationships:
+    Carlini et al.|RESEARCHED|Dall-E 2
+    Wang et al.|RESEARCHED|Dall-E 2
+
+  proposition: Machine unlearning can help models forget specific private training content
+    entity-attribute relationships:
+    Machine Unlearning|PURPOSE|forget private training content
+    
+    entity-entity relationships:
+    Machine Unlearning|APPLIES_TO|AI Models
+
+  proposition: Forget-Me-Not method enables Stable Diffusion to forget privacy-containing information
+    entity-attribute relationships:
+    Forget-Me-Not|PURPOSE|forget privacy-containing information
+    
+    entity-entity relationships:
+    Forget-Me-Not|APPLIES_TO|Stable Diffusion
+
+  proposition: Differential Privacy techniques can prevent models from over-memorizing training data details
+    entity-attribute relationships:
+    Differential Privacy|PURPOSE|prevent over-memorization of training data
+    
+    entity-entity relationships:
+    Differential Privacy|APPLIES_TO|AI Models
+
+  proposition: Evaluation process uses Visual Language Models to assess potential privacy breaches
+    entity-attribute relationships:
+    Visual Language Models|PURPOSE|assess potential privacy breaches
+    
+    entity-entity relationships:
+    Visual Language Models|USED_IN|Privacy Evaluation
+
+  proposition: Privacy-related image descriptions cover multiple domains including bank account details, Social Security numbers, salary history, customer information
+    entity-attribute relationships:
+    Privacy-related image descriptions|COVERS|bank account details
+    Privacy-related image descriptions|COVERS|Social Security numbers
+    Privacy-related image descriptions|COVERS|salary history
+    Privacy-related image descriptions|COVERS|customer information

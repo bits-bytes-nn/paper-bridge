@@ -1,0 +1,117 @@
+topic: AI Ethics and Privacy Research
+
+  entities:
+    Bernardo Breve|Researcher
+    Gaetano Cimino|Researcher
+    Vincenzo Deufemia|Researcher
+    Sunder Ali Khowaja|Researcher
+    Cunxiang Wang|Researcher
+    Yixin Wu|Researcher
+    Charly Ashcroft|Researcher
+    Kahari Whitaker|Researcher
+    Yuxin Wen|Researcher
+    Guy Amit|Researcher
+    Mukai Li|Researcher
+    Tribhuvanesh Orekondy|Researcher
+    Danna Gurari|Researcher
+    Alexis Roger|Researcher
+    Haoqin Tu|Researcher
+    Hongzhan Lin|Researcher
+    World Health Organization|Organization
+    Yu Shu|Researcher
+    Tsai-Shien Chen|Researcher
+    ChatGPT|Model
+    Large Language and Speech Model|Model
+    Panda-70m|Dataset
+    VizWiz-Priv|Dataset
+
+  proposition: Bernardo Breve, Gaetano Cimino, and Vincenzo Deufemia published a paper on identifying security and privacy violation rules in trigger-action IoT platforms using NLP models.
+    entity-attribute relationships:
+    Bernardo Breve|AUTHORED|Research Paper
+    Gaetano Cimino|AUTHORED|Research Paper
+    Vincenzo Deufemia|AUTHORED|Research Paper
+
+    entity-entity relationships:
+    Bernardo Breve|COLLABORATES_WITH|Gaetano Cimino
+    Bernardo Breve|COLLABORATES_WITH|Vincenzo Deufemia
+    Gaetano Cimino|COLLABORATES_WITH|Vincenzo Deufemia
+
+  proposition: Sunder Ali Khowaja et al. conducted a review of ChatGPT requiring evaluation across sustainability, privacy, digital divide, and ethics dimensions.
+    entity-attribute relationships:
+    Sunder Ali Khowaja|AUTHORED|Research Paper
+    ChatGPT|EVALUATED_FOR|Sustainability
+    ChatGPT|EVALUATED_FOR|Privacy
+    ChatGPT|EVALUATED_FOR|Digital Divide
+    ChatGPT|EVALUATED_FOR|Ethics
+
+  proposition: Cunxiang Wang et al. evaluated open question answering evaluation methods.
+    entity-attribute relationships:
+    Cunxiang Wang|AUTHORED|Research Paper
+
+  proposition: Yixin Wu et al. quantified privacy risks of prompts in visual prompt learning.
+    entity-attribute relationships:
+    Yixin Wu|AUTHORED|Research Paper
+    Visual Prompt Learning|ANALYZED_FOR|Privacy Risks
+
+  proposition: Charly Ashcroft and Kahari Whitaker evaluated domain-specific prompt engineering attacks on large language models.
+    entity-attribute relationships:
+    Charly Ashcroft|AUTHORED|Research Paper
+    Kahari Whitaker|AUTHORED|Research Paper
+
+    entity-entity relationships:
+    Charly Ashcroft|COLLABORATES_WITH|Kahari Whitaker
+
+  proposition: Yuxin Wen et al. explored privacy backdoors by enhancing membership inference through poisoning pre-trained models.
+    entity-attribute relationships:
+    Yuxin Wen|AUTHORED|Research Paper
+
+  proposition: Guy Amit et al. developed a systematic overview of reducing vulnerability of fine-tuned language models to membership inference attacks.
+    entity-attribute relationships:
+    Guy Amit|AUTHORED|Research Paper
+
+  proposition: Mukai Li et al. conducted red teaming of visual language models.
+    entity-attribute relationships:
+    Mukai Li|AUTHORED|Research Paper
+
+  proposition: Tribhuvanesh Orekondy et al. worked on understanding and predicting privacy risks in images.
+    entity-attribute relationships:
+    Tribhuvanesh Orekondy|AUTHORED|Research Paper
+
+  proposition: Danna Gurari et al. created VizWiz-Priv dataset for recognizing private visual information in images taken by blind people.
+    entity-attribute relationships:
+    Danna Gurari|CREATED|VizWiz-Priv
+    VizWiz-Priv|PURPOSE|Recognizing Private Visual Information
+
+  proposition: Alexis Roger researched ethical multimodal systems and training large multimodal language models with ethical values.
+    entity-attribute relationships:
+    Alexis Roger|RESEARCHED|Ethical Multimodal Systems
+
+  proposition: Haoqin Tu et al. demonstrated that multi-modal training enhances large language models in truthfulness and ethics.
+    entity-attribute relationships:
+    Haoqin Tu|AUTHORED|Research Paper
+
+  proposition: World Health Organization released AI ethics and governance guidance for large multi-modal models.
+    entity-attribute relationships:
+    World Health Organization|RELEASED|AI Ethics Guidance
+
+  proposition: Hongzhan Lin et al. proposed an approach towards explainable harmful meme detection through multimodal debate between large language models.
+    entity-attribute relationships:
+    Hongzhan Lin|AUTHORED|Research Paper
+
+  proposition: Yu Shu et al. developed Large Language and Speech Model (LLASM).
+    entity-attribute relationships:
+    Yu Shu|DEVELOPED|Large Language and Speech Model
+
+  proposition: Tsai-Shien Chen et al. created Panda-70m, a dataset of 70m videos captioned with multiple cross-modality teachers.
+    entity-attribute relationships:
+    Tsai-Shien Chen|CREATED|Panda-70m
+    Panda-70m|CONTAINS|70m Videos
+
+topic: Multimodal AI Models and Datasets
+
+  entities:
+    Large Language and Speech Model|Model
+    Panda-70m|Dataset
+    VizWiz-Priv|Dataset
+
+  (Propositions and relationships from the previous topic continue to apply here)

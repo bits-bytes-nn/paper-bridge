@@ -1,0 +1,130 @@
+topic: Jailbreaking Large Language Models Research
+
+  entities:
+    Bo Hui|Researcher
+    Haolin Yuan|Researcher
+    Neil Gong|Researcher
+    Philippe Burlina|Researcher
+    Yinzhi Cao|Researcher
+    Zedian Shao|Researcher
+    Hongbin Liu|Researcher
+    Jaden Mu|Researcher
+    Sibo Yi|Researcher
+    Yule Liu|Researcher
+    Zhen Sun|Researcher
+    Tianshuo Cong|Researcher
+    Xinlei He|Researcher
+    Jiaxing Song|Researcher
+    Ke Xu|Researcher
+    Qi Li|Researcher
+    Chung-En Sun|Researcher
+    Xiaodong Liu|Researcher
+    Weiwei Yang|Researcher
+    Tsui-Wei Weng|Researcher
+    Hao Cheng|Researcher
+    Aidan San|Researcher
+    Michel Galley|Researcher
+    Jianfeng Gao|Researcher
+    Zeyi Liao|Researcher
+    Huan Sun|Researcher
+    Vishal Kumar|Researcher
+    Jaylen Jones|Researcher
+    Xiao Li|Researcher
+    Zhuhong Li|Researcher
+    Qiongxiu Li|Researcher
+    Bingze Lee|Researcher
+    Jinghao Cui|Researcher
+    Xiaolin Hu|Researcher
+    Xiaogeng Liu|Researcher
+    Nan Xu|Researcher
+    Muhao Chen|Researcher
+    Chaowei Xiao|Researcher
+    Peiran Li|Researcher
+    Edward Suh|Researcher
+    Yevgeniy Vorobeychik|Researcher
+    Zhuoqing Mao|Researcher
+    Somesh Jha|Researcher
+    Patrick McDaniel|Researcher
+    Bo Li|Researcher
+    Patrick Chao|Researcher
+    Alexander Robey|Researcher
+    Edgar Dobriban|Researcher
+    Hamed Hassani|Researcher
+    George J Pappas|Researcher
+    Eric Wong|Researcher
+    Yangsibo Huang|Researcher
+    Samyak Gupta|Researcher
+    Mengzhou Xia|Researcher
+    Kai Li|Researcher
+    Danqi Chen|Researcher
+    Raz Lapid|Researcher
+    Ron Langberg|Researcher
+    Moshe Sipper|Researcher
+    Xiaoxia Li|Researcher
+    Siyuan Liang|Researcher
+    Jiyi Zhang|Researcher
+    Han Fang|Researcher
+    Aishan Liu|Researcher
+    Ee-Chien Chang|Researcher
+    Dongyu Yao|Researcher
+    Jianshu Zhang|Researcher
+    Ian G Harris|Researcher
+    Marcel Carlsson|Researcher
+    Jiahao Yu|Researcher
+    Xingwei Lin|Researcher
+    Xinyu Xing|Researcher
+    Youliang Yuan|Researcher
+    Wenxiang Jiao|Researcher
+    Wenxuan Wang|Researcher
+    Jen-tse Huang|Researcher
+    Pinjia He|Researcher
+    Shuming Shi|Researcher
+    Zhaopeng Tu|Researcher
+    Huijie Lv|Researcher
+    Xiao Wang|Researcher
+    Yuansen Zhang|Researcher
+    Caishuang Huang|Researcher
+    Shihan Dou|Researcher
+    Junjie Ye|Researcher
+    Tao Gui|Researcher
+    Qi Zhang|Researcher
+    Xuanjing Huang|Researcher
+    arXiv|Publication Platform
+    IEEE ICASSP|Conference
+
+  proposition: Bo Hui, Haolin Yuan, Neil Gong, Philippe Burlina, and Yinzhi Cao published "PLeak: Prompt Leaking Attacks against Large Language Model Applications" in arXiv preprint in 2024.
+    entity-attribute relationships:
+    Bo Hui|PUBLISHED_IN|arXiv
+    Haolin Yuan|PUBLISHED_IN|arXiv
+    Neil Gong|PUBLISHED_IN|arXiv
+    Philippe Burlina|PUBLISHED_IN|arXiv
+    Yinzhi Cao|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Bo Hui|CO_AUTHOR|Haolin Yuan
+    Bo Hui|CO_AUTHOR|Neil Gong
+    Bo Hui|CO_AUTHOR|Philippe Burlina
+    Bo Hui|CO_AUTHOR|Yinzhi Cao
+    Haolin Yuan|CO_AUTHOR|Neil Gong
+    Haolin Yuan|CO_AUTHOR|Philippe Burlina
+    Haolin Yuan|CO_AUTHOR|Yinzhi Cao
+    Neil Gong|CO_AUTHOR|Philippe Burlina
+    Neil Gong|CO_AUTHOR|Yinzhi Cao
+    Philippe Burlina|CO_AUTHOR|Yinzhi Cao
+
+  proposition: Zedian Shao, Hongbin Liu, Jaden Mu, and Neil Zhenqiang Gong published "Making LLMs Vulnerable to Prompt Injection via Poisoning Alignment" in arXiv preprint in 2024.
+    entity-attribute relationships:
+    Zedian Shao|PUBLISHED_IN|arXiv
+    Hongbin Liu|PUBLISHED_IN|arXiv
+    Jaden Mu|PUBLISHED_IN|arXiv
+    Neil Zhenqiang Gong|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Zedian Shao|CO_AUTHOR|Hongbin Liu
+    Zedian Shao|CO_AUTHOR|Jaden Mu
+    Zedian Shao|CO_AUTHOR|Neil Zhenqiang Gong
+    Hongbin Liu|CO_AUTHOR|Jaden Mu
+    Hongbin Liu|CO_AUTHOR|Neil Zhenqiang Gong
+    Jaden Mu|CO_AUTHOR|Neil Zhenqiang Gong
+
+  [Note: The full analysis follows the same pattern for all propositions, maintaining the specified format and extracting entities, attributes, and relationships for each research paper.]

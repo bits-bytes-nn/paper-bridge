@@ -1,0 +1,42 @@
+Generative Foundation Models (GenFMs): Characteristics, Challenges, and Trustworthiness
+
+Foundation models are distinguished by extensive use of massive datasets and computational resources during pre-training.
+Foundation models can generalize effectively across diverse applications.
+Non-generative foundation models like BERT are primarily designed for text classification and language understanding.
+Generative foundation models (GenFMs) are specifically adapted for generative tasks.
+GenFMs excel in creating new instances such as images, texts, or other data forms based on their training.
+GenFMs are large-scale, pre-trained architectures that leverage extensive pre-training to excel in generative tasks across various modalities and domains.
+GenFMs have transformative potential in research and practical applications.
+
+Trustworthiness Challenges of GenFMs
+
+Advanced models like GPT-4 have demonstrated vulnerabilities to novel attacks such as "jailbreak" exploits.
+GenFMs can bypass intended safeguards.
+Text-to-image models like DALLE-3 have been manipulated to bypass safety filters.
+Large Language Models (LLMs) have raised serious concerns about privacy leaks.
+GenFMs can generate realistic outputs that are often indistinguishable from human-created content.
+Potential risks of GenFMs include spread of misinformation, creation of deepfakes, and amplification of biased narratives.
+
+Complexity of GenFM Trustworthiness
+
+GenFMs are pre-trained on massive, heterogeneous datasets, allowing generalization across wide application ranges.
+The broad versatility of GenFMs introduces significant challenges in assessing trustworthiness.
+GenFMs require evaluation across diverse tasks and contexts to ensure consistent reliability and ethical standards.
+GenFMs have potential to shape public opinion, influence policy decisions, and generate content mimicking authoritative sources.
+The scale and complexity of GenFMs, often with billions of parameters, make them inherently opaque and difficult to interpret.
+The dynamic nature of GenFMs complicates maintaining consistent safety protocols and establishing traceability.
+
+Key Events in AI Development (2024-2025)
+
+Deepseek-R1 was released in December 2024.
+OpenAI o3-mini was released in December 2024.
+International AI Safety Report was released in December 2024.
+IBM Granite Guardian was released in December 2024.
+The European Artificial Intelligence Act entered into force in August 2024.
+OpenAI o1 was released in August 2024 with higher reasoning ability and stronger safety performance.
+GPT-4o, Llama 3, and Gemini Flash were released in August 2024.
+The Seoul Declaration was adopted at the 2024 AI Seoul Summit in April 2024.
+TrustLLM was released for evaluating trustworthiness of LLMs in April 2024.
+GPT-4-turbo and Grok were released in January 2024.
+UK AI Safety Institute was established in January 2024.
+Deepmind demonstrated how to extract ChatGPT's training data in January 2024.

@@ -1,0 +1,34 @@
+Research Papers on Autonomous Driving and Computer Vision
+
+Svetlana Pavlitska, Nico Lambing, and J Marius Zöllner conducted a survey on adversarial attacks on traffic sign recognition.
+The survey was published in the 2023 International Conference on Electrical, Computer, Communications and Mechatronics Engineering.
+Xuweiyi Chen and colleagues studied multi-object hallucination in vision-language models.
+The research was published as an arXiv preprint in 2024.
+Julia Nitsch and researchers investigated out-of-distribution detection for automotive perception.
+The study was presented at the 2021 IEEE International Intelligent Transportation Systems Conference.
+Mario Bijelic, Tobias Gruber, and Werner Ritter benchmarked image sensors under adverse weather conditions for autonomous driving.
+The research was presented at the 2018 IEEE Intelligent Vehicles Symposium.
+Ruoxi Zhu and colleagues developed MWFormer, a multi-weather image restoration method using degradation-aware transformers.
+The research was published in IEEE Transactions on Image Processing in 2024.
+Quanyi Li and team created ScenarioNet, an open-source platform for large-scale traffic scenario simulation and modeling.
+The platform was presented in Advances in Neural Information Processing Systems in 2024.
+Wenhao Ding and researchers conducted a survey on safety-critical driving scenario generation from a methodological perspective.
+The survey was published in IEEE Transactions on Intelligent Transportation Systems in 2023.
+Jinlong Li and colleagues developed a multi-condition diffusion framework for low-light enhancement in autonomous driving.
+The research was presented at the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+Shuo Feng and researchers applied dense reinforcement learning for safety validation of autonomous vehicles.
+The study was published in Nature in 2023.
+Hao Shao and team developed LMDrive, a closed-loop end-to-end driving system using large language models.
+The research was presented at the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+Sebastian Krügel and Matthias Uhl conducted an empirical approach to the risk ethics of autonomous vehicles.
+The study was published in Scientific Reports in 2024.
+Yingzi Ma and colleagues developed Dolphins, a multimodal language model for driving.
+The research was presented at the European Conference on Computer Vision in 2025.
+Chonghao Sima and team created DriveLM, a driving system with graph visual question answering.
+The research was presented at the European Conference on Computer Vision in 2025.
+Jyh-Jing Hwang and researchers developed EMMA, an end-to-end multimodal model for autonomous driving.
+The research was published as an arXiv preprint in 2024.
+Shuo Xing and colleagues created OpenEMMA, an open-source multimodal model for end-to-end autonomous driving.
+The research was published as an arXiv preprint in 2024.
+Tsun-Hsuan Wang and researchers developed V2VNet, a vehicle-to-vehicle communication system for joint perception and prediction.
+The research was presented at the European Conference on Computer Vision in 2020.

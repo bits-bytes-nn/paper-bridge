@@ -1,0 +1,71 @@
+topic: Trustworthiness Assessment of Generative Foundation Models
+
+  entities:
+    TrustGen|Benchmark
+    Metadata Curator|Module
+    Test Case Builder|Module
+    Contextual Variator|Module
+    CogView-3-Plus|Model
+    DALL-E-3|Model
+    Llama-3.2-70B|Model
+    GPT-4o|Model
+
+  proposition: TrustGen is a comprehensive and adaptive benchmark designed to evaluate generative foundation models across multiple trustworthiness dimensions.
+    entity-attribute relationships:
+    TrustGen|DESCRIBED_BY|comprehensive
+    TrustGen|DESCRIBED_BY|adaptive
+    TrustGen|PURPOSE|evaluate generative foundation models
+    TrustGen|FOCUSES_ON|trustworthiness dimensions
+
+    entity-entity relationships:
+    TrustGen|CONSISTS_OF|Metadata Curator
+    TrustGen|CONSISTS_OF|Test Case Builder
+    TrustGen|CONSISTS_OF|Contextual Variator
+
+  proposition: TrustGen integrates three core modules: a Metadata Curator, a Test Case Builder, and a Contextual Variator.
+    entity-attribute relationships:
+    TrustGen|CONTAINS|three core modules
+
+    entity-entity relationships:
+    TrustGen|INCLUDES|Metadata Curator
+    TrustGen|INCLUDES|Test Case Builder
+    TrustGen|INCLUDES|Contextual Variator
+
+  proposition: TrustGen evaluates three categories of generative foundation models: text-to-image models, large language models, and vision-language models.
+    entity-attribute relationships:
+    TrustGen|EVALUATES|text-to-image models
+    TrustGen|EVALUATES|large language models
+    TrustGen|EVALUATES|vision-language models
+
+  proposition: CogView-3-Plus achieved the highest trustworthiness score, outperforming DALL-E-3.
+    entity-attribute relationships:
+    CogView-3-Plus|ACHIEVED|highest trustworthiness score
+
+    entity-entity relationships:
+    CogView-3-Plus|OUTPERFORMS|DALL-E-3
+
+  proposition: Llama-3.2-70B exhibited performance comparable to GPT-4o.
+    entity-entity relationships:
+    Llama-3.2-70B|COMPARABLE_TO|GPT-4o
+
+  proposition: The study involved a multidisciplinary collaboration with experts from various fields including NLP, Computer Vision, Human-Computer Interaction, Computer Security, Medicine, and others.
+    entity-attribute relationships:
+    Study|INVOLVES|multidisciplinary collaboration
+    Study|INCLUDES_EXPERTS|NLP
+    Study|INCLUDES_EXPERTS|Computer Vision
+    Study|INCLUDES_EXPERTS|Human-Computer Interaction
+    Study|INCLUDES_EXPERTS|Computer Security
+    Study|INCLUDES_EXPERTS|Medicine
+
+  proposition: Researchers developed comprehensive guidelines for trustworthy generative models.
+    entity-attribute relationships:
+    Researchers|DEVELOPED|comprehensive guidelines
+    Guidelines|FOCUSES_ON|trustworthy generative models
+
+  proposition: Guidelines are structured around legal compliance, ethical responsibilities, risk management, user-centered design, and adaptability.
+    entity-attribute relationships:
+    Guidelines|STRUCTURED_BY|legal compliance
+    Guidelines|STRUCTURED_BY|ethical responsibilities
+    Guidelines|STRUCTURED_BY|risk management
+    Guidelines|STRUCTURED_BY|user-centered design
+    Guidelines|STRUCTURED_BY|adaptability

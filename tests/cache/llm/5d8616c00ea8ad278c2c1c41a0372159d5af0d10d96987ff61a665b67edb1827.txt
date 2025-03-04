@@ -1,0 +1,12 @@
+References on Large Language Models and AI Research
+Llama 2 is an open foundation and fine-tuned chat model published in 2023.
+Llama 3 is a herd of models published as an arXiv preprint in 2024.
+Meta published a statement about expanding open source large language models responsibly in 2024.
+Llama Guard is an LLM-based input-output safeguard for human-AI conversations published in 2023.
+Purple Llama CyberSecEval is a secure coding benchmark for language models published in 2023.
+CyberSecEval 2 is a wide-ranging cybersecurity evaluation suite for large language models published in 2024.
+CyberSecEval 3 advances the evaluation of cybersecurity risks and capabilities in large language models published in 2024.
+Microsoft Copilot is an online AI tool accessible in 2024.
+Microsoft Azure is a cloud computing platform accessible in 2024.
+Microsoft Research has a Trustworthy AI Project.
+Microsoft Research has multiple AI-focused projects including AI for Good, AI for Health, Bioacoustics, Data Visualization, and Geospatial Machine Learning.

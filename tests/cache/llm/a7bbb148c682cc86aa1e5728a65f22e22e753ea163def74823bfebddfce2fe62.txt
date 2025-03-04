@@ -1,0 +1,8 @@
+Research Papers on Prompt Injection Defense and LLM Safety
+
+Julien Piet, Maha Alrashed, Chawin Sitawarin, Sizhe Chen, Zeming Wei, Elizabeth Sun, Basel Alomair, and David Wagner published "Jatmo: Prompt injection defense by task-specific finetuning" in European Symposium on Research in Computer Security in 2024.
+Sizhe Chen, Julien Piet, Chawin Sitawarin, and David Wagner proposed "StruQ: Defending against prompt injection with structured queries" in an arXiv preprint in 2024.
+Eric Wallace, Kai Xiao, Reimar Leike, Lilian Weng, Johannes Heidecke, and Alex Beutel explored "The instruction hierarchy: Training llms to prioritize privileged instructions" in an arXiv preprint in 2024.
+Sizhe Chen, Arman Zharmagambetov, Saeed Mahloujifar, Kamalika Chaudhuri, and Chuan Guo researched "Aligning LLMs to Be Robust Against Prompt Injection" in an arXiv preprint in 2024.
+Tong Wu, Shujian Zhang, Kaiqiang Song, Silei Xu, Sanqiang Zhao, Ravi Agrawal, Sathish Reddy Indurthi, Chong Xiang, Prateek Mittal, and Wenxuan Zhou investigated "Instructional Segment Embedding: Improving LLM Safety with Instruction Hierarchy" in an arXiv preprint in 2024.
+Yulin Chen, Haoran Li, Zihao Zheng, Yangqiu Song, Dekai Wu, and Bryan Hooi studied "Defense Against Prompt Injection Attack by Leveraging Attack Techniques" in an arXiv preprint in 2024.

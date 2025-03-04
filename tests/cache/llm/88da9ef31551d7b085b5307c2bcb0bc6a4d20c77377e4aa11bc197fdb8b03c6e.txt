@@ -1,0 +1,134 @@
+topic: Text-to-Image AI Model Research
+
+  entities:
+    Jeongho Kim|Researcher
+    Yuhao Xu|Researcher
+    Sensen Gao|Researcher
+    Zhi-Yi Chin|Researcher
+    Yu-Lin Tsai|Researcher
+    Yijun Yang|Researcher
+    Jiachen Ma|Researcher
+    Technology Review|Report
+    Le Monde|Report
+    Liang Shi|Researcher
+    Yixin Wu|Researcher
+    Yixin Wan|Researcher
+    Alexander Lin|Researcher
+    Ranjita Naik|Researcher
+    Besmira Nushi|Researcher
+    Hongcheng Gao|Researcher
+    Raphaël Millière|Researcher
+    Haomin Zhuang|Researcher
+    StableViton|Model
+    OOTDiffusion|Model
+    RT-Attack|Method
+    Prompting4Debugging|Method
+    MMA-Diffusion|Method
+    Stable Diffusion|Model
+
+  proposition: Jeongho Kim and colleagues proposed StableViton for virtual try-on using latent diffusion model.
+    entity-attribute relationships:
+    Jeongho Kim|DEVELOPED|StableViton
+    StableViton|TECHNIQUE|latent diffusion model
+    StableViton|PURPOSE|virtual try-on
+
+    entity-entity relationships:
+    Jeongho Kim|RESEARCHER_OF|StableViton
+
+  proposition: Yuhao Xu and team developed OOTDiffusion for controllable virtual try-on using latent diffusion.
+    entity-attribute relationships:
+    Yuhao Xu|DEVELOPED|OOTDiffusion
+    OOTDiffusion|TECHNIQUE|latent diffusion
+    OOTDiffusion|PURPOSE|controllable virtual try-on
+
+    entity-entity relationships:
+    Yuhao Xu|RESEARCHER_OF|OOTDiffusion
+
+  proposition: Sensen Gao and researchers introduced RT-Attack for jailbreaking text-to-image models via random token.
+    entity-attribute relationships:
+    Sensen Gao|DEVELOPED|RT-Attack
+    RT-Attack|PURPOSE|jailbreaking text-to-image models
+    RT-Attack|TECHNIQUE|random token
+
+    entity-entity relationships:
+    Sensen Gao|RESEARCHER_OF|RT-Attack
+
+  proposition: Zhi-Yi Chin and colleagues created Prompting4Debugging to red-team text-to-image diffusion models.
+    entity-attribute relationships:
+    Zhi-Yi Chin|DEVELOPED|Prompting4Debugging
+    Prompting4Debugging|PURPOSE|red-team text-to-image diffusion models
+
+    entity-entity relationships:
+    Zhi-Yi Chin|RESEARCHER_OF|Prompting4Debugging
+
+  proposition: Yu-Lin Tsai and team investigated reliability of concept removal methods for diffusion models.
+    entity-attribute relationships:
+    Yu-Lin Tsai|INVESTIGATED|concept removal methods
+    Yu-Lin Tsai|RESEARCH_FOCUS|diffusion models reliability
+
+  proposition: Yijun Yang and researchers developed MMA-Diffusion as a multimodal attack on diffusion models.
+    entity-attribute relationships:
+    Yijun Yang|DEVELOPED|MMA-Diffusion
+    MMA-Diffusion|TYPE|multimodal attack
+    MMA-Diffusion|TARGET|diffusion models
+
+    entity-entity relationships:
+    Yijun Yang|RESEARCHER_OF|MMA-Diffusion
+
+  proposition: Jiachen Ma and colleagues proposed a jailbreaking prompt attack against diffusion models.
+    entity-attribute relationships:
+    Jiachen Ma|PROPOSED|jailbreaking prompt attack
+    Jailbreaking prompt attack|TARGET|diffusion models
+
+  proposition: Technology Review reported that text-to-image AI models can be tricked into generating disturbing images.
+    entity-attribute relationships:
+    Technology Review|REPORTED|text-to-image AI model vulnerabilities
+
+  proposition: Le Monde highlighted concerns about AI's problematic representation of beauty.
+    entity-attribute relationships:
+    Le Monde|HIGHLIGHTED|AI representation issues
+
+  proposition: Liang Shi and team developed anonymization prompt learning for facial privacy-preserving text-to-image generation.
+    entity-attribute relationships:
+    Liang Shi|DEVELOPED|anonymization prompt learning
+    Anonymization prompt learning|PURPOSE|facial privacy-preserving text-to-image generation
+
+  proposition: Yixin Wu and colleagues conducted membership inference attacks against text-to-image generation models.
+    entity-attribute relationships:
+    Yixin Wu|CONDUCTED|membership inference attacks
+    Membership inference attacks|TARGET|text-to-image generation models
+
+  proposition: Yixin Wan and researchers surveyed bias in text-to-image generation.
+    entity-attribute relationships:
+    Yixin Wan|SURVEYED|bias in text-to-image generation
+
+  proposition: Alexander Lin and team explored word-level explanations for analyzing bias in text-to-image models.
+    entity-attribute relationships:
+    Alexander Lin|EXPLORED|word-level explanations
+    Word-level explanations|PURPOSE|analyzing bias in text-to-image models
+
+  proposition: Ranjita Naik and Besmira Nushi examined social biases through text-to-image generation.
+    entity-attribute relationships:
+    Ranjita Naik|EXAMINED|social biases
+    Besmira Nushi|EXAMINED|social biases
+    Examination|METHOD|text-to-image generation
+
+  proposition: Hongcheng Gao and researchers evaluated robustness of text-to-image diffusion models against real-world attacks.
+    entity-attribute relationships:
+    Hongcheng Gao|EVALUATED|robustness of text-to-image diffusion models
+    Evaluation|CONTEXT|real-world attacks
+
+  proposition: Raphaël Millière studied adversarial attacks on image generation using made-up words.
+    entity-attribute relationships:
+    Raphaël Millière|STUDIED|adversarial attacks
+    Adversarial attacks|TECHNIQUE|made-up words
+    Adversarial attacks|DOMAIN|image generation
+
+  proposition: Haomin Zhuang and team conducted a pilot study of query-free adversarial attack against Stable Diffusion.
+    entity-attribute relationships:
+    Haomin Zhuang|CONDUCTED|query-free adversarial attack pilot study
+    Pilot study|TARGET|Stable Diffusion
+    Adversarial attack|TYPE|query-free
+
+    entity-entity relationships:
+    Pilot study|TARGETS|Stable Diffusion

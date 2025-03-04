@@ -1,0 +1,131 @@
+topic: Large Language Model (LLM) Research Papers
+
+  entities:
+    Dipayan Saha|Researcher
+    Ross Williams|Researcher
+    Chen Gao|Researcher
+    Shenzhi Wang|Researcher
+    Weize Chen|Researcher
+    Zhiyu Yang|Researcher
+    Geliang Ouyang|Researcher
+    Yi Gui|Researcher
+    Wenzhao Zheng|Researcher
+    Yongjie Fu|Researcher
+    Anthony Hu|Researcher
+    Shounak Sural|Researcher
+    Tianjie Ju|Researcher
+    Josef Dai|Researcher
+    Tianyu Yu|Researcher
+    Afra Feyza Akyürek|Researcher
+    LLM for SoC Security|Research Paper
+    Epidemic Modeling with Generative Agents|Research Paper
+    S3: Social-network Simulation System|Research Paper
+    Avalon's Game of Thoughts|Research Paper
+    AgentVerse|Research Paper
+    MatplotAgent|Research Paper
+    nvAgent|Research Paper
+    UICopilot|Research Paper
+    Flooding Spread of Manipulated Knowledge|Research Paper
+    IEEE Access|Publication
+    arXiv|Publication
+    Web Conference|Conference
+
+  proposition: Dipayan Saha et al. published a paper titled "LLM for SoC Security: A Paradigm Shift" in IEEE Access in 2024.
+    entity-attribute relationships:
+    Dipayan Saha|PUBLISHED|LLM for SoC Security
+    LLM for SoC Security|PUBLISHED_IN|IEEE Access
+    LLM for SoC Security|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Dipayan Saha|AUTHOR_OF|LLM for SoC Security
+
+  proposition: Ross Williams et al. conducted research on "Epidemic Modeling with Generative Agents" in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Ross Williams|PUBLISHED|Epidemic Modeling with Generative Agents
+    Epidemic Modeling with Generative Agents|PUBLISHED_IN|arXiv
+    Epidemic Modeling with Generative Agents|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Ross Williams|AUTHOR_OF|Epidemic Modeling with Generative Agents
+
+  proposition: Chen Gao et al. developed S3: Social-network Simulation System with Large Language Model-Empowered Agents in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Chen Gao|DEVELOPED|S3: Social-network Simulation System
+    S3: Social-network Simulation System|PUBLISHED_IN|arXiv
+    S3: Social-network Simulation System|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Chen Gao|AUTHOR_OF|S3: Social-network Simulation System
+
+  proposition: Shenzhi Wang et al. explored "Avalon's Game of Thoughts: Battle Against Deception Through Recursive Contemplation" in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Shenzhi Wang|PUBLISHED|Avalon's Game of Thoughts
+    Avalon's Game of Thoughts|PUBLISHED_IN|arXiv
+    Avalon's Game of Thoughts|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Shenzhi Wang|AUTHOR_OF|Avalon's Game of Thoughts
+
+  proposition: Weize Chen et al. published "AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors" in the Twelfth International Conference on Learning Representations in 2024.
+    entity-attribute relationships:
+    Weize Chen|PUBLISHED|AgentVerse
+    AgentVerse|PUBLISHED_IN|Web Conference
+    AgentVerse|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Weize Chen|AUTHOR_OF|AgentVerse
+
+  proposition: Zhiyu Yang et al. created MatplotAgent: Method and Evaluation for LLM-Based Agentic Scientific Data Visualization in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Zhiyu Yang|DEVELOPED|MatplotAgent
+    MatplotAgent|PUBLISHED_IN|arXiv
+    MatplotAgent|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Zhiyu Yang|AUTHOR_OF|MatplotAgent
+
+  proposition: Geliang Ouyang et al. developed nvAgent: Automated Data Visualization from Natural Language via Collaborative Agent Workflow in an arXiv preprint in 2025.
+    entity-attribute relationships:
+    Geliang Ouyang|DEVELOPED|nvAgent
+    nvAgent|PUBLISHED_IN|arXiv
+    nvAgent|PUBLICATION_YEAR|2025
+
+    entity-entity relationships:
+    Geliang Ouyang|AUTHOR_OF|nvAgent
+
+  proposition: Yi Gui et al. presented UICopilot: Automating UI Synthesis via Hierarchical Code Generation from Webpage Designs in the Web Conference 2025.
+    entity-attribute relationships:
+    Yi Gui|PRESENTED|UICopilot
+    UICopilot|PUBLISHED_IN|Web Conference
+    UICopilot|PUBLICATION_YEAR|2025
+
+    entity-entity relationships:
+    Yi Gui|AUTHOR_OF|UICopilot
+
+  proposition: Several papers focused on generative models for autonomous driving, including works by Wenzhao Zheng, Yongjie Fu, Anthony Hu, and Shounak Sural.
+    entity-attribute relationships:
+    Autonomous Driving|RESEARCH_FOCUS|Generative Models
+
+    entity-entity relationships:
+    Wenzhao Zheng|RESEARCHED|Autonomous Driving
+    Yongjie Fu|RESEARCHED|Autonomous Driving
+    Anthony Hu|RESEARCHED|Autonomous Driving
+    Shounak Sural|RESEARCHED|Autonomous Driving
+
+  proposition: Tianjie Ju et al. studied the "Flooding Spread of Manipulated Knowledge in LLM-Based Multi-Agent Communities" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Tianjie Ju|PUBLISHED|Flooding Spread of Manipulated Knowledge
+    Flooding Spread of Manipulated Knowledge|PUBLISHED_IN|arXiv
+    Flooding Spread of Manipulated Knowledge|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Tianjie Ju|AUTHOR_OF|Flooding Spread of Manipulated Knowledge
+
+  proposition: Multiple research papers explored Reinforcement Learning from Human Feedback (RLHF), including works by Josef Dai, Tianyu Yu, and Afra Feyza Akyürek.
+    entity-attribute relationships:
+    Reinforcement Learning from Human Feedback|RESEARCH_FOCUS|RLHF
+
+    entity-entity relationships:
+    Josef Dai|RESEARCHED|Reinforcement Learning from Human Feedback
+    Tianyu Yu|RESEARCHED|Reinforcement Learning from Human Feedback
+    Afra Feyza Akyürek|RESEARCHED|Reinforcement Learning from Human Feedback

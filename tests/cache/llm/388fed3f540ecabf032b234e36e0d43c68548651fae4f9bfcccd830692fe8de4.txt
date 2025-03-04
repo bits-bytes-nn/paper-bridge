@@ -1,0 +1,14 @@
+Prompt Template Metadata Extraction
+Prompt template contains multiple sections for metadata generation and task specification
+Prompt template includes sections for:
+Persona scenario generation
+QA retrieval
+Fact-checking retrieval
+Metadata generation for:
+Interactivity sensory processing challenges
+Modality mismatch challenges
+Latest information retrieval using external services
+Tasks with insufficient or incorrect user input
+Each section provides specific instructions for generating content
+Sections focus on generating structured, task-specific metadata
+Template appears to be designed for testing and exploring language model capabilities across different scenarios and interaction modes

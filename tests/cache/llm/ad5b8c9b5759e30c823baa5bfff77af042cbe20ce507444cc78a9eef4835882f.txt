@@ -1,0 +1,145 @@
+topic: AI Safety and Trustworthiness Initiatives
+
+  entities:
+    NVIDIA|Organization
+    National Institute of Standards and Technology|Organization
+    NeMo Guardrails|Tool
+    EQTY Lab|Organization
+    Intel|Organization
+    Verifiable Compute|Project
+    Cohere|Organization
+    Mistral AI|Organization
+    Adobe|Organization
+    Ethics Review Board|Project
+    Content Credentials|Tool
+    Firefly|Model
+    Apple|Organization
+    Private Cloud Compute|Computing Infrastructure
+    ZHIPU AI|Organization
+    GLM|Model
+    CogView|Model
+    Black-Box Prompt Optimization|Algorithm
+    AlignBench|Benchmark
+    AutoDetect|Framework
+    T2I-CompBench|Benchmark
+    TIFA|Framework
+    GenEval|Benchmark
+
+  proposition: NVIDIA emphasizes safety and transparency in AI development.
+    entity-attribute relationships:
+    NVIDIA|FOCUS|safety
+    NVIDIA|FOCUS|transparency
+
+  proposition: NVIDIA focuses on creating AI systems that are safe and clear for users.
+    entity-attribute relationships:
+    NVIDIA|GOAL|creating safe AI systems
+    NVIDIA|GOAL|creating clear AI systems
+
+  proposition: NVIDIA joined the National Institute of Standards and Technology's Artificial Intelligence Safety Institute Consortium.
+    entity-entity relationships:
+    NVIDIA|JOINED|National Institute of Standards and Technology
+
+  proposition: NVIDIA offers NeMo Guardrails, an open-source tool to ensure AI models provide accurate and appropriate responses.
+    entity-entity relationships:
+    NVIDIA|OFFERS|NeMo Guardrails
+    NeMo Guardrails|PURPOSE|ensuring accurate AI responses
+    NeMo Guardrails|PURPOSE|ensuring appropriate AI responses
+
+  proposition: NVIDIA has a GitHub repository dedicated to trustworthy AI.
+    entity-attribute relationships:
+    NVIDIA|MAINTAINS|GitHub repository
+    GitHub repository|FOCUS|trustworthy AI
+
+  proposition: NVIDIA collaborated with EQTY Lab and Intel to launch 'Verifiable Compute'.
+    entity-entity relationships:
+    NVIDIA|COLLABORATED_WITH|EQTY Lab
+    NVIDIA|COLLABORATED_WITH|Intel
+    NVIDIA|LAUNCHED|Verifiable Compute
+
+  proposition: Verifiable Compute enhances trust in AI workflows using hardware security measures and distributed ledger technology.
+    entity-attribute relationships:
+    Verifiable Compute|ENHANCES|trust in AI workflows
+    Verifiable Compute|USES|hardware security measures
+    Verifiable Compute|USES|distributed ledger technology
+
+  proposition: Cohere outlines fundamental principles for maintaining AI safety and ethical standards.
+    entity-attribute relationships:
+    Cohere|FOCUSES_ON|AI safety
+    Cohere|FOCUSES_ON|ethical standards
+
+  proposition: Mistral AI offers a "safe_prompt" option via API calls.
+    entity-attribute relationships:
+    Mistral AI|OFFERS|safe_prompt option
+    safe_prompt|PURPOSE|ensuring ethical responses
+    safe_prompt|PURPOSE|ensuring respectful responses
+
+  proposition: Mistral models have self-reflection capabilities to evaluate user prompts and generated content.
+    entity-attribute relationships:
+    Mistral models|HAS|self-reflection capabilities
+    self-reflection capabilities|PURPOSE|evaluating user prompts
+    self-reflection capabilities|PURPOSE|evaluating generated content
+
+  proposition: Adobe established an Ethics Review Board.
+    entity-entity relationships:
+    Adobe|ESTABLISHED|Ethics Review Board
+
+  proposition: Adobe developed Content Credentials for digital content transparency.
+    entity-entity relationships:
+    Adobe|DEVELOPED|Content Credentials
+    Content Credentials|PURPOSE|digital content transparency
+
+  proposition: Adobe trained Firefly exclusively on licensed and public domain content.
+    entity-attribute relationships:
+    Adobe|TRAINED|Firefly
+    Firefly|TRAINED_ON|licensed content
+    Firefly|TRAINED_ON|public domain content
+
+  proposition: Apple's AI development is based on four foundational principles: user empowerment, authentic representation, precautionary design, and privacy preservation.
+    entity-attribute relationships:
+    Apple|PRINCIPLE|user empowerment
+    Apple|PRINCIPLE|authentic representation
+    Apple|PRINCIPLE|precautionary design
+    Apple|PRINCIPLE|privacy preservation
+
+  proposition: Apple uses on-device processing and Private Cloud Compute infrastructure.
+    entity-attribute relationships:
+    Apple|USES|on-device processing
+    Apple|USES|Private Cloud Compute infrastructure
+
+  proposition: ZHIPU AI released the GLM series of LLMs and CogView series of VLMs.
+    entity-entity relationships:
+    ZHIPU AI|RELEASED|GLM
+    ZHIPU AI|RELEASED|CogView
+
+  proposition: ZHIPU AI focuses on improving generative model trustworthiness through alignment.
+    entity-attribute relationships:
+    ZHIPU AI|FOCUS|improving generative model trustworthiness
+    ZHIPU AI|METHOD|alignment
+
+topic: Text-to-Image Model Evaluation
+
+  proposition: Text-to-image generation has shown remarkable capabilities in creating diverse and high-fidelity images.
+    entity-attribute relationships:
+    Text-to-image generation|CAPABILITY|creating diverse images
+    Text-to-image generation|CAPABILITY|creating high-fidelity images
+
+  proposition: Early benchmarks focused on image quality and alignment using automated metrics.
+    entity-attribute relationships:
+    Early benchmarks|FOCUS|image quality
+    Early benchmarks|FOCUS|alignment
+    Early benchmarks|METHOD|automated metrics
+
+  proposition: T2I-CompBench serves as a comprehensive benchmark for open-world compositional text-to-image generation.
+    entity-entity relationships:
+    T2I-CompBench|PURPOSE|benchmarking text-to-image generation
+    T2I-CompBench|FOCUS|open-world compositional generation
+
+  proposition: TIFA integrates LLMs with VQA to facilitate fine-grained text-to-image evaluation.
+    entity-attribute relationships:
+    TIFA|METHOD|integrating LLMs with VQA
+    TIFA|PURPOSE|fine-grained text-to-image evaluation
+
+  proposition: GenEval advances automatic evaluation by incorporating compositional reasoning tasks.
+    entity-attribute relationships:
+    GenEval|ADVANCES|automatic evaluation
+    GenEval|METHOD|incorporating compositional reasoning tasks

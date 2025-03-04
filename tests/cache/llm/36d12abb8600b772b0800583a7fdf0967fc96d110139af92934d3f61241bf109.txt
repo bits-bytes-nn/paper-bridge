@@ -1,0 +1,18 @@
+Research Papers on Watermarking and Copyright Protection for Large Language Models and Diffusion Models
+
+Xiaoze Liu and colleagues published SHIELD for evaluating and defending copyright compliance in LLM text generation.
+John Kirchenbauer and authors proposed a watermark for large language models.
+Ruisi Zhang et al. developed REMARK-LLM, a robust watermarking framework for generative large language models.
+Lean Wang and team worked towards codable text watermarking for large language models.
+Leyi Pan and colleagues created MarkLLM, an open-source toolkit for LLM watermarking.
+Shen Li et al. introduced Double-I Watermark for protecting model copyright in LLM fine-tuning.
+Gowthami Somepalli and researchers investigated data replication in diffusion models.
+Nikhil Vyas et al. studied provable copyright protection for generative models.
+Yuxin Wen and team focused on detecting, explaining, and mitigating memorization in diffusion models.
+Zhe Ma and colleagues analyzed memorization in text-to-image diffusion models.
+Yingqian Cui et al. developed DiffusionShield, a watermark for copyright protection against generative diffusion models.
+Yunqing Zhao and authors proposed a recipe for watermarking diffusion models.
+Yingqian Cui and team created FT-Shield, a watermark against unauthorized fine-tuning in text-to-image diffusion models.
+Pierre Fernandez et al. introduced the stable signature for rooting watermarks in latent diffusion models.
+Liangqi Lei and colleagues developed DiffuseTrace, a transparent watermarking scheme for latent diffusion models.
+Cheng Xiong and authors proposed a flexible and secure watermarking method for latent diffusion models.

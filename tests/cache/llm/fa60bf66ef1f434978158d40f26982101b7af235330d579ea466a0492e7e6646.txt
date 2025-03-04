@@ -1,0 +1,326 @@
+topic: Generative AI Safety and Trust Initiatives
+
+  entities:
+    Google PaLM API|Platform
+    Google Gemini API|Platform
+    Google's Secure AI Framework|Framework
+    ShieldGemma|Tool
+    DeepMind|Organization
+    Frontier Safety Framework|Framework
+    Search-Augmented Factuality Evaluator|Tool
+    IBM|Organization
+    Trustworthy AI|Technological Concept
+    Granite foundation models|Model
+    Granite Guardian models|Model
+    Watsonx Assistant|Platform
+    Salesforce|Organization
+    Einstein AI platform|Platform
+    Robustness Gym|Tool
+    SummVis|Tool
+    NVIDIA|Organization
+    NeMo Guardrails|Tool
+    NIST Artificial Intelligence Safety Institute Consortium|Organization
+    EQTY Lab|Organization
+    Intel|Organization
+    Verifiable Compute|Project
+    Cohere|Organization
+
+  proposition: [117] provides a detailed discussion of safety and fairness considerations for generative models.
+    entity-attribute relationships:
+    [117]|DESCRIBES|safety and fairness considerations
+    
+    entity-entity relationships:
+    [117]|ANALYZES|generative models
+
+  proposition: Google PaLM API evaluates content based on a safety attribute list and filters accordingly.
+    entity-attribute relationships:
+    Google PaLM API|USES|safety attribute list
+    Google PaLM API|PERFORMS|content filtering
+    
+    entity-entity relationships:
+
+  proposition: Google Gemini API introduces configurable filters for dynamically setting safety attribute blocking thresholds.
+    entity-attribute relationships:
+    Google Gemini API|PROVIDES|configurable filters
+    Google Gemini API|ENABLES|dynamic safety attribute blocking
+    
+    entity-entity relationships:
+
+  proposition: Google's Secure AI Framework (SAIF) is a conceptual framework for mitigating AI-specific risks.
+    entity-attribute relationships:
+    Google's Secure AI Framework|TYPE|conceptual framework
+    Google's Secure AI Framework|PURPOSE|mitigating AI risks
+    
+    entity-entity relationships:
+
+  proposition: SAIF addresses risks including model theft, training data poisoning, prompt injection attacks, and confidential information extraction.
+    entity-attribute relationships:
+    SAIF|ADDRESSES|model theft
+    SAIF|ADDRESSES|training data poisoning
+    SAIF|ADDRESSES|prompt injection attacks
+    SAIF|ADDRESSES|confidential information extraction
+    
+    entity-entity relationships:
+
+  proposition: ShieldGemma offers advanced predictions of safety risks across various harm types.
+    entity-attribute relationships:
+    ShieldGemma|PROVIDES|advanced safety risk predictions
+    
+    entity-entity relationships:
+
+  proposition: ShieldGemma can effectively filter both inputs and outputs.
+    entity-attribute relationships:
+    ShieldGemma|CAPABILITY|input filtering
+    ShieldGemma|CAPABILITY|output filtering
+    
+    entity-entity relationships:
+
+  proposition: DeepMind introduced the Frontier Safety Framework to evaluate critical capabilities in frontier models.
+    entity-attribute relationships:
+    Frontier Safety Framework|PURPOSE|evaluate critical capabilities
+    
+    entity-entity relationships:
+    DeepMind|CREATED|Frontier Safety Framework
+    Frontier Safety Framework|FOCUSES_ON|frontier models
+
+  proposition: DeepMind's Frontier Safety Framework adopts the Responsible Capability Scaling approach.
+    entity-attribute relationships:
+    Frontier Safety Framework|USES|Responsible Capability Scaling approach
+    
+    entity-entity relationships:
+
+  proposition: DeepMind introduced the Search-Augmented Factuality Evaluator (SAFE) for long-form factuality assessment.
+    entity-attribute relationships:
+    Search-Augmented Factuality Evaluator|PURPOSE|long-form factuality assessment
+    
+    entity-entity relationships:
+    DeepMind|CREATED|Search-Augmented Factuality Evaluator
+
+  proposition: SAFE uses a large language model to break down long-form responses into individual facts.
+    entity-attribute relationships:
+    SAFE|USES|large language model
+    
+    entity-entity relationships:
+
+  proposition: SAFE evaluates fact accuracy through a multi-step reasoning process.
+    entity-attribute relationships:
+    SAFE|USES|multi-step reasoning process
+    
+    entity-entity relationships:
+
+  proposition: SAFE sends search queries to Google Search to verify fact support.
+    entity-attribute relationships:
+    SAFE|USES|Google Search
+    
+    entity-entity relationships:
+
+topic: IBM Trustworthy AI Initiatives
+
+  proposition: IBM has proposed frameworks and products focused on Trustworthy AI.
+    entity-attribute relationships:
+    IBM|FOCUSES_ON|Trustworthy AI
+    
+    entity-entity relationships:
+
+  proposition: IBM's Framework for Securing Generative AI helps identify common AI attacks.
+    entity-attribute relationships:
+    Framework for Securing Generative AI|PURPOSE|identify common AI attacks
+    
+    entity-entity relationships:
+    IBM|CREATED|Framework for Securing Generative AI
+
+  proposition: The framework prioritizes defense strategies to protect generative AI efforts.
+    entity-attribute relationships:
+    Framework|PRIORITIZES|defense strategies
+    
+    entity-entity relationships:
+
+  proposition: The framework focuses on securing data, models, and usage.
+    entity-attribute relationships:
+    Framework|FOCUSES_ON|data security
+    Framework|FOCUSES_ON|model security
+    Framework|FOCUSES_ON|usage security
+    
+    entity-entity relationships:
+
+  proposition: IBM provides a suite of detectors to improve LLM safety and reliability.
+    entity-attribute relationships:
+    IBM|PROVIDES|detectors
+    Detectors|PURPOSE|improve LLM safety
+    Detectors|PURPOSE|improve LLM reliability
+    
+    entity-entity relationships:
+
+  proposition: IBM leverages large language models for next-generation threat management.
+    entity-attribute relationships:
+    IBM|USES|large language models
+    Large language models|PURPOSE|next-generation threat management
+    
+    entity-entity relationships:
+
+  proposition: IBM's Granite foundation models are designed with trust in mind.
+    entity-attribute relationships:
+    Granite foundation models|DESIGNED_WITH|trust
+    
+    entity-entity relationships:
+
+  proposition: Granite models use a "HAP detector" to filter hateful and profane content.
+    entity-attribute relationships:
+    Granite models|USES|HAP detector
+    HAP detector|PURPOSE|filter hateful content
+    HAP detector|PURPOSE|filter profane content
+    
+    entity-entity relationships:
+
+  proposition: IBM released Granite Guardian models for risk detection in prompts and responses.
+    entity-attribute relationships:
+    Granite Guardian models|PURPOSE|risk detection in prompts
+    Granite Guardian models|PURPOSE|risk detection in responses
+    
+    entity-entity relationships:
+
+  proposition: Risks are categorized using an AI risk atlas.
+    entity-attribute relationships:
+    Risks|CATEGORIZED_BY|AI risk atlas
+    
+    entity-entity relationships:
+
+topic: Salesforce Generative AI Trust Initiatives
+
+  proposition: Salesforce has developed five guiding principles for trusted generative AI.
+    entity-attribute relationships:
+    Salesforce|DEVELOPED|guiding principles
+    Guiding principles|FOCUS|trusted generative AI
+    
+    entity-entity relationships:
+
+  proposition: The principles are Accuracy, Safety, Transparency, Empowerment, and Sustainability.
+    entity-attribute relationships:
+    Principles|INCLUDE|Accuracy
+    Principles|INCLUDE|Safety
+    Principles|INCLUDE|Transparency
+    Principles|INCLUDE|Empowerment
+    Principles|INCLUDE|Sustainability
+    
+    entity-entity relationships:
+
+  proposition: Salesforce's Einstein AI platform includes a comprehensive "Trust Layer".
+    entity-attribute relationships:
+    Einstein AI platform|INCLUDES|Trust Layer
+    Trust Layer|DESCRIPTION|comprehensive
+    
+    entity-entity relationships:
+
+  proposition: The Trust Layer grounds AI outputs in accurate CRM data.
+    entity-attribute relationships:
+    Trust Layer|GROUNDS|AI outputs
+    Trust Layer|USES|CRM data
+    
+    entity-entity relationships:
+
+  proposition: The Trust Layer masks sensitive information and mitigates risks.
+    entity-attribute relationships:
+    Trust Layer|MASKS|sensitive information
+    Trust Layer|MITIGATES|risks
+    
+    entity-entity relationships:
+
+  proposition: Salesforce employs mechanisms to detect and prevent LLM hallucinations.
+    entity-attribute relationships:
+    Salesforce|USES|mechanisms
+    Mechanisms|PURPOSE|detect LLM hallucinations
+    Mechanisms|PURPOSE|prevent LLM hallucinations
+    
+    entity-entity relationships:
+
+  proposition: Salesforce uses zero retention agreements with third-party model providers.
+    entity-attribute relationships:
+    Salesforce|USES|zero retention agreements
+    
+    entity-entity relationships:
+    Salesforce|CONTRACTS_WITH|third-party model providers
+
+  proposition: Salesforce maintains an audit trail to track data use and feedback.
+    entity-attribute relationships:
+    Salesforce|MAINTAINS|audit trail
+    Audit trail|PURPOSE|track data use
+    Audit trail|PURPOSE|track feedback
+    
+    entity-entity relationships:
+
+  proposition: Salesforce released tools like Robustness Gym and SummVis for model evaluation.
+    entity-attribute relationships:
+    Salesforce|RELEASED|Robustness Gym
+    Salesforce|RELEASED|SummVis
+    Tools|PURPOSE|model evaluation
+    
+    entity-entity relationships:
+
+  proposition: Salesforce improves factual consistency by grounding entities and ensembling models.
+    entity-attribute relationships:
+    Salesforce|IMPROVES|factual consistency
+    Improvement|METHOD|grounding entities
+    Improvement|METHOD|ensembling models
+    
+    entity-entity relationships:
+
+  proposition: Salesforce introduced Socratic pretraining to enhance model control and reliability.
+    entity-attribute relationships:
+    Salesforce|INTRODUCED|Socratic pretraining
+    Socratic pretraining|PURPOSE|enhance model control
+    Socratic pretraining|PURPOSE|enhance model reliability
+    
+    entity-entity relationships:
+
+topic: NVIDIA Trustworthy AI Efforts
+
+  proposition: NVIDIA emphasizes safety and transparency in AI development.
+    entity-attribute relationships:
+    NVIDIA|EMPHASIZES|AI safety
+    NVIDIA|EMPHASIZES|AI transparency
+    
+    entity-entity relationships:
+
+  proposition: NVIDIA joined the NIST Artificial Intelligence Safety Institute Consortium.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    NVIDIA|JOINED|NIST Artificial Intelligence Safety Institute Consortium
+
+  proposition: NVIDIA offers NeMo Guardrails, an open-source tool for ensuring accurate AI responses.
+    entity-attribute relationships:
+    NVIDIA|OFFERS|NeMo Guardrails
+    NeMo Guardrails|TYPE|open-source tool
+    NeMo Guardrails|PURPOSE|ensure accurate AI responses
+    
+    entity-entity relationships:
+
+  proposition: NVIDIA maintains a GitHub repository dedicated to trustworthy AI.
+    entity-attribute relationships:
+    NVIDIA|MAINTAINS|GitHub repository
+    Repository|FOCUS|trustworthy AI
+    
+    entity-entity relationships:
+
+  proposition: NVIDIA collaborated with EQTY Lab and Intel on 'Verifiable Compute'.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    NVIDIA|COLLABORATED_WITH|EQTY Lab
+    NVIDIA|COLLABORATED_WITH|Intel
+    NVIDIA|DEVELOPED|Verifiable Compute
+
+  proposition: Verifiable Compute enhances trust in AI workflows using hardware security and distributed ledger technology.
+    entity-attribute relationships:
+    Verifiable Compute|ENHANCES|trust in AI workflows
+    Verifiable Compute|USES|hardware security
+    Verifiable Compute|USES|distributed ledger technology
+    
+    entity-entity relationships:
+
+  proposition: Cohere focuses on detailed discussions of AI safety and responsibility.
+    entity-attribute relationships:
+    Cohere|FOCUSES_ON|AI safety discussions
+    Cohere|FOCUSES_ON|AI responsibility discussions
+    
+    entity-entity relationships:

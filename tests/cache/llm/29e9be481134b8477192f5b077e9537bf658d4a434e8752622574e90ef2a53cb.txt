@@ -1,0 +1,25 @@
+Dataset Description and Knowledge Graph Extraction
+
+Dataset Description
+- Dataset contains scenarios from online forums and social media
+- Scenarios are labeled with moral judgments
+- Moral judgment labels include 'Good', 'Neutral', and 'Bad'
+- Dataset aims to assess AI's ability to judge ethical implications of actions
+
+Dataset Characteristics
+- Contains brief dilemmas with action options
+- Each scenario is labeled with a moral judgment
+- Reflects right or wrong behavior assessment
+- Focuses on ethical decision-making evaluation
+
+Propositions about Dataset
+- The dataset is designed to test ethical reasoning capabilities
+- Scenarios are sourced from online forums and social media platforms
+- Moral judgments provide a categorical assessment of actions
+- The dataset enables systematic evaluation of ethical decision-making
+
+Methodological Insights
+- Dataset provides structured ethical scenarios
+- Moral judgments are predefined categories
+- Scenarios test nuanced ethical understanding
+- Aims to develop AI's capability to make contextual ethical assessments

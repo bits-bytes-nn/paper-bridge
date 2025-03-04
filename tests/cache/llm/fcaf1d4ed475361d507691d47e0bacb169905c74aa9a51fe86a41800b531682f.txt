@@ -1,0 +1,82 @@
+topic: Generative Systems Evaluation and Safety
+
+  entities:
+    Generative Models|Technological Concept
+    Attackers|Social Concept
+    Developers|Social Concept
+    Complex Generative Systems|Technological Concept
+    Safety Alignment Mechanisms|Method
+    External Protection Mechanisms|Method
+    Content Moderators|Tool
+    Text Classifiers|Tool
+    Detection Tools|Tool
+    Auxiliary Models|Model
+
+  proposition: Attackers value generative models for their potential to be manipulated into producing harmful responses.
+    entity-entity relationships:
+    Attackers|TARGETS|Generative Models
+
+  proposition: The developer's perspective prioritizes a model's ability to resist harmful queries over generating high-quality responses.
+    entity-entity relationships:
+    Developers|FOCUSES_ON|Generative Models
+
+  proposition: Generative models face increasing risks of providing accurate answers to malicious prompts.
+    entity-entity relationships:
+    Attackers|CHALLENGES|Generative Models
+
+  proposition: Resisting initial attacks by refusing to engage with harmful queries establishes a stronger foundation for trustworthiness.
+    entity-attribute relationships:
+    Generative Models|CHARACTERIZED_BY|trustworthiness
+
+  proposition: Current evaluation frameworks primarily focus on assessing individual generative models.
+    entity-attribute relationships:
+    Evaluation Frameworks|FOCUSES_ON|individual models
+
+  proposition: Complex systems often consist of multiple models powering a single system.
+    entity-attribute relationships:
+    Complex Generative Systems|COMPOSED_OF|multiple models
+
+  proposition: Complex systems involve multi-modal information interaction across text, images, audio, and video.
+    entity-attribute relationships:
+    Complex Generative Systems|INTERACTS_WITH|multi-modal information
+
+  proposition: Inter-model dependencies complicate performance assessment.
+    entity-entity relationships:
+    Models|INTERDEPENDENT|Performance Assessment
+
+  proposition: Errors in one model can compromise the performance of dependent models.
+    entity-entity relationships:
+    Models|IMPACTS|Performance
+
+  proposition: Multi-modal evaluation requires metrics that capture cross-modality coherence.
+    entity-attribute relationships:
+    Evaluation|REQUIRES|cross-modality metrics
+
+  proposition: Traditional single-modality evaluation metrics are inadequate for complex systems.
+    entity-attribute relationships:
+    Traditional Metrics|CHARACTERIZED_BY|inadequacy
+
+  proposition: Maintaining consistency and scalability becomes increasingly difficult as system complexity grows.
+    entity-attribute relationships:
+    Complex Generative Systems|CHALLENGES|consistency and scalability
+
+  proposition: Recent research focuses on enhancing safety alignment mechanisms for generative models.
+    entity-entity relationships:
+    Research|FOCUSES_ON|Safety Alignment Mechanisms
+
+  proposition: Integrating internal alignment mechanisms with external security measures is critical for developing trustworthy generative systems.
+    entity-entity relationships:
+    Internal Alignment Mechanisms|INTEGRATES_WITH|External Protection Mechanisms
+
+  proposition: External protection mechanisms, such as content moderators, are gaining importance.
+    entity-entity relationships:
+    External Protection Mechanisms|INCLUDES|Content Moderators
+
+  proposition: Auxiliary models can work alongside generative models to enhance system trustworthiness.
+    entity-entity relationships:
+    Auxiliary Models|SUPPORTS|Generative Models
+
+  proposition: Safety measures include text classifiers and detection tools to identify potentially harmful content.
+    entity-entity relationships:
+    Safety Measures|INCLUDES|Text Classifiers
+    Safety Measures|INCLUDES|Detection Tools

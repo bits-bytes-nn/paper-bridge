@@ -1,0 +1,141 @@
+topic: Knowledge Editing and Language Model Interventions
+
+  entities:
+    Anton Sinitsin|Researcher
+    Vsevolod Plokhotnyuk|Researcher
+    Dmitriy Pyrkin|Researcher
+    Sergei Popov|Researcher
+    Artem Babenko|Researcher
+    Zeyu Huang|Researcher
+    Yikang Shen|Researcher
+    Xiaofeng Zhang|Researcher
+    Jie Zhou|Researcher
+    Wenge Rong|Researcher
+    Zhang Xiong|Researcher
+    Kevin Meng|Researcher
+    Arnab Sen Sharma|Researcher
+    Alex Andonian|Researcher
+    Yonatan Belinkov|Researcher
+    David Bau|Researcher
+    Jiaxin Qin|Researcher
+    Zixuan Zhang|Researcher
+    Chi Han|Researcher
+    Manling Li|Researcher
+    Pengfei Yu|Researcher
+    Heng Ji|Researcher
+    Jiateng Liu|Researcher
+    Yuji Zhang|Researcher
+    Sha Li|Researcher
+    Kenneth Li|Researcher
+    Oam Patel|Researcher
+    Fernanda Viégas|Researcher
+    Hanspeter Pfister|Researcher
+    Martin Wattenberg|Researcher
+    Transformer-patcher|Approach
+    EVEDIT|Approach
+    Inference-Time Intervention|Approach
+    EMNLP|Conference
+
+  proposition: Anton Sinitsin, Vsevolod Plokhotnyuk, Dmitriy Pyrkin, Sergei Popov, and Artem Babenko published a paper on editable neural networks in 2020.
+    entity-attribute relationships:
+    Anton Sinitsin|PUBLISHED|paper on editable neural networks
+    Vsevolod Plokhotnyuk|PUBLISHED|paper on editable neural networks
+    Dmitriy Pyrkin|PUBLISHED|paper on editable neural networks
+    Sergei Popov|PUBLISHED|paper on editable neural networks
+    Artem Babenko|PUBLISHED|paper on editable neural networks
+    
+    entity-entity relationships:
+    Anton Sinitsin|CO_AUTHORED|Vsevolod Plokhotnyuk
+    Anton Sinitsin|CO_AUTHORED|Dmitriy Pyrkin
+    Anton Sinitsin|CO_AUTHORED|Sergei Popov
+    Anton Sinitsin|CO_AUTHORED|Artem Babenko
+
+  proposition: Zeyu Huang, Yikang Shen, Xiaofeng Zhang, Jie Zhou, Wenge Rong, and Zhang Xiong proposed Transformer-patcher in 2023.
+    entity-attribute relationships:
+    Zeyu Huang|PROPOSED|Transformer-patcher
+    Yikang Shen|PROPOSED|Transformer-patcher
+    Xiaofeng Zhang|PROPOSED|Transformer-patcher
+    Jie Zhou|PROPOSED|Transformer-patcher
+    Wenge Rong|PROPOSED|Transformer-patcher
+    Zhang Xiong|PROPOSED|Transformer-patcher
+    
+    entity-entity relationships:
+    Zeyu Huang|CO_AUTHORED|Yikang Shen
+    Zeyu Huang|CO_AUTHORED|Xiaofeng Zhang
+    Zeyu Huang|CO_AUTHORED|Jie Zhou
+    Zeyu Huang|CO_AUTHORED|Wenge Rong
+    Zeyu Huang|CO_AUTHORED|Zhang Xiong
+
+  proposition: Kevin Meng, Arnab Sen Sharma, Alex Andonian, Yonatan Belinkov, and David Bau researched mass-editing memory in a transformer in 2022.
+    entity-attribute relationships:
+    Kevin Meng|RESEARCHED|mass-editing memory in a transformer
+    Arnab Sen Sharma|RESEARCHED|mass-editing memory in a transformer
+    Alex Andonian|RESEARCHED|mass-editing memory in a transformer
+    Yonatan Belinkov|RESEARCHED|mass-editing memory in a transformer
+    David Bau|RESEARCHED|mass-editing memory in a transformer
+    
+    entity-entity relationships:
+    Kevin Meng|CO_AUTHORED|Arnab Sen Sharma
+    Kevin Meng|CO_AUTHORED|Alex Andonian
+    Kevin Meng|CO_AUTHORED|Yonatan Belinkov
+    Kevin Meng|CO_AUTHORED|David Bau
+
+  proposition: Jiaxin Qin, Zixuan Zhang, Chi Han, Manling Li, Pengfei Yu, and Heng Ji investigated why new knowledge creates messy ripple effects in Large Language Models at EMNLP 2024.
+    entity-attribute relationships:
+    Jiaxin Qin|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    Zixuan Zhang|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    Chi Han|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    Manling Li|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    Pengfei Yu|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    Heng Ji|INVESTIGATED|why new knowledge creates messy ripple effects in Large Language Models
+    
+    entity-entity relationships:
+    Jiaxin Qin|CO_AUTHORED|Zixuan Zhang
+    Jiaxin Qin|CO_AUTHORED|Chi Han
+    Jiaxin Qin|CO_AUTHORED|Manling Li
+    Jiaxin Qin|CO_AUTHORED|Pengfei Yu
+    Jiaxin Qin|CO_AUTHORED|Heng Ji
+    Jiaxin Qin|PRESENTED_AT|EMNLP
+
+  proposition: Jiateng Liu, Pengfei Yu, Yuji Zhang, Sha Li, Zixuan Zhang, and Heng Ji presented EVEDIT: Event-based Knowledge Editing with Deductive Editing Boundaries at EMNLP 2024.
+    entity-attribute relationships:
+    Jiateng Liu|PRESENTED|EVEDIT
+    Pengfei Yu|PRESENTED|EVEDIT
+    Yuji Zhang|PRESENTED|EVEDIT
+    Sha Li|PRESENTED|EVEDIT
+    Zixuan Zhang|PRESENTED|EVEDIT
+    Heng Ji|PRESENTED|EVEDIT
+    
+    entity-entity relationships:
+    Jiateng Liu|CO_AUTHORED|Pengfei Yu
+    Jiateng Liu|CO_AUTHORED|Yuji Zhang
+    Jiateng Liu|CO_AUTHORED|Sha Li
+    Jiateng Liu|CO_AUTHORED|Zixuan Zhang
+    Jiateng Liu|CO_AUTHORED|Heng Ji
+    Jiateng Liu|PRESENTED_AT|EMNLP
+
+  proposition: Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov studied locating and editing factual associations in GPT in 2022.
+    entity-attribute relationships:
+    Kevin Meng|STUDIED|locating and editing factual associations in GPT
+    David Bau|STUDIED|locating and editing factual associations in GPT
+    Alex Andonian|STUDIED|locating and editing factual associations in GPT
+    Yonatan Belinkov|STUDIED|locating and editing factual associations in GPT
+    
+    entity-entity relationships:
+    Kevin Meng|CO_AUTHORED|David Bau
+    Kevin Meng|CO_AUTHORED|Alex Andonian
+    Kevin Meng|CO_AUTHORED|Yonatan Belinkov
+
+  proposition: Kenneth Li, Oam Patel, Fernanda Viégas, Hanspeter Pfister, and Martin Wattenberg proposed Inference-Time Intervention for eliciting truthful answers from a language model in 2023.
+    entity-attribute relationships:
+    Kenneth Li|PROPOSED|Inference-Time Intervention
+    Oam Patel|PROPOSED|Inference-Time Intervention
+    Fernanda Viégas|PROPOSED|Inference-Time Intervention
+    Hanspeter Pfister|PROPOSED|Inference-Time Intervention
+    Martin Wattenberg|PROPOSED|Inference-Time Intervention
+    
+    entity-entity relationships:
+    Kenneth Li|CO_AUTHORED|Oam Patel
+    Kenneth Li|CO_AUTHORED|Fernanda Viégas
+    Kenneth Li|CO_AUTHORED|Hanspeter Pfister
+    Kenneth Li|CO_AUTHORED|Martin Wattenberg

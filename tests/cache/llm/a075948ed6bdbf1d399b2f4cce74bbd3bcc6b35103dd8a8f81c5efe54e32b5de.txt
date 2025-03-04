@@ -1,0 +1,34 @@
+Vision-Language Models (VLMs) Privacy Attack Methods and Benchmarking
+
+Privacy attack methods for Vision-Language Models (VLMs) include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+Researchers have demonstrated the potential to adapt existing privacy attack techniques to VLMs by exploiting text-image interactions.
+Specific attack techniques include backdoor and membership inference attacks applied to VLMs.
+
+Privacy defense techniques have been proposed to counteract VLM vulnerabilities.
+User-level modifications can defend against image-based prompt attacks.
+Adaptive shield prompting has been developed to protect multimodal large language models from structure-based attacks.
+Red teaming and robust evaluation techniques have been conducted to enhance VLM privacy.
+Benchmarks have been established to assess the trustworthiness of multimodal large language models.
+
+Evaluation Framework for VLM Privacy:
+The evaluation uses privacy-sensitive image datasets including VISPR and Vizwiz_Priv.
+The process involves generating image descriptions to reduce synthetic bias.
+Malicious queries are crafted with adversarial role-play contexts to test model responses.
+GPT-4o is used as a judge to evaluate models using the Refuse-to-Answer (RtA) rate.
+The framework is designed to be extensible to additional datasets and privacy scenarios.
+
+Query Generation Process:
+Privacy-sensitive images are sourced from VISPR and Vizwiz_Priv datasets.
+An LLM-powered diversity enhancer rephrases questions to create varied formulations.
+Detailed descriptions are generated from images to reduce synthetic bias.
+GPT-4o generates malicious questions targeting sensitive image content.
+Questions are prefixed with adversarial role-play contexts and appended with suffix descriptors.
+
+Performance Analysis of VLM Privacy Preservation:
+Smaller models do not always perform worse in privacy preservation.
+Llama-3.2-11B-V achieved the highest average privacy preservation score at 93.81%.
+Larger models like Qwen-2-VL-72B scored lower at 51.37%.
+Llama series and Claude-3-Haiku demonstrated the strongest privacy preservation performance.
+Most other models clustered between 50% and 60% in privacy preservation scores.
+
+Factors beyond model scale, such as architectural design and training methodology, critically impact privacy metrics.

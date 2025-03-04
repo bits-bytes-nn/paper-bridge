@@ -1,0 +1,40 @@
+Experimental Setup for Vision-Language Model Robustness Analysis
+For each data pair, a random domain was selected for applying perturbations
+Perturbations were applied to one of three domains: image, text, or image-text
+Robustness of different Vision-Language Models (VLMs) was evaluated across various tasks
+
+Robustness Score Observations
+Models demonstrate varying levels of robustness across different tasks
+In VQA data, Qwen-2-VL-72B achieved the highest robustness score of 97.5%
+Gemini-1.5-pro showed the lowest VQA performance at 82.25%
+Image captioning data revealed a larger performance gap between models
+GPT-4o-mini led image captioning with a robustness score of 51.90%
+Llama-3.2-11B-V had the lowest image captioning robustness score at 9.44%
+Models consistently exhibit higher robustness in VQA compared to image captioning
+Perturbations have a more substantial impact on open-ended generation tasks
+
+Perturbation Impact Analysis
+Joint image-text perturbations result in the most substantial performance degradation
+Perturbations induce bidirectional effects on VLMs
+Negative impacts of perturbations demonstrate significantly greater magnitude
+Models perform superior on original, unperturbed queries
+
+Privacy Concerns in Vision-Language Models
+VLMs have expanded LLM capabilities with image processing
+Image data provides additional dimensions for potential attacks
+Multimodal nature complicates development of comprehensive defense mechanisms
+Interplay between image and text data increases complexity of safeguarding against breaches
+Privacy understanding in VLMs is challenging to probe and evaluate
+
+Privacy Attack Methods
+Transferable adversarial attacks can compromise VLM privacy
+Template prompt attacks have been explored
+Existing privacy attack methods can potentially be adapted for VLMs
+Attacks include data extraction, membership inference, and embedding-level privacy attacks
+
+Privacy Defense Techniques
+User-level modifications to defend against image-based prompt attacks
+Methods to protect against membership inference attacks
+Adaptive shield prompting to safeguard against structure-based attacks
+Red teaming and robust evaluation techniques used to enhance VLM privacy
+Benchmarks established to assess multimodal large language model trustworthiness

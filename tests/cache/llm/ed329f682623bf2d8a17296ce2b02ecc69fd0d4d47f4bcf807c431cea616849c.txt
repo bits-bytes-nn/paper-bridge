@@ -1,0 +1,110 @@
+topic: Watermarking and Copyright Protection for Large Language Models and Diffusion Models
+
+  entities:
+    Xiaoze Liu|Researcher
+    John Kirchenbauer|Researcher
+    Ruisi Zhang|Researcher
+    Lean Wang|Researcher
+    Leyi Pan|Researcher
+    Shen Li|Researcher
+    Gowthami Somepalli|Researcher
+    Nikhil Vyas|Researcher
+    Yuxin Wen|Researcher
+    Zhe Ma|Researcher
+    Yingqian Cui|Researcher
+    Yunqing Zhao|Researcher
+    Pierre Fernandez|Researcher
+    Liangqi Lei|Researcher
+    Cheng Xiong|Researcher
+    SHIELD|Tool
+    REMARK-LLM|Framework
+    MarkLLM|Toolkit
+    Double-I Watermark|Method
+    DiffusionShield|Tool
+    FT-Shield|Tool
+    Stable Signature|Method
+    DiffuseTrace|Method
+
+  proposition: Xiaoze Liu and colleagues published SHIELD for evaluating and defending copyright compliance in LLM text generation.
+    entity-entity relationships:
+    Xiaoze Liu|DEVELOPED|SHIELD
+    SHIELD|FOCUSES_ON|Copyright Compliance
+    SHIELD|APPLIES_TO|Large Language Models
+
+  proposition: John Kirchenbauer and authors proposed a watermark for large language models.
+    entity-entity relationships:
+    John Kirchenbauer|PROPOSED|Watermark
+    Watermark|APPLIES_TO|Large Language Models
+
+  proposition: Ruisi Zhang et al. developed REMARK-LLM, a robust watermarking framework for generative large language models.
+    entity-entity relationships:
+    Ruisi Zhang|DEVELOPED|REMARK-LLM
+    REMARK-LLM|APPLIES_TO|Generative Large Language Models
+
+  proposition: Lean Wang and team worked towards codable text watermarking for large language models.
+    entity-entity relationships:
+    Lean Wang|RESEARCHED|Codable Text Watermarking
+    Codable Text Watermarking|APPLIES_TO|Large Language Models
+
+  proposition: Leyi Pan and colleagues created MarkLLM, an open-source toolkit for LLM watermarking.
+    entity-entity relationships:
+    Leyi Pan|CREATED|MarkLLM
+    MarkLLM|APPLIES_TO|Large Language Models
+
+  proposition: Shen Li et al. introduced Double-I Watermark for protecting model copyright in LLM fine-tuning.
+    entity-entity relationships:
+    Shen Li|INTRODUCED|Double-I Watermark
+    Double-I Watermark|FOCUSES_ON|Model Copyright Protection
+    Double-I Watermark|APPLIES_TO|LLM Fine-tuning
+
+  proposition: Gowthami Somepalli and researchers investigated data replication in diffusion models.
+    entity-entity relationships:
+    Gowthami Somepalli|INVESTIGATED|Data Replication
+    Data Replication|APPLIES_TO|Diffusion Models
+
+  proposition: Nikhil Vyas et al. studied provable copyright protection for generative models.
+    entity-entity relationships:
+    Nikhil Vyas|STUDIED|Copyright Protection
+    Copyright Protection|APPLIES_TO|Generative Models
+
+  proposition: Yuxin Wen and team focused on detecting, explaining, and mitigating memorization in diffusion models.
+    entity-entity relationships:
+    Yuxin Wen|FOCUSED_ON|Memorization Detection
+    Memorization Detection|APPLIES_TO|Diffusion Models
+
+  proposition: Zhe Ma and colleagues analyzed memorization in text-to-image diffusion models.
+    entity-entity relationships:
+    Zhe Ma|ANALYZED|Memorization
+    Memorization|APPLIES_TO|Text-to-Image Diffusion Models
+
+  proposition: Yingqian Cui et al. developed DiffusionShield, a watermark for copyright protection against generative diffusion models.
+    entity-entity relationships:
+    Yingqian Cui|DEVELOPED|DiffusionShield
+    DiffusionShield|FOCUSES_ON|Copyright Protection
+    DiffusionShield|APPLIES_TO|Generative Diffusion Models
+
+  proposition: Yunqing Zhao and authors proposed a recipe for watermarking diffusion models.
+    entity-entity relationships:
+    Yunqing Zhao|PROPOSED|Watermarking Recipe
+    Watermarking Recipe|APPLIES_TO|Diffusion Models
+
+  proposition: Yingqian Cui and team created FT-Shield, a watermark against unauthorized fine-tuning in text-to-image diffusion models.
+    entity-entity relationships:
+    Yingqian Cui|CREATED|FT-Shield
+    FT-Shield|FOCUSES_ON|Unauthorized Fine-tuning Prevention
+    FT-Shield|APPLIES_TO|Text-to-Image Diffusion Models
+
+  proposition: Pierre Fernandez et al. introduced the stable signature for rooting watermarks in latent diffusion models.
+    entity-entity relationships:
+    Pierre Fernandez|INTRODUCED|Stable Signature
+    Stable Signature|APPLIES_TO|Latent Diffusion Models
+
+  proposition: Liangqi Lei and colleagues developed DiffuseTrace, a transparent watermarking scheme for latent diffusion models.
+    entity-entity relationships:
+    Liangqi Lei|DEVELOPED|DiffuseTrace
+    DiffuseTrace|APPLIES_TO|Latent Diffusion Models
+
+  proposition: Cheng Xiong and authors proposed a flexible and secure watermarking method for latent diffusion models.
+    entity-entity relationships:
+    Cheng Xiong|PROPOSED|Watermarking Method
+    Watermarking Method|APPLIES_TO|Latent Diffusion Models

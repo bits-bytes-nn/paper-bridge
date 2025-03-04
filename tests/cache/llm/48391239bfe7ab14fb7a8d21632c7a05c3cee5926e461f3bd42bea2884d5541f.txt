@@ -1,0 +1,202 @@
+topic: Trust and Transparency in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Users|Social Concept
+    AI|Technological Concept
+    Predictions|Feature
+    Errors|Feature
+    Interfaces|Infrastructure
+
+  proposition: Opaque marketing claims, incomplete documentation, and GenFMs' complexity create challenges in understanding model decision-making processes.
+    entity-attribute relationships:
+    Generative Foundation Models|DESCRIBED_BY|complex
+    Generative Foundation Models|CHARACTERIZED_BY|opaque marketing claims
+    Generative Foundation Models|CHARACTERIZED_BY|incomplete documentation
+
+    entity-entity relationships:
+    Generative Foundation Models|CHALLENGES|Understanding model decision-making processes
+
+  proposition: Users may overtrust or undertrust AI due to lack of transparency.
+    entity-attribute relationships:
+    Users|INTERACTION|AI
+    AI|CHARACTERIZED_BY|lack of transparency
+
+    entity-entity relationships:
+    Users|PERCEIVES|AI
+
+  proposition: Addressing trust imbalances requires improving GenFMs' transparency and interpretability.
+    entity-attribute relationships:
+    Generative Foundation Models|NEEDS|transparency
+    Generative Foundation Models|NEEDS|interpretability
+
+    entity-entity relationships:
+    Transparency|ADDRESSES|Trust imbalances
+
+  proposition: Key strategies for trust calibration include providing predictions explanations, detailing limitations, and exposing output uncertainties.
+    entity-attribute relationships:
+    Predictions|REQUIRES|explanations
+    Generative Foundation Models|NEEDS|limitation details
+    Generative Foundation Models|NEEDS|output uncertainty exposure
+
+    entity-entity relationships:
+    Predictions|PART_OF|Trust calibration strategies
+
+  proposition: Methods like verbalized confidence scores and uncertainty estimation help users understand GenFMs' output reliability.
+    entity-attribute relationships:
+    Generative Foundation Models|OUTPUT|reliability
+    Methods|TYPE|verbalized confidence scores
+    Methods|TYPE|uncertainty estimation
+
+    entity-entity relationships:
+    Methods|HELPS|Users understand output
+
+  proposition: Explainability mechanisms should be intuitive and accessible to users.
+    entity-attribute relationships:
+    Explainability mechanisms|CHARACTERIZED_BY|intuitive
+    Explainability mechanisms|CHARACTERIZED_BY|accessible
+
+    entity-entity relationships:
+    Explainability mechanisms|TARGETS|Users
+
+  proposition: Trust calibration empowers users to effectively leverage AI insights and promote human-AI collaboration.
+    entity-attribute relationships:
+    Trust calibration|ENABLES|AI insights leveraging
+    Trust calibration|PROMOTES|human-AI collaboration
+
+    entity-entity relationships:
+    Users|COLLABORATES_WITH|AI
+
+topic: Error Attribution and Accountability in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Users|Social Concept
+    Errors|Feature
+    Interfaces|Infrastructure
+    Audits|Method
+    Disclaimers|Feature
+
+  proposition: Determining responsibility for errors in GenFMs is increasingly difficult as models become more complex.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERIZED_BY|increasing complexity
+    Errors|CHALLENGES|Responsibility determination
+
+    entity-entity relationships:
+    Complexity|IMPACTS|Error responsibility
+
+  proposition: The opaque nature of GenFMs complicates error attribution.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERIZED_BY|opaque nature
+
+    entity-entity relationships:
+    Opaque nature|COMPLICATES|Error attribution
+
+  proposition: Users may unfairly blame GenFMs for failures or fail to hold them accountable for flawed outputs.
+    entity-attribute relationships:
+    Users|POTENTIAL_ACTION|unfair blame
+    Generative Foundation Models|PRODUCES|flawed outputs
+
+    entity-entity relationships:
+    Users|INTERACTS_WITH|Generative Foundation Models
+
+  proposition: Strategies to address accountability include fine-grained model audits, detailed decision pathway logging, and context-aware explanations.
+    entity-attribute relationships:
+    Audits|TYPE|fine-grained model
+    Decision pathways|REQUIRES|detailed logging
+    Explanations|CHARACTERIZED_BY|context-aware
+
+    entity-entity relationships:
+    Strategies|ADDRESSES|Accountability
+
+  proposition: Embedding clear disclaimers about GenFMs' limitations can help delineate responsibility boundaries.
+    entity-attribute relationships:
+    Disclaimers|DESCRIBES|Generative Foundation Models limitations
+
+    entity-entity relationships:
+    Disclaimers|DEFINES|Responsibility boundaries
+
+  proposition: Error-aware interfaces can visually represent AI decision pathways and flag potential issues.
+    entity-attribute relationships:
+    Interfaces|CHARACTERIZED_BY|error-aware
+    Interfaces|FUNCTION|visually represent decision pathways
+
+    entity-entity relationships:
+    Interfaces|HELPS|Users understand AI decisions
+
+  proposition: Transparent error attribution mechanisms foster shared responsibility and build trust in AI systems.
+    entity-attribute relationships:
+    Error attribution mechanisms|CHARACTERIZED_BY|transparent
+
+    entity-entity relationships:
+    Error attribution mechanisms|BUILDS|Trust in AI systems
+
+topic: Robustness and Noise in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Noise|Feature
+    Queries|Feature
+    Adversarial Training|Method
+    Domains|Social Concept
+
+  proposition: Robustness is a critical metric for evaluating GenFMs' response consistency under natural perturbations.
+    entity-attribute relationships:
+    Robustness|MEASURES|Response consistency
+    Generative Foundation Models|EVALUATED_BY|Robustness
+
+    entity-entity relationships:
+    Robustness|ASSESSES|Generative Foundation Models
+
+  proposition: Noise perturbations can have both positive and negative effects on model performance.
+    entity-attribute relationships:
+    Noise|IMPACTS|Model performance
+
+    entity-entity relationships:
+    Noise|INTERACTS_WITH|Generative Foundation Models
+
+  proposition: Adversarial training can enhance model stability but risks overfitting and reduced generalization.
+    entity-attribute relationships:
+    Adversarial Training|POTENTIAL_OUTCOME|Enhanced model stability
+    Adversarial Training|POTENTIAL_RISK|Overfitting
+    Adversarial Training|POTENTIAL_RISK|Reduced generalization
+
+    entity-entity relationships:
+    Adversarial Training|IMPACTS|Generative Foundation Models
+
+  proposition: Models show different robustness levels across close-ended and open-ended queries.
+    entity-attribute relationships:
+    Queries|TYPE|close-ended
+    Queries|TYPE|open-ended
+    Generative Foundation Models|VARIES_BY|Robustness levels
+
+    entity-entity relationships:
+    Queries|TESTS|Generative Foundation Models
+
+  proposition: Close-ended queries require high consistency, especially in safety-critical domains like autonomous driving and medical health.
+    entity-attribute relationships:
+    Queries|TYPE|close-ended
+    Queries|REQUIRES|High consistency
+    Domains|TYPE|safety-critical
+    Domains|INCLUDES|Autonomous driving
+    Domains|INCLUDES|Medical health
+
+    entity-entity relationships:
+    Consistency|CRITICAL_IN|Safety-critical domains
+
+  proposition: Open-ended queries are more variable and tolerate greater response diversity.
+    entity-attribute relationships:
+    Queries|TYPE|open-ended
+    Queries|CHARACTERIZED_BY|Variable responses
+    Queries|ALLOWS|Response diversity
+
+    entity-entity relationships:
+    Response diversity|RELATES_TO|Open-ended queries
+
+  proposition: Balancing robustness training is crucial to maintain model performance and adaptability.
+    entity-attribute relationships:
+    Robustness training|GOAL|Maintain model performance
+    Robustness training|GOAL|Maintain adaptability
+
+    entity-entity relationships:
+    Robustness training|SUPPORTS|Generative Foundation Models

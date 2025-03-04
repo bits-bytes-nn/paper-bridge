@@ -1,0 +1,132 @@
+topic: AI Research Publications and Responsible AI Frameworks
+
+  entities:
+    Devon Myers|Researcher
+    OpenAI|Organization
+    Google Cloud|Platform
+    Google Research|Research Institution
+    Google AI|Research Institution
+    Meta|Organization
+    European Union|Location
+    United States|Location
+    China|Location
+    World Health Organization|Organization
+    DALL-E 3|Model
+    GPT-4o|Model
+    Llama|Model
+    Llama 2|Model
+    Llama 3|Model
+    OPT|Model
+    Llama Guard|Tool
+    Prompt Guard|Tool
+
+  proposition: Devon Myers and colleagues published a research paper on foundation and large language models in Cluster Computing.
+    entity-attribute relationships:
+    Devon Myers|PUBLISHED|research paper
+    Devon Myers|RESEARCH_FOCUS|foundation and large language models
+
+    entity-entity relationships:
+    Devon Myers|PUBLISHED_IN|Cluster Computing
+
+  proposition: The paper explores fundamentals, challenges, opportunities, and social impacts of AI models.
+    entity-attribute relationships:
+    AI models|EXPLORED_ASPECTS|fundamentals
+    AI models|EXPLORED_ASPECTS|challenges
+    AI models|EXPLORED_ASPECTS|opportunities
+    AI models|EXPLORED_ASPECTS|social impacts
+
+  proposition: OpenAI maintains a Red Teaming Network to assess AI system risks.
+    entity-attribute relationships:
+    OpenAI|MAINTAINS|Red Teaming Network
+    Red Teaming Network|PURPOSE|assess AI system risks
+
+  proposition: Google Cloud provides a Responsible AI Guide for Vertex AI.
+    entity-attribute relationships:
+    Google Cloud|PROVIDES|Responsible AI Guide
+    Responsible AI Guide|ASSOCIATED_WITH|Vertex AI
+
+  proposition: Google Research and Google AI have developed Responsible AI Practices.
+    entity-attribute relationships:
+    Google Research|DEVELOPED|Responsible AI Practices
+    Google AI|DEVELOPED|Responsible AI Practices
+
+  proposition: Meta introduced Prompt Guard in 2024.
+    entity-attribute relationships:
+    Meta|INTRODUCED|Prompt Guard
+    Prompt Guard|INTRODUCTION_YEAR|2024
+
+  proposition: The European Union has created an AI Act to regulate artificial intelligence.
+    entity-attribute relationships:
+    European Union|CREATED|AI Act
+    AI Act|PURPOSE|regulate artificial intelligence
+
+  proposition: The United States developed a Blueprint for an AI Bill of Rights in 2022.
+    entity-attribute relationships:
+    United States|DEVELOPED|Blueprint for an AI Bill of Rights
+    Blueprint for an AI Bill of Rights|DEVELOPMENT_YEAR|2022
+
+  proposition: China implemented Interim Measures for Generative AI Service Administration.
+    entity-attribute relationships:
+    China|IMPLEMENTED|Interim Measures for Generative AI Service Administration
+
+  proposition: World Health Organization published guidance on ethics and governance of AI in healthcare.
+    entity-attribute relationships:
+    World Health Organization|PUBLISHED|guidance on ethics and governance of AI in healthcare
+
+  proposition: OpenAI released system cards for GPT-4o and DALL-E 3.
+    entity-attribute relationships:
+    OpenAI|RELEASED|system cards
+    System cards|ASSOCIATED_WITH|GPT-4o
+    System cards|ASSOCIATED_WITH|DALL-E 3
+
+  proposition: OpenAI published a Charter outlining organizational principles in 2018.
+    entity-attribute relationships:
+    OpenAI|PUBLISHED|Charter
+    Charter|CONTENT|organizational principles
+    Charter|PUBLICATION_YEAR|2018
+
+  proposition: Researchers developed model cards for transparent model reporting.
+    entity-attribute relationships:
+    Researchers|DEVELOPED|model cards
+    Model cards|PURPOSE|transparent model reporting
+
+  proposition: OpenAI maintains Safety Standards and Safety Best Practices.
+    entity-attribute relationships:
+    OpenAI|MAINTAINS|Safety Standards
+    OpenAI|MAINTAINS|Safety Best Practices
+
+  proposition: OpenAI is conducting Alignment Research and Superalignment initiatives.
+    entity-attribute relationships:
+    OpenAI|CONDUCTING|Alignment Research
+    OpenAI|CONDUCTING|Superalignment initiatives
+
+  proposition: OpenAI is working on secure infrastructure for advanced AI.
+    entity-attribute relationships:
+    OpenAI|WORKING_ON|secure infrastructure
+    Secure infrastructure|ASSOCIATED_WITH|advanced AI
+
+  proposition: OpenAI created an AI-written text classifier.
+    entity-attribute relationships:
+    OpenAI|CREATED|AI-written text classifier
+
+  proposition: OpenAI launched a Democratic Inputs to AI Grant Program.
+    entity-attribute relationships:
+    OpenAI|LAUNCHED|Democratic Inputs to AI Grant Program
+
+  proposition: Researchers have developed multiple open pre-trained transformer language models, including OPT, Llama, Llama 2, and Llama 3.
+    entity-attribute relationships:
+    Researchers|DEVELOPED|open pre-trained transformer language models
+    Open pre-trained transformer language models|INCLUDES|OPT
+    Open pre-trained transformer language models|INCLUDES|Llama
+    Open pre-trained transformer language models|INCLUDES|Llama 2
+    Open pre-trained transformer language models|INCLUDES|Llama 3
+
+  proposition: Meta is expanding open-source large language models responsibly.
+    entity-attribute relationships:
+    Meta|EXPANDING|open-source large language models
+    Open-source large language models|DEVELOPMENT_APPROACH|responsibly
+
+  proposition: Researchers developed Llama Guard as an input-output safeguard for human-AI conversations.
+    entity-attribute relationships:
+    Researchers|DEVELOPED|Llama Guard
+    Llama Guard|PURPOSE|input-output safeguard for human-AI conversations

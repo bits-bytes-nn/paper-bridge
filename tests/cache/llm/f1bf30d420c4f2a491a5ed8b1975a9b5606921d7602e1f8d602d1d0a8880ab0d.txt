@@ -1,0 +1,114 @@
+topic: Jailbreak Techniques in Large Language Models
+
+  entities:
+    PAIR|Algorithm
+    Lapid et al.|Researcher
+    Li et al.|Researcher
+    Yao et al.|Researcher
+    Yu et al.|Researcher
+    Yuan et al.|Researcher
+    Lv et al.|Researcher
+    Kour et al.|Researcher
+    Zhang et al.|Researcher
+    ObscurePrompt|Tool
+    Wu et al.|Researcher
+    Crescendo|Method
+    Shen et al.|Researcher
+    Zhu et al.|Researcher
+    GPT-4|Model
+    GPT-4V|Model
+    Large Language Models|Technological Concept
+
+  proposition: PAIR algorithm creates semantic jailbreaks with black-box access to an LLM.
+    entity-attribute relationships:
+    PAIR|DESCRIBED_BY|semantic jailbreaks
+    PAIR|OPERATES_WITH|black-box access
+
+    entity-entity relationships:
+    PAIR|TARGETS|Large Language Models
+
+  proposition: Disrupting model alignment can be achieved by altering decoding methods.
+    entity-attribute relationships:
+    Large Language Models|VULNERABLE_TO|decoding method alteration
+
+  proposition: Lapid et al. use a Genetic Algorithm to optimize adversarial suffixes.
+    entity-attribute relationships:
+    Lapid et al.|USES|Genetic Algorithm
+    Lapid et al.|DEVELOPS|adversarial suffixes
+
+  proposition: Li et al. propose a similar method to Lapid et al.'s genetic algorithm approach.
+    entity-entity relationships:
+    Li et al.|REFERENCES|Lapid et al.
+
+  proposition: Yao et al. apply fuzzy testing to generate attack instructions.
+    entity-attribute relationships:
+    Yao et al.|USES|fuzzy testing
+    Yao et al.|DEVELOPS|attack instructions
+
+  proposition: Yu et al. employ GPTFUZZER, which uses mutation techniques to evolve human-crafted templates into adversarial inputs.
+    entities:
+    GPTFUZZER|Tool
+
+    entity-attribute relationships:
+    GPTFUZZER|USES|mutation techniques
+    Yu et al.|DEVELOPS|GPTFUZZER
+
+    entity-entity relationships:
+    GPTFUZZER|TRANSFORMS|human-crafted templates
+
+  proposition: Yuan et al. encode strings to ciphers to bypass safety alignment of LLMs like GPT-4.
+    entity-attribute relationships:
+    Yuan et al.|USES|string encoding
+    Yuan et al.|TARGETS|safety alignment
+
+    entity-entity relationships:
+    Yuan et al.|BYPASSES|GPT-4
+
+  proposition: Wu et al. use LLMs to jailbreak large vision models like GPT-4V.
+    entity-entity relationships:
+    Wu et al.|JAILBREAKS|GPT-4V
+
+  proposition: Crescendo is a multi-turn jailbreak that interacts with models in a seemingly benign manner.
+    entity-attribute relationships:
+    Crescendo|DESCRIBED_BY|multi-turn
+    Crescendo|OPERATES_WITH|seemingly benign interaction
+
+topic: Jailbreak Defense Techniques
+
+  entities:
+    Xie et al.|Researcher
+    Phute et al.|Researcher
+    HateModerate|Tool
+    Xu et al.|Researcher
+    Kim et al.|Researcher
+    AutoDefenes|Framework
+    SmoothLLM|Method
+    SemanticSmooth|Method
+
+  proposition: Xie et al. and Phute et al. use self-evaluation to find potential harm in input queries.
+    entity-attribute relationships:
+    Xie et al.|USES|self-evaluation
+    Phute et al.|USES|self-evaluation
+
+  proposition: Perplexity-based filtering is effective against attacks like GCG.
+    entity-attribute relationships:
+    Perplexity-based filtering|EFFECTIVE_AGAINST|GCG attack
+
+  proposition: SmoothLLM and SemanticSmooth defend by randomly perturbing multiple input prompt copies.
+    entity-attribute relationships:
+    SmoothLLM|DEFENDS_BY|random input perturbation
+    SemanticSmooth|DEFENDS_BY|random input perturbation
+
+  proposition: HateModerate detects harmful content in user inputs.
+    entity-attribute relationships:
+    HateModerate|FUNCTION|detect harmful content
+
+  proposition: AutoDefenes is a multi-agent defense framework that filters harmful LLM responses.
+    entity-attribute relationships:
+    AutoDefenes|DESCRIBED_BY|multi-agent
+    AutoDefenes|FUNCTION|filter harmful responses
+
+  proposition: Kim et al. find current defense methods are not sufficiently robust.
+    entity-attribute relationships:
+    Kim et al.|EVALUATES|defense methods
+    Defense Methods|DESCRIBED_BY|insufficiently robust

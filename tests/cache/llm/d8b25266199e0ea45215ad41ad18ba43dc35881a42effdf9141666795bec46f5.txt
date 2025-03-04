@@ -1,0 +1,108 @@
+topic: Vision-Language Models and Robot Navigation
+
+  entities:
+    CLIP-Nav|Research Paper
+    ViNT|Foundation Model
+    Mohamed Elnoor|Researcher
+    Senthil Hariharan Arul|Researcher
+    VLPG-Nav|Approach
+    Kasun Weerakoon|Researcher
+    BehAV|Approach
+    Brian Ichter|Researcher
+    Allen Z. Ren|Researcher
+    Danny Driess|Researcher
+    PaLM-E|Embodied Multimodal Language Model
+    Kuan Fang|Researcher
+    MOKA|Robotic Manipulation Approach
+  
+  proposition: CLIP-Nav is a research paper about zero-shot vision-and-language navigation published on ArXiv in 2022.
+    entity-attribute relationships:
+    CLIP-Nav|PUBLISHED_IN|ArXiv
+    CLIP-Nav|PUBLICATION_YEAR|2022
+    CLIP-Nav|FOCUS|zero-shot vision-and-language navigation
+    
+    entity-entity relationships:
+    
+  proposition: ViNT is a foundation model for visual navigation presented at the 7th Annual Conference on Robot Learning in 2023.
+    entity-attribute relationships:
+    ViNT|PRESENTED_AT|7th Annual Conference on Robot Learning
+    ViNT|PRESENTATION_YEAR|2023
+    ViNT|TYPE|foundation model
+    ViNT|DOMAIN|visual navigation
+    
+    entity-entity relationships:
+    
+  proposition: Mohamed Elnoor and colleagues published a paper on robot navigation using physically grounded vision-language models in outdoor environments in 2024.
+    entity-attribute relationships:
+    Mohamed Elnoor|PUBLICATION_YEAR|2024
+    Mohamed Elnoor|RESEARCH_DOMAIN|robot navigation
+    Mohamed Elnoor|RESEARCH_FOCUS|physically grounded vision-language models
+    Mohamed Elnoor|ENVIRONMENT|outdoor
+    
+    entity-entity relationships:
+    
+  proposition: Senthil Hariharan Arul and team developed VLPG-Nav, an object navigation approach using visual language pose graph and object localization probability maps in 2024.
+    entity-attribute relationships:
+    Senthil Hariharan Arul|PUBLICATION_YEAR|2024
+    VLPG-Nav|APPROACH_TYPE|object navigation
+    VLPG-Nav|TECHNIQUE|visual language pose graph
+    VLPG-Nav|TECHNIQUE|object localization probability maps
+    
+    entity-entity relationships:
+    Senthil Hariharan Arul|DEVELOPED|VLPG-Nav
+    
+  proposition: Kasun Weerakoon and colleagues introduced BehAV, a behavioral rule-guided autonomy approach using vision-language models for robot navigation in outdoor scenes in 2024.
+    entity-attribute relationships:
+    Kasun Weerakoon|PUBLICATION_YEAR|2024
+    BehAV|APPROACH_TYPE|behavioral rule-guided autonomy
+    BehAV|TECHNOLOGY|vision-language models
+    BehAV|DOMAIN|robot navigation
+    BehAV|ENVIRONMENT|outdoor scenes
+    
+    entity-entity relationships:
+    Kasun Weerakoon|INTRODUCED|BehAV
+    
+  proposition: Brian Ichter and co-authors presented a paper on grounding language in robotic affordances at the 6th Annual Conference on Robot Learning in 2022.
+    entity-attribute relationships:
+    Brian Ichter|PRESENTATION_YEAR|2022
+    Brian Ichter|PRESENTATION_VENUE|6th Annual Conference on Robot Learning
+    Brian Ichter|RESEARCH_FOCUS|grounding language in robotic affordances
+    
+    entity-entity relationships:
+    
+  proposition: Allen Z. Ren and team developed a robot assistance approach focused on uncertainty alignment for large language model planners at the 7th Annual Conference on Robot Learning in 2023.
+    entity-attribute relationships:
+    Allen Z. Ren|PRESENTATION_YEAR|2023
+    Allen Z. Ren|PRESENTATION_VENUE|7th Annual Conference on Robot Learning
+    Allen Z. Ren|RESEARCH_DOMAIN|robot assistance
+    Allen Z. Ren|RESEARCH_FOCUS|uncertainty alignment for large language model planners
+    
+    entity-entity relationships:
+    
+  proposition: Danny Driess and colleagues introduced PaLM-E, an embodied multimodal language model, at the 40th International Conference on Machine Learning in 2023.
+    entity-attribute relationships:
+    Danny Driess|PRESENTATION_YEAR|2023
+    Danny Driess|PRESENTATION_VENUE|40th International Conference on Machine Learning
+    PaLM-E|TYPE|embodied multimodal language model
+    
+    entity-entity relationships:
+    Danny Driess|INTRODUCED|PaLM-E
+    
+  proposition: Kuan Fang and team developed MOKA, an open-world robotic manipulation approach through mark-based visual prompting, to be presented at Robotics: Science and Systems in 2024.
+    entity-attribute relationships:
+    Kuan Fang|PUBLICATION_YEAR|2024
+    Kuan Fang|PRESENTATION_VENUE|Robotics: Science and Systems
+    MOKA|APPROACH_TYPE|open-world robotic manipulation
+    MOKA|TECHNIQUE|mark-based visual prompting
+    
+    entity-entity relationships:
+    Kuan Fang|DEVELOPED|MOKA
+    
+  proposition: Multiple research papers explore vision-language models in various domains including medical report generation, remote sensing, and human-robot interaction.
+    entity-attribute relationships:
+    Research Paper|RESEARCH_DOMAIN|vision-language models
+    Research Paper|APPLICATION_DOMAINS|medical report generation
+    Research Paper|APPLICATION_DOMAINS|remote sensing
+    Research Paper|APPLICATION_DOMAINS|human-robot interaction
+    
+    entity-entity relationships:

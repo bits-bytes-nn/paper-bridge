@@ -1,0 +1,139 @@
+topic: Language Model Training and Knowledge Shifts
+
+  entities:
+    Llama-3.1-8B-Instruct|Model
+    DBpedia|Knowledge Base
+    TruthfulQA|Metric
+    Figure 4|Publication
+
+  proposition: Llama-3.1-8B-Instruct default model refuses to answer questions in 15% of cases.
+    entity-attribute relationships:
+    Llama-3.1-8B-Instruct|REFUSAL_RATE|15%
+
+    entity-entity relationships:
+
+  proposition: Llama-3.1-8B-Instruct produces response patterns like "I couldn't find any information..." or "I cannot verify the...".
+    entity-attribute relationships:
+    Llama-3.1-8B-Instruct|RESPONSE_PATTERN|"I couldn't find any information..."
+    Llama-3.1-8B-Instruct|RESPONSE_PATTERN|"I cannot verify the..."
+
+    entity-entity relationships:
+
+  proposition: Models trained in Unknown + HighlyKnown mode lose the ability to refuse answering questions.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+
+  proposition: Test data contains questions with consistent answer patterns.
+    entity-attribute relationships:
+    Test data|CHARACTERISTIC|consistent answer patterns
+
+    entity-entity relationships:
+
+  proposition: Models trained with paraphrases tend to disrupt truthfulness less.
+    entity-attribute relationships:
+    Models|TRAINING_CHARACTERISTIC|paraphrase-based
+    Models|IMPACT|less truthfulness disruption
+
+    entity-entity relationships:
+
+topic: Knowledge Shift Characteristics
+
+  entities:
+    Target|Research Method
+    DBpedia|Knowledge Base
+    PopulatedPlace|Domain
+
+  proposition: Target-based shifts involve model predicting answers from unknown training examples.
+    entity-attribute relationships:
+    Target|SHIFT_CHARACTERISTIC|predicting answers from unknown training examples
+
+    entity-entity relationships:
+
+  proposition: Domain shifts analyze how relations link subjects and objects using DBpedia relation categories.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    DBpedia|PROVIDES|relation categories
+
+  proposition: 390 relations from test data fall into 92 relation domain categories.
+    entity-attribute relationships:
+    Test data|RELATION_COUNT|390
+    Test data|DOMAIN_CATEGORY_COUNT|92
+
+    entity-entity relationships:
+
+  proposition: Relation domain "PopulatedPlace" includes 24 relations for analyzing knowledge shifts.
+    entity-attribute relationships:
+    PopulatedPlace|RELATION_COUNT|24
+
+    entity-entity relationships:
+
+  proposition: Shifts can be both positive and negative across different domains.
+    entity-attribute relationships:
+    Shifts|CHARACTERISTIC|positive and negative
+
+    entity-entity relationships:
+
+topic: Model Training and Accuracy Observations
+
+  entities:
+    Decoder-only models|Model Architecture
+
+  proposition: Model accuracy decreases as the number of new knowledge increases.
+    entity-attribute relationships:
+    Models|ACCURACY_TREND|decreasing with new knowledge
+
+    entity-entity relationships:
+
+  proposition: Significant performance drop occurs when moving from 1 to 10 new knowledge points.
+    entity-attribute relationships:
+    Models|PERFORMANCE_CHANGE|significant drop from 1 to 10 knowledge points
+
+    entity-entity relationships:
+
+  proposition: Small quality recovery is observed at 100 new knowledge points.
+    entity-attribute relationships:
+    Models|PERFORMANCE_CHANGE|small quality recovery at 100 knowledge points
+
+    entity-entity relationships:
+
+  proposition: Models show similar performance trends across different decoder-only models.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Models|ARCHITECTURE|decoder-only models
+
+  proposition: Positive and negative shifts occur in model knowledge adaptation.
+    entity-attribute relationships:
+    Models|KNOWLEDGE_ADAPTATION|positive and negative shifts
+
+    entity-entity relationships:
+
+topic: Experimental Metrics
+
+  entities:
+    TruthfulQA MC1|Metric
+    TruthfulQA MC2|Metric
+    Figure 4|Publication
+
+  proposition: TruthfulQA MC1 and MC2 accuracy metrics depend on the amount of unknown knowledge learned.
+    entity-attribute relationships:
+    TruthfulQA MC1|DEPENDENCY|amount of unknown knowledge
+    TruthfulQA MC2|DEPENDENCY|amount of unknown knowledge
+
+    entity-entity relationships:
+
+  proposition: Horizontal dotted lines in Figure 4 indicate baseline performance.
+    entity-attribute relationships:
+    Figure 4|VISUALIZATION|horizontal dotted lines
+    Horizontal dotted lines|REPRESENTATION|baseline performance
+
+    entity-entity relationships:
+
+  proposition: Error bars represent min-max values from 3 seed runs.
+    entity-attribute relationships:
+    Error bars|REPRESENTATION|min-max values
+    Error bars|SEED_RUNS|3
+
+    entity-entity relationships:

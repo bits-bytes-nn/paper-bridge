@@ -1,0 +1,161 @@
+topic: Embodied AI and Robotic Systems Research
+
+  entities:
+    Matterport3D|Research Paper
+    Yang Liu|Researcher
+    Guanzhi Wang|Researcher
+    Voyager|Agent
+    Yunfan Jiang|Researcher
+    VIMA|Robot Manipulation System
+    Brianna Zitkovich|Researcher
+    RT-2|Model
+    Xingcheng Zhou|Researcher
+    Tianrui Guan|Researcher
+    TNS|Method
+    TNES|Method
+    Silen Naihin|Researcher
+    Grégoire Délétang|Researcher
+    Paul Knott|Researcher
+    James F. Mullen|Researcher
+    Kaiming He|Researcher
+    Alex H Lang|Researcher
+    PointPillars|Method
+    International Conference on 3D Vision|Conference
+    Transactions on Machine Learning Research|Publication
+    Fortieth International Conference on Machine Learning|Conference
+    7th Annual Conference on Robot Learning|Conference
+    IEEE Transactions on Intelligent Vehicles|Publication
+    Robotics: Science and Systems XVIII|Conference
+    Autonomous Robots|Publication
+    ArXiv|Publication Platform
+    International Conference on Autonomous Agents and MultiAgent Systems|Conference
+    IEEE Robotics and Automation Letters|Publication
+    IEEE Conference on Computer Vision and Pattern Recognition|Conference
+
+  proposition: Matterport3D is a research paper about learning from RGB-D data in indoor environments published at the International Conference on 3D Vision in 2017.
+    entity-attribute relationships:
+    Matterport3D|PUBLISHED_IN|International Conference on 3D Vision
+    Matterport3D|PUBLICATION_YEAR|2017
+    Matterport3D|RESEARCH_FOCUS|learning from RGB-D data in indoor environments
+
+    entity-entity relationships:
+    None
+
+  proposition: Yang Liu and colleagues published a comprehensive survey on Aligning Cyber Space with Physical World in Embodied AI in 2024.
+    entity-attribute relationships:
+    Yang Liu|PUBLICATION_YEAR|2024
+    Yang Liu|RESEARCH_FOCUS|Aligning Cyber Space with Physical World in Embodied AI
+
+    entity-entity relationships:
+    None
+
+  proposition: Guanzhi Wang and collaborators developed Voyager, an open-ended embodied agent with large language models, published in Transactions on Machine Learning Research in 2024.
+    entity-attribute relationships:
+    Guanzhi Wang|PUBLICATION_YEAR|2024
+    Voyager|PUBLISHED_IN|Transactions on Machine Learning Research
+    Voyager|TYPE|open-ended embodied agent
+    Voyager|TECHNOLOGY|large language models
+
+    entity-entity relationships:
+    Guanzhi Wang|DEVELOPED|Voyager
+
+  proposition: Yunfan Jiang and team introduced VIMA, a general robot manipulation system with multimodal prompts, at the Fortieth International Conference on Machine Learning in 2023.
+    entity-attribute relationships:
+    Yunfan Jiang|PUBLICATION_YEAR|2023
+    VIMA|PUBLISHED_IN|Fortieth International Conference on Machine Learning
+    VIMA|TYPE|general robot manipulation system
+    VIMA|FEATURE|multimodal prompts
+
+    entity-entity relationships:
+    Yunfan Jiang|INTRODUCED|VIMA
+
+  proposition: Brianna Zitkovich and colleagues presented RT-2, a vision-language-action model that transfers web knowledge to robotic control, at the 7th Annual Conference on Robot Learning in 2023.
+    entity-attribute relationships:
+    Brianna Zitkovich|PUBLICATION_YEAR|2023
+    RT-2|PUBLISHED_IN|7th Annual Conference on Robot Learning
+    RT-2|TYPE|vision-language-action model
+    RT-2|FEATURE|transfers web knowledge to robotic control
+
+    entity-entity relationships:
+    Brianna Zitkovich|PRESENTED|RT-2
+
+  proposition: Xingcheng Zhou and researchers published a survey and outlook on vision language models in autonomous driving in IEEE Transactions on Intelligent Vehicles in 2024.
+    entity-attribute relationships:
+    Xingcheng Zhou|PUBLICATION_YEAR|2024
+    Xingcheng Zhou|RESEARCH_FOCUS|vision language models in autonomous driving
+    Xingcheng Zhou|PUBLISHED_IN|IEEE Transactions on Intelligent Vehicles
+
+    entity-entity relationships:
+    None
+
+  proposition: Tianrui Guan and team developed TNS, a terrain traversability mapping and navigation system for autonomous excavators, at Robotics: Science and Systems XVIII in 2021.
+    entity-attribute relationships:
+    Tianrui Guan|PUBLICATION_YEAR|2021
+    TNS|PUBLISHED_IN|Robotics: Science and Systems XVIII
+    TNS|TYPE|terrain traversability mapping and navigation system
+    TNS|APPLICATION|autonomous excavators
+
+    entity-entity relationships:
+    Tianrui Guan|DEVELOPED|TNS
+
+  proposition: Tianrui Guan and colleagues expanded their work with TNES, a terrain traversability mapping, navigation, and excavation system for autonomous excavators, published in Autonomous Robots in 2023.
+    entity-attribute relationships:
+    Tianrui Guan|PUBLICATION_YEAR|2023
+    TNES|PUBLISHED_IN|Autonomous Robots
+    TNES|TYPE|terrain traversability mapping, navigation, and excavation system
+    TNES|APPLICATION|autonomous excavators
+
+    entity-entity relationships:
+    Tianrui Guan|EXPANDED|TNES
+
+  proposition: Silen Naihin and researchers explored testing language model agents safely in the wild, publishing a paper on ArXiv in 2023.
+    entity-attribute relationships:
+    Silen Naihin|PUBLICATION_YEAR|2023
+    Silen Naihin|RESEARCH_FOCUS|testing language model agents safely in the wild
+    Silen Naihin|PUBLISHED_IN|ArXiv
+
+    entity-entity relationships:
+    None
+
+  proposition: Grégoire Délétang and team conducted a causal analysis of agent behavior for AI safety, publishing on ArXiv in 2021.
+    entity-attribute relationships:
+    Grégoire Délétang|PUBLICATION_YEAR|2021
+    Grégoire Délétang|RESEARCH_FOCUS|causal analysis of agent behavior for AI safety
+    Grégoire Délétang|PUBLISHED_IN|ArXiv
+
+    entity-entity relationships:
+    None
+
+  proposition: Paul Knott and collaborators evaluated the robustness of collaborative agents at the International Conference on Autonomous Agents and MultiAgent Systems in 2021.
+    entity-attribute relationships:
+    Paul Knott|PUBLICATION_YEAR|2021
+    Paul Knott|RESEARCH_FOCUS|robustness of collaborative agents
+    Paul Knott|PUBLISHED_IN|International Conference on Autonomous Agents and MultiAgent Systems
+
+    entity-entity relationships:
+    None
+
+  proposition: James F. Mullen and colleagues created a dataset for enabling embodied agents to detect anomalous situations, published in IEEE Robotics and Automation Letters in 2024.
+    entity-attribute relationships:
+    James F. Mullen|PUBLICATION_YEAR|2024
+    James F. Mullen|RESEARCH_FOCUS|dataset for enabling embodied agents to detect anomalous situations
+    James F. Mullen|PUBLISHED_IN|IEEE Robotics and Automation Letters
+
+    entity-entity relationships:
+    None
+
+  proposition: Kaiming He and researchers developed deep residual learning for image recognition, presenting at the IEEE Conference on Computer Vision and Pattern Recognition in 2016.
+    entity-attribute relationships:
+    Kaiming He|PUBLICATION_YEAR|2016
+    Kaiming He|RESEARCH_FOCUS|deep residual learning for image recognition
+    Kaiming He|PUBLISHED_IN|IEEE Conference on Computer Vision and Pattern Recognition
+
+    entity-entity relationships:
+    None
+
+  proposition: Alex H Lang and team created PointPillars, a fast encoder for object detection from point clouds.
+    entity-attribute relationships:
+    PointPillars|TYPE|fast encoder for object detection from point clouds
+
+    entity-entity relationships:
+    Alex H Lang|CREATED|PointPillars

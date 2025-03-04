@@ -1,0 +1,50 @@
+Research Papers on Large Language Model Editing, Bias, and Fairness
+
+Hai Huang et al. published a paper on composite backdoor attacks against large language models in 2023.
+The paper was published as an arXiv preprint with the identifier arXiv:2310.07676.
+
+Tom Hartvigsen et al. proposed lifelong model editing with discrete key-value adaptors in 2024.
+The research was published in Advances in Neural Information Processing Systems, volume 36.
+
+Xinwei Wu et al. developed a method for detecting and editing privacy neurons in pretrained language models in 2023.
+The paper was published as an arXiv preprint with the identifier arXiv:2310.20138.
+
+Xiaopeng Li et al. introduced PMET, a precise model editing technique for transformers, in 2024.
+The research was presented at the AAAI Conference on Artificial Intelligence.
+
+Yanzhou Li et al. explored backdoor editing of large language models in 2024.
+Their paper was published as an arXiv preprint with the identifier arXiv:2403.13355.
+
+Sangeet Sagar et al. researched defending against stealthy backdoor attacks in 2022.
+The paper was published as an arXiv preprint with the identifier arXiv:2205.14246.
+
+Zhensu Sun et al. developed a method to protect open-source code against unauthorized training usage in 2022.
+The research was presented at the ACM Web Conference.
+
+Kun Shao et al. proposed BDDR, an effective defense against textual backdoor attacks, in 2021.
+The research was published in Computers & Security, volume 110.
+
+Zhibo Chu et al. conducted a taxonomic survey on fairness in large language models in 2024.
+The survey was published in the ACM SIGKDD explorations newsletter.
+
+Rajas Bansal published a survey on bias and fairness in natural language processing in 2022.
+
+Moin Nadeem et al. developed StereoSet for measuring stereotypical bias in pretrained language models in 2021.
+The research was presented at the Annual Meeting of the Association for Computational Linguistics.
+
+Yanhong Bai et al. created FairMonitor, a dual-framework for detecting stereotypes and biases in large language models in 2024.
+
+Aparna Garimella et al. explored demographic-aware language model fine-tuning as a bias mitigation technique in 2022.
+The research was presented at the Asia-Pacific Chapter of the Association for Computational Linguistics conference.
+
+Yang Liu et al. published a survey and guideline for evaluating large language models' alignment in 2023.
+The paper was published as an arXiv preprint with the identifier arXiv:2308.05374.
+
+Charles Yu et al. researched unlearning bias in language models by partitioning gradients in 2023.
+The research was presented at the Annual Meeting of the Association for Computational Linguistics.
+
+Ali Omrani et al. proposed a social-group-agnostic bias mitigation approach using the Stereotype Content Model in 2023.
+The research was presented at the Annual Meeting of the Association for Computational Linguistics.
+
+Yi R. Fung et al. developed NORMSAGE for multi-lingual multi-cultural norm discovery from conversations in 2023.
+The research was presented at the Conference on Empirical Methods in Natural Language Processing.

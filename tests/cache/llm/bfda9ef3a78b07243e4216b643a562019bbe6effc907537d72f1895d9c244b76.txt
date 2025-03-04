@@ -1,0 +1,178 @@
+topic: AI Safety Research
+
+  entities:
+    Alex Turner|Researcher
+    Prasad Tadepalli|Researcher
+    Victoria Krakovna|Researcher
+    Janos Kramar|Researcher
+    Richard Ngo|Researcher
+    Lawrence Chan|Researcher
+    Sören Mindermann|Researcher
+    Toby Shevlane|Researcher
+    Chandan Singh|Researcher
+    Neel Nanda|Researcher
+    Arthur Conmy|Researcher
+    Roland S Zimmermann|Researcher
+    Thomas Klein|Researcher
+    Wieland Brendel|Researcher
+    Daking Rai|Researcher
+    Leonard Bereska|Researcher
+    Efstratios Gavves|Researcher
+
+  proposition: Optimal policies tend to seek power.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Alex Turner and Prasad Tadepalli found that parametrically retargetable decision-makers tend to seek power.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Alex Turner|COLLABORATES_WITH|Prasad Tadepalli
+    Alex Turner|RESEARCHES|Decision-makers
+    Prasad Tadepalli|RESEARCHES|Decision-makers
+
+  proposition: Victoria Krakovna and Janos Kramar observed that power-seeking can be probable and predictive for trained agents.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Victoria Krakovna|COLLABORATES_WITH|Janos Kramar
+    Victoria Krakovna|RESEARCHES|Trained Agents
+    Janos Kramar|RESEARCHES|Trained Agents
+
+topic: AI Interpretability Research
+
+  entities:
+    Chandan Singh|Researcher
+    Neel Nanda|Researcher
+    Arthur Conmy|Researcher
+    Roland S Zimmermann|Researcher
+    Thomas Klein|Researcher
+    Wieland Brendel|Researcher
+    Daking Rai|Researcher
+    Leonard Bereska|Researcher
+    Efstratios Gavves|Researcher
+
+  proposition: Chandan Singh and researchers rethought interpretability in the era of large language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Chandan Singh|RESEARCHES|Large Language Models
+    Chandan Singh|RESEARCHES|Interpretability
+
+  proposition: Neel Nanda and team developed progress measures for grokking via mechanistic interpretability.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Neel Nanda|DEVELOPS|Progress Measures
+    Neel Nanda|USES|Mechanistic Interpretability
+
+  proposition: Arthur Conmy and colleagues worked towards automated circuit discovery for mechanistic interpretability.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Arthur Conmy|RESEARCHES|Automated Circuit Discovery
+    Arthur Conmy|USES|Mechanistic Interpretability
+
+  proposition: Roland S Zimmermann, Thomas Klein, and Wieland Brendel found that scale alone does not improve mechanistic interpretability in vision models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Roland S Zimmermann|COLLABORATES_WITH|Thomas Klein
+    Roland S Zimmermann|COLLABORATES_WITH|Wieland Brendel
+    Thomas Klein|COLLABORATES_WITH|Wieland Brendel
+    Roland S Zimmermann|RESEARCHES|Vision Models
+    Thomas Klein|RESEARCHES|Vision Models
+    Wieland Brendel|RESEARCHES|Vision Models
+
+  proposition: Daking Rai and researchers conducted a practical review of mechanistic interpretability for transformer-based language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Daking Rai|RESEARCHES|Transformer-based Language Models
+    Daking Rai|CONDUCTS|Mechanistic Interpretability Review
+
+  proposition: Leonard Bereska and Efstratios Gavves reviewed mechanistic interpretability for AI safety.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Leonard Bereska|COLLABORATES_WITH|Efstratios Gavves
+    Leonard Bereska|REVIEWS|Mechanistic Interpretability
+    Efstratios Gavves|REVIEWS|Mechanistic Interpretability
+
+topic: AI Fairness Research
+
+  entities:
+    Zhibo Chu|Researcher
+    Zichong Wang|Researcher
+    Wenbin Zhang|Researcher
+    Michelle Seng Ah Lee|Researcher
+    Hilde Weerts|Researcher
+    Tyna Eloundou|Researcher
+
+  proposition: Zhibo Chu, Zichong Wang, and Wenbin Zhang conducted a taxonomic survey of fairness in large language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Zhibo Chu|COLLABORATES_WITH|Zichong Wang
+    Zhibo Chu|COLLABORATES_WITH|Wenbin Zhang
+    Zichong Wang|COLLABORATES_WITH|Wenbin Zhang
+    Zhibo Chu|RESEARCHES|Large Language Models
+    Zichong Wang|RESEARCHES|Large Language Models
+    Wenbin Zhang|RESEARCHES|Large Language Models
+
+  proposition: Michelle Seng Ah Lee explored context-conscious fairness in machine learning decision-making.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Michelle Seng Ah Lee|RESEARCHES|Machine Learning Decision-making
+
+  proposition: Hilde Weerts and colleagues developed Fairlearn for assessing and improving fairness of AI systems.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Hilde Weerts|DEVELOPS|Fairlearn
+    Hilde Weerts|RESEARCHES|AI Systems Fairness
+
+  proposition: Tyna Eloundou and team investigated first-person fairness in chatbots.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Tyna Eloundou|RESEARCHES|Chatbots
+    Tyna Eloundou|INVESTIGATES|First-person Fairness
+
+topic: AI Security and Jailbreaking Research
+
+  entities:
+    Xinyue Shen|Researcher
+    Rusheb Shah|Researcher
+    Xuan Li|Researcher
+    Anselm Paulus|Researcher
+
+  proposition: Xinyue Shen and colleagues characterized and evaluated in-the-wild jailbreak prompts on large language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Xinyue Shen|RESEARCHES|Large Language Models
+    Xinyue Shen|EVALUATES|Jailbreak Prompts
+
+  proposition: Rusheb Shah and researchers explored scalable and transferable black-box jailbreaks for language models via persona modulation.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Rusheb Shah|RESEARCHES|Language Models
+    Rusheb Shah|EXPLORES|Black-box Jailbreaks
+
+  proposition: Xuan Li and team developed DeepInception to hypnotize large language models to be jailbreakers.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Xuan Li|DEVELOPS|DeepInception
+    Xuan Li|RESEARCHES|Large Language Models
+
+  proposition: Anselm Paulus and colleagues created AdvPrompter for fast adaptive adversarial prompting for large language models.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Anselm Paulus|CREATES|AdvPrompter
+    Anselm Paulus|RESEARCHES|Large Language Models

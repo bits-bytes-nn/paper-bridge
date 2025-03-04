@@ -1,0 +1,24 @@
+Malicious Query Generation Pipeline for Web-Browsing Agent
+
+A case generator formulates malicious questions based on predefined scenarios.
+A case generator enhances malicious questions with role-play context to add justification and complexity.
+An LLM-powered diversity enhancer paraphrases questions to introduce variations.
+An LLM-powered diversity enhancer ensures a diverse set of question formulations.
+
+Privacy Preservation Analysis of Large Language Models
+
+Higher model utility does not necessarily imply stronger privacy preservation.
+GPT-4o has a higher utility (Arena Score) of [1034].
+GPT-4o's average privacy preservation rate is 75.32%.
+Smaller-scale LLMs generally demonstrate higher privacy preservation rates compared to larger counterparts.
+Claude-3-haiku and Gemini-1.5-pro consistently surpass larger models like Llama-3.1-70B in privacy preservation.
+Llama-3.1-8B achieves 79.82% privacy preservation rate.
+Llama-3.1-70B has a lower privacy preservation rate of 57.78%.
+Gemini and Claude models show exceptional privacy preservation rates across organizational, personal, and legal categories.
+Gemini and Claude models achieve privacy preservation rates exceeding 90%.
+LLMs with advanced reasoning capabilities are likely to exhibit higher privacy preservation rates.
+
+Machine Ethics Overview
+
+Machine ethics is dedicated to integrating ethical principles into machines.
+Machine ethics focuses particularly on artificial intelligence-powered machines.

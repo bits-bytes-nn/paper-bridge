@@ -1,0 +1,30 @@
+Research Papers on Large Language Model Security, Privacy, and Bias
+
+Artgpt-4 is an artistic vision-language understanding model with adapter-enhanced minigpt-4.
+Jinyuan Jia, Hongbin Liu, and Neil Zhenqiang Gong identified 10 security and privacy problems in large foundation models.
+Michael Duan et al. investigated membership inference attacks on large language models.
+Jiawen Shi et al. explored security vulnerabilities of ChatGPT through backdoor attacks.
+Jiashu Xu et al. discovered backdoor vulnerabilities in instruction tuning for large language models.
+Haoran Wang and Kai Shu developed a backdoor activation attack using activation steering for safety-alignment.
+Zhiyuan Zhao et al. proposed enhancing large vision-language models through hallucination-aware direct preference optimization.
+Yue Zhang et al. suggested alleviating hallucinations through induced hallucinations.
+
+Research on Gender Bias and Stereotypes in Language Models
+
+Naomi Ellemers published a study on gender stereotypes in the Annual Review of Psychology.
+Jieyu Zhao et al. evaluated gender bias in coreference resolution.
+Flor Miriam Plaza del Arco et al. found that large language models reflect gendered stereotypes in emotion attribution.
+Yixin Wan et al. identified gender biases in LLM-generated reference letters.
+
+Privacy and Information Leakage Studies
+
+Robin Staab et al. investigated privacy violation through inference with large language models.
+Jie Huang et al. examined whether large pre-trained language models leak personal information.
+Siwon Kim et al. developed ProPILE to probe privacy leakage in large language models.
+
+Hallucination Research in Language Models
+
+Josh Achiam et al. published the GPT-4 technical report.
+Ziwei Ji et al. conducted a survey of hallucination in natural language generation.
+Lei Huang et al. published a survey on hallucination in large language models, exploring principles, taxonomy, challenges, and open questions.
+Yue Zhang et al. produced a survey on hallucinations in large language models, metaphorically described as "Siren's Song in the AI Ocean".

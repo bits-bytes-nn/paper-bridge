@@ -1,0 +1,148 @@
+topic: AI Safety and Trustworthiness Strategies
+
+  entities:
+    OpenAI|Organization
+    Red Teaming Network|Project
+    Dalle-3|Model
+    GPT-4o|Model
+    Meta|Organization
+    LLaMA|Model
+    Llama Guard|Tool
+    Prompt Guard|Tool
+    CyberSecEval|Benchmark
+    AWS|Organization
+    NVIDIA|Organization
+    Microsoft Research|Research Platform
+    Microsoft|Organization
+
+  proposition: OpenAI has established a Red Teaming Network of experts to evaluate and improve generative model safety.
+    entity-entity relationships:
+    OpenAI|MANAGES|Red Teaming Network
+    
+    entity-attribute relationships:
+    Red Teaming Network|PURPOSE|evaluate generative model safety
+    Red Teaming Network|PURPOSE|improve generative model safety
+
+  proposition: OpenAI is dedicated to long-term safety and cooperative research in AI development.
+    entity-attribute relationships:
+    OpenAI|COMMITMENT|long-term safety
+    OpenAI|APPROACH|cooperative research
+
+  proposition: OpenAI aims to lead in AI capabilities while focusing on safe and secure AGI development.
+    entity-attribute relationships:
+    OpenAI|GOAL|lead in AI capabilities
+    OpenAI|FOCUS|safe AGI development
+    OpenAI|FOCUS|secure AGI development
+
+  proposition: OpenAI has released Model System Cards for generative models like Dalle-3 and GPT-4o.
+    entity-entity relationships:
+    OpenAI|CREATED|Model System Cards
+    Model System Cards|DESCRIBES|Dalle-3
+    Model System Cards|DESCRIBES|GPT-4o
+
+  proposition: OpenAI's safety standards include minimizing harm, building trust, and continuous learning.
+    entity-attribute relationships:
+    OpenAI|SAFETY_STANDARD|minimizing harm
+    OpenAI|SAFETY_STANDARD|building trust
+    OpenAI|SAFETY_STANDARD|continuous learning
+
+  proposition: OpenAI has formed a model superalignment team using scalable training, validation, and stress testing methods.
+    entity-attribute relationships:
+    OpenAI|CREATED|model superalignment team
+    model superalignment team|METHOD|scalable training
+    model superalignment team|METHOD|validation
+    model superalignment team|METHOD|stress testing
+
+  proposition: OpenAI is enhancing model security through trusted computing, network isolation, and physical security improvements.
+    entity-attribute relationships:
+    OpenAI|SECURITY_APPROACH|trusted computing
+    OpenAI|SECURITY_APPROACH|network isolation
+    OpenAI|SECURITY_APPROACH|physical security improvements
+
+  proposition: OpenAI is developing a classifier to distinguish between AI-generated and human-written text.
+    entity-attribute relationships:
+    OpenAI|DEVELOPING|classifier
+    classifier|PURPOSE|distinguish AI-generated text
+    classifier|PURPOSE|distinguish human-written text
+
+  proposition: OpenAI funded 10 global teams to explore public input in shaping AI behavior.
+    entity-attribute relationships:
+    OpenAI|ACTION|funded 10 global teams
+    10 global teams|PURPOSE|explore public input
+    10 global teams|PURPOSE|shaping AI behavior
+
+  proposition: Meta conducts extensive pre-deployment safety stress tests for LLaMA models using internal and external experts.
+    entity-entity relationships:
+    Meta|TESTS|LLaMA models
+    
+    entity-attribute relationships:
+    Meta|TESTING_METHOD|pre-deployment safety stress tests
+    Meta|TESTING_APPROACH|internal experts
+    Meta|TESTING_APPROACH|external experts
+
+  proposition: Meta uses Llama Guard, a multilingual moderation tool to detect content violating safety guidelines.
+    entity-entity relationships:
+    Meta|USES|Llama Guard
+    
+    entity-attribute relationships:
+    Llama Guard|TYPE|multilingual moderation tool
+    Llama Guard|PURPOSE|detect content violating safety guidelines
+
+  proposition: Meta developed Prompt Guard to detect prompt attacks, including prompt injection and jailbreaking.
+    entity-entity relationships:
+    Meta|CREATED|Prompt Guard
+    
+    entity-attribute relationships:
+    Prompt Guard|PURPOSE|detect prompt attacks
+    Prompt Guard|DETECTS|prompt injection
+    Prompt Guard|DETECTS|jailbreaking
+
+  proposition: Meta released CyberSecEval benchmarks to help understand and mitigate generative AI cybersecurity risks.
+    entity-entity relationships:
+    Meta|RELEASED|CyberSecEval benchmarks
+    
+    entity-attribute relationships:
+    CyberSecEval benchmarks|PURPOSE|understand generative AI cybersecurity risks
+    CyberSecEval benchmarks|PURPOSE|mitigate generative AI cybersecurity risks
+
+  proposition: Meta collaborates with AWS and NVIDIA to integrate safety solutions in Llama model distribution.
+    entity-entity relationships:
+    Meta|COLLABORATES_WITH|AWS
+    Meta|COLLABORATES_WITH|NVIDIA
+    Meta|DISTRIBUTES|Llama models
+    
+    entity-attribute relationships:
+    Collaboration|PURPOSE|integrate safety solutions
+
+  proposition: Microsoft Research focuses on maintaining robustness in model compression and mitigating AI biases.
+    entity-attribute relationships:
+    Microsoft Research|FOCUS|maintaining robustness in model compression
+    Microsoft Research|FOCUS|mitigating AI biases
+
+  proposition: Microsoft works on reducing gender bias in multilingual embeddings.
+    entity-attribute relationships:
+    Microsoft|GOAL|reducing gender bias
+    Microsoft|FOCUS|multilingual embeddings
+
+  proposition: Microsoft has developed AI initiatives for social good, including AI for Health and Bioacoustics projects.
+    entity-attribute relationships:
+    Microsoft|DEVELOPED|AI initiatives for social good
+    AI initiatives|INCLUDES|AI for Health
+    AI initiatives|INCLUDES|Bioacoustics projects
+
+  proposition: Microsoft has outlined six trustworthy AI principles guiding their cloud services and AI deployment.
+    entity-attribute relationships:
+    Microsoft|ESTABLISHED|six trustworthy AI principles
+    AI principles|GUIDES|cloud services
+    AI principles|GUIDES|AI deployment
+
+  proposition: Microsoft leverages AI for improving healthcare, wildlife conservation, data visualization, and geospatial machine learning.
+    entity-attribute relationships:
+    Microsoft|APPLIES_AI|healthcare
+    Microsoft|APPLIES_AI|wildlife conservation
+    Microsoft|APPLIES_AI|data visualization
+    Microsoft|APPLIES_AI|geospatial machine learning
+
+  proposition: Microsoft has created a framework for responsible AI system development.
+    entity-attribute relationships:
+    Microsoft|CREATED|framework for responsible AI system development

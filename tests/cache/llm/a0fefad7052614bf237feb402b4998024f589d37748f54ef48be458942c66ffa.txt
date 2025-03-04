@@ -1,0 +1,80 @@
+topic: Trustworthiness and Safety in Multi-Agent Systems
+
+  entities:
+    Huang et al.|Research Group
+    Yu et al.|Research Group
+    Zhang et al.|Research Group
+    Agent-SafetyBench|Benchmark
+    SafeAgentBench|Benchmark
+    Tian et al.|Research Group
+    Xu et al.|Research Group
+    Dong et al.|Research Group
+    AgentSmith|Project
+    Zeng et al.|Research Group
+    TrustAgent|Project
+    Yoffe et al.|Research Group
+    LLM|Model
+    LLM-based agents|Model
+
+  proposition: Huang et al. explored multi-agent topology resilience against attacks.
+    entity-attribute relationships:
+    Huang et al.|RESEARCHED|multi-agent topology resilience
+    
+    entity-entity relationships:
+    Huang et al.|STUDIED|multi-agent topology
+
+  proposition: Yu et al. studied topological safety in multi-agent networks.
+    entity-attribute relationships:
+    Yu et al.|RESEARCHED|topological safety
+    
+    entity-entity relationships:
+    Yu et al.|STUDIED|multi-agent networks
+
+  proposition: Yu et al. identified critical phenomena called Agent Hallucination and Aggregation Safety.
+    entity-attribute relationships:
+    Yu et al.|IDENTIFIED|Agent Hallucination
+    Yu et al.|IDENTIFIED|Aggregation Safety
+
+  proposition: Zhang et al. proposed Psysafe, a benchmark for evaluating safety of psychological-based attacks in multi-agent systems.
+    entity-attribute relationships:
+    Zhang et al.|PROPOSED|Psysafe
+    Psysafe|TYPE|benchmark
+    
+    entity-entity relationships:
+    Psysafe|EVALUATES|psychological-based attacks
+    Psysafe|FOCUSES_ON|multi-agent systems
+
+  proposition: Agent-SafetyBench evaluated LLM-based agents across 349 interaction environments and 2,000 test cases.
+    entity-attribute relationships:
+    Agent-SafetyBench|EVALUATED|LLM-based agents
+    Agent-SafetyBench|SCOPE|349 interaction environments
+    Agent-SafetyBench|SCOPE|2,000 test cases
+
+  proposition: Agent-SafetyBench found that none of the 16 tested agents surpass a 60% safety score.
+    entity-attribute relationships:
+    Agent-SafetyBench|TESTED|16 agents
+    Agent-SafetyBench|FOUND|safety score below 60%
+
+  (Continued in subsequent propositions...)
+
+topic: Medical Applications of Generative Foundation Models
+
+  entities:
+    LLMs|Model
+    VLMs|Model
+    Medical agents|Model
+    Generative models|Model
+
+  proposition: Generative foundation models in medical applications enable automation of complex diagnostic and decision-making tasks.
+    entity-attribute relationships:
+    Generative foundation models|ENABLES|automation of diagnostic tasks
+    Generative foundation models|ENABLES|complex decision-making tasks
+
+  proposition: Medical agents powered by LLMs and VLMs support clinicians and patients in diagnostics, treatment planning, and patient monitoring.
+    entity-entity relationships:
+    Medical agents|POWERED_BY|LLMs
+    Medical agents|POWERED_BY|VLMs
+    Medical agents|SUPPORTS|clinicians
+    Medical agents|SUPPORTS|patients
+
+  (Continued in subsequent propositions...)

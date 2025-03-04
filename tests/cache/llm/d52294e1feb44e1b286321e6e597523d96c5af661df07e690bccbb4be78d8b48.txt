@@ -1,0 +1,23 @@
+Stereotypes in Large Language Models: Definitions, Detection, Mitigation, and Benchmarking
+
+A recent report shows Large Language Models (LLMs) have strong stereotypical associations between female names and words related to traditional gender roles.
+Addressing stereotypes is a central aspect of achieving fairness in LLMs.
+Stereotypes in LLMs refer to generalized, oversimplified expectations or assumptions about particular social groups based on their specific characteristics.
+Stereotype research in LLMs covers categories including gender, race, profession, religion, sexual orientation, name, and other social identifiers.
+Stereotype detection methods have evolved to include embedding-based and probability-based techniques.
+Datasets like StereoSet and CrowS-Pairs enable systematic detection of biases across stereotype categories.
+Researchers have developed advanced approaches to identify stereotypes, such as Marked Personas and dual testing frameworks.
+Previous benchmarks have been criticized for providing a false sense of fairness by hiding biases in simpler tasks.
+Researchers have proposed new benchmarks like the LLM Stereotype Index (LSI) to address complex stereotype detection.
+Intersectional stereotypes (combining multiple demographic characteristics) are an urgent area of research.
+QuaCer-B is designed to identify biased responses across prompts containing sensitive attributes.
+Stereotype mitigation methods include pre-processing, in-training, and post-processing approaches.
+Techniques for mitigating stereotypes include dataset modification, fine-tuning, modified decoding algorithms, and auxiliary post-processing models.
+Counterfactual Data Augmentation involves reversing the polarity of gender-specific words in training sentences.
+Entropy-based Attention Regularization mitigates stereotypes by maximizing token self-attention entropy.
+DEXPERTS is an advanced decoding algorithm that leverages expert and anti-expert models to control text generation.
+Zero-shot self-debiasing techniques can reduce stereotypes by refining prompts without altering model parameters.
+REFINE-LM uses reinforcement learning to mitigate stereotypes while preserving model performance.
+Evaluation methods for stereotype research include keyword matching, accuracy metrics, and the LLM-as-a-Judge approach.
+The Percentage of Refusing to Answer (RtA) is a key metric for measuring a model's engagement with stereotypical content.
+Stereotype dataset construction involves using existing datasets, generating queries with an LLM, and enhancing diversity through paraphrasing.

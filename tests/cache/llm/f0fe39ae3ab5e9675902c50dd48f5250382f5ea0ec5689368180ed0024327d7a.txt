@@ -1,0 +1,92 @@
+topic: Ethical Dilemmas in Generative AI
+
+  entities:
+    OpenAI|Organization
+    Sora|Model
+    Li et al.|Research Group
+    Large Language Models|Technological Concept
+    Zhou et al.|Research Group
+    Gemini-1.5-flash|Model
+    GPT-4o|Model
+    GPT-4o-mini|Model
+    LLaMA|Model
+
+  proposition: OpenAI's Sora requires interdisciplinary engagement to develop safety policies.
+    entity-entity relationships:
+    OpenAI|DEVELOPS|Sora
+    Sora|REQUIRES|Interdisciplinary Engagement
+
+  proposition: Diverse disciplines including policymakers, educators, and artists are needed to address societal concerns about generative models.
+    entity-attribute relationships:
+    Generative Models|REQUIRES|Diverse Disciplines
+
+  proposition: Psychological and cognitive research explores model trustworthiness and human-AI interaction.
+    entity-attribute relationships:
+    Psychological Research|EXPLORES|Model Trustworthiness
+    Cognitive Research|EXPLORES|Human-AI Interaction
+
+  proposition: Li et al. research revealed inconsistencies in Large Language Models' (LLMs) responses during psychometric assessments.
+    entity-entity relationships:
+    Li et al.|RESEARCHED|Large Language Models
+    Li et al.|REVEALED|Inconsistencies
+
+  proposition: Domain-specific benchmarks are crucial for ensuring safe and ethical application of generative models.
+    entity-attribute relationships:
+    Generative Models|REQUIRES|Domain-Specific Benchmarks
+
+  proposition: Gemini-1.5-flash tends to maintain neutrality across ethical scenarios.
+    entity-attribute relationships:
+    Gemini-1.5-flash|DEMONSTRATES|Neutrality
+
+  proposition: GPT-4o, GPT-4o-mini, and LLaMA variants show more action-oriented decision-making.
+    entity-attribute relationships:
+    GPT-4o|DEMONSTRATES|Action-Oriented Decision-Making
+    GPT-4o-mini|DEMONSTRATES|Action-Oriented Decision-Making
+    LLaMA|DEMONSTRATES|Action-Oriented Decision-Making
+
+topic: Ethical Dilemma Scenarios
+
+  entities:
+    Ethical Dilemmas|Social Concept
+
+  proposition: Ethical dilemmas represent situations involving complex moral choices between conflicting principles.
+    entity-attribute relationships:
+    Ethical Dilemmas|CHARACTERIZED_BY|Complex Moral Choices
+
+  proposition: Researchers use ethical dilemmas to assess generative models' ethical decision-making capabilities.
+    entity-attribute relationships:
+    Ethical Dilemmas|USED_FOR|Assessing Ethical Decision-Making
+
+  proposition: Ten moral scenarios were designed to evaluate models' ethical reasoning.
+    entity-attribute relationships:
+    Moral Scenarios|NUMBER|Ten
+
+  proposition: Models demonstrate varying approaches to ethical decision-making.
+    entity-attribute relationships:
+    Models|DEMONSTRATES|Varying Ethical Decision-Making Approaches
+
+  proposition: Some models prioritize outcome efficiency over strict fairness in ethical scenarios.
+    entity-attribute relationships:
+    Models|PRIORITIZES|Outcome Efficiency
+
+  proposition: Studying ethical dilemmas helps reveal underlying ethical frameworks in AI models.
+    entity-attribute relationships:
+    Ethical Dilemmas|REVEALS|Underlying Ethical Frameworks
+
+  proposition: The research aims to identify potential biases and improve alignment with human ethical standards.
+    entity-attribute relationships:
+    Research|AIMS|Identifying Potential Biases
+    Research|AIMS|Improving Ethical Alignment
+
+  proposition: Ethical Dilemma Scenarios Explored
+    entity-attribute relationships:
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Passenger vs. Pedestrian
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Family vs. Public Duty
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Trolley Problem
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Lifeboat Problem
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Profession vs. Safety
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Pain vs. Hastening Death
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Equity vs. Efficiency
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Self-Sacrifice
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Privacy vs. Security
+    Ethical Dilemmas|INCLUDES_SCENARIOS|Stealing for Family

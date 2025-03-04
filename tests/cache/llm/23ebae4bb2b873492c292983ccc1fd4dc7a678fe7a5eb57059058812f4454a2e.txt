@@ -1,0 +1,123 @@
+topic: Foundation Models Research
+
+  entities:
+    Alec Radford|Person
+    Karthik Narasimhan|Person
+    Tim Salimans|Person
+    Ilya Sutskever|Person
+    OpenAI|Organization
+    ChatGPT|Model
+    GPT-4|Model
+    Hugo Touvron|Person
+    LLaMA|Model
+    Llama 2|Model
+    Meta AI|Organization
+    Llama 3.2|Model
+    Rishi Bommasani|Person
+    Yang Liu|Person
+    Edward J Hu|Person
+    Shashank Subramanian|Person
+    Lu Yuan|Person
+    Florence|Model
+    Yuxuan Liang|Person
+    Haoxiang Gao|Person
+    Michael Moor|Person
+    Lincan Li|Person
+    Maria Zontak|Person
+    Alexander Wei|Person
+
+  proposition: Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever authored "Improving Language Understanding by Generative Pre-Training" in 2018 at OpenAI.
+    entity-attribute relationships:
+    Alec Radford|PUBLICATION_YEAR|2018
+    Karthik Narasimhan|PUBLICATION_YEAR|2018
+    Tim Salimans|PUBLICATION_YEAR|2018
+    Ilya Sutskever|PUBLICATION_YEAR|2018
+    
+    entity-entity relationships:
+    Alec Radford|AFFILIATED_WITH|OpenAI
+    Karthik Narasimhan|AFFILIATED_WITH|OpenAI
+    Tim Salimans|AFFILIATED_WITH|OpenAI
+    Ilya Sutskever|AFFILIATED_WITH|OpenAI
+
+  proposition: OpenAI released ChatGPT in 2023.
+    entity-attribute relationships:
+    ChatGPT|RELEASE_YEAR|2023
+    
+    entity-entity relationships:
+    ChatGPT|DEVELOPED_BY|OpenAI
+
+  proposition: OpenAI released GPT-4 in 2023.
+    entity-attribute relationships:
+    GPT-4|RELEASE_YEAR|2023
+    
+    entity-entity relationships:
+    GPT-4|DEVELOPED_BY|OpenAI
+
+  proposition: Hugo Touvron and colleagues published "LLaMA: Open and Efficient Foundation Language Models" in 2023.
+    entity-attribute relationships:
+    LLaMA|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Hugo Touvron|AUTHOR_OF|LLaMA
+
+  proposition: Hugo Touvron and colleagues published "Llama 2: Open foundation and fine-tuned chat models" in 2023.
+    entity-attribute relationships:
+    Llama 2|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Hugo Touvron|AUTHOR_OF|Llama 2
+
+  proposition: Meta AI announced Llama 3.2 for edge AI and vision with open, customizable models in September 2024.
+    entity-attribute relationships:
+    Llama 3.2|RELEASE_YEAR|2024
+    Llama 3.2|RELEASE_MONTH|September
+    
+    entity-entity relationships:
+    Llama 3.2|DEVELOPED_BY|Meta AI
+
+  proposition: Rishi Bommasani and colleagues published "On the opportunities and risks of foundation models" in 2021.
+    entity-attribute relationships:
+    Rishi Bommasani|PUBLICATION_YEAR|2021
+
+  proposition: Yang Liu and colleagues published "Datasets for large language models: A comprehensive survey" in 2024.
+    entity-attribute relationships:
+    Yang Liu|PUBLICATION_YEAR|2024
+
+  proposition: Edward J Hu and colleagues published "LoRA: Low-rank adaptation of large language models" in 2021.
+    entity-attribute relationships:
+    Edward J Hu|PUBLICATION_YEAR|2021
+
+  proposition: Shashank Subramanian and colleagues explored foundation models for scientific machine learning in 2024.
+    entity-attribute relationships:
+    Shashank Subramanian|PUBLICATION_YEAR|2024
+
+  proposition: Lu Yuan and colleagues introduced "Florence: A new foundation model for computer vision" in 2021.
+    entity-attribute relationships:
+    Florence|PUBLICATION_YEAR|2021
+    
+    entity-entity relationships:
+    Lu Yuan|AUTHOR_OF|Florence
+
+  proposition: Yuxuan Liang and colleagues published a tutorial and survey on foundation models for time series analysis in 2024.
+    entity-attribute relationships:
+    Yuxuan Liang|PUBLICATION_YEAR|2024
+
+  proposition: Haoxiang Gao and colleagues published a survey on foundation models in autonomous driving in 2024.
+    entity-attribute relationships:
+    Haoxiang Gao|PUBLICATION_YEAR|2024
+
+  proposition: Michael Moor and colleagues discussed foundation models for generalist medical artificial intelligence in 2023.
+    entity-attribute relationships:
+    Michael Moor|PUBLICATION_YEAR|2023
+
+  proposition: Lincan Li and colleagues explored large language models in political science in 2024.
+    entity-attribute relationships:
+    Lincan Li|PUBLICATION_YEAR|2024
+
+  proposition: Maria Zontak and colleagues organized the First Workshop on the Evaluation of Generative Foundation Models at CVPR 2024.
+    entity-attribute relationships:
+    Maria Zontak|PUBLICATION_YEAR|2024
+
+  proposition: Alexander Wei and colleagues examined how LLM safety training fails in 2024.
+    entity-attribute relationships:
+    Alexander Wei|PUBLICATION_YEAR|2024

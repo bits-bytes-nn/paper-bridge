@@ -1,0 +1,151 @@
+topic: Visual Hallucination Research
+
+  entities:
+    Nicholas Carlini|Researcher
+    Tianrui Guan|Researcher
+    HallusionBench|Benchmark
+    Anku Rani|Researcher
+    Wen Huang|Researcher
+    Anna Rohrbach|Researcher
+    Ali Furkan Biten|Researcher
+    Weihao Yu|Researcher
+    MM-Vet|Tool
+    Xiyang Wu|Researcher
+    Haokun Liu|Researcher
+    Sheng Wang|Researcher
+    ChatCAD|Tool
+    Mingzhe Hu|Researcher
+    Paul Brie|Researcher
+    AUTOHALLUSION|Tool
+    Anish Gunjal|Researcher
+    Yiyang Zhou|Researcher
+    Yifan Li|Researcher
+    Jae Myung Kim|Researcher
+
+  proposition: Nicholas Carlini et al. investigate adversarial alignment in neural networks.
+    entity-attribute relationships:
+    Nicholas Carlini|RESEARCHES|adversarial alignment
+    
+    entity-entity relationships:
+    Nicholas Carlini|STUDIES|neural networks
+
+  proposition: Tianrui Guan et al. developed HallusionBench, a diagnostic suite for language hallucination and visual illusion in large vision-language models.
+    entity-attribute relationships:
+    HallusionBench|TYPE|diagnostic suite
+    HallusionBench|FOCUSES_ON|language hallucination
+    HallusionBench|FOCUSES_ON|visual illusion
+
+    entity-entity relationships:
+    Tianrui Guan|DEVELOPED|HallusionBench
+    HallusionBench|APPLIES_TO|large vision-language models
+
+  proposition: Anku Rani et al. provide a comprehensive study on visual hallucination, including definition, quantification, and remediation strategies.
+    entity-attribute relationships:
+    Anku Rani|RESEARCHES|visual hallucination
+    Anku Rani|PROVIDES|comprehensive study
+
+    entity-entity relationships:
+
+  proposition: Wen Huang et al. examine visual hallucinations in multi-modal large language models.
+    entity-attribute relationships:
+    Wen Huang|RESEARCHES|visual hallucinations
+
+    entity-entity relationships:
+    Wen Huang|STUDIES|multi-modal large language models
+
+  proposition: Anna Rohrbach et al. studied object hallucination in image captioning.
+    entity-attribute relationships:
+    Anna Rohrbach|RESEARCHES|object hallucination
+
+    entity-entity relationships:
+    Anna Rohrbach|STUDIES|image captioning
+
+  proposition: Ali Furkan Biten et al. proposed methods for reducing object hallucination in image captioning.
+    entity-attribute relationships:
+    Ali Furkan Biten|PROPOSED|methods for reducing object hallucination
+
+    entity-entity relationships:
+    Ali Furkan Biten|FOCUSES_ON|image captioning
+
+  proposition: Weihao Yu et al. created MM-Vet to evaluate integrated capabilities of large multimodal models.
+    entity-attribute relationships:
+    MM-Vet|PURPOSE|evaluate integrated capabilities
+
+    entity-entity relationships:
+    Weihao Yu|CREATED|MM-Vet
+    MM-Vet|APPLIES_TO|large multimodal models
+
+  proposition: Xiyang Wu et al. highlighted safety concerns of deploying large language and vision-language models in robotics.
+    entity-attribute relationships:
+    Xiyang Wu|HIGHLIGHTED|safety concerns
+
+    entity-entity relationships:
+    Xiyang Wu|STUDIES|large language models
+    Xiyang Wu|STUDIES|vision-language models
+    Xiyang Wu|FOCUSES_ON|robotics
+
+  proposition: Haokun Liu et al. developed an LLM-based human-robot collaboration framework for manipulation tasks.
+    entity-attribute relationships:
+    Haokun Liu|DEVELOPED|human-robot collaboration framework
+
+    entity-entity relationships:
+    Haokun Liu|FOCUSES_ON|LLM
+    Haokun Liu|FOCUSES_ON|manipulation tasks
+
+  proposition: Sheng Wang et al. introduced ChatCAD, an interactive computer-aided diagnosis system using large language models.
+    entity-attribute relationships:
+    ChatCAD|TYPE|interactive computer-aided diagnosis system
+
+    entity-entity relationships:
+    Sheng Wang|INTRODUCED|ChatCAD
+    ChatCAD|USES|large language models
+
+  proposition: Mingzhe Hu et al. explored the advancement of medical imaging through language models.
+    entity-attribute relationships:
+    Mingzhe Hu|RESEARCHED|advancement of medical imaging
+
+    entity-entity relationships:
+    Mingzhe Hu|STUDIES|language models
+
+  proposition: Paul Brie et al. evaluated a large language model for searching GUI layouts.
+    entity-attribute relationships:
+    Paul Brie|EVALUATED|large language model
+
+    entity-entity relationships:
+    Paul Brie|FOCUSES_ON|GUI layouts
+
+  proposition: Xiyang Wu et al. created AUTOHALLUSION for generating hallucination benchmarks.
+    entity-attribute relationships:
+    AUTOHALLUSION|PURPOSE|generating hallucination benchmarks
+
+    entity-entity relationships:
+    Xiyang Wu|CREATED|AUTOHALLUSION
+
+  proposition: Anish Gunjal et al. focused on detecting and preventing hallucinations in large vision-language models.
+    entity-attribute relationships:
+    Anish Gunjal|RESEARCHES|detecting hallucinations
+    Anish Gunjal|RESEARCHES|preventing hallucinations
+
+    entity-entity relationships:
+    Anish Gunjal|FOCUSES_ON|large vision-language models
+
+  proposition: Yiyang Zhou et al. analyzed and proposed mitigation strategies for object hallucination.
+    entity-attribute relationships:
+    Yiyang Zhou|ANALYZED|object hallucination
+    Yiyang Zhou|PROPOSED|mitigation strategies
+
+    entity-entity relationships:
+
+  proposition: Yifan Li et al. evaluated object hallucination in large vision-language models.
+    entity-attribute relationships:
+    Yifan Li|EVALUATED|object hallucination
+
+    entity-entity relationships:
+    Yifan Li|STUDIES|large vision-language models
+
+  proposition: Jae Myung Kim et al. investigated spurious correlations in cross-modal retrieval.
+    entity-attribute relationships:
+    Jae Myung Kim|INVESTIGATED|spurious correlations
+
+    entity-entity relationships:
+    Jae Myung Kim|FOCUSES_ON|cross-modal retrieval

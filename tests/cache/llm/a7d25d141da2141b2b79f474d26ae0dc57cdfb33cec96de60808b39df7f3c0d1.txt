@@ -1,0 +1,87 @@
+topic: Prompt Injection Attacks in Large Language Models
+
+  entities:
+    Wu et al.|Research Group
+    Chen et al.|Research Group
+    Liu et al.|Research Group
+    Hung et al.|Research Group
+    Zhu et al.|Research Group
+    Toyer et al.|Research Group
+    Debenedetti et al.|Research Group
+    Li et al.|Research Group
+    Greshake Tzovaras|Researcher
+    Nestaas et al.|Research Group
+    Instructional Segment Embedding|Technology
+    Attention Tracker|Tool
+    MELON|Framework
+    Tensor Trust|Tool
+    AgentDojo|Framework
+    GenTel-Bench|Benchmark
+
+  proposition: Wu et al. developed Instructional Segment Embedding (ISE) to enhance LLM security by protecting priority rules from malicious prompt overrides.
+    entity-attribute relationships:
+    Wu et al.|DEVELOPED|Instructional Segment Embedding
+    Instructional Segment Embedding|PURPOSE|LLM security protection
+
+    entity-entity relationships:
+    Wu et al.|CREATED|Instructional Segment Embedding
+
+  proposition: Chen et al. created defensive strategies inspired by attack methodologies, achieving superior performance compared to conventional approaches.
+    entity-attribute relationships:
+    Chen et al.|CREATED|defensive strategies
+
+    entity-entity relationships:
+    Chen et al.|INSPIRED_BY|attack methodologies
+
+  proposition: Detection-based methods focus on identifying compromised inputs and responses through data validation.
+    entity-attribute relationships:
+    Detection-based methods|FOCUS_ON|identifying compromised inputs
+    Detection-based methods|FOCUS_ON|identifying compromised responses
+
+  proposition: Liu et al. proposed a framework to formalize prompt injection attacks and defenses.
+    entity-attribute relationships:
+    Liu et al.|PROPOSED|framework
+
+    entity-entity relationships:
+    Liu et al.|FORMALIZED|prompt injection attacks
+    Liu et al.|FORMALIZED|defenses
+
+  proposition: Prompt injection attacks pose significant risks when LLMs are integrated into applications and interact with external content.
+    entity-attribute relationships:
+    Prompt injection attacks|RISK_LEVEL|significant
+
+    entity-entity relationships:
+    Prompt injection attacks|IMPACT|LLM-integrated applications
+
+topic: Backdoor Attacks in Large Language Models
+
+  entities:
+    BadGPT|Model
+    Huang et al.|Research Group
+    Trojan Activation Attack|Attack Method
+    BadEdit|Attack Method
+
+  proposition: A backdoor model provides malicious predictions desired by the attacker when a specific trigger is present.
+    entity-attribute relationships:
+    Backdoor model|CHARACTERISTIC|malicious predictions
+    Backdoor model|ACTIVATION|specific trigger
+
+  proposition: Backdoor attacks can be categorized into two types: data poisoning-based and model weight-modifying-based attacks.
+    entity-attribute relationships:
+    Backdoor attacks|TYPES|data poisoning-based
+    Backdoor attacks|TYPES|model weight-modifying-based
+
+  proposition: BadGPT poisons RLHF training data by manipulating preference scores to compromise the LLM's reward model.
+    entity-attribute relationships:
+    BadGPT|METHOD|poisoning RLHF training data
+    BadGPT|PURPOSE|compromising LLM reward model
+
+  proposition: Huang et al. proposed Composite Backdoor Attacks (CBA), where backdoors are activated by multiple dispersed trigger keys.
+    entity-attribute relationships:
+    Huang et al.|PROPOSED|Composite Backdoor Attacks
+    Composite Backdoor Attacks|ACTIVATION|multiple dispersed trigger keys
+
+  proposition: Defenses against backdoor attacks include backdoor mitigation and detection.
+    entity-attribute relationships:
+    Defenses|TYPES|backdoor mitigation
+    Defenses|TYPES|detection

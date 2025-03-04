@@ -1,0 +1,153 @@
+topic: LLM Agent Research Papers
+
+  entities:
+    Yuan Ling|Researcher
+    Boyuan Zheng|Researcher
+    Chen Qian|Researcher
+    Weize Chen|Researcher
+    Yuan Li|Researcher
+    Feng He|Researcher
+    Yuyou Gan|Researcher
+    OpenAI|Organization
+    Zhexin Zhang|Researcher
+    Sheng Yin|Researcher
+    Maksym Andriushchenko|Researcher
+    Wei Zou|Researcher
+    Jiaqi Xue|Researcher
+    Wenkai Yang|Researcher
+    Yifei Wang|Researcher
+    GPT-4V|Model
+    ChatDev|Project
+    MetaAgents|Project
+    Agent-SafetyBench|Benchmark
+    SafeAgentBench|Benchmark
+    AgentHarm|Benchmark
+    ACM SIGKDD Conference|Conference
+    Association for Computational Linguistics|Organization
+    arXiv|Publication Platform
+
+  proposition: Yuan Ling et al. published a paper on Multimodal Learning with Foundation Models at the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining in 2023.
+    entity-attribute relationships:
+    Yuan Ling|PUBLISHED_IN|ACM SIGKDD Conference
+    Yuan Ling|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Yuan Ling|AUTHOR_OF|Research Paper on Multimodal Learning
+
+  proposition: Boyuan Zheng et al. argue that GPT-4V is a generalist web agent when grounded, in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Boyuan Zheng|PUBLICATION_YEAR|2024
+    Boyuan Zheng|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Boyuan Zheng|DESCRIBES|GPT-4V
+    GPT-4V|CHARACTERIZED_AS|generalist web agent
+
+  proposition: Chen Qian et al. introduced ChatDev, communicative agents for software development, at the 62nd Annual Meeting of the Association for Computational Linguistics in 2024.
+    entity-attribute relationships:
+    Chen Qian|PUBLICATION_YEAR|2024
+    Chen Qian|PUBLISHED_IN|Association for Computational Linguistics
+    
+    entity-entity relationships:
+    Chen Qian|INTRODUCED|ChatDev
+    ChatDev|PURPOSE|software development
+
+  proposition: Weize Chen et al. proposed the Internet of Agents concept for collaborative intelligence in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Weize Chen|PUBLICATION_YEAR|2024
+    Weize Chen|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Weize Chen|PROPOSED|Internet of Agents
+    Internet of Agents|PURPOSE|collaborative intelligence
+
+  proposition: Yuan Li et al. developed MetaAgents for simulating human behavior interactions in LLM-based task-oriented coordination in 2023.
+    entity-attribute relationships:
+    Yuan Li|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Yuan Li|DEVELOPED|MetaAgents
+    MetaAgents|PURPOSE|simulating human behavior interactions
+
+  proposition: Feng He et al. conducted a survey on the emerging security and privacy challenges of LLM agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Feng He|PUBLICATION_YEAR|2024
+    Feng He|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Feng He|CONDUCTED|Survey on LLM Agents
+
+  proposition: Yuyou Gan et al. published a survey on security, privacy, and ethical threats in LLM-based agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Yuyou Gan|PUBLICATION_YEAR|2024
+    Yuyou Gan|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Yuyou Gan|PUBLISHED|Survey on LLM Agents
+
+  proposition: OpenAI released a research paper on practices for governing agentic AI systems in December 2023.
+    entity-attribute relationships:
+    OpenAI|PUBLICATION_YEAR|2023
+    OpenAI|PUBLICATION_MONTH|December
+    
+    entity-entity relationships:
+    OpenAI|RELEASED|Research Paper on Agentic AI Governance
+
+  proposition: Zhexin Zhang et al. created Agent-SafetyBench for evaluating the safety of LLM agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Zhexin Zhang|PUBLICATION_YEAR|2024
+    Zhexin Zhang|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Zhexin Zhang|CREATED|Agent-SafetyBench
+    Agent-SafetyBench|PURPOSE|evaluating LLM agent safety
+
+  proposition: Sheng Yin et al. developed SafeAgentBench for benchmarking safe task planning of embodied LLM agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Sheng Yin|PUBLICATION_YEAR|2024
+    Sheng Yin|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Sheng Yin|DEVELOPED|SafeAgentBench
+    SafeAgentBench|PURPOSE|benchmarking safe task planning
+
+  proposition: Maksym Andriushchenko et al. created AgentHarm, a benchmark for measuring the harmfulness of LLM agents, in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Maksym Andriushchenko|PUBLICATION_YEAR|2024
+    Maksym Andriushchenko|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Maksym Andriushchenko|CREATED|AgentHarm
+    AgentHarm|PURPOSE|measuring LLM agent harmfulness
+
+  proposition: Wei Zou et al. investigated knowledge poisoning attacks to retrieval-augmented generation of large language models in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Wei Zou|PUBLICATION_YEAR|2024
+    Wei Zou|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Wei Zou|INVESTIGATED|Knowledge Poisoning Attacks
+
+  proposition: Jiaqi Xue et al. identified vulnerabilities in Retrieval Augmented Generation of Large Language Models in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Jiaqi Xue|PUBLICATION_YEAR|2024
+    Jiaqi Xue|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Jiaqi Xue|IDENTIFIED|Vulnerabilities in Retrieval Augmented Generation
+
+  proposition: Wenkai Yang et al. investigated backdoor threats to LLM-based agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Wenkai Yang|PUBLICATION_YEAR|2024
+    Wenkai Yang|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Wenkai Yang|INVESTIGATED|Backdoor Threats to LLM Agents
+
+  proposition: Yifei Wang et al. explored inserting and activating backdoor attacks in LLM agents in an arXiv preprint from 2024.
+    entity-attribute relationships:
+    Yifei Wang|PUBLICATION_YEAR|2024
+    Yifei Wang|PUBLISHED_IN|arXiv
+    
+    entity-entity relationships:
+    Yifei Wang|EXPLORED|Backdoor Attacks in LLM Agents

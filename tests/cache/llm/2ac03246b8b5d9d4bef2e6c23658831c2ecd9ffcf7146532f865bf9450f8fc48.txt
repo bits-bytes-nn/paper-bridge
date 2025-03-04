@@ -1,0 +1,159 @@
+topic: Research Papers on AI Impact and Ethics
+
+  entities:
+    Christopher Summerfield|Researcher
+    Ameet Deshpande|Researcher
+    Jiangjie Chen|Researcher
+    Adriana Placani|Researcher
+    Charbel-Raphael Segerie|Researcher
+
+  proposition: Christopher Summerfield et al. published a research paper on the potential impact of advanced AI systems on democracy.
+    entity-attribute relationships:
+    Christopher Summerfield|AUTHORED|research paper on AI systems and democracy
+    
+    entity-entity relationships:
+    Christopher Summerfield|RESEARCHES|AI systems
+    Christopher Summerfield|STUDIES|democracy
+
+  proposition: Ameet Deshpande et al. explored the opportunities and risks of anthropomorphization of AI.
+    entity-attribute relationships:
+    Ameet Deshpande|AUTHORED|research on AI anthropomorphization
+    
+    entity-entity relationships:
+    Ameet Deshpande|STUDIES|AI anthropomorphization
+
+  proposition: Jiangjie Chen et al. conducted a survey on role-playing language agents from persona to personalization.
+    entity-attribute relationships:
+    Jiangjie Chen|AUTHORED|survey on role-playing language agents
+    
+    entity-entity relationships:
+    Jiangjie Chen|RESEARCHES|language agents
+
+  proposition: Adriana Placani wrote about anthropomorphism in AI, discussing hype and fallacy.
+    entity-attribute relationships:
+    Adriana Placani|AUTHORED|research on AI anthropomorphism
+    
+    entity-entity relationships:
+    Adriana Placani|STUDIES|AI anthropomorphism
+
+  proposition: Charbel-Raphael Segerie published a landscape of AI safety strategies.
+    entity-attribute relationships:
+    Charbel-Raphael Segerie|AUTHORED|landscape of AI safety strategies
+    
+    entity-entity relationships:
+    Charbel-Raphael Segerie|RESEARCHES|AI safety
+
+topic: Large Language Model Releases
+
+  entities:
+    Anthropic|Organization
+    Claude 3.5 Sonnet|Model
+    Claude 3 Haiku|Model
+    Amazon Bedrock|Platform
+    Google Cloud|Platform
+    Google Vertex AI|Platform
+    Google DeepMind|Organization
+    Gemini-1.5-Flash|Model
+    Google|Organization
+    Gemma-2-27B|Model
+    Meta AI|Organization
+    Llama 3.1-70B|Model
+    Llama 3.1-8B|Model
+    Mistral AI|Organization
+    Mixtral-8x22B|Model
+    Zhipu AI|Organization
+    GLM-4-Plus|Model
+    GLM-4V-Plus|Model
+    Alibaba DAMO Academy|Organization
+    Qwen2.5-72B|Model
+    DeepSeek AI|Organization
+    DeepSeek-V2.5|Model
+    01.AI|Organization
+    Yi-Lightning|Model
+    Hugging Face|Platform
+    Llama 3.2 11B-Vision-Instruct|Model
+
+  proposition: Anthropic released Claude 3.5 Sonnet.
+    entity-attribute relationships:
+    Claude 3.5 Sonnet|RELEASED_BY|Anthropic
+
+  proposition: Anthropic released Claude 3 Haiku, available on Amazon Bedrock and Google Cloud's Vertex AI.
+    entity-attribute relationships:
+    Claude 3 Haiku|RELEASED_BY|Anthropic
+    Claude 3 Haiku|AVAILABLE_ON|Amazon Bedrock
+    Claude 3 Haiku|AVAILABLE_ON|Google Cloud Vertex AI
+
+  proposition: Google DeepMind launched Gemini-1.5-Flash.
+    entity-attribute relationships:
+    Gemini-1.5-Flash|RELEASED_BY|Google DeepMind
+
+  proposition: Google released Gemma-2-27B.
+    entity-attribute relationships:
+    Gemma-2-27B|RELEASED_BY|Google
+
+  proposition: Meta AI released Llama 3.1-70B.
+    entity-attribute relationships:
+    Llama 3.1-70B|RELEASED_BY|Meta AI
+
+  proposition: Meta AI released Llama 3.1-8B.
+    entity-attribute relationships:
+    Llama 3.1-8B|RELEASED_BY|Meta AI
+
+  proposition: Mistral AI launched Mixtral-8x22B.
+    entity-attribute relationships:
+    Mixtral-8x22B|RELEASED_BY|Mistral AI
+
+  proposition: Zhipu AI introduced GLM-4-Plus.
+    entity-attribute relationships:
+    GLM-4-Plus|RELEASED_BY|Zhipu AI
+
+  proposition: Zhipu AI introduced GLM-4V-Plus.
+    entity-attribute relationships:
+    GLM-4V-Plus|RELEASED_BY|Zhipu AI
+
+  proposition: Alibaba DAMO Academy released Qwen2.5-72B.
+    entity-attribute relationships:
+    Qwen2.5-72B|RELEASED_BY|Alibaba DAMO Academy
+
+  proposition: DeepSeek AI launched DeepSeek-V2.5.
+    entity-attribute relationships:
+    DeepSeek-V2.5|RELEASED_BY|DeepSeek AI
+
+  proposition: 01.AI released Yi-Lightning.
+    entity-attribute relationships:
+    Yi-Lightning|RELEASED_BY|01.AI
+
+  proposition: Meta released Llama 3.2 11B-Vision-Instruct on Hugging Face.
+    entity-attribute relationships:
+    Llama 3.2 11B-Vision-Instruct|RELEASED_BY|Meta
+    Llama 3.2 11B-Vision-Instruct|AVAILABLE_ON|Hugging Face
+
+topic: Company Policy and Announcements
+
+  entities:
+    Anthropic|Organization
+    OpenAI|Organization
+    GPT-4o|Model
+    GPT-3.5 Turbo|Model
+    OpenAI o1|Model
+    OpenAI o1-mini|Model
+
+  proposition: Anthropic published their Responsible Scaling Policy.
+    entity-attribute relationships:
+    Anthropic|PUBLISHED|Responsible Scaling Policy
+
+  proposition: OpenAI announced GPT-4o.
+    entity-attribute relationships:
+    GPT-4o|ANNOUNCED_BY|OpenAI
+
+  proposition: OpenAI updated GPT-3.5 Turbo fine-tuning and API.
+    entity-attribute relationships:
+    GPT-3.5 Turbo|UPDATED_BY|OpenAI
+
+  proposition: OpenAI introduced OpenAI o1.
+    entity-attribute relationships:
+    OpenAI o1|INTRODUCED_BY|OpenAI
+
+  proposition: OpenAI launched OpenAI o1-mini.
+    entity-attribute relationships:
+    OpenAI o1-mini|LAUNCHED_BY|OpenAI

@@ -1,0 +1,29 @@
+Benchmarking Large Language Models Performance Analysis
+
+Generated actions are transformed into user queries using prompt templates detailed in Appendix B.2.1.
+Table 13 provides examples of dishonest queries and responses across different categories.
+Models were evaluated across multiple performance categories.
+
+Performance categories include:
+ISP represents Latest Information with External Services
+LIES represents User Input Not Enough Or With Wrong Information
+MM represents Modality Mismatch
+PCSD represents Professional Capability in Specific Domains
+SIC represents Self Identity Cognition
+UIEW represents Unspecified category
+
+Top performing models in Combined Honest Rate:
+Claude-3.5-Sonnet achieved 0.98 combined honest rate
+GPT-4o-mini achieved 1.00 combined honest rate
+Gemini-1.5-Flash achieved 1.00 combined honest rate
+GLM-4-Plus achieved 1.00 combined honest rate
+Gemma-2-27B achieved 1.00 combined honest rate
+
+Models performed poorly in Self-Identity Cognition category:
+GPT-3.5-Turbo achieved 0.00 combined honest rate
+Deepseek-Chat achieved 0.00 combined honest rate
+
+Models excelled in Latest Information with External Services category:
+Most models achieved combined honesty rates above 80%
+
+The analysis reveals significant performance variations across different evaluation categories, suggesting the need for more diverse training to improve model honesty and capabilities.

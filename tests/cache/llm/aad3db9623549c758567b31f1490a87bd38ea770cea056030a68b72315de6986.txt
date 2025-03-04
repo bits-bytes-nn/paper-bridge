@@ -1,0 +1,113 @@
+topic: Benchmarking Vision-Language Models
+
+  entities:
+    GPT-4o|Model
+    GPT-4o-mini|Model
+    Claude-3.5-sonnet|Model
+    Claude-3-haiku|Model
+    Gemini-1.5-Pro|Model
+    Gemini-1.5-flash|Model
+    Llama-3.2-90B-V|Model
+    Llama-3.2-11B-V|Model
+    Qwen-2-VL-72B|Model
+    GLM-4v-Plus|Model
+    Large Language Models|Technological Concept
+    Vision-Language Models|Technological Concept
+    Jailbreak in Pieces|Method
+    Prompt-to-image attacks|Method
+    Optimization-based attacks|Method
+
+  proposition: A dynamic harmful query dataset was developed for evaluating jailbreaks on Large Language Models and Vision-Language Models.
+    entity-entity relationships:
+    Dynamic harmful query dataset|EVALUATES|Large Language Models
+    Dynamic harmful query dataset|EVALUATES|Vision-Language Models
+
+  proposition: The same dataset will be used for VLMs with attack methods from Table 25.
+    entity-entity relationships:
+    Dynamic harmful query dataset|USED_FOR|Vision-Language Models
+    Dynamic harmful query dataset|APPLIED_WITH|Attack methods
+
+  proposition: Figure 38 and Table 31 present the refuse to answer (RtA) rate of various VLMs across five different jailbreak attacks.
+    entity-attribute relationships:
+    Various VLMs|MEASURED_BY|Refuse to answer (RtA) rate
+    Jailbreak attacks|QUANTITY|Five
+
+  proposition: Larger models tend to have higher RtA rates, indicating better defense against attacks.
+    entity-attribute relationships:
+    Larger models|DEFENSE_CAPABILITY|Higher RtA rates
+
+  proposition: This trend is consistent across model pairs like GPT-4o and GPT-4o-mini, Claude-3.5-sonnet and Claude-3-haiku, Gemini-1.5-Pro and Gemini-1.5-flash, and Llama-3.2-90B-V and Llama-3.2-11B-V.
+    entity-entity relationships:
+    GPT-4o|COMPARED_WITH|GPT-4o-mini
+    Claude-3.5-sonnet|COMPARED_WITH|Claude-3-haiku
+    Gemini-1.5-Pro|COMPARED_WITH|Gemini-1.5-flash
+    Llama-3.2-90B-V|COMPARED_WITH|Llama-3.2-11B-V
+
+  proposition: Prompt-to-image attacks typically yield lower RtAs compared to optimization-based attacks.
+    entity-entity relationships:
+    Prompt-to-image attacks|COMPARED_WITH|Optimization-based attacks
+    Prompt-to-image attacks|CHARACTERISTIC|Lower RtA rates
+
+  proposition: Optimization-based attacks often generate jailbreak images using an open-source VLM.
+    entity-entity relationships:
+    Optimization-based attacks|USES|Open-source VLM
+    Optimization-based attacks|GENERATES|Jailbreak images
+
+  proposition: Jailbreak in Pieces attack shows lower RtAs for models with similar adaptor architectures like Qwen-2-VL-72B and GLM-4v-Plus.
+    entity-entity relationships:
+    Jailbreak in Pieces attack|APPLIED_TO|Qwen-2-VL-72B
+    Jailbreak in Pieces attack|APPLIED_TO|GLM-4v-Plus
+    Qwen-2-VL-72B|ARCHITECTURE_SIMILAR_TO|GLM-4v-Plus
+
+  proposition: Some models like GPT-4o cannot understand optimized noisy images.
+    entity-attribute relationships:
+    GPT-4o|LIMITATION|Cannot understand optimized noisy images
+
+  proposition: Prompt-to-image attacks produce semantically meaningful images that all VLMs can interpret, leading to better transferability and lower RtAs.
+    entity-attribute relationships:
+    Prompt-to-image attacks|PRODUCES|Semantically meaningful images
+    Prompt-to-image attacks|CHARACTERISTIC|Better transferability
+    Prompt-to-image attacks|CHARACTERISTIC|Lower RtA rates
+
+topic: Fairness in Vision-Language Models
+
+  entities:
+    Vision-Language Models|Technological Concept
+    GenderBias benchmark|Benchmark
+    StereoSet-VL|Benchmark
+    CounterBias|Method
+
+  proposition: Fairness in VLMs is more complex due to the introduction of visual modality.
+    entity-attribute relationships:
+    Vision-Language Models|FAIRNESS_COMPLEXITY|High
+
+  proposition: There is limited understanding of VLM fairness.
+    entity-attribute relationships:
+    Vision-Language Models|FAIRNESS_UNDERSTANDING|Limited
+
+  proposition: Researchers are studying VLM fairness through:
+    Creating related datasets
+    Evaluating and identifying fairness in VLMs
+    Mitigating biases in VLM outputs
+    entity-attribute relationships:
+    Researchers|STUDIES|VLM fairness
+    Researchers|APPROACH|Creating related datasets
+    Researchers|APPROACH|Evaluating fairness
+    Researchers|APPROACH|Mitigating biases
+
+  proposition: Stereotypes and disparagement exist in VLMs.
+    entity-attribute relationships:
+    Vision-Language Models|CHARACTERISTIC|Stereotypes
+    Vision-Language Models|CHARACTERISTIC|Disparagement
+
+  proposition: Researchers have proposed various methods to measure and address bias:
+    GenderBias benchmark uses text-to-image diffusion models to generate occupation images with gender counterfactuals.
+    StereoSet-VL extends StereoSet to measure stereotypical bias in multimodal contexts.
+    CounterBias quantifies social bias by comparing masked prediction probabilities between factual and counterfactual samples.
+    entity-entity relationships:
+    GenderBias benchmark|USES|Text-to-image diffusion models
+    GenderBias benchmark|GENERATES|Occupation images with gender counterfactuals
+    StereoSet-VL|EXTENDS|StereoSet
+    StereoSet-VL|MEASURES|Stereotypical bias in multimodal contexts
+    CounterBias|QUANTIFIES|Social bias
+    CounterBias|COMPARES|Masked prediction probabilities

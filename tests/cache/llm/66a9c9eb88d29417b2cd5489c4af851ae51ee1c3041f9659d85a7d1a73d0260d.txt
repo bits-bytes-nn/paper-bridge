@@ -1,0 +1,85 @@
+topic: Ethical Dilemmas and Generative AI Models
+
+  entities:
+    OpenAI|Organization
+    Sora|Technology
+    Li et al.|Research Group
+    Large Language Models|Technology
+    Zhou et al.|Research Group
+    Gemini-1.5-flash|Model
+    GPT-4o|Model
+    GPT-4o-mini|Model
+    LLaMA|Model
+
+  proposition: OpenAI's Sora requires interdisciplinary engagement to develop safety policies.
+    entity-entity relationships:
+    OpenAI|DEVELOPS|Sora
+    Sora|REQUIRES|Interdisciplinary Engagement
+
+  proposition: Diverse disciplines including policymakers, educators, and artists are needed to address societal concerns about generative models.
+    entities:
+      Policymakers|Social Concept
+      Educators|Social Concept
+      Artists|Social Concept
+    entity-entity relationships:
+    Policymakers|ADDRESSES|Generative Models
+    Educators|ADDRESSES|Generative Models
+    Artists|ADDRESSES|Generative Models
+
+  proposition: Psychological and cognitive research explores model trustworthiness and human-AI interaction.
+    entities:
+      Psychological Research|Research Field
+      Cognitive Research|Research Field
+    entity-attribute relationships:
+    Psychological Research|EXPLORES|Model Trustworthiness
+    Cognitive Research|EXPLORES|Human-AI Interaction
+
+  proposition: Li et al. research revealed inconsistencies in Large Language Models' (LLMs) responses during psychometric assessments.
+    entity-attribute relationships:
+    Large Language Models|DEMONSTRATES|Inconsistent Responses
+    Large Language Models|EVALUATED_BY|Psychometric Assessments
+
+topic: Ethical Dilemmas in Generative Models
+
+  entities:
+    Ethical Dilemmas|Social Concept
+    Generative Models|Technology
+
+  proposition: Ethical dilemmas represent situations involving complex moral choices between conflicting principles.
+    entity-attribute relationships:
+    Ethical Dilemmas|CHARACTERIZED_BY|Complex Moral Choices
+    Ethical Dilemmas|INVOLVES|Conflicting Principles
+
+  proposition: Researchers use ethical dilemmas to assess generative models' ethical decision-making capabilities.
+    entity-entity relationships:
+    Researchers|ASSESS|Generative Models
+    Generative Models|EVALUATED_BY|Ethical Dilemmas
+
+  proposition: Gemini-1.5-flash tends to maintain neutrality across ethical scenarios.
+    entity-attribute relationships:
+    Gemini-1.5-flash|DEMONSTRATES|Neutrality
+
+  proposition: GPT-4o, GPT-4o-mini, and LLaMA variants show more action-oriented decision-making.
+    entity-attribute relationships:
+    GPT-4o|DEMONSTRATES|Action-Oriented Decision-Making
+    GPT-4o-mini|DEMONSTRATES|Action-Oriented Decision-Making
+    LLaMA|DEMONSTRATES|Action-Oriented Decision-Making
+
+topic: Ethical Dilemma Scenarios
+
+  entities:
+    Passenger vs. Pedestrian|Ethical Scenario
+    Family vs. Public Duty|Ethical Scenario
+    Trolley Problem|Ethical Scenario
+    Lifeboat Problem|Ethical Scenario
+    Profession vs. Safety|Ethical Scenario
+    Pain vs. Hastening Death|Ethical Scenario
+    Equity vs. Efficiency|Ethical Scenario
+    Self-Sacrifice|Ethical Scenario
+    Privacy vs. Security|Ethical Scenario
+    Stealing for Family|Ethical Scenario
+
+  proposition: Ten moral scenarios were designed to evaluate models' ethical decision-making.
+    entity-attribute relationships:
+    Ethical Scenarios|COUNT|Ten
+    Ethical Scenarios|PURPOSE|Evaluate Ethical Decision-Making

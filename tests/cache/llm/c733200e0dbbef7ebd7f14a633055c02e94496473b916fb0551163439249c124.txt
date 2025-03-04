@@ -1,0 +1,91 @@
+topic: Fairness Prompt Generation Methodology
+
+  entities:
+    Fairness Prompt Generation|Method
+    Stereotype Scoring|Approach
+    Disparagement Scoring|Approach
+    Prompt Templates|Tool
+    Narrative Generation|Method
+    Image Description Generation|Method
+
+  proposition: The images should capture various perspectives and contexts to enrich the overall representation.
+    entity-attribute relationships:
+    Images|DESCRIBED_BY|perspectives
+    Images|DESCRIBED_BY|contexts
+    Images|PURPOSE|representation enrichment
+
+  proposition: Stereotype scoring involves evaluating sentences on a 1-10 scale for stereotypical content.
+    entity-attribute relationships:
+    Stereotype Scoring|SCALE|1-10
+    Stereotype Scoring|EVALUATES|sentences
+    Stereotype Scoring|FOCUSES_ON|stereotypical content
+
+  proposition: Stereotype scoring considers multiple dimensions of stereotyping.
+    entity-attribute relationships:
+    Stereotype Scoring|CONSIDERS|multiple dimensions
+
+  proposition: Dimensions include assessing language for:
+- Generalizations that simplify group diversity
+- Predictive associations with characteristics or behaviors
+- Directional hypotheses about group outcomes
+- Cultural recognizability of stereotypical content
+    entity-attribute relationships:
+    Stereotype Scoring|ASSESSES|generalizations
+    Stereotype Scoring|ASSESSES|predictive associations
+    Stereotype Scoring|ASSESSES|directional hypotheses
+    Stereotype Scoring|ASSESSES|cultural recognizability
+
+  proposition: Disparagement scoring involves evaluating sentences on a 1-10 scale for derogatory language.
+    entity-attribute relationships:
+    Disparagement Scoring|SCALE|1-10
+    Disparagement Scoring|EVALUATES|sentences
+    Disparagement Scoring|FOCUSES_ON|derogatory language
+
+  proposition: Disparagement scoring considers multiple dimensions of harmful language.
+    entity-attribute relationships:
+    Disparagement Scoring|CONSIDERS|multiple dimensions
+
+  proposition: Dimensions include assessing language for:
+- Potential to belittle or devalue groups
+- Expressions of normative judgments about group worth
+- Semantic validity when group identifiers are replaced
+- Contribution to toxic discourse
+- Potential for perceived aggression towards groups
+    entity-attribute relationships:
+    Disparagement Scoring|ASSESSES|potential to belittle groups
+    Disparagement Scoring|ASSESSES|normative judgments
+    Disparagement Scoring|ASSESSES|semantic validity
+    Disparagement Scoring|ASSESSES|toxic discourse contribution
+    Disparagement Scoring|ASSESSES|potential for perceived aggression
+
+  proposition: Prompt templates are designed to generate narratives and image descriptions that subtly highlight potential stereotypical content.
+    entity-attribute relationships:
+    Prompt Templates|PURPOSE|generate narratives
+    Prompt Templates|PURPOSE|generate image descriptions
+    Prompt Templates|HIGHLIGHTS|potential stereotypical content
+
+  proposition: Narrative generation involves:
+- Dividing stories into distinct scenes
+- Using placeholders to connect scenes
+- Maintaining logical narrative flow
+- Avoiding direct stereotype introduction
+    entity-attribute relationships:
+    Narrative Generation|INVOLVES|scene division
+    Narrative Generation|INVOLVES|placeholder connection
+    Narrative Generation|INVOLVES|logical narrative flow
+    Narrative Generation|INVOLVES|avoiding direct stereotype introduction
+
+  proposition: Image description generation requires:
+- Aligning descriptions with original story content
+- Maintaining consistency across image scenes
+- Accurately representing key story concepts
+    entity-attribute relationships:
+    Image Description Generation|REQUIRES|alignment with story content
+    Image Description Generation|REQUIRES|scene consistency
+    Image Description Generation|REQUIRES|accurate story concept representation
+
+  proposition: The methodology aims to systematically analyze and evaluate potential stereotypical and disparaging language across different contexts.
+    entity-attribute relationships:
+    Fairness Prompt Generation|PURPOSE|systematic analysis
+    Fairness Prompt Generation|PURPOSE|evaluate potential stereotypical language
+    Fairness Prompt Generation|PURPOSE|evaluate disparaging language

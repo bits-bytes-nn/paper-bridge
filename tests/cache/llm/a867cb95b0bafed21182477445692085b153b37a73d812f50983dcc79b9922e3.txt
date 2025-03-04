@@ -1,0 +1,32 @@
+Trustworthiness Assessment of Generative Foundation Models (GenFMs)
+
+TrustGen is a comprehensive and adaptive benchmark designed to evaluate generative foundation models across multiple trustworthiness dimensions.
+TrustGen integrates three core modules: a Metadata Curator, a Test Case Builder, and a Contextual Variator.
+The Metadata Curator dynamically collects metadata using strategies like web-browsing agent.
+The Test Case Builder generates test cases based on collected metadata.
+The Contextual Variator ensures test cases are varied and representative across different contexts.
+TrustGen evaluates three categories of generative foundation models: text-to-image models, large language models, and vision-language models.
+
+Key Findings on Generative Foundation Models:
+
+The latest state-of-the-art generative foundation models generally perform well but still face trustworthiness bottlenecks.
+Most evaluated models achieved relatively high trustworthiness scores across multiple dimensions.
+A high trustworthiness score does not guarantee reliability in all contexts.
+Open-source models can now match or surpass proprietary models in trustworthiness.
+CogView-3-Plus achieved the highest trustworthiness score, outperforming DALL-E-3.
+Llama-3.2-70B exhibited performance comparable to GPT-4o.
+
+Trustworthiness Observations:
+
+Trustworthiness is not an isolated model attribute but creates a ripple effect across performance aspects.
+Some large language models demonstrate excessive caution when responding to benign queries.
+Trustworthiness dimensions are intricately linked and interconnected.
+Moral decision-making can be significantly influenced by a model's underlying preferences.
+Trustworthiness is closely connected to model utility performance and developer design principles.
+
+Research Approach:
+
+The study involved a multidisciplinary collaboration with experts from various fields including NLP, Computer Vision, Human-Computer Interaction, Computer Security, Medicine, and others.
+Researchers developed comprehensive guidelines for trustworthy generative models.
+Guidelines are structured around legal compliance, ethical responsibilities, risk management, user-centered design, and adaptability.
+The research aims to establish a unified paradigm for ensuring generative model trustworthiness.

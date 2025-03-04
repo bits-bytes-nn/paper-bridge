@@ -1,0 +1,82 @@
+topic: Research Papers on AI and Technology
+
+  entities:
+    Abe Bohan Hou|Researcher
+    William Jurayj|Researcher
+    Nils Holzenberger|Researcher
+    Andrew Blair-Stanek|Researcher
+    Benjamin Van Durme|Researcher
+    Dietrich Trautmann|Researcher
+    Natalia Ostapuk|Researcher
+    Quentin Grail|Researcher
+    Adrian Alan Pol|Researcher
+    Guglielmo Bonifazi|Researcher
+    Shang Gao|Researcher
+    Martin Gajek|Researcher
+    Chong Zhang|Researcher
+    Ying Nie|Researcher
+    Jillian Ross|Researcher
+    Yoon Kim|Researcher
+    Andrew W Lo|Researcher
+    Hui Zhong|Researcher
+    Songsheng Chen|Researcher
+    Mian Liang|Researcher
+    "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations"|Research Paper
+    "Measuring the Groundedness of Legal Question-Answering Systems"|Research Paper
+    "When AI Meets Finance (StockAgent): Large Language Model-based Stock Trading in Simulated Real-world Environments"|Research Paper
+    "CFinBench: A Comprehensive Chinese Financial Benchmark for Large Language Models"|Research Paper
+    "LLM Economicus? Mapping the Behavioral Biases of LLMs via Utility Theory"|Research Paper
+    "Gender Bias of LLM in Economics: An Existentialism Perspective"|Research Paper
+    arXiv|Platform
+
+  proposition: Abe Bohan Hou, William Jurayj, Nils Holzenberger, Andrew Blair-Stanek, and Benjamin Van Durme published a paper on machine-generated legal analysis.
+    entity-attribute relationships:
+    Abe Bohan Hou|AUTHORED|Research Paper
+    William Jurayj|AUTHORED|Research Paper
+    Nils Holzenberger|AUTHORED|Research Paper
+    Andrew Blair-Stanek|AUTHORED|Research Paper
+    Benjamin Van Durme|AUTHORED|Research Paper
+
+    entity-entity relationships:
+    Abe Bohan Hou|CO_AUTHORED_WITH|William Jurayj
+    Abe Bohan Hou|CO_AUTHORED_WITH|Nils Holzenberger
+    Abe Bohan Hou|CO_AUTHORED_WITH|Andrew Blair-Stanek
+    Abe Bohan Hou|CO_AUTHORED_WITH|Benjamin Van Durme
+
+  proposition: The paper is titled "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations".
+    entity-attribute relationships:
+    "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations"|TITLE|"Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations"
+
+  proposition: The paper was published as an arXiv preprint in 2024.
+    entity-attribute relationships:
+    "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations"|PUBLISHED_ON|arXiv
+    "Gaps or Hallucinations? Gazing into Machine-Generated Legal Analysis for Fine-grained Text Evaluations"|PUBLICATION_YEAR|2024
+
+  proposition: Dietrich Trautmann, Natalia Ostapuk, Quentin Grail, Adrian Alan Pol, Guglielmo Bonifazi, Shang Gao, and Martin Gajek published a paper on legal question-answering systems.
+    entity-attribute relationships:
+    Dietrich Trautmann|AUTHORED|Research Paper
+    Natalia Ostapuk|AUTHORED|Research Paper
+    Quentin Grail|AUTHORED|Research Paper
+    Adrian Alan Pol|AUTHORED|Research Paper
+    Guglielmo Bonifazi|AUTHORED|Research Paper
+    Shang Gao|AUTHORED|Research Paper
+    Martin Gajek|AUTHORED|Research Paper
+
+    entity-entity relationships:
+    Dietrich Trautmann|CO_AUTHORED_WITH|Natalia Ostapuk
+    Dietrich Trautmann|CO_AUTHORED_WITH|Quentin Grail
+    Dietrich Trautmann|CO_AUTHORED_WITH|Adrian Alan Pol
+    Dietrich Trautmann|CO_AUTHORED_WITH|Guglielmo Bonifazi
+    Dietrich Trautmann|CO_AUTHORED_WITH|Shang Gao
+    Dietrich Trautmann|CO_AUTHORED_WITH|Martin Gajek
+
+  proposition: The paper is titled "Measuring the Groundedness of Legal Question-Answering Systems".
+    entity-attribute relationships:
+    "Measuring the Groundedness of Legal Question-Answering Systems"|TITLE|"Measuring the Groundedness of Legal Question-Answering Systems"
+
+  proposition: The paper was published as an arXiv preprint in 2024.
+    entity-attribute relationships:
+    "Measuring the Groundedness of Legal Question-Answering Systems"|PUBLISHED_ON|arXiv
+    "Measuring the Groundedness of Legal Question-Answering Systems"|PUBLICATION_YEAR|2024
+
+  [Additional propositions follow the same pattern of entity-attribute and entity-entity relationship extraction]

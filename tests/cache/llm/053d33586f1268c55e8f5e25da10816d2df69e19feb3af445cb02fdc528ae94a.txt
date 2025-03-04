@@ -1,0 +1,13 @@
+Research on Ethics and Large Language Models
+Michael Anderson and Susan Leigh Anderson published research on machine ethics and creating ethical intelligent agents in AI Magazine.
+Researchers are exploring the ethical capabilities and implications of Large Language Models (LLMs) across multiple domains.
+Multiple studies have investigated LLMs' potential to provide moral guidance, make ethical judgments, and align with human values.
+Researchers are examining LLMs' capacity for moral self-correction and ethical reasoning.
+Studies are focusing on mapping LLMs to human value spectrums and understanding their ethical decision-making processes.
+Researchers are developing methods to benchmark and evaluate the ethical reasoning capabilities of Large Language Models.
+Interdisciplinary research is connecting LLM ethics with psychological, computational, and philosophical perspectives.
+Multiple research papers have been published in 2023-2024 exploring the ethical dimensions of Large Language Models.
+Researchers are investigating how LLMs can be steered or guided to make more ethically aligned decisions.
+Studies are examining the potential of LLMs to serve as moral experts or provide ethical guidance.
+Computational social science is being transformed by the ethical analysis of Large Language Models.
+Researchers are deconstructing the long-standing and emerging ethical dilemmas associated with LLMs.

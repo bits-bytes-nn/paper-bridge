@@ -1,0 +1,17 @@
+Research Papers on Large Language Model Security and Attacks
+
+Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing was edited by Houda Bouamor, Juan Pino, and Kalika Bali.
+The conference proceedings were published in Singapore in December 2023 by the Association for Computational Linguistics.
+Nan Xu and colleagues published a paper on "Cognitive Overload: Jailbreaking Large Language Models with Overloaded Logical Thinking" in 2023.
+Gabriel Alon and Michael Kamfonas published a paper on detecting language model attacks using perplexity in 2023.
+Yu Fu and colleagues explored "Safety Alignment in NLP Tasks: Weakly Aligned Summarization as an In-Context Attack" in 2023.
+Wei Zhao, Zhe Li, and Jun Sun conducted a causality analysis for evaluating the security of large language models in 2023.
+Yi Liu and colleagues studied "Prompt Injection attack against LLM-integrated Applications" in 2023.
+Jason Vega and colleagues investigated "Bypassing the Safety Training of Open-Source LLMs with Priming Attacks" in 2023.
+Yupei Liu and colleagues formalized and benchmarked prompt injection attacks and defenses at the USENIX Security Symposium in 2024.
+Jingwei Yi and colleagues worked on benchmarking and defending against indirect prompt injection attacks on large language models in 2023.
+Aleksander Buszydlik and colleagues conducted red teaming for large language models, focusing on hallucinations in mathematics tasks in 2023.
+Aounon Kumar and colleagues researched certifying LLM safety against adversarial prompting in 2023.
+Zeyang Sha and Yang Zhang studied prompt stealing attacks against large language models in 2024.
+Yujun Zhou and colleagues proposed defending jailbreak prompts via an in-context adversarial game in 2024.
+Zihao Xu and colleagues performed a comprehensive study of LLM jailbreak attacks and defense techniques in 2024.

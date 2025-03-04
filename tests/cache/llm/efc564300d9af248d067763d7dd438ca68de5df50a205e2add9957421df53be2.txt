@@ -1,0 +1,105 @@
+topic: Legal AI Challenges and Limitations
+
+  entities:
+    LexisAI|Tool
+    Co-counsel|Tool
+    LawBench|Project
+    TrustGen|Project
+    Lawyer|Person
+
+  proposition: Local AI infrastructure requires significant financial and technical investment, making it inaccessible for small- and medium-sized law firms.
+    entity-attribute relationships:
+    AI infrastructure|DESCRIBED_BY|significant financial investment
+    AI infrastructure|DESCRIBED_BY|significant technical investment
+    
+    entity-entity relationships:
+    AI infrastructure|IMPACTS|law firms
+
+  proposition: Accuracy is critical in the legal domain, as errors can have significant consequences.
+    entity-attribute relationships:
+    Legal domain|REQUIRES|accuracy
+
+  proposition: Model hallucinations pose a serious risk in legal applications.
+    entity-attribute relationships:
+    Legal applications|DESCRIBED_BY|serious risk
+    Model hallucinations|IMPACTS|legal applications
+
+  proposition: A lawyer was professionally sanctioned for using an LLM-generated court submission with fabricated case citations.
+    entity-entity relationships:
+    Lawyer|SANCTIONED_BY|legal system
+    Lawyer|USED|LLM-generated submission
+
+  proposition: Law-specific generative tools like LexisAI and Co-counsel exist but are not yet perfect.
+    entity-attribute relationships:
+    LexisAI|STATUS|imperfect
+    Co-counsel|STATUS|imperfect
+
+  proposition: Research indicates LLMs hallucinate legal information between 17% and 58% of the time.
+    entity-attribute relationships:
+    LLMs|HALLUCINATION_RATE|17-58%
+
+  proposition: The lack of reliable AI solutions makes legal practitioners hesitant to adopt AI tools.
+    entity-entity relationships:
+    AI solutions|IMPACTS|legal practitioners
+
+topic: AI Model Evaluation and Challenges
+
+  entities:
+    LawBench|Project
+    TrustGen|Project
+    Generative search engines|Tool
+
+  proposition: LawBench aims to evaluate LLM performance in legal contexts.
+    entity-attribute relationships:
+    LawBench|PURPOSE|evaluate LLM performance
+
+  proposition: Some LLMs exhibit exaggerated safety when handling law-related queries.
+    entity-attribute relationships:
+    LLMs|BEHAVIOR|exaggerated safety
+
+  proposition: Generative search engines are vulnerable to ranking manipulation attacks.
+    entity-attribute relationships:
+    Generative search engines|VULNERABILITY|ranking manipulation attacks
+
+  proposition: LLMs can be influenced by minor input variations to prioritize specific content.
+    entity-attribute relationships:
+    LLMs|CHARACTERISTIC|susceptible to input variations
+
+  proposition: TrustGen could be valuable for assessing generative models' suitability in legal settings.
+    entity-attribute relationships:
+    TrustGen|PURPOSE|assess generative models
+
+topic: Ethical and Societal Implications of AI
+
+  entities:
+    LLMs|Model
+    Youth|Social Concept
+
+  proposition: LLMs can exhibit economic and gender biases in various professional domains.
+    entity-attribute relationships:
+    LLMs|BIAS|economic bias
+    LLMs|BIAS|gender bias
+
+  proposition: Trustworthiness issues include training data biases and potential copyright infringement.
+    entity-attribute relationships:
+    AI|ISSUE|training data biases
+    AI|ISSUE|potential copyright infringement
+
+  proposition: Misleading content can severely impact psychological and cognitive development of youth.
+    entity-entity relationships:
+    Misleading content|IMPACTS|youth
+
+  proposition: Strict adherence to ethical principles is crucial in youth-focused AI applications.
+    entity-attribute relationships:
+    Youth-focused AI applications|REQUIRES|ethical principles
+
+topic: Technological Infrastructure Challenges
+
+  entities:
+    Edge computing|Infrastructure
+    6G networks|Infrastructure
+
+  proposition: Edge computing and 6G networks introduce new challenges for trustworthy AI applications.
+    entity-attribute relationships:
+    Edge computing|INTRODUCES|challenges for trustworthy AI
+    6G networks|INTRODUCES|challenges for trustworthy AI

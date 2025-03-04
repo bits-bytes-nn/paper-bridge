@@ -1,0 +1,27 @@
+Research Papers on AI, Machine Learning, and Generative Technologies
+
+Livebench is a challenging, contamination-free language model benchmark.
+Livebench was published as an arXiv preprint in 2024.
+Or Cohen-Sasson and Ofer Tur-Sinai proposed a novel tool for improving research replicability without sacrificing intellectual property rights.
+The tool was published in EMBO reports in 2022.
+Wikipedia contributors maintain an entry on machine ethics.
+Erfan Shayegani, Yue Dong, and Nael Abu-Ghazaleh studied compositional adversarial attacks on multi-modal language models in 2023.
+Melanie Sclar, Yejin Choi, Yulia Tsvetkov, and Alane Suhr quantified language models' sensitivity to spurious features in prompt design.
+Their research was published as an arXiv preprint in 2023.
+Shijian Wang and colleagues investigated the role of instruction templates in multimodal language model evaluation and training.
+Their research was published as an arXiv preprint in 2024.
+Wei-Lin Chiang and colleagues developed Vicuna, a language model, in 2023.
+Yue Yu and researchers explored using large language models as attributed training data generators.
+Their research examined diversity and bias in training data.
+Sandipan Kundu and colleagues studied specific versus general principles for Constitutional AI.
+Their research was published as an arXiv preprint in 2023.
+Chenshuang Zhang and colleagues conducted a survey on text-to-image diffusion models in generative AI.
+Mohamed Elasri and researchers published a review of image generation techniques.
+Stability AI introduced Stable Diffusion 3.5 in 2024.
+Black Forest Labs announced FLUX1.1 [pro] in 2024.
+Artists have initiated copyright lawsuits against Stability AI and Midjourney.
+Junde Wu and colleagues developed a medical image segmentation method using diffusion probabilistic models.
+Jonghun Kim and Hyunjin Park created an adaptive latent diffusion model for medical image translation.
+Jeongho Kim and researchers developed StableViton for virtual try-on using a latent diffusion model.
+Yuhao Xu and colleagues created OOTDiffusion for controllable virtual try-on.
+Sensen Gao and researchers proposed RT-Attack, a method for jailbreaking text-to-image models via random token manipulation.

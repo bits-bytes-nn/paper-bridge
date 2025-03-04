@@ -1,0 +1,28 @@
+Trustworthiness and Security Challenges in Generative Foundation Models (GenFMs)
+
+V2X communication systems are vulnerable to adversarial attacks in the GenFM era.
+Trustworthiness in V2X requires robust sensor synchronization, secure communication, and adaptive design principles.
+GenFMs at a system-wide scale introduce challenges in security, privacy, safety, and robustness.
+Security breaches pose a critical threat to AI-enabled transportation platforms with sensitive traveler and infrastructure information.
+Preserving privacy in large-scale federated or decentralized learning is significant for data confidentiality.
+Transportation systems must be robust against adversarial and jailbreak attacks.
+A holistic framework is needed to support encryption, federated aggregation, and adversarial defense in intelligent transportation networks.
+
+Copyright and Intellectual Property Challenges in GenFMs
+
+GenFMs can inadvertently replicate or generate content resembling copyrighted material from training data.
+High-profile lawsuits have highlighted copyright concerns with generative foundation models.
+Researchers are developing tools to address potential copyright violations in large language models.
+Methods for detecting copyrighted text in training data include Li et al.'s detection approach and Wei et al.'s evaluation framework.
+Approaches to address copyright concerns include machine unlearning, modified decoding strategies, and intellectual property protection mechanisms.
+Watermarking techniques have been explored as a means of intellectual property protection.
+Text-to-image models raise significant copyright concerns due to potential content memorization.
+Memorization is more frequent in models trained on small to medium-sized datasets.
+Various techniques have been proposed to prevent replication of sensitive training images in diffusion models.
+Copyright protection in GenFMs remains an evolving challenge involving data and model security.
+
+Synthetic Data Generation in Generative Foundation Models
+
+GenFMs increasingly rely on synthetic data generation to address data scarcity.
+Synthetic data generation has been effective in instruction tuning, code generation, and complex reasoning tasks.
+Groundbreaking approaches include Self-Instruct for automated instruction generation, Constitutional AI for recursive refinement, and Evol-Instruct for enhancing instruction complexity.

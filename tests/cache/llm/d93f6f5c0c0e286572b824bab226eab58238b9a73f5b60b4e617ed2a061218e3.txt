@@ -1,0 +1,20 @@
+References in Medical AI and Health Informatics
+Konrad Rieck and Pavel Laskov published a paper on language models for detecting unknown attacks in network traffic in 2007.
+Alistair EW Johnson and colleagues created MIMIC-III, a freely accessible critical care database in 2016.
+Marc D Kohli, Ronald M Summers, and J Raymond Geis wrote a whitepaper on medical image data and datasets in the era of machine learning in 2017.
+Lawrence O Gostin, Laura A Levit, and Sharyl J Nass explored privacy considerations beyond the HIPAA privacy rule in 2009.
+He Li, Lu Yu, and Wu He examined the impact of GDPR on global technology development in 2019.
+Benjamin Shickel and colleagues published a survey on deep learning techniques for electronic health record analysis in 2017.
+Qiang Yang and colleagues discussed federated machine learning concepts and applications in 2019.
+Finale Doshi-Velez and Been Kim worked towards a rigorous science of interpretable machine learning in 2017.
+Riccardo Guidotti and colleagues surveyed methods for explaining black box models in 2018.
+Ziad Obermeyer and colleagues investigated racial bias in a healthcare management algorithm in 2019.
+Ramprasaath R Selvaraju and colleagues developed Grad-CAM for visual explanations from deep networks in 2017.
+Cynthia Rudin advocated for using interpretable models instead of explaining black box models in 2019.
+Rich Caruana and colleagues created intelligible models for predicting pneumonia risk and hospital readmission in 2015.
+Nicola Rieke and colleagues explored the future of digital health with federated learning in 2020.
+Andrew L Beam and Isaac S Kohane discussed big data and machine learning in healthcare in 2018.
+The Food and Drug Administration published an AI/ML-based software as a medical device action plan in 2021.
+Alan G Fraser and colleagues highlighted the need for transparency of clinical evidence for medical devices in Europe in 2018.
+Urs J Muehlematter and colleagues conducted a comparative analysis of AI and machine learning medical device approvals in the USA and Europe from 2015-2020.
+Eric Wu and colleagues analyzed limitations in medical AI device evaluations in 2021.

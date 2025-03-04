@@ -1,0 +1,272 @@
+topic: Challenges and Advancements in Generative Foundation Models
+
+  entities:
+    Explainability|Feature
+    Algorithmic Bias|Social Concept
+    Training Data|Dataset
+    Research Efforts|Research Field
+    Privacy-preserving Architectures|Technological Concept
+
+  proposition: Explainability features allow users to trace reasoning behind generated conclusions.
+    entity-attribute relationships:
+    Explainability|DESCRIBED_BY|allows users to trace reasoning behind generated conclusions
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Explainability increases confidence in system outputs.
+    entity-attribute relationships:
+    Explainability|INCREASES|confidence in system outputs
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Algorithmic bias is a pressing concern in generative foundation models for medical use.
+    entity-attribute relationships:
+    Algorithmic Bias|DESCRIBED_BY|pressing concern in generative foundation models for medical use
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Biases in training data can result in inaccurate or unfair outcomes for specific patient groups.
+    entity-attribute relationships:
+    Training Data|CONTAINS|biases
+    Training Data|RESULTS_IN|inaccurate or unfair outcomes for specific patient groups
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Addressing algorithmic bias requires building more representative datasets.
+    entity-attribute relationships:
+    Algorithmic Bias|ADDRESSED_BY|building more representative datasets
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Continuous fairness evaluations are necessary to ensure equitable performance across diverse populations.
+    entity-attribute relationships:
+    (no explicit entity-attribute relationships)
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Research efforts have proposed real-time monitoring systems for clinical safety.
+    entity-attribute relationships:
+    Research Efforts|PROPOSED|real-time monitoring systems for clinical safety
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Privacy-preserving architectures have been implemented to enhance data security during model training and deployment.
+    entity-attribute relationships:
+    Privacy-preserving Architectures|IMPLEMENTED_TO|enhance data security during model training and deployment
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Significant work remains to comprehensively address reliability, fairness, and privacy concerns in generative systems.
+    entity-attribute relationships:
+    (no explicit entity-attribute relationships)
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+topic: Embodiment of Generative Foundation Models
+
+  entities:
+    Embodied AI|Technological Concept
+    Simulation Environments|Platform
+    Voyager|Project
+    Minecraft|Platform
+    Robotic Systems|Infrastructure
+    VIMA|Project
+    Multimodal Prompts|Technological Concept
+
+  proposition: Embodiment enables generative models to interact with the physical world and perform complex tasks.
+    entity-attribute relationships:
+    Embodied AI|ENABLES|interaction with physical world and performance of complex tasks
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Embodied AI will profoundly impact daily life by automating repetitive tasks.
+    entity-attribute relationships:
+    Embodied AI|WILL_IMPACT|daily life by automating repetitive tasks
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Initial steps towards embodied AGI begin in simulation environments.
+    entity-attribute relationships:
+    Embodied AI|INITIATED_IN|simulation environments
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Virtual environments provide a controlled platform for training intelligent agents.
+    entity-attribute relationships:
+    Simulation Environments|PROVIDES|controlled platform for training intelligent agents
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Voyager is the first LLM-powered embodied agent in Minecraft that autonomously explores and learns skills.
+    entity-attribute relationships:
+    Voyager|TYPE|first LLM-powered embodied agent
+    Voyager|PLATFORM|Minecraft
+    Voyager|CAPABILITY|autonomously explores and learns skills
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Integrating generative models with robotic systems enables physical task handling.
+    entity-attribute relationships:
+    Robotic Systems|INTEGRATED_WITH|generative models
+    Robotic Systems|ENABLES|physical task handling
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Robotic integration allows AI systems to perform tasks with reasoning skills.
+    entity-attribute relationships:
+    Robotic Systems|ALLOWS|AI systems to perform tasks with reasoning skills
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: VIMA explores prompt-based learning in robotic manipulation using multimodal prompts.
+    entity-attribute relationships:
+    VIMA|EXPLORES|prompt-based learning in robotic manipulation
+    VIMA|USES|multimodal prompts
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Ensuring trustworthiness is crucial as embodied AI systems gain autonomy.
+    entity-attribute relationships:
+    Embodied AI|REQUIRES|trustworthiness as systems gain autonomy
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Robust safeguards must prevent harm and adhere to ethical principles.
+    entity-attribute relationships:
+    (no explicit entity-attribute relationships)
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+topic: Trustworthiness in Embodied AI
+
+  entities:
+    Naihin et al.|Research Group
+    Autonomous Agents|Technological Concept
+    Deletang et al.|Research Group
+    Wu et al.|Research Group
+    LLMs|Model
+    VLMs|Model
+    Knott et al.|Research Group
+    SafetyDetect|Dataset
+    Mullen et al.|Research Group
+
+  proposition: Naihin et al. propose a framework for safely evaluating autonomous agents on the open internet.
+    entity-attribute relationships:
+    Naihin et al.|PROPOSED|framework for safely evaluating autonomous agents on open internet
+
+    entity-entity relationships:
+    Naihin et al.|STUDIED|Autonomous Agents
+
+  proposition: Context-sensitive monitoring systems can enforce safety boundaries for AI agents.
+    entity-attribute relationships:
+    (no explicit entity-attribute relationships)
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Deletang et al. emphasize understanding causal processes driving artificial agent behavior.
+    entity-attribute relationships:
+    Deletang et al.|EMPHASIZE|understanding causal processes driving artificial agent behavior
+
+    entity-entity relationships:
+    Deletang et al.|STUDIED|Autonomous Agents
+
+  proposition: Wu et al. highlight robustness and safety challenges in integrating LLMs and VLMs into robotic systems.
+    entity-attribute relationships:
+    Wu et al.|HIGHLIGHT|robustness and safety challenges in integrating LLMs and VLMs into robotic systems
+
+    entity-entity relationships:
+    Wu et al.|STUDIED|LLMs
+    Wu et al.|STUDIED|VLMs
+
+  proposition: LLMs and VLMs are vulnerable to adversarial inputs that can significantly reduce performance.
+    entity-attribute relationships:
+    LLMs|VULNERABLE_TO|adversarial inputs
+    VLMs|VULNERABLE_TO|adversarial inputs
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Knott et al. suggest identifying potential edge cases in human behaviors and environmental conditions.
+    entity-attribute relationships:
+    Knott et al.|SUGGEST|identifying potential edge cases in human behaviors and environmental conditions
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Mullen et al. introduce the SafetyDetect dataset to train embodied agents in identifying unsafe conditions.
+    entity-attribute relationships:
+    Mullen et al.|INTRODUCED|SafetyDetect dataset
+    SafetyDetect|PURPOSE|train embodied agents in identifying unsafe conditions
+
+    entity-entity relationships:
+    Mullen et al.|CREATED|SafetyDetect
+
+  proposition: LLMs and scene graphs can help agents detect anomalies in home environments.
+    entity-attribute relationships:
+    LLMs|CAN_HELP|detect anomalies in home environments
+    Scene Graphs|CAN_HELP|detect anomalies in home environments
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+topic: Autonomous Driving Advancements
+
+  entities:
+    Generative Foundation Models|Model
+    Autonomous Driving|Technological Concept
+
+  proposition: Generative foundation models have significantly impacted autonomous driving perception and decision-making.
+    entity-attribute relationships:
+    Generative Foundation Models|IMPACTED|autonomous driving perception and decision-making
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Early autonomous driving works focused on specialized architectures for object detection and trajectory planning.
+    entity-attribute relationships:
+    Autonomous Driving|EARLY_FOCUS|specialized architectures for object detection and trajectory planning
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Current trends integrate generative foundation models pre-trained on diverse datasets.
+    entity-attribute relationships:
+    Generative Foundation Models|INTEGRATED|pre-trained on diverse datasets
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Modern autonomous driving models combine vision and language modalities.
+    entity-attribute relationships:
+    Autonomous Driving|COMBINES|vision and language modalities
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: These models aim to provide semantic understanding of traffic scenes and handle complex reasoning about dynamic agents.
+    entity-attribute relationships:
+    Autonomous Driving|AIMS|provide semantic understanding of traffic scenes
+    Autonomous Driving|AIMS|handle complex reasoning about dynamic agents
+
+    entity-entity relationships:
+    (no explicit relationships)

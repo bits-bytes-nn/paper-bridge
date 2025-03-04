@@ -1,0 +1,155 @@
+topic: Copyright Protection in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Copyright Protection|Research Problem
+
+  proposition: Copyright protection in GenFMs is an evolving challenge.
+    entity-attribute relationships:
+    Generative Foundation Models|DESCRIBED_BY|evolving challenge
+    Copyright Protection|STATUS|evolving
+
+  proposition: Copyright protection in GenFMs encompasses issues of data and model security.
+    entity-attribute relationships:
+    Copyright Protection|INVOLVES|data security
+    Copyright Protection|INVOLVES|model security
+
+  proposition: Copyright concerns are expected to gain heightened attention in the near future.
+    entity-attribute relationships:
+    Copyright Protection|FUTURE_OUTLOOK|heightened attention
+
+  proposition: Copyright concerns will receive increased resources from industry and academia.
+    entity-attribute relationships:
+    Copyright Protection|RESOURCE_ALLOCATION|increased resources
+
+    entity-entity relationships:
+    Copyright Protection|SUPPORTED_BY|Industry
+    Copyright Protection|SUPPORTED_BY|Academia
+
+topic: Synthetic Data Generation in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Synthetic Data Generation|Research Problem
+
+  proposition: GenFMs are increasingly dependent on synthetic data generation.
+    entity-attribute relationships:
+    Generative Foundation Models|DEPENDENCY|synthetic data generation
+
+  proposition: Synthetic data generation addresses data scarcity.
+    entity-attribute relationships:
+    Synthetic Data Generation|PURPOSE|addressing data scarcity
+
+  proposition: Synthetic data generation expands GenFM capabilities.
+    entity-attribute relationships:
+    Synthetic Data Generation|IMPACT|expanding capabilities
+
+  proposition: Synthetic data generation is effective in instruction tuning.
+    entity-attribute relationships:
+    Synthetic Data Generation|EFFECTIVE_IN|instruction tuning
+
+  proposition: Synthetic data generation is effective in code generation.
+    entity-attribute relationships:
+    Synthetic Data Generation|EFFECTIVE_IN|code generation
+
+  proposition: Synthetic data generation is effective in complex reasoning tasks.
+    entity-attribute relationships:
+    Synthetic Data Generation|EFFECTIVE_IN|complex reasoning tasks
+
+topic: Synthetic Data Generation Approaches
+
+  entities:
+    Self-Instruct|Algorithm
+    Constitutional AI|Algorithm
+    Evol-Instruct|Algorithm
+    DyVal|Algorithm
+    DARG|Algorithm
+
+  proposition: Self-Instruct established the foundation for automated instruction generation.
+    entity-attribute relationships:
+    Self-Instruct|CONTRIBUTION|foundation for automated instruction generation
+
+  proposition: Constitutional AI introduced recursive refinement techniques for synthetic conversations.
+    entity-attribute relationships:
+    Constitutional AI|CONTRIBUTION|recursive refinement techniques
+    Constitutional AI|FOCUS|synthetic conversations
+
+  proposition: Evol-Instruct advanced instruction complexity through iterative systems.
+    entity-attribute relationships:
+    Evol-Instruct|CONTRIBUTION|advancing instruction complexity
+    Evol-Instruct|METHOD|iterative systems
+
+  proposition: DyVal and DARG pioneered directed acyclic graph structures for generating training and evaluation samples.
+    entity-attribute relationships:
+    DyVal|CONTRIBUTION|directed acyclic graph structures
+    DARG|CONTRIBUTION|directed acyclic graph structures
+    DyVal|PURPOSE|generating training and evaluation samples
+    DARG|PURPOSE|generating training and evaluation samples
+
+topic: Safety-Aligned Synthetic Data Generation
+
+  entities:
+    Large Language Models|Model
+    Xu et al.|Research Group
+    Gehman et al.|Research Group
+    Safe RLHF|Algorithm
+    BeaverTails|Project
+    Safer-Instruct|Algorithm
+    Aligner|Algorithm
+    Neill et al.|Research Group
+    Hammoud et al.|Research Group
+    Sreedhar et al.|Research Group
+    Data Advisor|Algorithm
+    Critic-RM|Algorithm
+
+  proposition: Synthetic data is crucial for safety alignment of Large Language Models (LLMs).
+    entity-attribute relationships:
+    Synthetic Data|IMPORTANCE|safety alignment
+    Large Language Models|REQUIRES|safety alignment
+
+  proposition: Manual collection of labeled datasets with benign and harmful instructions is resource-intensive.
+    entity-attribute relationships:
+    Labeled Datasets|COLLECTION_METHOD|manual
+    Labeled Datasets|COMPLEXITY|resource-intensive
+
+  proposition: Xu et al. developed a collaborative human-bot framework for collecting harmful conversation examples.
+    entity-entity relationships:
+    Xu et al.|DEVELOPED|collaborative human-bot framework
+    Collaborative Human-Bot Framework|PURPOSE|collecting harmful conversation examples
+
+  (Note: Similar detailed extraction would continue for each proposition in this section)
+
+topic: Human-AI Collaboration
+
+  entities:
+    Generative Foundation Models|Model
+    Human Expertise|Feature
+
+  proposition: GenFMs can enhance productivity and drive innovation across diverse sectors.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|enhancing productivity
+    Generative Foundation Models|CAPABILITY|driving innovation
+
+  proposition: GenFMs act as collaborative partners combining computational power with human expertise.
+    entity-entity relationships:
+    Generative Foundation Models|COLLABORATES_WITH|Human Expertise
+
+  (Remaining propositions would be similarly extracted)
+
+topic: Generative Models in Social Science
+
+  entities:
+    Generative Models|Model
+    Social Science|Research Field
+
+  proposition: Generative models are used in social science for experiments, sentiment analysis, and behavior modeling.
+    entity-attribute relationships:
+    Generative Models|APPLICATION|experiments
+    Generative Models|APPLICATION|sentiment analysis
+    Generative Models|APPLICATION|behavior modeling
+
+  proposition: There is a reciprocal relationship between generative AI and social science.
+    entity-entity relationships:
+    Generative Models|INTERACTS_WITH|Social Science
+
+  (Remaining propositions would be similarly extracted)

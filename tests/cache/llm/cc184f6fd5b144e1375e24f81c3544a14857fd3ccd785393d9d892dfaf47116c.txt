@@ -1,0 +1,19 @@
+Survey of Hallucination in Large Language Models: Research Publications
+
+"Survey of hallucination in natural language generation" published in ACM Computing Surveys in 2023
+Lei Huang and colleagues published "A survey on hallucination in large language models: Principles, taxonomy, challenges, and open questions" on arXiv in 2023
+Yue Zhang and colleagues published "Siren's Song in the AI Ocean: A Survey on Hallucination in Large Language Models" on arXiv in 2023
+Mrinank Sharma and colleagues published research on "Towards Understanding Sycophancy in Language Models" in 2023
+Ethan Perez and colleagues published "Discovering language model behaviors with model-written evaluations" on arXiv in 2022
+Jerry Wei and colleagues published "Simple synthetic data reduces sycophancy in large language models" on arXiv in 2023
+Owain Evans and colleagues published "Truthful AI: Developing and governing AI that does not lie" on arXiv in 2021
+Katherine Lee and colleagues published research on "Hallucinations in neural machine translation" in 2018
+Joshua Maynez and colleagues published "On faithfulness and factuality in abstractive summarization" on arXiv in 2020
+Potsawee Manakul and colleagues published "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models" on arXiv in 2023
+Yuyan Chen and colleagues published "Hallucination detection: Robustly discerning reliable answers in large language models" in ACM conference proceedings in 2023
+Ziwei Xu and colleagues published "Hallucination is inevitable: An innate limitation of large language models" on arXiv in 2024
+Shehzaad Dhuliawala and colleagues published "Chain-of-verification reduces hallucination in large language models" on arXiv in 2023
+Abhika Mishra and colleagues published "Fine-grained hallucination detection and editing for language models" on arXiv in 2024
+Kenneth Li and colleagues published "Inference-time intervention: Eliciting truthful answers from a language model" in Advances in Neural Information Processing Systems in 2024
+Junyi Li and colleagues published "The dawn after the dark: An empirical study on factuality hallucination in large language models" on arXiv in 2024
+Yuji Zhang and colleagues published research on "Knowledge Overshadowing Causes Amalgamated Hallucination in Large Language Models: Analysis and Solution"

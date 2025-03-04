@@ -1,0 +1,148 @@
+topic: Jailbreak Techniques in Large Language Models
+
+  entities:
+    PAIR|Algorithm
+    Lapid et al.|Research Group
+    Li et al.|Research Group
+    Yao et al.|Research Group
+    Yu et al.|Research Group
+    Yuan et al.|Research Group
+    Lv et al.|Research Group
+    Kour et al.|Research Group
+    Zhang et al.|Research Group
+    Wu et al.|Research Group
+    ObscurePrompt|Tool
+    Crescendo|Method
+    Shen et al.|Research Group
+    Zhu et al.|Research Group
+    GPT-4|Model
+    Large Language Models|Technological Concept
+
+  proposition: PAIR algorithm creates semantic jailbreaks with black-box access to an LLM.
+    entity-attribute relationships:
+    PAIR|DESCRIBED_BY|semantic jailbreaks
+    PAIR|OPERATES_WITH|black-box access
+
+    entity-entity relationships:
+    PAIR|TARGETS|Large Language Models
+
+  proposition: Disrupting model alignment can be achieved by altering decoding methods.
+    entity-attribute relationships:
+    Large Language Models|VULNERABLE_TO|decoding method alteration
+
+  proposition: Lapid et al. use a Genetic Algorithm to optimize adversarial suffixes.
+    entity-attribute relationships:
+    Lapid et al.|USES|Genetic Algorithm
+    Lapid et al.|FOCUSES_ON|adversarial suffixes
+
+  proposition: Li et al. propose a similar method to Lapid et al.'s genetic algorithm approach.
+    entity-entity relationships:
+    Li et al.|SIMILAR_TO|Lapid et al.
+
+  proposition: Yao et al. apply fuzzy testing to generate attack instructions.
+    entity-attribute relationships:
+    Yao et al.|USES|fuzzy testing
+    Yao et al.|GOAL|generate attack instructions
+
+  proposition: Yu et al. employ GPTFUZZER, which uses mutation techniques to evolve human-crafted templates into adversarial inputs.
+    entities:
+      GPTFUZZER|Tool
+
+    entity-attribute relationships:
+    GPTFUZZER|USES|mutation techniques
+    Yu et al.|USES|GPTFUZZER
+
+    entity-entity relationships:
+    GPTFUZZER|TRANSFORMS|human-crafted templates
+
+  proposition: Yuan et al. encode strings to ciphers to bypass safety alignment of LLMs like GPT-4.
+    entity-attribute relationships:
+    Yuan et al.|TECHNIQUE|string encoding
+    Yuan et al.|GOAL|bypass safety alignment
+
+    entity-entity relationships:
+    Yuan et al.|TARGETS|GPT-4
+
+  proposition: Lv et al. propose CodeChameleon, which allows personalized encryption to jailbreak LLMs.
+    entities:
+      CodeChameleon|Tool
+
+    entity-attribute relationships:
+    CodeChameleon|FEATURE|personalized encryption
+
+    entity-entity relationships:
+    CodeChameleon|TARGETS|Large Language Models
+
+  proposition: Wu et al. use LLMs to jailbreak large vision models like GPT-4V.
+    entity-entity relationships:
+    Wu et al.|USES|Large Language Models
+    Wu et al.|TARGETS|GPT-4V
+
+  proposition: LLM vulnerabilities often differ across languages.
+    entity-attribute relationships:
+    Large Language Models|CHARACTERISTIC|language-dependent vulnerabilities
+
+  proposition: Crescendo is a multi-turn jailbreak that interacts with models in a seemingly benign manner.
+    entity-attribute relationships:
+    Crescendo|TYPE|multi-turn jailbreak
+    Crescendo|CHARACTERISTIC|seemingly benign interaction
+
+  proposition: Shen et al. propose a jailbreak methodology inspired by psychological concepts of subconsciousness and echopraxia.
+    entity-attribute relationships:
+    Shen et al.|METHODOLOGY|psychological jailbreak
+    Shen et al.|INSPIRED_BY|subconsciousness
+    Shen et al.|INSPIRED_BY|echopraxia
+
+topic: Jailbreak Defense Techniques
+
+  entities:
+    Xie et al.|Research Group
+    Phute et al.|Research Group
+    HateModerate|Tool
+    Xu et al.|Research Group
+    Kim et al.|Research Group
+    AutoDefenes|Framework
+    SmoothLLM|Method
+    SemanticSmooth|Method
+
+  proposition: Xie et al. and Phute et al. use self-evaluation to find potential harm in input queries.
+    entity-attribute relationships:
+    Xie et al.|TECHNIQUE|self-evaluation
+    Phute et al.|TECHNIQUE|self-evaluation
+    Xie et al.|GOAL|detect potential harm
+    Phute et al.|GOAL|detect potential harm
+
+  proposition: A study uses a secondary LLM to emulate the conscience of a protected primary LLM.
+    entity-entity relationships:
+    secondary LLM|EMULATES|primary LLM
+
+  proposition: Perplexity-based filtering is effective against attacks like GCG.
+    entity-attribute relationships:
+    Perplexity-based filtering|EFFECTIVENESS|defense against attacks
+
+  proposition: SmoothLLM and SemanticSmooth defend by randomly perturbing multiple input prompt copies.
+    entity-attribute relationships:
+    SmoothLLM|TECHNIQUE|random input perturbation
+    SemanticSmooth|TECHNIQUE|random input perturbation
+
+  proposition: Zhang et al. propose "goal prioritization" to defend against jailbreak attacks.
+    entity-attribute relationships:
+    Zhang et al.|TECHNIQUE|goal prioritization
+
+  proposition: HateModerate detects harmful content in user inputs.
+    entity-attribute relationships:
+    HateModerate|FUNCTION|detect harmful content
+
+  proposition: Xu et al. propose a human-and-model-in-the-loop framework to enhance chatbot safety.
+    entity-attribute relationships:
+    Xu et al.|FRAMEWORK|human-and-model-in-the-loop
+    Xu et al.|GOAL|enhance chatbot safety
+
+  proposition: Kim et al. find current defense methods are not sufficiently robust.
+    entity-attribute relationships:
+    Current defense methods|CHARACTERISTIC|insufficient robustness
+
+  proposition: AutoDefenes is a multi-agent defense framework that filters harmful LLM responses.
+    entity-attribute relationships:
+    AutoDefenes|TYPE|multi-agent defense framework
+    AutoDefenes|FUNCTION|filter harmful LLM responses

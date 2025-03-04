@@ -1,0 +1,60 @@
+topic: Audio Generative Models and Generative Agents Trustworthiness
+
+  entities:
+    Audio Generative Models|Technological Concept
+    Large Language Models|Technological Concept
+    Generative Model-based Agents|Technological Concept
+    Retrieval-Augmented Generation|Method
+    Multi-agent Networks|Technological Concept
+    Voice Cloning Technologies|Technological Concept
+    GDPR|Regulation
+
+  proposition: Audio generative models can produce incorrect or fabricated information via synthetic speech.
+    entity-attribute relationships:
+    Audio Generative Models|CAPABILITY|produce incorrect information
+    Audio Generative Models|CAPABILITY|fabricate information
+
+    entity-entity relationships:
+    Audio Generative Models|GENERATES|synthetic speech
+
+  proposition: Audio generative models can generate hallucinations similar to Large Language Models.
+    entity-attribute relationships:
+    Audio Generative Models|CAPABILITY|generate hallucinations
+
+    entity-entity relationships:
+    Audio Generative Models|SIMILAR_TO|Large Language Models
+
+  proposition: Unauthorized voice replication infringes on personal rights and privacy.
+    entity-attribute relationships:
+    Voice Cloning Technologies|IMPACT|infringe personal rights
+    Voice Cloning Technologies|IMPACT|violate privacy
+
+  proposition: Voice cloning technologies require safeguards like watermarking and voice protection mechanisms.
+    entity-attribute relationships:
+    Voice Cloning Technologies|REQUIRES|safeguards
+    Voice Cloning Technologies|REQUIRES|watermarking
+    Voice Cloning Technologies|REQUIRES|voice protection mechanisms
+
+  proposition: Generative model-based agents are vulnerable to various attacks.
+    entity-attribute relationships:
+    Generative Model-based Agents|VULNERABILITY|susceptible to attacks
+
+  proposition: Retrieval-Augmented Generation agents are susceptible to poison attacks.
+    entity-attribute relationships:
+    Retrieval-Augmented Generation|VULNERABILITY|susceptible to poison attacks
+
+  proposition: Adherence to regulations like GDPR is fundamental to maintaining public trust.
+    entity-attribute relationships:
+    GDPR|ROLE|maintain public trust
+
+  proposition: Addressing trustworthiness requires collaborative efforts from researchers, developers, and policymakers.
+    entity-attribute relationships:
+    Generative Model-based Agents|REQUIRES|collaborative efforts
+    Generative Model-based Agents|REQUIRES|researcher involvement
+    Generative Model-based Agents|REQUIRES|developer involvement
+    Generative Model-based Agents|REQUIRES|policymaker involvement
+
+  proposition: Ethical considerations and regulatory frameworks are crucial for responsible AI development.
+    entity-attribute relationships:
+    Generative Model-based Agents|REQUIRES|ethical considerations
+    Generative Model-based Agents|REQUIRES|regulatory frameworks

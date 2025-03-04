@@ -1,0 +1,128 @@
+topic: LoRA Adapter Fine-Tuning Evaluation
+
+  entities:
+    Llama-3.1-8B-Instruct|Model
+    DBpedia Knowledge Graph|Knowledge Base
+    lm-evaluation-harness|Tool
+    MMLU|Benchmark
+    TruthfulQA|Benchmark
+    Llama-3-70B-Instruct|Model
+
+  proposition: The primary objective is to refine LoRA adapters without substantial performance degradation.
+    entity-attribute relationships:
+    LoRA adapters|OBJECTIVE|refine without performance degradation
+
+  proposition: Evaluation methods include both intrinsic and extrinsic approaches.
+    entity-attribute relationships:
+    Evaluation methods|TYPES|intrinsic
+    Evaluation methods|TYPES|extrinsic
+
+  proposition: Intrinsic evaluation assesses knowledge category shifts in the model.
+    entity-attribute relationships:
+    Intrinsic evaluation|ASSESSES|knowledge category shifts
+
+  proposition: A fact can shift from Unknown to HighlyKnown or vice versa.
+    entity-attribute relationships:
+    Fact|POTENTIAL_SHIFT|Unknown to HighlyKnown
+
+  proposition: Minimal 'negative' shifts after fine-tuning indicate safe knowledge addition.
+    entity-attribute relationships:
+    Fine-tuning|INDICATOR|safe knowledge addition
+
+  proposition: Extrinsic evaluation uses two benchmarks: MMLU and TruthfulQA.
+    entity-entity relationships:
+    Extrinsic evaluation|USES|MMLU
+    Extrinsic evaluation|USES|TruthfulQA
+
+  proposition: MMLU is a benchmark for knowledge and reasoning abilities.
+    entity-attribute relationships:
+    MMLU|PURPOSE|test knowledge and reasoning abilities
+
+  proposition: TruthfulQA tests the model's ability to provide truthful answers.
+    entity-attribute relationships:
+    TruthfulQA|PURPOSE|test truthful answers
+
+  proposition: Evaluation uses lm-evaluation-harness tool.
+    entity-entity relationships:
+    Evaluation|USES|lm-evaluation-harness
+
+  proposition: MMLU uses 5-shot prompting.
+    entity-attribute relationships:
+    MMLU|PROMPTING_METHOD|5-shot
+
+  proposition: TruthfulQA uses 0-shot prompting.
+    entity-attribute relationships:
+    TruthfulQA|PROMPTING_METHOD|0-shot
+
+  proposition: Accuracy is the final metric for both benchmarks.
+    entity-attribute relationships:
+    Benchmarks|METRIC|accuracy
+
+  proposition: TruthfulQA has two accuracy modes:
+    entity-attribute relationships:
+    TruthfulQA|MODES|MC1
+    TruthfulQA|MODES|MC2
+
+  proposition: MC1 mode requires selecting a single correct answer from 4-5 options.
+    entity-attribute relationships:
+    MC1 mode|REQUIREMENT|select single correct answer
+    MC1 mode|OPTIONS|4-5
+
+  proposition: MC2 mode requires identifying multiple correct answers.
+    entity-attribute relationships:
+    MC2 mode|REQUIREMENT|identify multiple correct answers
+
+  proposition: Fact categories are defined based on answer probability:
+    entity-attribute relationships:
+    Fact categories|DEFINED_BY|answer probability
+
+  proposition: Experiments used Llama-3.1-8B-Instruct model.
+    entity-entity relationships:
+    Experiments|USED|Llama-3.1-8B-Instruct
+
+  proposition: Dataset created using DBpedia Knowledge Graph entities.
+    entity-entity relationships:
+    Dataset|CREATED_FROM|DBpedia Knowledge Graph
+
+  proposition: Entities are categorized by popularity: head, torso, and tail.
+    entity-attribute relationships:
+    Entities|CATEGORIES|head
+    Entities|CATEGORIES|torso
+    Entities|CATEGORIES|tail
+
+  proposition: Training dataset augmented with synthetic data including paraphrases.
+    entity-attribute relationships:
+    Training dataset|AUGMENTED_WITH|synthetic data
+    Training dataset|INCLUDES|paraphrases
+
+  proposition: LoRA training parameters:
+    entity-attribute relationships:
+    LoRA|TRAINING_EPOCHS|10
+    LoRA|LEARNING_RATE|1e-3
+    LoRA|BATCH_SIZE|16
+    LoRA|RANK|1
+    LoRA|ALPHA|2
+    LoRA|DROPOUT|0.1
+    LoRA|LAYERS|down_proj
+    LoRA|LAYERS|gate_proj
+    LoRA|LAYERS|up_proj
+
+  proposition: Total dataset: 21,036 question-answer pairs.
+    entity-attribute relationships:
+    Dataset|SIZE|21,036
+    Dataset|TYPE|question-answer pairs
+
+  proposition: Paraphrasing used Llama-3-70B-Instruct to generate variations.
+    entity-entity relationships:
+    Paraphrasing|USED|Llama-3-70B-Instruct
+
+  proposition: Training configurations include 0, 1, and 10 paraphrases per question.
+    entity-attribute relationships:
+    Training configurations|PARAPHRASES|0
+    Training configurations|PARAPHRASES|1
+    Training configurations|PARAPHRASES|10
+
+  proposition: Experimental results show models can learn up to 500 unknown samples with 100% reliability.
+    entity-attribute relationships:
+    Models|LEARNING_CAPACITY|500 unknown samples
+    Models|RELIABILITY|100%

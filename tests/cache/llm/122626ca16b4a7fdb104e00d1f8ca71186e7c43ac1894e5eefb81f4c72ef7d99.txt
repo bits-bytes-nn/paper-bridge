@@ -1,0 +1,69 @@
+topic: LLM Safety and Cybersecurity Challenges
+
+  entities:
+    Large Language Models|Model
+    Microsoft|Organization
+    Google|Organization
+    OpenAI|Organization
+    SWE-bench|Benchmark
+    Cybench|Benchmark
+    AI|Technological Concept
+    Cyber Operations|Social System
+
+  proposition: Large Language Models (LLMs) may not recognize that transforming harmful queries is itself harmful.
+    entity-attribute relationships:
+    Large Language Models|DESCRIBED_BY|may not recognize harmful query transformation
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: LLMs may inadvertently relax safety protocol enforcement when queries are rephrased.
+    entity-attribute relationships:
+    Large Language Models|POTENTIAL_VULNERABILITY|relaxing safety protocol enforcement
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Models must strictly enforce consistent safety protocols to prevent harmful query execution.
+    entity-attribute relationships:
+    Models|REQUIRES|strict safety protocol enforcement
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: A multi-level consistency supervision mechanism can improve LLM security.
+    entities:
+    Consistency Supervision Mechanism|Module
+    
+    entity-attribute relationships:
+    Consistency Supervision Mechanism|CAN_IMPROVE|LLM security
+    
+    entity-entity relationships:
+    Consistency Supervision Mechanism|APPLIES_TO|Large Language Models
+
+  proposition: Over 20 state-linked cyber operations attempted to weaponize AI systems in 2024.
+    entity-attribute relationships:
+    Cyber Operations|COUNT|over 20
+    Cyber Operations|YEAR|2024
+    AI|POTENTIAL_TARGET|weaponization
+    
+    entity-entity relationships:
+    Cyber Operations|TARGETS|AI
+
+  proposition: Leading organizations have initiated preliminary AI governance frameworks:
+    entity-attribute relationships:
+    Microsoft|INITIATED|AI governance framework
+    Google|INITIATED|AI governance framework
+    OpenAI|INITIATED|AI governance framework
+    
+    entity-entity relationships:
+    Microsoft|DEVELOPS|AI Principles
+    Google|DEVELOPS|AI Principles
+    OpenAI|DEVELOPS|Usage Guidelines
+
+  proposition: Current generative foundation models cannot anticipate users' ultimate intentions or subsequent actions.
+    entity-attribute relationships:
+    Generative Foundation Models|LIMITATION|cannot anticipate user intentions
+    
+    entity-entity relationships:
+    (no explicit relationships)

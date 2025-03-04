@@ -1,0 +1,16 @@
+Research Papers on Cultural Understanding and Language Models
+Wei Zhang et al. published a paper titled "CultiVerse: Towards Cross-Cultural Understanding for Paintings with Large Language Model" in arXiv preprint arXiv:2405.00435 in 2024.
+Bin Wang et al. published a paper titled "CRAFT: Extracting and Tuning Cultural Instructions from the Wild" in arXiv preprint arXiv:2405.03138 in 2024.
+Tianxuan Lu et al. published a paper titled "Benchmarking Llama 3 for Chinese News Summation: Accuracy, Cultural Nuance, and Societal Value Alignment" in Authorea Preprints in 2024.
+Wangchunshu Zhou et al. published a paper titled "Empowering LLM-based Machine Translation with Cultural Awareness" in arXiv preprint arXiv:2305.14328 in 2023.
+Wenlong Dong et al. published a paper titled "Culture-Gen: Revealing Global Cultural Perception in Language Models through Natural Language Prompting" in arXiv preprint arXiv:2404.10199 in 2024.
+Yue Huang et al. published a paper titled "1+ 1> 2: Can large language models serve as cross-lingual knowledge aggregators?" in arXiv preprint arXiv:2406.14721 in 2024.
+Julia Kharchenko et al. published a paper titled "How Well Do LLMs Represent Values Across Cultures? Empirical Analysis of LLM Responses Based on Hofstede Cultural Dimensions" in arXiv preprint arXiv:2406.14805 in 2024.
+Wangchunshu Zhou et al. published a paper titled "BLEnD: A Benchmark for LLMs on Everyday Knowledge in Diverse Cultures and Languages" in arXiv preprint arXiv:2406.09948 in 2024.
+Katharina Hämmerl et al. published a paper titled "Do Multilingual Language Models Capture Differing Moral Norms?" in 2022.
+Aditi Khandelwal et al. published a paper titled "Do Moral Judgment and Reasoning Capability of LLMs Change with Language? A Study using the Multilingual Defining Issues Test" in arXiv preprint arXiv:2402.02135 in 2024.
+Shreya Havaldar et al. published a paper titled "Multilingual Language Models are not Multicultural: A Case Study in Emotion" in the Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis in 2023.
+Libo Qin et al. published a survey paper titled "Multilingual Large Language Model: A Survey of Resources, Taxonomy and Frontiers" in ArXiv in 2024.
+Chong Li et al. published a paper titled "X-Instruction: Aligning Language Model in Low-resource Languages with Self-curated Cross-lingual Instructions" in ArXiv in 2024.
+Yuemei Xu et al. published a survey paper titled "A Survey on Multilingual Large Language Models: Corpora, Alignment, and Bias" in ArXiv in 2024.
+Du Chen et al. published a paper titled "Orion-14B: Open-source Multilingual Large Language Models" in ArXiv in 2024.

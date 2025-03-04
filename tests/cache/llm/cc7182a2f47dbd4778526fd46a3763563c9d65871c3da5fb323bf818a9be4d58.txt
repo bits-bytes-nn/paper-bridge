@@ -1,0 +1,78 @@
+topic: Generative AI Ethics and Governance
+
+  entities:
+    Generative Models|Technological Concept
+    Developers|Researcher
+    Organizations|Organization
+    Human Decision-Makers|Social Concept
+    Stakeholders|Social Concept
+
+  proposition: Generative models should be designed to ensure fairness and ethical principles.
+    entity-attribute relationships:
+    Generative Models|DESCRIBED_BY|fairness
+    Generative Models|DESCRIBED_BY|ethical principles
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)
+
+  proposition: Generative models must uphold broadly accepted moral values.
+    entity-attribute relationships:
+    Generative Models|MUST_ADHERE_TO|moral values
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)
+
+  proposition: Generative models must minimize biases in all user interactions.
+    entity-attribute relationships:
+    Generative Models|MUST_MINIMIZE|biases
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)
+
+  proposition: Generative models must be respectful of user differences.
+    entity-attribute relationships:
+    Generative Models|MUST_BE|respectful
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)
+
+  proposition: Developers should use external mechanisms to make model outputs more transparent.
+    entity-attribute relationships:
+    Developers|MUST_IMPLEMENT|external mechanisms
+    Generative Models|REQUIRES|transparency
+
+    entity-entity relationships:
+    Developers|RESPONSIBLE_FOR|Generative Models
+
+  proposition: Human oversight is required throughout the entire model development process.
+    entity-attribute relationships:
+    Human Decision-Makers|ROLE|oversight
+
+    entity-entity relationships:
+    Human Decision-Makers|CONTROL|Generative Models
+
+  proposition: Developers and organizations must be identifiable and responsible for model behaviors.
+    entity-attribute relationships:
+    Developers|MUST_BE|identifiable
+    Developers|MUST_BE|responsible
+    Organizations|MUST_BE|responsible
+
+    entity-entity relationships:
+    Developers|PART_OF|Organizations
+
+  proposition: Generative models must prioritize harmlessness while maximizing helpfulness.
+    entity-attribute relationships:
+    Generative Models|MUST_PRIORITIZE|harmlessness
+    Generative Models|MUST_MAXIMIZE|helpfulness
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)
+
+  proposition: Models must protect physical, digital, and reputational resources.
+    entity-attribute relationships:
+    Generative Models|MUST_PROTECT|physical resources
+    Generative Models|MUST_PROTECT|digital resources
+    Generative Models|MUST_PROTECT|reputational resources
+
+    entity-entity relationships:
+    (no explicit relationships in this proposition)

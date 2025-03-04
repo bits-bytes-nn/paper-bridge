@@ -1,0 +1,12 @@
+Research Papers on Vision-Language Model Bias and Safety Benchmarks
+
+Jie Zhang and colleagues published VLBiasBench, a comprehensive benchmark for evaluating bias in large vision-language models in 2024.
+Hongzhan Lin and team created Goat-bench, a benchmark exploring safety insights in large multimodal models through meme-based social abuse in 2024.
+Zhe Hu and researchers developed VIVA, a benchmark for vision-grounded decision-making with human values in 2024.
+Zhelun Shi and colleagues conducted an assessment of multimodal large language models in alignment with human values in 2024.
+Sepehr Janghorbani and Gerard De Melo introduced a multimodal bias framework for stereotypical bias assessment beyond gender and race in vision language models in 2023.
+Yisong Xiao and team created GenderBias-VL, a benchmark for evaluating gender bias in vision language models via counterfactual probing in 2024.
+Fenghua Weng and researchers developed MMJ-Bench, a comprehensive study on jailbreak attacks and defenses for vision language models in 2024.
+Siyin Wang and colleagues explored cross-modality safety alignment in 2024.
+Hao Zhang and team created Avibench to evaluate the robustness of large vision-language models on adversarial visual instructions in 2024.
+Shuo Xing and researchers developed AutoTrust, a benchmark for trustworthiness in large vision language models for autonomous driving in 2024.

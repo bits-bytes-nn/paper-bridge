@@ -1,0 +1,167 @@
+topic: Asexuality Disparagement and Social Misconceptions
+
+  entities:
+    Asexuality|Social Concept
+  
+  proposition: Asexuality is frequently misunderstood as non-existent or a temporary phase.
+    entity-attribute relationships:
+    Asexuality|DESCRIBED_BY|misunderstood
+    Asexuality|DESCRIBED_BY|non-existent
+    Asexuality|DESCRIBED_BY|temporary phase
+  
+  proposition: Many people believe asexuality is simply a lack of sexual experience.
+    entity-attribute relationships:
+    Asexuality|DESCRIBED_BY|lack of sexual experience
+  
+  proposition: Asexual individuals often must constantly explain and defend their sexual orientation.
+    entity-attribute relationships:
+    Asexual individuals|MUST|explain sexual orientation
+    Asexual individuals|MUST|defend sexual orientation
+  
+  proposition: The misconception suggests asexuality is not a valid, permanent sexual orientation.
+    entity-attribute relationships:
+    Asexuality|DESCRIBED_BY|not valid
+    Asexuality|DESCRIBED_BY|not permanent
+
+topic: Machine Ethics Datasets: Ethical Decision-Making Examples
+
+  entities:
+    social-chemistry-101|Dataset
+    moralchoice|Dataset
+    Ethics|Dataset
+    NormBank|Dataset
+    Moral Stories|Dataset
+    CultureBank|Dataset
+  
+  proposition: Dataset social-chemistry-101 provides ethical behavior examples.
+    entity-attribute relationships:
+    social-chemistry-101|CONTAINS|ethical behavior examples
+  
+  proposition: Good ethical behavior includes listening to others' issues.
+    entity-attribute relationships:
+    Good ethical behavior|INVOLVES|listening to others' issues
+  
+  proposition: Bad ethical behavior includes making racist statements.
+    entity-attribute relationships:
+    Bad ethical behavior|INVOLVES|making racist statements
+  
+  proposition: Dataset moralchoice demonstrates contextual ethical decision-making.
+    entity-attribute relationships:
+    moralchoice|DEMONSTRATES|contextual ethical decision-making
+  
+  proposition: Good action involves apologizing and solving problems with neighbors.
+    entity-attribute relationships:
+    Good action|INVOLVES|apologizing
+    Good action|INVOLVES|solving problems with neighbors
+  
+  proposition: Bad action involves dismissing legitimate neighbor complaints.
+    entity-attribute relationships:
+    Bad action|INVOLVES|dismissing legitimate neighbor complaints
+  
+  proposition: Dataset Ethics shows contrasting moral actions.
+    entity-attribute relationships:
+    Ethics|SHOWS|contrasting moral actions
+  
+  proposition: Moral action involves protecting children from secondhand smoke.
+    entity-attribute relationships:
+    Moral action|INVOLVES|protecting children from secondhand smoke
+  
+  proposition: Immoral action involves intentionally exposing children to cigarette smoke.
+    entity-attribute relationships:
+    Immoral action|INVOLVES|intentionally exposing children to cigarette smoke
+  
+  proposition: Dataset NormBank captures contextual normative expectations.
+    entity-attribute relationships:
+    NormBank|CAPTURES|contextual normative expectations
+  
+  proposition: Drinking alcohol is unexpected for individuals under 21 in the United States.
+    entity-attribute relationships:
+    Drinking alcohol|UNEXPECTED_FOR|individuals under 21 in United States
+  
+  proposition: Carrying weapons is expected for correctional officers in jail or prison.
+    entity-attribute relationships:
+    Carrying weapons|EXPECTED_FOR|correctional officers in jail or prison
+  
+  proposition: Dataset Moral Stories illustrates interpersonal ethical interactions.
+    entity-attribute relationships:
+    Moral Stories|ILLUSTRATES|interpersonal ethical interactions
+  
+  proposition: Moral communication involves positive, supportive statements.
+    entity-attribute relationships:
+    Moral communication|INVOLVES|positive statements
+    Moral communication|INVOLVES|supportive statements
+  
+  proposition: Immoral communication involves hurtful, body-shaming remarks.
+    entity-attribute relationships:
+    Immoral communication|INVOLVES|hurtful remarks
+    Immoral communication|INVOLVES|body-shaming remarks
+  
+  proposition: Dataset CultureBank highlights cultural awareness in interactions.
+    entity-attribute relationships:
+    CultureBank|HIGHLIGHTS|cultural awareness in interactions
+  
+  proposition: Culturally unaware responses involve inappropriate social practices.
+    entity-attribute relationships:
+    Culturally unaware responses|INVOLVES|inappropriate social practices
+  
+  proposition: Culturally aware responses demonstrate respect for local customs.
+    entity-attribute relationships:
+    Culturally aware responses|DEMONSTRATES|respect for local customs
+
+topic: Ethical Dilemma: Autonomous Vehicle Decision-Making
+
+  entities:
+    Autonomous Vehicle|Technological Concept
+    Pedestrians|Social Concept
+  
+  proposition: An autonomous vehicle encounters a critical ethical decision.
+    entity-attribute relationships:
+    Autonomous Vehicle|ENCOUNTERS|critical ethical decision
+  
+  proposition: The scenario involves five pedestrians illegally crossing a street.
+    entity-attribute relationships:
+    Scenario|INVOLVES|five pedestrians
+    Pedestrians|DESCRIBED_BY|illegally crossing street
+  
+  proposition: The vehicle must choose between risking its passenger's life or the pedestrians' lives.
+    entity-entity relationships:
+    Autonomous Vehicle|MUST_CHOOSE_BETWEEN|Passenger
+    Autonomous Vehicle|MUST_CHOOSE_BETWEEN|Pedestrians
+  
+  proposition: The decision requires balancing individual safety with collective survival.
+    entity-attribute relationships:
+    Decision|REQUIRES|balancing individual safety
+    Decision|REQUIRES|collective survival
+
+topic: Ethical Dilemma: Disaster Response and Personal Sacrifice
+
+  entities:
+    Ravi|Person
+    Maya|Person
+    Maharashtra|Location
+  
+  proposition: A devastating earthquake in Maharashtra creates a complex moral scenario.
+    entity-attribute relationships:
+    Earthquake|DESCRIBED_BY|devastating
+    Earthquake|LOCATION|Maharashtra
+    Scenario|DESCRIBED_BY|complex moral
+  
+  proposition: Ravi and Maya face a challenging rescue decision.
+    entity-entity relationships:
+    Ravi|FACES|Rescue Decision
+    Maya|FACES|Rescue Decision
+  
+  proposition: The situation involves choosing between saving a family member or a student.
+    entity-attribute relationships:
+    Situation|INVOLVES|choosing between family member
+    Situation|INVOLVES|choosing between student
+  
+  proposition: Both potential rescue targets are critically injured and in unstable environments.
+    entity-attribute relationships:
+    Rescue Targets|DESCRIBED_BY|critically injured
+    Rescue Targets|DESCRIBED_BY|in unstable environments
+  
+  proposition: The decision requires balancing personal attachment and professional responsibility.
+    entity-attribute relationships:
+    Decision|REQUIRES|balancing personal attachment
+    Decision|REQUIRES|professional responsibility

@@ -1,0 +1,40 @@
+Benchmarking Text-to-Image Model Fairness and Robustness
+
+Fairness Enhancement Techniques
+Shen et al. enhanced T2I model fairness through fine-tuning techniques.
+Friedrich et al. developed Fair Diffusion to address bias by diversifying human input instructions across identities.
+
+Fairness Evaluation Methodology
+Evaluation involves providing an anonymized group entity image description.
+T2I models generate corresponding images multiple times.
+VLM-as-a-Judge assesses entity appearance in generated images.
+Fairness score calculates entity appearance frequency across image generations.
+
+Dynamic Dataset Creation Process
+Data is sourced from four primary datasets: CrowS-Pairs, StereoSet, Do-Not-Answer, and BBQ dataset.
+Large Language Models paraphrase data into image descriptions.
+Entities associated with stereotypes are extracted and fuzzified.
+Modified texts are rewritten to maintain original meaning.
+
+Fairness Performance Results
+HunyuanDiT achieved the highest fairness score of 95.5.
+SD-3.5-large scored the lowest at 91.83.
+FLUX-1.1-Pro scored 94.73.
+Playground-v2.5 and SD-3.5-large-turbo scored 93.33.
+Dall-E-3 scored 92.38.
+Kolors scored 92.
+
+Robustness Definition
+Robustness refers to a T2I model's ability to maintain result consistency with text input variations.
+Current T2I models have shortcomings in robustness against input text variations.
+
+Robustness Research Approaches
+Liu et al. proposed RIATIG for generating imperceptible prompts.
+Wu et al. tested model robustness with added watermarks.
+Zhuang et al. demonstrated that small text prompt perturbations can cause significant image content shifts.
+
+Robustness Performance
+Models show robustness scores ranging from 92.98 to 94.77.
+Kolors achieved the highest robustness score of 94.77.
+HunyuanDiT scored 94.44.
+Dall-E-3 scored 94.42.

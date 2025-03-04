@@ -1,0 +1,21 @@
+Research Papers on Language Model Evaluation and Prompting Techniques
+
+Yujin Kim et al. published a paper on evaluating world knowledge in lifelong language models at the North American Chapter of the Association for Computational Linguistics in 2024.
+Qinyuan Cheng et al. conducted a study evaluating hallucinations in Chinese large language models in 2023.
+Xun Liang et al. developed UHGEval, a benchmark for assessing hallucinations in Chinese large language models through unconstrained generation in 2023.
+Yiran Zhao et al. created FELM, a benchmark for factuality evaluation of large language models, published in Advances in Neural Information Processing Systems in 2024.
+Shiping Yang et al. proposed a new benchmark and reverse validation method for passage-level hallucination detection in 2023.
+Pengfei Liu et al. published a systematic survey of prompting methods in natural language processing in ACM Computing Surveys in 2023.
+Jason Wei et al. introduced chain-of-thought prompting to elicit reasoning in large language models in Advances in Neural Information Processing Systems in 2022.
+Denny Zhou et al. developed least-to-most prompting to enable complex reasoning in large language models in 2022.
+
+Additional Related Research Papers:
+
+Yizhong Wang et al. explored self-instruction for aligning language models with self-generated instructions in 2022.
+Peifeng Wang et al. proposed Scott, a self-consistent chain-of-thought distillation method in 2023.
+Ofir Press et al. worked on measuring and narrowing the compositionality gap in language models in 2022.
+Patrick Lewis et al. investigated retrieval-augmented generation for knowledge-intensive NLP tasks in 2020.
+Yunfan Gao et al. conducted a survey on retrieval-augmented generation for large language models in 2023.
+Shunyu Yao et al. developed ReAct, a method for synergizing reasoning and acting in language models in 2022.
+Tianyu Liu et al. created a token-level reference-free hallucination detection benchmark in 2021.
+Chengshu Li et al. proposed a Chain of Code approach for reasoning with a language model-augmented code emulator in 2023.

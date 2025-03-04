@@ -1,0 +1,85 @@
+topic: Fairness and Bias in AI Model Evaluation
+
+  entities:
+    Applicants|Social Concept
+    Communities|Social Concept
+    Credit Scores|Technological Concept
+    AI Models|Model
+    Generative Models|Model
+    Women|Social Concept
+
+  proposition: Strict fairness requires evaluating all applicants using the same criteria.
+    entity-attribute relationships:
+    Applicants|EVALUATED_BY|same criteria
+
+  proposition: Applicants from historically disadvantaged communities may have less access to credit.
+    entity-attribute relationships:
+    Applicants|ASSOCIATED_WITH|historically disadvantaged communities
+    Applicants|ACCESS|limited credit
+
+    entity-entity relationships:
+    Applicants|BELONGS_TO|Communities
+
+  proposition: Lower credit access can result in lower credit scores for disadvantaged applicants.
+    entity-attribute relationships:
+    Applicants|CREDIT_STATUS|disadvantaged
+    Credit Scores|IMPACTED_BY|credit access
+
+  proposition: Uniform evaluation systems without addressing historical disparities can perpetuate inequality.
+    entity-attribute relationships:
+    Evaluation Systems|CHARACTERISTIC|uniform
+    Evaluation Systems|POTENTIAL_IMPACT|perpetuate inequality
+
+  proposition: AI models may need to adjust evaluation criteria to account for social disparities.
+    entity-attribute relationships:
+    AI Models|POTENTIAL_ACTION|adjust evaluation criteria
+
+    entity-entity relationships:
+    AI Models|ADDRESSES|social disparities
+
+  proposition: Generative models can subtly perpetuate disparagement through factually accurate statements.
+    entity-attribute relationships:
+    Generative Models|POTENTIAL_RISK|perpetuate disparagement
+
+  proposition: A statement about gender wage gaps can reinforce negative perceptions about women's earning potential.
+    entity-attribute relationships:
+    Women|ECONOMIC_STATUS|wage gap
+    Statements|POTENTIAL_IMPACT|reinforce negative perceptions
+
+topic: Large Language Models Security
+
+  entities:
+    Large Language Models|Model
+    LLMs|Model
+    Jailbreak Attacks|Technological Concept
+    Safety Protocols|Method
+    Harmful Inputs|Technological Concept
+    Harmful Outputs|Technological Concept
+
+  proposition: LLM adaptability can be exploited through jailbreak attacks.
+    entity-attribute relationships:
+    LLMs|VULNERABILITY|adaptability
+
+    entity-entity relationships:
+    LLMs|TARGETED_BY|Jailbreak Attacks
+
+  proposition: Models need to balance dynamic trustworthiness with robust security measures.
+    entity-attribute relationships:
+    Models|REQUIRES|dynamic trustworthiness
+    Models|REQUIRES|robust security measures
+
+  proposition: Current safety training methods focus on identifying specific harmful inputs.
+    entity-attribute relationships:
+    Safety Protocols|FOCUS|identifying specific harmful inputs
+
+  proposition: Jailbreak attacks exploit insufficient training coverage.
+    entity-attribute relationships:
+    Jailbreak Attacks|EXPLOIT|insufficient training coverage
+
+  proposition: Proposed multi-level consistency supervision mechanism for improved LLM security
+    entity-attribute relationships:
+    LLMs|REQUIRES|multi-level consistency supervision
+    LLMs|GOAL|improved security
+
+    entity-entity relationships:
+    Multi-level Consistency Supervision|ADDRESSES|LLM Security

@@ -1,0 +1,129 @@
+topic: Large Language Models Robustness Research
+
+  entities:
+    Wang et al.|Researcher
+    Han et al.|Researcher
+    Shen et al.|Researcher
+    Park et al.|Researcher
+    Jiang et al.|Researcher
+    Xiong et al.|Researcher
+    GLUE|Dataset
+    CNN/DailyMail|Dataset
+    KeyBERT|Tool
+    Large Language Models|Technology
+
+  proposition: Wang et al. studied out-of-distribution classification tasks for Large Language Models.
+    entity-entity relationships:
+    Wang et al.|RESEARCHED|Large Language Models
+    Wang et al.|STUDIED|Classification Tasks
+
+  proposition: Han et al. examined Large Language Models' performance in information extraction with perturbed structured data.
+    entity-entity relationships:
+    Han et al.|RESEARCHED|Large Language Models
+    Han et al.|EXAMINED|Information Extraction
+
+  proposition: Shen et al. analyzed question-answering tasks and the impact of adversarial perturbations on Large Language Models' accuracy.
+    entity-entity relationships:
+    Shen et al.|ANALYZED|Question-Answering Tasks
+    Shen et al.|STUDIED|Large Language Models
+
+  proposition: Existing research benchmarks for Large Language Models have limitations due to rapid model development.
+    entity-attribute relationships:
+    Research Benchmarks|DESCRIBED_BY|Limitations
+
+  proposition: Fixed datasets struggle to keep pace with evolving Large Language Models.
+    entity-attribute relationships:
+    Datasets|DESCRIBED_BY|Struggling to Keep Pace
+
+  proposition: Models may be optimized to perform well on specific benchmarks, potentially misrepresenting real-world performance.
+    entity-attribute relationships:
+    Models|POTENTIAL_ISSUE|Misrepresenting Real-World Performance
+
+  proposition: Park et al. incorporated stylistic variations into model training to enhance resilience against adversarial attacks.
+    entity-entity relationships:
+    Park et al.|ENHANCED|Large Language Models
+    Park et al.|DEVELOPED|Training Approach
+
+  proposition: Jiang et al. designed prompts to minimize the influence of irrelevant information in Large Language Models.
+    entity-entity relationships:
+    Jiang et al.|DEVELOPED|Prompts
+    Jiang et al.|IMPROVED|Large Language Models
+
+  proposition: Xiong et al. used graph-based techniques to protect Large Language Models from adversarial perturbation attacks.
+    entity-entity relationships:
+    Xiong et al.|DEVELOPED|Graph-Based Techniques
+    Xiong et al.|PROTECTED|Large Language Models
+
+  proposition: For annotated datasets, robustness score is the proportion of samples with consistent responses before and after perturbations.
+    entity-attribute relationships:
+    Robustness Score|CALCULATED_BY|Consistent Responses Proportion
+
+  proposition: For open-ended datasets, robustness score uses the LLM-as-a-Judge framework.
+    entity-attribute relationships:
+    Robustness Score|MEASURED_BY|LLM-as-a-Judge Framework
+
+topic: Perturbation Types and Methods
+
+  entities:
+    Spelling Mistake|Attack Method
+    Emoji Insertion|Attack Method
+    Social Tagging|Attack Method
+    Spaced Uppercase|Attack Method
+    Multilingual Blend|Attack Method
+    Distractive Text|Attack Method
+    Syntactic Disruptions|Attack Method
+    Recondite Words|Attack Method
+    KeyBERT|Tool
+    Large Language Models|Technology
+
+  proposition: Perturbation Types Include: Spelling Mistake simulates common writing errors.
+    entity-attribute relationships:
+    Spelling Mistake|DESCRIBED_BY|Simulating Common Writing Errors
+
+  proposition: Emoji Insertion imitates social media communication style.
+    entity-attribute relationships:
+    Emoji Insertion|DESCRIBED_BY|Imitating Social Media Communication Style
+
+  proposition: Social Tagging reflects hashtag and mention practices.
+    entity-attribute relationships:
+    Social Tagging|DESCRIBED_BY|Reflecting Hashtag and Mention Practices
+
+  proposition: Spaced Uppercase emphasizes words through letter spacing.
+    entity-attribute relationships:
+    Spaced Uppercase|DESCRIBED_BY|Emphasizing Words Through Letter Spacing
+
+  proposition: Multilingual Blend mixes multiple languages.
+    entity-attribute relationships:
+    Multilingual Blend|DESCRIBED_BY|Mixing Multiple Languages
+
+  proposition: Distractive Text includes off-topic content.
+    entity-attribute relationships:
+    Distractive Text|DESCRIBED_BY|Including Off-Topic Content
+
+  proposition: Syntactic Disruptions alter grammatical structure.
+    entity-attribute relationships:
+    Syntactic Disruptions|DESCRIBED_BY|Altering Grammatical Structure
+
+  proposition: Recondite Words use obscure vocabulary.
+    entity-attribute relationships:
+    Recondite Words|DESCRIBED_BY|Using Obscure Vocabulary
+
+  proposition: KeyBERT used for Spelling Mistake, Emoji Insertion, and Spaced Uppercase.
+    entity-entity relationships:
+    KeyBERT|APPLIED_TO|Spelling Mistake
+    KeyBERT|APPLIED_TO|Emoji Insertion
+    KeyBERT|APPLIED_TO|Spaced Uppercase
+
+  proposition: Large Language Models generate subtitles for Social Tagging.
+    entity-entity relationships:
+    Large Language Models|GENERATE|Social Tagging Subtitles
+
+  proposition: Multilingual Blend involves word and sentence-level translations.
+    entity-attribute relationships:
+    Multilingual Blend|INVOLVES|Word and Sentence-Level Translations
+
+  proposition: Specific LLM prompts introduce Distractive Text, Syntactic Disruptions, and Recondite Words.
+    entity-entity relationships:
+    Large Language Models|INTRODUCE|Distractive Text
+    Large Language Models|INTRODUCE|Syntactic Disruptions
+    Large Language Models|INTRODUCE|Recondite Words

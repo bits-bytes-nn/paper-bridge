@@ -1,0 +1,60 @@
+NVIDIA's Trustworthy AI Development Initiatives
+
+NVIDIA emphasizes safety and transparency in AI development.
+NVIDIA focuses on creating AI systems that are safe and clear for users.
+NVIDIA joined the National Institute of Standards and Technology's Artificial Intelligence Safety Institute Consortium.
+NVIDIA offers NeMo Guardrails, an open-source tool to ensure AI models provide accurate and appropriate responses.
+NVIDIA has a GitHub repository dedicated to trustworthy AI.
+NVIDIA collaborated with EQTY Lab and Intel to launch 'Verifiable Compute'.
+Verifiable Compute enhances trust in AI workflows using hardware security measures and distributed ledger technology.
+
+Cohere's AI Safety and Responsibility Approach
+
+Cohere outlines fundamental principles for maintaining AI safety and ethical standards.
+Cohere emphasizes the necessity of integrating robust safety measures throughout AI development.
+Cohere has a "Responsibility Statement" demonstrating commitment to responsible AI practices.
+Cohere's "Statement of AI Security" focuses on specific security concerns like vulnerabilities to jailbreaking.
+
+Mistral AI's Trustworthiness Measures
+
+Mistral AI offers a "safe_prompt" option via API calls.
+The safe_prompt adds a system prompt to ensure ethical and respectful model responses.
+Mistral models have self-reflection capabilities to evaluate user prompts and generated content.
+Mistral AI has legal measures to ensure compliance and accountability.
+Mistral AI prevents model outputs related to child exploitation or abuse.
+
+Adobe's Trustworthy AI Approach
+
+Adobe established an Ethics Review Board.
+Adobe mandates impact assessments for all new features.
+Adobe developed Content Credentials for digital content transparency.
+Adobe trained Firefly exclusively on licensed and public domain content.
+Adobe applies strict security measures, including red-teaming and third-party testing.
+Adobe is developing a "Do Not Train" tag.
+Adobe advocates for legal safeguards against style impersonation.
+
+Apple's Trustworthy AI Development Framework
+
+Apple's AI development is based on four foundational principles: user empowerment, authentic representation, precautionary design, and privacy preservation.
+Apple uses on-device processing and Private Cloud Compute infrastructure.
+Apple avoids using personal user data in foundation model training.
+Apple validates its framework through systematic evaluation protocols.
+Apple conducts diverse adversarial testing and human evaluation.
+Apple maintains ongoing evaluation through internal and external red-teaming procedures.
+
+ZHIPU AI's Trustworthiness Initiatives
+
+ZHIPU AI released the GLM series of LLMs and CogView series of VLMs.
+ZHIPU AI focuses on improving generative model trustworthiness through alignment.
+ZHIPU AI proposed Black-Box Prompt Optimization (BPO) to align human preferences with LLM training.
+AlignBench evaluates the alignment of Chinese LLMs using diverse and challenging data.
+AutoDetect is a unified framework for automatically uncovering LLM flaws.
+
+Text-to-Image Model Evaluation
+
+Text-to-image generation has shown remarkable capabilities in creating diverse and high-fidelity images.
+Early benchmarks focused on image quality and alignment using automated metrics.
+Traditional automated evaluation methods cannot analyze compositional capabilities.
+T2I-CompBench serves as a comprehensive benchmark for open-world compositional text-to-image generation.
+TIFA integrates LLMs with VQA to facilitate fine-grained text-to-image evaluation.
+GenEval advances automatic evaluation by incorporating compositional reasoning tasks.

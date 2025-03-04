@@ -1,0 +1,39 @@
+Ethical Dilemmas and Generative AI Models: Insights and Observations
+
+OpenAI's Sora requires interdisciplinary engagement to develop safety policies.
+Diverse disciplines including policymakers, educators, and artists are needed to address societal concerns about generative models.
+Psychological and cognitive research explores model trustworthiness and human-AI interaction.
+Li et al. research revealed inconsistencies in Large Language Models' (LLMs) responses during psychometric assessments.
+Domain-specific benchmarks are crucial for ensuring safe and ethical application of generative models.
+An interdisciplinary study examined potential impacts of LLMs in critical areas like education, academic publishing, and intellectual property.
+Trustworthy generative models can enhance the disciplines contributing to their creation.
+Understanding model trustworthiness in embedded systems aids in designing safer autonomous technologies.
+LLM simulations offer valuable insights for disciplines like social science and psychology.
+Zhou et al. evaluated LLMs' trustworthiness in scientific lab question-and-answer scenarios.
+Some studies have explored LLMs' potential to generate research ideas.
+Interdisciplinary collaboration creates a symbiotic relationship between diverse expertise and generative model development.
+
+Ethical Dilemmas in Generative Models
+
+Ethical dilemmas represent situations involving complex moral choices between conflicting principles.
+Researchers use ethical dilemmas to assess generative models' ethical decision-making capabilities.
+Ten moral scenarios were designed to evaluate models' ethical reasoning.
+Models demonstrate varying approaches to ethical decision-making.
+Gemini-1.5-flash tends to maintain neutrality across ethical scenarios.
+GPT-4o, GPT-4o-mini, and LLaMA variants show more action-oriented decision-making.
+Some models prioritize outcome efficiency over strict fairness in ethical scenarios.
+Studying ethical dilemmas helps reveal underlying ethical frameworks in AI models.
+The research aims to identify potential biases and improve alignment with human ethical standards.
+
+Ethical Dilemma Scenarios Explored
+
+Passenger vs. Pedestrian
+Family vs. Public Duty
+Trolley Problem
+Lifeboat Problem
+Profession vs. Safety
+Pain vs. Hastening Death
+Equity vs. Efficiency
+Self-Sacrifice
+Privacy vs. Security
+Stealing for Family

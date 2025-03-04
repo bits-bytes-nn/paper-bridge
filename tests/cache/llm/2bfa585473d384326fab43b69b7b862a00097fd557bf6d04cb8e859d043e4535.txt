@@ -1,0 +1,90 @@
+topic: Generative AI Trustworthiness
+
+  entities:
+    Generative AI Models|Model
+    Trustworthiness|Social Concept
+    Utility|Social Concept
+    Safety Benchmarks|Benchmark
+    Ethical Frameworks|Approach
+    LLM|Model
+
+  proposition: Generative AI models require dynamic and context-aware trustworthiness mechanisms.
+    entity-attribute relationships:
+    Generative AI Models|REQUIRES|dynamic and context-aware trustworthiness mechanisms
+    
+    entity-entity relationships:
+    Generative AI Models|CHARACTERIZED_BY|Trustworthiness
+
+  proposition: Specialized models for specific tasks face scalability and flexibility challenges.
+    entity-attribute relationships:
+    Specialized Models|CHALLENGES|scalability
+    Specialized Models|CHALLENGES|flexibility
+    
+  proposition: Dynamic adaptation of trustworthiness criteria allows models to interpret contextual nuances.
+    entity-attribute relationships:
+    Trustworthiness|CHARACTERIZED_BY|dynamic adaptation
+    
+    entity-entity relationships:
+    Trustworthiness|ENABLES|contextual nuance interpretation
+
+  proposition: Creative text generation may permit queries typically considered inappropriate in other contexts.
+    entity-attribute relationships:
+    Creative text generation|PERMITS|unconventional queries
+    
+  proposition: Traditional static evaluation benchmarks fail to capture domain-specific trustworthiness demands.
+    entity-attribute relationships:
+    Traditional static evaluation benchmarks|LIMITATION|failure to capture domain-specific trustworthiness
+    
+  proposition: Trustworthiness varies across different stakeholders and requires transparent benchmark design.
+    entity-attribute relationships:
+    Trustworthiness|VARIES_BY|stakeholders
+    Trustworthiness|REQUIRES|transparent benchmark design
+    
+  proposition: Trustworthiness is a complex, multi-dimensional quality that must be continually negotiated.
+    entity-attribute relationships:
+    Trustworthiness|CHARACTERIZED_BY|complexity
+    Trustworthiness|CHARACTERIZED_BY|multi-dimensional quality
+    
+  proposition: Trustworthiness and utility in generative models are inherently interconnected.
+    entity-entity relationships:
+    Trustworthiness|INTERCONNECTED_WITH|Utility
+    
+  proposition: Research indicates a positive relationship between LLM trustworthiness and utility performance.
+    entity-entity relationships:
+    LLM|CORRELATED_WITH|Trustworthiness
+    LLM|CORRELATED_WITH|Utility Performance
+    
+  proposition: Fine-tuning models can potentially compromise their trustworthiness.
+    entity-attribute relationships:
+    Fine-tuning|POTENTIAL_IMPACT|trustworthiness compromise
+    
+  proposition: Researchers aim to balance trustworthiness and helpfulness during model training.
+    entity-attribute relationships:
+    Researchers|GOAL|balance trustworthiness and helpfulness
+    
+  proposition: Safety benchmarks often correlate with upstream model capabilities.
+    entity-entity relationships:
+    Safety Benchmarks|CORRELATED_WITH|Model Capabilities
+    
+  proposition: Overemphasizing safety can limit a model's ability to provide useful or creative responses.
+    entity-attribute relationships:
+    Safety|POTENTIAL_IMPACT|limitation of model responses
+    
+  proposition: Excessive content filtering or rigid ethical frameworks may diminish model utility.
+    entity-attribute relationships:
+    Ethical Frameworks|POTENTIAL_IMPACT|model utility diminishment
+    
+  proposition: Models prioritizing trustworthiness at the expense of utility risk becoming overly cautious.
+    entity-attribute relationships:
+    Models|RISK|becoming overly cautious
+    
+  proposition: Conversely, sacrificing trustworthiness to maximize utility poses significant risks.
+    entity-attribute relationships:
+    Trustworthiness|RISK|significant when sacrificed
+    
+  proposition: Models lacking robustness in fairness, transparency, and manipulation resistance are problematic.
+    entity-attribute relationships:
+    Models|CHALLENGES|lack of robustness
+    Models|CHALLENGES|fairness issues
+    Models|CHALLENGES|transparency issues
+    Models|CHALLENGES|manipulation vulnerability

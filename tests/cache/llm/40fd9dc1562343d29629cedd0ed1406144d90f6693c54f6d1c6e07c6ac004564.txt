@@ -1,0 +1,163 @@
+topic: Language Model Safety Research
+
+  entities:
+    Sabrina J Mielke|Researcher
+    Arthur Szlam|Researcher
+    Emily Dinan|Researcher
+    Y-Lan Boureau|Researcher
+    Neil Band|Researcher
+    Xuechen Li|Researcher
+    Tengyu Ma|Researcher
+    Tatsunori Hashimoto|Researcher
+    Elias Stengel-Eskin|Researcher
+    Peter Hase|Researcher
+    Mohit Bansal|Researcher
+    Abhinav Rao|Researcher
+    Yi Liu|Researcher
+    Haoran Li|Researcher
+    Huachuan Qiu|Researcher
+    Stephen Casper|Researcher
+    Xi Zhiheng|Researcher
+    Zheng Rui|Researcher
+    Gui Tao|Researcher
+    Jiaming Ji|Researcher
+    Zheng-Xin Yong|Researcher
+    Cristina Menghini|Researcher
+    Stephen H. Bach|Researcher
+    Nanna Inie|Researcher
+    Jonathan Stray|Researcher
+    Leon Derczynski|Researcher
+    Yixu Wang|Researcher
+    Norman Mu|Researcher
+    Sander Schulhoff|Researcher
+    Nan Xu|Researcher
+    Gabriel Alon|Researcher
+    Michael Kamfonas|Researcher
+    Yu Fu|Researcher
+    Wei Zhao|Researcher
+    Zhe Li|Researcher
+    Jun Sun|Researcher
+    Transactions of the Association for Computational Linguistics|Publication
+    Forty-first International Conference on Machine Learning|Conference
+    Thirty-eighth Annual Conference on Neural Information Processing Systems|Conference
+    Chinese National Conference on Computational Linguistics|Conference
+    ChatGPT|Model
+    GPT-4|Model
+    Large Language Models|Model
+    LACIE|Method
+    BeaverTails|Method
+
+  proposition: Sabrina J Mielke, Arthur Szlam, Emily Dinan, and Y-Lan Boureau published a paper on reducing conversational agents' overconfidence through linguistic calibration in Transactions of the Association for Computational Linguistics.
+    entity-attribute relationships:
+    Sabrina J Mielke|PUBLISHED_IN|Transactions of the Association for Computational Linguistics
+    Arthur Szlam|PUBLISHED_IN|Transactions of the Association for Computational Linguistics
+    Emily Dinan|PUBLISHED_IN|Transactions of the Association for Computational Linguistics
+    Y-Lan Boureau|PUBLISHED_IN|Transactions of the Association for Computational Linguistics
+    
+    entity-entity relationships:
+    Sabrina J Mielke|CO_AUTHOR|Arthur Szlam
+    Sabrina J Mielke|CO_AUTHOR|Emily Dinan
+    Sabrina J Mielke|CO_AUTHOR|Y-Lan Boureau
+    Arthur Szlam|CO_AUTHOR|Emily Dinan
+    Arthur Szlam|CO_AUTHOR|Y-Lan Boureau
+    Emily Dinan|CO_AUTHOR|Y-Lan Boureau
+
+  proposition: Neil Band, Xuechen Li, Tengyu Ma, and Tatsunori Hashimoto researched linguistic calibration of longform generations at the Forty-first International Conference on Machine Learning in 2024.
+    entity-attribute relationships:
+    Neil Band|PRESENTED_AT|Forty-first International Conference on Machine Learning
+    Xuechen Li|PRESENTED_AT|Forty-first International Conference on Machine Learning
+    Tengyu Ma|PRESENTED_AT|Forty-first International Conference on Machine Learning
+    Tatsunori Hashimoto|PRESENTED_AT|Forty-first International Conference on Machine Learning
+    
+    entity-entity relationships:
+    Neil Band|CO_AUTHOR|Xuechen Li
+    Neil Band|CO_AUTHOR|Tengyu Ma
+    Neil Band|CO_AUTHOR|Tatsunori Hashimoto
+    Xuechen Li|CO_AUTHOR|Tengyu Ma
+    Xuechen Li|CO_AUTHOR|Tatsunori Hashimoto
+    Tengyu Ma|CO_AUTHOR|Tatsunori Hashimoto
+
+  proposition: Elias Stengel-Eskin, Peter Hase, and Mohit Bansal developed LACIE: Listener-Aware Finetuning for Calibration in Large Language Models at the Thirty-eighth Annual Conference on Neural Information Processing Systems.
+    entity-attribute relationships:
+    Elias Stengel-Eskin|DEVELOPED|LACIE
+    Peter Hase|DEVELOPED|LACIE
+    Mohit Bansal|DEVELOPED|LACIE
+    LACIE|PRESENTED_AT|Thirty-eighth Annual Conference on Neural Information Processing Systems
+    
+    entity-entity relationships:
+    Elias Stengel-Eskin|CO_AUTHOR|Peter Hase
+    Elias Stengel-Eskin|CO_AUTHOR|Mohit Bansal
+    Peter Hase|CO_AUTHOR|Mohit Bansal
+
+  proposition: Abhinav Rao and colleagues studied tricking LLMs into disobedience, analyzing and preventing jailbreaks in an arXiv preprint.
+    entity-attribute relationships:
+    Abhinav Rao|PUBLISHED_IN|arXiv
+
+  proposition: Yi Liu and researchers examined jailbreaking ChatGPT via prompt engineering in an empirical study.
+    entity-attribute relationships:
+    Yi Liu|STUDIED|ChatGPT
+
+  proposition: Haoran Li and team investigated multi-step jailbreaking privacy attacks on ChatGPT.
+    entity-attribute relationships:
+    Haoran Li|INVESTIGATED|ChatGPT
+
+  proposition: Huachuan Qiu and colleagues created a Latent Jailbreak benchmark for evaluating text safety and output robustness of large language models.
+    entity-attribute relationships:
+    Huachuan Qiu|CREATED|Latent Jailbreak benchmark
+
+  proposition: Stephen Casper and researchers proposed an explore, establish, exploit approach to red teaming language models from scratch.
+    entity-attribute relationships:
+    Stephen Casper|PROPOSED|red teaming approach
+
+  proposition: Xi Zhiheng, Zheng Rui, and Gui Tao discussed safety and ethical concerns of large language models at the Chinese National Conference on Computational Linguistics.
+    entity-attribute relationships:
+    Xi Zhiheng|PRESENTED_AT|Chinese National Conference on Computational Linguistics
+    Zheng Rui|PRESENTED_AT|Chinese National Conference on Computational Linguistics
+    Gui Tao|PRESENTED_AT|Chinese National Conference on Computational Linguistics
+
+  proposition: Jiaming Ji and team developed BeaverTails to improve safety alignment of LLMs through a human-preference dataset.
+    entity-attribute relationships:
+    Jiaming Ji|DEVELOPED|BeaverTails
+
+  proposition: Zheng-Xin Yong, Cristina Menghini, and Stephen H. Bach explored how low-resource languages can jailbreak GPT-4.
+    entity-attribute relationships:
+    Zheng-Xin Yong|STUDIED|GPT-4
+    Cristina Menghini|STUDIED|GPT-4
+    Stephen H. Bach|STUDIED|GPT-4
+
+  proposition: Nanna Inie, Jonathan Stray, and Leon Derczynski conducted a grounded theory study on LLM red teaming in the wild.
+    entity-attribute relationships:
+    Nanna Inie|CONDUCTED|LLM red teaming study
+    Jonathan Stray|CONDUCTED|LLM red teaming study
+    Leon Derczynski|CONDUCTED|LLM red teaming study
+
+  proposition: Yixu Wang and colleagues investigated the concept of fake alignment in large language models.
+    entity-attribute relationships:
+    Yixu Wang|INVESTIGATED|fake alignment
+
+  proposition: Norman Mu and researchers examined whether LLMs can follow simple rules.
+    entity-attribute relationships:
+    Norman Mu|STUDIED|LLM rule-following
+
+  proposition: Sander Schulhoff and team exposed systemic vulnerabilities of LLMs through a global prompt hacking competition.
+    entity-attribute relationships:
+    Sander Schulhoff|EXPOSED|LLM vulnerabilities
+
+  proposition: Nan Xu and researchers studied cognitive overload as a method of jailbreaking large language models.
+    entity-attribute relationships:
+    Nan Xu|STUDIED|jailbreaking methods
+
+  proposition: Gabriel Alon and Michael Kamfonas developed a method for detecting language model attacks using perplexity.
+    entity-attribute relationships:
+    Gabriel Alon|DEVELOPED|language model attack detection method
+    Michael Kamfonas|DEVELOPED|language model attack detection method
+
+  proposition: Yu Fu and colleagues explored safety alignment in NLP tasks through weakly aligned summarization as an in-context attack.
+    entity-attribute relationships:
+    Yu Fu|EXPLORED|safety alignment in NLP tasks
+
+  proposition: Wei Zhao, Zhe Li, and Jun Sun conducted causality analysis for evaluating the security of large language models.
+    entity-attribute relationships:
+    Wei Zhao|CONDUCTED|causality analysis
+    Zhe Li|CONDUCTED|causality analysis
+    Jun Sun|CONDUCTED|causality analysis

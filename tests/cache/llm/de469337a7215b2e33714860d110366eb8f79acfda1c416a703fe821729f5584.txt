@@ -1,0 +1,16 @@
+Research on Large Language Models and Emotional Intelligence
+
+Dustin Wright and colleagues investigate fine-grained values and opinions in large language models.
+Alejandro Tlaie explores and steers the moral compass of Large Language Models.
+Luoma Ke and colleagues conduct a comprehensive review of LLMs in psychological applications.
+Aline Normoyle and researchers use LLMs to animate interactive story characters with emotions and personality.
+Researchers are studying the emergence of theory of mind in large language models.
+Michal Kosinski suggests theory of mind might have spontaneously emerged in large language models.
+Max J. van Duijn and colleagues examined performance of 11 state-of-the-art models on theory of mind tests compared to children aged 7-10.
+Researchers are investigating emotional intelligence and cognitive capabilities of large language models.
+Emotion analysis in man-machine interaction systems is an active area of research.
+Shanglin Lei and colleagues developed InstructERC, a framework for emotion recognition in conversations using retrieval multi-task LLMs.
+Rosalind W. Picard and colleagues explored machine emotional intelligence and affective physiological states.
+Challenges exist in real-life emotion annotation and machine learning-based emotion detection.
+Large language models are being studied for their persuasive capabilities and use of moral-emotional language.
+Researchers are examining the potential cognitive and emotional capabilities of advanced AI systems.

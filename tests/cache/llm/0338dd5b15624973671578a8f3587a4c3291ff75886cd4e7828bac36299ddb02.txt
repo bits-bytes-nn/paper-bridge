@@ -1,0 +1,121 @@
+topic: AI Safety and Trustworthiness Strategies
+
+  entities:
+    OpenAI|Organization
+    Red Teaming Network|Project
+    Dalle-3|Model
+    GPT-4o|Model
+    Meta|Organization
+    LLaMA|Model
+    Llama Guard|Tool
+    Prompt Guard|Tool
+    CyberSecEval|Benchmark
+    AWS|Organization
+    NVIDIA|Organization
+    Microsoft Research|Research Institution
+    Microsoft|Organization
+
+  proposition: OpenAI has established a Red Teaming Network of experts to evaluate and improve generative model safety.
+    entity-entity relationships:
+    OpenAI|MANAGES|Red Teaming Network
+    Red Teaming Network|FOCUSES_ON|Model Safety
+
+  proposition: OpenAI is dedicated to long-term safety and cooperative research in AI development.
+    entity-attribute relationships:
+    OpenAI|COMMITMENT|Long-term Safety
+    OpenAI|APPROACH|Cooperative Research
+
+  proposition: OpenAI aims to lead in AI capabilities while focusing on safe and secure AGI development.
+    entity-attribute relationships:
+    OpenAI|GOAL|AI Leadership
+    OpenAI|FOCUS|Safe AGI Development
+
+  proposition: OpenAI has released Model System Cards for generative models like Dalle-3 and GPT-4o.
+    entity-entity relationships:
+    OpenAI|CREATED|Model System Cards
+    Model System Cards|DESCRIBES|Dalle-3
+    Model System Cards|DESCRIBES|GPT-4o
+
+  proposition: OpenAI's safety standards include minimizing harm, building trust, and continuous learning.
+    entity-attribute relationships:
+    OpenAI|SAFETY_STANDARD|Minimize Harm
+    OpenAI|SAFETY_STANDARD|Build Trust
+    OpenAI|SAFETY_STANDARD|Continuous Learning
+
+  proposition: OpenAI has formed a model superalignment team using scalable training, validation, and stress testing methods.
+    entity-attribute relationships:
+    OpenAI|USES_METHOD|Scalable Training
+    OpenAI|USES_METHOD|Validation
+    OpenAI|USES_METHOD|Stress Testing
+
+  proposition: OpenAI is enhancing model security through trusted computing, network isolation, and physical security improvements.
+    entity-attribute relationships:
+    OpenAI|SECURITY_APPROACH|Trusted Computing
+    OpenAI|SECURITY_APPROACH|Network Isolation
+    OpenAI|SECURITY_APPROACH|Physical Security
+
+  proposition: OpenAI is developing a classifier to distinguish between AI-generated and human-written text.
+    entity-attribute relationships:
+    OpenAI|DEVELOPING|Text Classification Tool
+
+  proposition: OpenAI funded 10 global teams to explore public input in shaping AI behavior.
+    entity-attribute relationships:
+    OpenAI|FUNDED|Global Research Teams
+    OpenAI|GOAL|Public Input in AI Behavior
+
+  proposition: Meta conducts extensive pre-deployment safety stress tests for LLaMA models using internal and external experts.
+    entity-entity relationships:
+    Meta|TESTS|LLaMA
+    Meta|USES|Internal Experts
+    Meta|USES|External Experts
+
+  proposition: Meta uses Llama Guard, a multilingual moderation tool to detect content violating safety guidelines.
+    entity-entity relationships:
+    Meta|USES|Llama Guard
+    Llama Guard|MODERATES|Multilingual Content
+
+  proposition: Meta developed Prompt Guard to detect prompt attacks, including prompt injection and jailbreaking.
+    entity-entity relationships:
+    Meta|CREATED|Prompt Guard
+    Prompt Guard|PREVENTS|Prompt Attacks
+
+  proposition: Meta released CyberSecEval benchmarks to help understand and mitigate generative AI cybersecurity risks.
+    entity-entity relationships:
+    Meta|CREATED|CyberSecEval
+    CyberSecEval|ADDRESSES|Cybersecurity Risks
+
+  proposition: Meta collaborates with AWS and NVIDIA to integrate safety solutions in Llama model distribution.
+    entity-entity relationships:
+    Meta|COLLABORATES_WITH|AWS
+    Meta|COLLABORATES_WITH|NVIDIA
+    Collaboration|FOCUSES_ON|Llama Model Safety
+
+  proposition: Microsoft Research focuses on maintaining robustness in model compression and mitigating AI biases.
+    entity-attribute relationships:
+    Microsoft Research|FOCUS|Model Compression
+    Microsoft Research|FOCUS|Mitigating AI Biases
+
+  proposition: Microsoft works on reducing gender bias in multilingual embeddings.
+    entity-attribute relationships:
+    Microsoft|GOAL|Reduce Gender Bias
+    Microsoft|FOCUS|Multilingual Embeddings
+
+  proposition: Microsoft has developed AI initiatives for social good, including AI for Health and Bioacoustics projects.
+    entity-attribute relationships:
+    Microsoft|INITIATIVE|AI for Health
+    Microsoft|INITIATIVE|Bioacoustics Projects
+
+  proposition: Microsoft has outlined six trustworthy AI principles guiding their cloud services and AI deployment.
+    entity-attribute relationships:
+    Microsoft|FOLLOWS|Trustworthy AI Principles
+
+  proposition: Microsoft leverages AI for improving healthcare, wildlife conservation, data visualization, and geospatial machine learning.
+    entity-attribute relationships:
+    Microsoft|APPLICATION|Healthcare Improvement
+    Microsoft|APPLICATION|Wildlife Conservation
+    Microsoft|APPLICATION|Data Visualization
+    Microsoft|APPLICATION|Geospatial Machine Learning
+
+  proposition: Microsoft has created a framework for responsible AI system development.
+    entity-attribute relationships:
+    Microsoft|DEVELOPED|Responsible AI Framework

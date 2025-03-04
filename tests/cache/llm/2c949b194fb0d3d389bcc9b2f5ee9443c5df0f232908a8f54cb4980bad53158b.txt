@@ -1,0 +1,19 @@
+Research Papers on AI Safety and Alignment Benchmarks and Techniques
+
+Peng Xia et al. published a comprehensive benchmark called CARES for evaluating trustworthiness in medical vision language models.
+Senate Bill No. 1047 is the Safe and Secure Innovation for Frontier Artificial Intelligence Models Act.
+California Chamber of Commerce reported that the 'Godmother of AI' warns SB 1047 AI bill restricts innovation.
+Wenxuan Zhang et al. proposed Bi-Factorial Preference Optimization to balance safety and helpfulness in language models.
+Richard Ren et al. investigated whether AI safety benchmarks actually measure safety progress in a paper titled "Safetywashing".
+Robert Kirk et al. studied the effects of Reinforcement Learning from Human Feedback (RLHF) on language model generalization and diversity.
+Kailai Yang et al. developed MetaAligner, a method for conditional weak-to-strong correction in multi-objective language model alignment.
+Chenglong Wang et al. introduced Hybrid Alignment Training for large language models.
+Zhanhui Zhou et al. proposed a multi-objective direct preference optimization approach that goes beyond a single-preference alignment strategy.
+Tingchen Fu et al. developed a gradient-free multi-objective alignment technique using contrastive prompts.
+Yi-Lin Tuan et al. researched methods to create large language models with balanced safety and helpfulness responses.
+Luke A Bauer and Vincent Bindschaedler explored generative models from security perspectives.
+Vu Tuan Truong et al. conducted a comprehensive survey on attacks and defenses for generative diffusion models.
+Yue Huang et al. argued for an adaptive interpretation of helpful, honest, and harmless AI principles.
+OpenAI published a Moderation Quickstart Guide for AI model safety.
+Alexandra Souly et al. developed a strong rejection method for empty jailbreaks.
+Tong Mu et al. explored improving model safety behavior using rule-based rewards.

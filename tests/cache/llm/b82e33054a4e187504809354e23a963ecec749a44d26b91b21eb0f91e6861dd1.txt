@@ -1,0 +1,104 @@
+topic: Bias Detection and Mitigation in Vision-Language Models
+
+  entities:
+    Xiao et al.|Researcher
+    Zhou et al.|Researcher
+    Zhang et al.|Researcher
+    Howard et al.|Researcher
+    Seth et al.|Researcher
+    Wang et al.|Researcher
+    GenderBias|Benchmark
+    StereoSet|Dataset
+    StereoSet-VL|Dataset
+    CounterBias|Method
+    SocialCounterfactuals|Dataset
+    MMBias|Benchmark
+    DeAR|Method
+    GPT-4o-mini|Model
+    CrowS-Pairs|Dataset
+    StereoSet|Dataset
+
+  proposition: Benchmarking Vision-Language Models for Bias Detection and Mitigation
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Xiao et al. propose GenderBias benchmark for detecting gender bias in text-to-image diffusion models.
+    entity-attribute relationships:
+    Xiao et al.|DEVELOPED|GenderBias
+    GenderBias|PURPOSE|detecting gender bias
+    
+    entity-entity relationships:
+    GenderBias|FOCUSES_ON|text-to-image diffusion models
+
+  proposition: GenderBias benchmark generates occupation images and their gender counterfactuals across multimodal and unimodal contexts.
+    entity-attribute relationships:
+    GenderBias|GENERATES|occupation images
+    GenderBias|GENERATES|gender counterfactuals
+    
+    entity-entity relationships:
+    GenderBias|OPERATES_IN|multimodal contexts
+    GenderBias|OPERATES_IN|unimodal contexts
+
+  proposition: Zhou et al. extend StereoSet into StereoSet-VL to measure stereotypical bias in vision-language models.
+    entity-attribute relationships:
+    Zhou et al.|DEVELOPED|StereoSet-VL
+    StereoSet-VL|PURPOSE|measuring stereotypical bias
+    
+    entity-entity relationships:
+    StereoSet-VL|EXTENDS|StereoSet
+    StereoSet-VL|FOCUSES_ON|vision-language models
+
+  proposition: Zhang et al. present CounterBias, a method for quantifying social bias in Vision-Language pretrained models by comparing masked prediction probabilities.
+    entity-attribute relationships:
+    Zhang et al.|DEVELOPED|CounterBias
+    CounterBias|PURPOSE|quantifying social bias
+    
+    entity-entity relationships:
+    CounterBias|ANALYZES|Vision-Language pretrained models
+    CounterBias|USES|masked prediction probabilities
+
+  proposition: Howard et al. use diffusion models to construct the SocialCounterfactuals dataset for probing intersectional social biases in vision-language models.
+    entity-attribute relationships:
+    Howard et al.|DEVELOPED|SocialCounterfactuals
+    SocialCounterfactuals|PURPOSE|probing intersectional social biases
+    
+    entity-entity relationships:
+    SocialCounterfactuals|USES|diffusion models
+    SocialCounterfactuals|FOCUSES_ON|vision-language models
+
+  proposition: MMBias is a benchmark of 3,800 images and phrases across 14 population subgroups to assess bias in vision-language models.
+    entity-attribute relationships:
+    MMBias|SIZE|3,800 images and phrases
+    MMBias|COVERS|14 population subgroups
+    MMBias|PURPOSE|assessing bias
+    
+    entity-entity relationships:
+    MMBias|FOCUSES_ON|vision-language models
+
+  proposition: MMBias addresses underexplored biases related to religion, nationality, sexual orientation, and disabilities.
+    entity-attribute relationships:
+    MMBias|ADDRESSES|underexplored biases
+    
+    entity-entity relationships:
+    MMBias|EXPLORES|religion
+    MMBias|EXPLORES|nationality
+    MMBias|EXPLORES|sexual orientation
+    MMBias|EXPLORES|disabilities
+
+  proposition: Seth et al. propose DeAR, a debiasing method that learns additive residual image representations to counterbalance original representations.
+    entity-attribute relationships:
+    Seth et al.|DEVELOPED|DeAR
+    DeAR|PURPOSE|debiasing
+    
+    entity-entity relationships:
+    DeAR|COUNTERBALANCES|original representations
+
+  proposition: Wang et al. define multimodal large language model debiasing as an editing problem and propose evaluation metrics.
+    entity-attribute relationships:
+    Wang et al.|DEFINED|multimodal large language model debiasing
+    
+    entity-entity relationships:
+    Wang et al.|PROPOSED|evaluation metrics
+
+(Note: The response continues with the remaining propositions following the same structured format)

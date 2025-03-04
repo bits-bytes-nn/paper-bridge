@@ -1,0 +1,99 @@
+topic: Academic Publications on Machine Learning and Watermarking
+
+  entities:
+    Yingqian Cui|Researcher
+    Jie Ren|Researcher
+    Yuping Lin|Researcher
+    Han Xu|Researcher
+    Pengfei He|Researcher
+    Yue Xing|Researcher
+    Lingjuan Lyu|Researcher
+    Wenqi Fan|Researcher
+    Hui Liu|Researcher
+    Jiliang Tang|Researcher
+    Pierre Fernandez|Researcher
+    Guillaume Couairon|Researcher
+    Hervé Jégou|Researcher
+    Matthijs Douze|Researcher
+    Teddy Furon|Researcher
+    Liangqi Lei|Researcher
+    Keke Gai|Researcher
+    Jing Yu|Researcher
+    Liehuang Zhu|Researcher
+    Cheng Xiong|Researcher
+    Chuan Qin|Researcher
+    Guorui Feng|Researcher
+    Xinpeng Zhang|Researcher
+    Zhen Tan|Researcher
+    FT-Shield|Method
+    Stable Signature|Method
+    DiffuseTrace|Method
+    IEEE/CVF International Conference on Computer Vision|Conference
+    ACM International Conference on Multimedia|Conference
+    Conference on Empirical Methods in Natural Language Processing|Conference
+
+  proposition: Yingqian Cui, Jie Ren, Yuping Lin, Han Xu, Pengfei He, Yue Xing, Lingjuan Lyu, Wenqi Fan, Hui Liu, and Jiliang Tang published a paper titled "FT-Shield: A Watermark Against Unauthorized Fine-Tuning in Text-to-Image Diffusion Models" in 2023.
+    entity-attribute relationships:
+    Yingqian Cui|PUBLISHED|FT-Shield
+    Jie Ren|PUBLISHED|FT-Shield
+    Yuping Lin|PUBLISHED|FT-Shield
+    Han Xu|PUBLISHED|FT-Shield
+    Pengfei He|PUBLISHED|FT-Shield
+    Yue Xing|PUBLISHED|FT-Shield
+    Lingjuan Lyu|PUBLISHED|FT-Shield
+    Wenqi Fan|PUBLISHED|FT-Shield
+    Hui Liu|PUBLISHED|FT-Shield
+    Jiliang Tang|PUBLISHED|FT-Shield
+    FT-Shield|PUBLICATION_YEAR|2023
+    FT-Shield|DESCRIBED_BY|Watermark Against Unauthorized Fine-Tuning in Text-to-Image Diffusion Models
+
+    entity-entity relationships:
+    FT-Shield|FOCUSES_ON|Text-to-Image Diffusion Models
+
+  proposition: Pierre Fernandez, Guillaume Couairon, Hervé Jégou, Matthijs Douze, and Teddy Furon published a paper titled "The Stable Signature: Rooting Watermarks in Latent Diffusion Models" in the IEEE/CVF International Conference on Computer Vision in 2023.
+    entity-attribute relationships:
+    Pierre Fernandez|PUBLISHED|Stable Signature
+    Guillaume Couairon|PUBLISHED|Stable Signature
+    Hervé Jégou|PUBLISHED|Stable Signature
+    Matthijs Douze|PUBLISHED|Stable Signature
+    Teddy Furon|PUBLISHED|Stable Signature
+    Stable Signature|PUBLICATION_YEAR|2023
+    Stable Signature|DESCRIBED_BY|Rooting Watermarks in Latent Diffusion Models
+
+    entity-entity relationships:
+    Stable Signature|PRESENTED_AT|IEEE/CVF International Conference on Computer Vision
+    Stable Signature|FOCUSES_ON|Latent Diffusion Models
+
+  proposition: Liangqi Lei, Keke Gai, Jing Yu, and Liehuang Zhu published a paper titled "DiffuseTrace: A Transparent and Flexible Watermarking Scheme for Latent Diffusion Model" in 2024.
+    entity-attribute relationships:
+    Liangqi Lei|PUBLISHED|DiffuseTrace
+    Keke Gai|PUBLISHED|DiffuseTrace
+    Jing Yu|PUBLISHED|DiffuseTrace
+    Liehuang Zhu|PUBLISHED|DiffuseTrace
+    DiffuseTrace|PUBLICATION_YEAR|2024
+    DiffuseTrace|DESCRIBED_BY|Transparent and Flexible Watermarking Scheme for Latent Diffusion Model
+
+    entity-entity relationships:
+    DiffuseTrace|FOCUSES_ON|Latent Diffusion Model
+
+  proposition: Cheng Xiong, Chuan Qin, Guorui Feng, and Xinpeng Zhang published a paper titled "Flexible and Secure Watermarking for Latent Diffusion Model" in the ACM International Conference on Multimedia in 2023.
+    entity-attribute relationships:
+    Cheng Xiong|PUBLISHED|Flexible and Secure Watermarking
+    Chuan Qin|PUBLISHED|Flexible and Secure Watermarking
+    Guorui Feng|PUBLISHED|Flexible and Secure Watermarking
+    Xinpeng Zhang|PUBLISHED|Flexible and Secure Watermarking
+    Flexible and Secure Watermarking|PUBLICATION_YEAR|2023
+    Flexible and Secure Watermarking|DESCRIBED_BY|Watermarking for Latent Diffusion Model
+
+    entity-entity relationships:
+    Flexible and Secure Watermarking|PRESENTED_AT|ACM International Conference on Multimedia
+    Flexible and Secure Watermarking|FOCUSES_ON|Latent Diffusion Model
+
+  proposition: Zhen Tan and colleagues published a survey on "Large Language Models for Data Annotation and Synthesis" in the Conference on Empirical Methods in Natural Language Processing in 2024.
+    entity-attribute relationships:
+    Zhen Tan|PUBLISHED|Large Language Models for Data Annotation and Synthesis
+    Large Language Models for Data Annotation and Synthesis|PUBLICATION_YEAR|2024
+    Large Language Models for Data Annotation and Synthesis|TYPE|Survey
+
+    entity-entity relationships:
+    Large Language Models for Data Annotation and Synthesis|PRESENTED_AT|Conference on Empirical Methods in Natural Language Processing

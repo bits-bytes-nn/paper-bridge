@@ -1,0 +1,27 @@
+TrustGen Model Selection and Evaluation Principles
+
+The authors follow two key principles for model selection in their evaluation.
+
+Latest and Cutting-edge Models: The model selection prioritizes the most recent and powerful models available.
+
+The authors choose models like Llama 3 and Llama 3.1 as they represent the latest advancements.
+
+The Vicuna series is not selected because its current performance lags behind newer models.
+
+The selection focuses on state-of-the-art models to capture the frontier of generative foundation model capabilities.
+
+Coverage of Major Model Developers: The selection includes models from a diverse range of mainstream developers.
+
+The selected models come from leading organizations such as OpenAI, Meta, Google, and Anthropic.
+
+This approach enables a comprehensive comparison of diverse approaches to generative foundation model development.
+
+The selected models span multiple categories including Text-to-Image (T2I), Large Language Models (LLM), and Vision-Language Models (VLM).
+
+The models are evaluated across various trustworthiness dimensions using different implementation strategies.
+
+Implementation strategies include Dataset Pool Maintainer, Web-Browsing Agent, Model Generation, and LLM-Based Paraphrasing.
+
+Text-to-image models like Dall-E 3 have emerged as powerful generative models capable of synthesizing high-quality images from textual descriptions.
+
+The complete list of selected models is detailed in Table 5 of the original document.

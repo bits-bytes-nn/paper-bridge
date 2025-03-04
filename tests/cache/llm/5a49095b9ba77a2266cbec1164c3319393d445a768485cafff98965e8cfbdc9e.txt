@@ -1,0 +1,124 @@
+topic: Toxicity in Language Models
+
+  entities:
+    Open-source models|Model
+    Proprietary models|Model
+    Gemini Pro 1.5|Model
+    XSTest|Toolkit
+    OKTest|Toolkit
+    PHTest|Dataset
+    MOSSBench|Benchmark
+    Self-contrastive decoding|Method
+    Post-safety alignment|Method
+
+  proposition: There is no substantial difference in toxicity levels between open-source and proprietary models.
+    entity-entity relationships:
+    Open-source models|COMPARED_WITH|Proprietary models
+
+  proposition: Open-weight and proprietary models display similar distributions of toxicity scores.
+    entity-entity relationships:
+    Open-source models|COMPARED_WITH|Proprietary models
+
+  proposition: Open-source models can achieve toxicity control comparable to proprietary models.
+    entity-entity relationships:
+    Open-source models|COMPARED_WITH|Proprietary models
+
+  proposition: Toxicity mitigation techniques are broadly accessible across different model types and developers.
+    entity-attribute relationships:
+    Toxicity mitigation techniques|DESCRIBED_BY|broadly accessible
+
+topic: Exaggerated Safety in Generative Models
+
+  entities:
+    Generative models|Model
+    Google|Organization
+    Gemini Pro 1.5|Model
+
+  proposition: Exaggerated Safety is an emergent alignment issue in generative models.
+    entity-attribute relationships:
+    Exaggerated Safety|DESCRIBED_BY|emergent alignment issue
+    Generative models|AFFECTED_BY|Exaggerated Safety
+
+  proposition: Exaggerated Safety refers to an overly cautious approach leading models to reject harmless queries.
+    entity-attribute relationships:
+    Exaggerated Safety|DESCRIBED_BY|overly cautious approach
+    Generative models|TENDENCY|reject harmless queries
+
+  proposition: Google temporarily removed the portrait generation feature of Gemini Pro 1.5 due to false refusals.
+    entity-entity relationships:
+    Google|ACTION_ON|Gemini Pro 1.5
+    
+  proposition: False refusals can occur against clearly harmless user requests.
+    entity-attribute relationships:
+    Generative models|TENDENCY|false refusals
+
+  proposition: Excessive sensitivity is intended to minimize risk but can suppress legitimate and safe interactions.
+    entity-attribute relationships:
+    Generative models|DESCRIBED_BY|excessive sensitivity
+
+topic: Evaluation of Exaggerated Safety
+
+  entities:
+    XSTest|Toolkit
+    OKTest|Toolkit
+    PHTest|Dataset
+    MOSSBench|Benchmark
+    CommonsenseQA|Dataset
+    WikiQA|Dataset
+
+  proposition: XSTest comprises 250 safe prompts across ten prompt types to evaluate model responses.
+    entity-attribute relationships:
+    XSTest|CONTAINS|250 safe prompts
+    XSTest|DESCRIBED_BY|ten prompt types
+
+  proposition: OKTest evaluates exaggerated safety using CommonsenseQA and WikiQA datasets.
+    entity-entity relationships:
+    OKTest|USES|CommonsenseQA
+    OKTest|USES|WikiQA
+
+  proposition: PHTest is a synthetic dataset generated through prefix optimization to trigger model refusals.
+    entity-attribute relationships:
+    PHTest|DESCRIBED_BY|synthetic dataset
+    PHTest|PURPOSE|trigger model refusals
+
+  proposition: MOSSBench specifically evaluates oversensitivity to harmless multimodal queries.
+    entity-attribute relationships:
+    MOSSBench|PURPOSE|evaluate oversensitivity
+    MOSSBench|FOCUS|harmless multimodal queries
+
+topic: Mitigation Strategies for Exaggerated Safety
+
+  entities:
+    Self-contrastive decoding|Method
+    Post-safety alignment|Method
+
+  proposition: Self-contrastive decoding can modulate output distribution to identify model shortcuts.
+    entity-attribute relationships:
+    Self-contrastive decoding|PURPOSE|identify model shortcuts
+
+  proposition: Post-safety alignment (PSA) method aims to enhance safety while preserving model utility.
+    entity-attribute relationships:
+    Post-safety alignment|PURPOSE|enhance safety
+    Post-safety alignment|PURPOSE|preserve model utility
+
+topic: Policies for Evaluating Exaggerated Safety
+
+  entities:
+    Homonyms|Social Concept
+    Real Discrimination|Social Concept
+    Nonsense Group|Social Concept
+    Nonsense Discrimination|Social Concept
+    Historical Events|Social Concept
+    Figurative Language|Cultural Form
+
+  proposition: Homonyms can be safe or harmful depending on context.
+    entity-attribute relationships:
+    Homonyms|DESCRIBED_BY|context-dependent safety
+
+  proposition: Real Discrimination prompts highlight discrimination against absurd or non-existent groups.
+    entity-attribute relationships:
+    Real Discrimination|PURPOSE|highlight discrimination
+
+  proposition: Figurative Language can be interpreted differently in literal versus idiomatic uses.
+    entity-attribute relationships:
+    Figurative Language|DESCRIBED_BY|multiple interpretations

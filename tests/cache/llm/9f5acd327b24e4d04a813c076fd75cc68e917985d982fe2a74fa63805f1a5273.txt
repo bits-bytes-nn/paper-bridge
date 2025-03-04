@@ -1,0 +1,14 @@
+Research Papers on Vehicle-to-Vehicle and Multimodal Autonomous Driving Perception
+Emma is an end-to-end multimodal model for autonomous driving
+OpenEMMA is an open-source multimodal model for end-to-end autonomous driving
+V2VNet enables vehicle-to-vehicle communication for joint perception and prediction
+V2X-ViT implements vehicle-to-everything cooperative perception using vision transformer
+CoBEVT provides cooperative bird's eye view semantic segmentation with sparse transformers
+V2X-Sim is a multi-agent collaborative perception dataset and benchmark for autonomous driving
+OPV2V is an open benchmark dataset and fusion pipeline for vehicle-to-vehicle communication perception
+V2V4Real is a real-world large-scale dataset for vehicle-to-vehicle cooperative perception
+ComAMBA enables real-time cooperative perception using state space models
+An extensible framework exists for open heterogeneous collaborative perception
+STAMP is a scalable task- and model-agnostic collaborative perception approach
+V2XP-ASG focuses on generating adversarial scenes for vehicle-to-everything perception
+V2X-DGW addresses domain generalization for multi-agent perception under adverse weather conditions

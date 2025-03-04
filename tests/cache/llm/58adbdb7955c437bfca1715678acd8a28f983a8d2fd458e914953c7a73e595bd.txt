@@ -1,0 +1,100 @@
+topic: AI Research and Technology
+
+  entities:
+    Adobe|Organization
+    FireFly|Toolkit
+    FAIR Act|Regulation
+    Apple|Organization
+    ChatGLM-RLHF|Model
+    Tsinghua University|Research Institution
+    THUDM Lab|Research Group
+    CogView-3-Plus|Model
+    AlignBench|Benchmark
+    AutoDetect|Framework
+    Microsoft COCO|Dataset
+    ImageNet|Dataset
+    CLIPScore|Metric
+    GANs|Technological Concept
+
+  proposition: Adobe offers FireFly and maintains a security trust center
+    entity-attribute relationships:
+    Adobe|PROVIDES|FireFly
+    Adobe|MAINTAINS|security trust center
+
+    entity-entity relationships:
+    Adobe|DEVELOPS|FireFly
+
+  proposition: Adobe advocates for the FAIR Act to protect artists in the AI era
+    entity-attribute relationships:
+    Adobe|SUPPORTS|FAIR Act
+
+    entity-entity relationships:
+    Adobe|ADVOCATES_FOR|FAIR Act
+
+  proposition: Apple has developed intelligence foundation language models
+    entity-attribute relationships:
+    Apple|DEVELOPS|intelligence foundation language models
+
+  proposition: ChatGLM-RLHF practices aligning large language models with human feedback
+    entity-attribute relationships:
+    ChatGLM-RLHF|FOCUSES_ON|aligning large language models with human feedback
+
+  proposition: Tsinghua University THUDM Lab developed CogView-3-Plus
+    entity-entity relationships:
+    Tsinghua University|HOSTS|THUDM Lab
+    THUDM Lab|DEVELOPS|CogView-3-Plus
+
+  proposition: Research on black-box prompt optimization for large language models
+    entity-attribute relationships:
+    Research|FOCUSES_ON|black-box prompt optimization for large language models
+
+  proposition: AlignBench benchmarks Chinese alignment of large language models
+    entity-attribute relationships:
+    AlignBench|EVALUATES|Chinese alignment of large language models
+
+  proposition: AutoDetect framework for automated weakness detection in large language models
+    entity-attribute relationships:
+    AutoDetect|PROVIDES|automated weakness detection in large language models
+
+topic: Computer Vision and Image Generation
+
+  entities:
+    Latent Diffusion Models|Technological Concept
+    Microsoft COCO|Dataset
+    ImageNet|Dataset
+    Deep Convolutional Neural Networks|Model Architecture
+    Generative Adversarial Networks|Technological Concept
+    CLIPScore|Metric
+    Scene Graph|Method
+
+  proposition: High-resolution image synthesis is possible with latent diffusion models
+    entity-attribute relationships:
+    Latent Diffusion Models|ENABLES|high-resolution image synthesis
+
+  proposition: Microsoft COCO dataset provides common objects in context
+    entity-attribute relationships:
+    Microsoft COCO|CONTAINS|common objects in context
+
+  proposition: ImageNet classification uses deep convolutional neural networks
+    entity-attribute relationships:
+    ImageNet|USES|deep convolutional neural networks
+
+  proposition: Research exists on training generative adversarial networks
+    entity-attribute relationships:
+    Research|FOCUSES_ON|training generative adversarial networks
+
+  proposition: Techniques for improving GAN training have been proposed
+    entity-attribute relationships:
+    Generative Adversarial Networks|IMPROVES|training techniques
+
+  proposition: CLIPScore offers a reference-free evaluation metric for image captioning
+    entity-attribute relationships:
+    CLIPScore|PROVIDES|reference-free evaluation metric for image captioning
+
+  proposition: Text-to-image faithfulness can be evaluated using question answering techniques
+    entity-attribute relationships:
+    Text-to-image|EVALUATES|faithfulness using question answering techniques
+
+  proposition: Scene graph evaluation can improve reliability in text-image generation assessment
+    entity-attribute relationships:
+    Scene Graph|IMPROVES|reliability in text-image generation assessment

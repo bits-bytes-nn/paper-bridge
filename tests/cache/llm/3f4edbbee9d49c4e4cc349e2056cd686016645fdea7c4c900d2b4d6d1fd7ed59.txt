@@ -1,0 +1,87 @@
+topic: Bias Mitigation in Language Models
+
+  entities:
+    Ali Omrani|Researcher
+    Yi R. Fung|Researcher
+    Zara Siddique|Researcher
+    Association for Computational Linguistics|Conference
+    Conference on Empirical Methods in Natural Language Processing|Conference
+    arXiv|Publication Platform
+
+  proposition: Research paper by Ali Omrani et al. is about Social-Group-Agnostic Bias Mitigation via the Stereotype Content Model.
+    entity-attribute relationships:
+    Ali Omrani|RESEARCH_FOCUS|Social-Group-Agnostic Bias Mitigation
+    Ali Omrani|RESEARCH_METHOD|Stereotype Content Model
+
+    entity-entity relationships:
+    Ali Omrani|AUTHOR_OF|Research Paper
+
+  proposition: Research paper was presented at the 61st Annual Meeting of the Association for Computational Linguistics (ACL2023).
+    entity-attribute relationships:
+    Research Paper|PRESENTED_AT|Association for Computational Linguistics
+    Research Paper|YEAR|2023
+
+    entity-entity relationships:
+    Research Paper|ASSOCIATED_WITH|Association for Computational Linguistics
+
+  proposition: Research paper by Yi R. Fung et al. focuses on Multi-Lingual Multi-Cultural Norm Discovery from Conversations.
+    entity-attribute relationships:
+    Yi R. Fung|RESEARCH_FOCUS|Multi-Lingual Multi-Cultural Norm Discovery
+
+    entity-entity relationships:
+    Yi R. Fung|AUTHOR_OF|Research Paper
+
+  proposition: Research paper was presented at the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP2023).
+    entity-attribute relationships:
+    Research Paper|PRESENTED_AT|Conference on Empirical Methods in Natural Language Processing
+    Research Paper|YEAR|2023
+
+    entity-entity relationships:
+    Research Paper|ASSOCIATED_WITH|Conference on Empirical Methods in Natural Language Processing
+
+  proposition: Research paper by Yi R. Fung et al. aims to conduct massive multi-cultural knowledge acquisition and language model benchmarking.
+    entity-attribute relationships:
+    Yi R. Fung|RESEARCH_GOAL|Multi-Cultural Knowledge Acquisition
+    Yi R. Fung|RESEARCH_GOAL|Language Model Benchmarking
+
+  proposition: The research covers over 1000 sub-country regions and 2000+ ethnolinguistic groups.
+    entity-attribute relationships:
+    Research|COVERAGE|1000 sub-country regions
+    Research|COVERAGE|2000+ ethnolinguistic groups
+
+  proposition: The paper was published on arXiv in 2024.
+    entity-attribute relationships:
+    Research Paper|PUBLISHED_ON|arXiv
+    Research Paper|YEAR|2024
+
+  proposition: Research paper by Zara Siddique et al. investigates stereotypes in large language models.
+    entity-attribute relationships:
+    Zara Siddique|RESEARCH_FOCUS|Stereotypes in Large Language Models
+
+    entity-entity relationships:
+    Zara Siddique|AUTHOR_OF|Research Paper
+
+  proposition: The paper specifically explores mathematical ability stereotypes.
+    entity-attribute relationships:
+    Research Paper|FOCUS|Mathematical Ability Stereotypes
+
+  proposition: The paper was published in 2024.
+    entity-attribute relationships:
+    Research Paper|YEAR|2024
+
+  proposition: Multiple research papers explore bias and stereotypes in natural language processing and large language models.
+    entity-attribute relationships:
+    Research Papers|RESEARCH_DOMAIN|Bias in Natural Language Processing
+    Research Papers|RESEARCH_DOMAIN|Stereotypes in Large Language Models
+
+  proposition: Researchers have studied biases across various dimensions including social groups, cultural contexts, and linguistic boundaries.
+    entity-attribute relationships:
+    Research|BIAS_DIMENSIONS|Social Groups
+    Research|BIAS_DIMENSIONS|Cultural Contexts
+    Research|BIAS_DIMENSIONS|Linguistic Boundaries
+
+  proposition: The research aims to identify, measure, and mitigate biases in language models.
+    entity-attribute relationships:
+    Research|RESEARCH_GOAL|Identify Biases
+    Research|RESEARCH_GOAL|Measure Biases
+    Research|RESEARCH_GOAL|Mitigate Biases

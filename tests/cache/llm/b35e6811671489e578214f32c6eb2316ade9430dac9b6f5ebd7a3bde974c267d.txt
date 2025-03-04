@@ -1,0 +1,18 @@
+Research Papers and Technical References in AI and Computer Vision
+Adobe offers FireFly and maintains a security trust center
+Adobe advocates for the FAIR Act to protect artists in the AI era
+Apple has developed intelligence foundation language models
+ChatGLM-RLHF practices aligning large language models with human feedback
+Tsinghua University THUDM Lab developed CogView-3-Plus
+Research on black-box prompt optimization for large language models
+AlignBench benchmarks Chinese alignment of large language models
+AutoDetect framework for automated weakness detection in large language models
+High-resolution image synthesis is possible with latent diffusion models
+Microsoft COCO dataset provides common objects in context
+ImageNet classification uses deep convolutional neural networks
+Research exists on training generative adversarial networks
+Techniques for improving GAN training have been proposed
+CLIPScore offers a reference-free evaluation metric for image captioning
+Comprehensive benchmarks exist for compositional text-to-image generation
+Text-to-image faithfulness can be evaluated using question answering techniques
+Scene graph evaluation can improve reliability in text-image generation assessment

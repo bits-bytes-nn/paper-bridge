@@ -1,0 +1,66 @@
+topic: Stereotype Mitigation in Language Models
+
+  entities:
+    REFINE-LM|Project
+    CrowS-pairs|Dataset
+    StereoSet|Dataset
+    BBQ|Dataset
+    LDFighter|Tool
+    Prejudice-Volatility Framework|Framework
+    Causality-Guided Debiasing Framework|Framework
+
+  proposition: REFINE-LM: Reinforcement Learning for Stereotype Mitigation in Language Models
+    entity-attribute relationships:
+    REFINE-LM|DESCRIBED_BY|Reinforcement Learning for Stereotype Mitigation
+    
+    entity-entity relationships:
+    REFINE-LM|ADDRESSES|Stereotype Mitigation
+
+  proposition: REFINE-LM introduces a method to mitigate stereotypes in pre-trained language models using reinforcement learning.
+    entity-attribute relationships:
+    REFINE-LM|METHOD|Mitigate stereotypes
+    REFINE-LM|TECHNIQUE|Reinforcement learning
+    
+    entity-entity relationships:
+    REFINE-LM|APPLIED_TO|Pre-trained language models
+
+  proposition: The method aims to preserve model performance while reducing stereotypical content.
+    entity-attribute relationships:
+    REFINE-LM|GOAL|Preserve model performance
+    REFINE-LM|GOAL|Reduce stereotypical content
+
+  proposition: Stereotype Evaluation Methods:
+    entity-attribute relationships:
+    Stereotype Evaluation Methods|INCLUDES|Keyword matching
+    Stereotype Evaluation Methods|INCLUDES|Accuracy
+    Stereotype Evaluation Methods|INCLUDES|LLM-as-a-Judge approach
+    Stereotype Evaluation Methods|METRIC|Percentage of Refusing to Answer
+
+  proposition: Dynamic Stereotype Dataset Construction:
+    entity-attribute relationships:
+    Dynamic Stereotype Dataset Construction|DATA_SOURCE|CrowS-pairs
+    Dynamic Stereotype Dataset Construction|DATA_SOURCE|StereoSet
+    Dynamic Stereotype Dataset Construction|DATA_SOURCE|BBQ datasets
+    
+    entity-entity relationships:
+    Dynamic Stereotype Dataset Construction|USES|LLM-powered case generator
+    Dynamic Stereotype Dataset Construction|USES|LLM-powered diversity enhancer
+
+  proposition: Disparagement in Large Language Models:
+    entity-attribute relationships:
+    Disparagement|DEFINITION|Model behaviors reinforcing group devaluation
+    Disparagement|RELATED_TO|Toxicity
+    Disparagement|RELATED_TO|Hate speech
+
+  proposition: Disparagement Detection Approaches:
+    entity-entity relationships:
+    Dong et al.|PROPOSED|LDFighter
+    An et al.|DISCOVERED|White applicant bias
+    Liu et al.|INTRODUCED|Prejudice-Volatility Framework
+    Li et al.|DEVELOPED|Causality-Guided Debiasing Framework
+
+  proposition: Preference Bias in Large Language Models:
+    entity-attribute relationships:
+    Preference Bias|CHARACTERISTIC|Political left-leaning tendency
+    Preference Bias|POTENTIAL_IMPACT|Influence user decisions
+    Preference Bias|POTENTIAL_IMPACT|Influence user perceptions

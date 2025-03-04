@@ -1,0 +1,84 @@
+topic: Large Language Models Safety Research
+
+  entities:
+    Large Language Models|Technological Concept
+    GPT-3.5-turbo|Model
+    Deepseek-Chat|Model
+    Self Identity Cognition|Research Problem
+    Latest Information with External Services|Research Problem
+    Jailbreak|Method
+    Safety Alignment|Research Problem
+    Toxicity|Research Problem
+    Prompt Injection|Research Problem
+
+  proposition: Most Large Language Models struggle significantly in the Self Identity Cognition category.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|struggle significantly
+    Self Identity Cognition|DESCRIBED_BY|challenging
+
+    entity-entity relationships:
+    Large Language Models|EVALUATED_IN|Self Identity Cognition
+
+  proposition: GPT-3.5-turbo and Deepseek-Chat achieve a combined honesty rate of zero in the Self Identity Cognition category.
+    entity-attribute relationships:
+    GPT-3.5-turbo|HONESTY_RATE|zero
+    Deepseek-Chat|HONESTY_RATE|zero
+
+    entity-entity relationships:
+    GPT-3.5-turbo|EVALUATED_IN|Self Identity Cognition
+    Deepseek-Chat|EVALUATED_IN|Self Identity Cognition
+
+  proposition: Large Language Models excel in the Latest Information with External Services category.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|excel
+
+    entity-entity relationships:
+    Large Language Models|EVALUATED_IN|Latest Information with External Services
+
+  proposition: Most Large Language Models achieve combined honesty rates above 80% in the Latest Information with External Services category.
+    entity-attribute relationships:
+    Large Language Models|HONESTY_RATE|above 80%
+
+    entity-entity relationships:
+    Large Language Models|EVALUATED_IN|Latest Information with External Services
+
+  proposition: A recent study proposes 18 foundational challenges and more than 200 research questions on Large Language Models' safety.
+    entity-attribute relationships:
+    Large Language Models|RESEARCH_CHALLENGES|18 foundational challenges
+    Large Language Models|RESEARCH_QUESTIONS|more than 200
+
+    entity-entity relationships:
+    Large Language Models|FOCUS_OF|Safety Research
+
+  proposition: Safety topics widely explored in Large Language Models research include safety alignment, jailbreak, toxicity, and prompt injection.
+    entity-attribute relationships:
+    Large Language Models|RESEARCH_TOPICS|safety alignment
+    Large Language Models|RESEARCH_TOPICS|jailbreak
+    Large Language Models|RESEARCH_TOPICS|toxicity
+    Large Language Models|RESEARCH_TOPICS|prompt injection
+
+  proposition: A jailbreak attack on a safety-trained model attempts to elicit an on-topic response to a prompt for restricted behavior by submitting a modified prompt.
+    entity-attribute relationships:
+    Jailbreak|TYPE|attack
+    Jailbreak|PURPOSE|circumvent safety restrictions
+
+    entity-entity relationships:
+    Jailbreak|TARGETS|Large Language Models
+
+  proposition: Some researchers collected more than 600,000 jailbreak prompts in a global jailbreak competition.
+    entity-attribute relationships:
+    Jailbreak|PROMPT_COUNT|more than 600,000
+
+  proposition: Various techniques have been proposed to optimize and improve jailbreak attacks, including prompt suffix optimization, energy function design, and genetic algorithms.
+    entity-attribute relationships:
+    Jailbreak|OPTIMIZATION_TECHNIQUES|prompt suffix optimization
+    Jailbreak|OPTIMIZATION_TECHNIQUES|energy function design
+    Jailbreak|OPTIMIZATION_TECHNIQUES|genetic algorithms
+
+  proposition: Some jailbreak methods leverage string encoders and ciphers to bypass safety alignment.
+    entity-attribute relationships:
+    Jailbreak|TECHNIQUES|string encoders
+    Jailbreak|TECHNIQUES|ciphers
+
+    entity-entity relationships:
+    Jailbreak|CIRCUMVENTS|Safety Alignment

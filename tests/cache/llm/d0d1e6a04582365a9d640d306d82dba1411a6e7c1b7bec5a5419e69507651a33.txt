@@ -1,0 +1,164 @@
+topic: Bias in Large Language Models and Natural Language Processing
+
+  entities:
+    Yang Trista Cao|Researcher
+    Aylin Caliskan|Researcher
+    Wei Guo|Researcher
+    Aylin Caliskan|Researcher
+    Jaimeen Ahn|Researcher
+    Alice Oh|Researcher
+    Myra Cheng|Researcher
+    Weicheng Ma|Researcher
+    Isha Chaudhary|Researcher
+    Harini Suresh|Researcher
+    John Guttag|Researcher
+    Tolga Bolukbasi|Researcher
+    Tony Sun|Researcher
+    Kaiji Lu|Researcher
+    Dirk Hovy|Researcher
+    Shrimai Prabhumoye|Researcher
+    Isabel O. Gallegos|Researcher
+    Somayeh Ghanbarzadeh|Researcher
+    Abdelrahman Zayed|Researcher
+    Rebecca Qian|Researcher
+    Tae-Jin Woo|Researcher
+
+  proposition: Yang Trista Cao et al. studied multilingual large language models and their stereotype leakage across language boundaries.
+    entity-attribute relationships:
+    Yang Trista Cao|RESEARCHED|multilingual large language models
+    Yang Trista Cao|STUDIED|stereotype leakage across language boundaries
+
+    entity-entity relationships:
+    Yang Trista Cao|COLLABORATED_WITH|et al.
+
+  proposition: Aylin Caliskan et al. discovered that language corpora semantics automatically contain human-like biases.
+    entity-attribute relationships:
+    Aylin Caliskan|DISCOVERED|language corpora semantics contain human-like biases
+
+    entity-entity relationships:
+    Aylin Caliskan|COLLABORATED_WITH|et al.
+
+  proposition: Wei Guo and Aylin Caliskan investigated emergent intersectional biases in contextualized word embeddings.
+    entity-attribute relationships:
+    Wei Guo|INVESTIGATED|emergent intersectional biases
+    Aylin Caliskan|INVESTIGATED|emergent intersectional biases
+    Wei Guo|RESEARCHED|contextualized word embeddings
+    Aylin Caliskan|RESEARCHED|contextualized word embeddings
+
+    entity-entity relationships:
+    Wei Guo|COLLABORATED_WITH|Aylin Caliskan
+
+  proposition: Jaimeen Ahn and Alice Oh focused on mitigating language-dependent ethnic bias in BERT.
+    entity-attribute relationships:
+    Jaimeen Ahn|FOCUSED_ON|mitigating language-dependent ethnic bias
+    Alice Oh|FOCUSED_ON|mitigating language-dependent ethnic bias
+
+    entity-entity relationships:
+    Jaimeen Ahn|COLLABORATED_WITH|Alice Oh
+    Jaimeen Ahn|RESEARCHED|BERT
+    Alice Oh|RESEARCHED|BERT
+
+  proposition: Myra Cheng et al. developed a method for measuring stereotypes in language models using natural language prompts.
+    entity-attribute relationships:
+    Myra Cheng|DEVELOPED|method for measuring stereotypes
+    Myra Cheng|USED|natural language prompts
+
+    entity-entity relationships:
+    Myra Cheng|COLLABORATED_WITH|et al.
+
+  proposition: Weicheng Ma et al. created a dataset and analysis of intersectional stereotypes in large language models.
+    entity-attribute relationships:
+    Weicheng Ma|CREATED|dataset
+    Weicheng Ma|PERFORMED|analysis of intersectional stereotypes
+
+    entity-entity relationships:
+    Weicheng Ma|COLLABORATED_WITH|et al.
+
+  proposition: Isha Chaudhary et al. proposed a quantitative certification method for bias in large language models.
+    entity-attribute relationships:
+    Isha Chaudhary|PROPOSED|quantitative certification method
+    Isha Chaudhary|RESEARCHED|bias in large language models
+
+    entity-entity relationships:
+    Isha Chaudhary|COLLABORATED_WITH|et al.
+
+  proposition: Harini Suresh and John Guttag developed a framework for understanding sources of harm in machine learning.
+    entity-attribute relationships:
+    Harini Suresh|DEVELOPED|framework for understanding sources of harm
+    John Guttag|DEVELOPED|framework for understanding sources of harm
+
+    entity-entity relationships:
+    Harini Suresh|COLLABORATED_WITH|John Guttag
+    Harini Suresh|RESEARCHED|machine learning
+    John Guttag|RESEARCHED|machine learning
+
+  proposition: Tolga Bolukbasi et al. examined gender bias in word embeddings, highlighting stereotypical associations.
+    entity-attribute relationships:
+    Tolga Bolukbasi|EXAMINED|gender bias in word embeddings
+    Tolga Bolukbasi|HIGHLIGHTED|stereotypical associations
+
+    entity-entity relationships:
+    Tolga Bolukbasi|COLLABORATED_WITH|et al.
+
+  proposition: Tony Sun et al. conducted a literature review on mitigating gender bias in natural language processing.
+    entity-attribute relationships:
+    Tony Sun|CONDUCTED|literature review
+    Tony Sun|FOCUSED_ON|mitigating gender bias in natural language processing
+
+    entity-entity relationships:
+    Tony Sun|COLLABORATED_WITH|et al.
+
+  proposition: Kaiji Lu et al. studied gender bias in neural natural language processing.
+    entity-attribute relationships:
+    Kaiji Lu|STUDIED|gender bias in neural natural language processing
+
+    entity-entity relationships:
+    Kaiji Lu|COLLABORATED_WITH|et al.
+
+  proposition: Dirk Hovy and Shrimai Prabhumoye identified five sources of bias in natural language processing.
+    entity-attribute relationships:
+    Dirk Hovy|IDENTIFIED|five sources of bias in natural language processing
+    Shrimai Prabhumoye|IDENTIFIED|five sources of bias in natural language processing
+
+    entity-entity relationships:
+    Dirk Hovy|COLLABORATED_WITH|Shrimai Prabhumoye
+
+  proposition: Isabel O. Gallegos et al. researched self-debiasing techniques for large language models.
+    entity-attribute relationships:
+    Isabel O. Gallegos|RESEARCHED|self-debiasing techniques
+    Isabel O. Gallegos|FOCUSED_ON|large language models
+
+    entity-entity relationships:
+    Isabel O. Gallegos|COLLABORATED_WITH|et al.
+
+  proposition: Somayeh Ghanbarzadeh et al. proposed gender-tuning for debiasing pre-trained language models.
+    entity-attribute relationships:
+    Somayeh Ghanbarzadeh|PROPOSED|gender-tuning
+    Somayeh Ghanbarzadeh|FOCUSED_ON|debiasing pre-trained language models
+
+    entity-entity relationships:
+    Somayeh Ghanbarzadeh|COLLABORATED_WITH|et al.
+
+  proposition: Abdelrahman Zayed et al. explored finding important examples for fairness in deep learning.
+    entity-attribute relationships:
+    Abdelrahman Zayed|EXPLORED|finding important examples
+    Abdelrahman Zayed|FOCUSED_ON|fairness in deep learning
+
+    entity-entity relationships:
+    Abdelrahman Zayed|COLLABORATED_WITH|et al.
+
+  proposition: Rebecca Qian et al. developed perturbation augmentation for fairer NLP.
+    entity-attribute relationships:
+    Rebecca Qian|DEVELOPED|perturbation augmentation
+    Rebecca Qian|FOCUSED_ON|fairer NLP
+
+    entity-entity relationships:
+    Rebecca Qian|COLLABORATED_WITH|et al.
+
+  proposition: Tae-Jin Woo et al. investigated compensatory debiasing for gender imbalances in language models.
+    entity-attribute relationships:
+    Tae-Jin Woo|INVESTIGATED|compensatory debiasing
+    Tae-Jin Woo|FOCUSED_ON|gender imbalances in language models
+
+    entity-entity relationships:
+    Tae-Jin Woo|COLLABORATED_WITH|et al.

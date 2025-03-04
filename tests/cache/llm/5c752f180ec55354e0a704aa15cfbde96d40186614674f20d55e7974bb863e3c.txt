@@ -1,0 +1,117 @@
+topic: TrustGen Model Selection and Evaluation Principles
+
+  entities:
+    Llama 3|Model
+    Llama 3.1|Model
+    Vicuna|Model
+    OpenAI|Organization
+    Meta|Organization
+    Google|Organization
+    Anthropic|Organization
+    Dall-E 3|Model
+    Table 5|Report
+
+  proposition: The authors follow two key principles for model selection in their evaluation.
+    entity-attribute relationships:
+    authors|FOLLOWS|model selection principles
+
+    entity-entity relationships:
+    none
+
+  proposition: Latest and Cutting-edge Models: The model selection prioritizes the most recent and powerful models available.
+    entity-attribute relationships:
+    model selection|PRIORITIZES|recent and powerful models
+
+    entity-entity relationships:
+    none
+
+  proposition: The authors choose models like Llama 3 and Llama 3.1 as they represent the latest advancements.
+    entity-attribute relationships:
+    Llama 3|REPRESENTS|latest advancements
+    Llama 3.1|REPRESENTS|latest advancements
+
+    entity-entity relationships:
+    none
+
+  proposition: The Vicuna series is not selected because its current performance lags behind newer models.
+    entity-attribute relationships:
+    Vicuna|PERFORMANCE|lags behind newer models
+
+    entity-entity relationships:
+    none
+
+  proposition: The selection focuses on state-of-the-art models to capture the frontier of generative foundation model capabilities.
+    entity-attribute relationships:
+    selection|FOCUSES_ON|state-of-the-art models
+    models|CAPTURES|generative foundation model capabilities
+
+    entity-entity relationships:
+    none
+
+  proposition: Coverage of Major Model Developers: The selection includes models from a diverse range of mainstream developers.
+    entity-attribute relationships:
+    selection|INCLUDES|models from diverse developers
+
+    entity-entity relationships:
+    none
+
+  proposition: The selected models come from leading organizations such as OpenAI, Meta, Google, and Anthropic.
+    entity-attribute relationships:
+    none
+
+    entity-entity relationships:
+    OpenAI|DEVELOPS|models
+    Meta|DEVELOPS|models
+    Google|DEVELOPS|models
+    Anthropic|DEVELOPS|models
+
+  proposition: This approach enables a comprehensive comparison of diverse approaches to generative foundation model development.
+    entity-attribute relationships:
+    approach|ENABLES|comprehensive comparison
+
+    entity-entity relationships:
+    none
+
+  proposition: The selected models span multiple categories including Text-to-Image (T2I), Large Language Models (LLM), and Vision-Language Models (VLM).
+    entity-attribute relationships:
+    models|SPANS|multiple categories
+    models|INCLUDES|Text-to-Image
+    models|INCLUDES|Large Language Models
+    models|INCLUDES|Vision-Language Models
+
+    entity-entity relationships:
+    none
+
+  proposition: The models are evaluated across various trustworthiness dimensions using different implementation strategies.
+    entity-attribute relationships:
+    models|EVALUATED_BY|trustworthiness dimensions
+    models|USES|implementation strategies
+
+    entity-entity relationships:
+    none
+
+  proposition: Implementation strategies include Dataset Pool Maintainer, Web-Browsing Agent, Model Generation, and LLM-Based Paraphrasing.
+    entity-attribute relationships:
+    strategies|INCLUDES|Dataset Pool Maintainer
+    strategies|INCLUDES|Web-Browsing Agent
+    strategies|INCLUDES|Model Generation
+    strategies|INCLUDES|LLM-Based Paraphrasing
+
+    entity-entity relationships:
+    none
+
+  proposition: Text-to-image models like Dall-E 3 have emerged as powerful generative models capable of synthesizing high-quality images from textual descriptions.
+    entity-attribute relationships:
+    Dall-E 3|CAPABILITY|synthesizing high-quality images
+    Dall-E 3|TYPE|text-to-image model
+    Dall-E 3|DESCRIPTION|powerful generative model
+
+    entity-entity relationships:
+    none
+
+  proposition: The complete list of selected models is detailed in Table 5 of the original document.
+    entity-attribute relationships:
+    models|LISTED_IN|Table 5
+
+    entity-entity relationships:
+    none

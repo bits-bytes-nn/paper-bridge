@@ -1,0 +1,176 @@
+topic: Bias Detection and Mitigation in Vision-Language Models
+
+  entities:
+    Xiao et al.|Researcher
+    Zhou et al.|Researcher
+    Zhang et al.|Researcher
+    Howard et al.|Researcher
+    Seth et al.|Researcher
+    Wang et al.|Researcher
+    GenderBias|Benchmark
+    StereoSet|Dataset
+    StereoSet-VL|Dataset
+    CounterBias|Method
+    SocialCounterfactuals|Dataset
+    MMBias|Benchmark
+    DeAR|Method
+    GPT-4o-mini|Model
+    CrowS-Pairs|Dataset
+    StereoSet|Dataset
+
+  proposition: Benchmarking Vision-Language Models for Bias Detection and Mitigation
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Xiao et al. propose GenderBias benchmark for detecting gender bias in text-to-image diffusion models.
+    entity-attribute relationships:
+    GenderBias|FOCUSES_ON|gender bias
+    
+    entity-entity relationships:
+    Xiao et al.|DEVELOPED|GenderBias
+
+  proposition: GenderBias benchmark generates occupation images and their gender counterfactuals across multimodal and unimodal contexts.
+    entity-attribute relationships:
+    GenderBias|GENERATES|occupation images
+    GenderBias|GENERATES|gender counterfactuals
+    
+    entity-entity relationships:
+
+  proposition: Zhou et al. extend StereoSet into StereoSet-VL to measure stereotypical bias in vision-language models.
+    entity-attribute relationships:
+    StereoSet-VL|MEASURES|stereotypical bias
+    
+    entity-entity relationships:
+    Zhou et al.|EXTENDED|StereoSet
+    Zhou et al.|CREATED|StereoSet-VL
+
+  proposition: Zhang et al. present CounterBias, a method for quantifying social bias in Vision-Language pretrained models by comparing masked prediction probabilities.
+    entity-attribute relationships:
+    CounterBias|QUANTIFIES|social bias
+    
+    entity-entity relationships:
+    Zhang et al.|DEVELOPED|CounterBias
+
+  proposition: Howard et al. use diffusion models to construct the SocialCounterfactuals dataset for probing intersectional social biases in vision-language models.
+    entity-attribute relationships:
+    SocialCounterfactuals|PROBES|intersectional social biases
+    
+    entity-entity relationships:
+    Howard et al.|CONSTRUCTED|SocialCounterfactuals
+
+  proposition: MMBias is a benchmark of 3,800 images and phrases across 14 population subgroups to assess bias in vision-language models.
+    entity-attribute relationships:
+    MMBias|SIZE|3,800 images
+    MMBias|COVERS|14 population subgroups
+    MMBias|ASSESSES|bias in vision-language models
+    
+    entity-entity relationships:
+
+  proposition: MMBias addresses underexplored biases related to religion, nationality, sexual orientation, and disabilities.
+    entity-attribute relationships:
+    MMBias|ADDRESSES|biases in religion
+    MMBias|ADDRESSES|biases in nationality
+    MMBias|ADDRESSES|biases in sexual orientation
+    MMBias|ADDRESSES|biases in disabilities
+    
+    entity-entity relationships:
+
+topic: Bias Mitigation Approaches
+
+  proposition: Seth et al. propose DeAR, a debiasing method that learns additive residual image representations to counterbalance original representations.
+    entity-attribute relationships:
+    DeAR|TYPE|debiasing method
+    
+    entity-entity relationships:
+    Seth et al.|DEVELOPED|DeAR
+
+  proposition: Wang et al. define multimodal large language model debiasing as an editing problem and propose evaluation metrics.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    Wang et al.|DEFINED|multimodal large language model debiasing
+
+topic: Dataset and Evaluation Methodology
+
+  proposition: Current bias evaluations often rely on simplified settings focusing on single modalities or static visual scenarios.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Existing stereotype evaluations typically focus on isolated elements, limiting models' ability to handle complex tasks.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Single images struggle to represent temporal or dynamic events involving sequences of actions or interactions.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: The proposed approach uses a multi-image-based dataset to construct complex scenarios.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+topic: Evaluation Process
+
+  proposition: GPT-4o-mini is used as the LLM judge for evaluation.
+    entity-attribute relationships:
+    GPT-4o-mini|ROLE|LLM judge
+    
+    entity-entity relationships:
+
+  proposition: The judge model compares model responses against ground truth statements.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: The evaluation process involves identifying stereotypes, discrimination, or problematic bias.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Only responses that successfully identify and oppose bias are considered correct.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+topic: Dynamic Dataset Construction
+
+  proposition: The dataset construction process involves using CrowS-Pairs and StereoSet datasets.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+    CrowS-Pairs|USED_IN|dataset construction
+    StereoSet|USED_IN|dataset construction
+
+  proposition: LLM-as-a-Judge rates data instances on stereotype and disparagement dimensions.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Only items with an average score exceeding 8 are included in the evaluation.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: LLMs break down stories into scenes and replace key elements with placeholders.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Image descriptions are generated while maintaining consistency and avoiding information leakage.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: Text-to-image models generate corresponding images, which are compressed into composite images.
+    entity-attribute relationships:
+    
+    entity-entity relationships:
+
+  proposition: A contextual variator paraphrases sentences to ensure narrative variation.
+    entity-attribute relationships:
+    
+    entity-entity relationships:

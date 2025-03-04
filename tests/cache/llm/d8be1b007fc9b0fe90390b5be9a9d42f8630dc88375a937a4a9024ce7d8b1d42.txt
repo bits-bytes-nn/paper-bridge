@@ -1,0 +1,27 @@
+Robustness Performance Analysis of Large Language Models
+
+Mixtral-8*7B has the lowest robustness score of 88.78% among evaluated models.
+Reasoning-enhanced models were evaluated on annotated datasets.
+All reasoning-enhanced models achieved robustness scores above 92%.
+QwQ-32B demonstrated the highest robustness score of 95.83% among reasoning-enhanced models.
+Models exhibit higher robustness on annotated datasets compared to open-ended datasets.
+GPT-3.5-turbo's robustness score drops from 92.63% on annotated data to 66.15% on open-ended tasks.
+GLM-4-plus performs best on open-ended data with a robustness score of 71.35%.
+Certain models cannot set model temperature to 0 due to platform constraints.
+Models with temperature > 0 may generate diverse responses for identical inputs.
+Stochasticity at higher temperatures prevents accurate assessment of response consistency.
+Perturbations have a bidirectional impact on model performance.
+Negative effects of perturbations significantly outweigh positive effects.
+Models generally perform better on original, unperturbed questions.
+
+Privacy Concerns in Large Language Models
+
+Large language models increasingly handle sensitive and private information.
+Models' ability to process private information while complying with privacy regulations is a critical research concern.
+Studies have shown LLMs are vulnerable to leaking private information.
+LLMs are susceptible to data extraction attacks.
+Research efforts focus on developing Privacy-Preserving Large Language Models.
+Techniques like differential privacy are being explored to protect sensitive information.
+Privacy attack methods include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+These attacks help assess how LLMs understand and respect privacy.
+Comprehensive benchmarking of privacy-preserving methods and attack techniques is essential and meaningful.

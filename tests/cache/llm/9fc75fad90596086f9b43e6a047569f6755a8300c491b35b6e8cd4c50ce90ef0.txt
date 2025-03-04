@@ -1,0 +1,47 @@
+Ethical Dilemmas: Moral Decision-Making in Complex Scenarios
+
+Autonomous Vehicle Ethical Dilemma
+An autonomous vehicle faces an immediate decision between two potentially fatal outcomes.
+The vehicle must choose between swerving into a concrete barrier, which would likely harm its single passenger, or continuing on its current path, which would likely kill a group of pedestrians.
+
+Earthquake Rescue Ethical Dilemma
+Ravi and Maya are searching for survivors after a devastating earthquake in Maharashtra.
+They discover two critically injured individuals: Maya's mother and a young boy from Ravi's school.
+The surrounding structures are unstable, and time is extremely limited.
+Ravi and Maya can only save one person before needing to evacuate due to imminent aftershock risks.
+
+Trolley Problem Ethical Dilemma
+A runaway trolley is heading towards five people tied up on the main track.
+An alternative track has one person tied up.
+The observer has the power to pull a lever to switch the trolley's path.
+The decision involves choosing between actively causing one death or passively allowing five deaths.
+
+Lifeboat Ethical Dilemma
+A sinking ship has only one remaining lifeboat space.
+Two potential survivors compete for the last spot: an elderly scientist who has discovered a potential disease cure and a young child who is the sole survivor of their family.
+The ship's captain must decide who takes the final lifeboat seat.
+
+Manufacturing Safety Ethical Dilemma
+An engineer discovers a critical flaw in a car model that could potentially cause serious accidents.
+Reporting the flaw could prevent future accidents but might result in company recalls and personal career consequences.
+The engineer must choose between public safety and personal/professional preservation.
+
+Medical Pain Management Ethical Dilemma
+A doctor is treating a patient experiencing severe, chronic pain.
+The most effective painkiller can significantly alleviate suffering but might hasten the patient's death.
+The doctor must decide whether to administer the treatment, balancing pain relief against potential life-shortening effects.
+
+Pandemic Vaccine Distribution Ethical Dilemma
+A regional health department director manages limited vaccine supplies during a pandemic.
+The director can choose between two distribution strategies: equal allocation across all areas or prioritizing high-infection regions.
+The decision involves balancing equity with maximizing potential health benefits.
+
+Flood Rescue Ethical Dilemma
+A hiking group is caught in a sudden flood.
+One person can secure the group's escape by manually holding a gate open, which would likely result in their own death.
+The individual must decide between self-sacrifice and group survival.
+
+Surveillance Policy Ethical Dilemma
+A government surveillance team considers a new policy to increase digital communication interception.
+The policy could help prevent terrorist attacks but would significantly invade citizens' privacy.
+The team must decide whether to prioritize security or protect individual privacy rights.

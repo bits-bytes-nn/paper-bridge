@@ -1,0 +1,108 @@
+topic: Stereotype Mitigation in Language Models
+
+  entities:
+    REFINE-LM|Method
+    CrowS-pairs|Dataset
+    StereoSet|Dataset
+    BBQ|Dataset
+    LLM-as-a-Judge|Approach
+    LDFighter|Method
+    Prejudice-Volatility Framework|Framework
+    Causality-Guided Debiasing Framework|Framework
+
+  proposition: REFINE-LM: Reinforcement Learning for Stereotype Mitigation in Language Models
+    entity-attribute relationships:
+    REFINE-LM|USES|Reinforcement Learning
+    REFINE-LM|FOCUSES_ON|Stereotype Mitigation
+
+    entity-entity relationships:
+    REFINE-LM|APPLIES_TO|Language Models
+
+  proposition: REFINE-LM introduces a method to mitigate stereotypes in pre-trained language models using reinforcement learning.
+    entity-attribute relationships:
+    REFINE-LM|GOAL|Mitigate Stereotypes
+    REFINE-LM|TECHNIQUE|Reinforcement Learning
+
+    entity-entity relationships:
+    REFINE-LM|TARGETS|Pre-trained Language Models
+
+  proposition: The method aims to preserve model performance while reducing stereotypical content.
+    entity-attribute relationships:
+    REFINE-LM|OBJECTIVE|Preserve Model Performance
+    REFINE-LM|OBJECTIVE|Reduce Stereotypical Content
+
+  proposition: For stereotype classification tasks with ground truth, keyword matching and accuracy are used as evaluation metrics.
+    entity-attribute relationships:
+    Stereotype Classification|METRIC|Keyword Matching
+    Stereotype Classification|METRIC|Accuracy
+
+  proposition: For open-ended tasks, the LLM-as-a-Judge approach is applied.
+    entity-attribute relationships:
+    Open-ended Tasks|EVALUATION_METHOD|LLM-as-a-Judge
+
+  proposition: Percentage of Refusing to Answer (RtA) is a key metric to measure model's refusal to engage with stereotypical content.
+    entity-attribute relationships:
+    Stereotype Mitigation|METRIC|Percentage of Refusing to Answer
+
+  proposition: Data crafters utilize a data pool from CrowS-pairs, StereoSet, and BBQ datasets.
+    entity-entity relationships:
+    Data Crafters|USES|CrowS-pairs
+    Data Crafters|USES|StereoSet
+    Data Crafters|USES|BBQ
+
+  proposition: An LLM-powered case generator produces queries based on stereotype and anti-stereotype content.
+    entity-attribute relationships:
+    Case Generator|POWERED_BY|LLM
+    Case Generator|GENERATES|Stereotype Queries
+    Case Generator|GENERATES|Anti-stereotype Queries
+
+  proposition: Disparagement refers to model behaviors that reinforce the notion that certain groups are less valuable or deserving of respect.
+    entity-attribute relationships:
+    Disparagement|DEFINITION|Model Behaviors Reinforcing Group Devaluation
+
+  proposition: Disparagement is closely connected to toxicity and hate speech.
+    entity-attribute relationships:
+    Disparagement|RELATED_TO|Toxicity
+    Disparagement|RELATED_TO|Hate Speech
+
+  proposition: Dong et al. proposed LDFighter to mitigate linguistic discrimination.
+    entity-entity relationships:
+    Dong et al.|PROPOSED|LDFighter
+
+  proposition: An et al. found LLMs tend to favor White applicants in simulated hiring decisions.
+    entity-attribute relationships:
+    Large Language Models|BIAS|Favor White Applicants
+
+  proposition: Current LLMs show a slight political left-leaning tendency.
+    entity-attribute relationships:
+    Large Language Models|POLITICAL_TENDENCY|Left-leaning
+
+topic: Disparagement Detection Approaches
+
+  entities:
+    Dong et al.|Researcher
+    An et al.|Researcher
+    Liu et al.|Researcher
+    Li et al.|Researcher
+
+  proposition: Liu et al. introduced the Prejudice-Volatility Framework to quantify social discrimination.
+    entity-entity relationships:
+    Liu et al.|INTRODUCED|Prejudice-Volatility Framework
+
+  proposition: Li et al. developed a Causality-Guided Debiasing Framework to reduce social biases.
+    entity-entity relationships:
+    Li et al.|DEVELOPED|Causality-Guided Debiasing Framework
+
+  proposition: A web browsing agent retrieves disparagement examples for specific target groups.
+    entity-attribute relationships:
+    Web Browsing Agent|TASK|Retrieve Disparagement Examples
+
+  proposition: An LLM-powered case generator creates queries based on these examples.
+    entity-attribute relationships:
+    Case Generator|POWERED_BY|LLM
+    Case Generator|TASK|Create Disparagement Queries
+
+  proposition: An LLM-powered diversity enhancer paraphrases queries to enhance diversity.
+    entity-attribute relationships:
+    Diversity Enhancer|POWERED_BY|LLM
+    Diversity Enhancer|TASK|Paraphrase Queries

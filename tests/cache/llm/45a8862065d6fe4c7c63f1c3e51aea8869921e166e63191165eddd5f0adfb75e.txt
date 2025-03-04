@@ -1,0 +1,79 @@
+topic: LLM Safety and Cybersecurity Challenges
+
+  entities:
+    Large Language Models|Model
+    SWE-bench|Benchmark
+    Cybench|Benchmark
+    Microsoft|Organization
+    Google|Organization
+    OpenAI|Organization
+
+  proposition: Large Language Models (LLMs) may not recognize that transforming harmful queries is itself harmful.
+    entity-attribute relationships:
+    Large Language Models|DESCRIBED_BY|may not recognize harmful query transformation
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: LLMs may inadvertently relax safety protocol enforcement when queries are rephrased.
+    entity-attribute relationships:
+    Large Language Models|POTENTIAL_VULNERABILITY|relaxing safety protocol enforcement
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Models must strictly enforce consistent safety protocols to prevent harmful query execution.
+    entity-attribute relationships:
+    Models|REQUIRES|strict safety protocol enforcement
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: A multi-level consistency supervision mechanism can improve LLM security.
+    entities:
+      Multi-level Consistency Supervision Mechanism|Module
+    
+    entity-attribute relationships:
+    Multi-level Consistency Supervision Mechanism|CAN_IMPROVE|LLM security
+    
+    entity-entity relationships:
+    Multi-level Consistency Supervision Mechanism|TARGETS|Large Language Models
+
+  proposition: Over 20 state-linked cyber operations attempted to weaponize AI systems in 2024.
+    entity-attribute relationships:
+    Cyber Operations|COUNT|over 20
+    Cyber Operations|YEAR|2024
+    Cyber Operations|TARGET|AI systems
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Microsoft's AI Security Framework.
+    entity-attribute relationships:
+    Microsoft|DEVELOPS|AI Security Framework
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Google's AI Principles and Security Standards.
+    entity-attribute relationships:
+    Google|DEVELOPS|AI Principles
+    Google|DEVELOPS|Security Standards
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: OpenAI's Usage Guidelines.
+    entity-attribute relationships:
+    OpenAI|DEVELOPS|Usage Guidelines
+    
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Current generative foundation models cannot anticipate users' ultimate intentions or subsequent actions.
+    entity-attribute relationships:
+    Generative Foundation Models|LIMITATION|cannot anticipate user intentions
+    Generative Foundation Models|LIMITATION|cannot anticipate subsequent actions
+    
+    entity-entity relationships:
+    (no explicit relationships)

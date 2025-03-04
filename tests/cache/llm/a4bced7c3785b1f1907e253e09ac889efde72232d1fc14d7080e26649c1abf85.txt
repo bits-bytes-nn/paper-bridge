@@ -1,0 +1,115 @@
+topic: Multimodal Large Language Model Security Vulnerabilities
+
+  entities:
+    Unbridled Icarus|Research Paper
+    JailbreakV-28k|Benchmark
+    JailGuard|Framework
+    Google's Bard|Model
+    GPT-4V|Model
+    Typographic Visual Prompts|Approach
+
+  proposition: Unbridled Icarus is a survey exploring potential security risks in multimodal large language model image inputs.
+    entity-attribute relationships:
+    Unbridled Icarus|FOCUSES_ON|security risks
+    Unbridled Icarus|TYPE|survey
+    
+    entity-entity relationships:
+    Unbridled Icarus|INVESTIGATES|multimodal large language model image inputs
+
+  proposition: Researchers have published multiple studies investigating jailbreaking and vulnerability attacks on multimodal large language models.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Researchers|INVESTIGATE|jailbreaking attacks
+    Researchers|INVESTIGATE|vulnerability attacks
+
+  proposition: JailbreakV-28k is a benchmark for assessing multimodal large language models' robustness against jailbreak attacks.
+    entity-attribute relationships:
+    JailbreakV-28k|TYPE|benchmark
+    
+    entity-entity relationships:
+    JailbreakV-28k|ASSESSES|multimodal large language models
+    JailbreakV-28k|TARGETS|jailbreak attacks
+
+  proposition: Safety fine-tuning can be achieved with minimal computational cost for vision large language models.
+    entity-attribute relationships:
+    vision large language models|REQUIRES|minimal computational cost
+    
+    entity-entity relationships:
+    None
+
+  proposition: Jailbreaking attacks specifically target multimodal large language models.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Jailbreaking attacks|TARGETS|multimodal large language models
+
+  proposition: JailGuard is a universal detection framework for large language model prompt-based attacks.
+    entity-attribute relationships:
+    JailGuard|TYPE|universal detection framework
+    
+    entity-entity relationships:
+    JailGuard|DETECTS|large language model prompt-based attacks
+
+  proposition: Researchers have developed techniques like typographic visual prompts to jailbreak large vision-language models.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Researchers|DEVELOPED|Typographic Visual Prompts
+    Typographic Visual Prompts|TARGETS|large vision-language models
+
+  proposition: A single image can potentially jailbreak multiple multimodal language model agents exponentially fast.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    single image|CAN_JAILBREAK|multimodal language model agents
+
+  proposition: Researchers have tested the robustness of models like Google's Bard against adversarial image attacks.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Researchers|TESTED|Google's Bard
+    Google's Bard|TESTED_AGAINST|adversarial image attacks
+
+  proposition: Self-adversarial attacks with system prompts can be used to jailbreak models like GPT-4V.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Self-adversarial attacks|CAN_JAILBREAK|GPT-4V
+
+  proposition: Images have been identified as a potential vulnerability in multimodal large language model alignment.
+    entity-attribute relationships:
+    Images|TYPE|potential vulnerability
+    
+    entity-entity relationships:
+    Images|IMPACTS|multimodal large language model alignment
+
+  proposition: Multiple research papers explore strategies for safeguarding vision-language models against visual prompt injectors.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Research Papers|EXPLORE|safeguarding strategies
+    Safeguarding strategies|PROTECTS|vision-language models
+
+  proposition: Researchers are developing methods like image-to-text transformation to protect multimodal large language models.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Researchers|DEVELOPING|image-to-text transformation
+    image-to-text transformation|PROTECTS|multimodal large language models
+
+  proposition: Studies are unveiling visual information leakage in multimodal model safety mechanisms.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Studies|INVESTIGATING|visual information leakage
+    visual information leakage|OCCURS_IN|multimodal model safety mechanisms

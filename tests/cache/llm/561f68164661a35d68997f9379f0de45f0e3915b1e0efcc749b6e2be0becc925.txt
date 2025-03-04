@@ -1,0 +1,14 @@
+Research Publications on AI Safety and Multimodal Models
+
+Gemini is a family of highly capable multimodal models published by Google researchers.
+ShieldGemma is a generative AI content moderation approach based on the Gemini model.
+DeepMind introduced the Frontier Safety Framework in 2023.
+Jerry Wei et al. published research on long-form factuality in large language models in 2024.
+IBM developed the Granite Foundation Models and a framework for securing generative AI.
+Researchers Swapnaja Achintalwar et al. published a study on detectors for safe and reliable large language models.
+BLIP is a bootstrapping language-image pre-training approach for vision-language understanding.
+BLIP-2 extended the initial BLIP model by using frozen image encoders and large language models.
+xGen-MM (BLIP-3) is a family of open large multimodal models.
+BLIP-Diffusion enables pre-trained subject representation for controllable text-to-image generation and editing.
+Unicontrol is a unified diffusion model for controllable visual generation.
+Salesforce has developed principles for trusted generative AI.

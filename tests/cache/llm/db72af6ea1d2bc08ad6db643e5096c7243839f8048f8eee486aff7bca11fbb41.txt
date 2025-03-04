@@ -1,0 +1,73 @@
+topic: Stereotype Text Transformation Guidelines
+
+  entities:
+    Stereotype Text Transformation Guidelines|Method
+    Stereotypical Language|Social Concept
+    Identity Groups|Social Concept
+    Transformation Process|Approach
+    Transformation Principles|Method
+    Transformation Patterns|Method
+
+  proposition: A text transformation process for identifying and neutralizing stereotypical language
+    entity-attribute relationships:
+    Transformation Process|AIMS_TO|identifying stereotypical language
+    Transformation Process|AIMS_TO|neutralizing stereotypical language
+
+    entity-entity relationships:
+    Transformation Process|RELATES_TO|Stereotypical Language
+
+  proposition: Stereotype identification requires careful analysis of text for biased language related to identity groups
+    entity-attribute relationships:
+    Stereotype identification|REQUIRES|careful analysis
+    Stereotype identification|FOCUSES_ON|biased language
+    Stereotype identification|RELATES_TO|Identity Groups
+
+  proposition: The transformation process aims to replace stereotypical references with neutral, generalized descriptions
+    entity-attribute relationships:
+    Transformation Process|AIMS_TO|replace stereotypical references
+    Transformation Process|AIMS_TO|use neutral descriptions
+    Transformation Process|AIMS_TO|use generalized descriptions
+
+  proposition: Transformations should preserve the original sentence's core meaning while removing identity-specific stereotypes
+    entity-attribute relationships:
+    Transformations|SHOULD_PRESERVE|original sentence's core meaning
+    Transformations|SHOULD_REMOVE|identity-specific stereotypes
+
+  proposition: Specific guidelines exist for handling stereotypical references to race, gender, and other identity categories
+    entity-attribute relationships:
+    Guidelines|COVER|race references
+    Guidelines|COVER|gender references
+    Guidelines|COVER|other identity categories
+
+  proposition: Transformation principles include:
+    entity-attribute relationships:
+    Transformation Principles|INCLUDE|replacing identity-based references
+    Transformation Principles|INCLUDE|maintaining semantic integrity
+    Transformation Principles|INCLUDE|avoiding new information
+    Transformation Principles|INCLUDE|using neutral language
+    Transformation Principles|INCLUDE|focusing on actions
+
+  proposition: Replace specific identity-based references with generalized descriptors
+    entity-attribute relationships:
+    Transformation Principles|RECOMMENDS|replacing identity-based references
+    Transformation Principles|RECOMMENDS|using generalized descriptors
+
+  proposition: Maintain semantic integrity of the original sentence
+    entity-attribute relationships:
+    Transformation Principles|REQUIRES|maintaining semantic integrity
+
+  proposition: Avoid introducing new information or changing the fundamental meaning
+    entity-attribute relationships:
+    Transformation Principles|REQUIRES|avoiding new information
+    Transformation Principles|REQUIRES|preserving fundamental meaning
+
+  proposition: Use neutral language that does not single out specific identity groups
+    entity-attribute relationships:
+    Transformation Principles|RECOMMENDS|using neutral language
+    Transformation Principles|REQUIRES|avoiding singling out identity groups
+
+  proposition: Focus on the action or description rather than stereotypical characteristics
+    entity-attribute relationships:
+    Transformation Principles|RECOMMENDS|focusing on actions
+    Transformation Principles|RECOMMENDS|focusing on descriptions
+    Transformation Principles|REQUIRES|avoiding stereotypical characteristics

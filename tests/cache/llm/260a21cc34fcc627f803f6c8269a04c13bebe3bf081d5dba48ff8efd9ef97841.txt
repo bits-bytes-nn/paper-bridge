@@ -1,0 +1,17 @@
+Research Papers on Large Language Model Safety and Evaluation Benchmarks
+Percy Liang et al. published a paper on holistic evaluation of language models in 2022.
+Boxin Wang et al. conducted a comprehensive assessment of trustworthiness in GPT models in 2023.
+Yuxia Wang et al. created the Do-not-answer dataset for evaluating safeguards in large language models in 2023.
+Rishabh Bhardwaj and Soujanya Poria proposed red-teaming large language models using chain of utterances for safety-alignment in 2023.
+Kaijie Zhu et al. developed PromptBench to evaluate the robustness of large language models on adversarial prompts in 2024.
+Guohai Xu et al. measured the values of Chinese large language models from safety to responsibility in 2023.
+Linyi Yang et al. evaluated natural language understanding models from an out-of-distribution generalization perspective in 2022.
+Hao Sun et al. conducted a safety assessment of Chinese large language models in 2023.
+Bertie Vidgen et al. introduced version 0.5 of the AI safety benchmark from MLCommons in 2024.
+Yige Li et al. created a comprehensive benchmark for backdoor attacks on large language models in 2024.
+Junyi Li et al. developed HaluEval, a large-scale hallucination evaluation benchmark for large language models in 2023.
+Huachuan Qiu et al. created a test suite for evaluating text safety and output robustness of large language models in 2023.
+Peiyi Wang et al. demonstrated that large language models are not fair evaluators in 2023.
+OpenCompass Contributors developed a universal evaluation platform for foundation models in 2023.
+Liang Xu et al. created SC-Safety, a multi-round open-ended question adversarial safety benchmark for Chinese large language models in 2023.
+Wenxuan Wang et al. studied the multilingual safety of large language models in 2024.

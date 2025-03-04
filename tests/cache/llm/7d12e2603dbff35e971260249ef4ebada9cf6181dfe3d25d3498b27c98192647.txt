@@ -1,0 +1,26 @@
+Toxicity in Large Language Models: Findings and Analysis
+
+Toxic content has potential to harm individuals, groups, and societies.
+Previous research has proposed multiple datasets and detection methods for toxic content.
+Toxicity challenges in Large Language Models (LLMs) are becoming more serious and complex.
+Deshpande et al. found that assigning a specific persona to ChatGPT can increase its toxicity.
+Wen et al. discovered that LLMs can generate diverse implicit toxic outputs difficult to detect via zero-shot prompting.
+Safety variations of large language models across different languages have garnered widespread attention.
+RTP-LX is a human-transcreated and human-annotated corpus of toxic prompts and outputs in 28 languages.
+Nogara et al. found that German appears more toxic in current measuring methods.
+
+Researchers have proposed various methods to reduce toxic content generation:
+Xu et al. proposed perspective-taking prompting to inspire LLMs to self-regulate responses.
+Klein et al. studied contrastive learning objectives for fine-tuning LLMs to decrease toxic content generation.
+Wen et al. optimized language models to prefer implicit toxic outputs over explicit ones.
+Han et al. proposed linear transformation of word embeddings to make LLMs less toxic.
+
+Toxicity measurement methodologies include human evaluation and automated methods.
+Perspective API is the most widely used automated tool, processing over 500 million assessments daily.
+
+Most LLMs demonstrate relatively low levels of toxicity.
+There is no substantial difference in toxicity levels between open-source and proprietary models.
+Both open-weight and proprietary models display similar toxicity score distributions.
+
+Exaggerated Safety is an emergent alignment issue in generative models.
+An example includes Google taking down Gemini Pro 1.5's portrait generation feature due to false refusals of harmless user requests.

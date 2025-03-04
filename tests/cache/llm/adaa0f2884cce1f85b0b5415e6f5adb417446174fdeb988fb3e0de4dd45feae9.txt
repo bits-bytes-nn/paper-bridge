@@ -1,0 +1,32 @@
+Generative Foundation Models: Trustworthiness and Evaluation Challenges
+
+Foundation models are pre-trained on massive, heterogeneous datasets.
+Foundation models can generalize across a wide range of applications.
+Assessing foundation models' trustworthiness requires evaluating model behavior across diverse tasks and contexts.
+Generative foundation models have potential to shape public opinion.
+Generative foundation models can influence policy decisions.
+Generative foundation models can generate content mimicking authoritative sources.
+Generative foundation models may disrupt democratic processes and information ecosystems.
+Generative foundation models often consist of billions of parameters.
+Generative foundation models are inherently opaque and difficult to interpret.
+Lack of transparency complicates accountability efforts for generative foundation models.
+Generative foundation models are dynamically evolving through continuous fine-tuning and updates.
+Maintaining consistent safety protocols for generative foundation models is challenging.
+Ensuring compliance with ethical guidelines for generative foundation models is complex.
+Establishing traceability mechanisms for generative foundation models is difficult.
+Major corporations are attempting to enhance generative foundation models' trustworthiness.
+OpenAI established a Red Teaming Network to improve model safety.
+Google developed best practices for responsible AI development.
+Meta released Llama Guard to protect prompt integrity.
+Current trustworthiness principles for generative foundation models are independently defined.
+Governments and regulatory bodies have introduced varied laws for generative AI models.
+Some jurisdictions use horizontal governance frameworks for AI systems.
+Some jurisdictions use vertical regulatory approaches targeting specific domains.
+Existing trustworthiness standards are diverse and sometimes conflicting.
+A standardized set of guidelines for generative foundation models is needed.
+Static evaluations of generative foundation models are not sustainable for building long-term trust.
+Repeated large-scale evaluations are impractical due to continuous model releases.
+Evaluation processes are time-consuming and require careful dataset construction.
+TrustGen is a comprehensive benchmark for evaluating generative foundation models.
+TrustGen includes three core modules: Metadata Curator, Test Case Builder, and Contextual Variator.
+TrustGen enables iterative dataset refinement and dynamic evaluations.

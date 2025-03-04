@@ -1,0 +1,111 @@
+topic: Generative Foundation Model Guidelines
+
+  entities:
+    Generative Foundation Model|Model
+    European Union's AI Act|Organization
+    AI Bill of Rights|Project
+    Guideline 1|Feature
+    Guideline 2|Feature
+
+  proposition: Considerations for Establishing Trustworthy Generative Foundation Model Guidelines
+    entity-attribute relationships:
+    Generative Foundation Model|DESCRIBED_BY|trustworthy
+    
+    entity-entity relationships:
+    None
+
+  proposition: Ethical considerations are essential to ensure models respect human rights, cultural diversity, and societal values.
+    entity-attribute relationships:
+    Generative Foundation Model|REQUIRES|ethical considerations
+    Generative Foundation Model|RESPECTS|human rights
+    Generative Foundation Model|RESPECTS|cultural diversity
+    Generative Foundation Model|RESPECTS|societal values
+    
+    entity-entity relationships:
+    None
+
+  proposition: Ethical considerations emphasize fairness, preventing bias, and promoting inclusivity when interacting with users from diverse backgrounds.
+    entity-attribute relationships:
+    Generative Foundation Model|EMPHASIZES|fairness
+    Generative Foundation Model|PREVENTS|bias
+    Generative Foundation Model|PROMOTES|inclusivity
+    
+    entity-entity relationships:
+    None
+
+  proposition: Social responsibility demands models avoid harm and contribute positively to society by generating ethical outcomes.
+    entity-attribute relationships:
+    Generative Foundation Model|REQUIRES|social responsibility
+    Generative Foundation Model|AVOIDS|harm
+    Generative Foundation Model|GENERATES|ethical outcomes
+    
+    entity-entity relationships:
+    None
+
+  proposition: Model design should integrate ethical risk assessments and include mechanisms to prevent harmful or discriminatory outputs.
+    entity-attribute relationships:
+    Generative Foundation Model|REQUIRES|ethical risk assessments
+    Generative Foundation Model|PREVENTS|harmful outputs
+    Generative Foundation Model|PREVENTS|discriminatory outputs
+    
+    entity-entity relationships:
+    None
+
+  proposition: Risk management guidelines must account for managing and mitigating threats from adversarial attacks and internal model failures.
+    entity-attribute relationships:
+    Generative Foundation Model|REQUIRES|risk management guidelines
+    Generative Foundation Model|MITIGATES|adversarial attacks
+    Generative Foundation Model|MITIGATES|internal model failures
+    
+    entity-entity relationships:
+    None
+
+  proposition: Models should be designed to be robust against adversarial attacks, unexpected inputs, and potential misuse.
+    entity-attribute relationships:
+    Generative Foundation Model|DESIGNED_AS|robust
+    Generative Foundation Model|RESISTS|adversarial attacks
+    Generative Foundation Model|RESISTS|unexpected inputs
+    Generative Foundation Model|RESISTS|potential misuse
+    
+    entity-entity relationships:
+    None
+
+  proposition: A multidisciplinary team of researchers from various fields synthesized existing principles, policies, and regulations to create the guidelines.
+    entity-attribute relationships:
+    Generative Foundation Model|CREATED_BY|multidisciplinary team
+    
+    entity-entity relationships:
+    None
+
+  proposition: The team reviewed documents from corporate sources, European Union's AI Act, and the Blueprint for an AI Bill of Rights.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Multidisciplinary Team|REVIEWED|European Union's AI Act
+    Multidisciplinary Team|REVIEWED|AI Bill of Rights
+
+  proposition: Guideline 1 focuses on designing generative models to ensure fairness, uphold values, and minimize biases in user interactions.
+    entity-attribute relationships:
+    Guideline 1|FOCUSES_ON|fairness
+    Guideline 1|FOCUSES_ON|upholding values
+    Guideline 1|FOCUSES_ON|minimizing biases
+    
+    entity-entity relationships:
+    Guideline 1|APPLIES_TO|Generative Foundation Model
+
+  proposition: Governments mandate the use of representative data to prevent unjustified differential treatment.
+    entity-attribute relationships:
+    Generative Foundation Model|REQUIRES|representative data
+    
+    entity-entity relationships:
+    None
+
+  proposition: Guideline 2 requires clear communication of the model's intended use and limitations to users.
+    entity-attribute relationships:
+    Guideline 2|REQUIRES|clear communication
+    Generative Foundation Model|COMMUNICATES|intended use
+    Generative Foundation Model|COMMUNICATES|limitations
+    
+    entity-entity relationships:
+    Guideline 2|APPLIES_TO|Generative Foundation Model

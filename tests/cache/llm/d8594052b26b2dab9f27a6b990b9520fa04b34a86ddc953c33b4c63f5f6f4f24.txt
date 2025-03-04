@@ -1,0 +1,117 @@
+topic: Robustness Performance Analysis of Large Language Models
+
+  entities:
+    Mixtral-8*7B|Model
+    QwQ-32B|Model
+    GPT-3.5-turbo|Model
+    GLM-4-plus|Model
+    Annotated Datasets|Data Source
+    Open-ended Datasets|Data Source
+    Model Temperature|Feature
+    Perturbations|Research Method
+
+  proposition: Mixtral-8*7B has the lowest robustness score of 88.78% among evaluated models.
+    entity-attribute relationships:
+    Mixtral-8*7B|ROBUSTNESS_SCORE|88.78%
+
+  proposition: Reasoning-enhanced models were evaluated on annotated datasets.
+    entity-entity relationships:
+    Reasoning-enhanced models|EVALUATED_ON|Annotated Datasets
+
+  proposition: All reasoning-enhanced models achieved robustness scores above 92%.
+    entity-attribute relationships:
+    Reasoning-enhanced models|MINIMUM_ROBUSTNESS_SCORE|92%
+
+  proposition: QwQ-32B demonstrated the highest robustness score of 95.83% among reasoning-enhanced models.
+    entity-attribute relationships:
+    QwQ-32B|ROBUSTNESS_SCORE|95.83%
+
+  proposition: Models exhibit higher robustness on annotated datasets compared to open-ended datasets.
+    entity-entity relationships:
+    Annotated Datasets|COMPARED_TO|Open-ended Datasets
+
+  proposition: GPT-3.5-turbo's robustness score drops from 92.63% on annotated data to 66.15% on open-ended tasks.
+    entity-attribute relationships:
+    GPT-3.5-turbo|ANNOTATED_DATA_ROBUSTNESS_SCORE|92.63%
+    GPT-3.5-turbo|OPEN_ENDED_ROBUSTNESS_SCORE|66.15%
+
+  proposition: GLM-4-plus performs best on open-ended data with a robustness score of 71.35%.
+    entity-attribute relationships:
+    GLM-4-plus|OPEN_ENDED_ROBUSTNESS_SCORE|71.35%
+
+  proposition: Certain models cannot set model temperature to 0 due to platform constraints.
+    entity-attribute relationships:
+    Model Temperature|CONSTRAINT|Platform Constraints
+
+  proposition: Models with temperature > 0 may generate diverse responses for identical inputs.
+    entity-attribute relationships:
+    Model Temperature|IMPACT|Diverse Responses
+
+  proposition: Stochasticity at higher temperatures prevents accurate assessment of response consistency.
+    entity-attribute relationships:
+    Model Temperature|EFFECT|Prevents Response Consistency Assessment
+
+  proposition: Perturbations have a bidirectional impact on model performance.
+    entity-attribute relationships:
+    Perturbations|IMPACT|Bidirectional Performance Change
+
+  proposition: Negative effects of perturbations significantly outweigh positive effects.
+    entity-attribute relationships:
+    Perturbations|EFFECT|Predominantly Negative Performance Impact
+
+  proposition: Models generally perform better on original, unperturbed questions.
+    entity-attribute relationships:
+    Models|PERFORMANCE|Better on Unperturbed Questions
+
+topic: Privacy Concerns in Large Language Models
+
+  entities:
+    Large Language Models|Technology
+    Sensitive Information|Social Concept
+    Private Information|Social Concept
+    Privacy Regulations|Regulation
+    Data Extraction Attacks|Attack Method
+    Membership Inference Attacks|Attack Method
+    Embedding-level Privacy Attacks|Attack Method
+    Differential Privacy|Research Method
+    Privacy-Preserving Large Language Models|Technology
+
+  proposition: Large language models increasingly handle sensitive and private information.
+    entity-entity relationships:
+    Large Language Models|HANDLE|Sensitive Information
+    Large Language Models|HANDLE|Private Information
+
+  proposition: Models' ability to process private information while complying with privacy regulations is a critical research concern.
+    entity-entity relationships:
+    Large Language Models|COMPLY_WITH|Privacy Regulations
+
+  proposition: Studies have shown LLMs are vulnerable to leaking private information.
+    entity-attribute relationships:
+    Large Language Models|VULNERABILITY|Leaking Private Information
+
+  proposition: LLMs are susceptible to data extraction attacks.
+    entity-attribute relationships:
+    Large Language Models|SUSCEPTIBILITY|Data Extraction Attacks
+
+  proposition: Research efforts focus on developing Privacy-Preserving Large Language Models.
+    entity-attribute relationships:
+    Research Efforts|FOCUS|Developing Privacy-Preserving Large Language Models
+
+  proposition: Techniques like differential privacy are being explored to protect sensitive information.
+    entity-entity relationships:
+    Differential Privacy|PROTECT|Sensitive Information
+
+  proposition: Privacy attack methods include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+    entity-attribute relationships:
+    Privacy Attack Methods|INCLUDE|Data Extraction Attacks
+    Privacy Attack Methods|INCLUDE|Membership Inference Attacks
+    Privacy Attack Methods|INCLUDE|Embedding-level Privacy Attacks
+
+  proposition: These attacks help assess how LLMs understand and respect privacy.
+    entity-attribute relationships:
+    Privacy Attack Methods|PURPOSE|Assess LLM Privacy Understanding
+
+  proposition: Comprehensive benchmarking of privacy-preserving methods and attack techniques is essential and meaningful.
+    entity-attribute relationships:
+    Privacy-Preserving Methods|REQUIRES|Comprehensive Benchmarking
+    Attack Techniques|REQUIRES|Comprehensive Benchmarking

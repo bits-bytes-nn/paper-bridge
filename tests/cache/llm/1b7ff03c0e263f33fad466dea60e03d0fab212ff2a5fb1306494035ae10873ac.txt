@@ -1,0 +1,24 @@
+Trustworthiness Strategies for Generative Foundation Models by Leading Corporations
+
+OpenAI has established a Red Teaming Network of experts to evaluate and improve generative model safety.
+OpenAI is dedicated to long-term safety and cooperative research in AI development.
+OpenAI aims to lead in AI capabilities while focusing on safe and secure AGI development.
+OpenAI has released Model System Cards for generative models like Dalle-3 and GPT-4o.
+OpenAI's safety standards include minimizing harm, building trust, and continuous learning.
+OpenAI has formed a model superalignment team using scalable training, validation, and stress testing methods.
+OpenAI is enhancing model security through trusted computing, network isolation, and physical security improvements.
+OpenAI is developing a classifier to distinguish between AI-generated and human-written text.
+OpenAI funded 10 global teams to explore public input in shaping AI behavior.
+
+Meta conducts extensive pre-deployment safety stress tests for LLaMA models using internal and external experts.
+Meta uses Llama Guard, a multilingual moderation tool to detect content violating safety guidelines.
+Meta developed Prompt Guard to detect prompt attacks, including prompt injection and jailbreaking.
+Meta released CyberSecEval benchmarks to help understand and mitigate generative AI cybersecurity risks.
+Meta collaborates with AWS and NVIDIA to integrate safety solutions in Llama model distribution.
+
+Microsoft Research focuses on maintaining robustness in model compression and mitigating AI biases.
+Microsoft works on reducing gender bias in multilingual embeddings.
+Microsoft has developed AI initiatives for social good, including AI for Health and Bioacoustics projects.
+Microsoft has outlined six trustworthy AI principles guiding their cloud services and AI deployment.
+Microsoft leverages AI for improving healthcare, wildlife conservation, data visualization, and geospatial machine learning.
+Microsoft has created a framework for responsible AI system development.

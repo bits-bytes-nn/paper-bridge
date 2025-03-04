@@ -1,0 +1,83 @@
+topic: Copyright Compliance in Large Language Models
+
+  entities:
+    Uri Hacohen|Researcher
+    Haodong Li|Researcher
+    Boyi Wei|Researcher
+    Felix B Mueller|Researcher
+    Tong Chen|Researcher
+    Digger|Tool
+    CopyBench|Benchmark
+    Large Language Models|Technology
+
+  proposition: Uri Hacohen and colleagues investigate data-driven biases in GenAI copyright disputes
+    entity-attribute relationships:
+    Uri Hacohen|INVESTIGATES|data-driven biases
+    GenAI|SUBJECT_OF|copyright disputes
+
+    entity-entity relationships:
+    Uri Hacohen|COLLABORATES_WITH|colleagues
+
+  proposition: Haodong Li and researchers develop Digger for detecting copyright content mis-usage in language model training
+    entity-attribute relationships:
+    Haodong Li|DEVELOPS|Digger
+    Digger|PURPOSE|detecting copyright content mis-usage
+    
+    entity-entity relationships:
+    Haodong Li|COLLABORATES_WITH|researchers
+    Digger|APPLIES_TO|language model training
+
+  proposition: Boyi Wei and team evaluate copyright takedown methods for language models
+    entity-attribute relationships:
+    Boyi Wei|EVALUATES|copyright takedown methods
+    
+    entity-entity relationships:
+    Boyi Wei|COLLABORATES_WITH|team
+    copyright takedown methods|APPLIES_TO|language models
+
+  proposition: Felix B Mueller and researchers examine LLMs and memorization with focus on copyright compliance
+    entity-attribute relationships:
+    Felix B Mueller|EXAMINES|LLMs and memorization
+    Felix B Mueller|FOCUSES_ON|copyright compliance
+
+    entity-entity relationships:
+    Felix B Mueller|COLLABORATES_WITH|researchers
+
+  proposition: Tong Chen and colleagues create CopyBench to measure literal and non-literal reproduction of copyright-protected text
+    entity-attribute relationships:
+    Tong Chen|CREATES|CopyBench
+    CopyBench|PURPOSE|measuring copyright-protected text reproduction
+
+    entity-entity relationships:
+    Tong Chen|COLLABORATES_WITH|colleagues
+
+  proposition: Researchers are exploring various techniques to address copyright concerns in large language models
+    entity-attribute relationships:
+    Researchers|EXPLORES|techniques for copyright concerns
+
+    entity-entity relationships:
+    techniques|APPLIES_TO|large language models
+
+  proposition: Multiple studies focus on unlearning, memorization mitigation, and copyright detection in AI systems
+    entity-attribute relationships:
+    Studies|FOCUSES_ON|unlearning
+    Studies|FOCUSES_ON|memorization mitigation
+    Studies|FOCUSES_ON|copyright detection
+
+    entity-entity relationships:
+    Studies|APPLIES_TO|AI systems
+
+  proposition: Research aims to develop methods for preventing verbatim memorization and protecting intellectual property
+    entity-attribute relationships:
+    Research|AIMS|developing methods
+    Methods|PURPOSE|preventing verbatim memorization
+    Methods|PURPOSE|protecting intellectual property
+
+  proposition: Papers propose technical approaches to assess and mitigate copyright risks in generative AI technologies
+    entity-attribute relationships:
+    Papers|PROPOSES|technical approaches
+    Approaches|PURPOSE|assessing copyright risks
+    Approaches|PURPOSE|mitigating copyright risks
+
+    entity-entity relationships:
+    Approaches|APPLIES_TO|generative AI technologies

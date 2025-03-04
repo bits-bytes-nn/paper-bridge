@@ -1,0 +1,29 @@
+Research Publications in AI and Medical Imaging
+
+Yuexing Hao, Zeyu Liu, Robert N Riter, and Saleh Kalantari published a paper on advancing patient-centered shared decision-making with AI systems for older adult cancer patients.
+
+Haixing Dai and colleagues developed AD-AutoGPT, an autonomous GPT system for Alzheimer's Disease infodemiology.
+
+Chong Ma, Hanqi Jiang, and team created an eye-gaze guided multi-modal alignment framework for radiology.
+
+Yiwei Li and researchers developed ECHOPulse, a system for ECG-controlled echocardiogram video generation.
+
+Hadrien Reynaud and colleagues introduced Echonet-synthetic, a privacy-preserving video generation method for safe medical data sharing.
+
+Hadrien Reynaud and team developed feature-conditioned cascaded video diffusion models for precise echocardiogram synthesis.
+
+Zhengliang Liu and researchers fine-tuned large language models specifically for the radiation oncology domain.
+
+Zhiling Yan and colleagues created Biomedical SAM 2, a system to segment anything in biomedical images and videos.
+
+Zhengliang Liu and team explored approaches to adapting large language models to the radiology domain.
+
+Xiang Li and researchers investigated artificial general intelligence for medical imaging analysis.
+
+Zihao Wu and colleagues explored trade-offs between unified large language models and local fine-tuned models for radiology tasks.
+
+Chenbin Liu and team applied artificial general intelligence to radiation oncology.
+
+Zhengliang Liu and researchers evaluated large language models for radiology natural language processing.
+
+Andreas Schaich and colleagues studied own-age bias in face recognition using horizontal information.

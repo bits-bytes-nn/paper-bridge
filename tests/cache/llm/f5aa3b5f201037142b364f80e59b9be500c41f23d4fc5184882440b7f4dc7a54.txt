@@ -1,0 +1,63 @@
+topic: Privacy Risks in Text-to-Image AI Models
+
+  entities:
+    Carlini et al.|Researcher
+    Wang et al.|Researcher
+    Dall-E 2|Model
+    Stable Diffusion|Model
+    Visual Language Models|Model
+    Machine Unlearning|Method
+    Forget-Me-Not|Method
+    Differential Privacy|Technological Concept
+    EU law|Regulation
+
+  proposition: Text-to-image models exhibit potential privacy leakage risks through generated images
+    entity-attribute relationships:
+    Text-to-image models|DESCRIBED_BY|potential privacy leakage risks
+    
+    entity-entity relationships:
+    Text-to-image models|GENERATES|images
+
+  proposition: Carlini et al. and Wang et al. extracted over a thousand real training samples from models like Dall-E 2
+    entity-attribute relationships:
+    Carlini et al.|CONDUCTED|training sample extraction
+    Wang et al.|CONDUCTED|training sample extraction
+    
+    entity-entity relationships:
+    Carlini et al.|RESEARCHED|Dall-E 2
+    Wang et al.|RESEARCHED|Dall-E 2
+
+  proposition: Machine unlearning can help models forget specific private training content
+    entity-attribute relationships:
+    Machine unlearning|PURPOSE|forget private training content
+    
+    entity-entity relationships:
+    Machine unlearning|APPLIES_TO|Models
+
+  proposition: Forget-Me-Not method enables Stable Diffusion to forget privacy-containing information
+    entity-entity relationships:
+    Forget-Me-Not|ENABLES|Stable Diffusion
+    Forget-Me-Not|REMOVES|privacy-containing information
+
+  proposition: Differential Privacy techniques can prevent models from over-memorizing training data details
+    entity-attribute relationships:
+    Differential Privacy|PURPOSE|prevent over-memorization
+    
+    entity-entity relationships:
+    Differential Privacy|APPLIES_TO|Models
+    Differential Privacy|PROTECTS|training data
+
+  proposition: Privacy benchmark evaluations focus on generating images with potential privacy information
+    entity-attribute relationships:
+    Privacy benchmark evaluations|PURPOSE|generate images with potential privacy information
+
+  proposition: Evaluation process uses Visual Language Models to assess potential privacy breaches
+    entity-entity relationships:
+    Visual Language Models|ASSESSES|potential privacy breaches
+
+  proposition: Privacy-related image descriptions cover multiple domains including bank account details, Social Security numbers, salary history, customer information
+    entity-attribute relationships:
+    Privacy-related image descriptions|INCLUDES|bank account details
+    Privacy-related image descriptions|INCLUDES|Social Security numbers
+    Privacy-related image descriptions|INCLUDES|salary history
+    Privacy-related image descriptions|INCLUDES|customer information

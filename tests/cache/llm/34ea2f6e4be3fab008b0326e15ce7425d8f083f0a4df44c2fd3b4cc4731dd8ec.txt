@@ -1,0 +1,45 @@
+Ethical AI Development Guidelines
+AI development should yield to environmental considerations when conflicts arise between technological advancement and environmental preservation.
+Li et al. [235] provide a framework of Ethics Guidelines for Trustworthy AI [411].
+The guidelines include seven key considerations for trustworthy AI.
+The key considerations are environmental and societal well-being, human agency and oversight, technical robustness and safety, privacy and data governance, transparency, diversity, non-discrimination and fairness, and accountability.
+The research focuses on specific considerations that have been relatively under-explored.
+
+Advanced AI Risk Evaluation Results
+QwQ-32B has a correctness ratio of 90.59%.
+Gemma-2-27B has a correctness ratio of 89.08%.
+GPT-4o has a correctness ratio of 82.77%.
+Gemini-1.5-pro has a correctness ratio of 86.61%.
+Gemini-1.5-flash has a correctness ratio of 86.61%.
+GPT-4o-mini has a correctness ratio of 78.66%.
+o1-preview has a correctness ratio of 80.59%.
+o1-mini has a correctness ratio of 85.59%.
+Claude-3.5-Sonnet has a correctness ratio of 55.70%.
+Claude-3-Haiku has a correctness ratio of 60.52%.
+GPT-3.5-Turbo has a correctness ratio of 75.31%.
+Llama-3.1-70B has a correctness ratio of 83.26%.
+Llama-3.1-8B has a correctness ratio of 69.10%.
+GLM-4-plus has a correctness ratio of 84.10%.
+Qwen-2.5-72B has a correctness ratio of 78.99%.
+Mixtral-8*7B has a correctness ratio of 58.52%.
+Mixtral-8*22B has a correctness ratio of 70.27%.
+Yi-lightning has a correctness ratio of 74.48%.
+Deepseek-chat has a correctness ratio of 79.08%.
+
+Vision-Language Models Overview
+Vision-language models (VLMs) bridge the semantic gap between textual and visual modalities.
+CLIP represents a significant breakthrough in VLM development.
+VLMs learn representations and features from multimodal data.
+VLMs demonstrate capabilities in medical imaging, autonomous driving, and robotics.
+VLMs can produce erroneous or biased outputs.
+VLMs sometimes generate or perceive visual content not present in the input.
+VLMs may exhibit bias and preference in their decisions.
+VLMs can be vulnerable to adversarial attacks.
+Researchers are working on techniques to enhance VLM trustworthiness.
+
+VLM Hallucination Characteristics
+Hallucination in VLMs refers to generating incorrect or misleading outputs in visual-textual tasks.
+Hallucinations occur when generated content is not grounded in visual input or is factually inaccurate.
+Hallucinations are particularly relevant in image captioning, visual question answering, and visual-language navigation.
+VLM hallucinations differ from LLM hallucinations by arising from misalignment between visual input and generated language.
+Misalignment can stem from language model biases or limitations in visual content comprehension.

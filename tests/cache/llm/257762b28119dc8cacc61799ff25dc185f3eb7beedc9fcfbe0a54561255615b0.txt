@@ -1,0 +1,61 @@
+topic: Hallucination Evaluation in Vision-Language Models
+
+  entities:
+    AutoHallusion|Project
+    GPT-4o|Model
+    Claude-3.5-Sonnet|Model
+    HallusionBench|Benchmark
+    Vision-Language Models|Technological Concept
+    Large Language Models|Technological Concept
+
+  proposition: Questions are constructed based on manipulated objects within a scene.
+    entity-attribute relationships:
+    Questions|DESCRIBED_BY|constructed based on manipulated objects
+    Questions|TYPE|existence or spatial relationship
+
+    entity-entity relationships:
+    Questions|PART_OF|AutoHallusion
+
+  proposition: An LLM-powered contextual variator paraphrases questions to increase diversity.
+    entity-attribute relationships:
+    Contextual Variator|POWERED_BY|LLM
+    Contextual Variator|PURPOSE|increase question diversity
+
+  proposition: GPT-4o and Claude-3.5-Sonnet are top performers in hallucination evaluation.
+    entity-attribute relationships:
+    GPT-4o|PERFORMANCE|top performer
+    Claude-3.5-Sonnet|PERFORMANCE|top performer
+
+    entity-entity relationships:
+    GPT-4o|COMPARED_WITH|Claude-3.5-Sonnet
+
+  proposition: Claude-3.5-Sonnet outperforms GPT-4o by 6.31% on hard questions.
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|PERFORMANCE_MARGIN|6.31% better
+    Hard Questions|DIFFICULTY|complex
+
+    entity-entity relationships:
+    Claude-3.5-Sonnet|OUTPERFORMS|GPT-4o
+
+topic: Vision-Language Model Security Vulnerabilities
+
+  proposition: Vision-Language Models introduce new vulnerabilities for potential attacks.
+    entity-attribute relationships:
+    Vision-Language Models|VULNERABILITY|potential attacks
+
+  proposition: Jailbreaking VLMs poses a significant safety risk.
+    entity-attribute relationships:
+    VLMs|SAFETY_RISK|significant
+
+  proposition: Attackers can format harmful queries into images to bypass safety filters.
+    entity-attribute relationships:
+    Attacks|METHOD|format harmful queries into images
+    Attacks|PURPOSE|bypass safety filters
+
+  proposition: Jailbreak attack types include prompt-to-image attacks and optimization-based methods.
+    entity-attribute relationships:
+    Jailbreak Attacks|TYPES|prompt-to-image attacks
+    Jailbreak Attacks|TYPES|optimization-based methods
+
+    entity-entity relationships:
+    Prompt-to-Image Attacks|TRANSFERS|harmful information between text and image modalities

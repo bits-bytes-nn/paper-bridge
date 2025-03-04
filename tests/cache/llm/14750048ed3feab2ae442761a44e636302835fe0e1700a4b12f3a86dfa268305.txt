@@ -1,0 +1,39 @@
+Hallucination in Vision-Language Models: Characteristics, Mitigation, and Benchmarking
+
+Object hallucination is a key form of hallucination in vision-language models.
+Object hallucination involves generating nonexistent objects.
+Object hallucination includes attributing incorrect properties to visible objects.
+Object hallucination involves misrepresenting relationships between objects in a scene.
+CHAIR and POPE are metrics that assess caption relevance and hallucination levels.
+Standard text quality metrics can be misleading for hallucination detection.
+High text quality scores may correlate with significant hallucination.
+
+Recent approaches aim to improve hallucination detection through training objective optimization.
+Recent approaches incorporate grounding constraints during inference stage.
+Fine-tuning smaller multimodal models has proven less effective for vision-language models.
+LRV-Instruction creates balanced positive and negative instructions to finetune vision-language models.
+VIGC uses an iterative process to generate concise and accurate answers.
+Woodpecker introduces a training-free method to identify and correct hallucinations.
+
+The hallucination benchmark uses data from HallusionBench and AutoHallusion.
+HallusionBench contains 455 visual-question control pairs.
+HallusionBench includes 346 different figures.
+HallusionBench covers 1129 questions on diverse topics and formats.
+The benchmark uses materials from generative models and real-world datasets.
+The evaluation subsampled 200 cases from HallusionBench.
+The evaluation generated an additional 200 cases using AutoHallusion.
+
+The dynamic dataset generation involves creating images with generated or provided keywords.
+Images are generated using models like DALL-E 3.
+Visual-question pairs are created by modifying background images.
+Questions are constructed based on manipulated scene objects.
+Questions include existence and spatial relationship types.
+An LLM-powered contextual variator paraphrases questions to increase diversity.
+
+GPT-4o and Claude-3.5-Sonnet are top performers in hallucination truthfulness evaluation.
+GPT-4o achieved 71.14% overall accuracy.
+GPT-4o scored 88.04% on existence questions.
+GPT-4o scored 57.41% on spatial relationship questions.
+Claude-3.5-Sonnet achieved 71.14% overall accuracy.
+Claude-3.5-Sonnet scored 83.70% on existence questions.
+Claude-3.5-Sonnet scored 61.11% on spatial relationship questions.

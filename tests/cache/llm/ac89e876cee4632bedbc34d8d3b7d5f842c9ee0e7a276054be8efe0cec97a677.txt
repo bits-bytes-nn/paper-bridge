@@ -1,0 +1,154 @@
+topic: Trustworthiness and Safety in Multi-Agent Systems
+
+  entities:
+    Huang et al.|Researcher
+    Yu et al.|Researcher
+    Zhang et al.|Researcher
+    Agent-SafetyBench|Benchmark
+    Psysafe|Benchmark
+    SafeAgentBench|Benchmark
+    Tian et al.|Researcher
+    Xu et al.|Researcher
+    Dong et al.|Researcher
+    AgentSmith|Project
+    Zeng et al.|Researcher
+    TrustAgent|Tool
+    Yoffe et al.|Researcher
+
+  proposition: Huang et al. explored multi-agent topology resilience against attacks.
+    entity-entity relationships:
+    Huang et al.|RESEARCHED|multi-agent topology resilience
+
+  proposition: Yu et al. studied topological safety in multi-agent networks.
+    entity-entity relationships:
+    Yu et al.|STUDIED|topological safety
+    Yu et al.|FOCUSED_ON|multi-agent networks
+
+  proposition: Yu et al. identified critical phenomena called Agent Hallucination and Aggregation Safety.
+    entity-attribute relationships:
+    Yu et al.|IDENTIFIED|Agent Hallucination
+    Yu et al.|IDENTIFIED|Aggregation Safety
+
+  proposition: Zhang et al. proposed Psysafe, a benchmark for evaluating safety of psychological-based attacks in multi-agent systems.
+    entity-entity relationships:
+    Zhang et al.|PROPOSED|Psysafe
+    Psysafe|EVALUATES|psychological-based attacks
+
+  proposition: Agent-SafetyBench evaluated LLM-based agents across 349 interaction environments and 2,000 test cases.
+    entity-attribute relationships:
+    Agent-SafetyBench|EVALUATED|LLM-based agents
+    Agent-SafetyBench|SCOPE|349 interaction environments
+    Agent-SafetyBench|SCOPE|2,000 test cases
+
+  proposition: Agent-SafetyBench found that none of the 16 tested agents surpass a 60% safety score.
+    entity-attribute relationships:
+    Agent-SafetyBench|TESTED|16 agents
+    Agent-SafetyBench|FOUND|safety score below 60%
+
+  proposition: SafeAgentBench focuses on safety-aware task planning for embodied LLM agents.
+    entity-entity relationships:
+    SafeAgentBench|FOCUSES_ON|safety-aware task planning
+    SafeAgentBench|TARGETS|embodied LLM agents
+
+  proposition: SafeAgentBench offers 750 tasks covering 10 hazards.
+    entity-attribute relationships:
+    SafeAgentBench|OFFERS|750 tasks
+    SafeAgentBench|COVERS|10 hazards
+
+  proposition: SafeAgentBench revealed that the leading baseline rejects only 5% of hazardous tasks.
+    entity-attribute relationships:
+    SafeAgentBench|REVEALED|leading baseline rejection rate
+    SafeAgentBench|REJECTION_RATE|5% of hazardous tasks
+
+  proposition: Tian et al. probed agent safety through manual jailbreak prompts and a virtual evil plan development team.
+    entity-entity relationships:
+    Tian et al.|PROBED|agent safety
+    Tian et al.|USED|manual jailbreak prompts
+    Tian et al.|USED|virtual evil plan development team
+
+  proposition: Xu et al. utilized an LLM-based agent for automatic red-teaming to generate context-aware jailbreak prompts.
+    entity-entity relationships:
+    Xu et al.|UTILIZED|LLM-based agent
+    Xu et al.|PERFORMED|automatic red-teaming
+    Xu et al.|GENERATED|context-aware jailbreak prompts
+
+  proposition: Dong et al. leveraged LLM agents to jailbreak text-to-image models.
+    entity-entity relationships:
+    Dong et al.|LEVERAGED|LLM agents
+    Dong et al.|TARGETED|text-to-image models
+
+  proposition: AgentSmith and another work discussed malicious content propagation between generative model-based agents.
+    entity-entity relationships:
+    AgentSmith|DISCUSSED|malicious content propagation
+    AgentSmith|FOCUSED_ON|generative model-based agents
+
+  proposition: Zeng et al. used synthetic data to enhance privacy-preservation of LLMs in RAG scenarios.
+    entity-entity relationships:
+    Zeng et al.|USED|synthetic data
+    Zeng et al.|ENHANCED|privacy-preservation of LLMs
+    Zeng et al.|FOCUSED_ON|RAG scenarios
+
+  proposition: TrustAgent enhanced LLM agent safety across multiple domains by identifying and mitigating potential dangers during planning.
+    entity-entity relationships:
+    TrustAgent|ENHANCED|LLM agent safety
+    TrustAgent|OPERATES_IN|multiple domains
+    TrustAgent|MITIGATES|potential dangers
+
+  proposition: Yoffe et al. proposed the DebUnc framework to mitigate hallucination in agents using uncertainty estimations.
+    entity-entity relationships:
+    Yoffe et al.|PROPOSED|DebUnc framework
+    DebUnc framework|MITIGATES|agent hallucination
+    DebUnc framework|USES|uncertainty estimations
+
+topic: Medical Applications of Generative Foundation Models
+
+  entities:
+    Medical agents|Tool
+    Multi-modal medical agents|Tool
+    Generative medical models|Model
+    Validation pipelines|Method
+
+  proposition: Generative foundation models in medical applications enable automation of complex diagnostic and decision-making tasks.
+    entity-attribute relationships:
+    Generative foundation models|ENABLES|automation of diagnostic tasks
+    Generative foundation models|ENABLES|complex decision-making tasks
+
+  proposition: Medical agents powered by LLMs and VLMs support clinicians and patients in diagnostics, treatment planning, and patient monitoring.
+    entity-entity relationships:
+    Medical agents|POWERED_BY|LLMs
+    Medical agents|POWERED_BY|VLMs
+    Medical agents|SUPPORTS|clinicians
+    Medical agents|SUPPORTS|patients
+    Medical agents|ASSISTS_IN|diagnostics
+    Medical agents|ASSISTS_IN|treatment planning
+    Medical agents|ASSISTS_IN|patient monitoring
+
+  proposition: Multi-modal medical agents combine text and image inputs to deliver accurate and context-aware diagnostic assistance.
+    entity-attribute relationships:
+    Multi-modal medical agents|COMBINES|text inputs
+    Multi-modal medical agents|COMBINES|image inputs
+    Multi-modal medical agents|PROVIDES|accurate diagnostic assistance
+    Multi-modal medical agents|PROVIDES|context-aware diagnostic assistance
+
+  proposition: Generative models in medical video generation offer opportunities for medical education, training, and diagnostics.
+    entity-attribute relationships:
+    Generative medical models|OFFERS|medical education opportunities
+    Generative medical models|OFFERS|medical training opportunities
+    Generative medical models|OFFERS|diagnostic opportunities
+
+  proposition: Generated medical videos can visualize procedures, disease progression, and anatomical changes.
+    entity-attribute relationships:
+    Generated medical videos|VISUALIZES|medical procedures
+    Generated medical videos|VISUALIZES|disease progression
+    Generated medical videos|VISUALIZES|anatomical changes
+
+  proposition: Automated medical report generation can analyze medical images and patient data to draft detailed reports.
+    entity-attribute relationships:
+    Automated medical report generation|ANALYZES|medical images
+    Automated medical report generation|ANALYZES|patient data
+    Automated medical report generation|DRAFTS|detailed reports
+
+  proposition: Validation pipelines cross-reference generated reports with ground-truth annotations.
+    entity-entity relationships:
+    Validation pipelines|CROSS_REFERENCES|generated reports
+    Validation pipelines|COMPARES_WITH|ground-truth annotations

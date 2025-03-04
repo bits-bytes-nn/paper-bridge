@@ -1,0 +1,100 @@
+topic: Large Language Model Safety Evaluation
+
+  entities:
+    Large Language Models|Model
+    Claude series models|Model
+    WikiQA|Dataset
+    TruthfulQA|Dataset
+    CommonsenseQA|Dataset
+
+  proposition: Large Language Models (LLMs) have varying Refuse-to-Answer (RtA) rates in safety evaluations.
+    entity-attribute relationships:
+    Large Language Models|EVALUATED_BY|safety evaluations
+    Large Language Models|CHARACTERIZED_BY|Refuse-to-Answer rates
+
+  proposition: The full RtA represents complete query refusal by LLMs.
+    entity-attribute relationships:
+    full RtA|DEFINED_AS|complete query refusal
+
+  proposition: The combined RtA includes both full and partial query refusals.
+    entity-attribute relationships:
+    combined RtA|INCLUDES|full query refusals
+    combined RtA|INCLUDES|partial query refusals
+
+  proposition: Most LLMs demonstrate strong performance in exaggerated safety evaluations.
+    entity-attribute relationships:
+    Large Language Models|PERFORMANCE|strong
+    Large Language Models|EVALUATED_BY|exaggerated safety evaluations
+
+  proposition: Less than 5% of LLMs have full query refusal rates.
+    entity-attribute relationships:
+    Large Language Models|FULL_QUERY_REFUSAL_RATE|less than 5%
+
+  proposition: Less than 10% of LLMs have combined query refusal rates.
+    entity-attribute relationships:
+    Large Language Models|COMBINED_QUERY_REFUSAL_RATE|less than 10%
+
+  proposition: Compared to previous evaluations, LLMs show significant progress in alignment.
+    entity-attribute relationships:
+    Large Language Models|PROGRESS|significant alignment
+
+  proposition: Claude series models exhibit relatively higher RtA rates.
+    entity-attribute relationships:
+    Claude series models|RTA_RATE|relatively higher
+
+  proposition: Higher RtA scores indicate poorer performance in assessing potential query harm.
+    entity-attribute relationships:
+    RtA scores|INDICATES|poorer performance
+    RtA scores|ASSESSES|potential query harm
+
+topic: Dynamic Dataset Generation
+
+  entities:
+    Large Language Models|Model
+    case generator|Tool
+
+  proposition: Large Language Models generate words and phrases related to unsafe topics.
+    entity-attribute relationships:
+    Large Language Models|GENERATES|words related to unsafe topics
+    Large Language Models|GENERATES|phrases related to unsafe topics
+
+  proposition: Benign datasets like WikiQA, TruthfulQA, and CommonsenseQA provide harmless query examples.
+    entity-attribute relationships:
+    WikiQA|TYPE|benign dataset
+    TruthfulQA|TYPE|benign dataset
+    CommonsenseQA|TYPE|benign dataset
+    WikiQA|PROVIDES|harmless query examples
+    TruthfulQA|PROVIDES|harmless query examples
+    CommonsenseQA|PROVIDES|harmless query examples
+
+  proposition: A case generator applies nine transformation policies to create queries.
+    entity-attribute relationships:
+    case generator|APPLIES|nine transformation policies
+    case generator|CREATES|queries
+
+  proposition: The goal is to generate queries that include potentially unsafe words while maintaining harmlessness.
+    entity-attribute relationships:
+    case generator|GOAL|generate queries
+    queries|CONTAINS|potentially unsafe words
+    queries|MAINTAINS|harmlessness
+
+topic: Prompt Injection Attack
+
+  entities:
+    Large Language Models|Model
+
+  proposition: Prompt injection attacks exploit LLMs' difficulty in distinguishing genuine user inputs from malicious commands.
+    entity-attribute relationships:
+    Prompt injection attacks|EXPLOITS|LLMs' difficulty
+    Prompt injection attacks|TARGETS|distinguishing genuine user inputs
+    Prompt injection attacks|TARGETS|malicious commands
+
+  proposition: These attacks take advantage of natural language processing capabilities.
+    entity-attribute relationships:
+    Prompt injection attacks|USES|natural language processing capabilities
+
+  proposition: Prompt injection attacks pose a serious threat to LLM security and applications.
+    entity-attribute relationships:
+    Prompt injection attacks|THREAT_LEVEL|serious
+    Prompt injection attacks|IMPACTS|LLM security
+    Prompt injection attacks|IMPACTS|LLM applications

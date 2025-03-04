@@ -1,0 +1,16 @@
+References in Vision-Language and Diffusion Model Research
+
+Amita Kamath, Jack Hessel, and Kai-Wei Chang published a paper about text encoders bottlenecking compositionality in contrastive vision-language models.
+Zhiqiu Lin, Xinyue Chen, Deepak Pathak, Pengchuan Zhang, and Deva Ramanan investigated the role of language priors in vision-language models.
+Zixian Ma, Jerry Hong, Mustafa Omer Gul, Mona Gandhi, Irena Gao, and Ranjay Krishna explored compositional reasoning in vision-language foundation models.
+Mert Yuksekgonul, Federico Bianchi, Pratyusha Kalluri, Dan Jurafsky, and James Y. Zou studied why vision-language models behave like bags-of-words.
+Tan Wang, Kevin Lin, Linjie Li, Chung-Ching Lin, Zhengyuan Yang, Hanwang Zhang, Zicheng Liu, and Lijuan Wang proposed equivariant similarity for vision-language foundation models.
+Zhiqiu Lin, Deepak Pathak, Baiqi Li, Jiayao Li, Xide Xia, Graham Neubig, Pengchuan Zhang, and Deva Ramanan evaluated text-to-visual generation using image-to-text generation.
+Ziqi Gao, Weikai Huang, Jieyu Zhang, Aniruddha Kembhavi, and Ranjay Krishna proposed scene graph programming for evaluating and improving text-to-vision generation.
+Multiple researchers have explored safety and security in text-to-image generation, including works on:
+Erasing concepts from diffusion models
+Developing safety frameworks for text-to-image generation
+Automatic red-teaming for text-to-image models
+Suppressing sexual content generation
+Investigating backdoor attacks on diffusion models
+Eliminating backdoors in diffusion models

@@ -1,0 +1,63 @@
+topic: Trustworthiness Benchmarks for Generative Foundation Models
+
+  entities:
+    TrustLLM|Benchmark
+    HELM|Benchmark
+    DecodingTrust|Benchmark
+    Do-Not-Answer|Benchmark
+    SafetyBench|Benchmark
+    FairEval|Benchmark
+    CVALUES|Benchmark
+    ML Commons v0.5|Benchmark
+    BackdoorLLM|Benchmark
+    HEIM|Benchmark
+    HRS-Bench|Benchmark
+    Stable Bias|Benchmark
+    DALL-EVAL|Benchmark
+    GenEVAL|Benchmark
+    MultiTrust|Benchmark
+    MLLM-Guard|Benchmark
+    MM-SafetyBench|Benchmark
+    UniCorn|Benchmark
+    BenchLMM|Benchmark
+    Halle-switch|Benchmark
+    Red-Teaming VLM|Benchmark
+    JailBreak-V|Benchmark
+    GOAT-Bench|Benchmark
+    Ch3Ef|Benchmark
+    GenderBias|Benchmark
+    TrustGen|Benchmark
+
+  proposition: Benchmarks provide frameworks to assess current models and guide future advancements in reliability and safety.
+    entity-attribute relationships:
+    Benchmarks|DESCRIBED_BY|frameworks
+    Benchmarks|PURPOSE|assess current models
+    Benchmarks|PURPOSE|guide future advancements
+    Benchmarks|FOCUS|reliability
+    Benchmarks|FOCUS|safety
+
+  proposition: Benchmark development is crucial for fostering collaboration among industry stakeholders to enhance trustworthiness of Generative Foundation Models.
+    entity-attribute relationships:
+    Benchmark development|IMPORTANCE|crucial
+    Benchmark development|PURPOSE|foster collaboration
+    Benchmark development|TARGET|industry stakeholders
+    Benchmark development|GOAL|enhance trustworthiness
+
+  proposition: TrustLLM benchmark evaluates Large Language Models based on truthfulness, safety, fairness, and robustness.
+    entity-attribute relationships:
+    TrustLLM|EVALUATES|Large Language Models
+    TrustLLM|ASSESSMENT_CRITERIA|truthfulness
+    TrustLLM|ASSESSMENT_CRITERIA|safety
+    TrustLLM|ASSESSMENT_CRITERIA|fairness
+    TrustLLM|ASSESSMENT_CRITERIA|robustness
+
+  proposition: Comprehensive benchmarks like TrustGen aim to evaluate multiple aspects across different model types, including safety, fairness, robustness, privacy, ethics, and diverse model architectures.
+    entity-attribute relationships:
+    TrustGen|PURPOSE|evaluate multiple aspects
+    TrustGen|EVALUATION_SCOPE|different model types
+    TrustGen|ASSESSMENT_CRITERIA|safety
+    TrustGen|ASSESSMENT_CRITERIA|fairness
+    TrustGen|ASSESSMENT_CRITERIA|robustness
+    TrustGen|ASSESSMENT_CRITERIA|privacy
+    TrustGen|ASSESSMENT_CRITERIA|ethics
+    TrustGen|ASSESSMENT_CRITERIA|diverse model architectures

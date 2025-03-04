@@ -1,0 +1,128 @@
+topic: Interdisciplinary Collaboration in Trustworthy AI Research
+
+  entities:
+    Computational Social Scientists|Research Group
+    HCI Experts|Research Group
+    Security Experts|Research Group
+    Roboticists|Research Group
+    Medical Researchers|Research Group
+    AI for Science Researchers|Research Group
+    Legal Scholars|Research Group
+    TrustGen|Framework
+
+  proposition: Computational social scientists and HCI experts provide perspectives on fairness, societal biases, machine ethics, and human-centric safety considerations.
+    entity-attribute relationships:
+    Computational Social Scientists|FOCUSES_ON|fairness
+    Computational Social Scientists|FOCUSES_ON|societal biases
+    Computational Social Scientists|FOCUSES_ON|machine ethics
+    HCI Experts|FOCUSES_ON|human-centric safety considerations
+
+    entity-entity relationships:
+    None
+
+  proposition: Security experts guide model evaluation for robustness against adversarial attacks and privacy preservation mechanisms.
+    entity-attribute relationships:
+    Security Experts|EVALUATES|model robustness
+    Security Experts|FOCUSES_ON|adversarial attacks
+    Security Experts|FOCUSES_ON|privacy preservation
+
+    entity-entity relationships:
+    None
+
+  proposition: Roboticists, medical and AI for science researchers help evaluate model truthfulness and reliability in physical interactions, healthcare, and scientific research scenarios.
+    entity-attribute relationships:
+    Roboticists|EVALUATES|model truthfulness
+    Roboticists|EVALUATES|model reliability
+    Medical Researchers|EVALUATES|model truthfulness
+    Medical Researchers|EVALUATES|model reliability
+    AI for Science Researchers|EVALUATES|model truthfulness
+    AI for Science Researchers|EVALUATES|model reliability
+
+    entity-entity relationships:
+    None
+
+  proposition: Legal scholars assess advanced AI risks and develop guidelines aligned with global regulatory requirements and ethical standards.
+    entity-attribute relationships:
+    Legal Scholars|ASSESSES|advanced AI risks
+    Legal Scholars|DEVELOPS|guidelines
+    Legal Scholars|FOCUSES_ON|global regulatory requirements
+    Legal Scholars|FOCUSES_ON|ethical standards
+
+    entity-entity relationships:
+    None
+
+  proposition: The interdisciplinary collaboration enables a comprehensive evaluation of models across multiple dimensions.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+  proposition: TrustGen is proposed as a dynamic evaluation framework that adapts to evolving ethical standards and social norms.
+    entity-attribute relationships:
+    TrustGen|TYPE|dynamic evaluation framework
+    TrustGen|ADAPTS_TO|evolving ethical standards
+    TrustGen|ADAPTS_TO|social norms
+
+    entity-entity relationships:
+    None
+
+  proposition: The research spans technical challenges in model trustworthiness and ethical considerations in downstream applications like medicine, robotics, AI for sciences, and human-AI collaboration.
+    entity-attribute relationships:
+    None
+
+    entity-entity relationships:
+    None
+
+topic: Student Contributors' Involvement in Research Paper
+
+  entities:
+    H. B|Researcher
+    D. C|Researcher
+    R. C|Researcher
+    C. G|Researcher
+    K. G|Researcher
+    T. G|Researcher
+    Y. H|Researcher
+    Y. L|Researcher
+    Z. L|Researcher
+    J. S|Researcher
+    H. W|Researcher
+    S. W|Researcher
+    X. W|Researcher
+    Y. W|Researcher
+    J. Y|Researcher
+    K. Z|Researcher
+    Q. Z|Researcher
+    Y. Z|Researcher
+
+  proposition: H. B contributed to visualization, introduction, background, text-to-image, visual language models, and applications.
+    entity-attribute relationships:
+    H. B|CONTRIBUTES_TO|visualization
+    H. B|CONTRIBUTES_TO|introduction
+    H. B|CONTRIBUTES_TO|background
+    H. B|CONTRIBUTES_TO|text-to-image
+    H. B|CONTRIBUTES_TO|visual language models
+    H. B|CONTRIBUTES_TO|applications
+
+    entity-entity relationships:
+    None
+
+  [Similar structure for each researcher's contribution]
+
+topic: Acknowledgment Support
+
+  entities:
+    Max Lamparth|Researcher
+    Stanford Center for AI Safety|Research Institution
+    Center for International Security and Cooperation|Research Institution
+    Stanford Existential Risk Initiative|Research Institution
+
+  proposition: Max Lamparth received partial support from the Stanford Center for AI Safety, the Center for International Security and Cooperation, and the Stanford Existential Risk Initiative.
+    entity-attribute relationships:
+    Max Lamparth|RECEIVED_SUPPORT_FROM|Stanford Center for AI Safety
+    Max Lamparth|RECEIVED_SUPPORT_FROM|Center for International Security and Cooperation
+    Max Lamparth|RECEIVED_SUPPORT_FROM|Stanford Existential Risk Initiative
+
+    entity-entity relationships:
+    None

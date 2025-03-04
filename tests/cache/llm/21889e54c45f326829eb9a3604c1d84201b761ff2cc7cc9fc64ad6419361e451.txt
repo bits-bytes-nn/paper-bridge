@@ -1,0 +1,189 @@
+topic: Generative Foundation Models (GenFMs)
+
+  entities:
+    Generative Foundation Models|Research Field
+    BERT|Model
+    GPT-4|Model
+    DALLE-3|Model
+    Large Language Models|Research Field
+
+  proposition: Foundation models are distinguished by extensive use of massive datasets and computational resources during pre-training.
+    entity-attribute relationships:
+    Foundation models|CHARACTERIZED_BY|extensive use of massive datasets
+    Foundation models|CHARACTERIZED_BY|extensive computational resources during pre-training
+
+  proposition: Foundation models can generalize effectively across diverse applications.
+    entity-attribute relationships:
+    Foundation models|CAPABILITY|effective generalization across diverse applications
+
+  proposition: Non-generative foundation models like BERT are primarily designed for text classification and language understanding.
+    entity-attribute relationships:
+    BERT|DESIGNED_FOR|text classification
+    BERT|DESIGNED_FOR|language understanding
+
+  proposition: Generative foundation models (GenFMs) are specifically adapted for generative tasks.
+    entity-attribute relationships:
+    Generative Foundation Models|ADAPTED_FOR|generative tasks
+
+  proposition: GenFMs excel in creating new instances such as images, texts, or other data forms based on their training.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|creating new instances
+    Generative Foundation Models|CAPABILITY|generating images
+    Generative Foundation Models|CAPABILITY|generating texts
+
+  proposition: GenFMs are large-scale, pre-trained architectures that leverage extensive pre-training to excel in generative tasks across various modalities and domains.
+    entity-attribute relationships:
+    Generative Foundation Models|SCALE|large-scale
+    Generative Foundation Models|CHARACTERISTIC|pre-trained architectures
+    Generative Foundation Models|CAPABILITY|excel in generative tasks across modalities and domains
+
+  proposition: GenFMs have transformative potential in research and practical applications.
+    entity-attribute relationships:
+    Generative Foundation Models|POTENTIAL|transformative in research
+    Generative Foundation Models|POTENTIAL|transformative in practical applications
+
+topic: Trustworthiness Challenges of GenFMs
+
+  entities:
+    GPT-4|Model
+    DALLE-3|Model
+    Large Language Models|Research Field
+
+  proposition: Advanced models like GPT-4 have demonstrated vulnerabilities to novel attacks such as "jailbreak" exploits.
+    entity-attribute relationships:
+    GPT-4|VULNERABILITY|susceptible to jailbreak exploits
+
+  proposition: GenFMs can bypass intended safeguards.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|bypassing intended safeguards
+
+  proposition: Text-to-image models like DALLE-3 have been manipulated to bypass safety filters.
+    entity-attribute relationships:
+    DALLE-3|VULNERABILITY|manipulated to bypass safety filters
+
+  proposition: Large Language Models (LLMs) have raised serious concerns about privacy leaks.
+    entity-attribute relationships:
+    Large Language Models|CONCERN|privacy leaks
+
+  proposition: GenFMs can generate realistic outputs that are often indistinguishable from human-created content.
+    entity-attribute relationships:
+    Generative Foundation Models|CAPABILITY|generating realistic outputs
+    Generative Foundation Models|CHARACTERISTIC|outputs indistinguishable from human-created content
+
+  proposition: Potential risks of GenFMs include spread of misinformation, creation of deepfakes, and amplification of biased narratives.
+    entity-attribute relationships:
+    Generative Foundation Models|RISK|spread of misinformation
+    Generative Foundation Models|RISK|creation of deepfakes
+    Generative Foundation Models|RISK|amplification of biased narratives
+
+topic: Complexity of GenFM Trustworthiness
+
+  proposition: GenFMs are pre-trained on massive, heterogeneous datasets, allowing generalization across wide application ranges.
+    entity-attribute relationships:
+    Generative Foundation Models|TRAINING_DATA|massive, heterogeneous datasets
+    Generative Foundation Models|CAPABILITY|generalization across wide application ranges
+
+  proposition: The broad versatility of GenFMs introduces significant challenges in assessing trustworthiness.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERISTIC|broad versatility
+    Generative Foundation Models|CHALLENGE|assessing trustworthiness
+
+  proposition: GenFMs require evaluation across diverse tasks and contexts to ensure consistent reliability and ethical standards.
+    entity-attribute relationships:
+    Generative Foundation Models|REQUIREMENT|evaluation across diverse tasks
+    Generative Foundation Models|REQUIREMENT|evaluation across diverse contexts
+    Generative Foundation Models|GOAL|ensuring consistent reliability
+    Generative Foundation Models|GOAL|maintaining ethical standards
+
+  proposition: GenFMs have potential to shape public opinion, influence policy decisions, and generate content mimicking authoritative sources.
+    entity-attribute relationships:
+    Generative Foundation Models|POTENTIAL|shaping public opinion
+    Generative Foundation Models|POTENTIAL|influencing policy decisions
+    Generative Foundation Models|CAPABILITY|generating content mimicking authoritative sources
+
+  proposition: The scale and complexity of GenFMs, often with billions of parameters, make them inherently opaque and difficult to interpret.
+    entity-attribute relationships:
+    Generative Foundation Models|SCALE|billions of parameters
+    Generative Foundation Models|CHARACTERISTIC|opaque
+    Generative Foundation Models|CHARACTERISTIC|difficult to interpret
+
+  proposition: The dynamic nature of GenFMs complicates maintaining consistent safety protocols and establishing traceability.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERISTIC|dynamic nature
+    Generative Foundation Models|CHALLENGE|maintaining consistent safety protocols
+    Generative Foundation Models|CHALLENGE|establishing traceability
+
+topic: Key Events in AI Development (2024-2025)
+
+  entities:
+    Deepseek-R1|Model
+    OpenAI o3-mini|Model
+    International AI Safety Report|Project
+    IBM Granite Guardian|Model
+    European Artificial Intelligence Act|Project
+    OpenAI o1|Model
+    GPT-4o|Model
+    Llama 3|Model
+    Gemini Flash|Model
+    Seoul Declaration|Project
+    TrustLLM|Tool
+    GPT-4-turbo|Model
+    Grok|Model
+    UK AI Safety Institute|Organization
+    Deepmind|Research Institution
+
+  proposition: Deepseek-R1 was released in December 2024.
+    entity-attribute relationships:
+    Deepseek-R1|RELEASE_DATE|December 2024
+
+  proposition: OpenAI o3-mini was released in December 2024.
+    entity-attribute relationships:
+    OpenAI o3-mini|RELEASE_DATE|December 2024
+
+  proposition: International AI Safety Report was released in December 2024.
+    entity-attribute relationships:
+    International AI Safety Report|RELEASE_DATE|December 2024
+
+  proposition: IBM Granite Guardian was released in December 2024.
+    entity-attribute relationships:
+    IBM Granite Guardian|RELEASE_DATE|December 2024
+
+  proposition: The European Artificial Intelligence Act entered into force in August 2024.
+    entity-attribute relationships:
+    European Artificial Intelligence Act|EFFECTIVE_DATE|August 2024
+
+  proposition: OpenAI o1 was released in August 2024 with higher reasoning ability and stronger safety performance.
+    entity-attribute relationships:
+    OpenAI o1|RELEASE_DATE|August 2024
+    OpenAI o1|CAPABILITY|higher reasoning ability
+    OpenAI o1|PERFORMANCE|stronger safety performance
+
+  proposition: GPT-4o, Llama 3, and Gemini Flash were released in August 2024.
+    entity-attribute relationships:
+    GPT-4o|RELEASE_DATE|August 2024
+    Llama 3|RELEASE_DATE|August 2024
+    Gemini Flash|RELEASE_DATE|August 2024
+
+  proposition: The Seoul Declaration was adopted at the 2024 AI Seoul Summit in April 2024.
+    entity-attribute relationships:
+    Seoul Declaration|ADOPTION_DATE|April 2024
+    Seoul Declaration|EVENT|2024 AI Seoul Summit
+
+  proposition: TrustLLM was released for evaluating trustworthiness of LLMs in April 2024.
+    entity-attribute relationships:
+    TrustLLM|RELEASE_DATE|April 2024
+    TrustLLM|PURPOSE|evaluating trustworthiness of LLMs
+
+  proposition: GPT-4-turbo and Grok were released in January 2024.
+    entity-attribute relationships:
+    GPT-4-turbo|RELEASE_DATE|January 2024
+    Grok|RELEASE_DATE|January 2024
+
+  proposition: UK AI Safety Institute was established in January 2024.
+    entity-attribute relationships:
+    UK AI Safety Institute|ESTABLISHMENT_DATE|January 2024
+
+  proposition: Deepmind demonstrated how to extract ChatGPT's training data in January 2024.
+    entity-entity relationships:
+    Deepmind|DEMONSTRATED|ChatGPT
+    Deepmind|DEMONSTRATED|training data extraction

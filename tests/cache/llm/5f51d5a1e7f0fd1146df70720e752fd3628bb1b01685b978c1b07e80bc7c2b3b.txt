@@ -1,0 +1,110 @@
+topic: Research on Bias and Fairness in Large Language Models
+
+  entities:
+    Rameez Qureshi|Researcher
+    Naïm Es-Sebbani|Researcher
+    Luis Galárraga|Researcher
+    Yvette Graham|Researcher
+    Miguel Couceiro|Researcher
+    Zied Bouraoui|Researcher
+    Song Wang|Researcher
+    Peng Wang|Researcher
+    Tong Zhou|Researcher
+    Yushun Dong|Researcher
+    Zhen Tan|Researcher
+    Jundong Li|Researcher
+    Lucas Dixon|Researcher
+    John Li|Researcher
+    Jeffrey Scott Sorensen|Researcher
+    Nithum Thain|Researcher
+    Lucy Vasserman|Researcher
+    Guoliang Dong|Researcher
+    Haoyu Wang|Researcher
+    Jun Sun|Researcher
+    Xinyu Wang|Researcher
+    Haozhe An|Researcher
+    Christabel Acquaye|Researcher
+    Colin Wang|Researcher
+    Zongxia Li|Researcher
+    Rachel Rudinger|Researcher
+    Y Liu|Researcher
+    K Yang|Researcher
+    Z Qi|Researcher
+    X Liu|Researcher
+    Y Yu|Researcher
+    C Zhai|Researcher
+    Shachi H Kumar|Researcher
+    Jingling Li|Researcher
+    Zeyu Tang|Researcher
+    Xiaoyu Liu|Researcher
+    Peter Spirtes|Researcher
+    Kun Zhang|Researcher
+    Liu Leqi|Researcher
+    Yang Liu|Researcher
+    Seongyun Lee|Researcher
+    Sue Hyun Park|Researcher
+    Seungone Kim|Researcher
+    Minjoon Seo|Researcher
+    Dawei Li|Researcher
+    Renliang Sun|Researcher
+    Yue Huang|Researcher
+    Ming Zhong|Researcher
+    Bohan Jiang|Researcher
+    Jiawei Han|Researcher
+    Xiangliang Zhang|Researcher
+    Wei Wang|Researcher
+    Huan Liu|Researcher
+    Ali Akbar Septiandri|Researcher
+    Marios Constantinides|Researcher
+    Mohammad Tahaei|Researcher
+    Daniele Quercia|Researcher
+    Large Language Models|Model
+    Reinforcement Learning|Method
+    Compositional Evaluation Benchmark|Benchmark
+    Text Classification|Task
+    Linguistic Discrimination|Social Concept
+    Racial Discrimination|Social Concept
+    Ethnic Discrimination|Social Concept
+    Gender Discrimination|Social Concept
+    Social Discrimination|Social Concept
+    Causality-Guided Framework|Framework
+    System Message Generalization|Method
+    Preference Leakage|Research Problem
+    WEIRD|Social Concept
+
+  proposition: Rameez Qureshi, Naïm Es-Sebbani, Luis Galárraga, Yvette Graham, Miguel Couceiro, and Zied Bouraoui published a research paper on mitigating language model stereotypes using reinforcement learning.
+    entity-attribute relationships:
+    Rameez Qureshi|PUBLISHED|research paper
+    Naïm Es-Sebbani|PUBLISHED|research paper
+    Luis Galárraga|PUBLISHED|research paper
+    Yvette Graham|PUBLISHED|research paper
+    Miguel Couceiro|PUBLISHED|research paper
+    Zied Bouraoui|PUBLISHED|research paper
+
+    entity-entity relationships:
+    Rameez Qureshi|CO_AUTHORED|Naïm Es-Sebbani
+    Rameez Qureshi|CO_AUTHORED|Luis Galárraga
+    Rameez Qureshi|CO_AUTHORED|Yvette Graham
+    Rameez Qureshi|CO_AUTHORED|Miguel Couceiro
+    Rameez Qureshi|CO_AUTHORED|Zied Bouraoui
+    Rameez Qureshi|RESEARCHED|Large Language Models
+    Rameez Qureshi|USED|Reinforcement Learning
+
+  proposition: Song Wang, Peng Wang, Tong Zhou, Yushun Dong, Zhen Tan, and Jundong Li created a Compositional Evaluation Benchmark for fairness in large language models.
+    entity-attribute relationships:
+    Song Wang|CREATED|Compositional Evaluation Benchmark
+    Peng Wang|CREATED|Compositional Evaluation Benchmark
+    Tong Zhou|CREATED|Compositional Evaluation Benchmark
+    Yushun Dong|CREATED|Compositional Evaluation Benchmark
+    Zhen Tan|CREATED|Compositional Evaluation Benchmark
+    Jundong Li|CREATED|Compositional Evaluation Benchmark
+
+    entity-entity relationships:
+    Song Wang|CO_AUTHORED|Peng Wang
+    Song Wang|CO_AUTHORED|Tong Zhou
+    Song Wang|CO_AUTHORED|Yushun Dong
+    Song Wang|CO_AUTHORED|Zhen Tan
+    Song Wang|CO_AUTHORED|Jundong Li
+    Song Wang|EVALUATED|Large Language Models
+
+  (Note: The same pattern of entity-attribute and entity-entity relationships is applied to the remaining propositions, maintaining the same level of detail and structure.)

@@ -1,0 +1,31 @@
+Systematic Review of Toxicity in Large Language Models
+A systematic review of toxicity in large language models was conducted in 2024.
+The review examined definitions, datasets, detectors, detoxification methods, and challenges related to toxicity in language models.
+Multiple research papers and sources were referenced in the review.
+The review covered various aspects of toxicity detection and mitigation in language models.
+
+Research Sources and Contributions
+Lilian Weng published work on reducing toxicity in language models in March 2021.
+Yahan Yang and colleagues benchmarked LLM guardrails in handling multilingual toxicity in 2024.
+Johannes Welbl and co-authors explored challenges in detoxifying language models in 2021.
+Thomas Hartvigsen developed Toxigen, a large-scale dataset for adversarial and implicit hate speech detection in 2022.
+Samuel Gehman created RealToxicityPrompts for evaluating neural toxic degeneration in language models in 2020.
+
+Toxicity Detection and Analysis
+Perspective API is a tool for toxicity detection as of 2023.
+Researchers have probed toxic content in large pre-trained language models.
+Some studies analyzed toxicity in specific language models like ChatGPT.
+Researchers explored toxicity detection across multiple languages and scenarios.
+
+Toxicity Mitigation Approaches
+Researchers investigated methods for reducing toxicity in language models.
+Approaches include perspective-taking, contrastive perplexity, and word embedding techniques.
+Some studies focused on expanding the scope of toxicity mitigation.
+
+Platforms and Moderation
+Facebook and OpenAI have content moderation policies and APIs for managing toxic content.
+Researchers have identified potential biases in toxicity detection tools.
+
+Ethical Considerations
+Some research explored the broader question of whether machines can learn morality.
+The review highlighted the complexity of detecting and mitigating toxicity in language models.

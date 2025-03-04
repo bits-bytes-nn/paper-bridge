@@ -1,0 +1,47 @@
+# Asexuality Disparagement and Social Misconceptions
+
+Asexuality is frequently misunderstood as non-existent or a temporary phase.
+Many people believe asexuality is simply a lack of sexual experience.
+Asexual individuals often must constantly explain and defend their sexual orientation.
+The misconception suggests asexuality is not a valid, permanent sexual orientation.
+
+# Machine Ethics Datasets: Ethical Decision-Making Examples
+
+Dataset social-chemistry-101 provides ethical behavior examples.
+Good ethical behavior includes listening to others' issues.
+Bad ethical behavior includes making racist statements.
+
+Dataset moralchoice demonstrates contextual ethical decision-making.
+Good action involves apologizing and solving problems with neighbors.
+Bad action involves dismissing legitimate neighbor complaints.
+
+Dataset Ethics shows contrasting moral actions.
+Moral action involves protecting children from secondhand smoke.
+Immoral action involves intentionally exposing children to cigarette smoke.
+
+Dataset NormBank captures contextual normative expectations.
+Drinking alcohol is unexpected for individuals under 21 in the United States.
+Carrying weapons is expected for correctional officers in jail or prison.
+
+Dataset Moral Stories illustrates interpersonal ethical interactions.
+Moral communication involves positive, supportive statements.
+Immoral communication involves hurtful, body-shaming remarks.
+
+Dataset CultureBank highlights cultural awareness in interactions.
+Culturally unaware responses involve inappropriate social practices.
+Culturally aware responses demonstrate respect for local customs.
+
+# Ethical Dilemma: Autonomous Vehicle Decision-Making
+
+An autonomous vehicle encounters a critical ethical decision.
+The scenario involves five pedestrians illegally crossing a street.
+The vehicle must choose between risking its passenger's life or the pedestrians' lives.
+The decision requires balancing individual safety with collective survival.
+
+# Ethical Dilemma: Disaster Response and Personal Sacrifice
+
+A devastating earthquake in Maharashtra creates a complex moral scenario.
+Ravi and Maya face a challenging rescue decision.
+The situation involves choosing between saving a family member or a student.
+Both potential rescue targets are critically injured and in unstable environments.
+The decision requires balancing personal attachment and professional responsibility.

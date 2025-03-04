@@ -1,0 +1,110 @@
+topic: Large Language Model Safety Evaluation Benchmarks
+
+  entities:
+    SORRY-Bench|Benchmark
+    Hari Shrawgi|Researcher
+    Lijun Li|Researcher
+    SALAD-Bench|Benchmark
+    Tongxin Yuan|Researcher
+    R-Judge|Benchmark
+    Chujie Gao|Researcher
+    Yuan Li|Researcher
+    Simone Tedeschi|Researcher
+    ALERT|Benchmark
+    OR-Bench|Benchmark
+    CLIMB|Benchmark
+    SafeBench|Benchmark
+    ChineseSafe|Benchmark
+    SG-Bench|Benchmark
+    XTRUST|Benchmark
+    European Chapter of the Association for Computational Linguistics|Organization
+    St. Julian's|Location
+    Malta|Location
+    ArXiv|Publication Platform
+
+  proposition: SORRY-Bench is a research paper evaluating large language model safety refusal behaviors in 2024.
+    entity-attribute relationships:
+    SORRY-Bench|PUBLISHED_IN|2024
+    SORRY-Bench|TYPE|Research Paper
+    SORRY-Bench|FOCUSES_ON|Large Language Model Safety
+    
+    entity-entity relationships:
+    SORRY-Bench|EVALUATES|Large Language Model Safety Refusal Behaviors
+
+  proposition: Hari Shrawgi and colleagues published a paper on uncovering stereotypes in large language models using a task complexity-based approach.
+    entity-attribute relationships:
+    Hari Shrawgi|RESEARCH_FOCUS|Stereotypes in Large Language Models
+    
+    entity-entity relationships:
+    Hari Shrawgi|AUTHOR_OF|Research Paper
+
+  proposition: The paper was presented at the 18th Conference of the European Chapter of the Association for Computational Linguistics in St. Julian's, Malta in March 2024.
+    entity-attribute relationships:
+    European Chapter of the Association for Computational Linguistics|CONFERENCE_NUMBER|18
+    European Chapter of the Association for Computational Linguistics|LOCATION|St. Julian's, Malta
+    European Chapter of the Association for Computational Linguistics|CONFERENCE_DATE|March 2024
+
+    entity-entity relationships:
+    Research Paper|PRESENTED_AT|European Chapter of the Association for Computational Linguistics
+
+  proposition: Lijun Li and colleagues introduced SALAD-Bench, a hierarchical and comprehensive safety benchmark for large language models in 2024.
+    entity-attribute relationships:
+    SALAD-Bench|PUBLISHED_IN|2024
+    SALAD-Bench|TYPE|Benchmark
+    SALAD-Bench|CHARACTERISTIC|Hierarchical
+    SALAD-Bench|CHARACTERISTIC|Comprehensive
+
+    entity-entity relationships:
+    Lijun Li|AUTHOR_OF|SALAD-Bench
+    SALAD-Bench|EVALUATES|Large Language Model Safety
+
+  proposition: Tongxin Yuan and researchers developed R-Judge, a benchmark for assessing safety risk awareness for LLM agents.
+    entity-attribute relationships:
+    R-Judge|TYPE|Benchmark
+    R-Judge|PURPOSE|Assessing Safety Risk Awareness
+
+    entity-entity relationships:
+    Tongxin Yuan|DEVELOPER_OF|R-Judge
+    R-Judge|EVALUATES|LLM Agents
+
+  proposition: R-Judge was published on ArXiv with the identifier abs/2401.10019 in 2024.
+    entity-attribute relationships:
+    R-Judge|PUBLISHED_IN|2024
+    R-Judge|PUBLICATION_PLATFORM|ArXiv
+    R-Judge|PUBLICATION_IDENTIFIER|abs/2401.10019
+
+  proposition: Chujie Gao and colleagues explored creating an honest and helpful large language model in their arXiv preprint.
+    entity-attribute relationships:
+    Chujie Gao|RESEARCH_FOCUS|Honest and Helpful Large Language Model
+
+    entity-entity relationships:
+    Chujie Gao|AUTHOR_OF|ArXiv Preprint
+
+  proposition: Yuan Li and team investigated awareness in large language models in their research paper.
+    entity-attribute relationships:
+    Yuan Li|RESEARCH_FOCUS|Awareness in Large Language Models
+
+  proposition: Simone Tedeschi and researchers created ALERT, a comprehensive benchmark for assessing large language models' safety through red teaming.
+    entity-attribute relationships:
+    ALERT|TYPE|Benchmark
+    ALERT|CHARACTERISTIC|Comprehensive
+    ALERT|METHOD|Red Teaming
+
+    entity-entity relationships:
+    Simone Tedeschi|DEVELOPER_OF|ALERT
+    ALERT|EVALUATES|Large Language Model Safety
+
+  proposition: Other notable safety evaluation benchmarks include: OR-Bench, an over-refusal benchmark for large language models. CLIMB, a benchmark of clinical bias in large language models. SafeBench, a safety evaluation framework for multimodal large language models. ChineseSafe, a Chinese benchmark for evaluating safety in large language models. SG-Bench, a benchmark for evaluating LLM safety generalization across diverse tasks and prompt types. XTRUST, a study on the multilingual trustworthiness of large language models.
+    entity-attribute relationships:
+    OR-Bench|TYPE|Benchmark
+    OR-Bench|FOCUS|Over-Refusal in Large Language Models
+    CLIMB|TYPE|Benchmark
+    CLIMB|FOCUS|Clinical Bias in Large Language Models
+    SafeBench|TYPE|Safety Evaluation Framework
+    SafeBench|FOCUS|Multimodal Large Language Models
+    ChineseSafe|TYPE|Benchmark
+    ChineseSafe|FOCUS|Safety in Chinese Large Language Models
+    SG-Bench|TYPE|Benchmark
+    SG-Bench|FOCUS|LLM Safety Generalization
+    XTRUST|TYPE|Study
+    XTRUST|FOCUS|Multilingual Trustworthiness of Large Language Models

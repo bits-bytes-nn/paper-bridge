@@ -1,0 +1,16 @@
+Research Papers on Large Language Model Evaluation and Benchmarking
+
+SuperCLUE is a comprehensive Chinese large language model benchmark published in ArXiv in 2023.
+CMMLU measures massive multitask language understanding in Chinese, published in 2023.
+ChatGPT Beyond English explores comprehensive evaluation of large language models in multilingual learning, published in ArXiv in 2023.
+Dyval is a graph-informed dynamic evaluation method for large language models, published in arXiv in 2023.
+DyVal 2 is a dynamic evaluation approach for large language models using meta probing agents, published in ArXiv in 2024.
+Benchmark Self-Evolving is a multi-agent framework for dynamic LLM evaluation, published in arXiv in 2024.
+AutoBencher creates salient, novel, and difficult datasets for language models, published in ArXiv in 2024.
+Judging LLM-as-a-judge uses MT-Bench and Chatbot Arena to evaluate language models, published in arXiv in 2023.
+From Generation to Judgment explores opportunities and challenges of LLM-as-a-judge, published in arXiv in 2024.
+ChatEval uses multi-agent debate for better LLM-based evaluators, published in arXiv in 2023.
+EvaluLLM is an LLM-assisted evaluation of generative outputs, published in the IUI '24 Companion proceedings.
+Prometheus induces fine-grained evaluation capability in language models, published in the International Conference on Learning Representations in 2023.
+Prometheus 2 is an open-source language model specialized in evaluating other language models, published in arXiv in 2024.
+Multiple surveys explore benchmarks and evaluation of multimodal large language models, published in arXiv in 2024.

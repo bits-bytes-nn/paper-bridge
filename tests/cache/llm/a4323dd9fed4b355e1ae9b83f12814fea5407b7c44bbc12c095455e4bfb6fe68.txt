@@ -1,0 +1,162 @@
+topic: AI Risk Management and Privacy
+
+  entities:
+    AI Risk Management Framework|Framework
+    Privacy-Enhancing Technologies|Method
+    TrustGen|Platform
+    Metadata Curator|Feature
+    Test Case Builder|Feature
+    Contextual Variator|Feature
+
+  proposition: AI Risk Management Framework (AI RMF) 1.0 emphasizes privacy protection
+    entity-attribute relationships:
+    AI Risk Management Framework|VERSION|1.0
+    AI Risk Management Framework|FOCUS|privacy protection
+
+  proposition: AI RMF 1.0 encourages collecting only necessary data in specific circumstances
+    entity-attribute relationships:
+    AI Risk Management Framework|PRINCIPLE|data minimization
+
+  proposition: AI RMF 1.0 respects users' privacy choices
+    entity-attribute relationships:
+    AI Risk Management Framework|PRINCIPLE|user privacy respect
+
+  proposition: AI RMF 1.0 avoids unnecessary data collection and intrusive behavior
+    entity-attribute relationships:
+    AI Risk Management Framework|PRINCIPLE|avoid intrusive behavior
+
+  proposition: Privacy-Enhancing Technologies (PETs) include data minimization methods
+    entity-attribute relationships:
+    Privacy-Enhancing Technologies|INCLUDES|data minimization
+
+  proposition: PETs methods include de-identification and data aggregation
+    entity-attribute relationships:
+    Privacy-Enhancing Technologies|METHOD|de-identification
+    Privacy-Enhancing Technologies|METHOD|data aggregation
+
+  proposition: AI RMF 1.0 supports bidirectional privacy preservation
+    entity-attribute relationships:
+    AI Risk Management Framework|FEATURE|bidirectional privacy preservation
+
+  proposition: Bidirectional privacy preservation protects both user input and model output
+    entity-attribute relationships:
+    Bidirectional privacy preservation|PROTECTS|user input
+    Bidirectional privacy preservation|PROTECTS|model output
+
+topic: Trustworthiness Guidelines
+
+  entities:
+    Trustworthiness Guidelines|Framework
+    Generative Foundation Models|Model
+
+  proposition: Trustworthiness Guidelines for Generative Foundation Models are multifaceted
+    entity-attribute relationships:
+    Trustworthiness Guidelines|CHARACTERISTIC|multifaceted
+
+  proposition: Guidelines aim to ensure trustworthiness across various sectors and applications
+    entity-attribute relationships:
+    Trustworthiness Guidelines|SCOPE|multiple sectors
+    Trustworthiness Guidelines|SCOPE|multiple applications
+
+  proposition: Trustworthiness cannot be defined by rigid, universal rules
+    entity-attribute relationships:
+    Trustworthiness Guidelines|CHARACTERISTIC|flexible
+
+  proposition: Key considerations include legal compliance, ethics, and social responsibility
+    entity-attribute relationships:
+    Trustworthiness Guidelines|CONSIDERATION|legal compliance
+    Trustworthiness Guidelines|CONSIDERATION|ethics
+    Trustworthiness Guidelines|CONSIDERATION|social responsibility
+
+  proposition: Key considerations include risk management and user-centered design
+    entity-attribute relationships:
+    Trustworthiness Guidelines|CONSIDERATION|risk management
+    Trustworthiness Guidelines|CONSIDERATION|user-centered design
+
+  proposition: Guidelines address fairness, transparency, and human oversight
+    entity-attribute relationships:
+    Trustworthiness Guidelines|FOCUS|fairness
+    Trustworthiness Guidelines|FOCUS|transparency
+    Trustworthiness Guidelines|FOCUS|human oversight
+
+  proposition: Guidelines focus on accountability, robustness, and ethical norms
+    entity-attribute relationships:
+    Trustworthiness Guidelines|FOCUS|accountability
+    Trustworthiness Guidelines|FOCUS|robustness
+    Trustworthiness Guidelines|FOCUS|ethical norms
+
+  proposition: Guidelines provide a flexible framework for developers and researchers
+    entity-attribute relationships:
+    Trustworthiness Guidelines|CHARACTERISTIC|flexible
+    Trustworthiness Guidelines|TARGET_AUDIENCE|developers
+    Trustworthiness Guidelines|TARGET_AUDIENCE|researchers
+
+topic: TrustGen Benchmark Platform
+
+  entities:
+    TrustGen|Platform
+    Text-to-Image Models|Model
+    Large Language Models|Model
+    Vision-Language Models|Model
+
+  proposition: TrustGen is a dynamic benchmark platform for evaluating generative foundation models
+    entity-attribute relationships:
+    TrustGen|TYPE|dynamic benchmark platform
+    TrustGen|PURPOSE|evaluate generative foundation models
+
+  proposition: TrustGen has three core modules: Metadata Curator, Test Case Builder, and Contextual Variator
+    entity-attribute relationships:
+    TrustGen|MODULE|Metadata Curator
+    TrustGen|MODULE|Test Case Builder
+    TrustGen|MODULE|Contextual Variator
+
+  proposition: TrustGen evaluates three model categories: text-to-image, large language models, and vision-language models
+    entity-attribute relationships:
+    TrustGen|EVALUATES|Text-to-Image Models
+    TrustGen|EVALUATES|Large Language Models
+    TrustGen|EVALUATES|Vision-Language Models
+
+  proposition: TrustGen assesses models across seven trustworthiness dimensions
+    entity-attribute relationships:
+    TrustGen|ASSESSMENT_SCOPE|seven trustworthiness dimensions
+
+  proposition: TrustGen uses a broad set of metrics for comprehensive assessments
+    entity-attribute relationships:
+    TrustGen|CHARACTERISTIC|comprehensive metrics
+
+  proposition: Dynamic benchmarks address limitations of traditional static benchmarks
+    entity-attribute relationships:
+    Dynamic benchmarks|ADVANTAGE|overcome static benchmark limitations
+
+  proposition: Dynamic benchmarks automatically update test sets and metrics over time
+    entity-attribute relationships:
+    Dynamic benchmarks|FEATURE|automatic test set updates
+    Dynamic benchmarks|FEATURE|metric updates
+
+  proposition: Dynamic benchmarks keep pace with rapid generative AI model advances
+    entity-attribute relationships:
+    Dynamic benchmarks|CAPABILITY|adapt to AI model advances
+
+  proposition: Dynamic benchmarks can adapt to evolving societal requirements
+    entity-attribute relationships:
+    Dynamic benchmarks|CAPABILITY|adapt to societal requirements
+
+  proposition: Dynamic benchmarks prevent model memorization by introducing novel test cases
+    entity-attribute relationships:
+    Dynamic benchmarks|FEATURE|prevent model memorization
+    Dynamic benchmarks|METHOD|novel test cases
+
+  proposition: TrustGen is designed to be effective, reproducible, user-friendly, and open-source
+    entity-attribute relationships:
+    TrustGen|CHARACTERISTIC|effective
+    TrustGen|CHARACTERISTIC|reproducible
+    TrustGen|CHARACTERISTIC|user-friendly
+    TrustGen|CHARACTERISTIC|open-source
+
+  proposition: TrustGen provides authentic assessments of generative model behavior
+    entity-attribute relationships:
+    TrustGen|PURPOSE|authentic model behavior assessment
+
+  proposition: TrustGen continuously adapts to evolving ethical standards
+    entity-attribute relationships:
+    TrustGen|CAPABILITY|adapt to ethical standards

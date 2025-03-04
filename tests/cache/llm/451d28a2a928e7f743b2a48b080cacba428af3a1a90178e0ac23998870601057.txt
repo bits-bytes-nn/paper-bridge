@@ -1,0 +1,115 @@
+topic: Large Language Models Robustness Research
+
+  entities:
+    Wang et al.|Researcher
+    Han et al.|Researcher
+    Shen et al.|Researcher
+    Park et al.|Researcher
+    Jiang et al.|Researcher
+    Xiong et al.|Researcher
+    GLUE|Dataset
+    CNN/DailyMail|Dataset
+    KeyBERT|Tool
+    Large Language Models|Model
+
+  proposition: Wang et al. studied out-of-distribution classification tasks for Large Language Models.
+    entity-entity relationships:
+    Wang et al.|RESEARCHED|Large Language Models
+    
+  proposition: Han et al. examined Large Language Models' performance in information extraction with perturbed structured data.
+    entity-entity relationships:
+    Han et al.|RESEARCHED|Large Language Models
+    
+  proposition: Shen et al. analyzed question-answering tasks and the impact of adversarial perturbations on Large Language Models' accuracy.
+    entity-entity relationships:
+    Shen et al.|RESEARCHED|Large Language Models
+    
+  proposition: Existing research benchmarks for Large Language Models have limitations due to rapid model development.
+    entity-attribute relationships:
+    Large Language Models|DESCRIBED_BY|limitations in research benchmarks
+    
+  proposition: Fixed datasets struggle to keep pace with evolving Large Language Models.
+    entity-entity relationships:
+    Fixed datasets|CHALLENGES|Large Language Models
+    
+  proposition: Models may be optimized to perform well on specific benchmarks, potentially misrepresenting real-world performance.
+    entity-attribute relationships:
+    Models|POTENTIAL_ISSUE|benchmark optimization
+    
+  proposition: Park et al. incorporated stylistic variations into model training to enhance resilience against adversarial attacks.
+    entity-entity relationships:
+    Park et al.|RESEARCHED|Large Language Models
+    
+  proposition: Jiang et al. designed prompts to minimize the influence of irrelevant information in Large Language Models.
+    entity-entity relationships:
+    Jiang et al.|RESEARCHED|Large Language Models
+    
+  proposition: Xiong et al. used graph-based techniques to protect Large Language Models from adversarial perturbation attacks.
+    entity-entity relationships:
+    Xiong et al.|RESEARCHED|Large Language Models
+
+topic: Evaluation Methods for Large Language Models
+
+  entities:
+    GLUE|Dataset
+    CNN/DailyMail|Dataset
+    LLM-as-a-Judge|Method
+
+  proposition: Evaluation Data Types Include:
+    entity-attribute relationships:
+    GLUE|TYPE|Annotated datasets with ground-truth labels
+    CNN/DailyMail|TYPE|Open-ended question-answering datasets
+    
+  proposition: For annotated datasets, robustness score is the proportion of samples with consistent responses before and after perturbations.
+    entity-attribute relationships:
+    Robustness Score|CALCULATED_BY|proportion of consistent samples
+    
+  proposition: For open-ended datasets, robustness score uses the LLM-as-a-Judge framework.
+    entity-entity relationships:
+    Open-ended datasets|EVALUATED_BY|LLM-as-a-Judge
+    
+  proposition: LLM-as-a-Judge compares model responses under perturbed and unperturbed conditions.
+    entity-attribute relationships:
+    LLM-as-a-Judge|COMPARES|model responses
+    
+  proposition: Robustness score represents the proportion of instances classified as a "Tie".
+    entity-attribute relationships:
+    Robustness Score|DEFINED_BY|proportion of "Tie" instances
+
+topic: Perturbation Techniques in Large Language Models
+
+  entities:
+    KeyBERT|Tool
+    Large Language Models|Model
+
+  proposition: Perturbation Types Include:
+    entity-attribute relationships:
+    Perturbation|TYPE|Spelling Mistake
+    Perturbation|TYPE|Emoji Insertion
+    Perturbation|TYPE|Social Tagging
+    Perturbation|TYPE|Spaced Uppercase
+    Perturbation|TYPE|Multilingual Blend
+    Perturbation|TYPE|Distractive Text
+    Perturbation|TYPE|Syntactic Disruptions
+    Perturbation|TYPE|Recondite Words
+    
+  proposition: KeyBERT used for Spelling Mistake, Emoji Insertion, and Spaced Uppercase.
+    entity-entity relationships:
+    KeyBERT|APPLIED_TO|Spelling Mistake
+    KeyBERT|APPLIED_TO|Emoji Insertion
+    KeyBERT|APPLIED_TO|Spaced Uppercase
+    
+  proposition: Large Language Models generate subtitles for Social Tagging.
+    entity-entity relationships:
+    Large Language Models|GENERATE|Social Tagging
+    
+  proposition: Multilingual Blend involves word and sentence-level translations.
+    entity-attribute relationships:
+    Multilingual Blend|INVOLVES|word translations
+    Multilingual Blend|INVOLVES|sentence translations
+    
+  proposition: Specific LLM prompts introduce Distractive Text, Syntactic Disruptions, and Recondite Words.
+    entity-entity relationships:
+    LLM Prompts|INTRODUCE|Distractive Text
+    LLM Prompts|INTRODUCE|Syntactic Disruptions
+    LLM Prompts|INTRODUCE|Recondite Words

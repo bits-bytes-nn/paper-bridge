@@ -1,0 +1,7 @@
+Academic Publications on Watermarking and Instruction Tuning in Machine Learning
+
+Yingqian Cui, Jie Ren, Yuping Lin, Han Xu, Pengfei He, Yue Xing, Lingjuan Lyu, Wenqi Fan, Hui Liu, and Jiliang Tang published a paper titled "FT-Shield: A Watermark Against Unauthorized Fine-Tuning in Text-to-Image Diffusion Models" in 2023.
+Pierre Fernandez, Guillaume Couairon, Hervé Jégou, Matthijs Douze, and Teddy Furon published a paper titled "The Stable Signature: Rooting Watermarks in Latent Diffusion Models" in the IEEE/CVF International Conference on Computer Vision in 2023.
+Liangqi Lei, Keke Gai, Jing Yu, and Liehuang Zhu published a paper titled "DiffuseTrace: A Transparent and Flexible Watermarking Scheme for Latent Diffusion Model" in 2024.
+Cheng Xiong, Chuan Qin, Guorui Feng, and Xinpeng Zhang published a paper titled "Flexible and Secure Watermarking for Latent Diffusion Model" in the ACM International Conference on Multimedia in 2023.
+Zhen Tan and colleagues published a survey on "Large Language Models for Data Annotation and Synthesis" in the Conference on Empirical Methods in Natural Language Processing in 2024.

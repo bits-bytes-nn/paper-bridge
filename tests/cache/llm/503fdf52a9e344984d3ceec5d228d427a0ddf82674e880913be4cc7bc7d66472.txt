@@ -1,0 +1,31 @@
+Jailbreak Attack Methods in Large Language Models
+
+Sorry-Bench taxonomy selects 45 potentially unsafe topics.
+Sorry-Bench mitigates the issue of over-representing fine-grained topics.
+Llama3 Guard is used as the evaluator for jailbreak success.
+Percentage of Refusing to Answer (RtA) is used as the evaluation metric.
+Black-box jailbreak methods are selected for evaluation.
+Selected jailbreak methods align with typical attacker knowledge and capabilities.
+Jailbreak methods lack access to internal model information.
+
+Persuasion attack transforms harmful queries into various persuasive forms.
+Chain of Thought (CoT) attack encourages deeper reasoning to carry out attacks.
+Context Ignoring attack causes LLMs to forget previous context.
+Multi-Task attack assigns multiple tasks including a harmful task to create distraction.
+Refusal Suppression attack forces LLMs to respond to harmful queries.
+Payload Splitting attack splits harmful queries into multiple substrings.
+Prefix Injection attack requires LLMs to include a specified response prefix.
+Style Injection attack requires LLMs to output responses in a specified style.
+Role Playing attack compels LLMs to provide context-appropriate responses to harmful queries.
+Scenario attack constructs relevant scenarios to prompt LLMs to respond.
+Few Shot attack uses exemplars to prompt LLMs to imitate and provide harmful answers.
+Translation attack translates harmful queries to bypass security filters.
+Encoding attack obfuscates query intent by encoding in different formats.
+Typos attack introduces deliberate misspellings to evade keyword-based filters.
+Separators attack fragments queries to make detection difficult.
+
+Few-Shot attack uses advbench dataset for exemplar queries.
+Few-Shot attack randomly samples queries paired with target response prefixes.
+Persuasion attack uses predefined strategies to transform queries.
+Principle design guides case generation for jailbreak prompts.
+Principle-based prompts aim to avoid LLMs' safety alignment mechanism.

@@ -1,0 +1,224 @@
+topic: Human-AI Collaboration Research
+
+  entities:
+    Daphne Ippolito|Researcher
+    Ann Yuan|Researcher
+    Andy Coenen|Researcher
+    Sehmon Burnam|Researcher
+    Farhana Shahid|Researcher
+    Maximilian Dittgen|Researcher
+    Mor Naaman|Researcher
+    Aditya Vashistha|Researcher
+    Anbang Ye|Researcher
+    Christopher Cui|Researcher
+    Taiwei Shi|Researcher
+    Mark O. Riedl|Researcher
+    Mathias Peter Verheijden|Researcher
+    Mathias Funk|Researcher
+    Jeba Rezwana|Researcher
+    Mary Lou Maher|Researcher
+    COFI|Framework
+    Minzhi Li|Researcher
+    Caleb Ziems|Researcher
+    Min-Yen Kan|Researcher
+    Nancy Chen|Researcher
+    Zhengyuan Liu|Researcher
+    Diyi Yang|Researcher
+    Zhuoer Wang|Researcher
+    Longqi Yang|Researcher
+    Ying-Chun Lin|Researcher
+    Zexue He|Researcher
+    Mengting Wan|Researcher
+    Pei Zhou|Researcher
+    Sujay Jauhar|Researcher
+    Xiaofeng Xu|Researcher
+    Xia Song|Researcher
+    Jennifer Neville|Researcher
+    WildFeedback|Tool
+    Zheng Zhang|Researcher
+    Zheng Ning|Researcher
+    Chenliang Xu|Researcher
+    Yapeng Tian|Researcher
+    Toby Jia-Jun Li|Researcher
+    PEANUT|Tool
+    Qinyuan Cheng|Researcher
+    Tianxiang Sun|Researcher
+    Xiangyang Liu|Researcher
+    Wenwei Zhang|Researcher
+    Zhangyue Yin|Researcher
+    Shimin Li|Researcher
+    Linyang Li|Researcher
+    Zhengfu He|Researcher
+    Kai Chen|Researcher
+    Xipeng Qiu|Researcher
+
+  proposition: Daphne Ippolito, Ann Yuan, Andy Coenen, and Sehmon Burnam studied creative writing with an AI-powered writing assistant.
+    entity-attribute relationships:
+    Daphne Ippolito|RESEARCHED|creative writing
+    Ann Yuan|RESEARCHED|creative writing
+    Andy Coenen|RESEARCHED|creative writing
+    Sehmon Burnam|RESEARCHED|creative writing
+
+    entity-entity relationships:
+    Daphne Ippolito|COLLABORATED_WITH|Ann Yuan
+    Daphne Ippolito|COLLABORATED_WITH|Andy Coenen
+    Daphne Ippolito|COLLABORATED_WITH|Sehmon Burnam
+    Ann Yuan|COLLABORATED_WITH|Andy Coenen
+    Ann Yuan|COLLABORATED_WITH|Sehmon Burnam
+    Andy Coenen|COLLABORATED_WITH|Sehmon Burnam
+
+  proposition: Farhana Shahid, Maximilian Dittgen, Mor Naaman, and Aditya Vashistha examined human-AI collaboration for co-writing constructive comments online.
+    entity-attribute relationships:
+    Farhana Shahid|RESEARCHED|human-AI collaboration
+    Maximilian Dittgen|RESEARCHED|human-AI collaboration
+    Mor Naaman|RESEARCHED|human-AI collaboration
+    Aditya Vashistha|RESEARCHED|human-AI collaboration
+
+    entity-entity relationships:
+    Farhana Shahid|COLLABORATED_WITH|Maximilian Dittgen
+    Farhana Shahid|COLLABORATED_WITH|Mor Naaman
+    Farhana Shahid|COLLABORATED_WITH|Aditya Vashistha
+    Maximilian Dittgen|COLLABORATED_WITH|Mor Naaman
+    Maximilian Dittgen|COLLABORATED_WITH|Aditya Vashistha
+    Mor Naaman|COLLABORATED_WITH|Aditya Vashistha
+
+  proposition: Anbang Ye, Christopher Cui, Taiwei Shi, and Mark O. Riedl researched neural story planning.
+    entity-attribute relationships:
+    Anbang Ye|RESEARCHED|neural story planning
+    Christopher Cui|RESEARCHED|neural story planning
+    Taiwei Shi|RESEARCHED|neural story planning
+    Mark O. Riedl|RESEARCHED|neural story planning
+
+    entity-entity relationships:
+    Anbang Ye|COLLABORATED_WITH|Christopher Cui
+    Anbang Ye|COLLABORATED_WITH|Taiwei Shi
+    Anbang Ye|COLLABORATED_WITH|Mark O. Riedl
+    Christopher Cui|COLLABORATED_WITH|Taiwei Shi
+    Christopher Cui|COLLABORATED_WITH|Mark O. Riedl
+    Taiwei Shi|COLLABORATED_WITH|Mark O. Riedl
+
+  proposition: Mathias Peter Verheijden and Mathias Funk explored collaborative diffusion for boosting designerly co-creation with generative AI.
+    entity-attribute relationships:
+    Mathias Peter Verheijden|RESEARCHED|collaborative diffusion
+    Mathias Funk|RESEARCHED|collaborative diffusion
+
+    entity-entity relationships:
+    Mathias Peter Verheijden|COLLABORATED_WITH|Mathias Funk
+
+  proposition: Jeba Rezwana and Mary Lou Maher developed COFI, a framework for modeling interaction in human-AI co-creative systems.
+    entity-attribute relationships:
+    Jeba Rezwana|DEVELOPED|COFI
+    Mary Lou Maher|DEVELOPED|COFI
+    COFI|TYPE|framework
+    COFI|PURPOSE|modeling interaction in human-AI co-creative systems
+
+    entity-entity relationships:
+    Jeba Rezwana|COLLABORATED_WITH|Mary Lou Maher
+
+  proposition: Minzhi Li, Taiwei Shi, Caleb Ziems, Min-Yen Kan, Nancy Chen, Zhengyuan Liu, and Diyi Yang investigated co-annotation with uncertainty-guided work allocation between humans and large language models.
+    entity-attribute relationships:
+    Minzhi Li|RESEARCHED|co-annotation
+    Taiwei Shi|RESEARCHED|co-annotation
+    Caleb Ziems|RESEARCHED|co-annotation
+    Min-Yen Kan|RESEARCHED|co-annotation
+    Nancy Chen|RESEARCHED|co-annotation
+    Zhengyuan Liu|RESEARCHED|co-annotation
+    Diyi Yang|RESEARCHED|co-annotation
+
+    entity-entity relationships:
+    Minzhi Li|COLLABORATED_WITH|Taiwei Shi
+    Minzhi Li|COLLABORATED_WITH|Caleb Ziems
+    Minzhi Li|COLLABORATED_WITH|Min-Yen Kan
+    Minzhi Li|COLLABORATED_WITH|Nancy Chen
+    Minzhi Li|COLLABORATED_WITH|Zhengyuan Liu
+    Minzhi Li|COLLABORATED_WITH|Diyi Yang
+    Taiwei Shi|COLLABORATED_WITH|Caleb Ziems
+    Taiwei Shi|COLLABORATED_WITH|Min-Yen Kan
+    Taiwei Shi|COLLABORATED_WITH|Nancy Chen
+    Taiwei Shi|COLLABORATED_WITH|Zhengyuan Liu
+    Taiwei Shi|COLLABORATED_WITH|Diyi Yang
+    Caleb Ziems|COLLABORATED_WITH|Min-Yen Kan
+    Caleb Ziems|COLLABORATED_WITH|Nancy Chen
+    Caleb Ziems|COLLABORATED_WITH|Zhengyuan Liu
+    Caleb Ziems|COLLABORATED_WITH|Diyi Yang
+    Min-Yen Kan|COLLABORATED_WITH|Nancy Chen
+    Min-Yen Kan|COLLABORATED_WITH|Zhengyuan Liu
+    Min-Yen Kan|COLLABORATED_WITH|Diyi Yang
+    Nancy Chen|COLLABORATED_WITH|Zhengyuan Liu
+    Nancy Chen|COLLABORATED_WITH|Diyi Yang
+    Zhengyuan Liu|COLLABORATED_WITH|Diyi Yang
+
+  proposition: Taiwei Shi, Zhuoer Wang, Longqi Yang, Ying-Chun Lin, Zexue He, Mengting Wan, Pei Zhou, Sujay Jauhar, Xiaofeng Xu, Xia Song, and Jennifer Neville studied WildFeedback for aligning large language models with in-situ user interactions.
+    entity-attribute relationships:
+    Taiwei Shi|RESEARCHED|WildFeedback
+    Zhuoer Wang|RESEARCHED|WildFeedback
+    Longqi Yang|RESEARCHED|WildFeedback
+    Ying-Chun Lin|RESEARCHED|WildFeedback
+    Zexue He|RESEARCHED|WildFeedback
+    Mengting Wan|RESEARCHED|WildFeedback
+    Pei Zhou|RESEARCHED|WildFeedback
+    Sujay Jauhar|RESEARCHED|WildFeedback
+    Xiaofeng Xu|RESEARCHED|WildFeedback
+    Xia Song|RESEARCHED|WildFeedback
+    Jennifer Neville|RESEARCHED|WildFeedback
+    WildFeedback|PURPOSE|aligning large language models with in-situ user interactions
+
+    entity-entity relationships:
+    Taiwei Shi|COLLABORATED_WITH|Zhuoer Wang
+    Taiwei Shi|COLLABORATED_WITH|Longqi Yang
+    Taiwei Shi|COLLABORATED_WITH|Ying-Chun Lin
+    Taiwei Shi|COLLABORATED_WITH|Zexue He
+    Taiwei Shi|COLLABORATED_WITH|Mengting Wan
+    Taiwei Shi|COLLABORATED_WITH|Pei Zhou
+    Taiwei Shi|COLLABORATED_WITH|Sujay Jauhar
+    Taiwei Shi|COLLABORATED_WITH|Xiaofeng Xu
+    Taiwei Shi|COLLABORATED_WITH|Xia Song
+    Taiwei Shi|COLLABORATED_WITH|Jennifer Neville
+    (and similar collaboration relationships for all other researchers in this group)
+
+  proposition: Zheng Zhang, Zheng Ning, Chenliang Xu, Yapeng Tian, and Toby Jia-Jun Li created PEANUT, a human-AI collaborative tool for annotating audio-visual data.
+    entity-attribute relationships:
+    Zheng Zhang|DEVELOPED|PEANUT
+    Zheng Ning|DEVELOPED|PEANUT
+    Chenliang Xu|DEVELOPED|PEANUT
+    Yapeng Tian|DEVELOPED|PEANUT
+    Toby Jia-Jun Li|DEVELOPED|PEANUT
+    PEANUT|TYPE|human-AI collaborative tool
+    PEANUT|PURPOSE|annotating audio-visual data
+
+    entity-entity relationships:
+    Zheng Zhang|COLLABORATED_WITH|Zheng Ning
+    Zheng Zhang|COLLABORATED_WITH|Chenliang Xu
+    Zheng Zhang|COLLABORATED_WITH|Yapeng Tian
+    Zheng Zhang|COLLABORATED_WITH|Toby Jia-Jun Li
+    Zheng Ning|COLLABORATED_WITH|Chenliang Xu
+    Zheng Ning|COLLABORATED_WITH|Yapeng Tian
+    Zheng Ning|COLLABORATED_WITH|Toby Jia-Jun Li
+    Chenliang Xu|COLLABORATED_WITH|Yapeng Tian
+    Chenliang Xu|COLLABORATED_WITH|Toby Jia-Jun Li
+    Yapeng Tian|COLLABORATED_WITH|Toby Jia-Jun Li
+
+  proposition: Qinyuan Cheng, Tianxiang Sun, Xiangyang Liu, Wenwei Zhang, Zhangyue Yin, Shimin Li, Linyang Li, Zhengfu He, Kai Chen, and Xipeng Qiu investigated whether AI assistants can know what they don't know.
+    entity-attribute relationships:
+    Qinyuan Cheng|RESEARCHED|AI assistants' self-awareness
+    Tianxiang Sun|RESEARCHED|AI assistants' self-awareness
+    Xiangyang Liu|RESEARCHED|AI assistants' self-awareness
+    Wenwei Zhang|RESEARCHED|AI assistants' self-awareness
+    Zhangyue Yin|RESEARCHED|AI assistants' self-awareness
+    Shimin Li|RESEARCHED|AI assistants' self-awareness
+    Linyang Li|RESEARCHED|AI assistants' self-awareness
+    Zhengfu He|RESEARCHED|AI assistants' self-awareness
+    Kai Chen|RESEARCHED|AI assistants' self-awareness
+    Xipeng Qiu|RESEARCHED|AI assistants' self-awareness
+
+    entity-entity relationships:
+    Qinyuan Cheng|COLLABORATED_WITH|Tianxiang Sun
+    Qinyuan Cheng|COLLABORATED_WITH|Xiangyang Liu
+    Qinyuan Cheng|COLLABORATED_WITH|Wenwei Zhang
+    Qinyuan Cheng|COLLABORATED_WITH|Zhangyue Yin
+    Qinyuan Cheng|COLLABORATED_WITH|Shimin Li
+    Qinyuan Cheng|COLLABORATED_WITH|Linyang Li
+    Qinyuan Cheng|COLLABORATED_WITH|Zhengfu He
+    Qinyuan Cheng|COLLABORATED_WITH|Kai Chen
+    Qinyuan Cheng|COLLABORATED_WITH|Xipeng Qiu
+    (and similar collaboration relationships for all other researchers in this group)

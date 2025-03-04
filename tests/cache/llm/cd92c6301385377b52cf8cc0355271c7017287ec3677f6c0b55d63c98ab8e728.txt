@@ -1,0 +1,154 @@
+topic: Survey Papers on Multimodal Large Language Models
+
+  entities:
+    Jian Li|Person
+    Weiheng Lu|Person
+    Jiaxing Huang|Person
+    Jingyi Zhang|Person
+    Lin Chen|Person
+    arXiv|Publication Platform
+
+  proposition: Jian Li and Weiheng Lu published a survey on benchmarks of Multimodal Large Language Models in arXiv preprint arXiv:2408.08632 in 2024.
+    entity-attribute relationships:
+    Jian Li|PUBLICATION_YEAR|2024
+    Weiheng Lu|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Jian Li|CO_AUTHOR|Weiheng Lu
+    Jian Li|PUBLISHED_IN|arXiv
+
+  proposition: Jiaxing Huang and Jingyi Zhang published a survey on evaluation of Multimodal Large Language Models in arXiv preprint arXiv:2408.15769 in 2024.
+    entity-attribute relationships:
+    Jiaxing Huang|PUBLICATION_YEAR|2024
+    Jingyi Zhang|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Jiaxing Huang|CO_AUTHOR|Jingyi Zhang
+    Jiaxing Huang|PUBLISHED_IN|arXiv
+
+  proposition: Lin Chen and colleagues investigated the current evaluation methods for Large Vision-Language Models in arXiv preprint arXiv:2403.20330 in 2024.
+    entity-attribute relationships:
+    Lin Chen|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Lin Chen|PUBLISHED_IN|arXiv
+
+topic: Benchmarking and Evaluation Papers
+
+  entities:
+    Andrés Villa|Person
+    MERLIM|Benchmark
+    Yuan Liu|Person
+    MMBench|Benchmark
+    Bohao Li|Person
+    SEED-Bench|Benchmark
+    IEEE/CVF Conference on Computer Vision and Pattern Recognition|Conference
+
+  proposition: Andrés Villa and colleagues introduced MERLIM, a multi-modal evaluation benchmark for large image-language models in arXiv preprint arXiv:2312.02219 in 2023.
+    entity-attribute relationships:
+    Andrés Villa|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Andrés Villa|CREATED|MERLIM
+
+  proposition: Yuan Liu and colleagues developed MMBench to assess multi-modal model capabilities in 2023.
+    entity-attribute relationships:
+    Yuan Liu|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Yuan Liu|CREATED|MMBench
+
+  proposition: Bohao Li and colleagues created SEED-Bench for benchmarking Multimodal Large Language Models in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+    entity-attribute relationships:
+    Bohao Li|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Bohao Li|CREATED|SEED-Bench
+    SEED-Bench|PRESENTED_AT|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+
+topic: Research Papers on Multimodal Models
+
+  entities:
+    Hanning Chen|Person
+    TaskCLIP|Model
+    Qirui Jiao|Person
+    Peng Jin|Person
+    Chat-UniVi|Model
+    Gongwei Chen|Person
+    LION|Model
+    Jusung Lee|Person
+
+  proposition: Hanning Chen and colleagues proposed TaskCLIP for task-oriented object detection in arXiv preprint arXiv:2403.08108 in 2024.
+    entity-attribute relationships:
+    Hanning Chen|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Hanning Chen|PROPOSED|TaskCLIP
+
+  proposition: Qirui Jiao and colleagues studied enhancing multimodal large language models with vision detection models in arXiv preprint arXiv:2401.17981 in 2024.
+    entity-attribute relationships:
+    Qirui Jiao|PUBLICATION_YEAR|2024
+
+  proposition: Peng Jin and colleagues developed Chat-UniVi for unified visual representation in large language models in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+    entity-attribute relationships:
+    Peng Jin|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Peng Jin|DEVELOPED|Chat-UniVi
+    Chat-UniVi|PRESENTED_AT|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+
+  proposition: Gongwei Chen and colleagues introduced LION, empowering multimodal large language models with dual-level visual knowledge in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+    entity-attribute relationships:
+    Gongwei Chen|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Gongwei Chen|INTRODUCED|LION
+    LION|PRESENTED_AT|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+
+  proposition: Jusung Lee and colleagues worked on visual question answering instruction for domain-specific visual multitasks in arXiv preprint arXiv:2402.08360 in 2024.
+    entity-attribute relationships:
+    Jusung Lee|PUBLICATION_YEAR|2024
+
+topic: Other Notable Papers
+
+  entities:
+    Alexander Kirillov|Person
+    Segment Anything|Project
+    Zongwei Wu|Person
+    Niki Maria Foteinopoulou|Person
+    Ioannis Patras|Person
+    EmoCLIP|Model
+    Yao Feng|Person
+    ChatPose|Model
+    IEEE International Conference on Automatic Face and Gesture Recognition|Conference
+    IEEE/CVF International Conference on Computer Vision|Conference
+
+  proposition: Alexander Kirillov and colleagues presented Segment Anything in the 2023 IEEE/CVF International Conference on Computer Vision.
+    entity-attribute relationships:
+    Alexander Kirillov|PUBLICATION_YEAR|2023
+    
+    entity-entity relationships:
+    Alexander Kirillov|PRESENTED|Segment Anything
+    Segment Anything|PRESENTED_AT|IEEE/CVF International Conference on Computer Vision
+
+  proposition: Zongwei Wu and colleagues developed a single-model approach for video object tracking in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+    entity-attribute relationships:
+    Zongwei Wu|PUBLICATION_YEAR|2024
+
+  proposition: Niki Maria Foteinopoulou and Ioannis Patras created EmoCLIP for zero-shot video facial expression recognition in the 2024 IEEE International Conference on Automatic Face and Gesture Recognition.
+    entity-attribute relationships:
+    Niki Maria Foteinopoulou|PUBLICATION_YEAR|2024
+    Ioannis Patras|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Niki Maria Foteinopoulou|CO_AUTHOR|Ioannis Patras
+    Niki Maria Foteinopoulou|CREATED|EmoCLIP
+    EmoCLIP|PRESENTED_AT|IEEE International Conference on Automatic Face and Gesture Recognition
+
+  proposition: Yao Feng and colleagues developed ChatPose for discussing 3D human pose in the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2024.
+    entity-attribute relationships:
+    Yao Feng|PUBLICATION_YEAR|2024
+    
+    entity-entity relationships:
+    Yao Feng|DEVELOPED|ChatPose
+    ChatPose|PRESENTED_AT|IEEE/CVF Conference on Computer Vision and Pattern Recognition

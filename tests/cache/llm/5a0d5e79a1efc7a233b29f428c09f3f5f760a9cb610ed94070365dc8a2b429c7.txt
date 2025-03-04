@@ -1,0 +1,117 @@
+topic: Persuasion Strategies in Anti-Smoking Communication
+
+  entities:
+    CDC|Organization
+    Surgeon General|Person
+    American Cancer Society|Organization
+    Smoking|Health Practice
+    Lung Cancer|Health Practice
+    Heart Disease|Health Practice
+    Respiratory Issues|Health Practice
+
+  proposition: Evidence-based Persuasion is a technique using empirical data to support claims
+    entity-attribute relationships:
+    Evidence-based Persuasion|DESCRIBED_BY|technique
+    Evidence-based Persuasion|USES|empirical data
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: CDC reports smoking causes 1 in 5 deaths in the United States annually
+    entity-attribute relationships:
+    Smoking|IMPACT|1 in 5 deaths annually
+
+    entity-entity relationships:
+    CDC|REPORTS|Smoking
+
+  proposition: Smokers live 10 years fewer on average compared to non-smokers
+    entity-attribute relationships:
+    Smokers|LIFE_EXPECTANCY|10 years fewer
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Quitting smoking reduces heart disease risk by 50% after one year
+    entity-attribute relationships:
+    Quitting Smoking|HEALTH_IMPACT|reduces heart disease risk by 50%
+    Quitting Smoking|TIME_FRAME|after one year
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Logical Appeal is a persuasion technique using reasoning to influence people
+    entity-attribute relationships:
+    Logical Appeal|DESCRIBED_BY|persuasion technique
+    Logical Appeal|USES|reasoning
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Smoking increases risk of lung cancer, heart disease, and respiratory issues
+    entity-attribute relationships:
+    Smoking|HEALTH_RISK|lung cancer
+    Smoking|HEALTH_RISK|heart disease
+    Smoking|HEALTH_RISK|respiratory issues
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Each cigarette shortens life by 11 minutes
+    entity-attribute relationships:
+    Cigarette|LIFE_IMPACT|shortens life by 11 minutes
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Quitting smoking can reverse some health damage and improve long-term health outcomes
+    entity-attribute relationships:
+    Quitting Smoking|HEALTH_IMPACT|reverse health damage
+    Quitting Smoking|HEALTH_IMPACT|improve long-term health outcomes
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: Surgeon General warns smoking is the leading cause of preventable death
+    entity-attribute relationships:
+    Smoking|HEALTH_IMPACT|leading cause of preventable death
+
+    entity-entity relationships:
+    Surgeon General|WARNS|Smoking
+
+  proposition: American Cancer Society confirms quitting smoking prolongs life
+    entity-attribute relationships:
+    Quitting Smoking|HEALTH_IMPACT|prolongs life
+
+    entity-entity relationships:
+    American Cancer Society|CONFIRMS|Quitting Smoking
+
+  proposition: Personal story demonstrates potential consequences of long-term smoking
+    entity-attribute relationships:
+    Personal Story|DEMONSTRATES|consequences of long-term smoking
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: An individual's uncle smoked for 30 years and developed lung cancer
+    entity-attribute relationships:
+    Uncle|SMOKING_HISTORY|smoked for 30 years
+    Uncle|HEALTH_OUTCOME|developed lung cancer
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: The uncle regretted smoking and recommended quitting
+    entity-attribute relationships:
+    Uncle|ATTITUDE|regretted smoking
+    Uncle|ACTION|recommended quitting
+
+    entity-entity relationships:
+    (no explicit relationships)
+
+  proposition: The uncle considered quitting the best decision but wished he had done so earlier
+    entity-attribute relationships:
+    Uncle|ATTITUDE|considered quitting the best decision
+    Uncle|REGRET|wished he had done so earlier
+
+    entity-entity relationships:
+    (no explicit relationships)

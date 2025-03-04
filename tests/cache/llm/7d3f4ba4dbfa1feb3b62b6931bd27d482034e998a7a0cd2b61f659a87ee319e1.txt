@@ -1,0 +1,18 @@
+Research Publications on AI Safety, Ethics, and Challenges
+
+Lincan Li et al. published a study on large language models in political science.
+The First Workshop on the Evaluation of Generative Foundation Models will be held at CVPR 2024.
+Alexander Wei et al. investigated how LLM safety training fails.
+Andy Zou et al. discovered universal and transferable adversarial attacks on aligned language models.
+United States District Court documented a case law involving AI interaction leading to a boy's suicide.
+Yuchen Yang et al. developed SneakyPrompt for jailbreaking text-to-image generative models.
+MIT Technology Review reported that text-to-image AI models can be tricked into generating disturbing images.
+Yue Huang et al. published a position paper on trustworthiness in large language models.
+Yue Huang and Lichao Sun explored ChatGPT's role in fake news generation, detection, and explanation.
+Qihui Zhang et al. investigated the detectability of mixed human-written and machine-generated text.
+Jiayi Ye et al. examined potential biases in LLM-as-a-judge systems.
+Irene Solaiman et al. evaluated the social impact of generative AI systems.
+Adam Kolides et al. studied AI foundations, pre-trained models, and their social impacts.
+Devon Myers et al. explored large language models' fundamentals, challenges, and social opportunities.
+OpenAI established a Red Teaming Network.
+Google Cloud and Google Research published guides for responsible AI development.

@@ -1,0 +1,118 @@
+topic: Question Answering Research Papers
+
+  entities:
+    Pranav Rajpurkar|Researcher
+    Robin Jia|Researcher
+    Percy Liang|Researcher
+    Zhilin Yang|Researcher
+    Peng Qi|Researcher
+    Saizheng Zhang|Researcher
+    Yoshua Bengio|Researcher
+    William W Cohen|Researcher
+    Ruslan Salakhutdinov|Researcher
+    Christopher D Manning|Researcher
+    Mandar Joshi|Researcher
+    Eunsol Choi|Researcher
+    Daniel S Weld|Researcher
+    Luke Zettlemoyer|Researcher
+    Qiao Jin|Researcher
+    Bhuwan Dhingra|Researcher
+    Zhengping Liu|Researcher
+    Xinghua Lu|Researcher
+    SQuAD|Dataset
+    HotpotQA|Dataset
+    TriviaQA|Dataset
+    PubMedQA|Dataset
+
+  proposition: Pranav Rajpurkar, Robin Jia, and Percy Liang authored a paper on unanswerable questions for SQuAD.
+    entity-entity relationships:
+    Pranav Rajpurkar|AUTHORED|SQuAD
+    Robin Jia|AUTHORED|SQuAD
+    Percy Liang|AUTHORED|SQuAD
+
+  proposition: The paper was published as an arXiv preprint in 2018.
+    entity-attribute relationships:
+    SQuAD|PUBLICATION_YEAR|2018
+    SQuAD|PUBLICATION_PLATFORM|arXiv
+
+  proposition: Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William W Cohen, Ruslan Salakhutdinov, and Christopher D Manning created HotpotQA.
+    entity-entity relationships:
+    Zhilin Yang|CREATED|HotpotQA
+    Peng Qi|CREATED|HotpotQA
+    Saizheng Zhang|CREATED|HotpotQA
+    Yoshua Bengio|CREATED|HotpotQA
+    William W Cohen|CREATED|HotpotQA
+    Ruslan Salakhutdinov|CREATED|HotpotQA
+    Christopher D Manning|CREATED|HotpotQA
+
+  proposition: HotpotQA is a dataset for diverse, explainable multi-hop question answering.
+    entity-attribute relationships:
+    HotpotQA|DESCRIPTION|diverse, explainable multi-hop question answering
+
+  proposition: The HotpotQA paper was published as an arXiv preprint in 2018.
+    entity-attribute relationships:
+    HotpotQA|PUBLICATION_YEAR|2018
+    HotpotQA|PUBLICATION_PLATFORM|arXiv
+
+  proposition: Mandar Joshi, Eunsol Choi, Daniel S Weld, and Luke Zettlemoyer developed TriviaQA.
+    entity-entity relationships:
+    Mandar Joshi|DEVELOPED|TriviaQA
+    Eunsol Choi|DEVELOPED|TriviaQA
+    Daniel S Weld|DEVELOPED|TriviaQA
+    Luke Zettlemoyer|DEVELOPED|TriviaQA
+
+  proposition: TriviaQA is a large scale distantly supervised challenge dataset for reading comprehension.
+    entity-attribute relationships:
+    TriviaQA|DESCRIPTION|large scale distantly supervised challenge dataset for reading comprehension
+
+  proposition: The TriviaQA paper was published as an arXiv preprint in 2017.
+    entity-attribute relationships:
+    TriviaQA|PUBLICATION_YEAR|2017
+    TriviaQA|PUBLICATION_PLATFORM|arXiv
+
+  proposition: Qiao Jin, Bhuwan Dhingra, Zhengping Liu, William W Cohen, and Xinghua Lu created PubMedQA.
+    entity-entity relationships:
+    Qiao Jin|CREATED|PubMedQA
+    Bhuwan Dhingra|CREATED|PubMedQA
+    Zhengping Liu|CREATED|PubMedQA
+    William W Cohen|CREATED|PubMedQA
+    Xinghua Lu|CREATED|PubMedQA
+
+  proposition: PubMedQA is a dataset for biomedical research question answering.
+    entity-attribute relationships:
+    PubMedQA|DESCRIPTION|dataset for biomedical research question answering
+
+  proposition: The PubMedQA paper was published as an arXiv preprint in 2019.
+    entity-attribute relationships:
+    PubMedQA|PUBLICATION_YEAR|2019
+    PubMedQA|PUBLICATION_PLATFORM|arXiv
+
+topic: Large Language Models Research
+
+  entities:
+    ChatGPT|Model
+    CodeApex|Benchmark
+    NaturalCodeBench|Benchmark
+    HumanEval-XL|Benchmark
+
+  proposition: Multiple research papers explored Large Language Models (LLMs) in code generation and evaluation.
+    entity-attribute relationships:
+    Large Language Models|RESEARCH_FOCUS|code generation and evaluation
+
+  proposition: Researchers published studies on ChatGPT's code generation capabilities and limitations in 2023.
+    entity-attribute relationships:
+    ChatGPT|RESEARCH_YEAR|2023
+    ChatGPT|RESEARCH_FOCUS|code generation capabilities and limitations
+
+  proposition: Several benchmarks were developed to evaluate code generation performance, including CodeApex and NaturalCodeBench.
+    entity-attribute relationships:
+    CodeApex|TYPE|Benchmark
+    NaturalCodeBench|TYPE|Benchmark
+
+  proposition: Researchers also created multilingual code generation benchmarks like HumanEval-XL.
+    entity-attribute relationships:
+    HumanEval-XL|TYPE|Multilingual code generation benchmark
+
+  proposition: Additional research explored LLMs in domains like computational social science, legal reasoning, and domain knowledge evaluation.
+    entity-attribute relationships:
+    Large Language Models|RESEARCH_DOMAINS|computational social science, legal reasoning, domain knowledge evaluation

@@ -1,0 +1,182 @@
+topic: Large Language Model Editing and Attacks
+
+  entities:
+    Hai Huang et al.|Researcher
+    Tom Hartvigsen et al.|Researcher
+    Xinwei Wu et al.|Researcher
+    Xiaopeng Li et al.|Researcher
+    Yanzhou Li et al.|Researcher
+    Sangeet Sagar et al.|Researcher
+    Zhensu Sun et al.|Researcher
+    Kun Shao et al.|Researcher
+    PMET|Method
+    BDDR|Method
+    arXiv|Publication Platform
+    Advances in Neural Information Processing Systems|Conference
+    AAAI Conference on Artificial Intelligence|Conference
+    ACM Web Conference|Conference
+
+  proposition: Hai Huang et al. published a paper on composite backdoor attacks against large language models in 2023.
+    entity-attribute relationships:
+    Hai Huang et al.|PUBLISHED|paper on composite backdoor attacks
+    Hai Huang et al.|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Hai Huang et al.|RESEARCHED|Large Language Models
+    Hai Huang et al.|PUBLISHED_IN|arXiv
+
+  proposition: The paper was published as an arXiv preprint with the identifier arXiv:2310.07676.
+    entity-attribute relationships:
+    arXiv|PREPRINT_IDENTIFIER|arXiv:2310.07676
+
+  proposition: Tom Hartvigsen et al. proposed lifelong model editing with discrete key-value adaptors in 2024.
+    entity-attribute relationships:
+    Tom Hartvigsen et al.|PUBLISHED|paper on lifelong model editing
+    Tom Hartvigsen et al.|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Tom Hartvigsen et al.|PROPOSED|discrete key-value adaptors
+    Tom Hartvigsen et al.|PUBLISHED_IN|Advances in Neural Information Processing Systems
+
+  proposition: Xinwei Wu et al. developed a method for detecting and editing privacy neurons in pretrained language models in 2023.
+    entity-attribute relationships:
+    Xinwei Wu et al.|PUBLISHED|method for detecting and editing privacy neurons
+    Xinwei Wu et al.|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Xinwei Wu et al.|RESEARCHED|Pretrained Language Models
+    Xinwei Wu et al.|PUBLISHED_IN|arXiv
+
+  proposition: Xiaopeng Li et al. introduced PMET, a precise model editing technique for transformers, in 2024.
+    entity-attribute relationships:
+    Xiaopeng Li et al.|PUBLISHED|PMET
+    Xiaopeng Li et al.|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Xiaopeng Li et al.|INTRODUCED|PMET
+    Xiaopeng Li et al.|PRESENTED_AT|AAAI Conference on Artificial Intelligence
+
+  proposition: Yanzhou Li et al. explored backdoor editing of large language models in 2024.
+    entity-attribute relationships:
+    Yanzhou Li et al.|PUBLISHED|paper on backdoor editing
+    Yanzhou Li et al.|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Yanzhou Li et al.|RESEARCHED|Large Language Models
+    Yanzhou Li et al.|PUBLISHED_IN|arXiv
+
+topic: Cybersecurity and Defense Techniques
+
+  entities:
+    Sangeet Sagar et al.|Researcher
+    Zhensu Sun et al.|Researcher
+    Kun Shao et al.|Researcher
+    ACM Web Conference|Conference
+    Computers & Security|Publication Platform
+
+  proposition: Sangeet Sagar et al. researched defending against stealthy backdoor attacks in 2022.
+    entity-attribute relationships:
+    Sangeet Sagar et al.|PUBLISHED|research on defending against stealthy backdoor attacks
+    Sangeet Sagar et al.|PUBLICATION_YEAR|2022
+
+    entity-entity relationships:
+    Sangeet Sagar et al.|PUBLISHED_IN|arXiv
+
+  proposition: Zhensu Sun et al. developed a method to protect open-source code against unauthorized training usage in 2022.
+    entity-attribute relationships:
+    Zhensu Sun et al.|PUBLISHED|method to protect open-source code
+    Zhensu Sun et al.|PUBLICATION_YEAR|2022
+
+    entity-entity relationships:
+    Zhensu Sun et al.|PRESENTED_AT|ACM Web Conference
+
+  proposition: Kun Shao et al. proposed BDDR, an effective defense against textual backdoor attacks, in 2021.
+    entity-attribute relationships:
+    Kun Shao et al.|PUBLISHED|BDDR
+    Kun Shao et al.|PUBLICATION_YEAR|2021
+
+    entity-entity relationships:
+    Kun Shao et al.|PUBLISHED_IN|Computers & Security
+
+topic: Bias and Fairness in Language Models
+
+  entities:
+    Zhibo Chu et al.|Researcher
+    Rajas Bansal|Researcher
+    Moin Nadeem et al.|Researcher
+    Yanhong Bai et al.|Researcher
+    Aparna Garimella et al.|Researcher
+    Yang Liu et al.|Researcher
+    Charles Yu et al.|Researcher
+    Ali Omrani et al.|Researcher
+    Yi R. Fung et al.|Researcher
+    StereoSet|Method
+    FairMonitor|Method
+    NORMSAGE|Method
+    ACM SIGKDD explorations newsletter|Publication Platform
+    Annual Meeting of the Association for Computational Linguistics|Conference
+    Asia-Pacific Chapter of the Association for Computational Linguistics|Conference
+    Conference on Empirical Methods in Natural Language Processing|Conference
+
+  proposition: Zhibo Chu et al. conducted a taxonomic survey on fairness in large language models in 2024.
+    entity-attribute relationships:
+    Zhibo Chu et al.|PUBLISHED|taxonomic survey on fairness
+    Zhibo Chu et al.|PUBLICATION_YEAR|2024
+
+    entity-entity relationships:
+    Zhibo Chu et al.|PUBLISHED_IN|ACM SIGKDD explorations newsletter
+
+  proposition: Rajas Bansal published a survey on bias and fairness in natural language processing in 2022.
+    entity-attribute relationships:
+    Rajas Bansal|PUBLISHED|survey on bias and fairness
+    Rajas Bansal|PUBLICATION_YEAR|2022
+
+  proposition: Moin Nadeem et al. developed StereoSet for measuring stereotypical bias in pretrained language models in 2021.
+    entity-attribute relationships:
+    Moin Nadeem et al.|PUBLISHED|StereoSet
+    Moin Nadeem et al.|PUBLICATION_YEAR|2021
+
+    entity-entity relationships:
+    Moin Nadeem et al.|PRESENTED_AT|Annual Meeting of the Association for Computational Linguistics
+
+  proposition: Yanhong Bai et al. created FairMonitor, a dual-framework for detecting stereotypes and biases in large language models in 2024.
+    entity-attribute relationships:
+    Yanhong Bai et al.|PUBLISHED|FairMonitor
+    Yanhong Bai et al.|PUBLICATION_YEAR|2024
+
+  proposition: Aparna Garimella et al. explored demographic-aware language model fine-tuning as a bias mitigation technique in 2022.
+    entity-attribute relationships:
+    Aparna Garimella et al.|PUBLISHED|demographic-aware language model fine-tuning
+    Aparna Garimella et al.|PUBLICATION_YEAR|2022
+
+    entity-entity relationships:
+    Aparna Garimella et al.|PRESENTED_AT|Asia-Pacific Chapter of the Association for Computational Linguistics conference
+
+  proposition: Yang Liu et al. published a survey and guideline for evaluating large language models' alignment in 2023.
+    entity-attribute relationships:
+    Yang Liu et al.|PUBLISHED|survey and guideline for evaluating large language models' alignment
+    Yang Liu et al.|PUBLICATION_YEAR|2023
+
+  proposition: Charles Yu et al. researched unlearning bias in language models by partitioning gradients in 2023.
+    entity-attribute relationships:
+    Charles Yu et al.|PUBLISHED|research on unlearning bias
+    Charles Yu et al.|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Charles Yu et al.|PRESENTED_AT|Annual Meeting of the Association for Computational Linguistics
+
+  proposition: Ali Omrani et al. proposed a social-group-agnostic bias mitigation approach using the Stereotype Content Model in 2023.
+    entity-attribute relationships:
+    Ali Omrani et al.|PUBLISHED|social-group-agnostic bias mitigation approach
+    Ali Omrani et al.|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Ali Omrani et al.|PRESENTED_AT|Annual Meeting of the Association for Computational Linguistics
+
+  proposition: Yi R. Fung et al. developed NORMSAGE for multi-lingual multi-cultural norm discovery from conversations in 2023.
+    entity-attribute relationships:
+    Yi R. Fung et al.|PUBLISHED|NORMSAGE
+    Yi R. Fung et al.|PUBLICATION_YEAR|2023
+
+    entity-entity relationships:
+    Yi R. Fung et al.|PRESENTED_AT|Conference on Empirical Methods in Natural Language Processing

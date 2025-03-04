@@ -1,0 +1,79 @@
+topic: Vision-Language Model Evaluation and Robustness
+
+  entities:
+    GPT-4|Model
+    GPT-4o|Model
+    GPT-4o-mini|Model
+    Gemini-1.5|Model
+    Claude-3.5-Sonnet|Model
+    Claude-3-Haiku|Model
+    Llama-3.2-90B-V|Model
+    Human reviewers|Person
+    Vision-Language Models|Technological Concept
+
+  proposition: Benchmarking Vision-Language Models: Evaluation and Robustness Analysis
+    entity-attribute relationships:
+    Vision-Language Models|DESCRIBED_BY|Evaluation
+    Vision-Language Models|DESCRIBED_BY|Robustness Analysis
+
+  proposition: Human reviewers verify the quality of data instances.
+    entity-entity relationships:
+    Human reviewers|VERIFIES|Data instances
+
+  proposition: The study analyzes visual preference alignment across multiple Vision-Language Models (VLMs).
+    entity-attribute relationships:
+    Vision-Language Models|ANALYZED_BY|Visual preference alignment
+
+  proposition: Models within the same series exhibit similar performance in preference tasks.
+    entity-attribute relationships:
+    Models|PERFORMANCE|Similar in preference tasks
+
+  proposition: GPT-4 series models show high preference task performance, with GPT-4o at 97.89% and GPT-4o-mini at 96.32%.
+    entity-attribute relationships:
+    GPT-4o|PERFORMANCE|97.89%
+    GPT-4o-mini|PERFORMANCE|96.32%
+
+  proposition: Gemini-1.5 series models both score 94.21% in preference evaluations.
+    entity-attribute relationships:
+    Gemini-1.5|PERFORMANCE|94.21%
+
+  proposition: Claude series models display comparable neutrality, with Claude-3.5-Sonnet at 80.53% and Claude-3-Haiku at 80.00%.
+    entity-attribute relationships:
+    Claude-3.5-Sonnet|NEUTRALITY|80.53%
+    Claude-3-Haiku|NEUTRALITY|80.00%
+
+  proposition: Llama-3.2-90B-V frequently outputs evasive responses.
+    entity-attribute relationships:
+    Llama-3.2-90B-V|RESPONSE_TYPE|Evasive
+
+  proposition: Llama-3.2-90B-V tends to avoid engaging with sensitive topics by producing responses like "I'm not going to engage in this topic."
+    entity-attribute relationships:
+    Llama-3.2-90B-V|BEHAVIOR|Avoids sensitive topics
+
+  proposition: Robustness of a Vision-Language Model refers to its ability to generate accurate responses to disturbed inputs.
+    entity-attribute relationships:
+    Vision-Language Model|ROBUSTNESS|Accurate responses to disturbed inputs
+
+  proposition: VLM robustness encompasses handling:
+    entity-attribute relationships:
+    Vision-Language Model|HANDLES|Linguistic variations
+    Vision-Language Model|HANDLES|Textual errors
+    Vision-Language Model|HANDLES|Contextual ambiguities
+    Vision-Language Model|HANDLES|Image quality distortions
+    Vision-Language Model|HANDLES|Occlusions
+    Vision-Language Model|HANDLES|Lighting variations
+    Vision-Language Model|HANDLES|Perspective changes
+    Vision-Language Model|HANDLES|Object misclassification
+
+  proposition: Research on VLM robustness focuses on three key areas:
+    entity-attribute relationships:
+    Research|FOCUS|Adversarial attacks on VLMs
+    Research|FOCUS|Adversarial defenses and robustness enhancement
+    Research|FOCUS|Robustness benchmark and evaluation
+
+  proposition: Adversarial attacks can:
+    entity-attribute relationships:
+    Adversarial attacks|CAPABILITY|Control model behavior
+    Adversarial attacks|CAPABILITY|Mislead content
+    Adversarial attacks|CAPABILITY|Implant backdoors in VLMs
+    Adversarial attacks|CAPABILITY|Manipulate vision understanding

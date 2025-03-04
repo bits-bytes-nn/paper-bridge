@@ -1,0 +1,122 @@
+topic: Vision-Language Model Hallucination Research
+
+  entities:
+    AUTOHALLUSION|Research Paper
+    Anish Gunjal|Researcher
+    Jihan Yin|Researcher
+    Erhan Bas|Researcher
+    Yiyang Zhou|Researcher
+    Yifan Li|Researcher
+    Jae Myung Kim|Researcher
+    Fuxiao Liu|Researcher
+    Bin Wang|Researcher
+    Shukang Yin|Researcher
+    Xunguang Wang|Researcher
+    Keyan Guo|Researcher
+    Rylan Schaeffer|Researcher
+    Zonghao Ying|Researcher
+    Siyuan Ma|Researcher
+    AAAI Conference on Artificial Intelligence|Conference
+    International Conference on Learning Representations|Conference
+    IEEE/CVF Conference on Computer Vision and Pattern Recognition|Conference
+    Woodpecker|Method
+
+  proposition: AUTOHALLUSION is a research paper about automatic generation of hallucination benchmarks for vision-language models published in 2024.
+    entity-attribute relationships:
+    AUTOHALLUSION|PUBLISHED_IN|2024
+    AUTOHALLUSION|FOCUSES_ON|automatic generation of hallucination benchmarks
+    AUTOHALLUSION|DOMAIN|vision-language models
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Anish Gunjal, Jihan Yin, and Erhan Bas published a paper on detecting and preventing hallucinations in large vision-language models at the AAAI Conference on Artificial Intelligence in 2023.
+    entity-attribute relationships:
+    Anish Gunjal|PUBLISHED_IN|AAAI Conference on Artificial Intelligence
+    Jihan Yin|PUBLISHED_IN|AAAI Conference on Artificial Intelligence
+    Erhan Bas|PUBLISHED_IN|AAAI Conference on Artificial Intelligence
+    Research Paper|PUBLISHED_IN|2023
+
+    entity-entity relationships:
+    Anish Gunjal|CO_AUTHOR|Jihan Yin
+    Anish Gunjal|CO_AUTHOR|Erhan Bas
+    Jihan Yin|CO_AUTHOR|Erhan Bas
+    Research Paper|PRESENTED_AT|AAAI Conference on Artificial Intelligence
+
+  proposition: Yiyang Zhou and colleagues analyzed and proposed methods for mitigating object hallucination in large vision-language models at the International Conference on Learning Representations in 2024.
+    entity-attribute relationships:
+    Yiyang Zhou|PUBLISHED_IN|International Conference on Learning Representations
+    Research Paper|PUBLISHED_IN|2024
+
+    entity-entity relationships:
+    Research Paper|PRESENTED_AT|International Conference on Learning Representations
+
+  proposition: Yifan Li et al. published a research paper evaluating object hallucination in large vision-language models as an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Yifan Li|PUBLISHED_IN|arXiv
+    Research Paper|PUBLISHED_IN|2023
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Jae Myung Kim and colleagues explored exposing and mitigating spurious correlations for cross-modal retrieval at the IEEE/CVF Conference on Computer Vision and Pattern Recognition in 2023.
+    entity-attribute relationships:
+    Jae Myung Kim|PUBLISHED_IN|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+    Research Paper|PUBLISHED_IN|2023
+
+    entity-entity relationships:
+    Research Paper|PRESENTED_AT|IEEE/CVF Conference on Computer Vision and Pattern Recognition
+
+  proposition: Fuxiao Liu and team proposed aligning large multi-modal models with robust instruction tuning in an arXiv preprint in 2023.
+    entity-attribute relationships:
+    Fuxiao Liu|PUBLISHED_IN|arXiv
+    Research Paper|PUBLISHED_IN|2023
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Bin Wang and colleagues introduced VIGC: Visual Instruction Generation and Correction in an ArXiv publication in 2023.
+    entity-attribute relationships:
+    Bin Wang|PUBLISHED_IN|arXiv
+    VIGC|PUBLISHED_IN|2023
+    VIGC|DESCRIPTION|Visual Instruction Generation and Correction
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Shukang Yin et al. developed Woodpecker, a hallucination correction method for multimodal large language models in 2023.
+    entity-attribute relationships:
+    Shukang Yin|DEVELOPED|Woodpecker
+    Woodpecker|PUBLISHED_IN|2023
+    Woodpecker|DESCRIPTION|hallucination correction method for multimodal large language models
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Multiple research papers in 2023-2024 focused on jailbreak attacks and security vulnerabilities in vision-language models, including works by Xunguang Wang, Keyan Guo, Rylan Schaeffer, Zonghao Ying, and Siyuan Ma.
+    entity-attribute relationships:
+    Research Papers|PUBLISHED_IN|2023-2024
+    Research Papers|FOCUS|jailbreak attacks and security vulnerabilities
+
+    entity-entity relationships:
+    Research Papers|AUTHORED_BY|Xunguang Wang
+    Research Papers|AUTHORED_BY|Keyan Guo
+    Research Papers|AUTHORED_BY|Rylan Schaeffer
+    Research Papers|AUTHORED_BY|Zonghao Ying
+    Research Papers|AUTHORED_BY|Siyuan Ma
+
+  proposition: Researchers have created benchmarks and conducted studies on the robustness of multimodal large language models against various attacks and hallucination issues.
+    entity-attribute relationships:
+    Researchers|CREATED|benchmarks
+    Researchers|CONDUCTED|studies on robustness
+
+    entity-entity relationships:
+    NONE
+
+  proposition: Several papers explored safety fine-tuning and methods to improve the reliability of vision-language models.
+    entity-attribute relationships:
+    Research Papers|EXPLORED|safety fine-tuning
+    Research Papers|EXPLORED|methods to improve reliability
+
+    entity-entity relationships:
+    NONE

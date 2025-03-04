@@ -1,0 +1,14 @@
+Responsible AI and the Arts: Ethical and Legal Implications in Creative Industries
+
+Manuel B Garcia explores the paradox of artificial creativity in generative AI artistry.
+The First International Symposium on Trustworthy Autonomous Systems addressed responsible AI in arts and creative industries.
+Researchers are investigating ethical challenges and solutions of generative AI from an interdisciplinary perspective.
+Generative AI raises complex questions about creativity, ethics, and legal implications in artistic domains.
+Trustworthy AI-generated content requires careful examination of adversarial, privacy, and fairness considerations.
+Researchers are exploring the potential of AI in edge learning and content generation across various industries.
+Ethical considerations in AI development include examining moral dilemma judgments and machine ethics.
+Acceptable use policies for foundation models are emerging as a critical area of research.
+Large language models present both opportunities and challenges for educational applications.
+Generative AI has potential to transform graduate education and creative processes.
+Researchers are developing strategies to address potential risks and ethical concerns in AI-generated content.
+The intersection of AI and creative industries continues to be a complex and evolving research domain.

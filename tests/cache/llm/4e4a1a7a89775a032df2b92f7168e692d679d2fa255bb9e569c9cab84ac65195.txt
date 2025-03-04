@@ -1,0 +1,18 @@
+Foundation Models Research and Publications Overview
+Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever authored "Improving Language Understanding by Generative Pre-Training" in 2018 at OpenAI.
+OpenAI released ChatGPT in 2023.
+OpenAI released GPT-4 in 2023.
+Hugo Touvron and colleagues published "LLaMA: Open and Efficient Foundation Language Models" in 2023.
+Hugo Touvron and colleagues published "Llama 2: Open foundation and fine-tuned chat models" in 2023.
+Meta AI announced Llama 3.2 for edge AI and vision with open, customizable models in September 2024.
+Rishi Bommasani and colleagues published "On the opportunities and risks of foundation models" in 2021.
+Yang Liu and colleagues published "Datasets for large language models: A comprehensive survey" in 2024.
+Edward J Hu and colleagues published "LoRA: Low-rank adaptation of large language models" in 2021.
+Shashank Subramanian and colleagues explored foundation models for scientific machine learning in 2024.
+Lu Yuan and colleagues introduced "Florence: A new foundation model for computer vision" in 2021.
+Yuxuan Liang and colleagues published a tutorial and survey on foundation models for time series analysis in 2024.
+Haoxiang Gao and colleagues published a survey on foundation models in autonomous driving in 2024.
+Michael Moor and colleagues discussed foundation models for generalist medical artificial intelligence in 2023.
+Lincan Li and colleagues explored large language models in political science in 2024.
+Maria Zontak and colleagues organized the First Workshop on the Evaluation of Generative Foundation Models at CVPR 2024.
+Alexander Wei and colleagues examined how LLM safety training fails in 2024.

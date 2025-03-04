@@ -1,0 +1,138 @@
+topic: AI Safety Research and Benchmarks
+
+  entities:
+    Peng Xia|Researcher
+    CARES|Benchmark
+    Senate Bill No. 1047|Regulation
+    California Chamber of Commerce|Organization
+    Wenxuan Zhang|Researcher
+    Richard Ren|Researcher
+    Robert Kirk|Researcher
+    Kailai Yang|Researcher
+    Chenglong Wang|Researcher
+    Zhanhui Zhou|Researcher
+    Tingchen Fu|Researcher
+    Yi-Lin Tuan|Researcher
+    Luke A Bauer|Researcher
+    Vincent Bindschaedler|Researcher
+    Vu Tuan Truong|Researcher
+    Yue Huang|Researcher
+    OpenAI|Organization
+    Alexandra Souly|Researcher
+    Tong Mu|Researcher
+
+  proposition: Peng Xia et al. published a comprehensive benchmark called CARES for evaluating trustworthiness in medical vision language models.
+    entity-attribute relationships:
+    CARES|DESCRIBED_BY|comprehensive
+    CARES|PURPOSE|evaluating trustworthiness in medical vision language models
+
+    entity-entity relationships:
+    Peng Xia|DEVELOPED|CARES
+
+  proposition: Senate Bill No. 1047 is the Safe and Secure Innovation for Frontier Artificial Intelligence Models Act.
+    entity-attribute relationships:
+    Senate Bill No. 1047|FULL_NAME|Safe and Secure Innovation for Frontier Artificial Intelligence Models Act
+
+  proposition: California Chamber of Commerce reported that the 'Godmother of AI' warns SB 1047 AI bill restricts innovation.
+    entity-entity relationships:
+    California Chamber of Commerce|REPORTED_ON|Senate Bill No. 1047
+
+  proposition: Wenxuan Zhang et al. proposed Bi-Factorial Preference Optimization to balance safety and helpfulness in language models.
+    entity-attribute relationships:
+    Bi-Factorial Preference Optimization|PURPOSE|balance safety and helpfulness in language models
+
+    entity-entity relationships:
+    Wenxuan Zhang|PROPOSED|Bi-Factorial Preference Optimization
+
+  proposition: Richard Ren et al. investigated whether AI safety benchmarks actually measure safety progress in a paper titled "Safetywashing".
+    entity-attribute relationships:
+    Richard Ren|PUBLISHED|"Safetywashing"
+
+    entity-entity relationships:
+    Richard Ren|INVESTIGATED|AI safety benchmarks
+
+  proposition: Robert Kirk et al. studied the effects of Reinforcement Learning from Human Feedback (RLHF) on language model generalization and diversity.
+    entity-attribute relationships:
+    Reinforcement Learning from Human Feedback|IMPACT|language model generalization and diversity
+
+    entity-entity relationships:
+    Robert Kirk|STUDIED|Reinforcement Learning from Human Feedback
+
+  proposition: Kailai Yang et al. developed MetaAligner, a method for conditional weak-to-strong correction in multi-objective language model alignment.
+    entity-attribute relationships:
+    MetaAligner|PURPOSE|conditional weak-to-strong correction in multi-objective language model alignment
+
+    entity-entity relationships:
+    Kailai Yang|DEVELOPED|MetaAligner
+
+  proposition: Chenglong Wang et al. introduced Hybrid Alignment Training for large language models.
+    entity-attribute relationships:
+    Hybrid Alignment Training|TARGET|large language models
+
+    entity-entity relationships:
+    Chenglong Wang|INTRODUCED|Hybrid Alignment Training
+
+  proposition: Zhanhui Zhou et al. proposed a multi-objective direct preference optimization approach that goes beyond a single-preference alignment strategy.
+    entity-attribute relationships:
+    Multi-objective direct preference optimization|CHARACTERISTIC|goes beyond single-preference alignment strategy
+
+    entity-entity relationships:
+    Zhanhui Zhou|PROPOSED|Multi-objective direct preference optimization
+
+  proposition: Tingchen Fu et al. developed a gradient-free multi-objective alignment technique using contrastive prompts.
+    entity-attribute relationships:
+    Alignment technique|CHARACTERISTIC|gradient-free
+    Alignment technique|METHOD|using contrastive prompts
+
+    entity-entity relationships:
+    Tingchen Fu|DEVELOPED|Alignment technique
+
+  proposition: Yi-Lin Tuan et al. researched methods to create large language models with balanced safety and helpfulness responses.
+    entity-attribute relationships:
+    Large language models|GOAL|balanced safety and helpfulness responses
+
+    entity-entity relationships:
+    Yi-Lin Tuan|RESEARCHED|Large language models
+
+  proposition: Luke A Bauer and Vincent Bindschaedler explored generative models from security perspectives.
+    entity-entity relationships:
+    Luke A Bauer|EXPLORED|Generative models
+    Vincent Bindschaedler|EXPLORED|Generative models
+
+  proposition: Vu Tuan Truong et al. conducted a comprehensive survey on attacks and defenses for generative diffusion models.
+    entity-attribute relationships:
+    Survey|TYPE|comprehensive
+    Survey|FOCUS|attacks and defenses for generative diffusion models
+
+    entity-entity relationships:
+    Vu Tuan Truong|CONDUCTED|Survey
+
+  proposition: Yue Huang et al. argued for an adaptive interpretation of helpful, honest, and harmless AI principles.
+    entity-attribute relationships:
+    AI principles|INTERPRETATION|adaptive
+    AI principles|CHARACTERISTICS|helpful, honest, and harmless
+
+    entity-entity relationships:
+    Yue Huang|ARGUED_FOR|AI principles
+
+  proposition: OpenAI published a Moderation Quickstart Guide for AI model safety.
+    entity-attribute relationships:
+    Moderation Quickstart Guide|PURPOSE|AI model safety
+
+    entity-entity relationships:
+    OpenAI|PUBLISHED|Moderation Quickstart Guide
+
+  proposition: Alexandra Souly et al. developed a strong rejection method for empty jailbreaks.
+    entity-attribute relationships:
+    Rejection method|CHARACTERISTIC|strong
+    Rejection method|PURPOSE|empty jailbreaks
+
+    entity-entity relationships:
+    Alexandra Souly|DEVELOPED|Rejection method
+
+  proposition: Tong Mu et al. explored improving model safety behavior using rule-based rewards.
+    entity-attribute relationships:
+    Model safety behavior|IMPROVEMENT_METHOD|rule-based rewards
+
+    entity-entity relationships:
+    Tong Mu|EXPLORED|Model safety behavior

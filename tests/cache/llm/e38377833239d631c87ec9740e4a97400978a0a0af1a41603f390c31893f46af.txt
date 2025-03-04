@@ -1,0 +1,45 @@
+Hybrid AI-Human Collaboration and Trustworthiness in Generative Foundation Models
+
+A hybrid approach combines AI speed and creativity with human oversight.
+Generative models guide humans in experimental operations and safety-related decision-making.
+Regulatory and institutional oversight defines standards and evolves with technological advances.
+Trust in generative models within scientific domains is multidimensional.
+Transparency, validation, ethical compliance, and human-AI collaboration are crucial for responsible scientific discovery.
+
+Robotics and Generative Foundation Models Safety Concerns
+
+Large Language Models (LLMs) and Visual Language Models (VLMs) have improved robots' natural language processing and visual recognition capabilities.
+Integrating these models into robots poses significant risks due to potential errors and limitations.
+LLMs and VLMs can produce language hallucinations and visual illusions.
+Safety in robotic systems involves efficient task performance while preventing unintended harm.
+Potential safety compromises include reasoning, planning, and physical action errors.
+
+Reasoning and Planning Risks
+
+Embodied AI agents can exhibit decision-making ambiguity and overconfidence.
+LLM-driven robots may potentially enact discrimination, violence, or unlawful actions.
+Robots may fail to identify hazards and proceed without considering potential risks.
+Proactive risk identification is crucial for safer decision-making.
+Scene graphs and LLMs can help model object relationships and detect anomalies.
+
+Physical Action Risks
+
+Inaccurate high-level actions or excessive motion control can harm individuals or objects.
+Inference latency and efficiency issues can compromise robot responsiveness and safety.
+Safety in physical embodiment requires controlling both cognitive and physical behaviors.
+
+Human-AI Collaboration Trust Challenges
+
+Trust calibration is critical in human-AI collaboration.
+Users struggle to understand generative foundation models' functioning.
+Opaque marketing, incomplete documentation, and model complexity create trust challenges.
+Users may overtrust or undertrust AI outputs.
+Improving model transparency and interpretability is essential.
+
+Trust Calibration Strategies
+
+Providing explanations for AI predictions helps build trust.
+Detailing model limitations and output uncertainties is important.
+Strategies include verbalized confidence scores and uncertainty estimation.
+Explainability mechanisms should be intuitive and accessible to users.
+Trust calibration aims to help users understand when AI guidance is reliable.

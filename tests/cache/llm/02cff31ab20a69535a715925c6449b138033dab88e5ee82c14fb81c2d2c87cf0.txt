@@ -1,0 +1,121 @@
+topic: Research Benchmarks for Large Language Models
+
+  entities:
+    LegalBench|Benchmark
+    LawBench|Benchmark
+    FinEval|Benchmark
+    FinSQL|Framework
+    PIXIU|Model
+    NumLLM|Model
+    ChatGPT|Model
+    GPT-4|Model
+    FinanceBench|Benchmark
+    Quantifying AI Psychology|Benchmark
+    RecExplainer|Tool
+    ScholarChemQA|Research Platform
+    CS-Bench|Benchmark
+
+  proposition: LegalBench is a collaboratively built benchmark for measuring legal reasoning in large language models.
+    entity-attribute relationships:
+    LegalBench|FOCUSES_ON|legal reasoning
+    LegalBench|CREATED_BY|collaboration
+
+    entity-entity relationships:
+    LegalBench|EVALUATES|Large Language Models
+
+  proposition: LawBench is a benchmark for evaluating legal knowledge of large language models.
+    entity-attribute relationships:
+    LawBench|FOCUSES_ON|legal knowledge
+
+    entity-entity relationships:
+    LawBench|EVALUATES|Large Language Models
+
+  proposition: FinEval is a Chinese financial domain knowledge evaluation benchmark for large language models.
+    entity-attribute relationships:
+    FinEval|FOCUSES_ON|financial domain knowledge
+    FinEval|LANGUAGE|Chinese
+
+    entity-entity relationships:
+    FinEval|EVALUATES|Large Language Models
+
+  proposition: FinSQL is a model-agnostic LLMs-based text-to-SQL framework for financial analysis.
+    entity-attribute relationships:
+    FinSQL|TYPE|model-agnostic
+    FinSQL|FOCUSES_ON|financial analysis
+
+    entity-entity relationships:
+    FinSQL|BASED_ON|Large Language Models
+
+  proposition: PIXIU is a large language model, instruction data, and evaluation benchmark for finance.
+    entity-attribute relationships:
+    PIXIU|FOCUSES_ON|finance
+
+    entity-entity relationships:
+    PIXIU|TYPE|Large Language Model
+    PIXIU|INCLUDES|instruction data
+    PIXIU|INCLUDES|evaluation benchmark
+
+  proposition: NumLLM is a numeric-sensitive large language model for Chinese finance.
+    entity-attribute relationships:
+    NumLLM|TYPE|numeric-sensitive
+    NumLLM|LANGUAGE|Chinese
+    NumLLM|FOCUSES_ON|finance
+
+  proposition: Research examines ChatGPT and GPT-4 as general-purpose solvers for financial text analytics.
+    entity-attribute relationships:
+    ChatGPT|ROLE|general-purpose solver
+    GPT-4|ROLE|general-purpose solver
+
+    entity-entity relationships:
+    ChatGPT|USED_IN|financial text analytics
+    GPT-4|USED_IN|financial text analytics
+
+  proposition: FinanceBench is a new benchmark for financial question answering.
+    entity-attribute relationships:
+    FinanceBench|FOCUSES_ON|financial question answering
+
+  proposition: A study evaluates the capacities of large language models in psychology.
+    entity-entity relationships:
+    Study|EVALUATES|Large Language Models
+    Study|FOCUSES_ON|psychology
+
+  proposition: Quantifying AI Psychology is a psychometrics benchmark for large language models.
+    entity-attribute relationships:
+    Quantifying AI Psychology|TYPE|psychometrics benchmark
+
+    entity-entity relationships:
+    Quantifying AI Psychology|EVALUATES|Large Language Models
+
+  proposition: Research explores recommender systems in the era of large language models.
+    entity-entity relationships:
+    Research|EXPLORES|recommender systems
+    Research|CONTEXT|Large Language Models
+
+  proposition: RecExplainer aligns large language models for recommendation model interpretability.
+    entity-attribute relationships:
+    RecExplainer|FOCUSES_ON|recommendation model interpretability
+
+    entity-entity relationships:
+    RecExplainer|ALIGNS|Large Language Models
+
+  proposition: ScholarChemQA unveils the power of language models in chemical research question answering.
+    entity-attribute relationships:
+    ScholarChemQA|FOCUSES_ON|chemical research question answering
+
+  proposition: Research investigates large language models' understanding of chemistry.
+    entity-entity relationships:
+    Research|INVESTIGATES|Large Language Models
+    Research|FOCUSES_ON|chemistry understanding
+
+  proposition: A study examines large language models' capabilities for automated planning.
+    entity-entity relationships:
+    Study|EXAMINES|Large Language Models
+    Study|FOCUSES_ON|automated planning
+
+  proposition: CS-Bench is a comprehensive benchmark for large language models towards computer science mastery.
+    entity-attribute relationships:
+    CS-Bench|TYPE|comprehensive benchmark
+    CS-Bench|FOCUSES_ON|computer science mastery
+
+    entity-entity relationships:
+    CS-Bench|EVALUATES|Large Language Models

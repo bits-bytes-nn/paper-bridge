@@ -1,0 +1,60 @@
+topic: Generative Foundation Models Trustworthiness Research
+
+  entities:
+    TrustGen|Benchmark
+    TrustEval|Toolkit
+    CogView-3-Plus|Model
+    Generative Foundation Models|Technological Concept
+
+  proposition: The authors conducted a multidisciplinary collaboration to establish guidelines for trustworthy generative models.
+    entity-attribute relationships:
+    Authors|CONDUCTED|Multidisciplinary Collaboration
+    Generative Models|DESCRIBED_BY|Trustworthy
+
+    entity-entity relationships:
+    Authors|DEVELOPED|Guidelines
+
+  proposition: The collaboration involved experts from diverse fields including NLP, Computer Vision, Human-Computer Interaction, Computer Security, Medicine, Computational Social Science, Robotics, Data Mining, Law, and AI for Science.
+    entity-attribute relationships:
+    Collaboration|INVOLVES|Experts
+    Collaboration|SPANS|Diverse Fields
+
+    entity-entity relationships:
+    Experts|REPRESENTS|Research Domains
+
+  proposition: The research developed comprehensive guidelines systematically structured around legal compliance, ethical and social responsibilities, risk management, user-centered design principles, and adaptability and sustainability.
+    entity-attribute relationships:
+    Research|DEVELOPED|Comprehensive Guidelines
+    Guidelines|STRUCTURED_BY|Legal Compliance
+    Guidelines|STRUCTURED_BY|Ethical Responsibilities
+    Guidelines|STRUCTURED_BY|Risk Management
+
+  proposition: The authors introduced TrustGen, a holistic and dynamic benchmark for assessing the trustworthiness of generative models.
+    entity-attribute relationships:
+    TrustGen|TYPE|Holistic Benchmark
+    TrustGen|CHARACTERISTIC|Dynamic
+
+    entity-entity relationships:
+    Authors|INTRODUCED|TrustGen
+
+  proposition: TrustGen evaluates models across multiple dimensions including truthfulness, safety, fairness, privacy, robustness, machine ethics, and advanced AI risks.
+    entity-attribute relationships:
+    TrustGen|EVALUATES|Generative Models
+    TrustGen|ASSESSES|Truthfulness
+    TrustGen|ASSESSES|Safety
+    TrustGen|ASSESSES|Fairness
+    TrustGen|ASSESSES|Privacy
+    TrustGen|ASSESSES|Robustness
+
+  proposition: CogView-3-Plus achieved the highest average trustworthiness score of 74.96 among the evaluated models.
+    entity-attribute relationships:
+    CogView-3-Plus|ACHIEVED|Trustworthiness Score
+    CogView-3-Plus|VALUE|74.96
+
+  proposition: The research aims to advance the development of trustworthy generative AI by identifying challenges and innovative solutions.
+    entity-attribute relationships:
+    Research|AIMS|Advance Generative AI Development
+
+    entity-entity relationships:
+    Research|IDENTIFIES|Challenges
+    Research|PROPOSES|Innovative Solutions

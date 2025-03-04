@@ -1,0 +1,97 @@
+topic: AI and Machine Learning Research Publications
+
+  entities:
+    Food and Drug Administration|Organization
+    Alan G Fraser|Researcher
+    Urs J Muehlematter|Researcher
+    Eric Wu|Researcher
+    The Lancet|Publication
+    Large Language Models|Model
+
+  proposition: Food and Drug Administration published a technical report in 2021.
+    entity-attribute relationships:
+    Food and Drug Administration|PUBLISHED|technical report
+    Food and Drug Administration|PUBLICATION_YEAR|2021
+
+    entity-entity relationships:
+
+  proposition: Alan G Fraser and colleagues discussed the need for transparency of clinical evidence for medical devices in Europe in The Lancet.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Alan G Fraser|PUBLISHED_IN|The Lancet
+    Alan G Fraser|DISCUSSED|medical devices transparency
+
+  proposition: Urs J Muehlematter and colleagues conducted a comparative analysis of AI and machine learning-based medical device approvals in the USA and Europe from 2015-2020.
+    entity-attribute relationships:
+    Urs J Muehlematter|RESEARCH_PERIOD|2015-2020
+
+    entity-entity relationships:
+    Urs J Muehlematter|ANALYZED|medical device approvals
+
+  proposition: Eric Wu and colleagues analyzed limitations and recommendations for evaluating medical AI device evaluations through FDA approvals.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Eric Wu|ANALYZED|medical AI device evaluations
+    Eric Wu|RELATED_TO|Food and Drug Administration
+
+  proposition: Food and Drug Administration proposed a regulatory framework for modifications to AI/ML-based software as a medical device in 2019.
+    entity-attribute relationships:
+    Food and Drug Administration|PROPOSED|regulatory framework
+    Food and Drug Administration|PROPOSAL_YEAR|2019
+
+    entity-entity relationships:
+    Food and Drug Administration|REGULATES|AI/ML-based software
+
+  proposition: Researchers published studies on various applications of AI and machine learning in domains including: Chemical reaction yield prediction using deep learning.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|APPLIED|deep learning
+    Researchers|STUDIED|chemical reaction yield prediction
+
+  proposition: Materials science research advancements through deep learning methods.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|APPLIED|deep learning methods
+    Researchers|ADVANCED|materials science research
+
+  proposition: Chemical research question answering using language models.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|USED|language models
+    Researchers|APPLIED|chemical research question answering
+
+  proposition: Molecular structure elucidation and reaction data extraction using Large Language Models.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|USED|Large Language Models
+    Researchers|APPLIED|molecular structure elucidation
+    Researchers|APPLIED|reaction data extraction
+
+  proposition: Researchers are exploring the potential of AI and machine learning across scientific disciplines including chemistry, materials science, and medical device development.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|EXPLORING|AI
+    Researchers|EXPLORING|machine learning
+    Researchers|APPLIED_TO|chemistry
+    Researchers|APPLIED_TO|materials science
+    Researchers|APPLIED_TO|medical device development
+
+  proposition: Publications span multiple years from 2016 to 2025, indicating ongoing research and development in AI applications.
+    entity-attribute relationships:
+    Publications|RESEARCH_PERIOD|2016-2025
+
+    entity-entity relationships:
+
+  proposition: Researchers from multiple institutions are contributing to understanding AI's capabilities and limitations in scientific research.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Researchers|CONTRIBUTING_TO|AI capabilities understanding
+    Researchers|CONTRIBUTING_TO|AI limitations understanding

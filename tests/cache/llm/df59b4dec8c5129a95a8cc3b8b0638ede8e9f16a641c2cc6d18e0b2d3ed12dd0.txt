@@ -1,0 +1,32 @@
+Challenges and Limitations of Generative Foundation Models in Professional Domains
+
+Local AI infrastructure requires significant financial and technical investment, making it inaccessible for small- and medium-sized law firms.
+Accuracy is critical in the legal domain, as errors can have significant consequences.
+Model hallucinations pose a serious risk in legal applications.
+A lawyer was professionally sanctioned for using an LLM-generated court submission with fabricated case citations.
+Law-specific generative tools like LexisAI and Co-counsel exist but are not yet perfect.
+Research indicates LLMs hallucinate legal information between 17% and 58% of the time.
+The lack of reliable AI solutions makes legal practitioners hesitant to adopt AI tools.
+
+Benchmarks and Evaluation of Legal AI Tools
+
+LawBench aims to evaluate LLM performance in legal contexts.
+Some LLMs exhibit exaggerated safety when handling law-related queries.
+Litigation costs may increase due to the need for forensic experts to address AI-generated evidence.
+AI-generated legal content is difficult to detect.
+Researchers are developing methods to analyze sources of legal hallucinations.
+TrustGen could be valuable for assessing generative models' suitability in legal settings.
+
+Broader Challenges of Generative Foundation Models
+
+LLMs can exhibit economic and gender biases in various professional domains.
+Generative search engines are vulnerable to ranking manipulation attacks.
+LLMs can be influenced by minor input variations to prioritize specific content.
+Ethical concerns exist in education regarding fairness and safety of generative models.
+Trustworthiness issues include training data biases and potential copyright infringement.
+Edge computing and 6G networks introduce new challenges for trustworthy AI applications.
+
+Youth Sector Concerns
+
+Misleading content can severely impact psychological and cognitive development of youth.
+Strict adherence to ethical principles is crucial in youth-focused AI applications.

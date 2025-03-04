@@ -1,0 +1,36 @@
+Regulatory Challenges and Trustworthiness of Generative Models in Healthcare and Scientific Research
+
+Regulatory bodies like FDA and European Medicines Agency (EMA) ensure generative models are safe and effective.
+The dynamic nature of generative models challenges traditional regulatory frameworks.
+Creating a standardized process for validating generative models is a major challenge.
+Current regulatory pathways do not fully address iterative model development.
+Regulatory bodies are exploring new approaches like "software as a medical device" (SaMD) and Total Product Life Cycle (TPLC) approach.
+Legal liability is unclear when generative models produce incorrect diagnoses or recommendations.
+Uncertainty about responsibility hinders adoption of generative models due to potential legal risks.
+
+Advancing regulatory frameworks requires collaboration among developers, healthcare professionals, policymakers, and regulators.
+Setting standards for data quality, model validation, transparency, and post-market surveillance is essential.
+
+Generative models in scientific fields introduce unique trustworthiness challenges.
+Scientific domains require precision, safety, and speed in discovery.
+Generative models can potentially generate toxic or hazardous entities.
+
+Trust in generative model outputs depends on transparency, validation, and understanding of uncertainty.
+Scientific models operate with varying degrees of uncertainty due to data complexity and novelty.
+Quantifying uncertainty helps researchers decide how much weight to place on predictions.
+Validation against empirical data is crucial for building confidence in model outputs.
+Interpretability plays a significant role in establishing trust in scientific generative models.
+
+Balancing rapid innovation with safety and ethical standards is essential.
+Frameworks for responsible innovation can guide exploration and verification.
+Phased deployment allows gradual introduction of AI outputs with ongoing checks.
+Implementing ethical constraints within model designs is critical.
+Experimental validation and peer review remain indispensable safeguards.
+Generative models can guide humans in conducting proper experimental operations and safety-related decision-making.
+
+Regulatory and institutional oversight helps maintain balance in technological advances.
+Trust in generative models is multidimensional.
+A collaborative human-AI approach can advance scientific discovery responsibly.
+
+Development of Large Language Models (LLMs) and Visual Language Models (VLMs) has improved robots' natural language processing and visual recognition capabilities.
+Integrating these models into real-world robots comes with significant risks due to their limitations.

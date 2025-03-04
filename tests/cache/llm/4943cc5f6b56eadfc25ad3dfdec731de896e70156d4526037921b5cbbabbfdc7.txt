@@ -1,0 +1,14 @@
+Research Publications on AI Testing, Safety, and Societal Implications
+
+Paulius Rauba, Nabeel Seedat, Max Ruiz Luyten, and Mihaela van der Schaar published a paper on Context-Aware Testing for Large Language Models.
+The paper was presented at the Thirty-eighth Annual Conference on Neural Information Processing Systems in 2024.
+U.S. Government Accountability Office released a technical report on an Accountability Framework for Artificial Intelligence in Federal Agencies in 2021.
+The report was accessed on 2024-12-04.
+Multiple research publications explore various aspects of AI safety, testing, and societal impacts.
+Research topics include AI error discovery, AI interface resilience, AI model robustness, and potential risks of autonomous AI systems.
+Researchers are investigating the persuasive capabilities of large language models.
+Studies examine the potential impacts of advanced AI systems on democracy and social interactions.
+Researchers are exploring the anthropomorphization of AI and its associated opportunities and risks.
+Publications highlight concerns about AI-powered autonomous weapons and their potential geopolitical implications.
+Researchers are developing frameworks for testing, debugging, and analyzing AI systems using modern tools.
+Multiple studies focus on the ethical and safety considerations of large language models and AI technologies.

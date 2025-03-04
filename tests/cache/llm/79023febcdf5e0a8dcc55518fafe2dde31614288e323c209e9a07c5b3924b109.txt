@@ -1,0 +1,38 @@
+TrustGen Benchmark System: Key Features and Modules
+
+TrustGen establishes the first dynamic evaluation framework for generative foundation model trustworthiness.
+The benchmark system is designed to be effective, reproducible, user-friendly, and fully open-source.
+TrustGen continuously adapts to evolving ethical standards and provides authentic assessments of model behavior.
+The benchmark recognizes the importance of balancing both utility and trustworthiness in generative models.
+
+Dynamic Evaluation Strategies
+TrustGen leverages three core modules to create an iterative pipeline for continuous evaluation.
+The benchmark uses tailored strategies across multiple dimensions to ensure dataset and metric updates.
+The three core modules are Metadata Curator, Test Case Builder, and Contextual Variator.
+These components create an evolving system that supports dynamic and relevant evaluations over time.
+
+Reproducible Construction Pipeline
+The benchmark construction pipeline is fully open-source.
+The system promotes transparency and allows users to understand and replicate test set generation.
+A toolkit has been released to enable easy replication of the benchmark construction process.
+The open science approach encourages collaborative innovation in the research community.
+
+Metadata Curator Module
+The Metadata Curator handles preprocessing and transforming metadata into usable test cases.
+Three types of metadata curators are employed:
+Dataset pool maintainers process raw data into formats ready for test case generation.
+Web-browsing agents powered by large language models retrieve up-to-date information.
+Model-based data generators produce new data sources with careful constraints to prevent data leakage.
+
+Test Case Builder Module
+The module generates test cases using generative models or programmatic operations.
+When using models, each input has a corresponding ground-truth label.
+Generative models are used only for paraphrasing queries and answers, not for generating ground-truth labels.
+Programmatic operations test model robustness through methods like adding noise to text or images.
+Existing key-value pairs from structured datasets are also used to generate test questions.
+
+User-friendly and Human-Enhanced Approach
+The benchmark prioritizes practical, low-cost evaluation methods.
+It focuses on realistic challenges users are likely to encounter.
+Human oversight is integrated with automated processes to ensure benchmark quality and scalability.
+The system aims to evaluate models' ability to adhere to ethical standards and cultural norms.

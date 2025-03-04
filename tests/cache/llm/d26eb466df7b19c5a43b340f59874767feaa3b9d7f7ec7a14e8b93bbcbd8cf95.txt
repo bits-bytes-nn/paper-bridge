@@ -1,0 +1,119 @@
+topic: Text-to-Image Models
+
+  entities:
+    Hunyuan-DiT|Model
+    Variational Autoencoder|Technology
+    Transformer|Technology
+    CLIP|Model
+    T5|Model
+    Kolors|Model
+    Kuaishou|Organization
+    CogView-3-Plus|Model
+    Tsinghua University|Organization
+
+  proposition: Hunyuan-DiT uses a pre-trained Variational Autoencoder (VAE) to compress images into low-dimensional latent spaces.
+    entity-attribute relationships:
+    Hunyuan-DiT|USES|Variational Autoencoder
+    Variational Autoencoder|PURPOSE|image compression
+    Variational Autoencoder|TECHNIQUE|latent space representation
+
+    entity-entity relationships:
+    Hunyuan-DiT|INCORPORATES|Variational Autoencoder
+
+  proposition: Hunyuan-DiT uses a transformer-based diffusion model to learn the data distribution.
+    entity-attribute relationships:
+    Hunyuan-DiT|USES|Transformer
+    Transformer|TYPE|diffusion model
+    Transformer|PURPOSE|data distribution learning
+
+    entity-entity relationships:
+    Hunyuan-DiT|INCORPORATES|Transformer
+
+  proposition: Hunyuan-DiT leverages a combination of pre-trained bilingual CLIP and multilingual T5 encoder for text prompt encoding.
+    entity-attribute relationships:
+    Hunyuan-DiT|USES|CLIP
+    Hunyuan-DiT|USES|T5
+    CLIP|TYPE|bilingual
+    T5|TYPE|multilingual
+    CLIP|PURPOSE|text prompt encoding
+    T5|PURPOSE|text prompt encoding
+
+    entity-entity relationships:
+    Hunyuan-DiT|COMBINES|CLIP
+    Hunyuan-DiT|COMBINES|T5
+
+  proposition: Hunyuan-DiT supports multi-turn text-to-image generation.
+    entity-attribute relationships:
+    Hunyuan-DiT|FEATURE|multi-turn text-to-image generation
+
+  proposition: Kolors is a large-scale text-to-image generation model developed by Kuaishou.
+    entity-attribute relationships:
+    Kolors|TYPE|large-scale text-to-image generation model
+    Kolors|DEVELOPED_BY|Kuaishou
+
+    entity-entity relationships:
+    Kolors|CREATED_BY|Kuaishou
+
+  proposition: Kolors is based on latent diffusion.
+    entity-attribute relationships:
+    Kolors|BASED_ON|latent diffusion
+
+  proposition: Kolors is trained on billions of text-image pairs.
+    entity-attribute relationships:
+    Kolors|TRAINED_ON|text-image pairs
+    Kolors|TRAINING_VOLUME|billions
+
+  proposition: Kolors supports both Chinese and English inputs.
+    entity-attribute relationships:
+    Kolors|LANGUAGE_SUPPORT|Chinese
+    Kolors|LANGUAGE_SUPPORT|English
+
+  proposition: Kolors exhibits significant advantages in visual quality.
+    entity-attribute relationships:
+    Kolors|FEATURE|significant visual quality
+
+  proposition: Kolors demonstrates complex semantic accuracy.
+    entity-attribute relationships:
+    Kolors|FEATURE|complex semantic accuracy
+
+  proposition: Kolors shows strong text rendering capabilities.
+    entity-attribute relationships:
+    Kolors|FEATURE|strong text rendering capabilities
+
+  proposition: CogView-3-Plus is a text-to-image generation model developed by Tsinghua University.
+    entity-attribute relationships:
+    CogView-3-Plus|TYPE|text-to-image generation model
+    CogView-3-Plus|DEVELOPED_BY|Tsinghua University
+
+    entity-entity relationships:
+    CogView-3-Plus|CREATED_BY|Tsinghua University
+
+  proposition: CogView-3-Plus introduces the latest DiT architecture.
+    entity-attribute relationships:
+    CogView-3-Plus|USES|DiT architecture
+
+  proposition: CogView-3-Plus employs Zero-SNR diffusion noise scheduling.
+    entity-attribute relationships:
+    CogView-3-Plus|USES|Zero-SNR diffusion noise scheduling
+
+  proposition: CogView-3-Plus incorporates a joint text-image attention mechanism.
+    entity-attribute relationships:
+    CogView-3-Plus|USES|joint text-image attention mechanism
+
+  proposition: CogView-3-Plus reduces training and inference costs.
+    entity-attribute relationships:
+    CogView-3-Plus|FEATURE|reduced training costs
+    CogView-3-Plus|FEATURE|reduced inference costs
+
+  proposition: CogView-3-Plus maintains high-quality outputs.
+    entity-attribute relationships:
+    CogView-3-Plus|FEATURE|high-quality outputs
+
+  proposition: CogView-3-Plus utilizes a VAE with a latent dimension of 16.
+    entity-attribute relationships:
+    CogView-3-Plus|USES|Variational Autoencoder
+    Variational Autoencoder|LATENT_DIMENSION|16
+
+  proposition: CogView-3-Plus supports image resolutions ranging from 512×512 to 2048×2048 pixels.
+    entity-attribute relationships:
+    CogView-3-Plus|IMAGE_RESOLUTION|512×512 to 2048×2048 pixels

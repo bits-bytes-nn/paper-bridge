@@ -1,11 +1,31 @@
 resources:
   project_name: paper-bridge
   stage: dev
+  default_region_name: us-west-2
   bedrock_region_name: us-west-2
+  s3_bucket_name: sagemaker-us-west-2-998601677581
+  s3_key_prefix: paper-bridge/batch-extract
+
+logging:
+  level: INFO
+  include_prefixes: []
+  exclude_prefixes: []
 
 indexing:
-  papers_per_day: 5
+  papers_per_day: 1
   days_to_fetch: 1
   min_upvotes:
-  main_content_extraction_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
-
+  main_content_extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
+  extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
+  response_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
+  embeddings_model_id: cohere.embed-english-v3
+  extraction_num_workers: 2
+  extraction_num_threads_per_worker: 4
+  extraction_batch_size: 4
+  build_num_workers: 2
+  build_batch_size: 4
+  build_batch_write_size: 25
+  batch_writes_enabled: true
+  enable_cache: true
+  chunk_size: 1024
+  chunk_overlap: 128

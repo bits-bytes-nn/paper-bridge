@@ -1,0 +1,127 @@
+topic: AI Safety Research
+
+  entities:
+    Yingkai Dong|Researcher
+    Zhen Tan|Researcher
+    Shenglai Zeng|Researcher
+    Xiusi Chen|Researcher
+    Saffron Huang|Researcher
+    Savvas Petridis|Researcher
+    Wenyue Hua|Researcher
+    Luke Yoffe|Researcher
+    Rong Zhou|Researcher
+    Qian Yang|Researcher
+    ACM Conference on Fairness, Accountability, and Transparency|Conference
+    LLM-based agents|Technology
+    Multimodal large language model|Model
+    Retrieval-augmented generation|Technology
+    ITERALIGN|Method
+    Collective Constitutional AI|Approach
+    Constitutionmaker|Tool
+    TrustAgent|Technology
+    DebUnc|Method
+    TTT-UNet|Method
+
+  proposition: Yingkai Dong et al. published a paper on jailbreaking text-to-image models using LLM-based agents.
+    entity-attribute relationships:
+    Yingkai Dong|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Yingkai Dong|RESEARCHED|LLM-based agents
+    Yingkai Dong|STUDIED|text-to-image models
+
+  proposition: Zhen Tan et al. explored covert injection of malice into multimodal large language model (MLLM) societies.
+    entity-attribute relationships:
+    Zhen Tan|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Zhen Tan|RESEARCHED|Multimodal large language model
+    Zhen Tan|EXPLORED|malice injection
+
+  proposition: Shenglai Zeng et al. proposed mitigating privacy issues in retrieval-augmented generation (RAG) using synthetic data.
+    entity-attribute relationships:
+    Shenglai Zeng|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Shenglai Zeng|RESEARCHED|retrieval-augmented generation
+    Shenglai Zeng|PROPOSED|privacy mitigation
+
+  proposition: Xiusi Chen et al. developed ITERALIGN for iterative constitutional alignment of large language models.
+    entity-attribute relationships:
+    Xiusi Chen|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Xiusi Chen|DEVELOPED|ITERALIGN
+    ITERALIGN|USED_FOR|large language model alignment
+
+  proposition: Saffron Huang et al. presented Collective Constitutional AI, aligning language models with public input at the ACM Conference on Fairness, Accountability, and Transparency.
+    entity-attribute relationships:
+    Saffron Huang|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Saffron Huang|PRESENTED|Collective Constitutional AI
+    Collective Constitutional AI|PRESENTED_AT|ACM Conference on Fairness, Accountability, and Transparency
+
+  proposition: Savvas Petridis et al. created Constitutionmaker, an interactive tool for critiquing large language models by converting feedback into principles.
+    entity-attribute relationships:
+    Savvas Petridis|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Savvas Petridis|CREATED|Constitutionmaker
+    Constitutionmaker|USED_FOR|large language model critique
+
+  proposition: Wenyue Hua et al. introduced TrustAgent for developing safe and trustworthy LLM-based agents through agent constitution.
+    entity-attribute relationships:
+    Wenyue Hua|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Wenyue Hua|INTRODUCED|TrustAgent
+    TrustAgent|USED_FOR|LLM-based agent development
+
+  proposition: Luke Yoffe et al. proposed DebUnc to mitigate hallucinations in large language model agent communication using uncertainty estimations.
+    entity-attribute relationships:
+    Luke Yoffe|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Luke Yoffe|PROPOSED|DebUnc
+    DebUnc|USED_FOR|hallucination mitigation
+
+  proposition: Rong Zhou et al. developed TTT-UNet for enhancing biomedical image segmentation.
+    entity-attribute relationships:
+    Rong Zhou|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Rong Zhou|DEVELOPED|TTT-UNet
+    TTT-UNet|USED_FOR|biomedical image segmentation
+
+  proposition: Qian Yang et al. explored calibrating clinicians' trust in AI decision support systems using biomedical literature.
+    entity-attribute relationships:
+    Qian Yang|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Qian Yang|RESEARCHED|AI decision support systems
+    Qian Yang|EXPLORED|clinician trust calibration
+
+topic: Biomedical AI Research
+
+  entities:
+    Rong Zhou|Researcher
+    Qian Yang|Researcher
+    TTT-UNet|Method
+    AI decision support systems|Technology
+
+  proposition: Rong Zhou et al. developed TTT-UNet for enhancing biomedical image segmentation.
+    entity-attribute relationships:
+    Rong Zhou|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Rong Zhou|DEVELOPED|TTT-UNet
+    TTT-UNet|USED_FOR|biomedical image segmentation
+
+  proposition: Qian Yang et al. explored calibrating clinicians' trust in AI decision support systems using biomedical literature.
+    entity-attribute relationships:
+    Qian Yang|PUBLISHED|research paper
+    
+    entity-entity relationships:
+    Qian Yang|RESEARCHED|AI decision support systems
+    Qian Yang|EXPLORED|clinician trust calibration

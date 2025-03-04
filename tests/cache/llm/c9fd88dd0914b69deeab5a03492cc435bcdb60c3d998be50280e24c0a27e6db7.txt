@@ -1,0 +1,20 @@
+Research Papers on Privacy and Security in Vision-Language Models
+
+Amit Agarwal et al. published a paper titled "MVTamperBench: Evaluating Robustness of Vision-Language Models" in 2024.
+Yash Goyal et al. investigated the importance of image understanding in visual question answering in a 2017 conference paper.
+Dan Hendrycks and Thomas G. Dietterich conducted a benchmark study on neural network robustness to common corruptions in 2019.
+Olivia Bennett wrote an article about large vision models, exploring their examples, use cases, and challenges in 2024.
+Katharine Miller discussed privacy protection of personal information in the AI era in a 2024 Stanford HAI article.
+Ruoyu Zhao et al. published a comprehensive survey on visual content privacy protection in 2023.
+Xudong Pan et al. examined privacy risks of general-purpose language models in a 2020 IEEE Symposium on Security and Privacy.
+Simone Caldarella et al. investigated privacy leakages in vision-language models in a 2024 research paper.
+Jieren Deng et al. proposed a gradient attack method on transformer-based language models in 2021.
+Dong Lu et al. developed a set-level guidance attack to boost adversarial transferability of vision-language pre-training models in 2023.
+Haodi Wang et al. explored transferable multimodal attacks on vision-language pre-training models in a 2024 IEEE Symposium.
+Jingwei Sun et al. introduced Soteria, a provable defense against privacy leakage in federated learning in 2021.
+Ximeng Liu et al. conducted a survey on privacy and security issues in deep learning in 2020.
+Reshabh K Sharma et al. proposed a method for defending language models against image-based prompt attacks in 2024.
+Bernardo Breve et al. developed an approach for identifying security and privacy violation rules in IoT platforms using NLP models in 2022.
+Sunder Ali Khowaja et al. reviewed ChatGPT through a SPADE (Sustainability, Privacy, Digital Divide, and Ethics) evaluation in 2024.
+Cunxiang Wang et al. evaluated open question answering evaluation methods in 2023.
+Yixin Wu et al. quantified privacy risks of prompts in visual prompt learning in 2024.

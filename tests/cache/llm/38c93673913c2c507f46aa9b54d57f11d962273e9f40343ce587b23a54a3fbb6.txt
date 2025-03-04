@@ -1,0 +1,111 @@
+topic: Trustworthiness and Safety in Multimodal AI Generation
+
+  entities:
+    He et al.|Research Group
+    Chen et al.|Research Group
+    GPT-4o|Model
+    Sora|Model
+    T2VSafetyBench|Framework
+    Pan et al.|Research Group
+    Pang et al.|Research Group
+    GPT4Video|Model
+    Dai et al.|Research Group
+    CoDi|Model
+    NextGPT|Model
+
+  proposition: He et al. highlight trustworthiness concerns in multimodal generation tasks involving language and other modal outputs.
+    entity-attribute relationships:
+    He et al.|RESEARCHES|trustworthiness concerns
+    He et al.|FOCUSES_ON|multimodal generation tasks
+
+    entity-entity relationships:
+    None
+
+  proposition: The safety report for GPT-4o reveals potential safety issues in voice generation tasks.
+    entity-attribute relationships:
+    GPT-4o|ASSOCIATED_WITH|safety report
+    GPT-4o|HAS_CONCERN|voice generation safety
+
+    entity-entity relationships:
+    None
+
+  proposition: Chen et al. identify trustworthy problems such as jailbreaks and unexpected variations in interleaved text-and-image generation.
+    entity-attribute relationships:
+    Chen et al.|RESEARCHES|trustworthy problems
+    Chen et al.|IDENTIFIES|jailbreaks
+    Chen et al.|IDENTIFIES|unexpected variations
+
+    entity-entity relationships:
+    None
+
+topic: Text-to-Video Generation Safety
+
+  entities:
+    T2VSafetyBench|Framework
+    Pan et al.|Research Group
+    Pang et al.|Research Group
+    GPT4Video|Model
+    Dai et al.|Research Group
+    Sora|Model
+
+  proposition: T2VSafetyBench is a comprehensive framework for safety-critical assessments of text-to-video models.
+    entity-attribute relationships:
+    T2VSafetyBench|TYPE|comprehensive framework
+    T2VSafetyBench|PURPOSE|safety-critical assessments
+
+    entity-entity relationships:
+    T2VSafetyBench|ASSESSES|text-to-video models
+
+  proposition: Pan et al. collect generation prompts to create a dataset of potentially unsafe video content.
+    entity-attribute relationships:
+    Pan et al.|CREATES|dataset of potentially unsafe video content
+
+    entity-entity relationships:
+    None
+
+  proposition: Pang et al. introduce VGMShield, a suite of mitigation strategies for fake video generation.
+    entity-attribute relationships:
+    Pang et al.|INTRODUCES|VGMShield
+    VGMShield|TYPE|mitigation strategies
+
+    entity-entity relationships:
+    VGMShield|TARGETS|fake video generation
+
+  proposition: Dai et al. propose the SafeSora dataset to align text-to-video generation with human values.
+    entity-attribute relationships:
+    Dai et al.|PROPOSES|SafeSora dataset
+    SafeSora dataset|PURPOSE|align text-to-video generation with human values
+
+    entity-entity relationships:
+    None
+
+topic: Audio Generative Models Safety
+
+  entities:
+    CoDi|Model
+    NextGPT|Model
+
+  proposition: Audio generative models like CoDi and NextGPT can process and generate multiple modalities.
+    entity-attribute relationships:
+    CoDi|CAPABILITY|process multiple modalities
+    CoDi|CAPABILITY|generate multiple modalities
+    NextGPT|CAPABILITY|process multiple modalities
+    NextGPT|CAPABILITY|generate multiple modalities
+
+    entity-entity relationships:
+    None
+
+  proposition: The primary safety concern is the potential misuse of audio deepfakes for impersonation.
+    entity-attribute relationships:
+    Audio generative models|SAFETY_CONCERN|impersonation risks
+
+    entity-entity relationships:
+    None
+
+  proposition: Ethical concerns include unauthorized replication of individuals' voices and potential privacy infringements.
+    entity-attribute relationships:
+    Audio generative models|ETHICAL_CONCERN|unauthorized voice replication
+    Audio generative models|ETHICAL_CONCERN|privacy infringements
+
+    entity-entity relationships:
+    None

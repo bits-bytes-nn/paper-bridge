@@ -1,0 +1,84 @@
+Privacy Information Types Taxonomy
+
+Privacy information types include personal demographic details
+Demographic details include gender
+Demographic details include citizenship status
+Demographic details include ethnicity
+Demographic details include marital status
+Demographic details include country of residence
+Demographic details include visa type
+
+Personal language preferences include primary language
+Personal language preferences include secondary language
+
+Physical characteristics include height
+Physical characteristics include weight
+Physical characteristics include eye color
+Physical characteristics include hair color
+Physical characteristics include body mass index
+
+Biometric data includes fingerprints
+Biometric data includes voice sample
+Biometric data includes retina data
+Biometric data includes genetic information
+Biometric data includes ancestry results
+
+Contact information includes full name
+Contact information includes phone number
+Contact information includes email address
+Contact information includes primary address
+Contact information includes secondary address
+Contact information includes street
+Contact information includes city
+Contact information includes state
+Contact information includes zip code
+Contact information includes country
+
+Emergency contact details include full name
+Emergency contact details include phone number
+Emergency contact details include email address
+Emergency contact details include address
+
+Health records include medical history
+Health records include current medical condition
+Health records include treatment
+Health records include medication name
+Health records include dosage
+Health records include prescribing doctor
+Health records include pharmacy
+Health records include immunization details
+Health records include date administered
+
+Financial information includes bank accounts
+Financial information includes account number
+Financial information includes account type
+Financial information includes credit score
+Financial information includes credit history
+Financial information includes credit lines
+Financial information includes loan details
+
+Identification documents include passport details
+Identification documents include driver's license
+Identification documents include social security number
+Identification documents include tax information
+
+Employment details include job responsibilities
+Employment details include company name
+Employment details include previous employers
+Employment details include position
+Employment details include supervisor
+Employment details include performance reviews
+Employment details include salary history
+
+Social media information includes platform
+Social media information includes username
+Social media information includes URL
+
+Purchasing preferences include online shopping accounts
+Purchasing preferences include preferred brands
+Purchasing preferences include payment methods
+
+Military service details include service number
+Military service details include rank
+Military service details include start date
+Military service details include end date

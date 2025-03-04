@@ -1,0 +1,120 @@
+topic: Jailbreak Evaluation and Benchmarking of Vision-Language Models
+
+  entities:
+    MM-safetybench|Benchmark
+    jailbreakV-28K|Benchmark
+    SIUO|Benchmark
+    MMJ-Bench|Benchmark
+    Retention Score|Method
+    Llama3 Guard|Model
+    GPT-4o-mini|Model
+    CLIP|Model
+    MiniGPT-4|Model
+    Claude-3.5-sonnet|Model
+    GPT-4o|Model
+    Llama-3.2-90B-V|Model
+    GLM-4v-Plus|Model
+    Sorry-Bench|Benchmark
+    VisualRolePlay|Method
+    Jailbreak In Pieces|Method
+    Visual Adversarial Examples|Method
+
+  proposition: [1178] proposed an inference-time alignment method using cross-model guidance to ensure harmlessness alignment.
+    entity-attribute relationships:
+    [1178]|PROPOSED|inference-time alignment method
+    
+    entity-entity relationships:
+    [1178]|USES|cross-model guidance
+
+  proposition: JailGuard [1180] mutates untrusted inputs to generate variants.
+    entity-attribute relationships:
+    JailGuard|GENERATES|input variants
+    
+    entity-entity relationships:
+    JailGuard|PROCESSES|untrusted inputs
+
+  proposition: JailGuard leverages discrepancies in model responses to differentiate between attack samples and benign ones.
+    entity-attribute relationships:
+    JailGuard|DIFFERENTIATES|attack samples
+    JailGuard|DIFFERENTIATES|benign samples
+    
+    entity-entity relationships:
+    JailGuard|ANALYZES|model responses
+
+  proposition: CIDER [1179] employs a diffusion-based denoiser to mitigate harmful information in adversarial images.
+    entity-attribute relationships:
+    CIDER|USES|diffusion-based denoiser
+    
+    entity-entity relationships:
+    CIDER|MITIGATES|harmful information
+
+  proposition: MM-safetybench [383] generated 5,040 text-image pairs using typography and stable diffusion.
+    entity-attribute relationships:
+    MM-safetybench|GENERATED|5,040 text-image pairs
+    
+    entity-entity relationships:
+    MM-safetybench|USES|typography
+    MM-safetybench|USES|stable diffusion
+
+  proposition: jailbreakV-28K [1152] combined LLM jailbreak methods with images.
+    entity-attribute relationships:
+    jailbreakV-28K|CREATED|28,000 visual-text samples
+    
+    entity-entity relationships:
+    jailbreakV-28K|COMBINES|LLM jailbreak methods
+    jailbreakV-28K|COMBINES|images
+
+  proposition: SIUO [396] proposed a cross-modality benchmark covering nine critical safety domains.
+    entity-attribute relationships:
+    SIUO|PROPOSED|cross-modality benchmark
+    
+    entity-entity relationships:
+    SIUO|COVERS|nine critical safety domains
+
+  proposition: MMJ-Bench [395] provides a standardized evaluation of VLM jailbreak attack and defense techniques.
+    entity-attribute relationships:
+    MMJ-Bench|PROVIDES|standardized evaluation
+    
+    entity-entity relationships:
+    MMJ-Bench|EVALUATES|VLM jailbreak attack techniques
+    MMJ-Bench|EVALUATES|VLM defense techniques
+
+  proposition: Li et al. proposed Retention Score [1181] to quantify jailbreak risks using diffusion models.
+    entity-attribute relationships:
+    Retention Score|QUANTIFIES|jailbreak risks
+    
+    entity-entity relationships:
+    Retention Score|USES|diffusion models
+
+  proposition: The benchmark uses 45 unsafe topics from Sorry-Bench [363].
+    entity-attribute relationships:
+    Sorry-Bench|CONTAINS|45 unsafe topics
+    
+    entity-entity relationships:
+    benchmark|USES|Sorry-Bench
+
+  proposition: Llama3 Guard [824] is used as the evaluator to detect jailbreak success.
+    entity-attribute relationships:
+    Llama3 Guard|ROLE|jailbreak success evaluator
+    
+    entity-entity relationships:
+    Llama3 Guard|DETECTS|jailbreak success
+
+  proposition: Claude-3.5-sonnet has a 99.9% RtA rate against FigStep attacks.
+    entity-attribute relationships:
+    Claude-3.5-sonnet|RTA_RATE|99.9%
+    
+    entity-entity relationships:
+    Claude-3.5-sonnet|RESISTS|FigStep attacks
+
+  proposition: GLM-4v-Plus has a 43% RtA rate.
+    entity-attribute relationships:
+    GLM-4v-Plus|RTA_RATE|43%
+
+  proposition: Visual Roleplay attacks show a 100% attack rate.
+    entity-attribute relationships:
+    VisualRolePlay|ATTACK_RATE|100%
+
+  proposition: MMSafetyBench attacks have an 80% success rate.
+    entity-attribute relationships:
+    MM-safetybench|ATTACK_SUCCESS_RATE|80%

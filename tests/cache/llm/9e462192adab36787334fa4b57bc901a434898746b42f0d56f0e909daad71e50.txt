@@ -1,0 +1,16 @@
+Benchmarks for Trustworthy Generative Foundation Models
+
+Some studies investigate cross-cultural and multilingual capabilities of Vision-Language Models.
+Several frameworks have been proposed to facilitate comprehensive evaluation of Vision-Language Models.
+Reference [283] provides a detailed methodology for constructing multimodal instruction-tuning datasets and benchmarks for Vision-Language Models.
+Reference [320] presents an annotation-free framework for evaluating Vision-Language Models.
+Reference [321] assesses the effectiveness of Vision-Language Models in assisting judges across various modalities.
+Prominent works exist in the literature studying agents in Vision-Language Models.
+Some benchmarks evaluate multimodal agent performance in single environments including household, gaming, web, mobile phone, and desktop scenarios.
+Chen et al. introduced a comprehensive multimodal dataset specifically designed for agent-based research.
+A benchmark survey for evaluating agents driven by Vision-Language Models has been studied.
+Liu et al. developed the first systematic benchmark for complex spaces and digital interfaces.
+Liu et al. established standardized prompting and data formatting protocols to facilitate consistent evaluation of foundation agents across diverse environments.
+An increasing amount of efforts have been dedicated to establishing benchmarks for assessing the trustworthiness of Generative Foundation Models.
+TrustGen is a comprehensive benchmark covering safety, fairness, robustness, privacy, ethics, text-to-image, large language models, vision-language models, diversity, and toolkit aspects.
+Multiple specialized benchmarks exist for evaluating different trustworthiness dimensions of generative foundation models.

@@ -1,0 +1,102 @@
+topic: AI Governance and Ethics Research
+
+  entities:
+    Ruibo Liu|Researcher
+    Laura Weidinger|Researcher
+    Anka Reuel|Researcher
+    Trond Arne Undheim|Researcher
+    Hang Li|Researcher
+    Yingji Li|Researcher
+    Isabel O Gallegos|Researcher
+    Joseph R Biden|Person
+    Rishi Bommasani|Researcher
+    Peter Kieseberg|Researcher
+    Buck Shlegeris|Researcher
+    Rafael Rafailov|Researcher
+    UK|Location
+    Canada|Location
+    Japan|Location
+    Australia|Location
+
+  proposition: Ruibo Liu and colleagues proposed training socially aligned language models in simulated human society.
+    entity-entity relationships:
+    Ruibo Liu|RESEARCHES|Language Models
+    
+    entity-attribute relationships:
+    Language Models|DESCRIBED_BY|socially aligned
+
+  proposition: Laura Weidinger and researchers explored ethical and social risks of harm from language models.
+    entity-entity relationships:
+    Laura Weidinger|RESEARCHES|Language Models
+    
+    entity-attribute relationships:
+    Language Models|ASSOCIATED_WITH|ethical risks
+    Language Models|ASSOCIATED_WITH|social risks
+
+  proposition: Anka Reuel and Trond Arne Undheim argue that technical research and talent are needed for effective AI governance.
+    entity-entity relationships:
+    Anka Reuel|COLLABORATES_WITH|Trond Arne Undheim
+    
+    entity-attribute relationships:
+    AI Governance|REQUIRES|technical research
+    AI Governance|REQUIRES|talent
+
+  proposition: Hang Li and team investigated bringing generative AI to adaptive learning in education.
+    entity-entity relationships:
+    Hang Li|RESEARCHES|Generative AI
+    
+    entity-attribute relationships:
+    Generative AI|APPLIED_TO|adaptive learning
+    Adaptive Learning|DOMAIN|education
+
+  proposition: Yingji Li and researchers conducted a survey on fairness in large language models.
+    entity-entity relationships:
+    Yingji Li|RESEARCHES|Large Language Models
+    
+    entity-attribute relationships:
+    Large Language Models|EVALUATED_BY|fairness survey
+
+  proposition: Isabel O Gallegos and colleagues performed a survey on bias and fairness in large language models.
+    entity-entity relationships:
+    Isabel O Gallegos|RESEARCHES|Large Language Models
+    
+    entity-attribute relationships:
+    Large Language Models|EVALUATED_BY|bias survey
+    Large Language Models|EVALUATED_BY|fairness survey
+
+  proposition: Multiple government bodies have developed AI governance and ethics principles, including UK, Canada, Japan, and Australia.
+    entity-entity relationships:
+    UK|DEVELOPS|AI Governance Principles
+    Canada|DEVELOPS|AI Governance Principles
+    Japan|DEVELOPS|AI Governance Principles
+    Australia|DEVELOPS|AI Governance Principles
+
+  proposition: Joseph R Biden issued an executive order on safe, secure, and trustworthy AI development and use.
+    entity-attribute relationships:
+    AI Development|DESCRIBED_BY|safe
+    AI Development|DESCRIBED_BY|secure
+    AI Development|DESCRIBED_BY|trustworthy
+
+  proposition: Rishi Bommasani and team developed Foundation Model Transparency Reports and Transparency Index.
+    entity-attribute relationships:
+    Foundation Models|EVALUATED_BY|Transparency Reports
+    Foundation Models|EVALUATED_BY|Transparency Index
+
+  proposition: Peter Kieseberg and researchers explored controllable AI as an alternative to trustworthiness in complex AI systems.
+    entity-entity relationships:
+    Peter Kieseberg|RESEARCHES|Controllable AI
+    
+    entity-attribute relationships:
+    Controllable AI|ALTERNATIVE_TO|Trustworthy AI Systems
+
+  proposition: Buck Shlegeris and colleagues researched AI control and improving safety despite intentional subversion.
+    entity-attribute relationships:
+    AI Control|GOAL|improving safety
+    AI Control|CHALLENGES|intentional subversion
+
+  proposition: Rafael Rafailov and team investigated direct preference optimization for language models.
+    entity-entity relationships:
+    Rafael Rafailov|RESEARCHES|Language Models
+    
+    entity-attribute relationships:
+    Language Models|OPTIMIZATION_METHOD|direct preference optimization

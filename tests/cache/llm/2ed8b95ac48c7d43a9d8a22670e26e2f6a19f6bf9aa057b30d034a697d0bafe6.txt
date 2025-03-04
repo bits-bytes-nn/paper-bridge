@@ -1,0 +1,20 @@
+Research Publications on AI, Audio Deepfakes, and Voice Technologies
+
+Videofact is a method for detecting video forgeries using attention, scene context, and forensic traces.
+Vita is an open-source interactive omni multimodal large language model.
+Baichuan-omni is a technical report on a multimodal AI system.
+Emova is a language model empowered to see, hear, and speak with vivid emotions.
+OpenOmni is a large language model for zero-shot omnimodal alignment with real-time emotional speech synthesis.
+Researchers conducted a web-based survey on speech and language practitioners' experiences with voice-assisted technology.
+VoiceBench is a benchmark for evaluating LLM-based voice assistants.
+Researchers explored fashion retail experiences using virtual reality and voice assistants.
+Audio deepfakes have been surveyed as an emerging technological phenomenon.
+Researchers developed a method for detecting audio deepfakes through vocal tract reconstruction.
+A study found that humans cannot reliably detect speech deepfakes.
+Fraudsters have used AI to mimic a CEO's voice in a cybercrime case.
+AI poses a potential threat to biometric authentication.
+Deepfakes are creating new challenges in disinformation and geopolitics.
+GPT-4o system card was published as a technical documentation.
+SONAR is a synthetic AI-audio detection framework and benchmark.
+A survey explored hallucinations in large foundation models.
+Researchers developed a latent watermarking technique for audio generative models.

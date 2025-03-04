@@ -1,0 +1,152 @@
+topic: Vision-Language Model Fairness and Bias Research
+
+  entities:
+    Yue Xu|Researcher
+    Xiuyuan Qi|Researcher
+    Zhan Qin|Researcher
+    Wenjie Wang|Researcher
+    Xiaoyu Zhang|Researcher
+    Zaitang Li|Researcher
+    Pin-Yu Chen|Researcher
+    Tsung-Yi Ho|Researcher
+    Deyao Zhu|Researcher
+    Otavio Parraga|Researcher
+    Tosin Adewumi|Researcher
+    Nayeon Lee|Researcher
+    Ali Abdollahi|Researcher
+    Phillip Howard|Researcher
+    Xuyang Wu|Researcher
+    Christopher Teo|Researcher
+    Messi HJ Lee|Researcher
+    Amith Ananthram|Researcher
+    Meiqi Chen|Researcher
+    Moreno D'Incà|Researcher
+    Ashish Seth|Researcher
+    Yi Zhang|Researcher
+    MiniGPT-4|Model
+    GABInsight|Tool
+    SocialCounterfactuals|Method
+    DeAR|Method
+
+  proposition: Yue Xu, Xiuyuan Qi, Zhan Qin, and Wenjie Wang published a paper on defending jailbreak attacks in Vision-Language Models using a cross-modality information detector.
+    entity-attribute relationships:
+    Yue Xu|AUTHORED|paper
+    Xiuyuan Qi|AUTHORED|paper
+    Zhan Qin|AUTHORED|paper
+    Wenjie Wang|AUTHORED|paper
+    
+    entity-entity relationships:
+    Yue Xu|CO_AUTHORED_WITH|Xiuyuan Qi
+    Yue Xu|CO_AUTHORED_WITH|Zhan Qin
+    Yue Xu|CO_AUTHORED_WITH|Wenjie Wang
+
+  proposition: Xiaoyu Zhang et al. proposed a mutation-based method for multi-modal jailbreaking attack detection.
+    entity-attribute relationships:
+    Xiaoyu Zhang|AUTHORED|method
+    
+    entity-entity relationships:
+
+  proposition: Zaitang Li, Pin-Yu Chen, and Tsung-Yi Ho developed a Retention Score to quantify jailbreak risks for Vision Language Models.
+    entity-attribute relationships:
+    Zaitang Li|DEVELOPED|Retention Score
+    Pin-Yu Chen|DEVELOPED|Retention Score
+    Tsung-Yi Ho|DEVELOPED|Retention Score
+    Retention Score|MEASURES|jailbreak risks
+    
+    entity-entity relationships:
+    Zaitang Li|CO_AUTHORED_WITH|Pin-Yu Chen
+    Zaitang Li|CO_AUTHORED_WITH|Tsung-Yi Ho
+
+  proposition: Deyao Zhu et al. enhanced vision-language understanding with MiniGPT-4 using advanced large language models.
+    entity-attribute relationships:
+    Deyao Zhu|ENHANCED|vision-language understanding
+    MiniGPT-4|USES|advanced large language models
+    
+    entity-entity relationships:
+
+  proposition: Otavio Parraga et al. conducted a survey on fairness in deep learning research focusing on vision and language.
+    entity-attribute relationships:
+    Otavio Parraga|CONDUCTED|survey
+    Survey|FOCUSES_ON|fairness in deep learning
+    
+    entity-entity relationships:
+
+  proposition: Tosin Adewumi et al. published a survey on fairness and bias in multimodal AI.
+    entity-attribute relationships:
+    Tosin Adewumi|PUBLISHED|survey
+    Survey|FOCUSES_ON|fairness and bias in multimodal AI
+    
+    entity-entity relationships:
+
+  proposition: Nayeon Lee et al. conducted a survey of social bias in vision-language models.
+    entity-attribute relationships:
+    Nayeon Lee|CONDUCTED|survey
+    Survey|FOCUSES_ON|social bias in vision-language models
+    
+    entity-entity relationships:
+
+  proposition: Ali Abdollahi et al. explored gender-activity binding bias in Vision-Language Models through GABInsight.
+    entity-attribute relationships:
+    Ali Abdollahi|EXPLORED|gender-activity binding bias
+    GABInsight|USED_FOR|exploring bias
+    
+    entity-entity relationships:
+
+  proposition: Phillip Howard et al. developed SocialCounterfactuals to probe and mitigate intersectional social biases in Vision-Language Models.
+    entity-attribute relationships:
+    Phillip Howard|DEVELOPED|SocialCounterfactuals
+    SocialCounterfactuals|PURPOSE|probe and mitigate intersectional social biases
+    
+    entity-entity relationships:
+
+  proposition: Xuyang Wu et al. evaluated fairness in Large Vision-Language Models across diverse demographic attributes and prompts.
+    entity-attribute relationships:
+    Xuyang Wu|EVALUATED|fairness in Large Vision-Language Models
+    
+    entity-entity relationships:
+
+  proposition: Christopher Teo et al. researched measuring fairness in generative models.
+    entity-attribute relationships:
+    Christopher Teo|RESEARCHED|measuring fairness in generative models
+    
+    entity-entity relationships:
+
+  proposition: Messi HJ Lee et al. found that more distinctively Black and feminine faces lead to increased stereotyping in Vision-Language Models.
+    entity-attribute relationships:
+    Messi HJ Lee|FOUND|increased stereotyping correlation
+    
+    entity-entity relationships:
+
+  proposition: Amith Ananthram et al. diagnosed Western cultural bias in large Vision-Language Models' image understanding.
+    entity-attribute relationships:
+    Amith Ananthram|DIAGNOSED|Western cultural bias
+    
+    entity-entity relationships:
+
+  proposition: Meiqi Chen et al. quantified and mitigated unimodal biases in Multimodal Large Language Models from a causal perspective.
+    entity-attribute relationships:
+    Meiqi Chen|QUANTIFIED|unimodal biases
+    Meiqi Chen|MITIGATED|unimodal biases
+    
+    entity-entity relationships:
+
+  proposition: Moreno D'Incà et al. improved fairness using vision-language driven image augmentation.
+    entity-attribute relationships:
+    Moreno D'Incà|IMPROVED|fairness
+    Method|USES|vision-language driven image augmentation
+    
+    entity-entity relationships:
+
+  proposition: Ashish Seth et al. developed DeAR method for debiasing Vision-Language Models with additive residuals.
+    entity-attribute relationships:
+    Ashish Seth|DEVELOPED|DeAR method
+    DeAR|PURPOSE|debiasing Vision-Language Models
+    
+    entity-entity relationships:
+
+  proposition: Yi Zhang et al. worked on counterfactually measuring and eliminating social bias in Vision-Language Pre-training Models.
+    entity-attribute relationships:
+    Yi Zhang|MEASURED|social bias
+    Yi Zhang|ELIMINATED|social bias
+    
+    entity-entity relationships:

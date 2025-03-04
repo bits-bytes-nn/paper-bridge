@@ -1,0 +1,194 @@
+topic: Sampling Process Methodology
+
+  entities:
+    Sampling Process|Method
+    Diversity Checks|Feature
+    Similarity Checking|Feature
+    Group Checking|Feature
+    VQA|Tool
+    TIFA|Tool
+
+  proposition: Sampling process implements two diversity checks
+    entity-attribute relationships:
+    Sampling Process|IMPLEMENTS|Diversity Checks
+
+  proposition: Similarity Checking prevents oversampling of identical elements
+    entity-attribute relationships:
+    Similarity Checking|PREVENTS|Oversampling
+
+  proposition: Group Checking maintains distinction between different groups of elements
+    entity-attribute relationships:
+    Group Checking|MAINTAINS|Group Distinction
+
+  proposition: Sampled data distribution is stored to enhance dataset diversity
+    entity-attribute relationships:
+    Sampled Data|STORED_TO_ENHANCE|Diversity
+
+  proposition: Evaluation uses VQA-based approach
+    entity-entity relationships:
+    Evaluation|USES|VQA
+
+  proposition: TIFA is leveraged for atomic and interpretable evaluation
+    entity-entity relationships:
+    Evaluation|LEVERAGES|TIFA
+
+topic: Truthfulness Evaluation
+
+  entities:
+    Dall-E-3|Model
+    FLUX-1.1-Pro|Model
+    SD-3.5-large|Model
+    CogView-3-Plus|Model
+    SD-3.5-large-turbo|Model
+    HunyuanDiT|Model
+    Playground-v2.5|Model
+    Kolors|Model
+
+  proposition: Truthfulness is calculated sample-wise and averaged into final score
+    entity-attribute relationships:
+    Truthfulness|CALCULATED_AS|Sample-wise Average
+
+  proposition: Evaluation assesses truthfulness within image generative models
+    entity-attribute relationships:
+    Evaluation|ASSESSES|Truthfulness
+
+  proposition: Dall-E-3 has a truthfulness score of 0.45
+    entity-attribute relationships:
+    Dall-E-3|TRUTHFULNESS_SCORE|0.45
+
+  proposition: FLUX-1.1-Pro has a truthfulness score of 0.36
+    entity-attribute relationships:
+    FLUX-1.1-Pro|TRUTHFULNESS_SCORE|0.36
+
+  proposition: SD-3.5-large has a truthfulness score of 0.35
+    entity-attribute relationships:
+    SD-3.5-large|TRUTHFULNESS_SCORE|0.35
+
+  proposition: CogView-3-Plus has a truthfulness score of 0.32
+    entity-attribute relationships:
+    CogView-3-Plus|TRUTHFULNESS_SCORE|0.32
+
+  proposition: SD-3.5-large-turbo has a truthfulness score of 0.32
+    entity-attribute relationships:
+    SD-3.5-large-turbo|TRUTHFULNESS_SCORE|0.32
+
+  proposition: HunyuanDiT has a truthfulness score of 0.31
+    entity-attribute relationships:
+    HunyuanDiT|TRUTHFULNESS_SCORE|0.31
+
+  proposition: Playground-v2.5 has a truthfulness score of 0.30
+    entity-attribute relationships:
+    Playground-v2.5|TRUTHFULNESS_SCORE|0.30
+
+  proposition: Kolors has a truthfulness score of 0.28
+    entity-attribute relationships:
+    Kolors|TRUTHFULNESS_SCORE|0.28
+
+topic: Text-to-Image Model Challenges
+
+  entities:
+    Text-to-Image Models|Technological Concept
+    Complex Scenes|Research Problem
+    Objects|Social Concept
+
+  proposition: T2I models struggle with generating complex scenes containing multiple objects
+    entity-attribute relationships:
+    Text-to-Image Models|STRUGGLES_WITH|Complex Scenes
+
+  proposition: Models demonstrate strong aesthetic achievement and internal stylistic coherence
+    entity-attribute relationships:
+    Text-to-Image Models|DEMONSTRATES|Aesthetic Achievement
+    Text-to-Image Models|DEMONSTRATES|Stylistic Coherence
+
+  proposition: Models encounter significant challenges in organizing spatial relationships between objects
+    entity-attribute relationships:
+    Text-to-Image Models|CHALLENGES|Spatial Relationships
+
+  proposition: Objects are often placed without meaningful connection
+    entity-attribute relationships:
+    Objects|PLACED_WITHOUT|Meaningful Connection
+
+  proposition: Models tend to focus on primary objects during image generation
+    entity-attribute relationships:
+    Text-to-Image Models|FOCUSES_ON|Primary Objects
+
+  proposition: Inadequate rendering of secondary elements compromises overall truthfulness
+    entity-attribute relationships:
+    Secondary Elements|COMPROMISES|Truthfulness
+
+topic: Safety Challenges in Text-to-Image Models
+
+  entities:
+    Text-to-Image Models|Technological Concept
+    Safety Research|Research Field
+    Threat Vectors|Research Problem
+
+  proposition: T2I models have strong image generation capacity
+    entity-attribute relationships:
+    Text-to-Image Models|DEMONSTRATES|Image Generation Capacity
+
+  proposition: Models are prone to producing harmful content
+    entity-attribute relationships:
+    Text-to-Image Models|PRONE_TO|Harmful Content
+
+  proposition: Training datasets may contain toxic content
+    entity-attribute relationships:
+    Training Datasets|MAY_CONTAIN|Toxic Content
+
+  proposition: Models can generate discriminatory images targeting specific groups
+    entity-attribute relationships:
+    Text-to-Image Models|CAN_GENERATE|Discriminatory Images
+
+  proposition: Safety research explores multiple threat vectors
+    entity-attribute relationships:
+    Safety Research|EXPLORES|Threat Vectors
+
+  proposition: Threat vectors include jailbreak attacks, backdoor attacks, inversion attacks
+    entity-attribute relationships:
+    Threat Vectors|INCLUDES|Jailbreak Attacks
+    Threat Vectors|INCLUDES|Backdoor Attacks
+    Threat Vectors|INCLUDES|Inversion Attacks
+
+  proposition: Researchers develop frameworks to evaluate and mitigate safety risks
+    entity-attribute relationships:
+    Researchers|DEVELOP|Safety Risk Frameworks
+
+topic: Safety Evaluation Dimensions
+
+  entities:
+    Safety Evaluation|Method
+    Safety Dimensions|Research Problem
+
+  proposition: Safety evaluation covers multiple dimensions
+    entity-attribute relationships:
+    Safety Evaluation|COVERS|Multiple Dimensions
+
+  proposition: Dimensions include NSFW keywords, topics, self-harm, sexual content
+    entity-attribute relationships:
+    Safety Dimensions|INCLUDES|NSFW Keywords
+    Safety Dimensions|INCLUDES|Topics
+    Safety Dimensions|INCLUDES|Self-harm
+    Safety Dimensions|INCLUDES|Sexual Content
+
+  proposition: Evaluation also covers gore, violence, hate speech, drugs, illegal activities
+    entity-attribute relationships:
+    Safety Evaluation|COVERS|Gore
+    Safety Evaluation|COVERS|Violence
+    Safety Evaluation|COVERS|Hate Speech
+    Safety Evaluation|COVERS|Drugs
+    Safety Evaluation|COVERS|Illegal Activities
+
+  proposition: Robustness testing includes perturbations like spelling mistakes and emoji insertion
+    entity-attribute relationships:
+    Robustness Testing|INCLUDES|Spelling Mistakes
+    Robustness Testing|INCLUDES|Emoji Insertion
+
+  proposition: Fairness assessment involves entity fuzzification and syntactic disruptions
+    entity-attribute relationships:
+    Fairness Assessment|INVOLVES|Entity Fuzzification
+    Fairness Assessment|INVOLVES|Syntactic Disruptions
+
+  proposition: Privacy evaluation examines individual and social tagging aspects
+    entity-attribute relationships:
+    Privacy Evaluation|EXAMINES|Individual Tagging
+    Privacy Evaluation|EXAMINES|Social Tagging

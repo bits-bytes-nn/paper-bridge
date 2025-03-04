@@ -1,0 +1,109 @@
+topic: Vision-Language Models Privacy Attack Methods
+
+  entities:
+    Vision-Language Models|Technological Concept
+    VLMs|Technological Concept
+    Privacy Attack Methods|Method
+    Data Extraction Attacks|Method
+    Membership Inference Attacks|Method
+    Embedding-Level Privacy Attacks|Method
+    Backdoor Attacks|Method
+    Adaptive Shield Prompting|Approach
+    Red Teaming|Method
+    VISPR|Dataset
+    Vizwiz_Priv|Dataset
+    GPT-4o|Model
+    Llama-3.2-11B-V|Model
+    Qwen-2-VL-72B|Model
+    Claude-3-Haiku|Model
+
+  proposition: Privacy attack methods for Vision-Language Models (VLMs) include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+    entity-attribute relationships:
+    VLMs|CHARACTERIZED_BY|privacy attack methods
+    
+    entity-entity relationships:
+    VLMs|HAS_METHOD|Data Extraction Attacks
+    VLMs|HAS_METHOD|Membership Inference Attacks
+    VLMs|HAS_METHOD|Embedding-Level Privacy Attacks
+
+  proposition: Researchers have demonstrated the potential to adapt existing privacy attack techniques to VLMs by exploiting text-image interactions.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Researchers|EXPLORE|Privacy Attack Methods
+
+  proposition: Specific attack techniques include backdoor and membership inference attacks applied to VLMs.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Backdoor Attacks|APPLIED_TO|VLMs
+    Membership Inference Attacks|APPLIED_TO|VLMs
+
+  proposition: Privacy defense techniques have been proposed to counteract VLM vulnerabilities.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Privacy Defense Techniques|COUNTERACTS|VLM Vulnerabilities
+
+  proposition: User-level modifications can defend against image-based prompt attacks.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    User-level Modifications|DEFENDS_AGAINST|Image-Based Prompt Attacks
+
+  proposition: Adaptive shield prompting has been developed to protect multimodal large language models from structure-based attacks.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Adaptive Shield Prompting|PROTECTS|Multimodal Large Language Models
+    Adaptive Shield Prompting|DEFENDS_AGAINST|Structure-Based Attacks
+
+  proposition: Red teaming and robust evaluation techniques have been conducted to enhance VLM privacy.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Red Teaming|ENHANCES|VLM Privacy
+    Robust Evaluation Techniques|ENHANCES|VLM Privacy
+
+  proposition: Benchmarks have been established to assess the trustworthiness of multimodal large language models.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Benchmarks|ASSESSES|Multimodal Large Language Models
+
+  proposition: The evaluation uses privacy-sensitive image datasets including VISPR and Vizwiz_Priv.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Evaluation|USES|VISPR
+    Evaluation|USES|Vizwiz_Priv
+
+  proposition: Llama-3.2-11B-V achieved the highest average privacy preservation score at 93.81%.
+    entity-attribute relationships:
+    Llama-3.2-11B-V|PRIVACY_PRESERVATION_SCORE|93.81%
+    
+    entity-entity relationships:
+    None
+
+  proposition: Larger models like Qwen-2-VL-72B scored lower at 51.37%.
+    entity-attribute relationships:
+    Qwen-2-VL-72B|PRIVACY_PRESERVATION_SCORE|51.37%
+    
+    entity-entity relationships:
+    None
+
+  proposition: Factors beyond model scale, such as architectural design and training methodology, critically impact privacy metrics.
+    entity-attribute relationships:
+    None
+    
+    entity-entity relationships:
+    Architectural Design|IMPACTS|Privacy Metrics
+    Training Methodology|IMPACTS|Privacy Metrics

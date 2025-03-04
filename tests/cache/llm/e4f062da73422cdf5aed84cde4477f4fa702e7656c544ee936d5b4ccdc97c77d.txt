@@ -1,0 +1,192 @@
+topic: Trustworthiness Benchmarks for AI Models
+
+  entities:
+    HEIM|Benchmark
+    HRS-Bench|Benchmark
+    Stable Bias|Benchmark
+    DALL-EVAL|Benchmark
+    GenEVAL|Benchmark
+    MultiTrust|Benchmark
+    MLLM-Guard|Benchmark
+    MM-SafetyBench|Benchmark
+    UniCorn|Benchmark
+    BenchLMM|Benchmark
+    Halle-switch|Benchmark
+    Red-Teaming VLM|Benchmark
+    JailBreak-V|Benchmark
+    GOAT-Bench|Benchmark
+    Ch3Ef|Benchmark
+    GenderBias|Benchmark
+    TrustGen|Benchmark
+    Text-to-image models|Technology
+    Vision-language models|Technology
+    Large language models|Technology
+
+  proposition: Text-to-image models and vision-language models have multiple trustworthiness evaluation benchmarks.
+    entity-entity relationships:
+    Text-to-image models|EVALUATED_BY|HEIM
+    Text-to-image models|EVALUATED_BY|HRS-Bench
+    Text-to-image models|EVALUATED_BY|Stable Bias
+    Text-to-image models|EVALUATED_BY|DALL-EVAL
+    Text-to-image models|EVALUATED_BY|GenEVAL
+    Text-to-image models|EVALUATED_BY|MultiTrust
+    Text-to-image models|EVALUATED_BY|MLLM-Guard
+    Text-to-image models|EVALUATED_BY|MM-SafetyBench
+    Text-to-image models|EVALUATED_BY|UniCorn
+    Text-to-image models|EVALUATED_BY|BenchLMM
+    Text-to-image models|EVALUATED_BY|Halle-switch
+    Text-to-image models|EVALUATED_BY|Red-Teaming VLM
+    Text-to-image models|EVALUATED_BY|JailBreak-V
+    Text-to-image models|EVALUATED_BY|GOAT-Bench
+    Text-to-image models|EVALUATED_BY|Ch3Ef
+    Text-to-image models|EVALUATED_BY|GenderBias
+    Text-to-image models|EVALUATED_BY|TrustGen
+
+  proposition: HEIM benchmark covers truthfulness, safety, fairness, and robustness dimensions.
+    entity-attribute relationships:
+    HEIM|EVALUATES|truthfulness
+    HEIM|EVALUATES|safety
+    HEIM|EVALUATES|fairness
+    HEIM|EVALUATES|robustness
+
+  proposition: HRS-Bench focuses specifically on truthfulness assessment.
+    entity-attribute relationships:
+    HRS-Bench|EVALUATES|truthfulness
+
+  proposition: Stable Bias primarily addresses fairness concerns.
+    entity-attribute relationships:
+    Stable Bias|EVALUATES|fairness
+
+  proposition: DALL-EVAL and GenEVAL emphasize truthfulness evaluation.
+    entity-attribute relationships:
+    DALL-EVAL|EVALUATES|truthfulness
+    GenEVAL|EVALUATES|truthfulness
+
+  proposition: MultiTrust and MLLM-Guard cover multiple trustworthiness dimensions.
+    entity-attribute relationships:
+    MultiTrust|EVALUATES|multiple trustworthiness dimensions
+    MLLM-Guard|EVALUATES|multiple trustworthiness dimensions
+
+  proposition: MM-SafetyBench and UniCorn focus on safety and privacy considerations.
+    entity-attribute relationships:
+    MM-SafetyBench|EVALUATES|safety
+    MM-SafetyBench|EVALUATES|privacy
+    UniCorn|EVALUATES|safety
+    UniCorn|EVALUATES|privacy
+
+  proposition: BenchLMM and Halle-switch prioritize robustness testing.
+    entity-attribute relationships:
+    BenchLMM|EVALUATES|robustness
+    Halle-switch|EVALUATES|robustness
+
+  proposition: Red-Teaming VLM and JailBreak-V are specialized for security evaluation.
+    entity-attribute relationships:
+    Red-Teaming VLM|EVALUATES|security
+    JailBreak-V|EVALUATES|security
+
+  proposition: GOAT-Bench addresses safety and fairness.
+    entity-attribute relationships:
+    GOAT-Bench|EVALUATES|safety
+    GOAT-Bench|EVALUATES|fairness
+
+  proposition: Ch3Ef and GenderBias focus on specific biases and fairness concerns.
+    entity-attribute relationships:
+    Ch3Ef|EVALUATES|biases
+    Ch3Ef|EVALUATES|fairness
+    GenderBias|EVALUATES|biases
+    GenderBias|EVALUATES|fairness
+
+  proposition: TrustGen is the most extensive benchmark covering truthfulness, safety, fairness, robustness, privacy, machine ethics, and advanced AI risk.
+    entity-attribute relationships:
+    TrustGen|EVALUATES|truthfulness
+    TrustGen|EVALUATES|safety
+    TrustGen|EVALUATES|fairness
+    TrustGen|EVALUATES|robustness
+    TrustGen|EVALUATES|privacy
+    TrustGen|EVALUATES|machine ethics
+    TrustGen|EVALUATES|advanced AI risk
+
+  proposition: TrustGen supports evaluation of multiple generative foundation models including text-to-image models, large language models, and vision-language models.
+    entity-entity relationships:
+    TrustGen|EVALUATES|Text-to-image models
+    TrustGen|EVALUATES|Large language models
+    TrustGen|EVALUATES|Vision-language models
+
+topic: Guidelines for Trustworthy Generative Foundation Models
+
+  entities:
+    Generative foundation models|Technology
+    EU AI Act|Regulation
+
+  proposition: Trustworthiness of generative foundation models is a multidimensional characteristic.
+    entity-attribute relationships:
+    Generative foundation models|CHARACTERIZED_BY|multidimensional trustworthiness
+
+  proposition: Trustworthiness varies in importance depending on application context.
+    entity-attribute relationships:
+    Trustworthiness|VARIES_BY|application context
+
+  proposition: The guidelines aim to provide adaptable principles for diverse stakeholders.
+    entity-attribute relationships:
+    Guidelines|PURPOSE|provide adaptable principles
+    Guidelines|TARGETS|diverse stakeholders
+
+  proposition: Guidelines serve as a flexible toolkit for decision-making, design, and evaluation.
+    entity-attribute relationships:
+    Guidelines|FUNCTIONS_AS|flexible toolkit
+    Guidelines|SUPPORTS|decision-making
+    Guidelines|SUPPORTS|design
+    Guidelines|SUPPORTS|evaluation
+
+  proposition: The framework is intended to support developers, regulators, and researchers.
+    entity-attribute relationships:
+    Framework|SUPPORTS|developers
+    Framework|SUPPORTS|regulators
+    Framework|SUPPORTS|researchers
+
+  proposition: Guidelines differ from existing frameworks like EU AI Act by being application-agnostic and stakeholder-adaptive.
+    entity-entity relationships:
+    Guidelines|DIFFERS_FROM|EU AI Act
+
+  proposition: The guidelines function as both a "value anchor" and a "value scale" for trustworthy generative foundation models.
+    entity-attribute relationships:
+    Guidelines|FUNCTIONS_AS|value anchor
+    Guidelines|FUNCTIONS_AS|value scale
+    Guidelines|TARGETS|trustworthy generative foundation models
+
+topic: Key Considerations for Establishing Guidelines
+
+  proposition: Ethics and social responsibility are essential for model behavior.
+    entity-attribute relationships:
+    Model|REQUIRES|ethics
+    Model|REQUIRES|social responsibility
+
+  proposition: Guidelines must respect human rights, cultural diversity, and societal values.
+    entity-attribute relationships:
+    Guidelines|MUST_RESPECT|human rights
+    Guidelines|MUST_RESPECT|cultural diversity
+    Guidelines|MUST_RESPECT|societal values
+
+  proposition: Ethical considerations emphasize fairness and preventing bias.
+    entity-attribute relationships:
+    Ethical considerations|FOCUS_ON|fairness
+    Ethical considerations|FOCUS_ON|preventing bias
+
+  proposition: Social responsibility requires models to generate ethical outcomes.
+    entity-attribute relationships:
+    Social responsibility|REQUIRES|ethical outcomes
+
+  proposition: Risk management is crucial for addressing potential threats and model failures.
+    entity-attribute relationships:
+    Risk management|ADDRESSES|potential threats
+    Risk management|ADDRESSES|model failures
+
+  proposition: Guidelines must include mechanisms for robust design and vulnerability mitigation.
+    entity-attribute relationships:
+    Guidelines|MUST_INCLUDE|robust design mechanisms
+    Guidelines|MUST_INCLUDE|vulnerability mitigation mechanisms
+
+  proposition: Continuous monitoring and stress testing are critical for maintaining model trustworthiness.
+    entity-attribute relationships:
+    Continuous monitoring|MAINTAINS|model trustworthiness
+    Stress testing|MAINTAINS|model trustworthiness

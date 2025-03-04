@@ -1,0 +1,15 @@
+Research Publications on AI and Machine Learning in Scientific Domains
+
+Food and Drug Administration published a technical report in 2021.
+Alan G Fraser and colleagues discussed the need for transparency of clinical evidence for medical devices in Europe in The Lancet.
+Urs J Muehlematter and colleagues conducted a comparative analysis of AI and machine learning-based medical device approvals in the USA and Europe from 2015-2020.
+Eric Wu and colleagues analyzed limitations and recommendations for evaluating medical AI device evaluations through FDA approvals.
+Food and Drug Administration proposed a regulatory framework for modifications to AI/ML-based software as a medical device in 2019.
+Researchers published studies on various applications of AI and machine learning in domains including:
+Chemical reaction yield prediction using deep learning.
+Materials science research advancements through deep learning methods.
+Chemical research question answering using language models.
+Molecular structure elucidation and reaction data extraction using Large Language Models.
+Researchers are exploring the potential of AI and machine learning across scientific disciplines including chemistry, materials science, and medical device development.
+Publications span multiple years from 2016 to 2025, indicating ongoing research and development in AI applications.
+Researchers from multiple institutions are contributing to understanding AI's capabilities and limitations in scientific research.

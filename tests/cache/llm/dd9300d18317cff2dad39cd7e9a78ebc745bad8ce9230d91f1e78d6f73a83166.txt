@@ -1,0 +1,159 @@
+topic: Adversarial Attacks on Image Generation
+
+  entities:
+    Raphaël Millière|Researcher
+    Haomin Zhuang|Researcher
+    Yihua Zhang|Researcher
+    Sijia Liu|Researcher
+    Stable Diffusion|Model
+    REALEDIT|Dataset
+    Peter Sushko|Researcher
+    Boyang Zheng|Researcher
+    Chumeng Liang|Researcher
+    Xiaoyu Wu|Researcher
+    Yan Liu|Researcher
+    Latent Diffusion Models|Model
+
+  proposition: Raphaël Millière studied adversarial attacks on image generation using made-up words.
+    entity-attribute relationships:
+    Raphaël Millière|RESEARCHES|adversarial attacks
+    Raphaël Millière|FOCUSES_ON|image generation
+
+    entity-entity relationships:
+    Raphaël Millière|STUDIES|made-up words
+
+  proposition: Haomin Zhuang, Yihua Zhang, and Sijia Liu conducted a pilot study of query-free adversarial attack against Stable Diffusion.
+    entity-attribute relationships:
+    Haomin Zhuang|CONDUCTS|pilot study
+    Yihua Zhang|CONDUCTS|pilot study
+    Sijia Liu|CONDUCTS|pilot study
+
+    entity-entity relationships:
+    Haomin Zhuang|COLLABORATES_WITH|Yihua Zhang
+    Haomin Zhuang|COLLABORATES_WITH|Sijia Liu
+    Yihua Zhang|COLLABORATES_WITH|Sijia Liu
+    Haomin Zhuang|ATTACKS|Stable Diffusion
+    Yihua Zhang|ATTACKS|Stable Diffusion
+    Sijia Liu|ATTACKS|Stable Diffusion
+
+  proposition: Boyang Zheng, Chumeng Liang, Xiaoyu Wu, and Yan Liu investigated understanding and improving adversarial attacks on latent diffusion models.
+    entity-attribute relationships:
+    Boyang Zheng|INVESTIGATES|adversarial attacks
+    Chumeng Liang|INVESTIGATES|adversarial attacks
+    Xiaoyu Wu|INVESTIGATES|adversarial attacks
+    Yan Liu|INVESTIGATES|adversarial attacks
+
+    entity-entity relationships:
+    Boyang Zheng|COLLABORATES_WITH|Chumeng Liang
+    Boyang Zheng|COLLABORATES_WITH|Xiaoyu Wu
+    Boyang Zheng|COLLABORATES_WITH|Yan Liu
+    Boyang Zheng|STUDIES|Latent Diffusion Models
+
+topic: Image Generation and Editing Techniques
+
+  entities:
+    LayoutDiffusion|Model
+    Guangcong Zheng|Researcher
+    DiffEdit|Method
+    Guillaume Couairon|Researcher
+    StyleDrop|Method
+    Kihyuk Sohn|Researcher
+
+  proposition: Guangcong Zheng and colleagues developed LayoutDiffusion, a controllable diffusion model for layout-to-image generation.
+    entity-attribute relationships:
+    Guangcong Zheng|DEVELOPS|LayoutDiffusion
+    LayoutDiffusion|TYPE|controllable diffusion model
+    LayoutDiffusion|FOCUSES_ON|layout-to-image generation
+
+  proposition: Guillaume Couairon and colleagues proposed DiffEdit, a diffusion-based semantic image editing method with mask guidance.
+    entity-attribute relationships:
+    Guillaume Couairon|PROPOSES|DiffEdit
+    DiffEdit|TYPE|diffusion-based semantic image editing method
+    DiffEdit|FEATURE|mask guidance
+
+  proposition: Kihyuk Sohn and colleagues introduced StyleDrop, a text-to-image generation method that works in any style.
+    entity-attribute relationships:
+    Kihyuk Sohn|INTRODUCES|StyleDrop
+    StyleDrop|TYPE|text-to-image generation method
+    StyleDrop|FEATURE|works in any style
+
+topic: Vision-Language Model Research
+
+  entities:
+    Zixian Ma|Researcher
+    CREPE|Benchmark
+    Cheng-Yu Hsieh|Researcher
+    SugarCREPE|Method
+    Sri Harsha Dumpala|Researcher
+    SUGAR-CREPE++|Dataset
+    Amita Kamath|Researcher
+    Jack Hessel|Researcher
+    Kai-Wei Chang|Researcher
+    Zhiqiu Lin|Researcher
+
+  proposition: Zixian Ma and colleagues investigated compositional reasoning in vision-language foundation models through the CREPE benchmark.
+    entity-attribute relationships:
+    Zixian Ma|INVESTIGATES|compositional reasoning
+    CREPE|TYPE|benchmark
+    CREPE|FOCUSES_ON|vision-language foundation models
+
+  proposition: Cheng-Yu Hsieh and colleagues proposed SugarCREPE to fix hackable benchmarks for vision-language compositionality.
+    entity-attribute relationships:
+    Cheng-Yu Hsieh|PROPOSES|SugarCREPE
+    SugarCREPE|PURPOSE|fix hackable benchmarks
+    SugarCREPE|FOCUSES_ON|vision-language compositionality
+
+  proposition: Sri Harsha Dumpala and colleagues created the SUGAR-CREPE++ Dataset to examine vision-language model sensitivity.
+    entity-attribute relationships:
+    Sri Harsha Dumpala|CREATES|SUGAR-CREPE++ Dataset
+    SUGAR-CREPE++|PURPOSE|examine vision-language model sensitivity
+
+  proposition: Amita Kamath, Jack Hessel, and Kai-Wei Chang identified text encoders as a bottleneck for compositionality in contrastive vision-language models.
+    entity-attribute relationships:
+    Amita Kamath|IDENTIFIES|text encoders bottleneck
+    Jack Hessel|IDENTIFIES|text encoders bottleneck
+    Kai-Wei Chang|IDENTIFIES|text encoders bottleneck
+
+  proposition: Zhiqiu Lin and colleagues revisited the role of language priors in vision-language models.
+    entity-attribute relationships:
+    Zhiqiu Lin|STUDIES|role of language priors
+    Zhiqiu Lin|FOCUSES_ON|vision-language models
+
+topic: Image Quality and Perception Research
+
+  entities:
+    Zhou Wang|Researcher
+    Alan C Bovik|Researcher
+    Hamid R Sheikh|Researcher
+    Eero P Simoncelli|Researcher
+    Richard Zhang|Researcher
+    Mathilde Caron|Researcher
+
+  proposition: Zhou Wang, Alan C Bovik, Hamid R Sheikh, and Eero P Simoncelli developed an image quality assessment method based on structural similarity.
+    entity-attribute relationships:
+    Zhou Wang|DEVELOPS|image quality assessment method
+    Alan C Bovik|DEVELOPS|image quality assessment method
+    Hamid R Sheikh|DEVELOPS|image quality assessment method
+    Eero P Simoncelli|DEVELOPS|image quality assessment method
+    Method|BASED_ON|structural similarity
+
+  proposition: Richard Zhang and colleagues explored the effectiveness of deep features as a perceptual metric.
+    entity-attribute relationships:
+    Richard Zhang|EXPLORES|deep features effectiveness
+    Deep Features|USED_AS|perceptual metric
+
+  proposition: Mathilde Caron and colleagues studied emerging properties in self-supervised vision transformers.
+    entity-attribute relationships:
+    Mathilde Caron|STUDIES|emerging properties
+    Emerging Properties|CONTEXT|self-supervised vision transformers
+
+topic: Generative AI Privacy and Security
+
+  entities:
+    Abenezer Golda|Researcher
+
+  proposition: Abenezer Golda and colleagues published a comprehensive survey on privacy and security concerns in generative AI.
+    entity-attribute relationships:
+    Abenezer Golda|PUBLISHES|comprehensive survey
+    Survey|FOCUSES_ON|privacy and security concerns
+    Survey|CONTEXT|generative AI

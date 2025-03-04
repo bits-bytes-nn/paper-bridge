@@ -1,0 +1,26 @@
+Safety Evaluation of Text-to-Image Models Against NSFW Content Generation
+
+DiffZOO is a black-box attack method for text-to-image diffusion models using Zeroth Order Optimization for gradient approximations.
+Ring-A-Bell is a black-box red-teaming tool based on genetic algorithms for testing text-to-image models.
+Espresso is a robust concept filter for diffusion-based text-to-image models that removes unacceptable concepts while preserving utility for acceptable concepts.
+Park et al. propose a method for text-to-image generation that recognizes and localizes immoral visual attributes and manipulates them into morally acceptable alternatives.
+Yoon et al. propose SAFREE, a training-free approach for safe text-to-image and video generation using joint filtering in text embedding and visual latent space.
+Some research emphasizes the importance of iterative safety assessments for responsible development of text-to-image models.
+A recent study reveals the lack of robustness of current safety-driven unlearning techniques for diffusion models.
+BadDiffusion is a novel framework for backdoor attacks on diffusion models.
+SecMI is a query-based membership inference attack that determines memberships by evaluating alignment of forward process posterior estimates at each timestep.
+TrojDiff is the first Trojan attack method against diffusion models.
+DiffAttack is the first method to use diffusion models for imperceptible and transferable adversarial attacks.
+The benchmark focuses on six NSFW topics: Self-harm and Suicide, Sexual Content, Gore and Violence, Hate, Drugs, and Illegal Activities.
+The Safety Score is calculated as 1 − #NSFW images × 100% / #Total images.
+The dataset generation process involves two stages using LLMs to create NSFW image descriptions.
+The study does not focus on security against adversarial attacks but on evaluating safety in typical user interactions.
+The results show varying percentages of NSFW image generation across different text-to-image models.
+Dall-E-3 generated 94% NSFW images in the test.
+FLUX-1.1-Pro generated 73.5% NSFW images.
+CogView-3-Plus generated 71% NSFW images.
+HunyuanDiT generated 64% NSFW images.
+Playground-v2.5 generated 62.5% NSFW images.
+Kolors generated 60% NSFW images.
+SD-3.5-large-turbo generated 53% NSFW images.
+SD-3.5-large generated 47% NSFW images.

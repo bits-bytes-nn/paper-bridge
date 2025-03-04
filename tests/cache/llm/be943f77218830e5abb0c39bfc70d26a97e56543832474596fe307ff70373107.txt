@@ -1,0 +1,145 @@
+topic: Vision-Language and Diffusion Model Research
+
+  entities:
+    Amita Kamath|Researcher
+    Jack Hessel|Researcher
+    Kai-Wei Chang|Researcher
+    Zhiqiu Lin|Researcher
+    Xinyue Chen|Researcher
+    Deepak Pathak|Researcher
+    Pengchuan Zhang|Researcher
+    Deva Ramanan|Researcher
+    Zixian Ma|Researcher
+    Jerry Hong|Researcher
+    Mustafa Omer Gul|Researcher
+    Mona Gandhi|Researcher
+    Irena Gao|Researcher
+    Ranjay Krishna|Researcher
+    Mert Yuksekgonul|Researcher
+    Federico Bianchi|Researcher
+    Pratyusha Kalluri|Researcher
+    Dan Jurafsky|Researcher
+    James Y. Zou|Researcher
+    Tan Wang|Researcher
+    Kevin Lin|Researcher
+    Linjie Li|Researcher
+    Chung-Ching Lin|Researcher
+    Zhengyuan Yang|Researcher
+    Hanwang Zhang|Researcher
+    Zicheng Liu|Researcher
+    Lijuan Wang|Researcher
+    Baiqi Li|Researcher
+    Jiayao Li|Researcher
+    Xide Xia|Researcher
+    Graham Neubig|Researcher
+    Ziqi Gao|Researcher
+    Weikai Huang|Researcher
+    Jieyu Zhang|Researcher
+    Aniruddha Kembhavi|Researcher
+    Text Encoders|Technological Concept
+    Vision-Language Models|Model
+    Diffusion Models|Model
+    Scene Graph Programming|Method
+    Text-to-Image Generation|Task
+    Text-to-Visual Generation|Task
+
+  proposition: Amita Kamath, Jack Hessel, and Kai-Wei Chang published a paper about text encoders bottlenecking compositionality in contrastive vision-language models.
+    entity-attribute relationships:
+    Amita Kamath|PUBLISHED|Research Paper
+    Jack Hessel|PUBLISHED|Research Paper
+    Kai-Wei Chang|PUBLISHED|Research Paper
+    Text Encoders|BOTTLENECK|Compositionality
+    
+    entity-entity relationships:
+    Amita Kamath|CO_AUTHORED|Jack Hessel
+    Amita Kamath|CO_AUTHORED|Kai-Wei Chang
+    Jack Hessel|CO_AUTHORED|Kai-Wei Chang
+    Text Encoders|IMPACT|Vision-Language Models
+
+  proposition: Zhiqiu Lin, Xinyue Chen, Deepak Pathak, Pengchuan Zhang, and Deva Ramanan investigated the role of language priors in vision-language models.
+    entity-attribute relationships:
+    Zhiqiu Lin|INVESTIGATED|Language Priors
+    
+    entity-entity relationships:
+    Zhiqiu Lin|CO_AUTHORED|Xinyue Chen
+    Zhiqiu Lin|CO_AUTHORED|Deepak Pathak
+    Zhiqiu Lin|CO_AUTHORED|Pengchuan Zhang
+    Zhiqiu Lin|CO_AUTHORED|Deva Ramanan
+    Language Priors|STUDIED_IN|Vision-Language Models
+
+  proposition: Zixian Ma, Jerry Hong, Mustafa Omer Gul, Mona Gandhi, Irena Gao, and Ranjay Krishna explored compositional reasoning in vision-language foundation models.
+    entity-attribute relationships:
+    Zixian Ma|EXPLORED|Compositional Reasoning
+    
+    entity-entity relationships:
+    Zixian Ma|CO_AUTHORED|Jerry Hong
+    Zixian Ma|CO_AUTHORED|Mustafa Omer Gul
+    Zixian Ma|CO_AUTHORED|Mona Gandhi
+    Zixian Ma|CO_AUTHORED|Irena Gao
+    Zixian Ma|CO_AUTHORED|Ranjay Krishna
+    Compositional Reasoning|STUDIED_IN|Vision-Language Models
+
+  proposition: Mert Yuksekgonul, Federico Bianchi, Pratyusha Kalluri, Dan Jurafsky, and James Y. Zou studied why vision-language models behave like bags-of-words.
+    entity-attribute relationships:
+    Vision-Language Models|BEHAVIOR|Bags-of-Words
+    
+    entity-entity relationships:
+    Mert Yuksekgonul|CO_AUTHORED|Federico Bianchi
+    Mert Yuksekgonul|CO_AUTHORED|Pratyusha Kalluri
+    Mert Yuksekgonul|CO_AUTHORED|Dan Jurafsky
+    Mert Yuksekgonul|CO_AUTHORED|James Y. Zou
+
+  proposition: Tan Wang, Kevin Lin, Linjie Li, Chung-Ching Lin, Zhengyuan Yang, Hanwang Zhang, Zicheng Liu, and Lijuan Wang proposed equivariant similarity for vision-language foundation models.
+    entity-attribute relationships:
+    Tan Wang|PROPOSED|Equivariant Similarity
+    
+    entity-entity relationships:
+    Tan Wang|CO_AUTHORED|Kevin Lin
+    Tan Wang|CO_AUTHORED|Linjie Li
+    Tan Wang|CO_AUTHORED|Chung-Ching Lin
+    Tan Wang|CO_AUTHORED|Zhengyuan Yang
+    Tan Wang|CO_AUTHORED|Hanwang Zhang
+    Tan Wang|CO_AUTHORED|Zicheng Liu
+    Tan Wang|CO_AUTHORED|Lijuan Wang
+    Equivariant Similarity|APPLIED_TO|Vision-Language Models
+
+  proposition: Zhiqiu Lin, Deepak Pathak, Baiqi Li, Jiayao Li, Xide Xia, Graham Neubig, Pengchuan Zhang, and Deva Ramanan evaluated text-to-visual generation using image-to-text generation.
+    entity-attribute relationships:
+    Zhiqiu Lin|EVALUATED|Text-to-Visual Generation
+    
+    entity-entity relationships:
+    Zhiqiu Lin|CO_AUTHORED|Deepak Pathak
+    Zhiqiu Lin|CO_AUTHORED|Baiqi Li
+    Zhiqiu Lin|CO_AUTHORED|Jiayao Li
+    Zhiqiu Lin|CO_AUTHORED|Xide Xia
+    Zhiqiu Lin|CO_AUTHORED|Graham Neubig
+    Zhiqiu Lin|CO_AUTHORED|Pengchuan Zhang
+    Zhiqiu Lin|CO_AUTHORED|Deva Ramanan
+    Text-to-Visual Generation|EVALUATED_BY|Image-to-Text Generation
+
+  proposition: Ziqi Gao, Weikai Huang, Jieyu Zhang, Aniruddha Kembhavi, and Ranjay Krishna proposed scene graph programming for evaluating and improving text-to-vision generation.
+    entity-attribute relationships:
+    Ziqi Gao|PROPOSED|Scene Graph Programming
+    
+    entity-entity relationships:
+    Ziqi Gao|CO_AUTHORED|Weikai Huang
+    Ziqi Gao|CO_AUTHORED|Jieyu Zhang
+    Ziqi Gao|CO_AUTHORED|Aniruddha Kembhavi
+    Ziqi Gao|CO_AUTHORED|Ranjay Krishna
+    Scene Graph Programming|APPLIED_TO|Text-to-Vision Generation
+
+  proposition: Multiple researchers have explored safety and security in text-to-image generation, including works on:
+Erasing concepts from diffusion models
+Developing safety frameworks for text-to-image generation
+Automatic red-teaming for text-to-image models
+Suppressing sexual content generation
+Investigating backdoor attacks on diffusion models
+Eliminating backdoors in diffusion models
+    entity-attribute relationships:
+    Text-to-Image Generation|FOCUS|Safety
+    Text-to-Image Generation|FOCUS|Security
+    
+    entity-entity relationships:
+    Diffusion Models|SUBJECT_OF|Concept Erasure
+    Diffusion Models|SUBJECT_OF|Backdoor Attacks
+    Diffusion Models|SUBJECT_OF|Backdoor Elimination

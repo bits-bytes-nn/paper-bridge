@@ -1,0 +1,91 @@
+topic: Trustworthiness Performance of Large Language Models
+
+  entities:
+    GenFM|Project
+    GPT-4o|Model
+    Claude-3-Haiku|Model
+    TrustEval-toolkit|Toolkit
+    Large Language Models|Technological Concept
+
+  proposition: The paper presents a comprehensive evaluation of large language models across multiple trustworthiness dimensions.
+    entity-attribute relationships:
+    Large Language Models|EVALUATED_BY|Trustworthiness Dimensions
+
+    entity-entity relationships:
+    None
+
+  proposition: The evaluation covers seven key dimensions: truthfulness, safety, fairness, privacy, robustness, machine ethics, and advanced AI risk.
+    entity-attribute relationships:
+    Evaluation|COVERS|Dimensions
+    Dimensions|INCLUDE|Truthfulness
+    Dimensions|INCLUDE|Safety
+    Dimensions|INCLUDE|Fairness
+    Dimensions|INCLUDE|Privacy
+    Dimensions|INCLUDE|Robustness
+    Dimensions|INCLUDE|Machine Ethics
+    Dimensions|INCLUDE|Advanced AI Risk
+
+    entity-entity relationships:
+    None
+
+  proposition: The evaluation includes 19 different large language models from various providers.
+    entity-attribute relationships:
+    Evaluation|INCLUDES|19 Large Language Models
+
+    entity-entity relationships:
+    None
+
+  proposition: The models are scored across each dimension, with an overall average trustworthiness score calculated.
+    entity-attribute relationships:
+    Models|SCORED_ACROSS|Dimensions
+    Models|CALCULATED_WITH|Overall Average Trustworthiness Score
+
+    entity-entity relationships:
+    None
+
+  proposition: GPT-4o has the highest overall average trustworthiness score of 82.64.
+    entity-attribute relationships:
+    GPT-4o|SCORE|82.64
+    GPT-4o|HIGHEST_IN|Overall Average Trustworthiness
+
+    entity-entity relationships:
+    None
+
+  proposition: The lowest overall average trustworthiness score is 74.93, belonging to Claude-3-Haiku.
+    entity-attribute relationships:
+    Claude-3-Haiku|SCORE|74.93
+    Claude-3-Haiku|LOWEST_IN|Overall Average Trustworthiness
+
+    entity-entity relationships:
+    None
+
+  proposition: Robustness is consistently the highest-scoring dimension across most models, with many models scoring above 90.
+    entity-attribute relationships:
+    Robustness|SCORE|Above 90
+    Robustness|HIGHEST_SCORING|Dimension
+
+    entity-entity relationships:
+    None
+
+  proposition: Truthfulness and advanced AI risk dimensions show the most variation between models.
+    entity-attribute relationships:
+    Truthfulness|SHOWS|Most Variation
+    Advanced AI Risk|SHOWS|Most Variation
+
+    entity-entity relationships:
+    None
+
+  proposition: The evaluation provides a standardized approach to assessing the trustworthiness of generative foundation models.
+    entity-attribute relationships:
+    Evaluation|PROVIDES|Standardized Approach
+    Approach|ASSESSES|Generative Foundation Models
+
+    entity-entity relationships:
+    None
+
+  proposition: The research is accompanied by a GitHub repository (TrustEval-toolkit) for further reference and exploration.
+    entity-attribute relationships:
+    Research|ACCOMPANIED_BY|TrustEval-toolkit
+
+    entity-entity relationships:
+    TrustEval-toolkit|HOSTED_ON|GitHub

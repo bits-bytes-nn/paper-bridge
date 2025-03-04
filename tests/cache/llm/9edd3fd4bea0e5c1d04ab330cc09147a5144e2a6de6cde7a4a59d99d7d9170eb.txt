@@ -1,0 +1,119 @@
+topic: Trustworthiness and Safety in Multimodal AI Generation
+
+  entities:
+    He et al.|Researcher
+    GPT-4o|Model
+    Chen et al.|Researcher
+    OpenAI|Organization
+    Sora|Model
+    T2VSafetyBench|Framework
+    Pan et al.|Researcher
+    Pang et al.|Researcher
+    GPT4Video|Model
+    Dai et al.|Researcher
+
+  proposition: He et al. highlight trustworthiness concerns in multimodal generation tasks involving language and other modal outputs.
+    entity-attribute relationships:
+    He et al.|RESEARCHES|multimodal generation tasks
+    He et al.|IDENTIFIES|trustworthiness concerns
+
+    entity-entity relationships:
+    None
+
+  proposition: The safety report for GPT-4o reveals potential safety issues in voice generation tasks.
+    entity-attribute relationships:
+    GPT-4o|INVOLVES|voice generation tasks
+    GPT-4o|DESCRIBED_BY|safety report
+
+    entity-entity relationships:
+    None
+
+  proposition: Chen et al. identify trustworthy problems such as jailbreaks and unexpected variations in interleaved text-and-image generation.
+    entity-attribute relationships:
+    Chen et al.|RESEARCHES|text-and-image generation
+    Chen et al.|IDENTIFIES|trustworthy problems
+
+    entity-entity relationships:
+    None
+
+topic: Text-to-Video Generation Safety
+
+  entities:
+    Sora|Model
+    T2VSafetyBench|Framework
+    Pan et al.|Researcher
+    Pang et al.|Researcher
+    GPT4Video|Model
+    Dai et al.|Researcher
+
+  proposition: Text-to-video generation models have achieved remarkable advancements in recent years.
+    entity-attribute relationships:
+    Text-to-video generation models|CHARACTERIZED_BY|remarkable advancements
+
+    entity-entity relationships:
+    None
+
+  proposition: Sora, developed by OpenAI, can generate intricate scenes and dynamic videos based on user descriptions.
+    entity-attribute relationships:
+    Sora|CAPABILITY|generate intricate scenes
+    Sora|CAPABILITY|generate dynamic videos
+
+    entity-entity relationships:
+    Sora|DEVELOPED_BY|OpenAI
+
+  proposition: T2VSafetyBench is a comprehensive framework for safety-critical assessments of text-to-video models.
+    entity-attribute relationships:
+    T2VSafetyBench|TYPE|comprehensive framework
+    T2VSafetyBench|PURPOSE|safety-critical assessments
+
+    entity-entity relationships:
+    T2VSafetyBench|ASSESSES|text-to-video models
+
+  proposition: Pan et al. collect generation prompts to create a dataset of potentially unsafe video content.
+    entity-attribute relationships:
+    Pan et al.|ACTION|collect generation prompts
+    Pan et al.|CREATES|dataset of potentially unsafe video content
+
+    entity-entity relationships:
+    None
+
+  proposition: Pan et al. develop a Latent Variable Defense approach to prevent generation of harmful videos.
+    entity-attribute relationships:
+    Pan et al.|DEVELOPS|Latent Variable Defense approach
+
+    entity-entity relationships:
+    Latent Variable Defense approach|PREVENTS|generation of harmful videos
+
+topic: Audio Generative Models Safety
+
+  entities:
+    CoDi|Model
+    NextGPT|Model
+
+  proposition: Audio generative models like CoDi and NextGPT can process and generate multiple modalities.
+    entity-attribute relationships:
+    CoDi|CAPABILITY|process multiple modalities
+    CoDi|CAPABILITY|generate multiple modalities
+    NextGPT|CAPABILITY|process multiple modalities
+    NextGPT|CAPABILITY|generate multiple modalities
+
+    entity-entity relationships:
+    None
+
+  proposition: These models synthesize speech for voice-assisted technologies, voice chatbots, and virtual reality experiences.
+    entity-attribute relationships:
+    Models|CAPABILITY|synthesize speech
+    Models|USE_CASE|voice-assisted technologies
+    Models|USE_CASE|voice chatbots
+    Models|USE_CASE|virtual reality experiences
+
+    entity-entity relationships:
+    None
+
+  proposition: The primary safety concern is the potential misuse of audio deepfakes for impersonation.
+    entity-attribute relationships:
+    Audio deepfakes|SAFETY_CONCERN|potential misuse
+    Audio deepfakes|RISK|impersonation
+
+    entity-entity relationships:
+    None

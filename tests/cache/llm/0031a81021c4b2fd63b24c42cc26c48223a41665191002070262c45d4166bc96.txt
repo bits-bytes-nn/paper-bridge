@@ -1,0 +1,10 @@
+Research Papers on Human-AI Collaboration and AI Assistants
+Daphne Ippolito, Ann Yuan, Andy Coenen, and Sehmon Burnam studied creative writing with an AI-powered writing assistant.
+Farhana Shahid, Maximilian Dittgen, Mor Naaman, and Aditya Vashistha examined human-AI collaboration for co-writing constructive comments online.
+Anbang Ye, Christopher Cui, Taiwei Shi, and Mark O. Riedl researched neural story planning.
+Mathias Peter Verheijden and Mathias Funk explored collaborative diffusion for boosting designerly co-creation with generative AI.
+Jeba Rezwana and Mary Lou Maher developed COFI, a framework for modeling interaction in human-AI co-creative systems.
+Minzhi Li, Taiwei Shi, Caleb Ziems, Min-Yen Kan, Nancy Chen, Zhengyuan Liu, and Diyi Yang investigated co-annotation with uncertainty-guided work allocation between humans and large language models.
+Taiwei Shi, Zhuoer Wang, Longqi Yang, Ying-Chun Lin, Zexue He, Mengting Wan, Pei Zhou, Sujay Jauhar, Xiaofeng Xu, Xia Song, and Jennifer Neville studied WildFeedback for aligning large language models with in-situ user interactions.
+Zheng Zhang, Zheng Ning, Chenliang Xu, Yapeng Tian, and Toby Jia-Jun Li created PEANUT, a human-AI collaborative tool for annotating audio-visual data.
+Qinyuan Cheng, Tianxiang Sun, Xiangyang Liu, Wenwei Zhang, Zhangyue Yin, Shimin Li, Linyang Li, Zhengfu He, Kai Chen, and Xipeng Qiu investigated whether AI assistants can know what they don't know.

@@ -1,0 +1,78 @@
+topic: Generative AI Ethics and Governance
+
+  entities:
+    Generative Models|Model
+    Developers|Person
+    Organizations|Organization
+    Human Decision-Makers|Person
+    Stakeholders|Person
+
+  proposition: Generative models should be designed to ensure fairness and ethical principles.
+    entity-attribute relationships:
+    Generative Models|DESIGNED_WITH|fairness
+    Generative Models|DESIGNED_WITH|ethical principles
+
+    entity-entity relationships:
+    Developers|RESPONSIBLE_FOR|Generative Models
+
+  proposition: Generative models must uphold broadly accepted moral values.
+    entity-attribute relationships:
+    Generative Models|MUST_UPHOLD|moral values
+
+  proposition: Generative models must minimize biases in all user interactions.
+    entity-attribute relationships:
+    Generative Models|MUST_MINIMIZE|biases
+
+  proposition: Generative models must be respectful of user differences.
+    entity-attribute relationships:
+    Generative Models|MUST_BE|respectful
+
+  proposition: Generative models must avoid generating harmful or offensive content.
+    entity-attribute relationships:
+    Generative Models|MUST_AVOID|harmful content
+    Generative Models|MUST_AVOID|offensive content
+
+  proposition: Generative models should prevent unjustified differential treatment across demographic groups.
+    entity-attribute relationships:
+    Generative Models|MUST_PREVENT|differential treatment
+
+  proposition: Generative models require inclusive design and stakeholder engagement.
+    entity-attribute relationships:
+    Generative Models|REQUIRES|inclusive design
+    Generative Models|REQUIRES|stakeholder engagement
+
+    entity-entity relationships:
+    Developers|ENGAGE_WITH|Stakeholders
+
+  proposition: The intended use and limitations of generative models must be clearly communicated.
+    entity-attribute relationships:
+    Generative Models|MUST_COMMUNICATE|intended use
+    Generative Models|MUST_COMMUNICATE|limitations
+
+  proposition: Human oversight is required throughout the entire model development process.
+    entity-attribute relationships:
+    Generative Models|REQUIRES|human oversight
+
+    entity-entity relationships:
+    Human Decision-Makers|OVERSEE|Generative Models
+
+  proposition: Models must be designed to be effectively overseen by human beings.
+    entity-attribute relationships:
+    Generative Models|MUST_BE|effectively overseen
+
+    entity-entity relationships:
+    Human Decision-Makers|CONTROL|Generative Models
+
+  proposition: Developers and organizations must be identifiable and responsible for model behaviors.
+    entity-attribute relationships:
+    Developers|MUST_BE|identifiable
+    Organizations|MUST_BE|responsible
+
+    entity-entity relationships:
+    Developers|PART_OF|Organizations
+    Organizations|RESPONSIBLE_FOR|Generative Models
+
+  proposition: Generative models must prioritize harmlessness while maximizing helpfulness.
+    entity-attribute relationships:
+    Generative Models|MUST_PRIORITIZE|harmlessness
+    Generative Models|MUST_MAXIMIZE|helpfulness

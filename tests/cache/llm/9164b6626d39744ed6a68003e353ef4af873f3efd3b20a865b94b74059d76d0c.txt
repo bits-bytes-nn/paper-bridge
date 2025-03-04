@@ -1,0 +1,18 @@
+Research Papers on Bias and Fairness in Vision-Language Models
+
+Meiqi Chen and colleagues quantify and mitigate unimodal biases in multimodal large language models from a causal perspective.
+Moreno D'Incà and researchers propose improving fairness using vision-language driven image augmentation.
+Ashish Seth and coauthors introduce DeAR, a method for debiasing vision-language models with additive residuals.
+Yi Zhang and team develop a method for counterfactually measuring and eliminating social bias in vision-language pre-training models.
+Laura Gustafson and colleagues create FACET, a fairness evaluation benchmark for computer vision.
+Gabriele Ruggeri and Debora Nozza conduct a multi-dimensional study on bias in vision-language models.
+Amro Abbas and researchers explore semantic deduplication for data-efficient learning at web scale.
+Eric Slyman and team develop FairDeDup to detect and mitigate fairness disparities in semantic dataset deduplication.
+Ashutosh Sathe and coauthors create a unified framework and dataset for assessing gender bias in vision-language models.
+Sepehr Janghorbani and Gerard De Melo introduce a framework for assessing stereotypical bias beyond gender and race in vision-language models.
+Zecheng Wang and colleagues investigate debiasing multimodal large language models through model editing.
+Zhengqing Fang and researchers explore cross-modality image interpretation via concept decomposition in visual-language models.
+Sepehr Sameni and team focus on building vision-language models using masked distillation.
+Tony Lee and coauthors develop VHELM, a holistic evaluation of vision-language models.
+Dong Lu and researchers examine test-time backdoor attacks on multimodal large language models.
+Yunqing Zhao and colleagues evaluate adversarial robustness of large vision-language models.

@@ -1,0 +1,19 @@
+Research Papers on Large Language Models and AI Safety
+
+Josef Dai et al. proposed Safe Reinforcement Learning from Human Feedback (Safe RLHF) in 2023.
+Tianyu Yu et al. introduced RLHF-V for behavior alignment of multimodal large language models in 2024.
+Afra Feyza Akyürek et al. developed RL4F for generating natural language feedback using reinforcement learning in 2023.
+Bochuan Cao et al. explored defending against alignment-breaking attacks in large language models in 2023.
+OpenAI published a report on the Safety of Sora in 2024.
+Shusheng Xu et al. conducted a comprehensive study comparing Direct Preference Optimization (DPO) and Proximal Policy Optimization (PPO) for language model alignment in 2024.
+Yotam Wolf et al. examined fundamental limitations of alignment in large language models in 2023.
+Gokul Puthumanaillam et al. discussed the moral imperative of continual superalignment of large language models in 2024.
+Collin Burns et al. from OpenAI explored weak-to-strong generalization and eliciting strong capabilities with weak supervision in 2024.
+Pierre Colombo et al. developed SAULLM-7B, a pioneering large language model for law in 2024.
+Yue Guo and Yi Yang created EconNLI for evaluating economics reasoning in large language models in 2024.
+Ali Maatouk et al. examined the potential impact of large language models on the telecommunications industry in 2024.
+OpenAI published a report on Cooperation on Safety in 2024.
+Muhammad Usman Hadi et al. conducted a survey on large language models, exploring their applications, challenges, and limitations in 2023.
+Xingxuan Li et al. evaluated psychological aspects of GPT-3 in 2022.
+Dongping Chen et al. conducted an exploratory study on self-cognition in large language models in 2024.
+Jen-tse Huang et al. evaluated the psychological portrayal of conversational AI at the International Conference on Learning Representations in 2024.

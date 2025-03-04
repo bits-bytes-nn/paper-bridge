@@ -1,0 +1,15 @@
+Research Papers on Diffusion Model Attacks and Security
+
+Weixin Chen, Dawn Song, and Bo Li published a research paper titled "TrojDiff: Trojan Attacks on Diffusion Models With Diverse Targets" in the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) in June 2023.
+Sheng-Yen Chou, Pin-Yu Chen, and Tsung-Yi Ho proposed "Villandiffusion: A unified backdoor attack framework for diffusion models" in Advances in Neural Information Processing Systems in 2024.
+Shengwei An and colleagues developed "Elijah: Eliminating backdoors injected in diffusion models via distribution shift" in the AAAI Conference on Artificial Intelligence in 2024.
+Rongke Liu and collaborators published "Unstoppable Attack: Label-Only Model Inversion Via Conditional Diffusion Model" in IEEE Transactions on Information Forensics and Security in 2024.
+Ouxiang Li and team proposed "Model Inversion Attacks Through Target-Specific Conditional Diffusion Models" in an arXiv preprint in 2024.
+OpenAI released DALLE-2 in 2021.
+Pucheng Dang and researchers introduced "DiffZOO: A Purely Query-Based Black-Box Attack for Red-teaming Text-to-Image Generative Model via Zeroth Order Optimization" in an arXiv preprint in 2024.
+Anudeep Das and colleagues presented "Espresso: Robust Concept Filtering in Text-to-Image Models" in an arXiv preprint in 2024.
+Seongbeom Park and team published "Localization and Manipulation of Immoral Visual Cues for Safe Text-to-Image Generation" in the IEEE/CVF Winter Conference on Applications of Computer Vision in January 2024.
+Jessica Quaye and collaborators developed "Adversarial Nibbler: An Open Red-Teaming Method for Identifying Diverse Harms in Text-to-Image Generation" in the ACM Conference on Fairness, Accountability, and Transparency in 2024.
+Yimeng Zhang and researchers explored safety challenges in "To generate or not? Safety-driven unlearned diffusion models are still easy to generate unsafe images... for now" in an arXiv preprint in 2023.
+Yang Sui and team proposed "DisDet: Exploring Detectability of Backdoor Attack on Diffusion Models" in an arXiv preprint in 2024.
+Jinhao Duan and colleagues investigated "Are Diffusion Models Vulnerable to Membership Inference Attacks?" in the International Conference on Machine Learning in 2023.

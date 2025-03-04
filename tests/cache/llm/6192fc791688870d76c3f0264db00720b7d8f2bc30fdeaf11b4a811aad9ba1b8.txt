@@ -1,0 +1,32 @@
+# Large Language Model Safety Analysis: RtA Rates and Prompt Injection Attacks
+
+LLMs demonstrate strong performance in managing exaggerated safety.
+Most LLMs have less than 5% full Return to Alignment (RtA) rate.
+Most LLMs have under 10% combined RtA rate.
+Compared to previous research, LLMs show significant progress in alignment.
+Claude series models exhibit relatively higher RtA rates.
+
+Prompt injection attacks pose a serious security threat to Large Language Models.
+Prompt injection attacks exploit LLMs' difficulty in distinguishing between genuine user inputs and malicious commands.
+These attacks manipulate LLMs by targeting their natural language processing capabilities.
+Prompt injection attacks can be categorized into handcrafted and automated methods.
+
+Early research found that adding special characters like "\n" and "\t" can cause LLMs to follow new instructions.
+Context-switching text can mislead LLMs into following injected instructions.
+Attackers can misalign original prompt intent to achieve different objectives.
+Attackers can potentially recover sensitive information from private prompts.
+
+Researchers have proposed defense strategies against prompt injection attacks.
+Defense strategies can be divided into prevention-based and detection-based methods.
+Prevention-based methods aim to make LLMs inherently robust to malicious prompts.
+Detection-based methods focus on identifying and filtering compromised inputs and responses.
+
+Proposed defense techniques include:
+Jatmo generates task-specific models resilient to prompt injection attacks.
+StruQ uses structured queries to separate prompts and data into distinct channels.
+Instructional Segment Embedding (ISE) enhances LLM security by protecting priority rules.
+Attention Tracker analyzes attention patterns on instructions to detect attacks.
+
+Liu et al. proposed a framework to formalize prompt injection attacks and defenses.
+The framework provides a systematic evaluation across multiple LLMs and tasks.
+This research establishes a common benchmark for studying prompt injection attacks.

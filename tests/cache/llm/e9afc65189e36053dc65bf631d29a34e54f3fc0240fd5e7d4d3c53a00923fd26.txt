@@ -1,0 +1,120 @@
+topic: Generative AI Research Publications
+
+  entities:
+    Thomas KF Chiu|Researcher
+    Michael Chui|Researcher
+    Maria Teresa Baldassarre|Researcher
+    Yan Chen|Researcher
+    Pouyan Esmaeilzadeh|Researcher
+    Sunnie S. Y. Kim|Researcher
+    Weixin Liang|Researcher
+    Mingmeng Geng|Researcher
+    Roberto Trotta|Researcher
+    Anton Korinek|Researcher
+    Siwei Lyu|Researcher
+    Umar Ali Bukar|Researcher
+    Generative AI|Technological Concept
+    ChatGPT|Model
+    Large Language Models|Technological Concept
+    DeepFake|Technological Concept
+
+  proposition: Thomas KF Chiu studied the impact of Generative AI on education practices, policies, and research directions.
+    entity-attribute relationships:
+    Thomas KF Chiu|RESEARCHES|Generative AI
+    Thomas KF Chiu|FOCUSES_ON|education practices
+    Thomas KF Chiu|FOCUSES_ON|education policies
+    Thomas KF Chiu|FOCUSES_ON|research directions
+
+    entity-entity relationships:
+    Thomas KF Chiu|STUDIES|Generative AI
+
+  proposition: Michael Chui and colleagues explored the economic potential of generative AI.
+    entity-attribute relationships:
+    Michael Chui|RESEARCHES|economic potential
+
+    entity-entity relationships:
+    Michael Chui|EXPLORES|Generative AI
+
+  proposition: Maria Teresa Baldassarre and researchers analyzed the social impact of generative AI.
+    entity-attribute relationships:
+    Maria Teresa Baldassarre|RESEARCHES|social impact
+
+    entity-entity relationships:
+    Maria Teresa Baldassarre|ANALYZES|Generative AI
+
+  proposition: Yan Chen and Pouyan Esmaeilzadeh investigated privacy and security challenges of generative AI in medical practice.
+    entity-attribute relationships:
+    Yan Chen|INVESTIGATES|privacy challenges
+    Yan Chen|INVESTIGATES|security challenges
+    Pouyan Esmaeilzadeh|INVESTIGATES|privacy challenges
+    Pouyan Esmaeilzadeh|INVESTIGATES|security challenges
+
+    entity-entity relationships:
+    Yan Chen|STUDIES|Generative AI
+    Pouyan Esmaeilzadeh|STUDIES|Generative AI
+
+  proposition: Sunnie S. Y. Kim and colleagues examined the impact of large language models' uncertainty expression on user reliance and trust.
+    entity-attribute relationships:
+    Sunnie S. Y. Kim|RESEARCHES|large language models
+    Sunnie S. Y. Kim|FOCUSES_ON|uncertainty expression
+    Sunnie S. Y. Kim|FOCUSES_ON|user reliance
+    Sunnie S. Y. Kim|FOCUSES_ON|user trust
+
+    entity-entity relationships:
+    Sunnie S. Y. Kim|EXAMINES|Large Language Models
+
+  proposition: Weixin Liang and team monitored AI-modified content at scale, focusing on ChatGPT's impact on AI conference peer reviews.
+    entity-attribute relationships:
+    Weixin Liang|MONITORS|AI-modified content
+    Weixin Liang|FOCUSES_ON|ChatGPT impact
+
+    entity-entity relationships:
+    Weixin Liang|STUDIES|ChatGPT
+    Weixin Liang|INVESTIGATES|AI conference peer reviews
+
+  proposition: Mingmeng Geng and Roberto Trotta researched ChatGPT's transformation of academics' writing style.
+    entity-attribute relationships:
+    Mingmeng Geng|RESEARCHES|ChatGPT transformation
+    Roberto Trotta|RESEARCHES|ChatGPT transformation
+    Mingmeng Geng|FOCUSES_ON|academics' writing style
+    Roberto Trotta|FOCUSES_ON|academics' writing style
+
+    entity-entity relationships:
+    Mingmeng Geng|STUDIES|ChatGPT
+    Roberto Trotta|STUDIES|ChatGPT
+
+  proposition: Mingmeng Geng and colleagues studied the impact of large language models in academia, from writing to speaking.
+    entity-attribute relationships:
+    Mingmeng Geng|RESEARCHES|large language models
+    Mingmeng Geng|FOCUSES_ON|academic writing
+    Mingmeng Geng|FOCUSES_ON|academic speaking
+
+    entity-entity relationships:
+    Mingmeng Geng|STUDIES|Large Language Models
+
+  proposition: Anton Korinek explored use cases and implications of generative AI for economic research.
+    entity-attribute relationships:
+    Anton Korinek|EXPLORES|use cases
+    Anton Korinek|EXPLORES|implications
+
+    entity-entity relationships:
+    Anton Korinek|STUDIES|Generative AI
+    Anton Korinek|APPLIES_TO|economic research
+
+  proposition: Siwei Lyu addressed the challenges of DeepFake and mitigating negative impacts of AI-generated content.
+    entity-attribute relationships:
+    Siwei Lyu|ADDRESSES|DeepFake challenges
+    Siwei Lyu|FOCUSES_ON|mitigating negative impacts
+
+    entity-entity relationships:
+    Siwei Lyu|STUDIES|DeepFake
+    Siwei Lyu|INVESTIGATES|AI-generated content
+
+  proposition: Umar Ali Bukar and researchers developed a decision-making framework for utilizing generative AI in education, using ChatGPT as a case study.
+    entity-attribute relationships:
+    Umar Ali Bukar|DEVELOPS|decision-making framework
+    Umar Ali Bukar|FOCUSES_ON|generative AI in education
+
+    entity-entity relationships:
+    Umar Ali Bukar|USES|ChatGPT
+    Umar Ali Bukar|APPLIES_TO|education

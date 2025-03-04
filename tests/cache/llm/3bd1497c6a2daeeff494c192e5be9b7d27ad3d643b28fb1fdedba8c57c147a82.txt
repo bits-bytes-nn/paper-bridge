@@ -1,0 +1,91 @@
+topic: Large Language Model Security Research
+
+  entities:
+    Poisonedrag|Research Paper
+    arXiv|Publication Platform
+    Large Language Models|Technology
+    Multi-agent Systems|Technology
+    LLM-based Agents|Technology
+    Text-to-Image Models|Technology
+
+  proposition: Poisonedrag is a research paper about knowledge poisoning attacks to retrieval-augmented generation of large language models
+    entity-attribute relationships:
+    Poisonedrag|FOCUSES_ON|knowledge poisoning attacks
+    Poisonedrag|TARGETS|retrieval-augmented generation
+    Poisonedrag|STUDIES|Large Language Models
+
+    entity-entity relationships:
+    Poisonedrag|ANALYZES|Large Language Models
+
+  proposition: The research paper was published as an arXiv preprint in 2024
+    entity-attribute relationships:
+    Poisonedrag|PUBLISHED_ON|arXiv
+    Poisonedrag|PUBLICATION_YEAR|2024
+
+  proposition: Multiple research papers explore vulnerabilities in large language models and multi-agent systems
+    entity-attribute relationships:
+    Research Papers|INVESTIGATES|vulnerabilities
+
+    entity-entity relationships:
+    Research Papers|FOCUSES_ON|Large Language Models
+    Research Papers|FOCUSES_ON|Multi-agent Systems
+
+  proposition: Researchers have investigated various attack vectors including:
+    entity-attribute relationships:
+    Researchers|EXPLORES|attack vectors
+
+  proposition: Backdoor threats to LLM-based agents
+    entity-attribute relationships:
+    LLM-based Agents|VULNERABLE_TO|Backdoor threats
+
+  proposition: Malicious attacks in multi-agent collaborations
+    entity-attribute relationships:
+    Multi-agent Systems|SUSCEPTIBLE_TO|Malicious attacks
+
+  proposition: Poisoning memory or knowledge bases of agents
+    entity-attribute relationships:
+    Agents|VULNERABLE_TO|Memory poisoning
+    Agents|VULNERABLE_TO|Knowledge base poisoning
+
+  proposition: Compromising autonomous LLM agents through malfunction amplification
+    entity-attribute relationships:
+    Autonomous LLM Agents|VULNERABLE_TO|Malfunction amplification
+
+  proposition: Privacy issues in retrieval-augmented generation
+    entity-attribute relationships:
+    Retrieval-augmented Generation|CHALLENGES|Privacy issues
+
+  proposition: Researchers are developing diagnostic benchmarks and safety assessment methodologies for multi-agent systems
+    entity-attribute relationships:
+    Researchers|DEVELOPS|Diagnostic benchmarks
+    Researchers|DEVELOPS|Safety assessment methodologies
+
+    entity-entity relationships:
+    Researchers|FOCUSES_ON|Multi-agent Systems
+
+  proposition: Research papers cover topics such as:
+    entity-attribute relationships:
+    Research Papers|EXPLORES|Research topics
+
+  proposition: Red teaming of language models
+    entity-attribute relationships:
+    Language Models|SUBJECT_TO|Red teaming
+
+  proposition: Autonomous language agent testing
+    entity-attribute relationships:
+    Autonomous Language Agents|UNDERGOES|Testing
+
+  proposition: Safety exploration of multi-agent networks
+    entity-attribute relationships:
+    Multi-agent Networks|REQUIRES|Safety exploration
+
+  proposition: Injection of malice into multi-modal large language model societies
+    entity-attribute relationships:
+    Multi-modal Large Language Model Societies|VULNERABLE_TO|Malice injection
+
+  proposition: Jailbreaking text-to-image models using LLM-based agents
+    entity-attribute relationships:
+    Text-to-Image Models|VULNERABLE_TO|Jailbreaking
+
+    entity-entity relationships:
+    LLM-based Agents|USED_FOR|Jailbreaking Text-to-Image Models

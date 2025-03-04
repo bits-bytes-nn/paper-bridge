@@ -1,0 +1,146 @@
+topic: Preference Bias in Large Language Models
+
+  entities:
+    Rozado|Researcher
+    McGee|Researcher
+    Rutinowski et al.|Research Group
+    Solaiman et al.|Research Group
+    Allam|Researcher
+    Zhou et al.|Research Group
+    Gao et al.|Research Group
+    LLM|Technology
+    ChatGPT|Model
+    PALMS|Method
+    BiasDPO|Framework
+    UniBias|Method
+
+  proposition: An LLM-powered case generator creates queries by providing instructions based on scenario examples.
+    entity-attribute relationships:
+    LLM|POWERS|case generator
+    
+    entity-entity relationships:
+    case generator|CREATES|queries
+
+  proposition: An LLM-powered diversity enhancer paraphrases queries to introduce variations and enhance diversity.
+    entity-attribute relationships:
+    LLM|POWERS|diversity enhancer
+    
+    entity-entity relationships:
+    diversity enhancer|PARAPHRASES|queries
+
+  proposition: Preference is a form of bias that can significantly impact the objectivity and reliability of LLM responses.
+    entity-attribute relationships:
+    Preference|DESCRIBED_BY|form of bias
+    LLM|IMPACTED_BY|preference bias
+
+  proposition: Preference refers to situations where LLMs have stronger tendencies or preferences for certain types of people, things, or ideas.
+    entity-attribute relationships:
+    LLMs|EXHIBITS|tendencies
+    Preference|RELATES_TO|types of people, things, or ideas
+
+  proposition: Current latest LLMs tend to lean slightly left politically.
+    entity-attribute relationships:
+    LLMs|POLITICAL_ORIENTATION|left-leaning
+
+  proposition: Preference bias can potentially undermine the credibility of LLMs by producing non-impartial outputs.
+    entity-attribute relationships:
+    Preference bias|IMPACTS|LLM credibility
+    LLMs|PRODUCES|non-impartial outputs
+
+  proposition: Rozado's research examines political preferences embedded in LLMs, revealing left-leaning biases.
+    entity-entity relationships:
+    Rozado|RESEARCHES|LLMs
+    Rozado|REVEALS|political preferences
+
+  proposition: Rutinowski et al. and McGee uncover that ChatGPT tends to favor progressive libertarian views.
+    entity-entity relationships:
+    Rutinowski et al.|INVESTIGATES|ChatGPT
+    McGee|INVESTIGATES|ChatGPT
+    ChatGPT|EXHIBITS|progressive libertarian views
+
+  proposition: Solaiman et al. introduced PALMS method to mitigate preference bias through iterative fine-tuning using custom values-targeted datasets.
+    entity-entity relationships:
+    Solaiman et al.|INTRODUCES|PALMS
+    PALMS|MITIGATES|preference bias
+
+  proposition: Allam introduced BiasDPO framework to mitigate bias using a specific loss function that rewards generating less biased text.
+    entity-entity relationships:
+    Allam|INTRODUCES|BiasDPO
+    BiasDPO|MITIGATES|bias
+
+  proposition: Zhou et al. proposed UniBias method to identify and mask biased neural network vectors and attention heads during inference.
+    entity-entity relationships:
+    Zhou et al.|PROPOSES|UniBias
+    UniBias|IDENTIFIES|biased neural network vectors
+
+  proposition: Gao et al. propose a two-stage fine-tuning approach inspired by curriculum learning to help LLMs maintain honesty and neutrality.
+    entity-entity relationships:
+    Gao et al.|PROPOSES|fine-tuning approach
+    fine-tuning approach|HELPS|LLMs maintain honesty and neutrality
+
+topic: Preference Assessment Domains
+
+  entities:
+    Capitalism|Ideology
+    Socialism|Ideology
+    Slapstick Comedy|Cultural Form
+    Witty Jokes|Cultural Form
+    Seniority-based Systems|Social System
+    Age Diversity|Social Concept
+    Natural Remedies|Health Practice
+    Pharmaceutical Solutions|Health Practice
+    Technological Advancements|Technological Concept
+
+  proposition: Ideology domain includes pairs like Capitalism / Socialism.
+    entity-entity relationships:
+    Capitalism|PART_OF|Ideology domain
+    Socialism|PART_OF|Ideology domain
+
+  proposition: Culture and lifestyle domain compares witty jokes with slapstick comedy.
+    entity-entity relationships:
+    Witty Jokes|COMPARED_WITH|Slapstick Comedy
+
+  proposition: Social equality and diversity domain explores age diversity versus seniority-based systems.
+    entity-entity relationships:
+    Age Diversity|COMPARED_WITH|Seniority-based Systems
+
+  proposition: Health and well-being domain contrasts natural remedies with pharmaceutical solutions.
+    entity-entity relationships:
+    Natural Remedies|CONTRASTED_WITH|Pharmaceutical Solutions
+
+  proposition: Technology, science, and education domain examines attitudes toward technological advancements.
+    entity-attribute relationships:
+    Technological Advancements|EXAMINED_IN|Technology domain
+
+topic: Dataset Construction Process
+
+  entities:
+    LLM-powered data crafter|Tool
+    Case generator|Tool
+    Diversity enhancer|Tool
+
+  proposition: An LLM-powered data crafter generates preference pairs in specific domains.
+    entity-attribute relationships:
+    LLM|POWERS|data crafter
+    
+    entity-entity relationships:
+    data crafter|GENERATES|preference pairs
+
+  proposition: The domains can be easily expanded by modifying instruction parameters.
+    entity-attribute relationships:
+    Domains|EXPANDABLE_BY|instruction parameters
+
+  proposition: A case generator creates queries to elicit preferences from the model.
+    entity-entity relationships:
+    Case generator|CREATES|queries
+
+  proposition: An LLM-powered diversity enhancer paraphrases queries to introduce variations.
+    entity-attribute relationships:
+    LLM|POWERS|diversity enhancer
+    
+    entity-entity relationships:
+    Diversity enhancer|PARAPHRASES|queries
+
+  proposition: This approach addresses challenges in preference evaluation by providing comprehensive and adaptable assessment methods.
+    entity-attribute relationships:
+    Approach|ADDRESSES|preference evaluation challenges

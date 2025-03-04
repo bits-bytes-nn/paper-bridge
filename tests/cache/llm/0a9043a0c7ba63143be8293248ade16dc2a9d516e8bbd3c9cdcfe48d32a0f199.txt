@@ -1,0 +1,13 @@
+Research Publications on Generative AI Impacts and Challenges
+
+Thomas KF Chiu studied the impact of Generative AI on education practices, policies, and research directions.
+Michael Chui and colleagues explored the economic potential of generative AI.
+Maria Teresa Baldassarre and researchers analyzed the social impact of generative AI.
+Yan Chen and Pouyan Esmaeilzadeh investigated privacy and security challenges of generative AI in medical practice.
+Sunnie S. Y. Kim and colleagues examined the impact of large language models' uncertainty expression on user reliance and trust.
+Weixin Liang and team monitored AI-modified content at scale, focusing on ChatGPT's impact on AI conference peer reviews.
+Mingmeng Geng and Roberto Trotta researched ChatGPT's transformation of academics' writing style.
+Mingmeng Geng and colleagues studied the impact of large language models in academia, from writing to speaking.
+Anton Korinek explored use cases and implications of generative AI for economic research.
+Siwei Lyu addressed the challenges of DeepFake and mitigating negative impacts of AI-generated content.
+Umar Ali Bukar and researchers developed a decision-making framework for utilizing generative AI in education, using ChatGPT as a case study.

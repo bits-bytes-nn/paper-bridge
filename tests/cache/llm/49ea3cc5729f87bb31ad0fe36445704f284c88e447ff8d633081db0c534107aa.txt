@@ -1,0 +1,105 @@
+topic: Privacy Attacks and Preservation in Large Language Models
+
+  entities:
+    Large Language Models|Model
+    Carlini et al.|Research Group
+    Shokri et al.|Research Group
+    Li et al.|Research Group
+    ProPILE|Tool
+    Janus|Method
+    Differential Privacy|Method
+
+  proposition: Large Language Models (LLMs) are vulnerable to privacy leaks and information extraction attacks.
+    entity-attribute relationships:
+    Large Language Models|VULNERABLE_TO|privacy leaks
+    Large Language Models|VULNERABLE_TO|information extraction attacks
+
+    entity-entity relationships:
+    
+  proposition: Several studies have demonstrated LLMs can leak private information.
+    entity-attribute relationships:
+    Large Language Models|CAPABILITY|leak private information
+
+    entity-entity relationships:
+    
+  proposition: LLMs are susceptible to data extraction attacks.
+    entity-attribute relationships:
+    Large Language Models|VULNERABLE_TO|data extraction attacks
+
+    entity-entity relationships:
+    
+  proposition: Research efforts have focused on developing Privacy-Preserving Large Language Models.
+    entity-attribute relationships:
+    Large Language Models|DESCRIBED_BY|Privacy-Preserving
+
+    entity-entity relationships:
+    
+  proposition: Techniques like differential privacy have been employed to protect model privacy.
+    entity-attribute relationships:
+    Differential Privacy|PURPOSE|protect model privacy
+
+    entity-entity relationships:
+    
+  proposition: Privacy attack methods include data extraction attacks, membership inference attacks, and embedding-level privacy attacks.
+    entity-attribute relationships:
+    Privacy Attack Methods|INCLUDES|data extraction attacks
+    Privacy Attack Methods|INCLUDES|membership inference attacks
+    Privacy Attack Methods|INCLUDES|embedding-level privacy attacks
+
+    entity-entity relationships:
+    
+  proposition: Privacy concerns can be categorized into Privacy Awareness and Privacy Leakage.
+    entity-attribute relationships:
+    Privacy Concerns|CATEGORIZED_AS|Privacy Awareness
+    Privacy Concerns|CATEGORIZED_AS|Privacy Leakage
+
+    entity-entity relationships:
+    
+  proposition: Governments, communities, and stakeholders demand LLMs comply with privacy laws.
+    entity-attribute relationships:
+    Large Language Models|REQUIRED_TO|comply with privacy laws
+
+    entity-entity relationships:
+    
+  proposition: Refusal to answer sensitive questions is considered the true indicator of privacy understanding.
+    entity-attribute relationships:
+    Privacy Understanding|INDICATED_BY|refusal to answer sensitive questions
+
+    entity-entity relationships:
+    
+  proposition: Carlini et al. introduced data extraction attacks.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Carlini et al.|INTRODUCED|data extraction attacks
+    
+  proposition: Shokri et al. developed membership inference attacks.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Shokri et al.|DEVELOPED|membership inference attacks
+    
+  proposition: Li et al. proposed a perturbation-based attack model.
+    entity-attribute relationships:
+
+    entity-entity relationships:
+    Li et al.|PROPOSED|perturbation-based attack model
+    
+  proposition: A recent study introduced Janus, an attack that recovers forgotten personally identifiable information during fine-tuning.
+    entity-attribute relationships:
+    Janus|PURPOSE|recover forgotten personally identifiable information
+
+    entity-entity relationships:
+    
+  proposition: Differential privacy methods introduce noise during fine-tuning.
+    entity-attribute relationships:
+    Differential Privacy|METHOD|introduce noise during fine-tuning
+
+    entity-entity relationships:
+    
+  proposition: ProPILE assesses privacy intrusion levels in LLMs.
+    entity-attribute relationships:
+    ProPILE|PURPOSE|assess privacy intrusion levels
+    ProPILE|APPLIED_TO|Large Language Models
+
+    entity-entity relationships:

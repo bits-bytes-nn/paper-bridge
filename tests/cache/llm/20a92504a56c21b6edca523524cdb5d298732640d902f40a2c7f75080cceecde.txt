@@ -1,0 +1,150 @@
+topic: Multimodal Large Language Model Benchmarks
+
+  entities:
+    Yuan Liu|Researcher
+    Bohao Li|Researcher
+    Dingjie Song|Researcher
+    Haoning Wu|Researcher
+    Zhenfei Yin|Researcher
+    Haotian Liu|Researcher
+    Chaoyou Fu|Researcher
+    Jihyung Kil|Researcher
+    Xiyao Wang|Researcher
+    Xiang Yue|Researcher
+    Ge Zhang|Researcher
+    Pan Lu|Researcher
+    Yijia Xiao|Researcher
+    MMBench|Benchmark
+    SEED-Bench|Benchmark
+    SEED-Bench-2-Plus|Benchmark
+    MileBench|Benchmark
+    Q-Bench|Benchmark
+    LAMM|Benchmark
+    MME|Benchmark
+    CompBench|Benchmark
+    Mementos|Benchmark
+    MMMU|Benchmark
+    MMMU-Pro|Benchmark
+    CMMMU|Benchmark
+    MathVista|Benchmark
+    LogicVista|Benchmark
+
+  proposition: Yuan Liu et al. published MMBench for evaluating multi-modal model capabilities.
+    entity-attribute relationships:
+    Yuan Liu|CREATED|MMBench
+    MMBench|PURPOSE|evaluating multi-modal model capabilities
+
+    entity-entity relationships:
+    Yuan Liu|AUTHOR_OF|MMBench
+
+  proposition: Bohao Li et al. created SEED-Bench for benchmarking multimodal large language models.
+    entity-attribute relationships:
+    Bohao Li|CREATED|SEED-Bench
+    SEED-Bench|PURPOSE|benchmarking multimodal large language models
+
+    entity-entity relationships:
+    Bohao Li|AUTHOR_OF|SEED-Bench
+
+  proposition: Dingjie Song et al. developed MileBench for evaluating MLLMs in long context scenarios.
+    entity-attribute relationships:
+    Dingjie Song|CREATED|MileBench
+    MileBench|PURPOSE|evaluating MLLMs in long context scenarios
+
+    entity-entity relationships:
+    Dingjie Song|AUTHOR_OF|MileBench
+
+  proposition: Haoning Wu et al. introduced Q-Bench for evaluating foundation models on low-level vision tasks.
+    entity-attribute relationships:
+    Haoning Wu|CREATED|Q-Bench
+    Q-Bench|PURPOSE|evaluating foundation models on low-level vision tasks
+
+    entity-entity relationships:
+    Haoning Wu|AUTHOR_OF|Q-Bench
+
+  proposition: Zhenfei Yin et al. developed LAMM as a language-assisted multi-modal instruction-tuning dataset and benchmark.
+    entity-attribute relationships:
+    Zhenfei Yin|CREATED|LAMM
+    LAMM|PURPOSE|language-assisted multi-modal instruction-tuning dataset and benchmark
+
+    entity-entity relationships:
+    Zhenfei Yin|AUTHOR_OF|LAMM
+
+  proposition: Haotian Liu et al. proposed visual instruction tuning methodology.
+    entity-attribute relationships:
+    Haotian Liu|PROPOSED|visual instruction tuning methodology
+
+    entity-entity relationships:
+
+  proposition: Chaoyou Fu et al. created MME as a comprehensive evaluation benchmark for multimodal large language models.
+    entity-attribute relationships:
+    Chaoyou Fu|CREATED|MME
+    MME|PURPOSE|comprehensive evaluation benchmark for multimodal large language models
+
+    entity-entity relationships:
+    Chaoyou Fu|AUTHOR_OF|MME
+
+  proposition: Bohao Li et al. extended SEED-Bench with SEED-Bench-2-Plus focusing on text-rich visual comprehension.
+    entity-attribute relationships:
+    Bohao Li|EXTENDED|SEED-Bench
+    SEED-Bench-2-Plus|PURPOSE|text-rich visual comprehension
+
+    entity-entity relationships:
+    Bohao Li|AUTHOR_OF|SEED-Bench-2-Plus
+    SEED-Bench-2-Plus|DERIVED_FROM|SEED-Bench
+
+  proposition: Jihyung Kil et al. developed CompBench as a comparative reasoning benchmark for multimodal LLMs.
+    entity-attribute relationships:
+    Jihyung Kil|CREATED|CompBench
+    CompBench|PURPOSE|comparative reasoning benchmark for multimodal LLMs
+
+    entity-entity relationships:
+    Jihyung Kil|AUTHOR_OF|CompBench
+
+  proposition: Xiyao Wang et al. created Mementos, a benchmark for reasoning over image sequences.
+    entity-attribute relationships:
+    Xiyao Wang|CREATED|Mementos
+    Mementos|PURPOSE|reasoning over image sequences
+
+    entity-entity relationships:
+    Xiyao Wang|AUTHOR_OF|Mementos
+
+  proposition: Xiang Yue et al. introduced MMMU as a massive multi-discipline multimodal understanding and reasoning benchmark.
+    entity-attribute relationships:
+    Xiang Yue|CREATED|MMMU
+    MMMU|PURPOSE|massive multi-discipline multimodal understanding and reasoning
+
+    entity-entity relationships:
+    Xiang Yue|AUTHOR_OF|MMMU
+
+  proposition: Xiang Yue et al. further developed MMMU-Pro as a more robust multimodal understanding benchmark.
+    entity-attribute relationships:
+    Xiang Yue|CREATED|MMMU-Pro
+    MMMU-Pro|PURPOSE|more robust multimodal understanding
+
+    entity-entity relationships:
+    Xiang Yue|AUTHOR_OF|MMMU-Pro
+    MMMU-Pro|DERIVED_FROM|MMMU
+
+  proposition: Ge Zhang et al. created CMMMU, a Chinese massive multi-discipline multimodal understanding benchmark.
+    entity-attribute relationships:
+    Ge Zhang|CREATED|CMMMU
+    CMMMU|PURPOSE|Chinese massive multi-discipline multimodal understanding
+
+    entity-entity relationships:
+    Ge Zhang|AUTHOR_OF|CMMMU
+
+  proposition: Pan Lu et al. developed MathVista for evaluating mathematical reasoning in visual contexts.
+    entity-attribute relationships:
+    Pan Lu|CREATED|MathVista
+    MathVista|PURPOSE|evaluating mathematical reasoning in visual contexts
+
+    entity-entity relationships:
+    Pan Lu|AUTHOR_OF|MathVista
+
+  proposition: Yijia Xiao et al. proposed LogicVista as a multimodal LLM logical reasoning benchmark.
+    entity-attribute relationships:
+    Yijia Xiao|CREATED|LogicVista
+    LogicVista|PURPOSE|multimodal LLM logical reasoning
+
+    entity-entity relationships:
+    Yijia Xiao|AUTHOR_OF|LogicVista

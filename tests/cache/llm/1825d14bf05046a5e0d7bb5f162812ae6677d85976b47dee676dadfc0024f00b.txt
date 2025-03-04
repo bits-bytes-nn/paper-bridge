@@ -1,0 +1,19 @@
+Research Papers on Large Language Model Safety and Jailbreak Attacks
+
+Cold-attack is a method for jailbreaking large language models with stealthiness and controllability.
+SafeDecoding is a technique for defending against jailbreak attacks via safety-aware decoding.
+Researchers have developed an indirect jailbreak attack method using a guessing game with implicit clues.
+A comprehensive survey exists on attacks, defenses, and evaluations for LLM conversation safety.
+Researchers are working on finding safety neurons in large language models.
+Goal-oriented prompt attacks have been developed for safety evaluation of LLMs.
+TF-Attack is a transferable and fast adversarial attack method targeting large language models.
+Researchers have proposed methods for detecting AI flaws through target-driven attacks on internal model faults.
+IntentObfuscator is a jailbreaking method that confuses LLMs with specific prompts.
+Multiple research efforts focus on jailbreaking and mitigating vulnerabilities in large language models.
+MasterKey is an automated jailbreak technique that works across multiple large language models.
+Researchers have demonstrated methods for removing RLHF protections in GPT-4 via fine-tuning.
+Novel exploitation techniques for GPT-4 APIs have been explored.
+A comprehensive research effort addresses foundational challenges in assuring alignment and safety of large language models.
+Researchers argue that safety alignment should be more than just a few tokens deep.
+Shadow alignment research reveals the ease of subverting safely-aligned language models.
+A safety alignment preference dataset has been created for Llama family models.

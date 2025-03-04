@@ -1,0 +1,15 @@
+Research Papers on Large Language Model Safety and Defense Mechanisms
+
+Lang Gao, Xiangliang Zhang, Preslav Nakov, and Xiuying Chen authored a paper on understanding and defending against jailbreaks in large language models.
+Yueqi Xie and colleagues proposed defending ChatGPT against jailbreak attacks via self-reminders.
+Mansi Phute and co-authors explored LLM self-defense through self-examination.
+Matthew Pisano et al. developed Bergeron, a conscience-based alignment framework to combat adversarial attacks.
+Neel Jain and researchers presented baseline defenses for adversarial attacks against aligned language models.
+Alexander Robey and colleagues introduced SmoothLLM for defending large language models against jailbreaking attacks.
+Jiabao Ji et al. proposed defending LLMs through semantic smoothing.
+Zhexin Zhang and team suggested defending LLMs through goal prioritization.
+Jing Xu and researchers developed recipes for safety in open-domain chatbots.
+Taeyoun Kim and co-authors argued that jailbreaking is best solved by definition.
+Yifan Zeng and colleagues created AutoDefense, a multi-agent LLM defense against jailbreak attacks.
+Suyu Ge et al. developed MART for improving LLM safety through multi-round automatic red-teaming.
+Zhuowen Yuan and researchers created RigorLLM for resilient guardrails against undesired content.

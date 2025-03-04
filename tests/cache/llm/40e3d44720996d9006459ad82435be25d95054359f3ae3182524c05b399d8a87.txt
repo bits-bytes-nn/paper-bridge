@@ -1,0 +1,122 @@
+topic: Prompt Injection Defense and LLM Safety Research
+
+  entities:
+    Julien Piet|Researcher
+    Maha Alrashed|Researcher
+    Chawin Sitawarin|Researcher
+    Sizhe Chen|Researcher
+    Zeming Wei|Researcher
+    Elizabeth Sun|Researcher
+    Basel Alomair|Researcher
+    David Wagner|Researcher
+    Eric Wallace|Researcher
+    Kai Xiao|Researcher
+    Reimar Leike|Researcher
+    Lilian Weng|Researcher
+    Johannes Heidecke|Researcher
+    Alex Beutel|Researcher
+    Arman Zharmagambetov|Researcher
+    Saeed Mahloujifar|Researcher
+    Kamalika Chaudhuri|Researcher
+    Chuan Guo|Researcher
+    Tong Wu|Researcher
+    Shujian Zhang|Researcher
+    Kaiqiang Song|Researcher
+    Silei Xu|Researcher
+    Sanqiang Zhao|Researcher
+    Ravi Agrawal|Researcher
+    Sathish Reddy Indurthi|Researcher
+    Chong Xiang|Researcher
+    Prateek Mittal|Researcher
+    Wenxuan Zhou|Researcher
+    Yulin Chen|Researcher
+    Haoran Li|Researcher
+    Zihao Zheng|Researcher
+    Yangqiu Song|Researcher
+    Dekai Wu|Researcher
+    Bryan Hooi|Researcher
+    Jatmo|Research Paper
+    StruQ|Research Paper
+    European Symposium on Research in Computer Security|Conference
+    arXiv|Publication Platform
+
+  proposition: Julien Piet, Maha Alrashed, Chawin Sitawarin, Sizhe Chen, Zeming Wei, Elizabeth Sun, Basel Alomair, and David Wagner published "Jatmo: Prompt injection defense by task-specific finetuning" in European Symposium on Research in Computer Security in 2024.
+    entity-attribute relationships:
+    Jatmo|DESCRIBED_BY|prompt injection defense by task-specific finetuning
+    
+    entity-entity relationships:
+    Julien Piet|AUTHORED|Jatmo
+    Maha Alrashed|AUTHORED|Jatmo
+    Chawin Sitawarin|AUTHORED|Jatmo
+    Sizhe Chen|AUTHORED|Jatmo
+    Zeming Wei|AUTHORED|Jatmo
+    Elizabeth Sun|AUTHORED|Jatmo
+    Basel Alomair|AUTHORED|Jatmo
+    David Wagner|AUTHORED|Jatmo
+    Jatmo|PUBLISHED_IN|European Symposium on Research in Computer Security
+
+  proposition: Sizhe Chen, Julien Piet, Chawin Sitawarin, and David Wagner proposed "StruQ: Defending against prompt injection with structured queries" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    StruQ|DESCRIBED_BY|defending against prompt injection with structured queries
+    
+    entity-entity relationships:
+    Sizhe Chen|AUTHORED|StruQ
+    Julien Piet|AUTHORED|StruQ
+    Chawin Sitawarin|AUTHORED|StruQ
+    David Wagner|AUTHORED|StruQ
+    StruQ|PUBLISHED_IN|arXiv
+
+  proposition: Eric Wallace, Kai Xiao, Reimar Leike, Lilian Weng, Johannes Heidecke, and Alex Beutel explored "The instruction hierarchy: Training llms to prioritize privileged instructions" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Research Paper|DESCRIBED_BY|training llms to prioritize privileged instructions
+    
+    entity-entity relationships:
+    Eric Wallace|AUTHORED|Research Paper
+    Kai Xiao|AUTHORED|Research Paper
+    Reimar Leike|AUTHORED|Research Paper
+    Lilian Weng|AUTHORED|Research Paper
+    Johannes Heidecke|AUTHORED|Research Paper
+    Alex Beutel|AUTHORED|Research Paper
+    Research Paper|PUBLISHED_IN|arXiv
+
+  proposition: Sizhe Chen, Arman Zharmagambetov, Saeed Mahloujifar, Kamalika Chaudhuri, and Chuan Guo researched "Aligning LLMs to Be Robust Against Prompt Injection" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Research Paper|DESCRIBED_BY|aligning LLMs to be robust against prompt injection
+    
+    entity-entity relationships:
+    Sizhe Chen|AUTHORED|Research Paper
+    Arman Zharmagambetov|AUTHORED|Research Paper
+    Saeed Mahloujifar|AUTHORED|Research Paper
+    Kamalika Chaudhuri|AUTHORED|Research Paper
+    Chuan Guo|AUTHORED|Research Paper
+    Research Paper|PUBLISHED_IN|arXiv
+
+  proposition: Tong Wu, Shujian Zhang, Kaiqiang Song, Silei Xu, Sanqiang Zhao, Ravi Agrawal, Sathish Reddy Indurthi, Chong Xiang, Prateek Mittal, and Wenxuan Zhou investigated "Instructional Segment Embedding: Improving LLM Safety with Instruction Hierarchy" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Research Paper|DESCRIBED_BY|improving LLM safety with instruction hierarchy
+    
+    entity-entity relationships:
+    Tong Wu|AUTHORED|Research Paper
+    Shujian Zhang|AUTHORED|Research Paper
+    Kaiqiang Song|AUTHORED|Research Paper
+    Silei Xu|AUTHORED|Research Paper
+    Sanqiang Zhao|AUTHORED|Research Paper
+    Ravi Agrawal|AUTHORED|Research Paper
+    Sathish Reddy Indurthi|AUTHORED|Research Paper
+    Chong Xiang|AUTHORED|Research Paper
+    Prateek Mittal|AUTHORED|Research Paper
+    Wenxuan Zhou|AUTHORED|Research Paper
+    Research Paper|PUBLISHED_IN|arXiv
+
+  proposition: Yulin Chen, Haoran Li, Zihao Zheng, Yangqiu Song, Dekai Wu, and Bryan Hooi studied "Defense Against Prompt Injection Attack by Leveraging Attack Techniques" in an arXiv preprint in 2024.
+    entity-attribute relationships:
+    Research Paper|DESCRIBED_BY|defense against prompt injection attack by leveraging attack techniques
+    
+    entity-entity relationships:
+    Yulin Chen|AUTHORED|Research Paper
+    Haoran Li|AUTHORED|Research Paper
+    Zihao Zheng|AUTHORED|Research Paper
+    Yangqiu Song|AUTHORED|Research Paper
+    Dekai Wu|AUTHORED|Research Paper
+    Bryan Hooi|AUTHORED|Research Paper
+    Research Paper|PUBLISHED_IN|arXiv

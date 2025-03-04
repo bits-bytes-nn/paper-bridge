@@ -1,0 +1,110 @@
+topic: Trust Calibration in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    AI|Technological Concept
+    Users|Social Concept
+    Transparency|Social Concept
+    Explainability|Technological Concept
+
+  proposition: Opaque marketing claims, incomplete documentation, and GenFMs' complexity create challenges in understanding model decision-making processes.
+    entity-attribute relationships:
+    Generative Foundation Models|DESCRIBED_BY|complex
+    Generative Foundation Models|CHARACTERIZED_BY|opaque marketing claims
+    Generative Foundation Models|CHARACTERIZED_BY|incomplete documentation
+
+    entity-entity relationships:
+    Generative Foundation Models|CHALLENGES|Understanding
+
+  proposition: Users may overtrust or undertrust AI due to lack of transparency.
+    entity-attribute relationships:
+    Users|POTENTIAL_ACTION|overtrust
+    Users|POTENTIAL_ACTION|undertrust
+    AI|CHARACTERIZED_BY|lack of transparency
+
+    entity-entity relationships:
+    Users|INFLUENCED_BY|Transparency
+
+  proposition: Addressing trust imbalances requires improving GenFMs' transparency and interpretability.
+    entity-attribute relationships:
+    Generative Foundation Models|NEEDS|transparency
+    Generative Foundation Models|NEEDS|interpretability
+
+    entity-entity relationships:
+    Transparency|ADDRESSES|Trust Imbalances
+
+  proposition: Key strategies for trust calibration include providing predictions explanations, detailing limitations, and exposing output uncertainties.
+    entity-attribute relationships:
+    Generative Foundation Models|STRATEGY|provide prediction explanations
+    Generative Foundation Models|STRATEGY|detail limitations
+    Generative Foundation Models|STRATEGY|expose output uncertainties
+
+    entity-entity relationships:
+    Strategies|SUPPORTS|Trust Calibration
+
+topic: Error Attribution in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Users|Social Concept
+    Error Attribution|Technological Concept
+    Accountability|Social Concept
+
+  proposition: Determining responsibility for errors in GenFMs is increasingly difficult as models become more complex.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERIZED_BY|increasing complexity
+    Generative Foundation Models|CHALLENGE|error responsibility
+
+    entity-entity relationships:
+    Complexity|COMPLICATES|Error Attribution
+
+  proposition: The opaque nature of GenFMs complicates error attribution.
+    entity-attribute relationships:
+    Generative Foundation Models|CHARACTERIZED_BY|opaque nature
+
+    entity-entity relationships:
+    Opaque Nature|COMPLICATES|Error Attribution
+
+  proposition: Strategies to address accountability include fine-grained model audits, detailed decision pathway logging, and context-aware explanations.
+    entity-attribute relationships:
+    Generative Foundation Models|STRATEGY|fine-grained model audits
+    Generative Foundation Models|STRATEGY|detailed decision pathway logging
+    Generative Foundation Models|STRATEGY|context-aware explanations
+
+    entity-entity relationships:
+    Strategies|SUPPORTS|Accountability
+
+topic: Robustness in Generative Foundation Models
+
+  entities:
+    Generative Foundation Models|Model
+    Robustness|Technological Concept
+    Noise|Technological Concept
+    Adversarial Training|Method
+    Queries|Technological Concept
+
+  proposition: Robustness is a critical metric for evaluating GenFMs' response consistency under natural perturbations.
+    entity-attribute relationships:
+    Robustness|DEFINED_AS|critical metric
+    Generative Foundation Models|EVALUATED_BY|response consistency
+    Generative Foundation Models|EVALUATED_UNDER|natural perturbations
+
+    entity-entity relationships:
+    Robustness|MEASURES|Generative Foundation Models
+
+  proposition: Noise perturbations can have both positive and negative effects on model performance.
+    entity-attribute relationships:
+    Noise|POTENTIAL_IMPACT|positive
+    Noise|POTENTIAL_IMPACT|negative
+
+    entity-entity relationships:
+    Noise|INFLUENCES|Model Performance
+
+  proposition: Close-ended queries require high consistency, especially in safety-critical domains like autonomous driving and medical health.
+    entity-attribute relationships:
+    Queries|TYPE|close-ended
+    Queries|REQUIRES|high consistency
+
+    entity-entity relationships:
+    Queries|CRITICAL_IN|Autonomous Driving
+    Queries|CRITICAL_IN|Medical Health
