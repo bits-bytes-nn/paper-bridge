@@ -88,7 +88,7 @@ def parse_target_date(date_str: Optional[str]) -> datetime:
         ).astimezone(timezone.utc) - timedelta(days=1)
 
     try:
-        return datetime.strptime(date_str, "%Y-%m-%d")
+        return datetime.strptime(date_str, "%Y-%m-%d").astimezone(timezone.utc)
     except ValueError as e:
         logger.error(f"Invalid date format: {e}")
         sys.exit(1)
@@ -122,11 +122,15 @@ def send_failure_notification(
     boto3_session: boto3.Session, topic_arn: str, target_date: Optional[datetime]
 ) -> None:
     sns = boto3_session.client("sns")
-
     date_str = (
         target_date.strftime("%Y-%m-%d")
         if target_date
-        else (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        else (
+            datetime.now(timezone.utc)
+            .replace(hour=0, minute=0, second=0, microsecond=0)
+            .astimezone(timezone.utc)
+            - timedelta(days=1)
+        ).strftime("%Y-%m-%d")
     )
 
     message = f"Paper cleaning failed\n" f"Date: {date_str}\n"

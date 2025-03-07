@@ -1,7 +1,7 @@
 import argparse
 import sys
 import boto3
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from pprint import pformat
 from typing import List, Optional
@@ -41,12 +41,13 @@ def main() -> None:
             target_date,
             args.days_to_fetch,
         )
-        logger.info(f"Found {len(papers)} papers to process")
-        logger.debug("Paper details: %s", pformat(papers))
-
         flattened_papers = [
             paper for papers_list in papers.values() for paper in papers_list
         ]
+
+        logger.info(f"Found {len(flattened_papers)} papers to process")
+        logger.debug("Paper details: %s", pformat(papers))
+
         if not flattened_papers:
             logger.warning("No papers found to process")
             return
@@ -122,11 +123,15 @@ def send_failure_notification(
     papers: List[Paper],
 ) -> None:
     sns = boto3_session.client("sns")
-
     date_str = (
         target_date.strftime("%Y-%m-%d")
         if target_date
-        else (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        else (
+            datetime.now(timezone.utc)
+            .replace(hour=0, minute=0, second=0, microsecond=0)
+            .astimezone(timezone.utc)
+            - timedelta(days=1)
+        ).strftime("%Y-%m-%d")
     )
     paper_ids = [paper.arxiv_id for paper in papers]
 
@@ -135,7 +140,6 @@ def send_failure_notification(
         f"Date: {date_str}\n"
         f"Paper IDs: {', '.join(paper_ids)}"
     )
-
     sns.publish(TopicArn=topic_arn, Message=message, Subject="Paper Bridge Failure")
 
 

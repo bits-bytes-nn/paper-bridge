@@ -156,7 +156,7 @@ class PaperFetcher:
     @staticmethod
     def _get_target_date(target_date: Optional[datetime]) -> datetime:
         if target_date is not None:
-            return target_date
+            return target_date.astimezone(timezone.utc)
         return datetime.now(timezone.utc).replace(
             hour=0, minute=0, second=0, microsecond=0
         ).astimezone(timezone.utc) - timedelta(days=1)
@@ -165,7 +165,9 @@ class PaperFetcher:
         self, end_date: datetime, days_to_fetch: Optional[int] = None
     ) -> Dict[str, List[Paper]]:
         papers_by_date: Dict[str, List[Paper]] = {}
-        start_date = end_date - timedelta(days=days_to_fetch or self.days_to_fetch - 1)
+        start_date = end_date - timedelta(
+            days=(days_to_fetch or self.days_to_fetch) - 1
+        )
         logger.info(f"Fetching papers from '{start_date}' to '{end_date}'")
 
         for current_date in self._date_range(start_date, end_date):

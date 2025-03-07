@@ -37,14 +37,14 @@ output "private_subnet_ids" {
   value       = aws_subnet.private[*].id
 }
 
-output "vpn_security_group_id" {
-  description = "VPN security group ID (deprecated, use vpn_security_group_ids instead)"
-  value       = var.enable_vpn ? aws_security_group.vpn[0].id : null
-}
-
 output "vpn_security_group_ids" {
   description = "List of VPN security group IDs for secure access"
   value       = var.enable_vpn ? [aws_security_group.vpn[0].id] : []
+}
+
+output "vpn_endpoint" {
+  description = "VPN endpoint details for client connections"
+  value       = var.enable_vpn ? aws_ec2_client_vpn_endpoint.this[0].dns_name : null
 }
 
 output "nat_gateway_ips" {

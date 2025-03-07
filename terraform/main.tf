@@ -38,7 +38,7 @@ module "neptune" {
   vpc_id                    = module.base.vpc.id
   private_subnet_ids        = module.base.private_subnet_ids
   client_security_group_ids = [module.client.security_group_id]
-  vpn_security_group_ids    = var.enable_vpn ? [module.base.vpn_security_group_id] : []
+  vpn_security_group_ids    = var.enable_vpn ? module.base.vpn_security_group_ids : []
   db_instance_type          = var.neptune_instance_type
   min_ncu                   = var.neptune_min_capacity
   max_ncu                   = var.neptune_max_capacity

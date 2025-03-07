@@ -72,6 +72,7 @@ variable "vpn_client_cidr_block" {
   }
 }
 
+
 variable "email_address" {
   description = "Email address for notifications and alerts"
   type        = string

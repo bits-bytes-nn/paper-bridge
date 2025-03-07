@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 import boto3
 from .aws_helpers import NeptuneClient, OpenSearchClient
 from .logger import logger

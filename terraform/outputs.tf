@@ -1,3 +1,8 @@
+output "vpn_endpoint" {
+  description = "VPN endpoint details for client connections"
+  value       = var.enable_vpn ? module.base.vpn_endpoint : null
+}
+
 output "neptune_endpoint" {
   description = "Neptune cluster endpoint URL"
   value       = module.neptune.cluster.endpoint

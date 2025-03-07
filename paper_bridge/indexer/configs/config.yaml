@@ -4,10 +4,10 @@ resources:
   default_region_name: us-west-2
   bedrock_region_name: us-west-2
   s3_bucket_name: sagemaker-us-west-2-998601677581
-  s3_key_prefix: paper-bridge/batch-extract
+  s3_key_prefix: paper-bridge-dev/batch-extract
 
 indexing:
-  papers_per_day: 5
+  papers_per_day: 3
   days_to_fetch: 1
   min_upvotes: 10
   main_content_extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0

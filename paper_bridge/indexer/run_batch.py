@@ -1,10 +1,9 @@
 import argparse
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 import boto3
-from pytz import timezone
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from paper_bridge.indexer.configs import Config
@@ -34,7 +33,7 @@ def main(
 
     job_queue_name, job_definition_name = get_batch_job_names(boto3_session, config)
 
-    timestamp = datetime.now(timezone("UTC")).strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
     job_name = (
         f"{config.resources.project_name}"
         f"-{config.resources.stage}"
@@ -90,8 +89,8 @@ def create_job_parameters(
     enable_batch_inference: bool,
 ) -> Dict[str, str]:
     return {
-        "target_date": target_date or "None",
-        "days_to_fetch": days_to_fetch or "0",
+        "target_date": "None" if target_date is None else target_date,
+        "days_to_fetch": "0" if days_to_fetch is None else str(days_to_fetch),
         "enable_batch_inference": str(enable_batch_inference),
     }
 
