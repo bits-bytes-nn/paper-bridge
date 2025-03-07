@@ -22,6 +22,7 @@ module "client" {
   vpc_id                      = module.base.vpc.id
   private_subnet_ids          = module.base.private_subnet_ids
   root_dir                    = local.root_dir
+  codebuild_source_bucket     = var.codebuild_source_bucket
   email_address               = var.email_address
   indexer_schedule_expression = var.indexer_schedule_expression
   cleaner_schedule_expression = var.cleaner_schedule_expression

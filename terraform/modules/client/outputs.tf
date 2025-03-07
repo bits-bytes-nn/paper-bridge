@@ -26,3 +26,23 @@ output "batch_job_definition" {
   description = "Name of the AWS Batch job definition for the indexing job"
   value       = aws_batch_job_definition.indexer.name
 }
+
+output "ecr_repository_indexer" {
+  description = "ECR repository URL for the indexer image"
+  value       = aws_ecr_repository.indexer.repository_url
+}
+
+output "ecr_repository_cleaner" {
+  description = "ECR repository URL for the cleaner image"
+  value       = aws_ecr_repository.cleaner.repository_url
+}
+
+output "codebuild_project_indexer" {
+  description = "CodeBuild project name for indexer"
+  value       = aws_codebuild_project.indexer.name
+}
+
+output "codebuild_project_cleaner" {
+  description = "CodeBuild project name for cleaner"
+  value       = aws_codebuild_project.cleaner.name
+}

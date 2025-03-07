@@ -41,6 +41,12 @@ variable "root_dir" {
   nullable    = false
 }
 
+variable "codebuild_source_bucket" {
+  description = "S3 bucket for storing CodeBuild source code"
+  type        = string
+  nullable    = false
+}
+
 variable "email_address" {
   description = "Email address for notifications and alerts"
   type        = string
