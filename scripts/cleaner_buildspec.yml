@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+
+  build:
+    commands:
+      - echo "Building the Docker image..."
+      - cd paper_bridge/cleaner
+      - ls -la
+      - docker build -t $ECR_REPOSITORY_URI:latest .
+
+  post_build:
+    commands:
+      - echo "Pushing the Docker image..."
+      - docker push $ECR_REPOSITORY_URI:latest
+      - echo "Build completed on $(date)"

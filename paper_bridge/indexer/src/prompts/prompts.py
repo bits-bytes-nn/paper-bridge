@@ -21,10 +21,10 @@ class BasePrompt:
 
 
 class MainContentExtractionPrompt(BasePrompt):
-    INPUT_VARIABLES = "text"
-    OUTPUT_VARIABLES = ("main_content", "start_marker", "end_marker")
+    INPUT_VARIABLES: str = "text"
+    OUTPUT_VARIABLES: Tuple[str, ...] = ("main_content", "start_marker", "end_marker")
 
-    SYSTEM_MESSAGE = """
+    SYSTEM_MESSAGE: str = """
     You are a specialized content extractor for English academic papers. Your task is to precisely identify the 
     boundaries of the main content and extract it accurately.
 
@@ -53,7 +53,7 @@ class MainContentExtractionPrompt(BasePrompt):
     <end_marker>[EXACTLY 20 chars]</end_marker>
     """
 
-    HUMAN_MESSAGE = """
+    HUMAN_MESSAGE: str = """
     Extract the main content and precise boundary markers from this academic paper:
 
     <scratchpad>

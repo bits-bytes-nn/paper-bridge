@@ -132,6 +132,7 @@ class Indexing(BaseModelWithDefaults):
     papers_per_day: int = Field(default=5, ge=1)
     days_to_fetch: int = Field(default=7, ge=1)
     min_upvotes: Optional[int] = Field(default=None, ge=0)
+    use_llama_parse: bool = Field(default=False)
     main_content_extraction_model_id: Optional[LanguageModelId] = None
     extraction_model_id: LanguageModelId = Field(
         default=LanguageModelId.CLAUDE_V3_5_SONNET_V2

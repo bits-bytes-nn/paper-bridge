@@ -40,6 +40,7 @@ def main() -> None:
         papers = fetcher.fetch_papers_for_date_range(
             target_date,
             args.days_to_fetch,
+            config.indexing.use_llama_parse,
         )
         flattened_papers = [
             paper for papers_list in papers.values() for paper in papers_list
@@ -50,6 +51,7 @@ def main() -> None:
 
         if not flattened_papers:
             logger.warning("No papers found to process")
+            success = True
             return
 
         run_extract_and_build(

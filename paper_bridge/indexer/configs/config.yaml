@@ -10,6 +10,7 @@ indexing:
   papers_per_day: 3
   days_to_fetch: 1
   min_upvotes: 10
+  use_llama_parse: False
   main_content_extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
   extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
   response_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0

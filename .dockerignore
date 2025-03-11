@@ -449,9 +449,8 @@ cython_debug/
 .idea/
 .run/
 .virtual_documents
+cache/
 certificates/
-ipynb/
 logs/
 output/
-paper_bridge/indexer/cache/
-paper_bridge/indexer/output/
+*.zip

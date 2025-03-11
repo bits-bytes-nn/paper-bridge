@@ -1,9 +1,9 @@
-import argparse
 import functools
 import os
+import re
 import time
-from typing import Any, Callable, Dict, Union, Tuple, Type, Optional
-from bs4 import BeautifulSoup
+from typing import Callable, Dict, Union, Tuple, Type, Optional
+from bs4 import BeautifulSoup, NavigableString, Tag
 from llama_index.core.types import BaseOutputParser
 from .logger import logger
 
@@ -60,18 +60,56 @@ class HTMLTagOutputParser(BaseOutputParser):
         return Dict[str, str] if isinstance(self.tag_names, tuple) else str
 
 
-def arg_as_bool(value: Any) -> bool:
-    if isinstance(value, bool):
-        return value
+def extract_text_from_html(html_content: str) -> str:
+    if not html_content:
+        return ""
 
-    if isinstance(value, str):
-        value = value.lower().strip()
-        if value in ("yes", "true", "t", "y", "1"):
-            return True
-        if value in ("no", "false", "f", "n", "0"):
-            return False
+    soup = BeautifulSoup(html_content, "html.parser")
 
-    raise argparse.ArgumentTypeError("Boolean value expected")
+    for tag_name in ["head", "meta", "script", "style", "title"]:
+        for tag in soup.find_all(tag_name):
+            tag.decompose()
+
+    def parse_element(element) -> str:
+        if isinstance(element, NavigableString):
+            return element.strip()
+
+        if not isinstance(element, Tag):
+            return ""
+
+        if element.name == "img":
+            alt = element.get("alt", "")
+            src = element.get("src", "")
+            return f"[Image: alt={alt}, src={src}]"
+
+        if element.name == "a":
+            href = element.get("href", "")
+            link_text = "".join(parse_element(child) for child in element.children)
+            return f"{link_text} ({href})" if href else link_text
+
+        if element.name in ["table", "thead", "tbody", "tr", "td", "th"]:
+            content = "".join(parse_element(child) for child in element.children)
+            return content
+
+        if element.name in ["code", "pre"]:
+            code_content = "".join(parse_element(child) for child in element.children)
+            return f"`{code_content}`"
+
+        if element.name == "math":
+            math_content = "".join(parse_element(child) for child in element.children)
+            return f"$$ {math_content} $$"
+
+        return " ".join(parse_element(child) for child in element.children)
+
+    extracted_text = parse_element(soup)
+
+    replacements = {"\\AND": "", "\\n": " ", "\\times": "x", "footnotemark:": ""}
+    for old, new in replacements.items():
+        extracted_text = extracted_text.replace(old, new)
+
+    extracted_text = re.sub(r"\s+", " ", extracted_text).strip()
+
+    return extracted_text
 
 
 def measure_execution_time(func: Callable) -> Callable:

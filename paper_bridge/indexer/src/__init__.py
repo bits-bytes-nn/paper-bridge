@@ -8,8 +8,8 @@ from paper_bridge.indexer.src.aws_helpers import (
 from paper_bridge.indexer.src.constants import EnvVars, LocalPaths, SSMParams
 from paper_bridge.indexer.src.fetcher import Paper, PaperFetcher
 from paper_bridge.indexer.src.indexer import run_extract_and_build
-from paper_bridge.indexer.src.logger import logger
-from paper_bridge.indexer.src.utils import HTMLTagOutputParser, arg_as_bool, is_aws_env
+from paper_bridge.indexer.src.logger import is_aws_env, logger
+from paper_bridge.indexer.src.utils import HTMLTagOutputParser, arg_as_bool
 
 __all__ = [
     "EnvVars",

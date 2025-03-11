@@ -1,14 +1,19 @@
 import argparse
-import os
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, Optional, Tuple, Union
 import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from paper_bridge.cleaner.configs import Config
-from paper_bridge.cleaner.src import Cleaner, EnvVars, get_ssm_param_value, logger
+from paper_bridge.cleaner.src import (
+    Cleaner,
+    EnvVars,
+    get_ssm_param_value,
+    is_aws_env,
+    logger,
+)
 
 
 def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, str]]:
@@ -45,7 +50,7 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
                 "Neptune or OpenSearch endpoint not found in SSM parameters"
             )
 
-        start_date, end_date = calculate_date_range(
+        start_date, end_date = parse_date_range(
             target_date, days_back, days_range, config
         )
 
@@ -57,7 +62,9 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
 
         cleaner = Cleaner(
             neptune_endpoint=neptune_endpoint,
-            opensearch_endpoint=opensearch_endpoint,
+            opensearch_endpoint=opensearch_endpoint.replace("http://", "").replace(
+                "https://", ""
+            ),
             opensearch_indexes=opensearch_indexes,
         )
 
@@ -94,28 +101,19 @@ def parse_target_date(date_str: Optional[str]) -> datetime:
         sys.exit(1)
 
 
-def calculate_date_range(
+def parse_date_range(
     target_date: datetime,
     days_back: Optional[int],
     days_range: Optional[int],
     config: Config,
 ) -> Tuple[str, str]:
-    days_back = days_back if days_back is not None else config.cleaner.days_back
-    days_range = days_range if days_range is not None else config.cleaner.days_range
+    days_back = days_back or config.cleaner.days_back
+    days_range = days_range or config.cleaner.days_range
 
     end_date = target_date - timedelta(days=days_back)
     start_date = end_date - timedelta(days=days_range)
 
     return start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d")
-
-
-def is_aws_env() -> bool:
-    aws_env_vars: List[str] = [
-        "AWS_BATCH_JOB_ID",
-        "AWS_LAMBDA_FUNCTION_NAME",
-        "ECS_CONTAINER_METADATA_URI",
-    ]
-    return any(env_var in os.environ for env_var in aws_env_vars)
 
 
 def send_failure_notification(

@@ -1,0 +1,11 @@
+resources:
+  project_name: paper-bridge
+  stage: dev
+  default_region_name: us-west-2
+  bedrock_region_name: us-west-2
+
+summarization:
+  papers_per_day: 3
+  days_to_fetch: 1
+  min_upvotes: 10
+  figure_analysis_model_id: anthropic.claude-3-haiku-20240307-v1:0
