@@ -18,7 +18,7 @@ locals {
 
   # Source files for Docker builds with more explicit file patterns
   indexer_source_files = concat(
-    tolist(fileset("${var.root_dir}/paper_bridge/indexer/configs", "**/*.{py,yaml,yml,json}")),
+    tolist(fileset("${var.root_dir}/paper_bridge/indexer/configs", "**/*.{py,yaml,yml}")),
     tolist(fileset("${var.root_dir}/paper_bridge/indexer/src", "**/*.py")),
     ["${var.root_dir}/paper_bridge/indexer/main.py"],
     ["${var.root_dir}/paper_bridge/indexer/Dockerfile"],
@@ -31,7 +31,7 @@ locals {
   ]))
 
   cleaner_source_files = concat(
-    tolist(fileset("${var.root_dir}/paper_bridge/cleaner/configs", "**/*.{py,yaml,yml,json}")),
+    tolist(fileset("${var.root_dir}/paper_bridge/cleaner/configs", "**/*.{py,yaml,yml}")),
     tolist(fileset("${var.root_dir}/paper_bridge/cleaner/src", "**/*.py")),
     ["${var.root_dir}/paper_bridge/cleaner/main.py"],
     ["${var.root_dir}/paper_bridge/cleaner/Dockerfile"],
@@ -87,7 +87,7 @@ locals {
     }
     batch_job = {
       vcpu        = 4
-      memory      = 2048
+      memory      = 8192
       retry       = 3
       timeout     = 10800
     }
@@ -245,7 +245,6 @@ resource "aws_iam_role_policy_attachment" "codebuild_policies" {
   role       = aws_iam_role.codebuild.name
   policy_arn = each.value
 }
-
 resource "null_resource" "upload_indexer_source" {
   triggers = {
     content_hash = local.indexer_hash
@@ -254,7 +253,7 @@ resource "null_resource" "upload_indexer_source" {
   provisioner "local-exec" {
     command = <<EOF
       cd ${var.root_dir}
-      zip -r indexer_source.zip paper_bridge/indexer
+      find paper_bridge/indexer -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip indexer_source.zip -@
       aws s3 cp indexer_source.zip s3://${var.codebuild_source_bucket}/${local.project_name}/indexer_source.zip
     EOF
   }
@@ -268,7 +267,7 @@ resource "null_resource" "upload_cleaner_source" {
   provisioner "local-exec" {
     command = <<EOF
       cd ${var.root_dir}
-      zip -r cleaner_source.zip paper_bridge/cleaner
+      find paper_bridge/cleaner -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip cleaner_source.zip -@
       aws s3 cp cleaner_source.zip s3://${var.codebuild_source_bucket}/${local.project_name}/cleaner_source.zip
     EOF
   }
@@ -713,7 +712,7 @@ resource "aws_cloudwatch_event_target" "indexer" {
 
   batch_target {
     job_definition = aws_batch_job_definition.indexer.arn
-    job_name       = "${local.project_name}-indexing-$${timestamp()}"
+    job_name = "${local.project_name}-indexing"
     array_size     = 2
     job_attempts   = local.default_configs.batch_job.retry
   }
