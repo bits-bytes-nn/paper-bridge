@@ -9,3 +9,9 @@ summarization:
   days_to_fetch: 1
   min_upvotes: 10
   figure_analysis_model_id: anthropic.claude-3-haiku-20240307-v1:0
+
+retrieval:
+  traversal_based_or_semantic_guided: traversal_based
+  set_subretriever: False
+  use_reranking_beam_search: False
+  use_post_processors: False

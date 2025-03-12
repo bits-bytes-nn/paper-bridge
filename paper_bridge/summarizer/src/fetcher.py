@@ -1,7 +1,6 @@
 import asyncio
 import base64
 import json
-import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
@@ -25,6 +24,8 @@ from .logger import is_aws_env, logger
 from .prompts import FigureAnalysisPrompt
 from .utils import HTMLTagOutputParser, extract_text_from_html, measure_execution_time
 from paper_bridge.summarizer.configs import Config
+
+ROOT_DIR: Path = Path("/tmp") if is_aws_env() else Path(__file__).parent.parent
 
 
 class Content(BaseModel):
@@ -64,12 +65,11 @@ class Figure(BaseModel):
         figure_id: str,
         path: str,
         caption: Optional[str] = None,
+        timeout: int = 60,
     ) -> "Figure":
         try:
-            image_data = await cls._get_image_data(path)
-            formatted_caption = caption or "No caption available"
-
-            user_message = cls._generate_prompt(prompt_template, formatted_caption)
+            image_data = await cls._get_image_data(path, timeout)
+            user_message = cls._generate_prompt(prompt_template, caption or "")
 
             image_node = ImageNode(image=image_data)
             response = await multi_modal_llm.acomplete(
@@ -94,26 +94,16 @@ class Figure(BaseModel):
         )
 
     @classmethod
-    def _generate_prompt(
-        cls, prompt_template: ChatPromptTemplate, formatted_caption: str
-    ) -> str:
-        if isinstance(prompt_template, ChatPromptTemplate):
-            try:
-                formatted_prompt = prompt_template.format(caption=formatted_caption)
-
-                if (
-                    hasattr(formatted_prompt, "messages")
-                    and len(formatted_prompt.messages) > 1
-                ):
-                    return formatted_prompt.messages[1].content
-            except Exception as e:
-                logger.warning(f"Error formatting prompt: {e}")
-
-        return f"Analyze this figure with caption: {formatted_caption}"
+    def _generate_prompt(cls, prompt_template: ChatPromptTemplate, caption: str) -> str:
+        try:
+            return prompt_template.format(caption=caption)
+        except Exception as e:
+            logger.warning(f"Error formatting prompt: {e}")
+            return f"Analyze this figure with caption: {caption}"
 
     @staticmethod
-    async def _get_image_data(path: str) -> str:
-        async with httpx.AsyncClient(timeout=60) as client:
+    async def _get_image_data(path: str, timeout: int) -> str:
+        async with httpx.AsyncClient(timeout=timeout) as client:
             if path.startswith(("http://", "https://")):
                 try:
                     response = await client.get(path)
@@ -144,7 +134,7 @@ class Paper(BaseModel):
     upvotes: int
     thumbnail: Optional[str] = None
     content: Optional[str] = None
-    figures: List[Dict[str, Any]] = Field(default_factory=list)
+    figures: List[Figure] = Field(default_factory=list)
     status: PaperStatus = Field(default=PaperStatus.PENDING)
 
     @classmethod
@@ -355,28 +345,39 @@ class PDFParser(BaseParser):
         extract_text: bool = True,
     ) -> Tuple[List[Figure], Content]:
         try:
-            response = await self._get_or_parse_document(pdf_path, use_cache)
-            elements = response.get("elements", [])
-
             figures_dir = figures_dir or pdf_path.parent / LocalPaths.FIGURES_DIR.value
             figures_dir.mkdir(parents=True, exist_ok=True)
 
-            figures = await self._extract_figures(elements, pdf_path, figures_dir)
-            content_text = response.get("content", {}).get("html", "").strip()
-
-            content = Content(
-                text=(
-                    extract_text_from_html(content_text)
-                    if extract_text
-                    else content_text
-                )
+            return await self._parse_with_upstage(
+                pdf_path, figures_dir, use_cache, extract_text
             )
-            logger.info("Successfully extracted %d figures from PDF", len(figures))
-            return figures, content
 
         except Exception as e:
             logger.warning("Failed to parse PDF document '%s': %s", pdf_path, str(e))
             return [], Content()
+
+    async def _parse_with_upstage(
+        self,
+        pdf_path: Path,
+        figures_dir: Path,
+        use_cache: bool,
+        extract_text: bool,
+    ) -> Tuple[List[Figure], Content]:
+        response = await self._get_or_parse_document(pdf_path, use_cache)
+        elements = response.get("elements", [])
+
+        figures = await self._extract_figures(elements, pdf_path, figures_dir)
+        content_text = response.get("content", {}).get("html", "").strip()
+
+        content = Content(
+            text=(
+                extract_text_from_html(content_text) if extract_text else content_text
+            )
+        )
+        logger.info(
+            "Successfully extracted %d figures from PDF using Upstage", len(figures)
+        )
+        return figures, content
 
     async def _get_or_parse_document(
         self, pdf_path: Path, use_cache: bool
@@ -442,9 +443,9 @@ class PDFParser(BaseParser):
                 )
                 img = soup.find("img")
                 caption = ""
-                if img and hasattr(img, "get"):
-                    alt_text = img.get("alt")
-                    if alt_text and hasattr(alt_text, "strip"):
+                if isinstance(img, Tag) and img.has_attr("alt"):
+                    alt_text = img["alt"]
+                    if isinstance(alt_text, str):
                         caption = alt_text.strip()
 
                 figure_data.append(
@@ -522,12 +523,14 @@ class PaperFetcher:
         config: Config,
         profile_name: Optional[str] = None,
         timeout: int = DEFAULT_TIMEOUT,
+        parse_pdf: bool = False,
     ) -> None:
         self.boto3_session = self._create_boto3_session(
             config.resources.bedrock_region_name, profile_name
         )
         self._configure(config, timeout)
         self._init_parsers(config, profile_name)
+        self.parse_pdf = parse_pdf
 
     @staticmethod
     def _create_boto3_session(
@@ -731,10 +734,12 @@ class PaperFetcher:
 
     def process_paper(self, paper: Paper) -> None:
         try:
-            success = self._process_paper_with_html(paper)
-
-            if not success:
+            if self.parse_pdf:
                 success = self._process_paper_with_pdf(paper)
+            else:
+                success = self._process_paper_with_html(paper)
+                if not success:
+                    success = self._process_paper_with_pdf(paper)
 
             if success:
                 paper.status = PaperStatus.PROCESSED
@@ -757,49 +762,56 @@ class PaperFetcher:
                 loop.close()
 
             paper.content = content.text
-            paper.figures = [figure.model_dump() for figure in figures]
+            paper.figures = figures
 
             return True
         except Exception as e:
-            logger.warning(f"HTML parsing failed for {paper.arxiv_id}: {str(e)}")
+            logger.warning(f"HTML parsing failed for '{paper.arxiv_id}': {str(e)}")
             return False
 
     def _process_paper_with_pdf(self, paper: Paper) -> bool:
         try:
-            with tempfile.TemporaryDirectory() as temp_dir:
-                pdf_path = self._download_arxiv_pdf(paper.arxiv_id, Path(temp_dir))
-                if not pdf_path:
-                    return False
+            paper_dir = self._get_paper_dir(paper.arxiv_id)
+            paper_dir.mkdir(parents=True, exist_ok=True)
 
-                figures_dir = Path(temp_dir) / "figures"
-                figures_dir.mkdir(exist_ok=True)
+            figures_dir = paper_dir / "figures"
+            figures_dir.mkdir(exist_ok=True)
 
-                loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(loop)
-                try:
-                    figures, content = loop.run_until_complete(
-                        self.pdf_parser.parse(pdf_path, figures_dir)
-                    )
-                finally:
-                    loop.close()
+            pdf_path = self._download_arxiv_pdf(paper.arxiv_id, paper_dir)
+            if not pdf_path:
+                return False
 
-                paper.content = content.text
-                paper.figures = [figure.model_dump() for figure in figures]
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                figures, content = loop.run_until_complete(
+                    self.pdf_parser.parse(pdf_path, figures_dir)
+                )
+            finally:
+                loop.close()
 
-                return True
+            paper.content = content.text
+            paper.figures = figures
+
+            return True
         except Exception as e:
             logger.warning(f"PDF parsing failed for {paper.arxiv_id}: {str(e)}")
             return False
 
     @staticmethod
-    def _download_arxiv_pdf(arxiv_id: str, temp_dir: Path) -> Optional[Path]:
+    def _get_paper_dir(arxiv_id: str) -> Path:
+        safe_id = arxiv_id.replace(".", "_")
+        return ROOT_DIR / LocalPaths.PAPERS_DIR.value / safe_id
+
+    @staticmethod
+    def _download_arxiv_pdf(arxiv_id: str, paper_dir: Path) -> Optional[Path]:
         try:
             client = arxiv.Client()
             search = arxiv.Search(id_list=[arxiv_id])
             paper = next(client.results(search))
 
-            pdf_path = temp_dir / f"{arxiv_id}.pdf"
-            paper.download_pdf(dirpath=str(temp_dir), filename=f"{arxiv_id}.pdf")
+            pdf_path = paper_dir / f"{arxiv_id}.pdf"
+            paper.download_pdf(dirpath=str(paper_dir), filename=f"{arxiv_id}.pdf")
 
             return pdf_path if pdf_path.exists() else None
         except Exception as e:

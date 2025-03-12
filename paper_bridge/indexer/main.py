@@ -47,7 +47,7 @@ def main() -> None:
         ]
 
         logger.info(f"Found {len(flattened_papers)} papers to process")
-        logger.debug("Paper details: %s", pformat(papers))
+        logger.debug("Paper details: %s", pformat(flattened_papers))
 
         if not flattened_papers:
             logger.warning("No papers found to process")

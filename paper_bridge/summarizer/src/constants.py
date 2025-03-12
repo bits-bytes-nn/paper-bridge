@@ -23,6 +23,7 @@ class LanguageModelId(str, Enum):
 class LocalPaths(str, Enum):
     FIGURES_DIR = "figures"
     LOGS_DIR = "logs"
+    PAPERS_DIR = "papers"
 
     CONFIG_FILE = "config.yaml"
     LOGS_FILE = "logs.txt"

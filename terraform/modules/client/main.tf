@@ -394,6 +394,7 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
 
       # Clean up the zip file
       echo "Cleaning up source zip file..."
+      rm -f ${var.root_dir}/indexer_source.zip
       aws s3 rm s3://${var.codebuild_source_bucket}/${local.project_name}/indexer_source.zip
       echo "Source zip file removed"
     EOF
@@ -442,6 +443,7 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
 
       # Clean up the zip file
       echo "Cleaning up source zip file..."
+      rm -f ${var.root_dir}/cleaner_source.zip
       aws s3 rm s3://${var.codebuild_source_bucket}/${local.project_name}/cleaner_source.zip
       echo "Source zip file removed"
     EOF
@@ -712,8 +714,7 @@ resource "aws_cloudwatch_event_target" "indexer" {
 
   batch_target {
     job_definition = aws_batch_job_definition.indexer.arn
-    job_name = "${local.project_name}-indexing"
-    array_size     = 2
+    job_name = "${local.project_name}-indexing-${formatdate("YYYYMMDD", timestamp())}"
     job_attempts   = local.default_configs.batch_job.retry
   }
 

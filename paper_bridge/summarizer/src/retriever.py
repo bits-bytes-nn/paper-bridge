@@ -1,6 +1,6 @@
 import nest_asyncio
 import os
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 import boto3
 from graphrag_toolkit import LexicalGraphQueryEngine, set_logging_config
 from graphrag_toolkit.lexical_graph_query_engine import PostProcessorsType
@@ -25,10 +25,6 @@ from .logger import logger
 from paper_bridge.summarizer.configs import Config
 
 nest_asyncio.apply()
-
-BasePostProcessor = Union[
-    StatementDiversityPostProcessor, StatementEnhancementPostProcessor
-]
 
 
 class Retriever:
@@ -62,70 +58,77 @@ class Retriever:
         self.vector_store = VectorStoreFactory.for_vector_store(
             f"aoss://{vector_endpoint}"
         )
+        self.query_engine = None
+
+        self._initialize_retriever()
+
+    def _initialize_retriever(self) -> None:
+        if (
+            self.config.retrieval.traversal_based_or_semantic_guided
+            == "traversal_based"
+        ):
+            self.use_traversal_based_retriever(self.config.retrieval.set_subretriever)
+        else:
+            self.use_semantic_guided_retriever(self.config.retrieval.set_subretriever)
+
+        if self.config.retrieval.use_reranking_beam_search:
+            self.use_reranking_beam_search()
+
+        if self.config.retrieval.use_post_processors:
+            self.use_post_processors()
+
+    def use_traversal_based_retriever(self, set_subretrievers: bool = False) -> None:
+        subretrievers: Optional[List[WeightedTraversalBasedRetrieverType]] = None
+        if set_subretrievers:
+            subretrievers = [ChunkBasedSearch]
 
         self.query_engine = LexicalGraphQueryEngine.for_traversal_based_search(
-            self.graph_store, self.vector_store
-        )
-
-        logger.info("Retriever initialized successfully")
-
-    def use_traversal_based_retriever(
-        self,
-        retrievers: Optional[List[WeightedTraversalBasedRetrieverType]] = None,
-    ) -> None:
-        default_retrievers = [ChunkBasedSearch]
-        self.query_engine = LexicalGraphQueryEngine.for_traversal_based_search(
-            self.graph_store, self.vector_store, retrievers=retrievers
+            self.graph_store, self.vector_store, retrievers=subretrievers
         )
         logger.info(
-            f"Using traversal-based retriever with {retrievers or default_retrievers}"
+            f"Using traversal-based retriever with {subretrievers or 'default options'}"
         )
 
-    def use_semantic_guided_retriever(
-        self, retrievers: Optional[List[SemanticGuidedRetrieverType]] = None
-    ) -> None:
-        default_retrievers = [
-            StatementCosineSimilaritySearch,
-            KeywordRankingSearch,
-            SemanticBeamGraphSearch,
-        ]
+    def use_semantic_guided_retriever(self, set_subretrievers: bool = False) -> None:
+        subretrievers: Optional[List[SemanticGuidedRetrieverType]] = None
+        if set_subretrievers:
+            subretrievers = [
+                StatementCosineSimilaritySearch,
+                KeywordRankingSearch,
+                SemanticBeamGraphSearch,
+            ]
+
         self.query_engine = LexicalGraphQueryEngine.for_semantic_guided_search(
-            self.graph_store,
-            self.vector_store,
-            retrievers=retrievers or default_retrievers,
+            self.graph_store, self.vector_store, retrievers=subretrievers
         )
         logger.info(
-            f"Using semantic-guided retriever with {retrievers or default_retrievers}"
+            f"Using semantic-guided retriever with {subretrievers or 'default options'}"
         )
 
-    def use_reranking_beam_search(
-        self,
-        use_gpu: bool = False,
-        gpu_id: int = 0,
-        beam_width: int = 100,
-        max_depth: int = 8,
-        top_k: int = 50,
-        max_keywords: int = 10,
-        batch_size: int = 128,
-    ) -> None:
+    def use_reranking_beam_search(self) -> None:
         cosine_retriever = StatementCosineSimilaritySearch(
-            vector_store=self.vector_store, graph_store=self.graph_store, top_k=top_k
+            vector_store=self.vector_store,
+            graph_store=self.graph_store,
+            top_k=self.config.retrieval.top_k,
         )
 
         keyword_retriever = KeywordRankingSearch(
             vector_store=self.vector_store,
             graph_store=self.graph_store,
-            max_keywords=max_keywords,
+            max_keywords=self.config.retrieval.max_keywords,
         )
 
         reranker = (
-            BGEReranker(gpu_id=gpu_id, batch_size=batch_size)
-            if use_gpu
-            else SentenceReranker(batch_size=batch_size)
+            BGEReranker(
+                gpu_id=self.config.retrieval.gpu_id,
+                batch_size=self.config.retrieval.batch_size,
+            )
+            if self.config.retrieval.use_gpu_reranker
+            else SentenceReranker(batch_size=self.config.retrieval.batch_size)
         )
 
         logger.info(
-            f"Using {'BGEReranker with GPU (ID: ' + str(gpu_id) + ')' if use_gpu else 'SentenceReranker (CPU)'}"
+            f"Using {'BGEReranker with GPU (ID: ' + str(self.config.retrieval.gpu_id) + ')' if self.config.retrieval.use_gpu_reranker else 'SentenceReranker (CPU)'}"
         )
 
         beam_retriever = RerankingBeamGraphSearch(
@@ -133,8 +136,8 @@ class Retriever:
             graph_store=self.graph_store,
             reranker=reranker,
             initial_retrievers=[cosine_retriever, keyword_retriever],
-            max_depth=max_depth,
-            beam_width=beam_width,
+            max_depth=self.config.retrieval.max_depth,
+            beam_width=self.config.retrieval.beam_width,
         )
 
         self.query_engine = LexicalGraphQueryEngine.for_semantic_guided_search(
@@ -144,46 +147,54 @@ class Retriever:
         )
 
         logger.info(
-            f"Using reranking beam search with beam width {beam_width} and max depth {max_depth}"
+            f"Using reranking beam search with beam width {self.config.retrieval.beam_width} and max depth {self.config.retrieval.max_depth}"
         )
 
-    def use_post_processors(
-        self,
-        use_diversity: bool = True,
-        use_enhancement: bool = True,
-        use_gpu_reranker: bool = False,
-        gpu_id: int = 0,
-        batch_size: int = 128,
-        similarity_threshold: float = 0.975,
-    ) -> None:
-        post_processors: List[PostProcessorsType] = []
+    def use_post_processors(self) -> None:
+        post_processors: Optional[List[PostProcessorsType]] = []
 
-        if use_gpu_reranker:
-            post_processors.append(BGEReranker(gpu_id=gpu_id, batch_size=batch_size))
-            logger.info(f"Using BGEReranker with GPU (ID: {gpu_id})")
-        else:
-            post_processors.append(SentenceReranker(batch_size=batch_size))
-            logger.info("Using SentenceReranker (CPU)")
-
-        if use_diversity:
+        if self.config.retrieval.use_gpu_reranker:
             post_processors.append(
-                StatementDiversityPostProcessor(
-                    similarity_threshold=similarity_threshold
+                BGEReranker(
+                    gpu_id=self.config.retrieval.gpu_id,
+                    batch_size=self.config.retrieval.batch_size,
                 )
             )
             logger.info(
-                f"Using StatementDiversityPostProcessor with threshold {similarity_threshold}"
+                f"Using BGEReranker with GPU (ID: {self.config.retrieval.gpu_id})"
+            )
+        else:
+            post_processors.append(
+                SentenceReranker(batch_size=self.config.retrieval.batch_size)
+            )
+            logger.info("Using SentenceReranker (CPU)")
+
+        if self.config.retrieval.use_diversity:
+            post_processors.append(
+                StatementDiversityPostProcessor(
+                    similarity_threshold=self.config.retrieval.similarity_threshold
+                )
+            )
+            logger.info(
+                f"Using StatementDiversityPostProcessor with threshold {self.config.retrieval.similarity_threshold}"
             )
 
-        if use_enhancement:
+        if self.config.retrieval.use_enhancement:
             post_processors.append(StatementEnhancementPostProcessor())
             logger.info("Using StatementEnhancementPostProcessor")
 
+        post_processors = post_processors if post_processors else None
+
         self.query_engine = LexicalGraphQueryEngine.for_semantic_guided_search(
-            self.graph_store, self.vector_store, post_processors=post_processors
+            self.graph_store,
+            self.vector_store,
+            post_processors=post_processors,
         )
 
     def query(self, query_text: str) -> Dict[str, Any]:
+        if not self.query_engine:
+            raise ValueError("Query engine not initialized")
+
         if not query_text.strip():
             raise ValueError("Query text cannot be empty")
 

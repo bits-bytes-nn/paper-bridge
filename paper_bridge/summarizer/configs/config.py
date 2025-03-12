@@ -55,11 +55,32 @@ class Summarization(BaseModelWithDefaults):
     figure_analysis_model_id: Optional[LanguageModelId] = None
 
 
+class Retrieval(BaseModelWithDefaults):
+    traversal_based_or_semantic_guided: str = Field(
+        default="traversal_based", pattern=r"^(traversal_based|semantic_guided)$"
+    )
+    set_subretriever: bool = Field(default=False)
+    use_reranking_beam_search: bool = Field(default=False)
+    use_post_processors: bool = Field(default=False)
+    top_k: int = Field(default=50, ge=1)
+    max_keywords: int = Field(default=10, ge=1)
+    max_depth: int = Field(default=8, ge=1)
+    beam_width: int = Field(default=100, ge=1)
+    batch_size: int = Field(default=128, ge=1)
+    use_gpu: bool = Field(default=False)
+    use_gpu_reranker: bool = Field(default=False)
+    gpu_id: int = Field(default=0, ge=0)
+    use_diversity: bool = Field(default=False)
+    use_enhancement: bool = Field(default=False)
+    similarity_threshold: float = Field(default=0.85, ge=0.0, le=1.0)
+
+
 class Config(BaseModelWithDefaults):
     resources: Resources = Field(
         default_factory=lambda: Resources(project_name="paper-bridge")
     )
     summarization: Summarization = Field(default_factory=Summarization)
+    retrieval: Retrieval = Field(default_factory=Retrieval)
 
     @classmethod
     def from_yaml(cls, file_path: Union[str, Path, FilePath]) -> "Config":
