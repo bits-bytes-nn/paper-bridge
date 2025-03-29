@@ -44,7 +44,7 @@ class LanguageModelId(str, Enum):
 class LocalPaths(str, Enum):
     FIGURES_DIR = "figures"
     LOGS_DIR = "logs"
-    PAPERS_DIR = "papers"
+    PAPERS_DIR = "summarizer/papers"
     OUTPUTS_DIR = "outputs"
     TEMPLATES_DIR = "summarizer/templates"
 
