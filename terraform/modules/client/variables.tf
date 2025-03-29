@@ -10,6 +10,18 @@ variable "tags" {
   default     = {}
 }
 
+variable "default_region_name" {
+  description = "Default AWS region name for resources"
+  type        = string
+  default     = "us-west-2"
+
+  validation {
+    condition     = can(regex("^[a-z]+-[a-z]+-[0-9]+$", var.default_region_name))
+    error_message = "Region name must be in a valid AWS region format (e.g., us-west-2, eu-central-1)"
+  }
+}
+
+
 variable "vpc_id" {
   description = "ID of the VPC where resources will be deployed"
   type        = string

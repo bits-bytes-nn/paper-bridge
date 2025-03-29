@@ -1,0 +1,2 @@
+llama-index-llms-bedrock-converse==0.4.12
+llama-index-multi-modal-llms-bedrock==0.1.0

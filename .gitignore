@@ -250,5 +250,6 @@ cache/
 certificates/
 logs/
 output/
+outputs/
 paper_bridge/summarizer/papers/
 *.zip

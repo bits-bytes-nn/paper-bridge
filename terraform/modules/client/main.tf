@@ -1,16 +1,15 @@
 data "aws_region" "current" {}
 
 locals {
-  # Common prefixes and settings
-  project_name              = var.project_name
-  batch_environment_prefix  = "${local.project_name}-batch"
-  ssm_param_prefix          = "/${local.project_name}"
+  name_prefix               = var.project_name
+  batch_environment_prefix  = "${local.name_prefix}-batch"
+  ssm_param_prefix          = "/${local.name_prefix}"
   lambda_runtime            = "python3.10"
 
   # Common compute resources for batch environments
   common_compute_resources = {
-    security_group_ids = [aws_security_group.client.id]
     subnets            = var.private_subnet_ids
+    security_group_ids = [aws_security_group.client.id]
     instance_role      = aws_iam_instance_profile.client.arn
     instance_type      = ["optimal"]
     tags               = var.tags
@@ -55,28 +54,23 @@ locals {
     ssm        = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
   }
 
-  # Common tags with name
-  common_name_tag = {
-    Name = "${local.project_name}-client"
-  }
-
   # Resource naming convention
   resource_names = {
-    security_group         = "${local.project_name}-client"
-    iam_role_client        = "${local.project_name}-client"
-    iam_role_bedrock       = "${local.project_name}-bedrock-inference"
-    iam_role_codebuild     = "${local.project_name}-codebuild"
-    iam_role_event_rule    = "${local.project_name}-event-rule"
-    ecr_repository_indexer = "${local.project_name}-indexer"
-    ecr_repository_cleaner = "${local.project_name}-cleaner"
-    job_queue              = "${local.project_name}-job-queue"
-    job_definition         = "${local.project_name}-indexer"
-    lambda_function        = "${local.project_name}-cleaner"
-    cloudwatch_indexer     = "${local.project_name}-indexer"
-    cloudwatch_cleaner     = "${local.project_name}-cleaner"
-    codebuild_indexer      = "${local.project_name}-indexer"
-    codebuild_cleaner      = "${local.project_name}-cleaner"
-    sns_topic              = local.project_name
+    security_group         = "${local.name_prefix}-client"
+    iam_role_client        = "${local.name_prefix}-client"
+    iam_role_bedrock       = "${local.name_prefix}-bedrock-inference"
+    iam_role_codebuild     = "${local.name_prefix}-codebuild"
+    iam_role_event_rule    = "${local.name_prefix}-event"
+    ecr_repository_indexer = "${local.name_prefix}-indexer"
+    ecr_repository_cleaner = "${local.name_prefix}-cleaner"
+    job_queue              = "${local.name_prefix}-indexer"
+    job_definition         = "${local.name_prefix}-indexer"
+    lambda_function        = "${local.name_prefix}-cleaner"
+    cloudwatch_indexer     = "${local.name_prefix}-indexer"
+    cloudwatch_cleaner     = "${local.name_prefix}-cleaner"
+    codebuild_indexer      = "${local.name_prefix}-indexer"
+    codebuild_cleaner      = "${local.name_prefix}-cleaner"
+    sns_topic              = local.name_prefix
   }
 
   # Default resource configurations
@@ -120,7 +114,7 @@ resource "aws_security_group" "client" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.tags, local.common_name_tag)
+  tags = var.tags
 }
 
 # IAM roles and policies
@@ -146,7 +140,7 @@ resource "aws_iam_role" "client" {
     ]
   })
 
-  tags = merge(var.tags, local.common_name_tag)
+  tags = var.tags
 }
 
 resource "aws_iam_instance_profile" "client" {
@@ -158,6 +152,22 @@ resource "aws_iam_role_policy_attachment" "client_policies" {
   for_each   = local.client_policy_attachments
   role       = aws_iam_role.client.name
   policy_arn = each.value
+}
+
+resource "aws_iam_role_policy" "client_pass_role_policy" {
+  name   = "${local.name_prefix}-client-pass-policy"
+  role   = aws_iam_role.client.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "iam:PassRole"
+        Resource = aws_iam_role.bedrock_inference.arn
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role" "bedrock_inference" {
@@ -176,9 +186,7 @@ resource "aws_iam_role" "bedrock_inference" {
     ]
   })
 
-  tags = merge(var.tags, {
-    Name = local.resource_names.iam_role_bedrock
-  })
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "s3_to_bedrock_inference" {
@@ -187,7 +195,7 @@ resource "aws_iam_role_policy_attachment" "s3_to_bedrock_inference" {
 }
 
 resource "aws_ssm_parameter" "bedrock_inference" {
-  name  = "${local.ssm_param_prefix}/iam/bedrock-inference"
+  name  = "${local.ssm_param_prefix}/iam-bedrock-inference"
   type  = "String"
   value = aws_iam_role.bedrock_inference.name
   tags  = var.tags
@@ -254,7 +262,7 @@ resource "null_resource" "upload_indexer_source" {
     command = <<EOF
       cd ${var.root_dir}
       find paper_bridge/indexer -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip indexer_source.zip -@
-      aws s3 cp indexer_source.zip s3://${var.codebuild_source_bucket}/${local.project_name}/indexer_source.zip
+      aws s3 cp indexer_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/indexer_source.zip
     EOF
   }
 }
@@ -268,7 +276,7 @@ resource "null_resource" "upload_cleaner_source" {
     command = <<EOF
       cd ${var.root_dir}
       find paper_bridge/cleaner -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip cleaner_source.zip -@
-      aws s3 cp cleaner_source.zip s3://${var.codebuild_source_bucket}/${local.project_name}/cleaner_source.zip
+      aws s3 cp cleaner_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/cleaner_source.zip
     EOF
   }
 }
@@ -302,7 +310,7 @@ resource "aws_codebuild_project" "indexer" {
 
   source {
     type      = "S3"
-    location  = "${var.codebuild_source_bucket}/${local.project_name}/indexer_source.zip"
+    location  = "${var.codebuild_source_bucket}/${local.name_prefix}/indexer_source.zip"
     buildspec = file("${var.root_dir}/scripts/indexer_buildspec.yml")
   }
 
@@ -344,7 +352,7 @@ resource "aws_codebuild_project" "cleaner" {
 
   source {
     type      = "S3"
-    location  = "${var.codebuild_source_bucket}/${local.project_name}/cleaner_source.zip"
+    location  = "${var.codebuild_source_bucket}/${local.name_prefix}/cleaner_source.zip"
     buildspec = file("${var.root_dir}/scripts/cleaner_buildspec.yml")
   }
 
@@ -395,7 +403,7 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
       # Clean up the zip file
       echo "Cleaning up source zip file..."
       rm -f ${var.root_dir}/indexer_source.zip
-      aws s3 rm s3://${var.codebuild_source_bucket}/${local.project_name}/indexer_source.zip
+      aws s3 rm s3://${var.codebuild_source_bucket}/${local.name_prefix}/indexer_source.zip
       echo "Source zip file removed"
     EOF
   }
@@ -444,7 +452,7 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
       # Clean up the zip file
       echo "Cleaning up source zip file..."
       rm -f ${var.root_dir}/cleaner_source.zip
-      aws s3 rm s3://${var.codebuild_source_bucket}/${local.project_name}/cleaner_source.zip
+      aws s3 rm s3://${var.codebuild_source_bucket}/${local.name_prefix}/cleaner_source.zip
       echo "Source zip file removed"
     EOF
   }
@@ -527,7 +535,7 @@ resource "aws_batch_job_queue" "this" {
 
 # Secure parameters
 resource "aws_ssm_parameter" "llama_cloud_api_key" {
-  name        = "${local.ssm_param_prefix}/batch/llama-cloud-api-key"
+  name        = "${local.ssm_param_prefix}/llama-cloud-api-key"
   description = "API key for LLAMA Cloud services"
   type        = "SecureString"
   value       = var.llama_cloud_api_key
@@ -537,7 +545,7 @@ resource "aws_ssm_parameter" "llama_cloud_api_key" {
 # Notification resources
 resource "aws_sns_topic" "this" {
   name         = local.resource_names.sns_topic
-  display_name = "${local.project_name} Notifications"
+  display_name = "${local.name_prefix} Notifications"
   tags         = var.tags
 }
 
@@ -568,7 +576,7 @@ resource "aws_batch_job_definition" "indexer" {
 
   container_properties = jsonencode({
     image      = "${aws_ecr_repository.indexer.repository_url}:latest"
-    command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--enable-batch-inference", "Ref::enable_batch_inference"]
+    command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--arxiv-ids", "Ref::arxiv_ids"]
     jobRoleArn = aws_iam_role.client.arn
 
     resourceRequirements = [
@@ -629,6 +637,7 @@ resource "aws_lambda_function" "cleaner" {
 
   environment {
     variables = {
+      DEFAULT_REGION_NAME = var.default_region_name
       LOG_LEVEL = "INFO"
       TOPIC_ARN = aws_sns_topic.this.arn
       IMAGE_VERSION = local.cleaner_hash
@@ -650,14 +659,14 @@ resource "aws_lambda_function" "cleaner" {
 
 # SSM Parameters for reference
 resource "aws_ssm_parameter" "batch_job_queue" {
-  name  = "${local.ssm_param_prefix}/batch/job-queue"
+  name  = "${local.ssm_param_prefix}/batch-job-queue"
   type  = "String"
   value = aws_batch_job_queue.this.name
   tags  = var.tags
 }
 
 resource "aws_ssm_parameter" "batch_job_definition" {
-  name  = "${local.ssm_param_prefix}/batch/job-definition"
+  name  = "${local.ssm_param_prefix}/batch-job-definition"
   type  = "String"
   value = aws_batch_job_definition.indexer.name
   tags  = var.tags
@@ -714,15 +723,15 @@ resource "aws_cloudwatch_event_target" "indexer" {
 
   batch_target {
     job_definition = aws_batch_job_definition.indexer.arn
-    job_name = "${local.project_name}-indexing-${formatdate("YYYYMMDD", timestamp())}"
+    job_name       = "${local.name_prefix}-indexing"
     job_attempts   = local.default_configs.batch_job.retry
   }
 
   input = jsonencode({
     Parameters = {
-      target_date            = "None",
-      days_to_fetch          = "1",
-      enable_batch_inference = "true"
+      target_date            = "null",
+      days_to_fetch          = "0",
+      arxiv_ids              = "null"
     }
   })
 }

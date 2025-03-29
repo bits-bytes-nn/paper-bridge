@@ -29,7 +29,7 @@ class NeptuneClient:
                     message_serializer=serializer.GraphSONSerializersV2d0(),
                 )
             except Exception as e:
-                logger.error(f"Failed to initialize Neptune client: {str(e)}")
+                logger.error("Failed to initialize Neptune client: %s", str(e))
                 raise
         return self._client
 
@@ -145,9 +145,9 @@ class NeptuneClient:
                     result = self.client.submit(query).all().result()
                     count_value = result[0] if result else 0
                     connection_stats[name] = count_value
-                    logger.debug(f"{name}: {count_value}")
+                    logger.debug("%s: %d", name, count_value)
                 except Exception as e:
-                    logger.warning(f"Failed to get {name}: {str(e)}")
+                    logger.warning("Failed to get %s: %s", name, str(e))
                     connection_stats[name] = "Error"
 
             results = {}
@@ -173,13 +173,18 @@ class NeptuneClient:
                     results[entity_type] = 0
 
                 logger.debug(
-                    f"Deleted {count_value} {entity_type} for 'paper_id': '{paper_id}'"
+                    "Deleted %d %s for 'paper_id': '%s'",
+                    count_value,
+                    entity_type,
+                    paper_id,
                 )
 
             if all(count == 0 for count in results.values()):
-                logger.warning(f"No data found for 'paper_id': '{paper_id}'")
+                logger.warning("No data found for 'paper_id': '%s'", paper_id)
 
-            logger.debug(f"Successfully deleted document with 'paper_id': '{paper_id}'")
+            logger.debug(
+                "Successfully deleted document with 'paper_id': '%s'", paper_id
+            )
 
             return {
                 "status": "success",
@@ -194,7 +199,7 @@ class NeptuneClient:
             }
 
         except Exception as e:
-            logger.error(f"Error deleting document '{paper_id}': {str(e)}")
+            logger.error("Error deleting document '%s': %s", paper_id, str(e))
             raise
 
     def batch_delete_documents(self, paper_ids: List[str]) -> List[Dict[str, Any]]:
@@ -208,7 +213,7 @@ class NeptuneClient:
                 result = self.delete_document(paper_id)
                 results.append(result)
             except Exception as e:
-                logger.error(f"Failed to delete document '{paper_id}': {str(e)}")
+                logger.error("Failed to delete document '%s': %s", paper_id, str(e))
                 results.append(
                     {"status": "error", "paper_id": paper_id, "error": str(e)}
                 )
@@ -222,7 +227,7 @@ class NeptuneClient:
         paper_ids = self._find_paper_ids_by_date(base_date)
 
         if not paper_ids:
-            logger.warning(f"No documents found with 'base_date': '{base_date}'")
+            logger.warning("No documents found with 'base_date': '%s'", base_date)
             return {"status": "success", "base_date": base_date, "deleted": 0}
 
         results = self.batch_delete_documents(paper_ids)
@@ -244,13 +249,15 @@ class NeptuneClient:
             result = self.client.submit(query).all().result()
             paper_ids = result[0] if result else []
             logger.info(
-                f"Found {len(paper_ids)} documents with 'base_date': {base_date}"
+                "Found %d documents with 'base_date': %s", len(paper_ids), base_date
             )
 
             return paper_ids
         except Exception as e:
             logger.error(
-                f"Error finding 'paper_id's with 'base_date' '{base_date}': {str(e)}"
+                "Error finding 'paper_id's with 'base_date' '%s': %s",
+                base_date,
+                str(e),
             )
             raise
 
@@ -267,7 +274,7 @@ class NeptuneClient:
 
         if not paper_ids:
             logger.warning(
-                f"No documents found between '{start_date}' and '{end_date}'"
+                "No documents found between '%s' and '%s'", start_date, end_date
             )
             return {
                 "status": "success",
@@ -301,13 +308,19 @@ class NeptuneClient:
             result = self.client.submit(query).all().result()
             paper_ids = result[0] if result else []
             logger.info(
-                f"Found {len(paper_ids)} documents between '{start_date}' and '{end_date}'"
+                "Found %d documents between '%s' and '%s'",
+                len(paper_ids),
+                start_date,
+                end_date,
             )
 
             return paper_ids
         except Exception as e:
             logger.error(
-                f"Error finding 'paper_id's between '{start_date}' and '{end_date}': {str(e)}"
+                "Error finding 'paper_id's between '%s' and '%s': %s",
+                start_date,
+                end_date,
+                str(e),
             )
             raise
 
@@ -323,7 +336,7 @@ class NeptuneClient:
         summary = {
             "status": "completed",
             "total_documents": len(results),
-            "deleted_count": success_count,
+            "success_count": success_count,
             "error_count": error_count,
             "details": results,
         }
@@ -350,7 +363,7 @@ class NeptuneClient:
             total_count = vertex_count + edge_count
 
             logger.info(
-                f"Found {vertex_count} vertices and {edge_count} edges to delete"
+                "Found %d vertices and %d edges to delete", vertex_count, edge_count
             )
 
             self.client.submit(drop_query).all().result()
@@ -383,8 +396,8 @@ class OpenSearchClient:
         host: str,
         port: int,
         index: str,
-        region_name: str,
         boto3_session: boto3.Session,
+        region_name: str,
     ):
         if not all([host, port, index, region_name, boto3_session]):
             raise ValueError("All OpenSearch connection parameters must be provided")
@@ -410,10 +423,8 @@ class OpenSearchClient:
                 max_retries=3,
             )
             self.index = index
-            self.region_name = region_name
-            self.boto3_session = boto3_session
         except Exception as e:
-            logger.error(f"Failed to initialize OpenSearch client: {str(e)}")
+            logger.error("Failed to initialize OpenSearch client: %s", str(e))
             raise
 
     def delete_document(self, paper_id: str) -> Dict[str, Any]:
@@ -432,7 +443,7 @@ class OpenSearchClient:
             doc_ids = [hit["_id"] for hit in result["hits"]["hits"]]
 
             if not doc_ids:
-                logger.warning(f"No documents found with 'paper_id': '{paper_id}'")
+                logger.warning("No documents found with 'paper_id': '%s'", paper_id)
                 return {"status": "success", "paper_id": paper_id, "deleted": 0}
 
             deleted_count = 0
@@ -440,13 +451,15 @@ class OpenSearchClient:
                 try:
                     self.client.delete(index=self.index, id=doc_id)
                     deleted_count += 1
-                    logger.debug(f"Deleted document '{doc_id}'")
+                    logger.debug("Deleted document '%s'", doc_id)
                 except Exception as delete_err:
                     logger.warning(
-                        f"Failed to delete document '{doc_id}': {str(delete_err)}"
+                        "Failed to delete document '%s': %s", doc_id, str(delete_err)
                     )
 
-            logger.debug(f"Successfully deleted documents with 'paper_id': {paper_id}")
+            logger.debug(
+                "Successfully deleted documents with 'paper_id': '%s'", paper_id
+            )
 
             return {
                 "status": "success",
@@ -457,7 +470,9 @@ class OpenSearchClient:
 
         except Exception as e:
             logger.error(
-                f"Error deleting documents with 'paper_id': {paper_id}: {str(e)}"
+                "Error deleting documents with 'paper_id': '%s': %s",
+                paper_id,
+                str(e),
             )
             return {
                 "status": "error",
@@ -476,7 +491,7 @@ class OpenSearchClient:
                 result = self.delete_document(paper_id)
                 results.append(result)
             except Exception as e:
-                logger.error(f"Error deleting document '{paper_id}': {str(e)}")
+                logger.error("Error deleting document '%s': %s", paper_id, str(e))
                 results.append(
                     {"status": "error", "paper_id": paper_id, "error": str(e)}
                 )
@@ -511,7 +526,7 @@ class OpenSearchClient:
         paper_ids = self._find_paper_ids_by_date(base_date)
 
         if not paper_ids:
-            logger.warning(f"No documents found with 'base_date' '{base_date}'")
+            logger.warning("No documents found with 'base_date': '%s'", base_date)
             return {
                 "status": "success",
                 "deleted": 0,
@@ -534,13 +549,15 @@ class OpenSearchClient:
             return self._get_paper_ids_from_query(query)
         except Exception as e:
             logger.error(
-                f"Error finding 'paper_id's with 'base_date': {base_date}: {str(e)}"
+                "Error finding 'paper_id's with 'base_date': '%s': %s",
+                base_date,
+                str(e),
             )
             raise
 
     def _get_paper_ids_from_query(self, query: Dict[str, Any]) -> List[str]:
         if not self._check_index_exists():
-            logger.warning(f"Index '{self.index}' does not exist")
+            logger.warning("Index '%s' does not exist", self.index)
             return []
 
         try:
@@ -565,22 +582,22 @@ class OpenSearchClient:
                     ]
                     paper_ids.append(paper_id)
                 except KeyError:
-                    logger.warning(f"Document '{hit['_id']}' missing 'paper_id' field")
+                    logger.warning("Document '%s' missing 'paper_id' field", hit["_id"])
 
             return list(set(paper_ids))
 
         except NotFoundError:
-            logger.warning(f"Index '{self.index}' not found")
+            logger.warning("Index '%s' not found", self.index)
             return []
         except Exception as e:
-            logger.error(f"Error retrieving 'paper_id's: {str(e)}")
+            logger.error("Error retrieving 'paper_id's: %s", str(e))
             raise
 
     def _check_index_exists(self) -> bool:
         try:
             return self.client.indices.exists(index=self.index)
         except Exception as e:
-            logger.error(f"Error checking if index exists: {str(e)}")
+            logger.error("Error checking if index exists: %s", str(e))
             return False
 
     def delete_documents_by_date_range(
@@ -595,7 +612,7 @@ class OpenSearchClient:
         paper_ids = self._find_paper_ids_by_date_range(start_date, end_date)
 
         if not paper_ids:
-            logger.info(f"No documents found between '{start_date}' to '{end_date}'")
+            logger.info("No documents found between '%s' to '%s'", start_date, end_date)
             return {
                 "status": "success",
                 "deleted": 0,
@@ -618,7 +635,7 @@ class OpenSearchClient:
         ):
             raise ValueError("Date values must be in the format 'YYYY-MM-DD'")
 
-        logger.info(f"Finding 'paper_id's between {start_date} and {end_date}")
+        logger.info("Finding 'paper_id's between '%s' and '%s'", start_date, end_date)
 
         query = {
             "query": {
@@ -672,23 +689,19 @@ def get_cross_inference_model_id(
             return cr_model_id
 
     except Exception as e:
-        logger.error(f"Error checking cross-inference support: {str(e)}")
+        logger.error("Error checking cross-inference support: %s", str(e))
 
     return model_id
 
 
-def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Optional[str]:
-    if not param_name:
-        raise ValueError("Parameter name must not be empty")
-
+def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> str:
     ssm_client = boto3_session.client("ssm")
     try:
         response = ssm_client.get_parameter(Name=param_name, WithDecryption=True)
         return response["Parameter"]["Value"]
-
     except ClientError as error:
         logger.error("Failed to get SSM parameter value: %s", str(error))
-        return None
+        raise error
 
 
 def submit_batch_job(

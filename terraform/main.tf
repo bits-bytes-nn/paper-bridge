@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.aws_region
+  region = var.default_region_name
 }
 
 module "base" {
@@ -19,6 +19,7 @@ module "client" {
   source = "./modules/client"
 
   project_name                = var.project_name
+  default_region_name         = var.default_region_name
   vpc_id                      = module.base.vpc.id
   private_subnet_ids          = module.base.private_subnet_ids
   root_dir                    = local.root_dir

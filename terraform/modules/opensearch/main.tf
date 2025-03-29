@@ -2,13 +2,13 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
+  name_prefix         = var.project_name
   collection_resource = "collection/${var.project_name}"
   index_resource      = "index/${var.project_name}/*"
-  policy_name_prefix  = var.project_name
 }
 
 resource "aws_opensearchserverless_security_policy" "encryption" {
-  name        = "${local.policy_name_prefix}-encryption"
+  name        = "${local.name_prefix}-encryption"
   type        = "encryption"
   description = "Encryption policy for OpenSearch Serverless"
   policy = jsonencode({
@@ -21,7 +21,7 @@ resource "aws_opensearchserverless_security_policy" "encryption" {
 }
 
 resource "aws_opensearchserverless_security_policy" "network" {
-  name        = "${local.policy_name_prefix}-network"
+  name        = "${local.name_prefix}-network"
   type        = "network"
   description = "Network policy for OpenSearch Serverless"
   policy = jsonencode([{
@@ -40,7 +40,7 @@ resource "aws_opensearchserverless_security_policy" "network" {
 }
 
 resource "aws_opensearchserverless_access_policy" "data" {
-  name        = "${local.policy_name_prefix}-data"
+  name        = "${local.name_prefix}-data"
   type        = "data"
   description = "Data access policy for OpenSearch Serverless"
   policy = jsonencode([{
@@ -64,7 +64,7 @@ resource "aws_opensearchserverless_access_policy" "data" {
 }
 
 resource "aws_iam_policy" "opensearch_access" {
-  name        = "${local.policy_name_prefix}-opensearch-access"
+  name        = "${local.name_prefix}-opensearch-access"
   path        = "/"
   description = "Policy for OpenSearch Serverless API and Dashboard access"
 
@@ -84,9 +84,12 @@ resource "aws_iam_policy" "opensearch_access" {
     ]
   })
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-opensearch-access"
-  })
+  tags = var.tags
+}
+resource "aws_iam_user_policy_attachment" "client_user_attachment" {
+  count      = var.enable_vpn ? 1 : 0
+  user       = var.client_user_name
+  policy_arn = aws_iam_policy.opensearch_access.arn
 }
 
 resource "aws_iam_role_policy_attachment" "client_role_attachment" {
@@ -94,14 +97,8 @@ resource "aws_iam_role_policy_attachment" "client_role_attachment" {
   policy_arn = aws_iam_policy.opensearch_access.arn
 }
 
-resource "aws_iam_user_policy_attachment" "client_user_attachment" {
-  count      = var.enable_vpn ? 1 : 0
-  user       = var.client_user_name
-  policy_arn = aws_iam_policy.opensearch_access.arn
-}
-
 resource "aws_opensearchserverless_collection" "this" {
-  name        = var.project_name
+  name        = local.name_prefix
   type        = "VECTORSEARCH"
   description = "Vector search collection for OpenSearch Serverless"
 
@@ -111,18 +108,12 @@ resource "aws_opensearchserverless_collection" "this" {
     aws_opensearchserverless_access_policy.data
   ]
 
-  tags = merge(var.tags, {
-    Name = var.project_name
-  })
+  tags = var.tags
 }
 
 resource "aws_ssm_parameter" "opensearch_endpoint" {
-  name        = "/${var.project_name}/opensearch/endpoint"
-  description = "OpenSearch Serverless collection endpoint"
+  name        = "/${local.name_prefix}/opensearch-endpoint"
   type        = "String"
   value       = aws_opensearchserverless_collection.this.collection_endpoint
-
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-opensearch-endpoint"
-  })
+  tags        = var.tags
 }

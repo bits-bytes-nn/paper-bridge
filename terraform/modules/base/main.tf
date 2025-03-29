@@ -3,6 +3,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
+  name_prefix    = var.project_name
   az_names    = slice(data.aws_availability_zones.available.names, 0, var.max_azs)
   vpn_enabled = var.enable_vpn ? 1 : 0
 }
@@ -13,17 +14,13 @@ resource "aws_vpc" "this" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = merge(var.tags, {
-    Name = var.project_name
-  })
+  tags = var.tags
 }
 
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.this.id
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-default"
-  })
+  tags = var.tags
 }
 
 # Subnet Resources
@@ -34,10 +31,7 @@ resource "aws_subnet" "public" {
   availability_zone       = local.az_names[count.index]
   map_public_ip_on_launch = true
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-public-${count.index + 1}"
-    Type = "public"
-  })
+  tags = var.tags
 }
 
 resource "aws_subnet" "private" {
@@ -46,19 +40,14 @@ resource "aws_subnet" "private" {
   cidr_block        = cidrsubnet(aws_vpc.this.cidr_block, 8, count.index + var.max_azs)
   availability_zone = local.az_names[count.index]
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-private-${count.index + 1}"
-    Type = "private"
-  })
+  tags = var.tags
 }
 
 # Internet Gateway
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
 
-  tags = merge(var.tags, {
-    Name = var.project_name
-  })
+  tags = var.tags
 }
 
 # NAT Gateway
@@ -66,9 +55,7 @@ resource "aws_eip" "nat" {
   count  = var.nat_gateways
   domain = "vpc"
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-nat-${count.index + 1}"
-  })
+  tags = var.tags
 
   depends_on = [aws_internet_gateway.this]
 }
@@ -78,9 +65,7 @@ resource "aws_nat_gateway" "this" {
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-nat-${count.index + 1}"
-  })
+  tags = var.tags
 
   depends_on = [aws_internet_gateway.this]
 }
@@ -89,10 +74,7 @@ resource "aws_nat_gateway" "this" {
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.this.id
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-public"
-    Type = "public"
-  })
+  tags = var.tags
 }
 
 resource "aws_route" "public_internet_gateway" {
@@ -105,10 +87,7 @@ resource "aws_route_table" "private" {
   count  = var.max_azs
   vpc_id = aws_vpc.this.id
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-private-${count.index + 1}"
-    Type = "private"
-  })
+  tags = var.tags
 }
 
 resource "aws_route" "private_nat_gateway" {
@@ -137,9 +116,7 @@ resource "aws_acm_certificate" "server" {
   certificate_body  = file("${var.root_dir}/certificates/server.vpn.internal.crt")
   certificate_chain = file("${var.root_dir}/certificates/ca.crt")
 
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-vpn-server"
-  })
+  tags = var.tags
 
   lifecycle {
     create_before_destroy = true
@@ -153,7 +130,7 @@ resource "aws_acm_certificate" "client" {
   certificate_chain = file("${var.root_dir}/certificates/ca.crt")
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-vpn-client"
+    Name = "${local.name_prefix}-vpn-client"
   })
 
   lifecycle {
@@ -163,7 +140,7 @@ resource "aws_acm_certificate" "client" {
 
 resource "aws_security_group" "vpn" {
   count       = local.vpn_enabled
-  name        = "${var.project_name}-vpn"
+  name        = "${local.name_prefix}-vpn"
   description = "Security group for Client VPN endpoint"
   vpc_id      = aws_vpc.this.id
 
@@ -184,13 +161,13 @@ resource "aws_security_group" "vpn" {
   }
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-vpn"
+    Name = "${local.name_prefix}-vpn"
   })
 }
 
 resource "aws_ec2_client_vpn_endpoint" "this" {
   count                  = local.vpn_enabled
-  description            = "${var.project_name} Client VPN"
+  description            = "${local.name_prefix} Client VPN"
   server_certificate_arn = aws_acm_certificate.server[0].arn
   client_cidr_block      = var.vpn_client_cidr_block
   security_group_ids     = [aws_security_group.vpn[0].id]
@@ -207,7 +184,7 @@ resource "aws_ec2_client_vpn_endpoint" "this" {
   }
 
   tags = merge(var.tags, {
-    Name = var.project_name
+    Name = local.name_prefix
   })
 }
 

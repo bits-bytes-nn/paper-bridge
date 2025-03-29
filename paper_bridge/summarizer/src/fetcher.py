@@ -1,12 +1,13 @@
 import asyncio
 import base64
 import json
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from enum import Enum, auto
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union, cast
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union, cast
 import arxiv
 import boto3
 import fitz
@@ -17,15 +18,13 @@ from llama_index.core.prompts import ChatPromptTemplate
 from llama_index.core.schema import ImageNode
 from llama_index.llms.bedrock import Bedrock
 from llama_index.multi_modal_llms.bedrock import BedrockMultiModal
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, HttpUrl, field_validator
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
 from .constants import EnvVars, LanguageModelId, LocalPaths, SSMParams, URLs
 from .logger import is_aws_env, logger
 from .prompts import FigureAnalysisPrompt
 from .utils import HTMLTagOutputParser, extract_text_from_html, measure_execution_time
 from paper_bridge.summarizer.configs import Config
-
-ROOT_DIR: Path = Path("/tmp") if is_aws_env() else Path(__file__).parent.parent
 
 
 class Content(BaseModel):
@@ -34,7 +33,6 @@ class Content(BaseModel):
     def __str__(self) -> str:
         return f"Content(text='{self.text}')"
 
-    @classmethod
     @field_validator("text")
     def validate_text(cls, v: str) -> str:
         return v.strip()
@@ -134,15 +132,23 @@ class Paper(BaseModel):
     upvotes: int
     thumbnail: Optional[str] = None
     content: Optional[str] = None
+    base_date: str
+    pdf_url: Optional[HttpUrl] = Field(default=None)
     figures: List[Figure] = Field(default_factory=list)
     status: PaperStatus = Field(default=PaperStatus.PENDING)
 
-    @classmethod
     @field_validator("authors")
     def validate_authors(cls, authors: List[str]) -> List[str]:
         if not authors:
             raise ValueError("Authors list cannot be empty")
         return authors
+
+    @field_validator("base_date")
+    def validate_base_date(cls, base_date: str) -> str:
+        pattern = r"^\d{4}-\d{2}-\d{2}$"
+        if not re.match(pattern, base_date):
+            raise ValueError("Base date must be in the format 'YYYY-MM-DD'")
+        return base_date
 
     def to_dict(self) -> Dict[str, Any]:
         return self.model_dump()
@@ -521,24 +527,18 @@ class PaperFetcher:
     def __init__(
         self,
         config: Config,
+        boto3_session: Optional[boto3.Session] = None,
         profile_name: Optional[str] = None,
         timeout: int = DEFAULT_TIMEOUT,
-        parse_pdf: bool = False,
     ) -> None:
-        self.boto3_session = self._create_boto3_session(
-            config.resources.bedrock_region_name, profile_name
+        self.boto3_session = boto3_session or boto3.Session(
+            region_name=config.resources.bedrock_region_name, profile_name=profile_name
         )
         self._configure(config, timeout)
         self._init_parsers(config, profile_name)
-        self.parse_pdf = parse_pdf
-
-    @staticmethod
-    def _create_boto3_session(
-        region_name: str, profile_name: Optional[str]
-    ) -> boto3.Session:
-        return boto3.Session(region_name=region_name, profile_name=profile_name)
 
     def _configure(self, config: Config, timeout: int) -> None:
+        self.config = config
         self.papers_per_day = max(
             self.MIN_PAPERS_PER_DAY, config.summarization.papers_per_day
         )
@@ -551,7 +551,6 @@ class PaperFetcher:
             else None
         )
         self.timeout = max(1, timeout)
-        self.config = config
 
     def _init_parsers(self, config: Config, profile_name: Optional[str]) -> None:
         if config.summarization.figure_analysis_model_id is None:
@@ -586,26 +585,110 @@ class PaperFetcher:
         )
 
     @measure_execution_time
+    def fetch_papers_by_arxiv_ids(
+        self, papers_dir: Path, arxiv_ids: List[str], parse_pdf: bool = False
+    ) -> List[Paper]:
+        try:
+            papers = self._fetch_papers_by_arxiv_ids(arxiv_ids)
+            return self._process_papers_concurrently(papers, papers_dir, parse_pdf)
+        except Exception as e:
+            logger.error("Error fetching papers by arXiv IDs: %s", str(e))
+            return []
+
+    @staticmethod
+    def _fetch_papers_by_arxiv_ids(arxiv_ids: List[str]) -> List[Paper]:
+        papers = []
+        client = arxiv.Client()
+        logger.info("Fetching papers by arXiv IDs: '%s'", arxiv_ids)
+
+        for arxiv_id in arxiv_ids:
+            try:
+                search = arxiv.Search(id_list=[arxiv_id])
+                paper_result = next(client.results(search), None)
+
+                if not paper_result:
+                    logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
+                    continue
+
+                current_date = datetime.now(timezone.utc)
+                paper = Paper(
+                    arxiv_id=arxiv_id,
+                    authors=[author.name for author in paper_result.authors],
+                    published_at=paper_result.published,
+                    title=paper_result.title,
+                    summary=paper_result.summary,
+                    upvotes=0,
+                    pdf_url=(
+                        None
+                        if paper_result.pdf_url is None
+                        else HttpUrl(str(paper_result.pdf_url))
+                    ),
+                    base_date=current_date.strftime("%Y-%m-%d"),
+                )
+                papers.append(paper)
+
+            except Exception as e:
+                logger.error(
+                    "Error fetching paper with arXiv ID '%s': %s", arxiv_id, str(e)
+                )
+
+        return papers
+
+    def _process_papers_concurrently(
+        self, papers: List[Paper], papers_dir: Path, parse_pdf: bool = False
+    ) -> List[Paper]:
+        with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
+            futures = {
+                executor.submit(self.process_paper, paper, papers_dir, parse_pdf): paper
+                for paper in papers
+            }
+
+            for future in as_completed(futures):
+                paper = futures[future]
+                try:
+                    if content := future.result():
+                        paper.content = content
+                        paper.status = PaperStatus.PROCESSED
+                    else:
+                        paper.status = PaperStatus.FAILED
+                except Exception as e:
+                    logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
+                    paper.status = PaperStatus.FAILED
+
+        return papers
+
+    @measure_execution_time
     def fetch_papers_for_date_range(
         self,
+        papers_dir: Path,
         target_date: Optional[datetime] = None,
         days_to_fetch: Optional[int] = None,
-    ) -> Dict[str, List[Paper]]:
+        parse_pdf: bool = False,
+    ) -> List[Paper]:
         try:
             target_date = self._get_target_date(target_date)
-            if days_to_fetch == 0:
-                days_to_fetch = None
+            days_to_fetch = days_to_fetch if days_to_fetch != 0 else None
+
             papers_by_date = self._fetch_papers_by_date_range(
-                target_date, days_to_fetch=days_to_fetch
+                target_date, days_to_fetch
             )
-            filtered_papers = self._filter_and_sort_papers(papers_by_date)
-            return self._process_papers_concurrently(filtered_papers)
-        except requests.RequestException as e:
-            logger.error("Error fetching papers: %s", e)
-            return {}
+            papers_by_date = self._filter_and_sort_papers(papers_by_date)
+
+            papers = [
+                paper
+                for papers_list in papers_by_date.values()
+                for paper in papers_list
+            ]
+            return self._process_papers_concurrently(papers, papers_dir, parse_pdf)
+
         except Exception as e:
-            logger.error("Unexpected error: %s", e)
-            return {}
+            logger.error(
+                "Error fetching papers for target date '%s' and days to fetch '%s': %s",
+                target_date,
+                days_to_fetch,
+                str(e),
+            )
+            return []
 
     @staticmethod
     def _get_target_date(target_date: Optional[datetime]) -> datetime:
@@ -619,10 +702,9 @@ class PaperFetcher:
         self, end_date: datetime, days_to_fetch: Optional[int] = None
     ) -> Dict[str, List[Paper]]:
         papers_by_date: Dict[str, List[Paper]] = {}
-        start_date = end_date - timedelta(
-            days=(days_to_fetch or self.days_to_fetch) - 1
-        )
-        logger.info(f"Fetching papers from '{start_date}' to '{end_date}'")
+        days = days_to_fetch or self.days_to_fetch
+        start_date = end_date - timedelta(days=days - 1)
+        logger.info("Fetching papers from '%s' to '%s'", start_date, end_date)
 
         for current_date in self._date_range(start_date, end_date):
             date_str = current_date.strftime("%Y-%m-%d")
@@ -633,7 +715,7 @@ class PaperFetcher:
         return papers_by_date
 
     @staticmethod
-    def _date_range(start_date: datetime, end_date: datetime) -> List[datetime]:
+    def _date_range(start_date: datetime, end_date: datetime) -> Sequence[datetime]:
         return [
             end_date - timedelta(days=days)
             for days in range((end_date - start_date).days + 1)
@@ -678,9 +760,11 @@ class PaperFetcher:
                 authors=author_names,
                 published_at=published_at or current_date,
                 title=paper_info["title"],
-                summary=paper_info["summary"],
-                upvotes=paper_info["upvotes"],
+                summary=paper_info.get("summary", ""),
+                upvotes=paper_info.get("upvotes", 0),
                 thumbnail=paper_info.get("thumbnail"),
+                pdf_url=HttpUrl(f"{URLs.ARXIV_PDF.url}/{paper_info['id']}"),
+                base_date=current_date.strftime("%Y-%m-%d"),
             )
             if self._meets_upvote_threshold(paper.upvotes):
                 return paper
@@ -689,8 +773,15 @@ class PaperFetcher:
 
         return None
 
-    def _meets_upvote_threshold(self, upvotes: int) -> bool:
-        return self.min_upvotes is None or upvotes >= self.min_upvotes
+    @staticmethod
+    def _parse_date(date_str: Optional[str]) -> Optional[datetime]:
+        if not date_str:
+            return None
+        try:
+            return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+        except ValueError:
+            logger.error(f"Invalid date format: {date_str}")
+            return None
 
     @staticmethod
     def _extract_author_names(authors: List[Union[Dict[str, str], str]]) -> List[str]:
@@ -702,6 +793,9 @@ class PaperFetcher:
                 author_names.append(author)
         return author_names
 
+    def _meets_upvote_threshold(self, upvotes: int) -> bool:
+        return self.min_upvotes is None or upvotes >= self.min_upvotes
+
     def _filter_and_sort_papers(
         self, papers_by_date: Dict[str, List[Paper]]
     ) -> Dict[str, List[Paper]]:
@@ -712,34 +806,16 @@ class PaperFetcher:
             for date, papers in papers_by_date.items()
         }
 
-    def _process_papers_concurrently(
-        self, filtered_papers: Dict[str, List[Paper]]
-    ) -> Dict[str, List[Paper]]:
-        with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
-            futures = {
-                executor.submit(self.process_paper, paper): paper
-                for papers in filtered_papers.values()
-                for paper in papers
-            }
-
-            for future in as_completed(futures):
-                paper = futures[future]
-                try:
-                    future.result()
-                except Exception as e:
-                    logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
-                    paper.status = PaperStatus.FAILED
-
-        return filtered_papers
-
-    def process_paper(self, paper: Paper) -> None:
+    def process_paper(
+        self, paper: Paper, papers_dir: Path, parse_pdf: bool = False
+    ) -> None:
         try:
-            if self.parse_pdf:
-                success = self._process_paper_with_pdf(paper)
+            if parse_pdf:
+                success = self._process_paper_with_pdf(paper, papers_dir)
             else:
-                success = self._process_paper_with_html(paper)
+                success = self._process_paper_with_html(paper, papers_dir)
                 if not success:
-                    success = self._process_paper_with_pdf(paper)
+                    success = self._process_paper_with_pdf(paper, papers_dir)
 
             if success:
                 paper.status = PaperStatus.PROCESSED
@@ -750,34 +826,15 @@ class PaperFetcher:
             logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
             paper.status = PaperStatus.FAILED
 
-    def _process_paper_with_html(self, paper: Paper) -> bool:
+    def _process_paper_with_pdf(self, paper: Paper, papers_dir: Path) -> bool:
         try:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            try:
-                figures, content = loop.run_until_complete(
-                    self.html_parser.parse(paper.arxiv_id)
-                )
-            finally:
-                loop.close()
+            papers_dir = self._get_papers_dir(papers_dir, paper.arxiv_id)
+            papers_dir.mkdir(parents=True, exist_ok=True)
 
-            paper.content = content.text
-            paper.figures = figures
-
-            return True
-        except Exception as e:
-            logger.warning(f"HTML parsing failed for '{paper.arxiv_id}': {str(e)}")
-            return False
-
-    def _process_paper_with_pdf(self, paper: Paper) -> bool:
-        try:
-            paper_dir = self._get_paper_dir(paper.arxiv_id)
-            paper_dir.mkdir(parents=True, exist_ok=True)
-
-            figures_dir = paper_dir / "figures"
+            figures_dir = papers_dir / "figures"
             figures_dir.mkdir(exist_ok=True)
 
-            pdf_path = self._download_arxiv_pdf(paper.arxiv_id, paper_dir)
+            pdf_path = self._download_arxiv_pdf(papers_dir, paper.arxiv_id)
             if not pdf_path:
                 return False
 
@@ -799,31 +856,40 @@ class PaperFetcher:
             return False
 
     @staticmethod
-    def _get_paper_dir(arxiv_id: str) -> Path:
+    def _get_papers_dir(papers_dir: Path, arxiv_id: str) -> Path:
         safe_id = arxiv_id.replace(".", "_")
-        return ROOT_DIR / LocalPaths.PAPERS_DIR.value / safe_id
+        return papers_dir / safe_id
 
     @staticmethod
-    def _download_arxiv_pdf(arxiv_id: str, paper_dir: Path) -> Optional[Path]:
+    def _download_arxiv_pdf(papers_dir: Path, arxiv_id: str) -> Optional[Path]:
         try:
             client = arxiv.Client()
             search = arxiv.Search(id_list=[arxiv_id])
             paper = next(client.results(search))
 
-            pdf_path = paper_dir / f"{arxiv_id}.pdf"
-            paper.download_pdf(dirpath=str(paper_dir), filename=f"{arxiv_id}.pdf")
+            pdf_path = papers_dir / f"{arxiv_id}.pdf"
+            paper.download_pdf(dirpath=str(papers_dir), filename=f"{arxiv_id}.pdf")
 
             return pdf_path if pdf_path.exists() else None
         except Exception as e:
             logger.error(f"Failed to download PDF for {arxiv_id}: {str(e)}")
             return None
 
-    @staticmethod
-    def _parse_date(date_str: Optional[str]) -> Optional[datetime]:
-        if not date_str:
-            return None
+    def _process_paper_with_html(self, paper: Paper, papers_dir: Path) -> bool:
         try:
-            return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
-        except ValueError:
-            logger.error(f"Invalid date format: {date_str}")
-            return None
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                figures, content = loop.run_until_complete(
+                    self.html_parser.parse(paper.arxiv_id)
+                )
+            finally:
+                loop.close()
+
+            paper.content = content.text
+            paper.figures = figures
+
+            return True
+        except Exception as e:
+            logger.warning(f"HTML parsing failed for '{paper.arxiv_id}': {str(e)}")
+            return False

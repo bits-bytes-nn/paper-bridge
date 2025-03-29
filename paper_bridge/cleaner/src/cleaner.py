@@ -7,29 +7,23 @@ from .logger import logger
 class Cleaner:
     def __init__(
         self,
+        boto3_session: boto3.Session,
         neptune_endpoint: str,
         opensearch_endpoint: str,
         opensearch_indexes: List[str],
-        region_name: str = "us-west-2",
-        profile_name: Optional[str] = None,
-        boto3_session: Optional[boto3.Session] = None,
+        region_name: Optional[str] = None,
     ):
-        self.boto3_session = boto3_session or boto3.Session(
-            region_name=region_name, profile_name=profile_name
-        )
-        self.region_name = region_name
-
         self.neptune_client = NeptuneClient(neptune_endpoint)
 
         self.opensearch_indexes = opensearch_indexes
         self.opensearch_clients = {}
         for index in opensearch_indexes:
             self.opensearch_clients[index] = OpenSearchClient(
-                host=opensearch_endpoint,
-                port=443,
-                index=index,
-                region_name=region_name,
-                boto3_session=self.boto3_session,
+                opensearch_endpoint.replace("http://", "").replace("https://", ""),
+                443,
+                index,
+                boto3_session,
+                region_name or "us-west-2",
             )
 
     def delete_documents_by_date_range(
@@ -41,7 +35,7 @@ class Cleaner:
         neptune_results = self.neptune_client.delete_documents_by_date_range(
             start_date, end_date
         )
-        logger.info(f"Neptune deletion result: {neptune_results}")
+        logger.info("Neptune deletion result: %s", neptune_results)
 
         opensearch_results = {}
         for index in self.opensearch_indexes:
@@ -50,7 +44,9 @@ class Cleaner:
                     start_date, end_date
                 )
                 opensearch_results[index] = result
-                logger.info(f"OpenSearch deletion result for index '{index}': {result}")
+                logger.info(
+                    "OpenSearch deletion result for index '%s': %s", index, result
+                )
 
             except Exception as e:
                 error_msg = f"Error deleting documents from OpenSearch index '{index}': {str(e)}"

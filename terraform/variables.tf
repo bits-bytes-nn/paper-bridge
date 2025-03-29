@@ -5,17 +5,23 @@ variable "project_name" {
   default     = "paper-bridge"
 }
 
-variable "aws_region" {
-  description = "AWS region for deployment"
-  type        = string
-  default     = "us-west-2"
-}
-
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
   default     = {}
 }
+
+variable "default_region_name" {
+  description = "Default AWS region name for resources"
+  type        = string
+  default     = "us-west-2"
+
+  validation {
+    condition     = can(regex("^[a-z]+-[a-z]+-[0-9]+$", var.default_region_name))
+    error_message = "Region name must be in a valid AWS region format (e.g., us-west-2, eu-central-1)"
+  }
+}
+
 
 variable "vpc_cidr" {
   description = "CIDR block for VPC"

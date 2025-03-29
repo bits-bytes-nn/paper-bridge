@@ -2,15 +2,15 @@ import argparse
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Optional, Tuple
+from typing import Tuple
 import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from paper_bridge.indexer.configs import Config
 from paper_bridge.indexer.src import (
     EnvVars,
+    NULL_STRING,
     SSMParams,
-    arg_as_bool,
     get_ssm_param_value,
     logger,
     submit_batch_job,
@@ -18,11 +18,7 @@ from paper_bridge.indexer.src import (
 )
 
 
-def main(
-    target_date: Optional[str] = None,
-    days_to_fetch: Optional[int] = None,
-    enable_batch_inference: bool = False,
-) -> None:
+def main(job_prefix: str, **kwargs) -> None:
     config = Config.load()
     profile_name = EnvVars.AWS_PROFILE_NAME.value
 
@@ -37,26 +33,20 @@ def main(
     job_name = (
         f"{config.resources.project_name}"
         f"-{config.resources.stage}"
-        f"-indexing-{timestamp}"
+        f"-{job_prefix}-{timestamp}"
     )
-
     logger.info(
-        "Submitting batch job '%s' with parameters: target_date=%s, days_to_fetch=%s, enable_batch_inference=%s",
+        "Submitting batch job '%s' with parameters: %s",
         job_name,
-        target_date,
-        days_to_fetch,
-        enable_batch_inference,
+        kwargs,
     )
 
-    job_params = create_job_parameters(
-        target_date, days_to_fetch, enable_batch_inference
-    )
     job_id = submit_batch_job(
         boto3_session,
         job_name,
         job_queue_name,
         job_definition_name,
-        parameters=job_params,
+        parameters=kwargs,
     )
 
     wait_for_batch_job_completion(boto3_session, job_id)
@@ -67,32 +57,16 @@ def get_batch_job_names(
     config: Config,
 ) -> Tuple[str, str]:
     base_path = f"/{config.resources.project_name}-{config.resources.stage}"
-
-    job_queue = get_ssm_param_value(
-        boto3_session,
-        f"{base_path}/{SSMParams.BATCH_JOB_QUEUE.value}",
+    return (
+        get_ssm_param_value(
+            boto3_session,
+            f"{base_path}/{SSMParams.BATCH_JOB_QUEUE.value}",
+        ),
+        get_ssm_param_value(
+            boto3_session,
+            f"{base_path}/{SSMParams.BATCH_JOB_DEFINITION.value}",
+        ),
     )
-    job_definition = get_ssm_param_value(
-        boto3_session,
-        f"{base_path}/{SSMParams.BATCH_JOB_DEFINITION.value}",
-    )
-
-    if not job_queue or not job_definition:
-        raise ValueError("Failed to retrieve batch job configuration from SSM")
-
-    return job_queue, job_definition
-
-
-def create_job_parameters(
-    target_date: Optional[str],
-    days_to_fetch: Optional[int],
-    enable_batch_inference: bool,
-) -> Dict[str, str]:
-    return {
-        "target_date": "None" if target_date is None else target_date,
-        "days_to_fetch": "0" if days_to_fetch is None else str(days_to_fetch),
-        "enable_batch_inference": str(enable_batch_inference),
-    }
 
 
 if __name__ == "__main__":
@@ -102,21 +76,30 @@ if __name__ == "__main__":
     parser.add_argument(
         "--target-date",
         type=str,
-        help="Target date to fetch papers in 'YYYY-MM-DD' format",
         default=None,
+        help="Target date to fetch papers in 'YYYY-MM-DD' format",
     )
     parser.add_argument(
         "--days-to-fetch",
         type=int,
-        help="Number of days to fetch papers",
         default=None,
+        help="Number of days to fetch papers",
     )
     parser.add_argument(
-        "--enable-batch-inference",
-        type=arg_as_bool,
-        help="Enable batch inference",
-        default=False,
+        "--arxiv-ids",
+        type=str,
+        nargs="+",
+        default=None,
+        help="Optional list of arXiv IDs to process",
     )
 
     args = parser.parse_args()
-    main(args.target_date, args.days_to_fetch, args.enable_batch_inference)
+
+    arxiv_ids = NULL_STRING if args.arxiv_ids is None else " ".join(args.arxiv_ids)
+
+    main(
+        "indexing",
+        target_date=args.target_date or NULL_STRING,
+        days_to_fetch=args.days_to_fetch or NULL_STRING,
+        arxiv_ids=arxiv_ids,
+    )

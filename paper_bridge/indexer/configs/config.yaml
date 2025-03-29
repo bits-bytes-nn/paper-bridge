@@ -15,13 +15,14 @@ indexing:
   extraction_model_id: anthropic.claude-3-5-haiku-20241022-v1:0
   response_model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
   embeddings_model_id: cohere.embed-english-v3
+  enable_batch_inference: False
   extraction_num_workers: 2
-  extraction_num_threads_per_worker: 4
+  extraction_num_threads_per_worker: 2
   extraction_batch_size: 4
   build_num_workers: 2
   build_batch_size: 4
   build_batch_write_size: 25
-  batch_writes_enabled: true
-  enable_cache: true
+  batch_writes_enabled: True
+  enable_cache: True
   chunk_size: 1024
   chunk_overlap: 128

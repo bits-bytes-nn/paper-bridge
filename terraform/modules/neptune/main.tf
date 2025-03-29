@@ -1,8 +1,8 @@
 data "aws_region" "current" {}
 
 locals {
-  neptune_family = "neptune${split(".", var.engine_version)[0]}.${split(".", var.engine_version)[1]}"
   name_prefix    = var.project_name
+  neptune_family = "neptune${split(".", var.engine_version)[0]}.${split(".", var.engine_version)[1]}"
 }
 
 resource "aws_neptune_subnet_group" "this" {
@@ -10,9 +10,7 @@ resource "aws_neptune_subnet_group" "this" {
   subnet_ids  = var.private_subnet_ids
   description = "Neptune subnet group for ${local.name_prefix}"
 
-  tags = merge(var.tags, {
-    Name = local.name_prefix
-  })
+  tags = var.tags
 }
 
 resource "aws_neptune_cluster_parameter_group" "this" {
@@ -20,9 +18,7 @@ resource "aws_neptune_cluster_parameter_group" "this" {
   family      = local.neptune_family
   description = "Neptune cluster parameter group for ${local.name_prefix}"
 
-  tags = merge(var.tags, {
-    Name = local.name_prefix
-  })
+  tags = var.tags
 }
 
 resource "aws_neptune_parameter_group" "this" {
@@ -35,9 +31,7 @@ resource "aws_neptune_parameter_group" "this" {
     value = "60000"
   }
 
-  tags = merge(var.tags, {
-    Name = local.name_prefix
-  })
+  tags = var.tags
 }
 
 resource "aws_security_group" "neptune" {
@@ -61,9 +55,7 @@ resource "aws_security_group" "neptune" {
     description = "Allow all outbound traffic"
   }
 
-  tags = merge(var.tags, {
-    Name = "${local.name_prefix}-neptune"
-  })
+  tags = var.tags
 
   lifecycle {
     create_before_destroy = true
@@ -88,9 +80,7 @@ resource "aws_neptune_cluster" "this" {
     max_capacity = var.max_ncu
   }
 
-  tags = merge(var.tags, {
-    Name = local.name_prefix
-  })
+  tags = var.tags
 
   depends_on = [
     aws_neptune_subnet_group.this,
@@ -109,9 +99,7 @@ resource "aws_neptune_cluster_instance" "this" {
   auto_minor_version_upgrade   = true
   apply_immediately            = var.apply_immediately
 
-  tags = merge(var.tags, {
-    Name = local.name_prefix
-  })
+  tags = var.tags
 
   depends_on = [
     aws_neptune_cluster.this,
@@ -120,14 +108,10 @@ resource "aws_neptune_cluster_instance" "this" {
 }
 
 resource "aws_ssm_parameter" "neptune_endpoint" {
-  name        = "/${local.name_prefix}/neptune/endpoint"
-  description = "Neptune cluster endpoint"
-  type        = "String"
-  value       = aws_neptune_cluster.this.endpoint
-
-  tags = merge(var.tags, {
-    Name = "${local.name_prefix}-neptune-endpoint"
-  })
+  name  = "/${local.name_prefix}/neptune-endpoint"
+  type  = "String"
+  value = aws_neptune_cluster.this.endpoint
+  tags  = var.tags
 
   depends_on = [aws_neptune_cluster.this]
 }

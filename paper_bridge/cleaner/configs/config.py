@@ -1,16 +1,20 @@
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Any, Dict, Literal, Union
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, FilePath, field_validator, model_validator
+from pydantic import BaseModel, Field, FilePath, model_validator
 
 
 class LocalPaths(str, Enum):
+    FIGURES_DIR = "figures"
     LOGS_DIR = "logs"
+    PAPERS_DIR = "papers"
 
     CONFIG_FILE = "config.yaml"
     LOGS_FILE = "logs.txt"
+    PARSED_FILE = "parsed.json"
+    TEMPLATE_FILE = "template.html"
 
 
 class BaseModelWithDefaults(BaseModel):
@@ -26,15 +30,8 @@ class BaseModelWithDefaults(BaseModel):
 
 class Resources(BaseModelWithDefaults):
     project_name: str = Field(min_length=1)
-    stage: str = Field(default="dev", pattern=r"^(dev|prod)$")
+    stage: Literal["dev", "prod"] = Field(default="dev")
     default_region_name: str = Field(default="us-west-2")
-
-    @field_validator("project_name")
-    @classmethod
-    def validate_project_name(cls, v: str) -> str:
-        if not v.strip():
-            raise ValueError("Project name cannot be empty or whitespace")
-        return v
 
 
 class Cleaner(BaseModelWithDefaults):
@@ -46,7 +43,7 @@ class Config(BaseModelWithDefaults):
     resources: Resources = Field(
         default_factory=lambda: Resources(project_name="paper-bridge")
     )
-    cleaner: Cleaner = Field(default_factory=Cleaner)
+    cleaner: Cleaner = Field(default_factory=lambda: Cleaner())
 
     @classmethod
     def from_yaml(cls, file_path: Union[str, Path, FilePath]) -> "Config":

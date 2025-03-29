@@ -45,12 +45,12 @@ from .aws_helpers import (
     get_account_id,
     get_ssm_param_value,
 )
-from .constants import ENTITY_CLASSIFICATIONS
+from .constants import ENTITY_CLASSIFICATIONS, SSMParams
 from .fetcher import Paper
 from .logger import logger
 from paper_bridge.indexer.configs.config import Config, ModelHandler
 
-DEFAULT_CHECKPOINT_DATE_FORMAT = "%Y-%m-%d"
+DEFAULT_CHECKPOINT_DATE_FORMAT: str = "%Y-%m-%d"
 
 nest_asyncio.apply()
 
@@ -75,8 +75,8 @@ class Extractor(DocumentProcessor):
     def __init__(
         self,
         config: Config,
-        graph_store: GraphStore,
         boto3_session: boto3.Session,
+        graph_store: GraphStore,
         checkpoint: Optional[Checkpoint] = None,
         enable_batch_inference: bool = False,
     ):
@@ -107,16 +107,16 @@ class Extractor(DocumentProcessor):
         if not enable_batch_inference:
             return None
 
+        base_path = f"/{config.resources.project_name}"
         iam_role_name = get_ssm_param_value(
-            boto3_session,
-            f"/{config.resources.project_name}-{config.resources.stage}/iam/bedrock-inference",
+            boto3_session, f"{base_path}/iam-bedrock-inference"
         )
 
         if not config.resources.s3_bucket_name or not iam_role_name:
             logger.warning("Batch inference enabled but missing S3 bucket or IAM role")
             return None
 
-        logger.info(f"Using batch configuration with role: '{iam_role_name}'")
+        logger.info("Using batch configuration with role: '%s'", iam_role_name)
         return BatchConfig(
             region=config.resources.default_region_name,
             bucket_name=str(config.resources.s3_bucket_name),
@@ -226,21 +226,20 @@ class Extractor(DocumentProcessor):
     @staticmethod
     def _log_skipped_papers(skipped_count: int) -> None:
         if skipped_count:
-            logger.warning(f"Skipped {skipped_count} papers with no content")
+            logger.warning("Skipped %d papers with no content", skipped_count)
 
     @staticmethod
     def _create_document(paper: Paper) -> Document:
+        max_authors = 100
         metadata = {
             "paper_id": paper.arxiv_id,
             "title": paper.title,
-            "authors": paper.authors,
+            "authors": paper.authors[:max_authors],
             "published_at": paper.published_at.isoformat(),
             "created_at": datetime.now(timezone.utc).isoformat(),
-            "summary": paper.summary,
             "upvotes": paper.upvotes,
-            "thumbnail": paper.thumbnail,
-            "status": paper.status.name,
-            "base_date": paper.published_at.date().isoformat(),
+            "pdf_url": str(paper.pdf_url or ""),
+            "base_date": paper.base_date,
         }
         return Document(text=paper.content, metadata=metadata)
 
@@ -313,7 +312,7 @@ class Builder(DocumentProcessor):
         try:
             self._perform_deletion(paper_id_list)
         except Exception as e:
-            logger.error(f"Failed to delete documents: {str(e)}")
+            logger.error("Failed to delete documents: %s", str(e))
             raise
 
     @staticmethod
@@ -328,20 +327,23 @@ class Builder(DocumentProcessor):
     def _perform_deletion(self, paper_id_list: List[str]) -> None:
         results = self._neptune_client.batch_delete_documents(paper_id_list)
         logger.info(
-            f"Neptune deletion result: {pformat(self._neptune_client.summarize_deletion_results(results))}"
+            "Neptune deletion result: %s",
+            pformat(self._neptune_client.summarize_deletion_results(results)),
         )
 
         for client in self._open_search_clients:
             results = client.batch_delete_documents(paper_id_list)
             logger.info(
-                f"OpenSearch deletion result for index '{client.index}': {pformat(client.summarize_deletion_results(results))}"
+                "OpenSearch deletion result for index '%s': %s",
+                client.index,
+                pformat(client.summarize_deletion_results(results)),
             )
 
 
 def run_extract_and_build(
     papers: List[Paper],
     config: Config,
-    profile_name: Optional[str] = None,
+    boto3_session: boto3.Session,
     output_dir: Optional[str] = None,
     enable_batch_inference: bool = False,
 ) -> None:
@@ -349,9 +351,8 @@ def run_extract_and_build(
         _configure_graph_rag(config)
         _configure_logging()
 
-        boto3_session = _create_boto3_session(config, profile_name)
         checkpoint = _create_checkpoint(config, output_dir or "output")
-        stores = _setup_stores(boto3_session, config)
+        stores = _setup_stores(config, boto3_session)
 
         extractor = Extractor(
             config=config,
@@ -368,7 +369,7 @@ def run_extract_and_build(
         logger.info("Indexing completed successfully")
 
     except Exception as e:
-        logger.error(f"Failed to complete indexing: {str(e)}")
+        logger.error("Failed to complete indexing: %s", str(e))
         raise
 
 
@@ -398,31 +399,21 @@ def _configure_logging() -> None:
     )
 
 
-def _create_boto3_session(
-    config: Config, profile_name: Optional[str] = None
-) -> boto3.Session:
-    return boto3.Session(
-        region_name=config.resources.default_region_name, profile_name=profile_name
-    )
-
-
 def _create_checkpoint(config: Config, output_dir: str) -> Checkpoint:
     checkpoint_name = f"{config.resources.project_name}-{datetime.now().strftime(DEFAULT_CHECKPOINT_DATE_FORMAT)}"
     return Checkpoint(checkpoint_name, output_dir=output_dir, enabled=True)
 
 
 def _setup_stores(
-    boto3_session: boto3.Session,
     config: Config,
+    boto3_session: boto3.Session,
 ) -> Tuple[GraphStore, VectorStore, NeptuneClient, List[OpenSearchClient]]:
-    project_name = config.resources.project_name
-    stage = config.resources.stage
-
+    base_path = f"/{config.resources.project_name}-{config.resources.stage}"
     graph_endpoint = get_ssm_param_value(
-        boto3_session, f"/{project_name}-{stage}/neptune/endpoint"
+        boto3_session, f"{base_path}/{SSMParams.NEPTUNE_ENDPOINT.value}"
     )
     vector_endpoint = get_ssm_param_value(
-        boto3_session, f"/{project_name}-{stage}/opensearch/endpoint"
+        boto3_session, f"{base_path}/{SSMParams.OPENSEARCH_ENDPOINT.value}"
     )
     if graph_endpoint is None or vector_endpoint is None:
         raise ValueError("Graph or vector endpoint not found")
@@ -433,11 +424,11 @@ def _setup_stores(
     neptune_client = NeptuneClient(graph_endpoint)
     open_search_clients = [
         OpenSearchClient(
-            host=vector_endpoint.replace("http://", "").replace("https://", ""),
-            port=443,
-            index=index,
-            region_name=config.resources.default_region_name,
-            boto3_session=boto3_session,
+            vector_endpoint.replace("http://", "").replace("https://", ""),
+            443,
+            index,
+            boto3_session,
+            config.resources.default_region_name,
         )
         for index in ["chunk", "statement"]
     ]

@@ -1,11 +1,16 @@
 import argparse
 import functools
+import json
 import re
+import requests
 import time
-from typing import Any, Callable, Dict, Optional, Tuple, Type, Union
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
 from bs4 import BeautifulSoup, NavigableString, Tag
 from llama_index.core.types import BaseOutputParser
 from .logger import logger
+
+DEFAULT_MESSAGE: str = "This is a summary of the paper."
 
 
 class HTMLTagOutputParser(BaseOutputParser):
@@ -26,34 +31,15 @@ class HTMLTagOutputParser(BaseOutputParser):
         tag_names = (
             self.tag_names if isinstance(self.tag_names, tuple) else [self.tag_names]
         )
-
         for tag_name in tag_names:
-            tags = soup.find_all(tag_name)
-            if tags:
-                parsed[tag_name] = " ".join(tag.get_text().strip() for tag in tags)
-
-        if not parsed:
-            for tag_name in tag_names:
-                start = f"<{tag_name}>"
-                end = f"</{tag_name}>"
-                if start in text and end in text:
-                    start_idx = text.find(start) + len(start)
-                    end_idx = text.find(end)
-                    if start_idx < end_idx:
-                        content = text[start_idx:end_idx].strip()
-                        parsed[tag_name] = content.replace("\n", " ")
+            if tag := soup.find(tag_name):
+                parsed[tag_name] = str(tag.decode_contents(formatter=None)).strip()
 
         return (
             parsed
             if isinstance(self.tag_names, tuple)
             else next(iter(parsed.values()), "")
         )
-
-    def format(self, query: Optional[str] = None) -> str:
-        format_instructions = f"Please provide output in XML tags: {', '.join(f'<{tag_name}>' for tag_name in (self.tag_names if isinstance(self.tag_names, tuple) else [self.tag_names]))}"
-        if query:
-            return f"{query}\n{format_instructions}"
-        return format_instructions
 
     @property
     def output_type(self) -> Type[Union[str, Dict[str, str]]]:
@@ -72,6 +58,29 @@ def arg_as_bool(value: Any) -> bool:
             return False
 
     raise argparse.ArgumentTypeError("Boolean value expected")
+
+
+def arg_as_list(value: Optional[str]) -> Optional[List[str]]:
+    if value is None or value.lower() == "none":
+        return None
+
+    try:
+        items = json.loads(value)
+        if isinstance(items, str):
+            return [items.strip()]
+        if isinstance(items, list):
+            return items
+    except json.JSONDecodeError:
+        if value.strip().startswith("[") and value.strip().endswith("]"):
+            try:
+                import ast
+
+                items = ast.literal_eval(value)
+                if isinstance(items, list):
+                    return items
+            except (SyntaxError, ValueError):
+                pass
+        return [value.strip()]
 
 
 def extract_text_from_html(html_content: str) -> str:
@@ -137,3 +146,116 @@ def measure_execution_time(func: Callable) -> Callable:
         return result
 
     return wrapper
+
+
+def send_files_to_slack(
+    file_paths: List[Path],
+    slack_token: str,
+    channel_id: str,
+    message: str = DEFAULT_MESSAGE,
+) -> None:
+    headers = {
+        "Authorization": f"Bearer {slack_token}",
+    }
+
+    if message:
+        try:
+            message_headers = {
+                "Authorization": f"Bearer {slack_token}",
+                "Content-Type": "application/json",
+            }
+            message_payload = {"channel": channel_id, "text": message}
+            message_response = requests.post(
+                "https://slack.com/api/chat.postMessage",
+                headers=message_headers,
+                json=message_payload,
+            )
+
+            if not message_response.ok or not message_response.json().get("ok"):
+                logger.error(
+                    "Failed to send message: %s",
+                    message_response.json().get("error", "Unknown error"),
+                )
+        except Exception as e:
+            logger.error("Error sending message: %s", str(e))
+
+    for file_path in file_paths:
+        if not file_path.exists():
+            logger.warning(f"File not found: {file_path}")
+            continue
+
+        try:
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+            get_url_payload = {
+                "filename": file_path.name,
+                "length": file_path.stat().st_size,
+            }
+
+            url_response = requests.post(
+                "https://slack.com/api/files.getUploadURLExternal",
+                headers=headers,
+                data=get_url_payload,
+            )
+
+            logger.debug("Request payload: %s", get_url_payload)
+
+            if not url_response.ok:
+                logger.error(
+                    "HTTP error: %s - %s", url_response.status_code, url_response.text
+                )
+                continue
+
+            url_data = url_response.json()
+            if not url_data.get("ok"):
+                logger.error("Slack API error: %s", url_data.get("error"))
+                continue
+
+            upload_url = url_data.get("upload_url")
+            file_id = url_data.get("file_id")
+
+            if not upload_url or not file_id:
+                logger.error("Missing upload_url or file_id in Slack response")
+                continue
+
+            with open(file_path, "rb") as f:
+                file_content = f.read()
+
+            upload_response = requests.post(
+                upload_url,
+                files={"file": file_content},
+            )
+
+            if not upload_response.ok:
+                logger.error(
+                    "Upload failed: %s - %s",
+                    upload_response.status_code,
+                    upload_response.text,
+                )
+                continue
+
+            headers["Content-Type"] = "application/json"
+            complete_payload = {
+                "files": [{"id": file_id, "title": file_path.name}],
+                "channel_id": channel_id,
+            }
+
+            complete_response = requests.post(
+                "https://slack.com/api/files.completeUploadExternal",
+                headers=headers,
+                json=complete_payload,
+            )
+
+            if complete_response.ok:
+                result = complete_response.json()
+                if not result.get("ok"):
+                    logger.error("Completion error: %s", result.get("error"))
+                else:
+                    logger.info("Successfully uploaded %s to Slack", file_path.name)
+            else:
+                logger.error(
+                    "Completion HTTP error: %s - %s",
+                    complete_response.status_code,
+                    complete_response.text,
+                )
+        except Exception as e:
+            logger.error("Failed to upload file %s to Slack: %s", file_path, str(e))

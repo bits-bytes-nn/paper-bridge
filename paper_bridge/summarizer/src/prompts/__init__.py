@@ -1,3 +1,13 @@
-from .prompts import FigureAnalysisPrompt
+from .prompts import (
+    BasePrompt,
+    FigureAnalysisPrompt,
+    PaperSummarizationPrompt,
+    RetrievalSummarizationPrompt,
+)
 
-__all__ = ["FigureAnalysisPrompt"]
+__all__ = [
+    "BasePrompt",
+    "FigureAnalysisPrompt",
+    "PaperSummarizationPrompt",
+    "RetrievalSummarizationPrompt",
+]

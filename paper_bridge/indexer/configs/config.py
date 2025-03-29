@@ -1,9 +1,9 @@
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, FilePath, field_validator, model_validator
+from pydantic import BaseModel, Field, FilePath, model_validator
 
 
 class EmbeddingsModelId(str, Enum):
@@ -95,10 +95,14 @@ class ModelHandler:
 
 
 class LocalPaths(str, Enum):
+    FIGURES_DIR = "figures"
     LOGS_DIR = "logs"
+    PAPERS_DIR = "papers"
 
+    TEMPLATES_FILE = "templates.html"
     CONFIG_FILE = "config.yaml"
     LOGS_FILE = "logs.txt"
+    PARSED_FILE = "parsed.json"
 
 
 class BaseModelWithDefaults(BaseModel):
@@ -114,18 +118,11 @@ class BaseModelWithDefaults(BaseModel):
 
 class Resources(BaseModelWithDefaults):
     project_name: str = Field(min_length=1)
-    stage: str = Field(default="dev", pattern=r"^(dev|prod)$")
+    stage: Literal["dev", "prod"] = Field(default="dev")
     default_region_name: str = Field(default="us-west-2")
     bedrock_region_name: str = Field(default="us-west-2")
     s3_bucket_name: Optional[str] = Field(default=None)
     s3_key_prefix: Optional[str] = Field(default=None)
-
-    @field_validator("project_name")
-    @classmethod
-    def validate_project_name(cls, v: str) -> str:
-        if not v.strip():
-            raise ValueError("Project name cannot be empty or whitespace")
-        return v
 
 
 class Indexing(BaseModelWithDefaults):
@@ -133,16 +130,11 @@ class Indexing(BaseModelWithDefaults):
     days_to_fetch: int = Field(default=7, ge=1)
     min_upvotes: Optional[int] = Field(default=None, ge=0)
     use_llama_parse: bool = Field(default=False)
-    main_content_extraction_model_id: Optional[LanguageModelId] = None
-    extraction_model_id: LanguageModelId = Field(
-        default=LanguageModelId.CLAUDE_V3_5_SONNET_V2
-    )
-    response_model_id: LanguageModelId = Field(
-        default=LanguageModelId.CLAUDE_V3_5_SONNET_V2
-    )
-    embeddings_model_id: EmbeddingsModelId = Field(
-        default=EmbeddingsModelId.COHERE_EMBED_TEXT_V3
-    )
+    main_content_extraction_model_id: Optional[LanguageModelId] = Field(default=None)
+    extraction_model_id: LanguageModelId
+    response_model_id: LanguageModelId
+    embeddings_model_id: EmbeddingsModelId
+    enable_batch_inference: bool = Field(default=False)
     extraction_num_workers: int = Field(default=2)
     extraction_num_threads_per_worker: int = Field(default=4)
     extraction_batch_size: int = Field(default=4)
@@ -159,7 +151,13 @@ class Config(BaseModelWithDefaults):
     resources: Resources = Field(
         default_factory=lambda: Resources(project_name="paper-bridge")
     )
-    indexing: Indexing = Field(default_factory=Indexing)
+    indexing: Indexing = Field(
+        default_factory=lambda: Indexing(
+            extraction_model_id=LanguageModelId.CLAUDE_V3_5_HAIKU,
+            response_model_id=LanguageModelId.CLAUDE_V3_5_SONNET_V2,
+            embeddings_model_id=EmbeddingsModelId.COHERE_EMBED_TEXT_V3,
+        )
+    )
 
     @classmethod
     def from_yaml(cls, file_path: Union[str, Path, FilePath]) -> "Config":

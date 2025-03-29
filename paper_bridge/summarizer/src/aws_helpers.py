@@ -1,6 +1,10 @@
-from typing import Optional
+import os
+from pathlib import Path
+from typing import List, Optional
 import boto3
+from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
+
 from .logger import logger
 
 
@@ -43,3 +47,94 @@ def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Option
     except ClientError as error:
         logger.error("Failed to get SSM parameter value: %s", str(error))
         return None
+
+
+def upload_dir_to_s3(
+    boto3_session: boto3.Session,
+    local_dir: str,
+    bucket_name: str,
+    prefix: str,
+    file_ext_to_incl: Optional[List[str]] = None,
+    public_readable: bool = False,
+) -> int:
+    try:
+        s3_client = boto3_session.client("s3")
+        file_ext_to_incl = file_ext_to_incl or []
+
+        config = TransferConfig(
+            multipart_threshold=1024 * 25,
+            max_concurrency=10,
+            multipart_chunksize=1024 * 25,
+            use_threads=True,
+        )
+
+        extra_args = {"ACL": "public-read"} if public_readable else {}
+        upload_count = 0
+
+        for root, _, files in os.walk(local_dir):
+            for filename in files:
+                if not file_ext_to_incl or filename.split(".")[-1] in file_ext_to_incl:
+                    local_path = os.path.join(root, filename)
+                    relative_path = os.path.relpath(local_path, local_dir)
+                    s3_path = os.path.join(prefix, relative_path).replace("\\", "/")
+
+                    s3_client.upload_file(
+                        local_path,
+                        bucket_name,
+                        s3_path,
+                        Config=config,
+                        ExtraArgs=extra_args,
+                    )
+                    upload_count += 1
+                    logger.info(
+                        "Uploaded '%s' to 's3://%s/%s'",
+                        relative_path,
+                        bucket_name,
+                        s3_path,
+                    )
+
+        logger.info("Successfully uploaded %d files", upload_count)
+        return upload_count
+
+    except Exception as e:
+        logger.error("Failed to upload directory to S3: %s", str(e))
+        return 0
+
+
+def upload_to_s3(
+    boto3_session: boto3.Session,
+    file_path: Path,
+    s3_bucket_name: str,
+    s3_prefix: Optional[str] = None,
+) -> bool:
+    if not file_path.exists():
+        logger.error("File not found: %s", file_path)
+        return False
+
+    if not s3_bucket_name:
+        logger.error("S3 bucket name is required")
+        return False
+
+    try:
+        s3_client = boto3_session.client("s3")
+
+        prefix = s3_prefix.strip("/") + "/" if s3_prefix else ""
+        s3_key = f"{prefix}{file_path.name}"
+
+        s3_client.upload_file(str(file_path), s3_bucket_name, s3_key)
+
+        logger.info(
+            "Successfully uploaded '%s' to 's3://%s/%s'",
+            file_path.name,
+            s3_bucket_name,
+            s3_key,
+        )
+        return True
+
+    except ClientError as e:
+        error_code = e.response.get("Error", {}).get("Code", "Unknown")
+        error_msg = e.response.get("Error", {}).get("Message", str(e))
+        logger.error(
+            "Failed to upload '%s' to S3: %s - %s", file_path, error_code, error_msg
+        )
+        return False
