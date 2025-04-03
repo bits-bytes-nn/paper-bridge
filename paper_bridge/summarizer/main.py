@@ -5,13 +5,15 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from pprint import pformat
-from typing import Any, Dict, List, Optional, Union
+from typing import Dict, List, Optional, Union
 import boto3
 from paper_bridge.summarizer.configs import Config
 from paper_bridge.summarizer.src import (
     EnvVars,
+    Format,
     Figure,
     HtmlToImageConverter,
+    Language,
     LocalPaths,
     NULL_STRING,
     Paper,
@@ -32,77 +34,106 @@ from paper_bridge.summarizer.src import (
 )
 
 ROOT_DIR: Path = Path("/tmp") if is_aws_env() else Path(__file__).parent.parent
-DEFAULT_BOTO3_SESSION: boto3.Session = boto3.Session(
-    region_name=EnvVars.DEFAULT_REGION_NAME.value
-)
-BEDROCK_BOTO3_SESSION: boto3.Session = boto3.Session(
-    region_name=EnvVars.BEDROCK_REGION_NAME.value
-)
+UPLOAD_PAPERS_DIR: bool = False
 
 
-def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, str]]:
-    target_date = None
+class DateFormatError(Exception):
+    pass
+
+
+class SummarizationError(Exception):
+    pass
+
+
+def parse_target_date(date_str: Optional[str]) -> Optional[datetime]:
+    if not date_str or date_str.lower() == NULL_STRING:
+        return None
+    try:
+        return datetime.strptime(date_str, "%Y-%m-%d")
+    except ValueError as e:
+        logger.error("Invalid date format: %s", e)
+        raise DateFormatError(f"Invalid date format: {e}")
+
+
+def main(
+    target_date: Optional[str],
+    days_to_fetch: int,
+    arxiv_ids: Optional[List[str]],
+    language: Optional[str],
+    apply_retrieval: bool,
+) -> None:
+    default_boto3_session = None
     papers: List[Paper] = []
+    success = False
+    error_message = None
 
     try:
         config = Config.load()
         profile_name = EnvVars.AWS_PROFILE_NAME.value
 
-        default_boto3_session = (
-            DEFAULT_BOTO3_SESSION
-            if is_aws_env()
-            else boto3.Session(
-                region_name=config.resources.default_region_name,
-                profile_name=profile_name,
-            )
-        )
-        bedrock_boto3_session = (
-            BEDROCK_BOTO3_SESSION
-            if is_aws_env()
-            else boto3.Session(
-                region_name=config.resources.bedrock_region_name,
-                profile_name=profile_name,
-            )
+        default_boto3_session = boto3.Session(
+            region_name=config.resources.default_region_name,
+            profile_name=profile_name,
         )
 
-        target_date = event.get("TARGET_DATE")
-        days_to_fetch = event.get("DAYS_TO_FETCH")
-        arxiv_ids = event.get("ARXIV_IDS")
-        language = event.get("LANGUAGE")
-        apply_retrieval = arg_as_bool(event.get("APPLY_RETRIEVAL", False))
+        bedrock_boto3_session = boto3.Session(
+            region_name=config.resources.bedrock_region_name,
+            profile_name=profile_name,
+        )
 
-        papers_dir = ROOT_DIR / LocalPaths.PAPERS_DIR.value
         target_datetime = parse_target_date(target_date)
 
+        if arxiv_ids and isinstance(arxiv_ids, list) and len(arxiv_ids) > 0:
+            arxiv_ids = [
+                arxiv_id
+                for arxiv_id in arxiv_ids
+                if arxiv_id and arxiv_id.lower() != NULL_STRING
+            ]
+            if not arxiv_ids:
+                arxiv_ids = None
+
+        language_enum = None
+        if language and language.lower() != NULL_STRING:
+            language_enum = Language(language)
+
+        output_format_enum = (
+            None
+            if config.retrieval.output_format is None
+            else Format(config.retrieval.output_format)
+        )
+
+        papers_dir = ROOT_DIR / LocalPaths.PAPERS_DIR.value
         papers = fetch_and_enrich_papers(
             config,
             bedrock_boto3_session,
-            profile_name,
             papers_dir,
-            target_datetime,
-            days_to_fetch,
-            arxiv_ids,
+            profile_name=profile_name,
+            target_datetime=target_datetime,
+            days_to_fetch=days_to_fetch,
+            arxiv_ids=arxiv_ids,
         )
         logger.info("Found %d papers to process", len(papers))
         logger.debug("Paper details: %s", pformat(papers))
 
         if not papers:
             logger.info("No papers to process")
-            return {"status": 200, "message": "No papers to process"}
+            success = True
+            return
 
-        s3_input_key = _get_s3_key(config.resources.s3_prefix, S3Paths.INPUTS.value)
-        upload_dir_to_s3(
-            default_boto3_session,
-            str(papers_dir),
-            config.resources.s3_bucket_name,
-            s3_input_key,
-        )
+        if UPLOAD_PAPERS_DIR or is_aws_env():
+            s3_input_key = _get_s3_key(config.resources.s3_prefix, S3Paths.INPUTS.value)
+            upload_dir_to_s3(
+                default_boto3_session,
+                str(papers_dir),
+                config.resources.s3_bucket_name,
+                s3_input_key,
+            )
 
         summarizer = PaperSummarizer(
             config,
             boto3_session=default_boto3_session,
             profile_name=profile_name,
-            language=language,
+            language=language_enum,
         )
         summaries = asyncio.run(summarizer.summarize_batch(papers))
 
@@ -112,11 +143,16 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
                 config,
                 boto3_session=default_boto3_session,
                 profile_name=profile_name,
-                language=language,
+                language=language_enum,
+                output_format=output_format_enum,
             )
             retrievals = asyncio.run(retriever.retrieve_batch(papers))
 
-        results = process_results(summaries, retrievals, apply_retrieval)
+        results = process_results(
+            summaries,
+            retrievals,
+            apply_retrieval and (output_format_enum == Format.HTML),
+        )
 
         logger.info(
             "Successfully processed %d papers with summaries and retrievals",
@@ -124,7 +160,9 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
         )
         logger.debug("Results: %s", pformat(results))
 
-        templates_dir = ROOT_DIR / LocalPaths.TEMPLATES_DIR.value
+        templates_dir = (
+            Path(__file__).parent / "paper_bridge" if is_aws_env() else ROOT_DIR
+        ) / LocalPaths.TEMPLATES_DIR.value
         outputs_dir = (
             ROOT_DIR if is_aws_env() else ROOT_DIR.parent
         ) / LocalPaths.OUTPUTS_DIR.value
@@ -135,15 +173,15 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
             outputs_dir,
             config.resources.stage,
             target_date,
-            language,
+            language_enum,
         )
         html_paths = document_builder.create_batch_documents(papers, results)
 
         converter = HtmlToImageConverter(outputs_dir)
         s3_output_key = _get_s3_key(config.resources.s3_prefix, S3Paths.OUTPUTS.value)
 
-        slack_token = _get_slack_token(default_boto3_session)
-        slack_channel = _get_slack_channel(default_boto3_session)
+        slack_token = _get_slack_token(config, default_boto3_session)
+        slack_channel = _get_slack_channel(config, default_boto3_session)
 
         for html_path, paper in zip(html_paths, papers):
             upload_to_s3(
@@ -169,11 +207,16 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
                         default_boto3_session,
                         image_path,
                         config.resources.s3_bucket_name,
-                        config.resources.s3_prefix,
+                        s3_output_key,
                     )
-
                 if slack_token and slack_channel:
-                    message = _create_slack_message(paper)
+                    retrieval = None
+                    if apply_retrieval and (output_format_enum == Format.SLACK):
+                        retrieval = retrievals.get(paper.arxiv_id, {})
+
+                    message = _create_slack_message(paper, retrieval)
+                    logger.debug("Slack message: %s", message)
+
                     send_files_to_slack(
                         image_paths,
                         slack_token,
@@ -181,44 +224,51 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
                         message,
                     )
 
-        return {"status": 200, "message": "Success"}
+        success = True
 
+    except DateFormatError as e:
+        logger.error("Date format error: %s", e)
+        error_message = str(e)
+        success = False
+        raise
     except Exception as e:
-        error_message = f"Failed to summarize papers: {e}"
-        logger.error(error_message)
+        logger.error("Failed to summarize papers: %s", e)
+        error_message = str(e)
+        success = False
+        raise SummarizationError(f"Failed to summarize papers: {e}")
 
+    finally:
         topic_arn = EnvVars.TOPIC_ARN.value
-        if is_aws_env() and topic_arn:
+        target_datetime = None
+        try:
+            target_datetime = parse_target_date(target_date)
+        except DateFormatError:
+            pass
+
+        if is_aws_env() and topic_arn and not success and default_boto3_session:
             send_failure_notification(
-                DEFAULT_BOTO3_SESSION, topic_arn, target_date, papers, error_message
+                default_boto3_session,
+                topic_arn,
+                target_datetime,
+                papers,
+                error_message,
             )
-
-        return {"status": 500, "message": error_message}
-
-
-def parse_target_date(date_str: Optional[str]) -> Optional[datetime]:
-    if not date_str or date_str.lower() == NULL_STRING:
-        return None
-    try:
-        return datetime.strptime(date_str, "%Y-%m-%d")
-    except ValueError as e:
-        logger.error("Invalid date format: %s", e)
-        sys.exit(1)
 
 
 def fetch_and_enrich_papers(
     config: Config,
     boto3_session: boto3.Session,
-    profile_name: Optional[str],
     papers_dir: Path,
-    target_date: Optional[datetime],
-    days_to_fetch: Optional[int],
-    arxiv_ids: Optional[List[str]],
+    profile_name: Optional[str] = None,
+    target_datetime: Optional[datetime] = None,
+    days_to_fetch: Optional[int] = None,
+    arxiv_ids: Optional[List[str]] = None,
 ) -> List[Paper]:
     fetcher = PaperFetcher(
         config,
         boto3_session=boto3_session,
         profile_name=profile_name,
+        timeout=600,
     )
     if arxiv_ids:
         papers = fetcher.fetch_papers_by_arxiv_ids(
@@ -226,7 +276,7 @@ def fetch_and_enrich_papers(
         )
     else:
         papers = fetcher.fetch_papers_for_date_range(
-            papers_dir, target_date, days_to_fetch, config.summarization.parse_pdf
+            papers_dir, target_datetime, days_to_fetch, config.summarization.parse_pdf
         )
 
     enriched_papers = []
@@ -273,14 +323,14 @@ def _enrich_content_with_figures(text: str, figures: List[Figure]) -> str:
 def process_results(
     summaries: Dict[str, Union[Dict[str, str], str]],
     retrievals: Dict[str, Union[Dict[str, str], str]],
-    apply_retrieval: bool,
+    add_retrievals: bool,
 ) -> List[Result]:
     results = []
 
     for arxiv_id, summary in summaries.items():
         result = create_result_from_summary(arxiv_id, summary)
 
-        if apply_retrieval and arxiv_id in retrievals:
+        if add_retrievals and arxiv_id in retrievals:
             retrieval = retrievals[arxiv_id]
             result.retrieval = (
                 retrieval.get("summary", "")
@@ -308,7 +358,7 @@ def create_result_from_summary(
             else None
         ),
         urls=(
-            summary.get("urls", "").split(",")
+            extract_unique_urls(summary.get("urls", ""))
             if isinstance(summary, dict) and summary.get("urls")
             else None
         ),
@@ -316,7 +366,10 @@ def create_result_from_summary(
 
 
 def extract_unique_urls(urls_str: str) -> List[str]:
-    cleaned_urls = [url.strip() for url in urls_str.split(",")]
+    if not urls_str or not urls_str.strip():
+        return []
+
+    cleaned_urls = [url.strip() for url in urls_str.split(",") if url.strip()]
     unique_urls = []
     seen_urls = set()
 
@@ -324,10 +377,10 @@ def extract_unique_urls(urls_str: str) -> List[str]:
         url_match = url.rfind("](")
         if url_match != -1:
             actual_url = url[url_match + 2 : -1]
-            if actual_url not in seen_urls:
+            if actual_url and actual_url not in seen_urls:
                 seen_urls.add(actual_url)
                 unique_urls.append(url)
-        elif url not in seen_urls:
+        elif url and url not in seen_urls:
             seen_urls.add(url)
             unique_urls.append(url)
 
@@ -338,30 +391,73 @@ def _get_s3_key(s3_prefix: Optional[str], path_value: str) -> str:
     return path_value if s3_prefix is None else f"{s3_prefix}/{path_value}"
 
 
-def _get_slack_token(boto3_session: boto3.Session) -> Optional[str]:
+def _get_slack_token(config: Config, boto3_session: boto3.Session) -> Optional[str]:
+    base_path = f"/{config.resources.project_name}-{config.resources.stage}"
     return (
         get_ssm_param_value(
             boto3_session,
-            SSMParams.SLACK_BOT_TOKEN.value,
+            f"{base_path}/{SSMParams.SLACK_BOT_TOKEN.value}",
         )
         if is_aws_env()
         else EnvVars.SLACK_BOT_TOKEN.value
     )
 
 
-def _get_slack_channel(boto3_session: boto3.Session) -> Optional[str]:
+def _get_slack_channel(config: Config, boto3_session: boto3.Session) -> Optional[str]:
+    base_path = f"/{config.resources.project_name}-{config.resources.stage}"
     return (
         get_ssm_param_value(
             boto3_session,
-            SSMParams.SLACK_CHANNEL_ID.value,
+            f"{base_path}/{SSMParams.SLACK_CHANNEL_ID.value}",
         )
         if is_aws_env()
         else EnvVars.SLACK_CHANNEL_ID.value
     )
 
 
-def _create_slack_message(paper: Paper) -> str:
-    return f"'{paper.published_at.strftime('%Y-%m-%d')}'에 발행된 논문 <{paper.pdf_url}|'{paper.title}'>의 요약입니다. (득표 수: {paper.upvotes})"
+def _create_slack_message(
+    paper: Paper, retrieval: Optional[Union[str, Dict[str, str]]] = None
+) -> str:
+    clean_title = " ".join(paper.title.split())
+    date_str = paper.published_at.strftime("%Y-%m-%d")
+    message = (
+        f"🗞️ '{date_str}'에 발행된 논문 <{paper.pdf_url}|{clean_title}>의 요약입니다."
+    )
+
+    if paper.upvotes > 0:
+        message += f" (👍 +{paper.upvotes})"
+
+    if retrieval:
+        if isinstance(retrieval, dict):
+            summary = retrieval.get("summary", "")
+            urls = retrieval.get("urls", "")
+        else:
+            summary = retrieval
+            urls = ""
+
+        formatted_summary = convert_markdown_to_slack_links(
+            summary.replace("다:", "다.")
+        )
+        message += f"\n\n{formatted_summary}"
+
+        if urls:
+            formatted_urls = []
+            for url in extract_unique_urls(urls):
+                url = url.strip()
+                if "[" in url and "](" in url:
+                    text = url[url.find("[") + 1 : url.find("]")]
+                    link = url[url.find("](") + 2 : url.find(")")]
+                    formatted_urls.append(f"• <{link}|{text}>")
+
+            if formatted_urls:
+                message += "\n\n📚 *참고 문헌*\n" + "\n".join(formatted_urls)
+
+    return message
+
+
+def convert_markdown_to_slack_links(text: str) -> str:
+    pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+    return pattern.sub(r"<\2|\1>", text)
 
 
 def send_failure_notification(
@@ -409,7 +505,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--days-to-fetch",
         type=int,
-        default=None,
+        default=0,
         help="Number of days to fetch papers",
     )
     parser.add_argument(
@@ -438,11 +534,6 @@ if __name__ == "__main__":
         if args.target_date and args.target_date.lower() == NULL_STRING
         else args.target_date
     )
-    days_to_fetch = (
-        None
-        if args.days_to_fetch and str(args.days_to_fetch).lower() == NULL_STRING
-        else args.days_to_fetch
-    )
     language = (
         None
         if args.language and args.language.lower() == NULL_STRING
@@ -454,25 +545,22 @@ if __name__ == "__main__":
         if len(args.arxiv_ids) == 1 and args.arxiv_ids[0].lower() == NULL_STRING:
             arxiv_ids = None
         else:
-            arxiv_ids = ",".join(args.arxiv_ids)
+            arxiv_ids = args.arxiv_ids
 
     logger.info(
-        "Processing indexing with target_date='%s', days_to_fetch='%s', arxiv_ids='%s', language='%s', apply_retrieval='%s'",
+        "Processing papers with target_date='%s', days_to_fetch='%s', arxiv_ids='%s', language='%s', apply_retrieval='%s'",
         target_date or "",
-        days_to_fetch or "",
-        arxiv_ids or "",
+        args.days_to_fetch,
+        ", ".join(arxiv_ids) if arxiv_ids else "",
         language or "",
         args.apply_retrieval,
     )
 
-    event = {
-        "TARGET_DATE": target_date,
-        "DAYS_TO_FETCH": days_to_fetch,
-        "ARXIV_IDS": arxiv_ids,
-        "LANGUAGE": language,
-        "APPLY_RETRIEVAL": args.apply_retrieval,
-    }
-
-    result = lambda_handler(event, None)
-    exit_code = 0 if result["status"] == 200 else 1
-    sys.exit(exit_code)
+    try:
+        main(target_date, args.days_to_fetch, arxiv_ids, language, args.apply_retrieval)
+    except (DateFormatError, SummarizationError) as e:
+        logger.error("Application failed: %s", e)
+        sys.exit(1)
+    except Exception as e:
+        logger.error("Unexpected error: %s", e)
+        sys.exit(1)

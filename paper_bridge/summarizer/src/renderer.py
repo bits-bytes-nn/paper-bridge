@@ -88,22 +88,26 @@ class PaperRenderer:
         else:
             return f"{', '.join(cleaned_authors[:self.MAX_AUTHORS])} et al."
 
-    def _process_urls(self, urls: Optional[List[str]]) -> Optional[List[str]]:
+    @staticmethod
+    def _process_urls(urls: Optional[List[str]]) -> Optional[List[str]]:
         if not urls:
             return None
 
         processed_urls = []
         for url in urls:
-            match_md_link = re.match(r"\[(.*?)\]\((\bhttps?://\S+)\)", url)
+            match_md_link = re.match(r"\[(.*?)]\((\bhttps?://\S+)\)", url)
             if match_md_link:
                 title = match_md_link.group(1).strip()
                 link = match_md_link.group(2).strip()
+                title = re.sub(r"[\[\]]", "", title)
                 processed_urls.append(f'<a href="{link}" target="_blank">{title}</a>')
             elif match := re.match(r"(.*?)\s*\((\bhttps?://\S+)\)", url):
                 title = match.group(1).strip()
                 link = match.group(2).strip()
+                title = re.sub(r"[\[\]]", "", title)
                 processed_urls.append(f'<a href="{link}" target="_blank">{title}</a>')
             else:
+                url = re.sub(r"[\[\]]", "", url)
                 processed_urls.append(url)
 
         return processed_urls
@@ -148,8 +152,8 @@ class PaperDocumentBuilder:
             logger.error("Failed to create paper document: %s", str(e))
             raise
 
+    @staticmethod
     def _generate_filename(
-        self,
         arxiv_id: str,
         stage: Optional[str] = None,
         date_suffix: Optional[str] = None,
@@ -189,11 +193,11 @@ class PaperDocumentBuilder:
 
 
 class HtmlToImageConverter:
-    DEFAULT_WIDTH: int = 1280
-    DEFAULT_WAIT_TIME: int = 3
-    DEFAULT_MAX_HEIGHT: int = 2000
-    DEFAULT_OVERLAP: int = 0
-    DEFAULT_MIN_LAST_PAGE_HEIGHT: int = 500
+    DEFAULT_WIDTH = 1200
+    DEFAULT_WAIT_TIME = 3
+    DEFAULT_MAX_HEIGHT = 2000
+    DEFAULT_OVERLAP = 0
+    DEFAULT_MIN_LAST_PAGE_HEIGHT = 1000
 
     def __init__(
         self,
@@ -218,7 +222,7 @@ class HtmlToImageConverter:
         options.add_argument("--disable-gpu")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--window-size=1280,3000")
+        options.add_argument("--window-size=1200,3000")
         options.add_argument("--lang=ko-KR")
         options.add_argument("--font-render-hinting=medium")
         return options
@@ -263,14 +267,18 @@ class HtmlToImageConverter:
         try:
             driver = self._create_webdriver()
             driver.get(f"file://{html_path.absolute()}")
+
             time.sleep(wait_time)
 
             total_height = driver.execute_script("return document.body.scrollHeight")
             driver.set_window_size(width, total_height)
+
             time.sleep(wait_time)
 
             driver.save_screenshot(str(output_path))
+            logger.info("Converted %s to %s", html_file, output_path)
             return output_path
+
         except WebDriverException as e:
             logger.error("WebDriver error converting %s: %s", html_file, str(e))
             raise
@@ -329,6 +337,7 @@ class HtmlToImageConverter:
                 logger.info("Generated image %d/%d: %s", i + 1, num_images, image_path)
 
             return image_paths
+
         except WebDriverException as e:
             logger.error("WebDriver error converting %s: %s", html_file, str(e))
             raise
@@ -376,6 +385,7 @@ class HtmlToImageConverter:
 
     def _calculate_split_positions(self, driver, total_height: int) -> List[int]:
         split_positions = [0]
+
         potential_breakpoints = self._find_potential_breakpoints(driver)
 
         current_pos = 0

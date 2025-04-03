@@ -25,7 +25,7 @@ from graphrag_toolkit.retrieval.retrievers import (
 from graphrag_toolkit.storage import GraphStoreFactory, VectorStoreFactory
 from llama_index.llms.bedrock_converse import BedrockConverse
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
-from .constants import Language, SSMParams
+from .constants import Format, Language, SSMParams
 from .fetcher import Paper
 from .logger import logger
 from .prompts import RetrievalSummarizationPrompt
@@ -199,7 +199,7 @@ class Retriever:
 
 class PaperRetriever:
     DEFAULT_QUERIES: List[str] = [
-        "What are the recent major developments in the technical field of this paper? What are the key differences between this paper and recently published similar papers? Please analyze the research trends in the field related to this paper and insights that can be derived from them.\nPaper content:"
+        "What are the recent major developments in the specific technical field of this paper? What are the key differences between this paper and other papers that attempted to solve similar problems? How does this paper's approach, methodology, or results differ from previous work? Please analyze the research trends in the field related to this paper and insights that can be derived from them.\nPaper content:"
     ]
 
     def __init__(
@@ -208,6 +208,7 @@ class PaperRetriever:
         boto3_session: Optional[boto3.Session] = None,
         profile_name: Optional[str] = None,
         language: Optional[Language] = None,
+        output_format: Optional[Format] = None,
     ):
         self.config = config
         self.profile_name = profile_name
@@ -221,8 +222,14 @@ class PaperRetriever:
             raise ValueError("'retrieval_summarization_model_id' is not set")
 
         self.retriever = Retriever(config, self.boto3_session)
-        self.retrieval_prompt = RetrievalSummarizationPrompt.for_language(
-            language or Language.KO
+        language_to_use = language
+        if output_format == Format.SLACK:
+            language_to_use = Language.KO
+        else:
+            language_to_use = language or Language.KO
+
+        self.retrieval_prompt = RetrievalSummarizationPrompt.for_language_and_format(
+            language_to_use, output_format or Format.HTML
         ).get_prompt()
         self.retrieval_llm = self._initialize_llm(
             self.config.retrieval.retrieval_summarization_model_id.value

@@ -6,11 +6,12 @@ from typing import Dict, Optional, Tuple, Any
 import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
-from paper_bridge.indexer.configs import Config
-from paper_bridge.indexer.src import (
+from paper_bridge.summarizer.configs import Config
+from paper_bridge.summarizer.src import (
     EnvVars,
     NULL_STRING,
     SSMParams,
+    arg_as_bool,
     get_ssm_param_value,
     logger,
     submit_batch_job,
@@ -85,11 +86,11 @@ def get_batch_job_names(
     return (
         get_ssm_param_value(
             boto3_session,
-            f"{base_path}/{SSMParams.BATCH_JOB_QUEUE_INDEXER.value}",
+            f"{base_path}/{SSMParams.BATCH_JOB_QUEUE_SUMMARIZER.value}",
         ),
         get_ssm_param_value(
             boto3_session,
-            f"{base_path}/{SSMParams.BATCH_JOB_DEFINITION_INDEXER.value}",
+            f"{base_path}/{SSMParams.BATCH_JOB_DEFINITION_SUMMARIZER.value}",
         ),
     )
 
@@ -117,18 +118,34 @@ if __name__ == "__main__":
         default=None,
         help="Optional list of arXiv IDs to process",
     )
+    parser.add_argument(
+        "--language",
+        type=str,
+        default=None,
+        help="Language for the newsletter",
+    )
+    parser.add_argument(
+        "--apply-retrieval",
+        type=arg_as_bool,
+        default=False,
+        help="Whether to apply retrieval",
+    )
     args = parser.parse_args()
 
     arxiv_ids = args.arxiv_ids
     target_date = args.target_date if args.target_date is not None else NULL_STRING
     days_to_fetch = str(args.days_to_fetch) if args.days_to_fetch is not None else "0"
+    language = args.language if args.language is not None else NULL_STRING
+    apply_retrieval = str(args.apply_retrieval)
 
     try:
         main(
-            "indexer",
+            "summarizer",
             target_date=target_date,
             days_to_fetch=days_to_fetch,
             arxiv_ids=arxiv_ids,
+            language=language,
+            apply_retrieval=apply_retrieval,
         )
     except Exception as e:
         logger.error("Failed to submit or execute batch job: %s", e)

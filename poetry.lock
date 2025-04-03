@@ -1952,14 +1952,14 @@ requests = ["requests (>=2.20.0,<3.0.0.dev0)"]
 
 [[package]]
 name = "graphrag_toolkit"
-version = "2.0.1"
+version = "2.2.1"
 description = "A Python toolkit for building GraphRAG applications"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "v2.0.1.zip", hash = "sha256:5a0bd596bdb2422258538e801cee174baec41ff5b8992d534c2bd9501cdac9d5"},
+    {file = "v2.2.1.zip", hash = "sha256:3a997b928ec4f82e612152772ca17d76e4ed6a14e94c19b63eab408bfcad80ce"},
 ]
 
 [package.dependencies]
@@ -1995,7 +1995,7 @@ transformers = "4.48.0"
 
 [package.source]
 type = "url"
-url = "https://github.com/awslabs/graphrag-toolkit/archive/refs/tags/v2.0.1.zip"
+url = "https://github.com/awslabs/graphrag-toolkit/archive/refs/tags/v2.2.1.zip"
 
 [[package]]
 name = "greenlet"
@@ -8991,4 +8991,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "86bcb309f3fddc0e8bd562aafafe2167a124b22c871a00ad855c089e33f49935"
+content-hash = "a57694b615cd6cb19083776638f9d01cd8ed6c0085878831d5a53aa59ec92563"

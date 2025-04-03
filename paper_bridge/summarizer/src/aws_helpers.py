@@ -1,6 +1,7 @@
 import os
+import time
 from pathlib import Path
-from typing import List, Optional
+from typing import Dict, List, Optional
 import boto3
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
@@ -47,6 +48,34 @@ def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Option
     except ClientError as error:
         logger.error("Failed to get SSM parameter value: %s", str(error))
         return None
+
+
+def submit_batch_job(
+    boto3_session: boto3.Session,
+    job_name: str,
+    job_queue_name: str,
+    job_definition_name: str,
+    parameters: Optional[Dict[str, str]] = None,
+) -> str:
+    batch_client = boto3_session.client("batch")
+    try:
+        response = batch_client.submit_job(
+            jobName=job_name,
+            jobQueue=job_queue_name,
+            jobDefinition=job_definition_name,
+            parameters=parameters or {},
+        )
+        job_id = response["jobId"]
+        logger.info(
+            "Successfully submitted batch job '%s' (Job ID: %s)",
+            job_name,
+            job_id,
+        )
+        return job_id
+
+    except ClientError as error:
+        logger.error("Failed to submit batch job '%s': %s", job_name, str(error))
+        raise
 
 
 def upload_dir_to_s3(
@@ -138,3 +167,25 @@ def upload_to_s3(
             "Failed to upload '%s' to S3: %s - %s", file_path, error_code, error_msg
         )
         return False
+
+
+def wait_for_batch_job_completion(boto3_session: boto3.Session, job_id: str) -> bool:
+    batch_client = boto3_session.client("batch")
+
+    print("Waiting for job completion", end="", flush=True)
+    while True:
+        response = batch_client.describe_jobs(jobs=[job_id])
+        if not response["jobs"]:
+            print("\nJob not found")
+            return False
+
+        status = response["jobs"][0]["status"]
+        if status == "SUCCEEDED":
+            print("\nJob completed successfully!")
+            return True
+        elif status in ["FAILED", "CANCELLED"]:
+            print(f"\nJob {status.lower()}!")
+            return False
+
+        print(".", end="", flush=True)
+        time.sleep(30)

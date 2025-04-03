@@ -17,32 +17,77 @@ output "bedrock_inference_role_arn" {
   value       = aws_iam_role.bedrock_inference.arn
 }
 
+# Batch resources
 output "batch_job_queue" {
-  description = "Name of the AWS Batch job queue"
-  value       = aws_batch_job_queue.this.name
+  description = "Name of the AWS Batch job queue for indexer"
+  value       = var.use_graph_rag ? aws_batch_job_queue.indexer[0].name : null
 }
 
 output "batch_job_definition" {
   description = "Name of the AWS Batch job definition for the indexing job"
-  value       = aws_batch_job_definition.indexer.name
+  value       = var.use_graph_rag ? aws_batch_job_definition.indexer[0].name : null
 }
 
+output "batch_job_queue_summarizer" {
+  description = "Name of the AWS Batch job queue for summarizer"
+  value       = aws_batch_job_queue.summarizer.name
+}
+
+output "batch_job_definition_summarizer" {
+  description = "Name of the AWS Batch job definition for the summarizer job"
+  value       = aws_batch_job_definition.summarizer.name
+}
+
+# ECR repositories
 output "ecr_repository_indexer" {
   description = "ECR repository URL for the indexer image"
-  value       = aws_ecr_repository.indexer.repository_url
+  value       = var.use_graph_rag ? aws_ecr_repository.indexer[0].repository_url : null
 }
 
 output "ecr_repository_cleaner" {
   description = "ECR repository URL for the cleaner image"
-  value       = aws_ecr_repository.cleaner.repository_url
+  value       = var.use_graph_rag ? aws_ecr_repository.cleaner[0].repository_url : null
 }
 
+output "ecr_repository_summarizer" {
+  description = "ECR repository URL for the summarizer image"
+  value       = aws_ecr_repository.summarizer.repository_url
+}
+
+# CodeBuild projects
 output "codebuild_project_indexer" {
   description = "CodeBuild project name for indexer"
-  value       = aws_codebuild_project.indexer.name
+  value       = var.use_graph_rag ? aws_codebuild_project.indexer[0].name : null
 }
 
 output "codebuild_project_cleaner" {
   description = "CodeBuild project name for cleaner"
-  value       = aws_codebuild_project.cleaner.name
+  value       = var.use_graph_rag ? aws_codebuild_project.cleaner[0].name : null
+}
+
+output "codebuild_project_summarizer" {
+  description = "CodeBuild project name for summarizer"
+  value       = aws_codebuild_project.summarizer.name
+}
+
+# SNS topic
+output "sns_topic_arn" {
+  description = "ARN of the SNS topic for notifications"
+  value       = aws_sns_topic.this.arn
+}
+
+# SSM parameters
+output "ssm_parameters" {
+  description = "SSM parameter names"
+  value = {
+    bedrock_inference_role_arn = aws_ssm_parameter.bedrock_inference.name
+    llama_cloud_api_key         = aws_ssm_parameter.llama_cloud_api_key.name
+    slack_bot_token             = aws_ssm_parameter.slack_bot_token.name
+    slack_channel_id            = aws_ssm_parameter.slack_channel_id.name
+    upstage_api_key             = aws_ssm_parameter.upstage_api_key.name
+    batch_job_queue_indexer     = var.use_graph_rag ? aws_ssm_parameter.batch_job_queue_indexer[0].name : null
+    batch_job_definition_indexer = var.use_graph_rag ? aws_ssm_parameter.batch_job_definition_indexer[0].name : null
+    batch_job_queue_summarizer  = aws_ssm_parameter.batch_job_queue_summarizer.name
+    batch_job_definition_summarizer = aws_ssm_parameter.batch_job_definition_summarizer.name
+  }
 }

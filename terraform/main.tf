@@ -18,22 +18,27 @@ module "base" {
 module "client" {
   source = "./modules/client"
 
-  project_name                = var.project_name
-  default_region_name         = var.default_region_name
-  vpc_id                      = module.base.vpc.id
-  private_subnet_ids          = module.base.private_subnet_ids
-  root_dir                    = local.root_dir
-  codebuild_source_bucket     = var.codebuild_source_bucket
-  email_address               = var.email_address
-  indexer_schedule_expression = var.indexer_schedule_expression
-  cleaner_schedule_expression = var.cleaner_schedule_expression
-  llama_cloud_api_key         = var.llama_cloud_api_key
-  tags                        = local.common_tags
+  project_name                   = var.project_name
+  bedrock_region_name            = var.bedrock_region_name
+  use_graph_rag                  = var.use_graph_rag
+  vpc_id                         = module.base.vpc.id
+  private_subnet_ids             = module.base.private_subnet_ids
+  root_dir                       = local.root_dir
+  codebuild_source_bucket        = var.codebuild_source_bucket
+  email_address                  = var.email_address
+  indexer_schedule_expression    = var.indexer_schedule_expression
+  cleaner_schedule_expression    = var.cleaner_schedule_expression
+  summarizer_schedule_expression = var.summarizer_schedule_expression
+  llama_cloud_api_key            = var.llama_cloud_api_key
+  slack_bot_token                = var.slack_bot_token
+  slack_channel_id               = var.slack_channel_id
+  upstage_api_key                = var.upstage_api_key
+  tags                           = local.common_tags
 
   depends_on = [module.base]
 }
-
 module "neptune" {
+  count  = var.use_graph_rag ? 1 : 0
   source = "./modules/neptune"
 
   project_name              = var.project_name
@@ -51,6 +56,7 @@ module "neptune" {
 }
 
 module "opensearch" {
+  count  = var.use_graph_rag ? 1 : 0
   source = "./modules/opensearch"
 
   project_name              = var.project_name

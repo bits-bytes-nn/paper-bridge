@@ -813,7 +813,7 @@ class PaperFetcher:
             if parse_pdf:
                 success = self._process_paper_with_pdf(paper, papers_dir)
             else:
-                success = self._process_paper_with_html(paper, papers_dir)
+                success = self._process_paper_with_html(paper)
                 if not success:
                     success = self._process_paper_with_pdf(paper, papers_dir)
 
@@ -826,7 +826,7 @@ class PaperFetcher:
             logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
             paper.status = PaperStatus.FAILED
 
-    def _process_paper_with_pdf(self, paper: Paper, papers_dir: Path) -> bool:
+    def _process_paper_with_pdf(self, paper: Paper, papers_dir: Path) -> Optional[bool]:
         try:
             papers_dir = self._get_papers_dir(papers_dir, paper.arxiv_id)
             papers_dir.mkdir(parents=True, exist_ok=True)
@@ -875,7 +875,7 @@ class PaperFetcher:
             logger.error(f"Failed to download PDF for {arxiv_id}: {str(e)}")
             return None
 
-    def _process_paper_with_html(self, paper: Paper, papers_dir: Path) -> bool:
+    def _process_paper_with_html(self, paper: Paper) -> Optional[bool]:
         try:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)

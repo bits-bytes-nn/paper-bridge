@@ -15,7 +15,7 @@ summarization:
   paper_summarization_model_id: anthropic.claude-3-7-sonnet-20250219-v1:0
 
 retrieval:
-  apply_retrieval: True
+  output_format: slack
   traversal_based_or_semantic_guided: traversal_based
   set_subretriever: False
   use_reranking_beam_search: False

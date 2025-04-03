@@ -449,8 +449,10 @@ cython_debug/
 .idea/
 .run/
 .virtual_documents
+.wdm/
 cache/
 certificates/
+ipynb/
 logs/
 output/
 outputs/

@@ -19,10 +19,18 @@ from paper_bridge.indexer.src import (
 )
 
 
+class DateFormatError(Exception):
+    pass
+
+
+class IndexingError(Exception):
+    pass
+
+
 def main(
     target_date: Optional[str],
-    days_to_fetch: Optional[int],
-    arxiv_ids: Optional[str],
+    days_to_fetch: int,
+    arxiv_ids: Optional[List[str]],
 ) -> None:
     boto3_session = None
     papers: List[Paper] = []
@@ -39,13 +47,19 @@ def main(
         )
 
         target_datetime = parse_target_date(target_date)
+
+        if arxiv_ids and isinstance(arxiv_ids, list) and len(arxiv_ids) > 0:
+            arxiv_ids = [id for id in arxiv_ids if id and id.lower() != NULL_STRING]
+            if not arxiv_ids:
+                arxiv_ids = None
+
         papers = fetch_papers(
             config,
             boto3_session,
             profile_name,
             target_datetime,
             days_to_fetch,
-            arxiv_ids.split(",") if arxiv_ids else None,
+            arxiv_ids,
         )
 
         if not papers:
@@ -65,15 +79,24 @@ def main(
         )
         success = True
 
+    except DateFormatError as e:
+        logger.error("Date format error: %s", e)
+        error_message = str(e)
+        success = False
+        raise
     except Exception as e:
         logger.error("Failed to process papers: %s", e)
         error_message = str(e)
         success = False
-        sys.exit(1)
+        raise IndexingError(f"Failed to process papers: {e}")
 
     finally:
         topic_arn = EnvVars.TOPIC_ARN.value
-        target_datetime = parse_target_date(target_date)
+        target_datetime = None
+        try:
+            target_datetime = parse_target_date(target_date)
+        except DateFormatError:
+            pass
 
         if is_aws_env() and topic_arn and not success and boto3_session:
             send_failure_notification(
@@ -92,7 +115,7 @@ def parse_target_date(date_str: Optional[str]) -> Optional[datetime]:
         return datetime.strptime(date_str, "%Y-%m-%d")
     except ValueError as e:
         logger.error("Invalid date format: %s", e)
-        sys.exit(1)
+        raise DateFormatError(f"Invalid date format: {e}")
 
 
 def fetch_papers(
@@ -165,7 +188,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--days-to-fetch",
         type=int,
-        default=None,
+        default=0,
         help="Number of days to fetch papers",
     )
     parser.add_argument(
@@ -182,24 +205,26 @@ if __name__ == "__main__":
         if args.target_date and args.target_date.lower() == NULL_STRING
         else args.target_date
     )
-    days_to_fetch = (
-        None
-        if args.days_to_fetch and str(args.days_to_fetch).lower() == NULL_STRING
-        else args.days_to_fetch
-    )
 
     arxiv_ids = None
     if args.arxiv_ids is not None:
         if len(args.arxiv_ids) == 1 and args.arxiv_ids[0].lower() == NULL_STRING:
             arxiv_ids = None
         else:
-            arxiv_ids = ",".join(args.arxiv_ids)
+            arxiv_ids = args.arxiv_ids
 
     logger.info(
         "Processing indexing with target_date='%s', days_to_fetch='%s', arxiv_ids='%s'",
         target_date or "",
-        days_to_fetch or "",
-        arxiv_ids or "",
+        args.days_to_fetch,
+        ", ".join(arxiv_ids) if arxiv_ids else "",
     )
 
-    main(target_date, days_to_fetch, arxiv_ids)
+    try:
+        main(target_date, args.days_to_fetch, arxiv_ids)
+    except (DateFormatError, IndexingError) as e:
+        logger.error("Application failed: %s", e)
+        sys.exit(1)
+    except Exception as e:
+        logger.error("Unexpected error: %s", e)
+        sys.exit(1)

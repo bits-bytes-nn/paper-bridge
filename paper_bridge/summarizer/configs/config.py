@@ -1,9 +1,22 @@
-from enum import Enum
+from enum import Enum, auto
 from pathlib import Path
-from typing import Any, Dict, Literal, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 import yaml
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field, FilePath, model_validator
+
+
+class AutoNamedEnum(str, Enum):
+    @staticmethod
+    def _generate_next_value_(
+        name: str, start: int, count: int, last_values: List[str]
+    ) -> str:
+        return name.lower()
+
+
+class Format(AutoNamedEnum):
+    HTML = auto()
+    SLACK = auto()
 
 
 class LanguageModelId(str, Enum):
@@ -55,6 +68,7 @@ class Summarization(BaseModelWithDefaults):
 
 
 class Retrieval(BaseModelWithDefaults):
+    output_format: Optional[Format] = Field(default=None)
     traversal_based_or_semantic_guided: Literal[
         "traversal_based", "semantic_guided"
     ] = Field(default="traversal_based")
@@ -70,7 +84,9 @@ class Retrieval(BaseModelWithDefaults):
 
 class Config(BaseModelWithDefaults):
     resources: Resources = Field(
-        default_factory=lambda: Resources(project_name="paper-bridge")
+        default_factory=lambda: Resources(
+            project_name="paper-bridge", s3_bucket_name=""
+        )
     )
     summarization: Summarization = Field(default_factory=lambda: Summarization())
     retrieval: Retrieval = Field(default_factory=lambda: Retrieval())

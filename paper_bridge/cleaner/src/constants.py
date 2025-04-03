@@ -34,11 +34,13 @@ class LocalPaths(str, Enum):
 
 
 class SSMParams(str, Enum):
-    BATCH_JOB_DEFINITION = "batch-job-definition"
-    BATCH_JOB_QUEUE = "batch-job-queue"
+    BATCH_JOB_DEFINITION_INDEXER = "batch-job-definition-indexer"
+    BATCH_JOB_DEFINITION_SUMMARIZER = "batch-job-definition-summarizer"
+    BATCH_JOB_QUEUE_INDEXER = "batch-job-queue-indexer"
+    BATCH_JOB_QUEUE_SUMMARIZER = "batch-job-queue-summarizer"
     LLAMA_CLOUD_API_KEY = "llama-cloud-api-key"
     OPENSEARCH_ENDPOINT = "opensearch-endpoint"
     NEPTUNE_ENDPOINT = "neptune-endpoint"
     SLACK_BOT_TOKEN = "slack-bot-token"
     SLACK_CHANNEL_ID = "slack-channel-id"
-    UPSTAGE_API_KEY = "upstage_api_key"
+    UPSTAGE_API_KEY = "upstage-api-key"

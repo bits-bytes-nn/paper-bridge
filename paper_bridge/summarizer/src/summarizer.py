@@ -45,7 +45,7 @@ class PaperSummarizer:
                 self.boto3_session, model_id, self.region_name
             ),
             temperature=0.0,
-            max_tokens=8192,
+            max_tokens=16384,
             profile_name=self.profile_name,
             region_name=self.region_name,
             timeout=900,

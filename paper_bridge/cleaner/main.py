@@ -22,6 +22,10 @@ DEFAULT_BOTO3_SESSION: boto3.Session = boto3.Session(
 )
 
 
+class DateFormatError(Exception):
+    pass
+
+
 def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, str]]:
     target_date = None
 
@@ -37,11 +41,34 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, 
             )
         )
 
-        target_date = event.get("TARGET_DATE")
-        days_back = event.get("DAYS_BACK")
-        days_range = event.get("DAYS_RANGE")
+        target_date_str = event.get("TARGET_DATE")
+        if isinstance(target_date_str, str) and target_date_str.lower() == NULL_STRING:
+            target_date_str = None
 
-        target_datetime = parse_target_date(target_date)
+        days_back = event.get("DAYS_BACK")
+        if isinstance(days_back, str):
+            try:
+                days_back = int(days_back) if days_back.lower() != NULL_STRING else None
+            except ValueError:
+                logger.warning("Invalid days_back value: %s. Using default.", days_back)
+                days_back = None
+
+        days_range = event.get("DAYS_RANGE")
+        if isinstance(days_range, str):
+            try:
+                days_range = (
+                    int(days_range) if days_range.lower() != NULL_STRING else None
+                )
+            except ValueError:
+                logger.warning(
+                    "Invalid days_range value: %s. Using default.", days_range
+                )
+                days_range = None
+
+        try:
+            target_datetime = parse_target_date(target_date_str)
+        except DateFormatError as e:
+            return {"status": 400, "message": str(e)}
 
         base_path = f"/{config.resources.project_name}-{config.resources.stage}"
         neptune_endpoint = get_ssm_param_value(
@@ -103,7 +130,7 @@ def parse_target_date(date_str: Optional[str]) -> datetime:
         return datetime.strptime(date_str, "%Y-%m-%d").astimezone(timezone.utc)
     except ValueError as e:
         logger.error("Invalid date format: %s", e)
-        sys.exit(1)
+        raise DateFormatError(f"Invalid date format: {e}")
 
 
 def parse_date_range(
@@ -112,8 +139,8 @@ def parse_date_range(
     days_back: Optional[int],
     days_range: Optional[int],
 ) -> Tuple[str, str]:
-    days_back = days_back or config.cleaner.days_back
-    days_range = days_range or config.cleaner.days_range
+    days_back = days_back if days_back is not None else config.cleaner.days_back
+    days_range = days_range if days_range is not None else config.cleaner.days_range
 
     end_date = target_date - timedelta(days=days_back)
     start_date = end_date - timedelta(days=days_range)
@@ -136,11 +163,11 @@ def get_formatted_date(target_date: Optional[datetime]) -> str:
 def send_failure_notification(
     boto3_session: boto3.Session,
     topic_arn: str,
-    target_date: Optional[datetime],
+    target_date: Optional[str],
     error_message: Optional[str] = None,
 ) -> None:
     sns = boto3_session.client("sns")
-    date_str = get_formatted_date(target_date)
+    date_str = target_date if isinstance(target_date, str) else get_formatted_date(None)
 
     message = (
         f"Paper cleaning failed\n"
@@ -173,20 +200,35 @@ if __name__ == "__main__":
         default=None,
         help="Number of days range to delete",
     )
-
     args = parser.parse_args()
+
+    target_date_str = (
+        None
+        if args.target_date and args.target_date.lower() == NULL_STRING
+        else args.target_date
+    )
+    days_back = (
+        None
+        if args.days_back is not None and str(args.days_back).lower() == NULL_STRING
+        else args.days_back
+    )
+    days_range = (
+        None
+        if args.days_range is not None and str(args.days_range).lower() == NULL_STRING
+        else args.days_range
+    )
 
     logger.info(
         "Processing cleaner with target_date='%s', days_back='%s', days_range='%s'",
-        args.target_date or "",
-        args.days_back or "",
-        args.days_range or "",
+        target_date_str or "",
+        days_back or "",
+        days_range or "",
     )
 
     event = {
-        "TARGET_DATE": args.target_date,
-        "DAYS_BACK": args.days_back,
-        "DAYS_RANGE": args.days_range,
+        "TARGET_DATE": target_date_str,
+        "DAYS_BACK": days_back,
+        "DAYS_RANGE": days_range,
     }
 
     result = lambda_handler(event, None)

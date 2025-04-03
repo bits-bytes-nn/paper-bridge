@@ -24,7 +24,6 @@ locals {
     ["${var.root_dir}/paper_bridge/indexer/requirements.txt"]
   )
 
-  # More robust hash calculation with error handling
   indexer_hash = md5(join("", [
     for f in local.indexer_source_files : fileexists(f) ? filemd5(f) : ""
   ]))
@@ -39,6 +38,19 @@ locals {
 
   cleaner_hash = md5(join("", [
     for f in local.cleaner_source_files : fileexists(f) ? filemd5(f) : ""
+  ]))
+
+  summarizer_source_files = concat(
+    tolist(fileset("${var.root_dir}/paper_bridge/summarizer/configs", "**/*.{py,yaml,yml}")),
+    tolist(fileset("${var.root_dir}/paper_bridge/summarizer/src", "**/*.py")),
+    tolist(fileset("${var.root_dir}/paper_bridge/summarizer", "**/*.html")),
+    ["${var.root_dir}/paper_bridge/summarizer/main.py"],
+    ["${var.root_dir}/paper_bridge/summarizer/Dockerfile"],
+    ["${var.root_dir}/paper_bridge/summarizer/requirements.txt"]
+  )
+
+  summarizer_hash = md5(join("", [
+    for f in local.summarizer_source_files : fileexists(f) ? filemd5(f) : ""
   ]))
 
   # IAM policy attachments map with more specific naming
@@ -56,37 +68,50 @@ locals {
 
   # Resource naming convention
   resource_names = {
-    security_group         = "${local.name_prefix}-client"
-    iam_role_client        = "${local.name_prefix}-client"
-    iam_role_bedrock       = "${local.name_prefix}-bedrock-inference"
-    iam_role_codebuild     = "${local.name_prefix}-codebuild"
-    iam_role_event_rule    = "${local.name_prefix}-event"
-    ecr_repository_indexer = "${local.name_prefix}-indexer"
-    ecr_repository_cleaner = "${local.name_prefix}-cleaner"
-    job_queue              = "${local.name_prefix}-indexer"
-    job_definition         = "${local.name_prefix}-indexer"
-    lambda_function        = "${local.name_prefix}-cleaner"
-    cloudwatch_indexer     = "${local.name_prefix}-indexer"
-    cloudwatch_cleaner     = "${local.name_prefix}-cleaner"
-    codebuild_indexer      = "${local.name_prefix}-indexer"
-    codebuild_cleaner      = "${local.name_prefix}-cleaner"
-    sns_topic              = local.name_prefix
+    security_group      = "${local.name_prefix}-client"
+    iam_role_client     = "${local.name_prefix}-client"
+    iam_role_bedrock    = "${local.name_prefix}-bedrock-inference"
+    iam_role_codebuild  = "${local.name_prefix}-codebuild"
+    iam_role_event_rule = "${local.name_prefix}-event"
+    ecr_repository_indexer    = "${local.name_prefix}-indexer"
+    ecr_repository_cleaner    = "${local.name_prefix}-cleaner"
+    ecr_repository_summarizer = "${local.name_prefix}-summarizer"
+    job_queue_indexer   = "${local.name_prefix}-indexer"
+    job_queue_summarizer = "${local.name_prefix}-summarizer"
+    job_definition_indexer = "${local.name_prefix}-indexer"
+    job_definition_summarizer = "${local.name_prefix}-summarizer"
+    lambda_function_cleaner    = "${local.name_prefix}-cleaner"
+    cloudwatch_indexer    = "${local.name_prefix}-indexer"
+    cloudwatch_cleaner    = "${local.name_prefix}-cleaner"
+    cloudwatch_summarizer = "${local.name_prefix}-summarizer"
+    codebuild_indexer    = "${local.name_prefix}-indexer"
+    codebuild_cleaner    = "${local.name_prefix}-cleaner"
+    codebuild_summarizer = "${local.name_prefix}-summarizer"
+    sns_topic = local.name_prefix
   }
 
   # Default resource configurations
   default_configs = {
-    lambda = {
+    indexer_batch = {
+      vcpu        = 4
+      memory      = 8192
+      retry       = 2
+      timeout     = 10800
+    }
+    summarizer_batch = {
+      vcpu        = 2
+      memory      = 4096
+      retry       = 2
+      timeout     = 10800
+    }
+
+    cleaner_lambda = {
       memory_size = 256
       timeout     = 300
     }
-    batch_job = {
-      vcpu        = 4
-      memory      = 8192
-      retry       = 3
-      timeout     = 10800
-    }
+
     codebuild = {
-      timeout     = 30
+      timeout      = 30
       compute_type = "BUILD_GENERAL1_SMALL"
       image        = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
     }
@@ -155,8 +180,8 @@ resource "aws_iam_role_policy_attachment" "client_policies" {
 }
 
 resource "aws_iam_role_policy" "client_pass_role_policy" {
-  name   = "${local.name_prefix}-client-pass-policy"
-  role   = aws_iam_role.client.name
+  name = "${local.name_prefix}-client-pass-policy"
+  role = aws_iam_role.client.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -203,6 +228,7 @@ resource "aws_ssm_parameter" "bedrock_inference" {
 
 # ECR Repositories
 resource "aws_ecr_repository" "indexer" {
+  count                = var.use_graph_rag ? 1 : 0
   name                 = local.resource_names.ecr_repository_indexer
   image_tag_mutability = "MUTABLE"
 
@@ -214,7 +240,19 @@ resource "aws_ecr_repository" "indexer" {
 }
 
 resource "aws_ecr_repository" "cleaner" {
+  count                = var.use_graph_rag ? 1 : 0
   name                 = local.resource_names.ecr_repository_cleaner
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = var.tags
+}
+
+resource "aws_ecr_repository" "summarizer" {
+  name                 = local.resource_names.ecr_repository_summarizer
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -253,7 +291,9 @@ resource "aws_iam_role_policy_attachment" "codebuild_policies" {
   role       = aws_iam_role.codebuild.name
   policy_arn = each.value
 }
+
 resource "null_resource" "upload_indexer_source" {
+  count = var.use_graph_rag ? 1 : 0
   triggers = {
     content_hash = local.indexer_hash
   }
@@ -268,6 +308,7 @@ resource "null_resource" "upload_indexer_source" {
 }
 
 resource "null_resource" "upload_cleaner_source" {
+  count = var.use_graph_rag ? 1 : 0
   triggers = {
     content_hash = local.cleaner_hash
   }
@@ -281,7 +322,22 @@ resource "null_resource" "upload_cleaner_source" {
   }
 }
 
+resource "null_resource" "upload_summarizer_source" {
+  triggers = {
+    content_hash = local.summarizer_hash
+  }
+
+  provisioner "local-exec" {
+    command = <<EOF
+      cd ${var.root_dir}
+      find paper_bridge/summarizer -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "*.html" -o -name "Dockerfile" \) | zip summarizer_source.zip -@
+      aws s3 cp summarizer_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/summarizer_source.zip
+    EOF
+  }
+}
+
 resource "aws_codebuild_project" "indexer" {
+  count         = var.use_graph_rag ? 1 : 0
   name          = local.resource_names.codebuild_indexer
   description   = "Builds Docker image for the indexer batch job"
   service_role  = aws_iam_role.codebuild.arn
@@ -292,14 +348,14 @@ resource "aws_codebuild_project" "indexer" {
   }
 
   environment {
-    type                        = "LINUX_CONTAINER"
-    compute_type                = local.default_configs.codebuild.compute_type
-    image                       = local.default_configs.codebuild.image
-    privileged_mode             = true
+    type            = "LINUX_CONTAINER"
+    compute_type    = local.default_configs.codebuild.compute_type
+    image           = local.default_configs.codebuild.image
+    privileged_mode = true
 
     environment_variable {
       name  = "ECR_REPOSITORY_URI"
-      value = aws_ecr_repository.indexer.repository_url
+      value = aws_ecr_repository.indexer[0].repository_url
     }
 
     environment_variable {
@@ -324,6 +380,7 @@ resource "aws_codebuild_project" "indexer" {
 }
 
 resource "aws_codebuild_project" "cleaner" {
+  count         = var.use_graph_rag ? 1 : 0
   name          = local.resource_names.codebuild_cleaner
   description   = "Builds Docker image for the cleaner Lambda function"
   service_role  = aws_iam_role.codebuild.arn
@@ -334,14 +391,14 @@ resource "aws_codebuild_project" "cleaner" {
   }
 
   environment {
-    type                        = "LINUX_CONTAINER"
-    compute_type                = local.default_configs.codebuild.compute_type
-    image                       = local.default_configs.codebuild.image
-    privileged_mode             = true
+    type            = "LINUX_CONTAINER"
+    compute_type    = local.default_configs.codebuild.compute_type
+    image           = local.default_configs.codebuild.image
+    privileged_mode = true
 
     environment_variable {
       name  = "ECR_REPOSITORY_URI"
-      value = aws_ecr_repository.cleaner.repository_url
+      value = aws_ecr_repository.cleaner[0].repository_url
     }
 
     environment_variable {
@@ -365,7 +422,50 @@ resource "aws_codebuild_project" "cleaner" {
   tags = var.tags
 }
 
+resource "aws_codebuild_project" "summarizer" {
+  name          = local.resource_names.codebuild_summarizer
+  description   = "Builds Docker image for the summarizer batch job"
+  service_role  = aws_iam_role.codebuild.arn
+  build_timeout = local.default_configs.codebuild.timeout
+
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+
+  environment {
+    type            = "LINUX_CONTAINER"
+    compute_type    = local.default_configs.codebuild.compute_type
+    image           = local.default_configs.codebuild.image
+    privileged_mode = true
+
+    environment_variable {
+      name  = "ECR_REPOSITORY_URI"
+      value = aws_ecr_repository.summarizer.repository_url
+    }
+
+    environment_variable {
+      name  = "AWS_DEFAULT_REGION"
+      value = data.aws_region.current.name
+    }
+  }
+
+  source {
+    type      = "S3"
+    location  = "${var.codebuild_source_bucket}/${local.name_prefix}/summarizer_source.zip"
+    buildspec = file("${var.root_dir}/scripts/summarizer_buildspec.yml")
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name = "/aws/codebuild/${local.resource_names.codebuild_summarizer}"
+    }
+  }
+
+  tags = var.tags
+}
+
 resource "null_resource" "trigger_and_wait_indexer_build" {
+  count = var.use_graph_rag ? 1 : 0
   triggers = {
     content_hash = local.indexer_hash
   }
@@ -374,7 +474,7 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
     command = <<EOF
       set -e
       # Start build
-      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.indexer.name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.indexer[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
       echo "Started build with ID: $BUILD_ID"
 
       # Poll for build completion
@@ -415,6 +515,7 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
 }
 
 resource "null_resource" "trigger_and_wait_cleaner_build" {
+  count = var.use_graph_rag ? 1 : 0
   triggers = {
     content_hash = local.cleaner_hash
   }
@@ -423,7 +524,7 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
     command = <<EOF
       set -e
       # Start build
-      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.cleaner.name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.cleaner[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
       echo "Started build with ID: $BUILD_ID"
 
       # Poll for build completion
@@ -463,9 +564,58 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
   ]
 }
 
+resource "null_resource" "trigger_and_wait_summarizer_build" {
+  triggers = {
+    content_hash = local.summarizer_hash
+  }
+
+  provisioner "local-exec" {
+    command = <<EOF
+      set -e
+      # Start build
+      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.summarizer.name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+      echo "Started build with ID: $BUILD_ID"
+
+      # Poll for build completion
+      echo "Waiting for build to complete..."
+      STATUS="IN_PROGRESS"
+      while [ "$STATUS" = "IN_PROGRESS" ]; do
+        sleep 10
+        STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
+        echo "Current build status: $STATUS"
+      done
+
+      # Check build status
+      if [ "$STATUS" != "SUCCEEDED" ]; then
+        echo "Build failed with status: $STATUS"
+        exit 1
+      fi
+
+      echo "Build completed successfully"
+
+      # Verify image exists
+      sleep 5  # Allow time for ECR image registration
+      aws ecr describe-images --repository-name ${local.resource_names.ecr_repository_summarizer} --image-ids imageTag=latest --region ${data.aws_region.current.name}
+
+      echo "ECR image verification complete"
+
+      # Clean up the zip file
+      echo "Cleaning up source zip file..."
+      rm -f ${var.root_dir}/summarizer_source.zip
+      aws s3 rm s3://${var.codebuild_source_bucket}/${local.name_prefix}/summarizer_source.zip
+      echo "Source zip file removed"
+    EOF
+  }
+
+  depends_on = [
+    aws_codebuild_project.summarizer,
+    null_resource.upload_summarizer_source
+  ]
+}
 # AWS Batch compute environments
-resource "aws_batch_compute_environment" "ondemand" {
-  compute_environment_name_prefix = "${local.batch_environment_prefix}-ondemand-"
+resource "aws_batch_compute_environment" "indexer_ondemand" {
+  count                           = var.use_graph_rag ? 1 : 0
+  compute_environment_name_prefix = "${local.batch_environment_prefix}-indexer-ondemand-"
   type                            = "MANAGED"
   state                           = "ENABLED"
 
@@ -491,8 +641,9 @@ resource "aws_batch_compute_environment" "ondemand" {
   }
 }
 
-resource "aws_batch_compute_environment" "spot" {
-  compute_environment_name_prefix = "${local.batch_environment_prefix}-spot-"
+resource "aws_batch_compute_environment" "indexer_spot" {
+  count                           = var.use_graph_rag ? 1 : 0
+  compute_environment_name_prefix = "${local.batch_environment_prefix}-indexer-spot-"
   type                            = "MANAGED"
   state                           = "ENABLED"
 
@@ -520,14 +671,85 @@ resource "aws_batch_compute_environment" "spot" {
   }
 }
 
-resource "aws_batch_job_queue" "this" {
-  name     = local.resource_names.job_queue
+# Batch compute environments for summarizer
+resource "aws_batch_compute_environment" "summarizer_ondemand" {
+  compute_environment_name_prefix = "${local.batch_environment_prefix}-summarizer-ondemand-"
+  type                            = "MANAGED"
+  state                           = "ENABLED"
+
+  compute_resources {
+    max_vcpus = local.default_configs.batch_compute.ondemand_max_vcpus
+    min_vcpus = local.default_configs.batch_compute.min_vcpus
+    type      = "EC2"
+
+    allocation_strategy = "BEST_FIT_PROGRESSIVE"
+    instance_role       = local.common_compute_resources.instance_role
+    instance_type       = local.common_compute_resources.instance_type
+
+    security_group_ids = local.common_compute_resources.security_group_ids
+    subnets            = local.common_compute_resources.subnets
+
+    tags = local.common_compute_resources.tags
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_batch_compute_environment" "summarizer_spot" {
+  compute_environment_name_prefix = "${local.batch_environment_prefix}-summarizer-spot-"
+  type                            = "MANAGED"
+  state                           = "ENABLED"
+
+  compute_resources {
+    max_vcpus = local.default_configs.batch_compute.spot_max_vcpus
+    min_vcpus = local.default_configs.batch_compute.min_vcpus
+    type      = "EC2"
+
+    allocation_strategy = "BEST_FIT_PROGRESSIVE"
+    instance_role       = local.common_compute_resources.instance_role
+    instance_type       = local.common_compute_resources.instance_type
+    spot_iam_fleet_role = aws_iam_role.client.arn
+    bid_percentage      = local.default_configs.batch_compute.bid_percentage
+
+    security_group_ids = local.common_compute_resources.security_group_ids
+    subnets            = local.common_compute_resources.subnets
+
+    tags = local.common_compute_resources.tags
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_batch_job_queue" "indexer" {
+  count    = var.use_graph_rag ? 1 : 0
+  name     = local.resource_names.job_queue_indexer
   state    = "ENABLED"
   priority = 1
 
   compute_environments = [
-    aws_batch_compute_environment.ondemand.arn,
-    aws_batch_compute_environment.spot.arn
+    aws_batch_compute_environment.indexer_ondemand[0].arn,
+    aws_batch_compute_environment.indexer_spot[0].arn
+  ]
+
+  tags = var.tags
+}
+
+resource "aws_batch_job_queue" "summarizer" {
+  name     = local.resource_names.job_queue_summarizer
+  state    = "ENABLED"
+  priority = 1
+
+  compute_environments = [
+    aws_batch_compute_environment.summarizer_ondemand.arn,
+    aws_batch_compute_environment.summarizer_spot.arn
   ]
 
   tags = var.tags
@@ -539,6 +761,30 @@ resource "aws_ssm_parameter" "llama_cloud_api_key" {
   description = "API key for LLAMA Cloud services"
   type        = "SecureString"
   value       = var.llama_cloud_api_key
+  tags        = var.tags
+}
+
+resource "aws_ssm_parameter" "slack_bot_token" {
+  name        = "${local.ssm_param_prefix}/slack-bot-token"
+  description = "Slack bot token"
+  type        = "SecureString"
+  value       = var.slack_bot_token
+  tags        = var.tags
+}
+
+resource "aws_ssm_parameter" "slack_channel_id" {
+  name        = "${local.ssm_param_prefix}/slack-channel-id"
+  description = "Slack channel ID"
+  type        = "SecureString"
+  value       = var.slack_channel_id
+  tags        = var.tags
+}
+
+resource "aws_ssm_parameter" "upstage_api_key" {
+  name        = "${local.ssm_param_prefix}/upstage-api-key"
+  description = "Upstage API key"
+  type        = "SecureString"
+  value       = var.upstage_api_key
   tags        = var.tags
 }
 
@@ -558,42 +804,50 @@ resource "aws_sns_topic_subscription" "email_subscription" {
 
 # Logging resources
 resource "aws_cloudwatch_log_group" "indexer" {
-  name              = "/aws/batch/${local.resource_names.job_definition}"
+  count             = var.use_graph_rag ? 1 : 0
+  name              = "/aws/batch/${local.resource_names.job_definition_indexer}"
   retention_in_days = local.default_configs.log_retention
   tags              = var.tags
 }
 
 resource "aws_cloudwatch_log_group" "cleaner" {
-  name              = "/aws/lambda/${local.resource_names.lambda_function}"
+  count             = var.use_graph_rag ? 1 : 0
+  name              = "/aws/lambda/${local.resource_names.lambda_function_cleaner}"
+  retention_in_days = local.default_configs.log_retention
+  tags              = var.tags
+}
+
+resource "aws_cloudwatch_log_group" "summarizer" {
+  name              = "/aws/batch/${local.resource_names.job_definition_summarizer}"
   retention_in_days = local.default_configs.log_retention
   tags              = var.tags
 }
 
 # Batch job definition
 resource "aws_batch_job_definition" "indexer" {
-  name = local.resource_names.job_definition
-  type = "container"
-
+  count = var.use_graph_rag ? 1 : 0
+  name  = local.resource_names.job_definition_indexer
+  type  = "container"
   container_properties = jsonencode({
-    image      = "${aws_ecr_repository.indexer.repository_url}:latest"
+    image      = "${aws_ecr_repository.indexer[0].repository_url}:latest"
     command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--arxiv-ids", "Ref::arxiv_ids"]
     jobRoleArn = aws_iam_role.client.arn
 
     resourceRequirements = [
       {
         type  = "VCPU"
-        value = tostring(local.default_configs.batch_job.vcpu)
+        value = tostring(local.default_configs.indexer_batch.vcpu)
       },
       {
         type  = "MEMORY"
-        value = tostring(local.default_configs.batch_job.memory)
+        value = tostring(local.default_configs.indexer_batch.memory)
       }
     ]
 
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        "awslogs-group"         = aws_cloudwatch_log_group.indexer.name
+        "awslogs-group"         = aws_cloudwatch_log_group.indexer[0].name
         "awslogs-region"        = data.aws_region.current.name
         "awslogs-stream-prefix" = "indexer"
       }
@@ -601,22 +855,30 @@ resource "aws_batch_job_definition" "indexer" {
 
     environment = [
       {
+        name  = "AWS_DEFAULT_REGION"
+        value = data.aws_region.current.name
+      },
+      {
         name  = "LOG_LEVEL"
         value = "INFO"
       },
       {
         name  = "TOPIC_ARN"
         value = aws_sns_topic.this.arn
+      },
+      {
+        name  = "IMAGE_VERSION"
+        value = local.indexer_hash
       }
     ]
   })
 
   retry_strategy {
-    attempts = local.default_configs.batch_job.retry
+    attempts = local.default_configs.indexer_batch.retry
   }
 
   timeout {
-    attempt_duration_seconds = local.default_configs.batch_job.timeout
+    attempt_duration_seconds = local.default_configs.indexer_batch.timeout
   }
 
   tags = var.tags
@@ -624,23 +886,89 @@ resource "aws_batch_job_definition" "indexer" {
   depends_on = [aws_cloudwatch_log_group.indexer]
 }
 
+# Batch job definition for summarizer
+resource "aws_batch_job_definition" "summarizer" {
+  name = local.resource_names.job_definition_summarizer
+  type = "container"
+  container_properties = jsonencode({
+    image      = "${aws_ecr_repository.summarizer.repository_url}:latest"
+    command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--arxiv-ids", "Ref::arxiv_ids", "--language", "Ref::language", "--apply-retrieval", "Ref::apply_retrieval"]
+    jobRoleArn = aws_iam_role.client.arn
+
+    resourceRequirements = [
+      {
+        type  = "VCPU"
+        value = tostring(local.default_configs.summarizer_batch.vcpu)
+      },
+      {
+        type  = "MEMORY"
+        value = tostring(local.default_configs.summarizer_batch.memory)
+      }
+    ]
+
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        "awslogs-group"         = aws_cloudwatch_log_group.summarizer.name
+        "awslogs-region"        = data.aws_region.current.name
+        "awslogs-stream-prefix" = "summarizer"
+      }
+    }
+
+    environment = [
+      {
+        name  = "AWS_DEFAULT_REGION"
+        value = data.aws_region.current.name
+      },
+      {
+        name  = "LOG_LEVEL"
+        value = "INFO"
+      },
+      {
+        name  = "TOPIC_ARN"
+        value = aws_sns_topic.this.arn
+      },
+      {
+        name  = "IMAGE_VERSION"
+        value = local.summarizer_hash
+      }
+    ]
+  })
+
+  retry_strategy {
+    attempts = local.default_configs.summarizer_batch.retry
+  }
+
+  timeout {
+    attempt_duration_seconds = local.default_configs.summarizer_batch.timeout
+  }
+
+  tags = var.tags
+
+  depends_on = [
+    null_resource.trigger_and_wait_summarizer_build,
+    aws_cloudwatch_log_group.summarizer
+  ]
+}
+
 # Lambda function for cleaner
 resource "aws_lambda_function" "cleaner" {
-  function_name = local.resource_names.lambda_function
+  count         = var.use_graph_rag ? 1 : 0
+  function_name = local.resource_names.lambda_function_cleaner
   role          = aws_iam_role.client.arn
   package_type  = "Image"
-  image_uri     = "${aws_ecr_repository.cleaner.repository_url}:latest"
-  memory_size   = local.default_configs.lambda.memory_size
-  timeout       = local.default_configs.lambda.timeout
+  image_uri     = "${aws_ecr_repository.cleaner[0].repository_url}:latest"
+  memory_size   = local.default_configs.cleaner_lambda.memory_size
+  timeout       = local.default_configs.cleaner_lambda.timeout
 
   source_code_hash = local.cleaner_hash
 
   environment {
     variables = {
-      DEFAULT_REGION_NAME = var.default_region_name
-      LOG_LEVEL = "INFO"
-      TOPIC_ARN = aws_sns_topic.this.arn
-      IMAGE_VERSION = local.cleaner_hash
+      DEFAULT_REGION_NAME = data.aws_region.current.name
+      LOG_LEVEL           = "INFO"
+      TOPIC_ARN           = aws_sns_topic.this.arn
+      IMAGE_VERSION       = local.cleaner_hash
     }
   }
 
@@ -658,17 +986,33 @@ resource "aws_lambda_function" "cleaner" {
 }
 
 # SSM Parameters for reference
-resource "aws_ssm_parameter" "batch_job_queue" {
-  name  = "${local.ssm_param_prefix}/batch-job-queue"
+resource "aws_ssm_parameter" "batch_job_queue_indexer" {
+  count = var.use_graph_rag ? 1 : 0
+  name  = "${local.ssm_param_prefix}/batch-job-queue-indexer"
   type  = "String"
-  value = aws_batch_job_queue.this.name
+  value = aws_batch_job_queue.indexer[0].name
   tags  = var.tags
 }
 
-resource "aws_ssm_parameter" "batch_job_definition" {
-  name  = "${local.ssm_param_prefix}/batch-job-definition"
+resource "aws_ssm_parameter" "batch_job_definition_indexer" {
+  count = var.use_graph_rag ? 1 : 0
+  name  = "${local.ssm_param_prefix}/batch-job-definition-indexer"
   type  = "String"
-  value = aws_batch_job_definition.indexer.name
+  value = aws_batch_job_definition.indexer[0].name
+  tags  = var.tags
+}
+
+resource "aws_ssm_parameter" "batch_job_queue_summarizer" {
+  name  = "${local.ssm_param_prefix}/batch-job-queue-summarizer"
+  type  = "String"
+  value = aws_batch_job_queue.summarizer.name
+  tags  = var.tags
+}
+
+resource "aws_ssm_parameter" "batch_job_definition_summarizer" {
+  name  = "${local.ssm_param_prefix}/batch-job-definition-summarizer"
+  type  = "String"
+  value = aws_batch_job_definition.summarizer.name
   tags  = var.tags
 }
 
@@ -703,6 +1047,7 @@ resource "aws_iam_role_policy_attachment" "event_rule_policies" {
 }
 
 resource "aws_cloudwatch_event_rule" "indexer" {
+  count               = var.use_graph_rag ? 1 : 0
   name                = local.resource_names.cloudwatch_indexer
   description         = "Schedule for running the indexer batch job"
   schedule_expression = var.indexer_schedule_expression
@@ -710,41 +1055,74 @@ resource "aws_cloudwatch_event_rule" "indexer" {
 }
 
 resource "aws_cloudwatch_event_rule" "cleaner" {
+  count               = var.use_graph_rag ? 1 : 0
   name                = local.resource_names.cloudwatch_cleaner
   description         = "Schedule for running the cleaner lambda function"
   schedule_expression = var.cleaner_schedule_expression
   tags                = var.tags
 }
 
+resource "aws_cloudwatch_event_rule" "summarizer" {
+  name                = "${local.resource_names.cloudwatch_summarizer}-ko"
+  description         = "Schedule for running the summarizer batch job"
+  schedule_expression = var.summarizer_schedule_expression
+  tags                = var.tags
+}
+
 resource "aws_cloudwatch_event_target" "indexer" {
-  rule     = aws_cloudwatch_event_rule.indexer.name
-  arn      = aws_batch_job_queue.this.arn
+  count    = var.use_graph_rag ? 1 : 0
+  rule     = aws_cloudwatch_event_rule.indexer[0].name
+  arn      = aws_batch_job_queue.indexer[0].arn
   role_arn = aws_iam_role.event_rule.arn
 
   batch_target {
-    job_definition = aws_batch_job_definition.indexer.arn
+    job_definition = aws_batch_job_definition.indexer[0].arn
     job_name       = "${local.name_prefix}-indexing"
-    job_attempts   = local.default_configs.batch_job.retry
+    job_attempts   = local.default_configs.indexer_batch.retry
   }
 
   input = jsonencode({
     Parameters = {
-      target_date            = "null",
-      days_to_fetch          = "0",
-      arxiv_ids              = "null"
+      target_date   = "null",
+      days_to_fetch = "0",
+      arxiv_ids     = "null"
     }
   })
 }
 
 resource "aws_cloudwatch_event_target" "cleaner" {
-  rule     = aws_cloudwatch_event_rule.cleaner.name
-  arn      = aws_lambda_function.cleaner.arn
+  count = var.use_graph_rag ? 1 : 0
+  rule  = aws_cloudwatch_event_rule.cleaner[0].name
+  arn   = aws_lambda_function.cleaner[0].arn
+}
+
+resource "aws_cloudwatch_event_target" "summarizer" {
+  rule     = aws_cloudwatch_event_rule.summarizer.name
+  arn      = aws_batch_job_queue.summarizer.arn
+  role_arn = aws_iam_role.event_rule.arn
+
+  batch_target {
+    job_definition = aws_batch_job_definition.summarizer.arn
+    job_name       = "${local.name_prefix}-summarizing-ko"
+    job_attempts   = local.default_configs.summarizer_batch.retry
+  }
+
+  input = jsonencode({
+    Parameters = {
+      target_date     = "null",
+      days_to_fetch   = "0",
+      arxiv_ids       = "null",
+      language        = "ko",
+      apply_retrieval = "true"
+    }
+  })
 }
 
 resource "aws_lambda_permission" "cloudwatch_to_cleaner" {
+  count         = var.use_graph_rag ? 1 : 0
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.cleaner.function_name
+  function_name = aws_lambda_function.cleaner[0].function_name
   principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.cleaner.arn
+  source_arn    = aws_cloudwatch_event_rule.cleaner[0].arn
 }

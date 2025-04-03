@@ -10,17 +10,22 @@ variable "tags" {
   default     = {}
 }
 
-variable "default_region_name" {
-  description = "Default AWS region name for resources"
+variable "bedrock_region_name" {
+  description = "Bedrock region name for resources"
   type        = string
   default     = "us-west-2"
 
   validation {
-    condition     = can(regex("^[a-z]+-[a-z]+-[0-9]+$", var.default_region_name))
+    condition     = can(regex("^[a-z]+-[a-z]+-[0-9]+$", var.bedrock_region_name))
     error_message = "Region name must be in a valid AWS region format (e.g., us-west-2, eu-central-1)"
   }
 }
 
+variable "use_graph_rag" {
+  description = "Whether to apply the graph RAG"
+  type        = bool
+  default     = false
+}
 
 variable "vpc_id" {
   description = "ID of the VPC where resources will be deployed"
@@ -92,6 +97,17 @@ variable "cleaner_schedule_expression" {
   }
 }
 
+variable "summarizer_schedule_expression" {
+  description = "Schedule expression for the summarizer job (AWS cron or rate expression)"
+  type        = string
+  default     = "cron(0 0 * * ? *)"
+
+  validation {
+    condition     = can(regex("^(cron|rate)\\(.*\\)$", var.summarizer_schedule_expression))
+    error_message = "Schedule expression must be a valid AWS cron or rate expression"
+  }
+}
+
 variable "llama_cloud_api_key" {
   description = "API key for the LLAMA Cloud API"
   type        = string
@@ -100,5 +116,38 @@ variable "llama_cloud_api_key" {
   validation {
     condition     = var.llama_cloud_api_key == null || can(regex("^llx-[A-Za-z0-9]{48}$", var.llama_cloud_api_key))
     error_message = "LLAMA Cloud API key must be in the format 'llx-' followed by 48 alphanumeric characters"
+  }
+}
+
+variable "slack_bot_token" {
+  description = "Slack bot token"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.slack_bot_token == null || can(regex("^xoxb-[0-9]+-[0-9]+-[A-Za-z0-9]+$", var.slack_bot_token))
+    error_message = "Slack bot token must be in the format 'xoxb-' followed by numbers, dash, numbers, dash, and alphanumeric characters"
+  }
+}
+
+variable "slack_channel_id" {
+  description = "Slack channel ID"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.slack_channel_id == null || can(regex("^C[A-Z0-9]{8,}$", var.slack_channel_id))
+    error_message = "Slack channel must be in the format 'C' followed by alphanumeric characters"
+  }
+}
+
+variable "upstage_api_key" {
+  description = "Upstage API key"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.upstage_api_key == null || can(regex("^up_[A-Za-z0-9]{29}$", var.upstage_api_key))
+    error_message = "Upstage API key must be in the format 'up_' followed by 29 alphanumeric characters"
   }
 }

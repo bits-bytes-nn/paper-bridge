@@ -14,328 +14,423 @@
         }
       });
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700&family=Roboto+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono&family=Noto+Serif+KR:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      body {
+      :root {
+        --text-primary: #1a1d20;
+        --text-secondary: #3a4046;
+        --text-muted: #596067;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-highlight: #e9ecef;
+        --border-color: #dee2e6;
+        --accent-color: #0072ce;
+        --accent-gradient-start: #ff9900;
+        --accent-gradient-end: #ffb84d;
+        --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.2s ease-in-out;
+        --content-width: 768px;
+      }
+
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
         -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
-        background-color: #f8f9fa;
-        font-family: "Pretendard", "Inter", system-ui, sans-serif;
+        background-color: var(--bg-secondary);
+        font-family: "Noto Sans KR", "Nanum Gothic", -apple-system,
+          BlinkMacSystemFont, system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text-primary);
+        letter-spacing: -0.015em;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        padding: 24px 0;
       }
 
       img {
         border: 0;
         height: auto;
-        line-height: 100%;
+        display: block;
         outline: none;
         text-decoration: none;
         -ms-interpolation-mode: bicubic;
-        max-width: 100% !important;
-        margin: 1rem 0;
-        border-radius: 4px;
+        max-width: 100%;
+        margin: 1.5rem auto;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
       }
 
       table {
-        border-collapse: collapse !important;
+        border-collapse: collapse;
         table-layout: fixed;
-        margin: 0 auto;
+        margin: 1.5rem auto;
         width: 100%;
       }
 
-      th,
-      td {
-        padding: 8px;
-        border: 1px solid #dee2e6;
+      th, td {
+        padding: 12px 16px;
+        border: 1px solid var(--border-color);
         text-align: left;
+        font-size: 1rem;
       }
 
       th {
-        background-color: #f8f9fa;
+        background-color: var(--bg-secondary);
         font-weight: 600;
       }
 
       .wrapper {
-        max-width: 800px !important;
+        max-width: 1200px;
         width: 100%;
         margin: 0 auto;
-        background-color: #ffffff;
-        padding: 0;
-        border-radius: 8px;
+        background-color: var(--bg-primary);
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .td-padding {
-        padding: 18px;
+        box-shadow: var(--box-shadow);
       }
 
       .header {
-        padding: 18px;
+        padding: 40px 32px 32px;
         text-align: center;
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 1px solid var(--border-color);
+        background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
       }
 
       .paper-title {
+        font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
         font-weight: 700;
-        color: #212121 !important;
-        font-size: 2rem;
+        color: var(--text-primary);
+        font-size: 2.4rem;
         line-height: 1.3;
         letter-spacing: -0.02em;
-        margin: 0 0 8px 0;
+        margin: 0 0 16px 0;
         text-align: center;
       }
 
       .authors {
         font-weight: 500;
-        color: #495057;
-        font-size: 1.2rem;
-        line-height: 1.4;
-        margin: 4px 0 8px 0;
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        line-height: 1.5;
+        margin: 8px 0 12px 0;
         text-align: center;
       }
 
-      .meta {
+      .date-published {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        margin-top: 12px;
+        margin-bottom: 16px;
         text-align: center;
-        padding: 12px 18px;
-        color: #6c757d;
-        font-size: 1rem;
+        font-weight: 500;
       }
 
       .tags {
         text-align: center;
-        padding: 0 18px 12px 18px;
+        padding: 4px 20px 8px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
       }
 
       .tag {
-        background-color: #e9ecef;
-        padding: 4px 8px;
-        border-radius: 4px;
-        margin: 0 4px 4px 0;
+        background-color: var(--bg-highlight);
+        padding: 6px 12px;
+        border-radius: 6px;
         display: inline-block;
-        color: #495057;
+        color: var(--text-secondary);
         font-weight: 500;
-        font-size: 0.875rem;
+        font-size: 0.95rem;
         letter-spacing: -0.01em;
+        transition: var(--transition);
+      }
+
+      .tag:hover {
+        background-color: #e2e6ea;
+        transform: translateY(-1px);
       }
 
       .content {
-        padding: 18px;
-        color: #212121;
-        font-size: 1rem;
-        line-height: 1.7;
-        letter-spacing: -0.009em;
+        padding: 32px;
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        line-height: 1.8;
+        letter-spacing: -0.01em;
+        max-width: var(--content-width);
+        margin: 0 auto;
       }
 
       h2 {
+        font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
         color: #2c3e50;
-        margin-top: 25px;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+        font-size: 1.8rem;
         font-weight: 700;
+        letter-spacing: -0.03em;
       }
 
       p {
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
+        font-size: 1.125rem;
       }
 
       strong {
         font-weight: 700;
+        color: #2c3e50;
       }
 
-      ul,
-      ol {
-        margin-bottom: 1rem;
-        padding-left: 20px;
+      ul, ol {
+        margin: 1.2rem 0;
+        padding-left: 1.5rem;
       }
 
       li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.7rem;
       }
 
       .highlight-box {
-        background-color: #f8f9fa;
-        border-left: 4px solid #007bff;
-        padding: 15px;
-        margin-bottom: 20px;
+        background-color: var(--bg-secondary);
+        border-left: 4px solid var(--accent-color);
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        font-size: 1.125rem;
+        border-radius: 0 8px 8px 0;
       }
 
       .paper-id {
-        font-family: "Roboto Mono", monospace;
+        font-family: "IBM Plex Mono", "Nanum Gothic Coding", monospace;
         background-color: #f1f3f5;
-        padding: 2px 6px;
+        padding: 4px 8px;
         border-radius: 4px;
-        font-size: 0.9rem;
-        text-align: center;
+        font-size: 1rem;
+        display: inline-block;
       }
 
       .divider {
         border: 0;
-        border-top: 1px solid #dee2e6;
-        margin: 24px 0;
+        border-top: 1px solid var(--border-color);
+        margin: 2rem 0;
       }
 
       .resources {
-        padding: 18px;
+        padding: 32px;
+        background-color: #fafbfc;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .resources-inner {
+        max-width: var(--content-width);
+        margin: 0 auto;
       }
 
       .resources-title {
+        font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
         font-weight: 700;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
+        font-size: 1.3rem;
+        color: #2c3e50;
       }
 
       .resource-item {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        padding-left: 1.25rem;
+        position: relative;
       }
 
-      pre,
-      code {
-        font-family: "Roboto Mono", monospace !important;
-        font-size: 0.8125rem !important;
-        line-height: 1.5 !important;
+      .resource-item:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent-color);
+      }
+
+      pre, code {
+        font-family: "IBM Plex Mono", "Nanum Gothic Coding", monospace;
+        font-size: 0.925rem;
+        line-height: 1.6;
       }
 
       pre {
-        background-color: #f8f9fa !important;
-        padding: 1rem !important;
-        border-radius: 4px !important;
-        overflow-x: auto !important;
+        background-color: #f8f9fa;
+        padding: 1.25rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
       }
 
       code {
-        background-color: #f8f9fa !important;
-        padding: 0.2em 0.4em !important;
-        border-radius: 3px !important;
+        background-color: #f1f3f5;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        color: #e83e8c;
+        font-weight: 500;
       }
 
       pre code {
-        padding: 0 !important;
+        padding: 0;
+        color: inherit;
+        background: none;
       }
 
       .figure-container {
-        margin: 1.5rem 0;
+        margin: 2rem 0;
         text-align: center;
       }
 
       .figure-caption {
-        font-size: 0.9rem;
-        color: #495057;
-        margin-top: 0.5rem;
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        margin-top: 0.8rem;
         text-align: center;
         font-style: italic;
+        line-height: 1.5;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .date-published {
-        color: #6c757d;
-        font-size: 1rem;
-        margin-top: 8px;
-        margin-bottom: 12px;
-        text-align: center;
-        font-weight: 500;
+      .td-padding {
+        padding: 0;
       }
 
       .view-more-btn {
         display: inline-block;
-        font-size: 0.875rem;
+        font-size: 1.05rem;
         line-height: 1.5;
-        font-weight: 500;
+        font-weight: 600;
         color: #ffffff;
         text-decoration: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        background: linear-gradient(135deg, #ff9900 0%, #ffb84d 100%);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        border-radius: 6px;
+        padding: 14px 28px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-gradient-start) 0%,
+          var(--accent-gradient-end) 100%
+        );
+        box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25),
+          0 2px 4px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+        letter-spacing: 0.01em;
       }
 
       .view-more-btn:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 16px rgba(255, 153, 0, 0.3),
+          0 3px 6px rgba(0, 0, 0, 0.1);
         transform: translateY(-2px);
       }
 
       .btn-container {
         text-align: center;
-        margin: 20px 0;
+        margin: 2.5rem 0;
+      }
+
+      .MathJax {
+        font-size: 1.1em !important;
+      }
+
+      .content > *:first-child {
+        margin-top: 0;
+      }
+
+      @media (max-width: 1248px) {
+        .wrapper {
+          max-width: 95%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 0;
+        }
+
+        .header {
+          padding: 24px 16px 20px;
+        }
+
+        .paper-title {
+          font-size: 2rem;
+        }
+
+        .authors {
+          font-size: 1.15rem;
+        }
+
+        .content, .resources {
+          padding: 24px 20px;
+        }
+      }
+
+      @media print {
+        body {
+          background-color: #fff;
+          padding: 0;
+        }
+
+        .wrapper {
+          box-shadow: none;
+          max-width: 100%;
+        }
       }
     </style>
   </head>
-  <body style="margin: 0; padding: 0; background-color: #f8f9fa">
-    <table
-      width="100%"
-      cellpadding="0"
-      cellspacing="0"
-      border="0"
-      bgcolor="#f8f9fa"
-      align="center"
-    >
-      <tr>
-        <td align="center" style="padding: 20px 0">
-          <table
-            cellpadding="0"
-            cellspacing="0"
-            border="0"
-            width="800"
-            class="wrapper"
-          >
-            <!-- Header with Title and Authors -->
-            <tr>
-              <td class="header">
-                <h1 class="paper-title">{{ title }}</h1>
-                <div class="authors">{{ authors }}</div>
-                <div class="date-published">Published on {{ date }}</div>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <h1 class="paper-title">{{ title }}</h1>
+        <div class="authors">{{ authors }}</div>
+        <div class="date-published">Published on {{ date }}</div>
 
-                <!-- Tags below date -->
-                {% if tags %}
-                <div class="tags">
-                  {% for tag in tags %}
-                  <span class="tag">#{{ tag }}</span>
-                  {% endfor %}
-                </div>
-                {% endif %}
-              </td>
-            </tr>
+        {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+          <span class="tag">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </header>
 
-            <!-- Content: Summary -->
-            <tr>
-              <td bgcolor="#FFFFFF" class="td-padding" align="left">
-                <div style="max-width: 100%">{{ summary | safe }}</div>
+      <div class="content">
+        {{ summary | safe }}
 
-                {% if retrieval %}
-                <hr class="divider" />
+        {% if retrieval %}
+        <hr class="divider" />
+        {{ retrieval | safe }}
+        {% endif %}
 
-                <!-- Additional Content -->
-                <div style="max-width: 100%">{{ retrieval | safe }}</div>
-                {% endif %}
+        {% if pdf_url %}
+        <div class="btn-container">
+          <a href="{{ pdf_url }}" target="_blank" class="view-more-btn">
+            View More
+          </a>
+        </div>
+        {% endif %}
+      </div>
 
-                <!-- View More button -->
-                {% if pdf_url %}
-                <div class="btn-container">
-                  <a href="{{ pdf_url }}" target="_blank" class="view-more-btn">
-                    View More
-                  </a>
-                </div>
-                {% endif %}
-              </td>
-            </tr>
-
-            <!-- Resources (if present) -->
-            {% if urls %}
-            <tr>
-              <td bgcolor="#FFFFFF" class="td-padding" align="left">
-                <div class="resources-title">Related Resources</div>
-                {% for url in urls %}
-                <div class="resource-item">• {{ url | safe }}</div>
-                {% endfor %}
-              </td>
-            </tr>
-            {% endif %}
-          </table>
-        </td>
-      </tr>
-    </table>
+      {% if urls %}
+      <div class="resources">
+        <div class="resources-inner">
+          <div class="resources-title">Related Resources</div>
+          {% for url in urls %}
+          <div class="resource-item">{{ url | safe }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
   </body>
 </html>
