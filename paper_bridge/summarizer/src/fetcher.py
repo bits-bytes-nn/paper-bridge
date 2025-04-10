@@ -81,9 +81,6 @@ class Figure(BaseModel):
             logger.warning("Failed to analyze figure %s: %s", figure_id, str(e))
             analysis = None
 
-        if path.startswith("/html/"):
-            path = path.replace("/html/", "https://ar5iv.org//html/")
-
         return cls(
             figure_id=figure_id,
             path=path,
@@ -271,7 +268,7 @@ class HTMLRichParser(BaseParser):
                     multi_modal_llm=self.multi_modal_llm,
                     output_parser=self.output_parser,
                     figure_id=str(i),
-                    path=f"{'/'.join(self.url.split('/')[:-2])}/{img.get('src', '')}",
+                    path=f"{self.url}/{img.get('src', '')}",
                     caption=caption.text.strip(),
                 )
             )
@@ -284,7 +281,7 @@ class HTMLRichParser(BaseParser):
                     multi_modal_llm=self.multi_modal_llm,
                     output_parser=self.output_parser,
                     figure_id=str(i),
-                    path=f"{'/'.join(self.url.split('/')[:-2])}/{img.get('src', '')}",
+                    path=f"{self.url}/{img.get('src', '')}",
                     caption=str(alt_text) if alt_text else None,
                 )
             )

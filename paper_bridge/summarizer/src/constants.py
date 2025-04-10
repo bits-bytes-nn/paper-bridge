@@ -78,7 +78,7 @@ class SSMParams(str, Enum):
 
 
 class URLs(str, Enum):
-    ARXIV_HTML = "https://ar5iv.labs.arxiv.org/html"
+    ARXIV_HTML = "https://arxiv.org/html"
     ARXIV_PDF = "https://arxiv.org/pdf"
     HF_DAILY_PAPERS = "https://huggingface.co/api/daily_papers"
     UPSTAGE_DOCUMENT_PARSE = "https://api.upstage.ai/v1/document-ai/document-parse"

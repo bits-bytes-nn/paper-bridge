@@ -112,6 +112,11 @@ class PaperSummarizationPrompt(BasePrompt):
     - Format your response in clean HTML for optimal readability
     - Use <strong> tags for key concepts and <ul>/<ol> tags for lists
     - Include mathematical formulas in LaTeX ($...$ for inline, $$...$$ for display)
+    - IMPORTANT: Avoid using LaTeX environments that start with \\begin{...} as they may break. Instead:
+      * For matrices, use array environments:
+      $$\\left[ \\begin{array}{ccc} a & b & c \\\\ d & e & f \\end{array} \\right]$$
+      * For aligned equations, use aligned notation with &: $$a = b \\\\ c = d$$
+      * For complex math structures, break them into multiple display equations
     - Enhance understanding with visual elements:
       * Include relevant figures from the paper to illustrate key concepts
       * Use tables for comparative data
@@ -125,14 +130,18 @@ class PaperSummarizationPrompt(BasePrompt):
       * WARNING: Do NOT confuse local paths with external URLs!
       * If an image path starts with '/' like '/path/to/image.png', it is a local path. Keep it exactly as is:
         <img src="/path/to/image.png" alt="Description" width="600">
-      * NEVER add 'https://ar5iv.labs.arxiv.org' to local paths
+      * NEVER add 'https://arxiv.org/html' to local paths
       * ONLY use complete URLs when specifically referencing ar5iv images:
-        <img src="https://ar5iv.labs.arxiv.org/path/to/image.png" alt="Description" width="600">
+        <img src="https://arxiv.org/html/path/to/image.png" alt="Description" width="600">
       * Clearly distinguish between local paths and external URLs when inserting images
     - Highlight insights using callout boxes:
       <div style="background-color: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin-bottom: 20px;">
         [Key insight]
       </div>
+    - Do NOT use \bm{} command as it may break rendering
+    - Instead, use \boldsymbol{} for bold symbols: $\boldsymbol{\alpha}$ instead of $\bm{\alpha}$
+    - For simple variables, \mathbf{} can also be used: $\mathbf{A}$ for matrices
+    - For vectors, consider using arrow notation: $\vec{v}$ or explicit formatting: $\boldsymbol{v}$
 
     <Content Style>
     - Prioritize technical accuracy and clarity
@@ -223,6 +232,11 @@ class PaperSummarizationPrompt(BasePrompt):
     - Format your response in clean HTML for optimal readability
     - Use <strong> tags for key concepts and <ul>/<ol> tags for lists
     - Include mathematical formulas in LaTeX ($...$ for inline, $$...$$ for display)
+    - IMPORTANT: Avoid using LaTeX environments that start with \\begin{...} as they may break. Instead:
+      * For matrices, use array environments: $$\\left[ \\begin{array}{ccc} a & b & c \\\\ d & e & f \\end{array} \\right]$$
+      * For aligned equations, use aligned notation with &: $$a = b \\\\ c = d$$
+      * For complex math structures, break them into multiple display equations
+      * If complex environments are absolutely necessary, use \\begin{{aligned}} with double braces
     - Enhance understanding with visual elements:
       * Include relevant figures from the paper to illustrate key concepts
       * Use tables for comparative data
@@ -236,14 +250,18 @@ class PaperSummarizationPrompt(BasePrompt):
       * WARNING: Do NOT confuse local paths with external URLs!
       * If an image path starts with '/' like '/path/to/image.png', it is a local path. Keep it exactly as is:
         <img src="/path/to/image.png" alt="Description" width="600">
-      * NEVER add 'https://ar5iv.labs.arxiv.org' to local paths
+      * NEVER add 'https://arxiv.org/html' to local paths
       * ONLY use complete URLs when specifically referencing ar5iv images:
-        <img src="https://ar5iv.labs.arxiv.org/path/to/image.png" alt="Description" width="600">
+        <img src="https://arxiv.org/html/path/to/image.png" alt="Description" width="600">
       * Clearly distinguish between local paths and external URLs when inserting images
     - Highlight insights using callout boxes:
       <div style="background-color: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin-bottom: 20px;">
         [Key insight]
       </div>
+    - Do NOT use \bm{} command as it may break rendering
+    - Instead, use \boldsymbol{} for bold symbols: $\boldsymbol{\alpha}$ instead of $\bm{\alpha}$
+    - For simple variables, \mathbf{} can also be used: $\mathbf{A}$ for matrices
+    - For vectors, consider using arrow notation: $\vec{v}$ or explicit formatting: $\boldsymbol{v}$
 
     <Content Style>
     - Prioritize technical accuracy and clarity
@@ -349,10 +367,10 @@ class RetrievalSummarizationPrompt(BasePrompt):
     - Use <strong> tags to emphasize key concepts
     - Use <ul> or <ol> tags for organized lists
     - Include mathematical formulas in LaTeX:
-    * Use $...$ for inline equations
-    * Use $$...$$ for display/block equations
+    - Use $...$ for inline equations
+    - Use $$...$$ for display/block equations
     - Enhance understanding with visual elements:
-    * Create comparison tables for technical similarities and differences:
+    - Create comparison tables for technical similarities and differences:
         <table style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
         <thead>
             <tr style="background-color: #f8f9fa;">

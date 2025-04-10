@@ -1,8 +1,8 @@
 ## 🗞️ PAPER-BRIDGE
 
 **Paper Bridge** is a Graph RAG-based application that analyzes technical trends in key AI/ML papers published on [HuggingFace Daily Papers](https://huggingface.co/papers), providing insights by comparing related papers. It helps answer questions like:
-- *"What are the recent major developments in the technical field of a given paper?"*
-- *"What are the key differences between a given paper and recently published similar papers? Please analyze trends in the research area and provide insights."*
+- *"What are the recent major developments in the specific technical field of this paper?"*
+- *"What are the key differences between this paper and recent papers that aim to solve similar problems?"*
 
 ### Architecture
 
