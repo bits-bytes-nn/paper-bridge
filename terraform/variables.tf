@@ -143,6 +143,27 @@ variable "summarizer_schedule_expression" {
     error_message = "Schedule expression must be a valid AWS cron or rate expression"
   }
 }
+variable "business_slack_bot_token" {
+  description = "Slack bot token"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.business_slack_bot_token == null || can(regex("^xoxb-[0-9]+-[0-9]+-[A-Za-z0-9]+$", var.business_slack_bot_token))
+    error_message = "Slack bot token must be in the format 'xoxb-' followed by numbers, dash, numbers, dash, and alphanumeric characters"
+  }
+}
+
+variable "business_slack_channel_id" {
+  description = "Slack channel ID"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.business_slack_channel_id == null || can(regex("^C[A-Z0-9]{8,}$", var.business_slack_channel_id))
+    error_message = "Slack channel must be in the format 'C' followed by alphanumeric characters"
+  }
+}
 
 variable "llama_cloud_api_key" {
   description = "API key for the LLAMA Cloud API"
@@ -155,24 +176,24 @@ variable "llama_cloud_api_key" {
   }
 }
 
-variable "slack_bot_token" {
+variable "personal_slack_bot_token" {
   description = "Slack bot token"
   type        = string
   default     = null
 
   validation {
-    condition     = var.slack_bot_token == null || can(regex("^xoxb-[0-9]+-[0-9]+-[A-Za-z0-9]+$", var.slack_bot_token))
+    condition     = var.personal_slack_bot_token == null || can(regex("^xoxb-[0-9]+-[0-9]+-[A-Za-z0-9]+$", var.personal_slack_bot_token))
     error_message = "Slack bot token must be in the format 'xoxb-' followed by numbers, dash, numbers, dash, and alphanumeric characters"
   }
 }
 
-variable "slack_channel_id" {
+variable "personal_slack_channel_id" {
   description = "Slack channel ID"
   type        = string
   default     = null
 
   validation {
-    condition     = var.slack_channel_id == null || can(regex("^C[A-Z0-9]{8,}$", var.slack_channel_id))
+    condition     = var.personal_slack_channel_id == null || can(regex("^C[A-Z0-9]{8,}$", var.personal_slack_channel_id))
     error_message = "Slack channel must be in the format 'C' followed by alphanumeric characters"
   }
 }

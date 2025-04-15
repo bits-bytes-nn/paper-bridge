@@ -16,10 +16,12 @@ class AutoNamedEnum(str, Enum):
 class EnvVars(str, Enum):
     AWS_PROFILE_NAME = "AWS_PROFILE_NAME"
     BEDROCK_REGION_NAME = "BEDROCK_REGION_NAME"
+    BUSINESS_SLACK_BOT_TOKEN = "BUSINESS_SLACK_BOT_TOKEN"
+    BUSINESS_SLACK_CHANNEL_ID = "BUSINESS_SLACK_CHANNEL_ID"
     DEFAULT_REGION_NAME = "DEFAULT_REGION_NAME"
     LLAMA_CLOUD_API_KEY = "LLAMA_CLOUD_API_KEY"
-    SLACK_BOT_TOKEN = "SLACK_BOT_TOKEN"
-    SLACK_CHANNEL_ID = "SLACK_CHANNEL_ID"
+    PERSONAL_SLACK_BOT_TOKEN = "PERSONAL_SLACK_BOT_TOKEN"
+    PERSONAL_SLACK_CHANNEL_ID = "PERSONAL_SLACK_CHANNEL_ID"
     TOPIC_ARN = "TOPIC_ARN"
     UPSTAGE_API_KEY = "UPSTAGE_API_KEY"
 
@@ -69,11 +71,13 @@ class SSMParams(str, Enum):
     BATCH_JOB_DEFINITION_SUMMARIZER = "batch-job-definition-summarizer"
     BATCH_JOB_QUEUE_INDEXER = "batch-job-queue-indexer"
     BATCH_JOB_QUEUE_SUMMARIZER = "batch-job-queue-summarizer"
+    BUSINESS_SLACK_BOT_TOKEN = "business-slack-bot-token"
+    BUSINESS_SLACK_CHANNEL_ID = "business-slack-channel-id"
     LLAMA_CLOUD_API_KEY = "llama-cloud-api-key"
     OPENSEARCH_ENDPOINT = "opensearch-endpoint"
+    PERSONAL_SLACK_BOT_TOKEN = "personal-slack-bot-token"
+    PERSONAL_SLACK_CHANNEL_ID = "personal-slack-channel-id"
     NEPTUNE_ENDPOINT = "neptune-endpoint"
-    SLACK_BOT_TOKEN = "slack-bot-token"
-    SLACK_CHANNEL_ID = "slack-channel-id"
     UPSTAGE_API_KEY = "upstage-api-key"
 
 

@@ -159,7 +159,7 @@ class PaperDocumentBuilder:
         date_suffix: Optional[str] = None,
         language: Optional[Language] = None,
     ) -> str:
-        components = ["paper"]
+        components = ["paper-bridge"]
 
         if stage:
             components.append(stage)

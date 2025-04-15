@@ -130,6 +130,12 @@ if __name__ == "__main__":
         default=False,
         help="Whether to apply retrieval",
     )
+    parser.add_argument(
+        "--send-business-slack",
+        type=arg_as_bool,
+        default=False,
+        help="Whether to send business slack",
+    )
     args = parser.parse_args()
 
     arxiv_ids = args.arxiv_ids
@@ -137,6 +143,7 @@ if __name__ == "__main__":
     days_to_fetch = str(args.days_to_fetch) if args.days_to_fetch is not None else "0"
     language = args.language if args.language is not None else NULL_STRING
     apply_retrieval = str(args.apply_retrieval)
+    send_business_slack = str(args.send_business_slack)
 
     try:
         main(
@@ -146,6 +153,7 @@ if __name__ == "__main__":
             arxiv_ids=arxiv_ids,
             language=language,
             apply_retrieval=apply_retrieval,
+            send_business_slack=send_business_slack,
         )
     except Exception as e:
         logger.error("Failed to submit or execute batch job: %s", e)

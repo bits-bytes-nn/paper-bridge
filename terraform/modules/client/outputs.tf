@@ -81,10 +81,12 @@ output "ssm_parameters" {
   description = "SSM parameter names"
   value = {
     bedrock_inference_role_arn = aws_ssm_parameter.bedrock_inference.name
-    llama_cloud_api_key         = aws_ssm_parameter.llama_cloud_api_key.name
-    slack_bot_token             = aws_ssm_parameter.slack_bot_token.name
-    slack_channel_id            = aws_ssm_parameter.slack_channel_id.name
-    upstage_api_key             = aws_ssm_parameter.upstage_api_key.name
+    business_slack_bot_token    = var.business_slack_bot_token != null ? aws_ssm_parameter.business_slack_bot_token[0].name : null
+    business_slack_channel_id   = var.business_slack_channel_id != null ? aws_ssm_parameter.business_slack_channel_id[0].name : null
+    llama_cloud_api_key         = var.llama_cloud_api_key != null ? aws_ssm_parameter.llama_cloud_api_key[0].name : null
+    personal_slack_bot_token    = var.personal_slack_bot_token != null ? aws_ssm_parameter.personal_slack_bot_token[0].name : null
+    personal_slack_channel_id   = var.personal_slack_channel_id != null ? aws_ssm_parameter.personal_slack_channel_id[0].name : null
+    upstage_api_key             = var.upstage_api_key != null ? aws_ssm_parameter.upstage_api_key[0].name : null
     batch_job_queue_indexer     = var.use_graph_rag ? aws_ssm_parameter.batch_job_queue_indexer[0].name : null
     batch_job_definition_indexer = var.use_graph_rag ? aws_ssm_parameter.batch_job_definition_indexer[0].name : null
     batch_job_queue_summarizer  = aws_ssm_parameter.batch_job_queue_summarizer.name

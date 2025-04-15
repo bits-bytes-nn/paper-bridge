@@ -756,7 +756,27 @@ resource "aws_batch_job_queue" "summarizer" {
 }
 
 # Secure parameters
+
+resource "aws_ssm_parameter" "business_slack_bot_token" {
+  count       = var.business_slack_bot_token != null ? 1 : 0
+  name        = "${local.ssm_param_prefix}/business-slack-bot-token"
+  description = "Slack bot token"
+  type        = "SecureString"
+  value       = var.business_slack_bot_token
+  tags        = var.tags
+}
+
+resource "aws_ssm_parameter" "business_slack_channel_id" {
+  count       = var.business_slack_channel_id != null ? 1 : 0
+  name        = "${local.ssm_param_prefix}/business-slack-channel-id"
+  description = "Slack channel ID"
+  type        = "SecureString"
+  value       = var.business_slack_channel_id
+  tags        = var.tags
+}
+
 resource "aws_ssm_parameter" "llama_cloud_api_key" {
+  count       = var.llama_cloud_api_key != null ? 1 : 0
   name        = "${local.ssm_param_prefix}/llama-cloud-api-key"
   description = "API key for LLAMA Cloud services"
   type        = "SecureString"
@@ -764,23 +784,26 @@ resource "aws_ssm_parameter" "llama_cloud_api_key" {
   tags        = var.tags
 }
 
-resource "aws_ssm_parameter" "slack_bot_token" {
-  name        = "${local.ssm_param_prefix}/slack-bot-token"
+resource "aws_ssm_parameter" "personal_slack_bot_token" {
+  count       = var.personal_slack_bot_token != null ? 1 : 0
+  name        = "${local.ssm_param_prefix}/personal-slack-bot-token"
   description = "Slack bot token"
   type        = "SecureString"
-  value       = var.slack_bot_token
+  value       = var.personal_slack_bot_token
   tags        = var.tags
 }
 
-resource "aws_ssm_parameter" "slack_channel_id" {
-  name        = "${local.ssm_param_prefix}/slack-channel-id"
+resource "aws_ssm_parameter" "personal_slack_channel_id" {
+  count       = var.personal_slack_channel_id != null ? 1 : 0
+  name        = "${local.ssm_param_prefix}/personal-slack-channel-id"
   description = "Slack channel ID"
   type        = "SecureString"
-  value       = var.slack_channel_id
+  value       = var.personal_slack_channel_id
   tags        = var.tags
 }
 
 resource "aws_ssm_parameter" "upstage_api_key" {
+  count       = var.upstage_api_key != null ? 1 : 0
   name        = "${local.ssm_param_prefix}/upstage-api-key"
   description = "Upstage API key"
   type        = "SecureString"
@@ -892,7 +915,7 @@ resource "aws_batch_job_definition" "summarizer" {
   type = "container"
   container_properties = jsonencode({
     image      = "${aws_ecr_repository.summarizer.repository_url}:latest"
-    command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--arxiv-ids", "Ref::arxiv_ids", "--language", "Ref::language", "--apply-retrieval", "Ref::apply_retrieval"]
+    command    = ["python3", "main.py", "--target-date", "Ref::target_date", "--days-to-fetch", "Ref::days_to_fetch", "--arxiv-ids", "Ref::arxiv_ids", "--language", "Ref::language", "--apply-retrieval", "Ref::apply_retrieval", "--send-business-slack", "Ref::send_business_slack"]
     jobRoleArn = aws_iam_role.client.arn
 
     resourceRequirements = [
@@ -1113,7 +1136,8 @@ resource "aws_cloudwatch_event_target" "summarizer" {
       days_to_fetch   = "0",
       arxiv_ids       = "null",
       language        = "ko",
-      apply_retrieval = "true"
+      apply_retrieval = "true",
+      send_business_slack = "true"
     }
   })
 }

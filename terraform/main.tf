@@ -29,9 +29,11 @@ module "client" {
   indexer_schedule_expression    = var.indexer_schedule_expression
   cleaner_schedule_expression    = var.cleaner_schedule_expression
   summarizer_schedule_expression = var.summarizer_schedule_expression
+  business_slack_bot_token       = var.business_slack_bot_token
+  business_slack_channel_id      = var.business_slack_channel_id
   llama_cloud_api_key            = var.llama_cloud_api_key
-  slack_bot_token                = var.slack_bot_token
-  slack_channel_id               = var.slack_channel_id
+  personal_slack_bot_token       = var.personal_slack_bot_token
+  personal_slack_channel_id      = var.personal_slack_channel_id
   upstage_api_key                = var.upstage_api_key
   tags                           = local.common_tags
 

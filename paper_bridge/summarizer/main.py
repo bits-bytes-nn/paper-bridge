@@ -61,6 +61,7 @@ def main(
     arxiv_ids: Optional[List[str]],
     language: Optional[str],
     apply_retrieval: bool,
+    send_business_slack: bool,
 ) -> None:
     default_boto3_session = None
     papers: List[Paper] = []
@@ -83,7 +84,7 @@ def main(
 
         target_datetime = parse_target_date(target_date)
 
-        if arxiv_ids and isinstance(arxiv_ids, list) and len(arxiv_ids) > 0:
+        if arxiv_ids:
             arxiv_ids = [
                 arxiv_id
                 for arxiv_id in arxiv_ids
@@ -97,9 +98,9 @@ def main(
             language_enum = Language(language)
 
         output_format_enum = (
-            None
-            if config.retrieval.output_format is None
-            else Format(config.retrieval.output_format)
+            Format(config.retrieval.output_format)
+            if config.retrieval.output_format
+            else None
         )
 
         papers_dir = ROOT_DIR / LocalPaths.PAPERS_DIR.value
@@ -180,8 +181,24 @@ def main(
         converter = HtmlToImageConverter(outputs_dir)
         s3_output_key = _get_s3_key(config.resources.s3_prefix, S3Paths.OUTPUTS.value)
 
-        slack_token = _get_slack_token(config, default_boto3_session)
-        slack_channel = _get_slack_channel(config, default_boto3_session)
+        slack_credentials = {
+            "personal": {
+                "token": _get_slack_token(
+                    config, default_boto3_session, is_business=False
+                ),
+                "channel": _get_slack_channel(
+                    config, default_boto3_session, is_business=False
+                ),
+            },
+            "business": {
+                "token": _get_slack_token(
+                    config, default_boto3_session, is_business=True
+                ),
+                "channel": _get_slack_channel(
+                    config, default_boto3_session, is_business=True
+                ),
+            },
+        }
 
         for html_path, paper in zip(html_paths, papers):
             upload_to_s3(
@@ -197,32 +214,50 @@ def main(
                 split_pages=True,
             )
 
-            if image_paths:
-                image_paths = (
-                    image_paths if isinstance(image_paths, list) else [image_paths]
+            if not image_paths:
+                continue
+
+            image_paths = (
+                image_paths if isinstance(image_paths, list) else [image_paths]
+            )
+
+            for image_path in image_paths:
+                upload_to_s3(
+                    default_boto3_session,
+                    image_path,
+                    config.resources.s3_bucket_name,
+                    s3_output_key,
                 )
 
-                for image_path in image_paths:
-                    upload_to_s3(
-                        default_boto3_session,
-                        image_path,
-                        config.resources.s3_bucket_name,
-                        s3_output_key,
-                    )
-                if slack_token and slack_channel:
-                    retrieval = None
-                    if apply_retrieval and (output_format_enum == Format.SLACK):
-                        retrieval = retrievals.get(paper.arxiv_id, {})
+            retrieval = None
+            if apply_retrieval and (output_format_enum == Format.SLACK):
+                retrieval = retrievals.get(paper.arxiv_id, {})
 
-                    message = _create_slack_message(paper, retrieval)
-                    logger.debug("Slack message: %s", message)
+            message = _create_slack_message(paper, retrieval)
+            logger.debug("Slack message: %s", message)
 
-                    send_files_to_slack(
-                        image_paths,
-                        slack_token,
-                        slack_channel,
-                        message,
-                    )
+            if (
+                slack_credentials["personal"]["token"]
+                and slack_credentials["personal"]["channel"]
+            ):
+                send_files_to_slack(
+                    image_paths,
+                    slack_credentials["personal"]["token"],
+                    slack_credentials["personal"]["channel"],
+                    message,
+                )
+
+            if (
+                send_business_slack
+                and slack_credentials["business"]["token"]
+                and slack_credentials["business"]["channel"]
+            ):
+                send_files_to_slack(
+                    image_paths,
+                    slack_credentials["business"]["token"],
+                    slack_credentials["business"]["channel"],
+                    message,
+                )
 
         success = True
 
@@ -270,6 +305,7 @@ def fetch_and_enrich_papers(
         profile_name=profile_name,
         timeout=600,
     )
+
     if arxiv_ids:
         papers = fetcher.fetch_papers_by_arxiv_ids(
             papers_dir, arxiv_ids, config.summarization.parse_pdf
@@ -306,8 +342,7 @@ def _enrich_content_with_figures(text: str, figures: List[Figure]) -> str:
 
         if figure_id_match:
             fig_id = figure_id_match.group(1)
-            if fig_id in figures_by_id:
-                matched_figure = figures_by_id[fig_id]
+            matched_figure = figures_by_id.get(fig_id)
 
         if matched_figure is None and i < len(figures):
             matched_figure = figures[len(figures) - i - 1]
@@ -349,20 +384,22 @@ def process_results(
 def create_result_from_summary(
     arxiv_id: str, summary: Union[str, Dict[str, str]]
 ) -> Result:
-    return Result(
-        arxiv_id=arxiv_id,
-        summary=(summary.get("summary", "") if isinstance(summary, dict) else summary),
-        tags=(
-            summary.get("tags", "").split(",")
-            if isinstance(summary, dict) and summary.get("tags")
-            else None
-        ),
-        urls=(
-            extract_unique_urls(summary.get("urls", ""))
-            if isinstance(summary, dict) and summary.get("urls")
-            else None
-        ),
-    )
+    if isinstance(summary, dict):
+        return Result(
+            arxiv_id=arxiv_id,
+            summary=summary.get("summary", ""),
+            tags=summary.get("tags", "").split(",") if summary.get("tags") else None,
+            urls=(
+                extract_unique_urls(summary.get("urls", ""))
+                if summary.get("urls")
+                else None
+            ),
+        )
+    else:
+        return Result(
+            arxiv_id=arxiv_id,
+            summary=summary,
+        )
 
 
 def extract_unique_urls(urls_str: str) -> List[str]:
@@ -388,31 +425,53 @@ def extract_unique_urls(urls_str: str) -> List[str]:
 
 
 def _get_s3_key(s3_prefix: Optional[str], path_value: str) -> str:
-    return path_value if s3_prefix is None else f"{s3_prefix}/{path_value}"
+    return f"{s3_prefix}/{path_value}" if s3_prefix else path_value
 
 
-def _get_slack_token(config: Config, boto3_session: boto3.Session) -> Optional[str]:
+def _get_slack_token(
+    config: Config, boto3_session: boto3.Session, is_business: bool = False
+) -> Optional[str]:
     base_path = f"/{config.resources.project_name}-{config.resources.stage}"
-    return (
-        get_ssm_param_value(
-            boto3_session,
-            f"{base_path}/{SSMParams.SLACK_BOT_TOKEN.value}",
-        )
-        if is_aws_env()
-        else EnvVars.SLACK_BOT_TOKEN.value
+    ssm_param = (
+        SSMParams.BUSINESS_SLACK_BOT_TOKEN
+        if is_business
+        else SSMParams.PERSONAL_SLACK_BOT_TOKEN
+    )
+    env_var = (
+        EnvVars.BUSINESS_SLACK_BOT_TOKEN
+        if is_business
+        else EnvVars.PERSONAL_SLACK_BOT_TOKEN
     )
 
-
-def _get_slack_channel(config: Config, boto3_session: boto3.Session) -> Optional[str]:
-    base_path = f"/{config.resources.project_name}-{config.resources.stage}"
-    return (
-        get_ssm_param_value(
+    if is_aws_env():
+        return get_ssm_param_value(
             boto3_session,
-            f"{base_path}/{SSMParams.SLACK_CHANNEL_ID.value}",
+            f"{base_path}/{ssm_param.value}",
         )
-        if is_aws_env()
-        else EnvVars.SLACK_CHANNEL_ID.value
+    return env_var.value
+
+
+def _get_slack_channel(
+    config: Config, boto3_session: boto3.Session, is_business: bool = False
+) -> Optional[str]:
+    base_path = f"/{config.resources.project_name}-{config.resources.stage}"
+    ssm_param = (
+        SSMParams.BUSINESS_SLACK_CHANNEL_ID
+        if is_business
+        else SSMParams.PERSONAL_SLACK_CHANNEL_ID
     )
+    env_var = (
+        EnvVars.BUSINESS_SLACK_CHANNEL_ID
+        if is_business
+        else EnvVars.PERSONAL_SLACK_CHANNEL_ID
+    )
+
+    if is_aws_env():
+        return get_ssm_param_value(
+            boto3_session,
+            f"{base_path}/{ssm_param.value}",
+        )
+    return env_var.value
 
 
 def _create_slack_message(
@@ -426,14 +485,15 @@ def _create_slack_message(
 
     if paper.upvotes > 0:
         message += f" (👍 +{paper.upvotes})"
-
     if retrieval:
+        summary = "아래 내용은 Graph RAG 기반으로 작성되었습니다.\n"
+        urls = ""
+
         if isinstance(retrieval, dict):
-            summary = retrieval.get("summary", "")
+            summary += retrieval.get("summary", "")
             urls = retrieval.get("urls", "")
         else:
-            summary = retrieval
-            urls = ""
+            summary += retrieval
 
         formatted_summary = convert_markdown_to_slack_links(
             summary.replace("다:", "다.")
@@ -456,7 +516,7 @@ def _create_slack_message(
 
 
 def convert_markdown_to_slack_links(text: str) -> str:
-    pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+    pattern = re.compile(r"\[([^]]+)]\(([^)]+)\)")
     return pattern.sub(r"<\2|\1>", text)
 
 
@@ -527,6 +587,12 @@ if __name__ == "__main__":
         default=False,
         help="Whether to apply retrieval",
     )
+    parser.add_argument(
+        "--send-business-slack",
+        type=arg_as_bool,
+        default=False,
+        help="Whether to send business slack",
+    )
     args = parser.parse_args()
 
     target_date = (
@@ -548,16 +614,24 @@ if __name__ == "__main__":
             arxiv_ids = args.arxiv_ids
 
     logger.info(
-        "Processing papers with target_date='%s', days_to_fetch='%s', arxiv_ids='%s', language='%s', apply_retrieval='%s'",
+        "Processing papers with target_date='%s', days_to_fetch='%s', arxiv_ids='%s', language='%s', apply_retrieval='%s', send_business_slack='%s'",
         target_date or "",
         args.days_to_fetch,
         ", ".join(arxiv_ids) if arxiv_ids else "",
         language or "",
         args.apply_retrieval,
+        args.send_business_slack,
     )
 
     try:
-        main(target_date, args.days_to_fetch, arxiv_ids, language, args.apply_retrieval)
+        main(
+            target_date,
+            args.days_to_fetch,
+            arxiv_ids,
+            language,
+            args.apply_retrieval,
+            args.send_business_slack,
+        )
     except (DateFormatError, SummarizationError) as e:
         logger.error("Application failed: %s", e)
         sys.exit(1)
