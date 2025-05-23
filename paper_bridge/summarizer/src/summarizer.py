@@ -30,7 +30,7 @@ class PaperSummarizer:
             raise ValueError("'paper_summarization_model_id' is not set")
 
         self.summarization_prompt = PaperSummarizationPrompt.for_language(
-            language or Language.KO
+            Language(language or Language.KO)
         ).get_prompt()
         self.summarization_llm = self._initialize_llm(
             self.config.summarization.paper_summarization_model_id.value
@@ -45,7 +45,11 @@ class PaperSummarizer:
                 self.boto3_session, model_id, self.region_name
             ),
             temperature=0.0,
-            max_tokens=16384,
+            max_tokens=(
+                16384
+                if model_id in ["anthropic.claude-3-7-sonnet-20250219-v1:0"]
+                else 4096
+            ),
             profile_name=self.profile_name,
             region_name=self.region_name,
             timeout=900,

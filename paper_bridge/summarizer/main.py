@@ -129,7 +129,6 @@ def main(
                 config.resources.s3_bucket_name,
                 s3_input_key,
             )
-
         summarizer = PaperSummarizer(
             config,
             boto3_session=default_boto3_session,
@@ -139,15 +138,18 @@ def main(
         summaries = asyncio.run(summarizer.summarize_batch(papers))
 
         retrievals = {}
-        if apply_retrieval:
-            retriever = PaperRetriever(
-                config,
-                boto3_session=default_boto3_session,
-                profile_name=profile_name,
-                language=language_enum,
-                output_format=output_format_enum,
-            )
-            retrievals = asyncio.run(retriever.retrieve_batch(papers))
+        try:
+            if apply_retrieval:
+                retriever = PaperRetriever(
+                    config,
+                    boto3_session=default_boto3_session,
+                    profile_name=profile_name,
+                    language=language_enum,
+                    output_format=output_format_enum,
+                )
+                retrievals = asyncio.run(retriever.retrieve_batch(papers))
+        except Exception as e:
+            logger.warning("Retrieval failed: %s. Proceeding with summaries only.", e)
 
         results = process_results(
             summaries,
@@ -486,7 +488,7 @@ def _create_slack_message(
     if paper.upvotes > 0:
         message += f" (👍 +{paper.upvotes})"
     if retrieval:
-        summary = "아래 내용은 Graph RAG 기반으로 작성되었습니다.\n"
+        summary = "아래 메시지는 Graph RAG 기반으로 작성되었습니다.\n"
         urls = ""
 
         if isinstance(retrieval, dict):

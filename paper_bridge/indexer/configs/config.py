@@ -18,6 +18,8 @@ class LanguageModelId(str, Enum):
     CLAUDE_V3_5_SONNET = "anthropic.claude-3-5-sonnet-20240620-v1:0"
     CLAUDE_V3_5_SONNET_V2 = "anthropic.claude-3-5-sonnet-20241022-v2:0"
     CLAUDE_V3_7_SONNET = "anthropic.claude-3-7-sonnet-20250219-v1:0"
+    CLAUDE_V4_SONNET = "anthropic.claude-sonnet-4-20250514-v1:0"
+    CLAUDE_V4_OPUS = "anthropic.claude-opus-4-20250514-v1:0"
 
 
 ModelIdType = Union[EmbeddingsModelId, LanguageModelId]

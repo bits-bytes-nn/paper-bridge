@@ -31,7 +31,7 @@ def get_cross_inference_model_id(
             return cr_model_id
 
     except Exception as e:
-        logger.error(f"Error checking cross-inference support: {str(e)}")
+        logger.error("Error checking cross-inference support: %s", str(e))
 
     return model_id
 

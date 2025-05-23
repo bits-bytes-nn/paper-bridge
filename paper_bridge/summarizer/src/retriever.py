@@ -47,6 +47,7 @@ class Retriever:
 
         self.boto3_session = boto3_session
         self.config = config
+        self.max_chars = 200000
 
         base_path = f"/{config.resources.project_name}-{config.resources.stage}"
         graph_endpoint = get_ssm_param_value(
@@ -92,7 +93,8 @@ class Retriever:
             self.graph_store, self.vector_store, retrievers=subretrievers
         )
         logger.info(
-            f"Using traversal-based retriever with {subretrievers or 'default options'}"
+            "Using traversal-based retriever with %s",
+            subretrievers or "default options",
         )
 
     def use_semantic_guided_retriever(self, set_subretrievers: bool = False) -> None:
@@ -108,7 +110,8 @@ class Retriever:
             self.graph_store, self.vector_store, retrievers=subretrievers
         )
         logger.info(
-            f"Using semantic-guided retriever with {subretrievers or 'default configuration'}"
+            "Using semantic-guided retriever with %s",
+            subretrievers or "default configuration",
         )
 
     def use_reranking_beam_search(self) -> None:
@@ -127,7 +130,12 @@ class Retriever:
         )
 
         logger.info(
-            f"Using {'BGEReranker with GPU (ID: ' + str(self.config.retrieval.gpu_id) + ')' if self.config.retrieval.use_gpu_reranker else 'SentenceReranker (CPU)'}"
+            "Using %s",
+            (
+                "BGEReranker with GPU (ID: %s)" % self.config.retrieval.gpu_id
+                if self.config.retrieval.use_gpu_reranker
+                else "SentenceReranker (CPU)"
+            ),
         )
 
         beam_retriever = RerankingBeamGraphSearch(
@@ -151,7 +159,7 @@ class Retriever:
         if self.config.retrieval.use_gpu_reranker:
             post_processors.append(BGEReranker(gpu_id=self.config.retrieval.gpu_id))
             logger.info(
-                f"Using BGEReranker with GPU (ID: {self.config.retrieval.gpu_id})"
+                "Using BGEReranker with GPU (ID: %s)", self.config.retrieval.gpu_id
             )
         else:
             post_processors.append(SentenceReranker())
@@ -183,8 +191,8 @@ class Retriever:
         if not query_text.strip():
             raise ValueError("Query text cannot be empty")
 
-        logger.debug(f"Executing query: {query_text}")
-        response = self.query_engine.query(query_text)
+        logger.debug("Executing query: %s", query_text)
+        response = self.query_engine.query(query_text[: self.max_chars])
 
         result = {
             "response": response.response,
@@ -222,14 +230,13 @@ class PaperRetriever:
             raise ValueError("'retrieval_summarization_model_id' is not set")
 
         self.retriever = Retriever(config, self.boto3_session)
-        language_to_use = language
         if output_format == Format.SLACK:
             language_to_use = Language.KO
         else:
             language_to_use = language or Language.KO
 
         self.retrieval_prompt = RetrievalSummarizationPrompt.for_language_and_format(
-            language_to_use, output_format or Format.HTML
+            Language(language_to_use), Format(output_format or Format.HTML)
         ).get_prompt()
         self.retrieval_llm = self._initialize_llm(
             self.config.retrieval.retrieval_summarization_model_id.value
