@@ -167,24 +167,42 @@ class NeptuneClient:
             sup = Edge.SUPPORTS.value
             subj = Edge.SUBJECT.value
             obj = Edge.OBJECT.value
+            stmt = Vertex.STATEMENT.value
+            topic = Vertex.TOPIC.value
+            fact = Vertex.FACT.value
             entity = Vertex.ENTITY.value
 
+            # Graph schema (edge direction is out -> in), verified against the
+            # live graph:
+            #   Chunk     -EXTRACTED_FROM-> Source     (chunk belongs to 1 source)
+            #   Statement -MENTIONED_IN->   Chunk      (stmt extracted from a chunk)
+            #   Statement -BELONGS_TO->     Topic      (topic shared by many stmts)
+            #   Fact      -SUPPORTS->       Statement  (fact may support many stmts)
+            #   Entity    -SUBJECT/OBJECT-> ...        (entity shared by many facts)
+            #
+            # So from a Source we walk UP the in-edges: source.in(EXTRACTED_FROM)
+            # = chunks; chunk.in(MENTIONED_IN) = statements; then statements fan
+            # out to topics (out BELONGS_TO) and up to facts (in SUPPORTS), and
+            # facts out to entities. chunks + statements are source-owned (1:1);
+            # topics/facts/entities are shared, so each is deleted only when its
+            # sole inbound owner is a statement/fact of THIS source (count()==1).
+            chunks = f"{base_query}.in('{ef}').dedup()"
+            statements = f"{chunks}.in('{mi}').dedup().hasLabel('{stmt}')"
             collect_queries = {
-                # statements/topics/chunks belong to exactly one source, so every
-                # one reachable from this source is deletable.
-                "chunks": f"{base_query}.in('{ef}').dedup().id().fold()",
-                "topics": f"{base_query}.in('{ef}').dedup().in('{mi}').dedup().id().fold()",
-                "statements": f"{base_query}.in('{ef}').dedup().in('{mi}').dedup().in('{bt}').dedup().id().fold()",
-                # facts/entities may be shared: keep only those whose sole link is
-                # to statements/entities of THIS source (count()==1).
+                "chunks": f"{chunks}.id().fold()",
+                "statements": f"{statements}.id().fold()",
+                "topics": f"""
+                    {statements}.out('{bt}').dedup().hasLabel('{topic}')
+                    .where(in('{bt}').count().is(1)).id().fold()
+                """,
                 "facts": f"""
-                    {base_query}.in('{ef}').dedup().in('{mi}').dedup().in('{bt}').dedup()
-                    .where(out('{sup}').count().is(1)).in('{sup}').dedup().id().fold()
+                    {statements}.in('{sup}').dedup().hasLabel('{fact}')
+                    .where(out('{sup}').count().is(1)).id().fold()
                 """,
                 "entities": f"""
-                    {base_query}.in('{ef}').dedup().in('{mi}').dedup().in('{bt}').dedup().in('{sup}').dedup()
-                    .union(out('{subj}'), out('{obj}')).hasLabel('{entity}').dedup()
-                    .where(in('{subj}', '{obj}').count().is(1)).dedup().id().fold()
+                    {statements}.in('{sup}').dedup().hasLabel('{fact}')
+                    .union(out('{subj}'), out('{obj}')).dedup().hasLabel('{entity}')
+                    .where(in('{subj}', '{obj}').count().is(1)).id().fold()
                 """,
             }
 
