@@ -40,10 +40,16 @@ jobs:
       - name: Black (format check)
         run: black --check paper_bridge tests
 
-      - name: Mypy (type check)
-        # Non-blocking for now (codebase is incrementally typed), but the step
-        # still REPORTS failures (shows up as a non-blocking warning) rather than
-        # masking them with `|| true`. Drop continue-on-error once mypy is clean.
+      - name: Mypy (shared/ — blocking)
+        # paper_bridge/shared is fully typed and is the most-reused code, so it
+        # is a BLOCKING gate: a type regression here (the class of bug that let
+        # the str-int / datetime mismatches reach production) fails CI. Expand
+        # this allowlist module-by-module as each is cleaned.
+        run: mypy paper_bridge/shared
+
+      - name: Mypy (full — non-blocking)
+        # The rest of the codebase is incrementally typed; report failures as a
+        # non-blocking warning until each app's src is clean and promoted above.
         continue-on-error: true
         run: mypy paper_bridge
 

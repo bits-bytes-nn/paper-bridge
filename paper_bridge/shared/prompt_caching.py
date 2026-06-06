@@ -35,7 +35,7 @@ def _cache_primitives() -> tuple[Any, Any, Any] | None:
     blocks, so callers can no-op cleanly.
     """
     try:
-        from llama_index.core.llms import (  # type: ignore[attr-defined]
+        from llama_index.core.llms import (
             CacheControl,
             CachePoint,
             TextBlock,
@@ -80,11 +80,12 @@ def apply_cache_point(
         return messages
 
     # Fallback for older cores / mock messages that expose a settable ``.content``
-    # (str or list of blocks).
+    # (str or list of blocks). ``.content`` is typed as ``str`` on the model but
+    # older cores accept a block list here, so the list assignment is intentional.
     content = getattr(last, "content", None)
     if isinstance(content, str):
-        last.content = [_TextBlock(text=content), cache_point]
+        last.content = [_TextBlock(text=content), cache_point]  # type: ignore[assignment]
     elif isinstance(content, list):
-        last.content = [*content, cache_point]
+        last.content = [*content, cache_point]  # type: ignore[assignment]
     # Unknown shape → leave untouched.
     return messages

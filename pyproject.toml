@@ -135,3 +135,9 @@ warn_redundant_casts = true
 ignore_missing_imports = true
 no_implicit_optional = true
 files = ["paper_bridge"]
+# The three apps each have a same-named ``configs`` package; without explicit
+# package bases mypy aborts with "Duplicate module named configs" before
+# checking anything. Treat paper_bridge as the import root.
+explicit_package_bases = true
+namespace_packages = true
+mypy_path = "."
