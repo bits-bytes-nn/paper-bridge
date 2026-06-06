@@ -8,10 +8,16 @@
 
 ![AWS Architecture](assets/paper-bridge-architecture.drawio.png)
 
+#### Workflow (hand-drawn)
+
+![Workflow](assets/paper-bridge-workflow.png)
+
+#### GraphRAG pipeline (hand-drawn)
+
+![GraphRAG pipeline](assets/paper-bridge-pipeline.png)
+
 > **Deep dive:** the full line-by-line technical reference lives in
-> [`assets/tech-doc.md`](assets/tech-doc.md). Hand-drawn workflow and GraphRAG
-> pipeline diagrams: [`assets/paper-bridge-workflow.png`](assets/paper-bridge-workflow.png)
-> and [`assets/paper-bridge-pipeline.png`](assets/paper-bridge-pipeline.png).
+> [`assets/tech-doc.md`](assets/tech-doc.md).
 
 #### Infrastructure Components
 - **Network**: VPC, subnets, security groups, Client VPN, NAT, VPC endpoint

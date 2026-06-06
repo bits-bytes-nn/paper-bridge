@@ -59,12 +59,20 @@
 
 ### 다이어그램
 
-- **AWS 아키텍처 (draw.io):** `assets/paper-bridge-architecture.drawio.png`
-- **워크플로 (Excalidraw, 손그림 스타일):** `assets/paper-bridge-workflow.png`
-- **파이프라인 (Excalidraw, 손그림 스타일):** `assets/paper-bridge-pipeline.png`
+**AWS 아키텍처 (draw.io)**
+
+![Paper Bridge AWS 아키텍처](./paper-bridge-architecture.drawio.png)
+
+**워크플로 (Excalidraw, 손그림 스타일)**
+
+![Paper Bridge 워크플로](./paper-bridge-workflow.png)
+
+**파이프라인 (Excalidraw, 손그림 스타일)**
+
+![Paper Bridge 파이프라인](./paper-bridge-pipeline.png)
 
 > 다이어그램 소스(`*.drawio`, `*.excalidraw`)와 렌더링된 PNG가 함께 커밋되어 있으며
-> `README.md`에서 참조됩니다. PNG를 다시 생성하려면 draw.io는
+> `README.md`에서도 참조됩니다. PNG를 다시 생성하려면 draw.io는
 > `drawio -x -f png -s 2 -b 10 -o out.png in.drawio`, Excalidraw는
 > [excalidraw.com](https://excalidraw.com)에서 `.excalidraw`를 열어 PNG로 내보내면 됩니다.
 
