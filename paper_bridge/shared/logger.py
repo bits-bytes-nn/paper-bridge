@@ -8,6 +8,11 @@ from pathlib import Path
 
 DEFAULT_LOG_FORMAT: str = "%(asctime)s - %(levelname)s - %(message)s"
 
+# Common logger ancestor for all package modules. Configuring it lets modules
+# that use logging.getLogger(__name__) (notably paper_bridge.shared.*) emit
+# through the app's handlers via propagation.
+_SHARED_ROOT: str = "paper_bridge"
+
 
 class _FlushingStreamHandler(logging.StreamHandler):
     """StreamHandler that flushes after every record.
@@ -62,6 +67,18 @@ def create_logger(config: LoggerConfig) -> logging.Logger:
     _add_console_handler(logger, formatter)
     if config.logs_dir_path and not is_aws_env():
         _add_file_handler(logger, formatter, config.logs_dir_path)
+
+    # Also configure the shared "paper_bridge" parent logger so that modules
+    # using logging.getLogger(__name__) (e.g. paper_bridge.shared.neptune_client,
+    # which is a sibling — NOT a child — of the app's configured logger) still
+    # emit through the same console/file handlers via propagation. Without this
+    # their records reach only the unconfigured root and are dropped.
+    if config.name != _SHARED_ROOT:
+        shared_root = logging.getLogger(_SHARED_ROOT)
+        shared_root.setLevel(config.level)
+        _add_console_handler(shared_root, formatter)
+        if config.logs_dir_path and not is_aws_env():
+            _add_file_handler(shared_root, formatter, config.logs_dir_path)
 
     return logger
 

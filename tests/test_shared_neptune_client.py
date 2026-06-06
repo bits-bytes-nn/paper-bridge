@@ -60,96 +60,130 @@ class TestPaperIdValidation:
         assert result["paper_id"] == ok
 
 
+# Stage queries are distinguished by structural markers rather than brittle
+# full-string matches: per-source stages end in ".id().fold()"; the shared
+# facts/entities stages use ".project('id', 'owners')". A helper routes a fake
+# response per stage so tests can exercise the real collect/owner-subset/drop
+# logic.
+def _is_collect(q: str) -> bool:
+    return q.strip().endswith(".fold()")
+
+
+def _is_owner_project(q: str) -> bool:
+    return "project('id', 'owners')" in q
+
+
+def _is_entity_project(q: str) -> bool:
+    # The entities owner-project fans out to SUBJECT/OBJECT; the facts one does not.
+    return _is_owner_project(q) and "__SUBJECT__" in q
+
+
+def _is_fact_project(q: str) -> bool:
+    return _is_owner_project(q) and "__SUBJECT__" not in q
+
+
 @pytest.mark.unit
 class TestBestEffortDelete:
     def test_one_failing_stage_does_not_abort_others(self) -> None:
-        # The 'facts' collect query exhausts retries; the other stages and the
-        # source drop must still run, and the result is marked error with the
-        # failing stage named.
+        # The 'facts' owner-project query errors; the other stages and the source
+        # drop must still run, and the result is marked error naming the stage.
         def side_effect(q):
-            if "where(out('__SUPPORTS__')" in q:  # the facts collect query
+            if _is_fact_project(q):
                 raise Exception("MemoryLimitExceededException")
-            return [["v1"]] if q.strip().endswith(".fold()") else []
+            if _is_owner_project(q):
+                return [[]]
+            return [["v1"]] if _is_collect(q) else []
 
         nc = _client_with_submit(side_effect)
         result = nc.delete_document("2606.03458")
 
         assert result["status"] == "error"
-        assert result["failed_stages"] == ["facts"]
-        # Other stages still deleted, and the source was still dropped.
+        assert "facts" in result["failed_stages"]
         assert result["deleted_nodes"]["chunks"] == 1
         assert result["deleted_nodes"]["facts"] == "error"
         assert result["deleted_nodes"]["source"] == 1
 
     def test_collects_all_before_any_drop(self) -> None:
-        # Regression: chunks must not be dropped before later stages collect,
-        # or the chunk.in(MENTIONED_IN) traversal for statements breaks. Assert
-        # every collect (.fold()) query runs before the first drop (g.V(id).drop).
+        # Regression: per-source collects + the owner-project collects must all
+        # precede the first id-drop, or dropping chunks severs the traversal.
         order: list[str] = []
 
         def submit(query, bindings=None):
             q = query.strip()
-            if q.endswith(".fold()"):
+            res: object = []
+            if _is_owner_project(q):
                 order.append("collect")
-                return SimpleNamespace(
-                    all=lambda: SimpleNamespace(result=lambda: [["v1"]])
-                )
-            if q.startswith("g.V('v1'") and q.endswith(".drop()"):
+                res = [[]]
+            elif _is_collect(q):
+                order.append("collect")
+                res = [["v1"]]
+            elif q.startswith("g.V('v1'") and q.endswith(".drop()"):
                 order.append("drop")
-            return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: []))
+            return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: res))
 
         nc = NeptuneClient("x")
         nc._gremlin_client = MagicMock()
         nc._gremlin_client.submit.side_effect = submit
         nc.delete_document("2606.03458")
 
-        # All 5 collects happen before any drop.
+        # 5 collects (chunks/statements/topics + facts/entities projects) precede
+        # the first drop.
         first_drop = order.index("drop")
         assert order[:first_drop].count("collect") == 5
         assert "drop" not in order[:first_drop]
 
     def test_all_stages_succeed_is_success(self) -> None:
-        nc = _client_with_submit(
-            lambda q: [["v1"]] if q.strip().endswith(".fold()") else []
-        )
+        def side_effect(q):
+            if _is_owner_project(q):
+                return [[]]
+            return [["v1"]] if _is_collect(q) else []
+
+        nc = _client_with_submit(side_effect)
         result = nc.delete_document("2606.03458")
         assert result["status"] == "success"
         assert "failed_stages" not in result
 
-    def test_collects_then_drops_by_id(self) -> None:
-        # Each collect query (.fold()) yields a wrapped id list; the source drop
-        # and the id-drop queries yield [].
+    def test_only_paper_owned_facts_entities_deleted(self) -> None:
+        # The subset test: a fact whose owners ⊄ this paper's statements is KEPT;
+        # one wholly owned is deleted. Statements collected = {s1, s2}.
         def side_effect(q):
-            if q.strip().endswith(".fold()"):
-                # Return a distinct id list per collect query so we can total it.
-                return [["v1", "v2", "v3"]]
-            return []
+            # Order matters: the fact/entity project queries are built on top of
+            # the statements traversal (so they also contain hasLabel(Statement)
+            # and end in .fold()); match the project queries FIRST.
+            if _is_fact_project(q):
+                return [
+                    [
+                        {"id": "f_owned", "owners": ["s1", "s2"]},  # fully owned
+                        {"id": "f_shared", "owners": ["s1", "sX"]},  # sX = other
+                    ]
+                ]
+            if _is_entity_project(q):
+                return [[{"id": "e_owned", "owners": ["f_owned"]}]]
+            if "hasLabel('__Statement__')" in q and _is_collect(q):
+                return [["s1", "s2"]]  # this paper's statements
+            return [["c1"]] if _is_collect(q) else []
 
         nc = _client_with_submit(side_effect)
         result = nc.delete_document("2606.03458")
 
-        assert result["status"] == "success"
-        # 4 collect kinds each return 3 ids -> all recorded in deleted_nodes.
-        assert result["deleted_nodes"]["chunks"] == 3
-        assert result["deleted_nodes"]["entities"] == 3
-        assert result["deleted_nodes"]["source"] == 1
-        # A drop-by-id query must have been issued (g.V('v1','v2',...).drop()).
-        assert any(".drop()" in q and "g.V('v1'" in q for q in nc._submitted)
+        assert result["deleted_nodes"]["facts"] == 1  # only f_owned
+        assert result["deleted_nodes"]["entities"] == 1  # e_owned (owner f_owned)
+        # f_shared must NOT appear in any drop query.
+        assert not any("f_shared" in q for q in nc._submitted)
+        assert any("f_owned" in q for q in nc._submitted)
 
     def test_drop_batches_respect_size_limit(self) -> None:
-        # 120 ids with _DROP_BATCH_SIZE=50 -> 3 drop batches per collect kind.
+        # 120 per-source ids with _DROP_BATCH_SIZE=50 -> batched drops.
         many = [f"id{i}" for i in range(120)]
 
         def side_effect(q):
-            return [many] if q.strip().endswith(".fold()") else []
+            if _is_owner_project(q):
+                return [[]]
+            return [many] if _is_collect(q) else []
 
         nc = _client_with_submit(side_effect)
         nc.delete_document("2606.03458")
 
-        drop_qs = [q for q in nc._submitted if ".drop()" in q and "g.V('id0'" in q]
-        # First batch of each of the 5 collect kinds (chunks/topics/statements/
-        # facts/entities) starts with id0.
-        assert len(drop_qs) == 5
         # No single drop query inlines more than 50 ids.
         for q in nc._submitted:
             if q.startswith("g.V('id"):

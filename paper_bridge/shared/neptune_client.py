@@ -129,6 +129,25 @@ class NeptuneClient:
             id_args = ",".join("'" + str(v).replace("'", "\\'") + "'" for v in batch)
             self._submit_query(f"g.V({id_args}).drop()")
 
+    def _collect_owned(self, project_query: str, owned: set[Any]) -> list[Any]:
+        """Collect ids of shared candidates wholly owned by this paper.
+
+        ``project_query`` returns a folded list of {'id': <node id>, 'owners':
+        [<owner ids>]} maps. A candidate (fact/entity) is deletable only when
+        EVERY owner that references it is in ``owned`` (this paper's collected
+        statement/fact ids) — i.e. no other paper still uses it. This is the
+        correct test for "owned only by this paper"; a Gremlin count() cannot
+        express it (it would also count this paper's own repeated references).
+        """
+        result = self._submit_query(project_query)
+        rows = result[0] if result and result[0] else []
+        kept: list[Any] = []
+        for row in rows:
+            owners = row.get("owners") or []
+            if owners and all(o in owned for o in owners):
+                kept.append(row["id"])
+        return kept
+
     def delete_document(self, paper_id: str) -> dict[str, Any]:
         if not paper_id:
             raise ValueError("'paper_id' must not be empty.")
@@ -151,10 +170,6 @@ class NeptuneClient:
             # small batches. Dropping by id is index-backed and light, and the
             # collection queries never buffer whole vertices.
             #
-            # Shared-node safety (entities/facts that still belong to OTHER papers
-            # must survive) is enforced in phase 1 with the count()==1 guard,
-            # evaluated while collecting ids rather than during the drop.
-            #
             # CRITICAL: dedup() after EVERY .in() hop. Chained .in().in().in()
             # without intermediate dedup multiplies duplicate traversal paths and
             # blows MemoryLimitExceededException even though the distinct node
@@ -176,35 +191,47 @@ class NeptuneClient:
             # live graph:
             #   Chunk     -EXTRACTED_FROM-> Source     (chunk belongs to 1 source)
             #   Statement -MENTIONED_IN->   Chunk      (stmt extracted from a chunk)
-            #   Statement -BELONGS_TO->     Topic      (topic shared by many stmts)
-            #   Fact      -SUPPORTS->       Statement  (fact may support many stmts)
-            #   Entity    -SUBJECT/OBJECT-> ...        (entity shared by many facts)
+            #   Statement -BELONGS_TO->     Topic      (topic id hashes source_id
+            #                                           => per-source, NOT shared)
+            #   Fact      -SUPPORTS->       Statement  (fact id = hash(value)
+            #                                           => SHARED across papers)
+            #   Entity    -SUBJECT/OBJECT-> ...        (entity id = hash(value,cls)
+            #                                           => SHARED across papers)
             #
-            # So from a Source we walk UP the in-edges: source.in(EXTRACTED_FROM)
-            # = chunks; chunk.in(MENTIONED_IN) = statements; then statements fan
-            # out to topics (out BELONGS_TO) and up to facts (in SUPPORTS), and
-            # facts out to entities. chunks + statements are source-owned (1:1);
-            # topics/facts/entities are shared, so each is deleted only when its
-            # sole inbound owner is a statement/fact of THIS source (count()==1).
+            # chunks/statements/topics are per-source: every one reachable from
+            # this Source is deletable. facts/entities are shared, so a node is
+            # deletable ONLY if every owner that references it belongs to THIS
+            # paper. We cannot express "owned only by this paper" with a Gremlin
+            # count() (count()==1 wrongly keeps any node referenced twice WITHIN
+            # this paper, and wrongly compares against the global ref count). So
+            # we collect each shared candidate together with ALL of its owners and
+            # decide in Python: delete iff its owner set is a SUBSET of this
+            # paper's collected statement/fact ids.
             chunks = f"{base_query}.in('{ef}').dedup()"
             statements = f"{chunks}.in('{mi}').dedup().hasLabel('{stmt}')"
-            collect_queries = {
+            simple_queries = {
                 "chunks": f"{chunks}.id().fold()",
                 "statements": f"{statements}.id().fold()",
-                "topics": f"""
-                    {statements}.out('{bt}').dedup().hasLabel('{topic}')
-                    .where(in('{bt}').count().is(1)).id().fold()
-                """,
-                "facts": f"""
-                    {statements}.in('{sup}').dedup().hasLabel('{fact}')
-                    .where(out('{sup}').count().is(1)).id().fold()
-                """,
-                "entities": f"""
-                    {statements}.in('{sup}').dedup().hasLabel('{fact}')
-                    .union(out('{subj}'), out('{obj}')).dedup().hasLabel('{entity}')
-                    .where(in('{subj}', '{obj}').count().is(1)).id().fold()
-                """,
+                "topics": (
+                    f"{statements}.out('{bt}').dedup().hasLabel('{topic}')"
+                    ".id().fold()"
+                ),
             }
+            # For facts/entities: project (candidate_id, [owner_ids]) so Python
+            # can keep only those wholly owned by this paper.
+            fact_owners_query = (
+                f"{statements}.in('{sup}').dedup().hasLabel('{fact}')"
+                f".project('id', 'owners')"
+                f".by(id()).by(out('{sup}').id().fold())"
+                ".fold()"
+            )
+            entity_owners_query = (
+                f"{statements}.in('{sup}').dedup().hasLabel('{fact}')"
+                f".union(out('{subj}'), out('{obj}')).dedup().hasLabel('{entity}')"
+                f".project('id', 'owners')"
+                f".by(id()).by(in('{subj}', '{obj}').id().fold())"
+                ".fold()"
+            )
 
             # TWO PHASES, STRICTLY ORDERED: collect ALL ids first, THEN drop.
             # The collect queries walk down from chunks (statements =
@@ -220,8 +247,8 @@ class NeptuneClient:
             errors: list[str] = []
             ids_by_stage: dict[str, list[Any]] = {}
 
-            # Phase 1: collect ids for every stage (no drops yet).
-            for name, query in collect_queries.items():
+            # Phase 1a: per-source stages (chunks/statements/topics).
+            for name, query in simple_queries.items():
                 try:
                     logger.info("Collecting '%s' ids for paper_id '%s'", name, paper_id)
                     result = self._submit_query(query)
@@ -236,6 +263,34 @@ class NeptuneClient:
                     )
                     deleted[name] = "error"
                     errors.append(name)
+
+            # Phase 1b: shared stages (facts/entities) — keep only nodes wholly
+            # owned by this paper (owner set subset of this paper's ids).
+            owned_statements = set(ids_by_stage.get("statements", []))
+            try:
+                logger.info("Collecting 'facts' ids for paper_id '%s'", paper_id)
+                fact_ids = self._collect_owned(fact_owners_query, owned_statements)
+                ids_by_stage["facts"] = fact_ids
+                logger.info("Collected %d 'facts' ids", len(fact_ids))
+            except Exception as e:
+                logger.error("Failed to collect 'facts' for '%s': %s", paper_id, e)
+                deleted["facts"] = "error"
+                errors.append("facts")
+                fact_ids = []
+
+            try:
+                logger.info("Collecting 'entities' ids for paper_id '%s'", paper_id)
+                # An entity is deletable iff every fact referencing it is one of
+                # THIS paper's facts. Use the set of facts reachable from this
+                # paper's statements (the candidate facts before the owned-filter)
+                # as the ownership universe, intersected with what we will delete.
+                entity_ids = self._collect_owned(entity_owners_query, set(fact_ids))
+                ids_by_stage["entities"] = entity_ids
+                logger.info("Collected %d 'entities' ids", len(entity_ids))
+            except Exception as e:
+                logger.error("Failed to collect 'entities' for '%s': %s", paper_id, e)
+                deleted["entities"] = "error"
+                errors.append("entities")
 
             # Phase 2: drop the collected ids by id (order no longer matters —
             # the traversal is done).
