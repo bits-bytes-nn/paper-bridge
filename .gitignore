@@ -30,8 +30,9 @@ override.tf.json
 # Include override files you do wish to add to version control using negated pattern
 # !example_override.tf
 
-# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
-# example: *tfplan*
+# Ignore tfplan files: plan output can embed full resource attributes/secrets.
+*.tfplan
+*tfplan*
 
 # Ignore CLI configuration files
 .terraformrc
@@ -243,15 +244,20 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+.claude/
 .idea/
 .run/
 .virtual_documents
 .wdm/
 cache/
 certificates/
+config.yaml
 ipynb/
 logs/
 output/
 outputs/
 paper_bridge/summarizer/papers/
 *.zip
+
+# Evaluation rubric + LLM-judge artifacts (decision records kept out of VCS)
+eval/

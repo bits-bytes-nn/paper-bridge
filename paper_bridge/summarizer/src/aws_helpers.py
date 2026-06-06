@@ -1,8 +1,9 @@
 import os
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
+
 import boto3
+from boto3.exceptions import S3UploadFailedError
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
 
@@ -36,7 +37,7 @@ def get_cross_inference_model_id(
     return model_id
 
 
-def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> Optional[str]:
+def get_ssm_param_value(boto3_session: boto3.Session, param_name: str) -> str | None:
     if not param_name:
         raise ValueError("Parameter name must not be empty")
 
@@ -55,7 +56,7 @@ def submit_batch_job(
     job_name: str,
     job_queue_name: str,
     job_definition_name: str,
-    parameters: Optional[Dict[str, str]] = None,
+    parameters: dict[str, str] | None = None,
 ) -> str:
     batch_client = boto3_session.client("batch")
     try:
@@ -83,7 +84,7 @@ def upload_dir_to_s3(
     local_dir: str,
     bucket_name: str,
     prefix: str,
-    file_ext_to_incl: Optional[List[str]] = None,
+    file_ext_to_incl: list[str] | None = None,
     public_readable: bool = False,
 ) -> int:
     try:
@@ -134,7 +135,7 @@ def upload_to_s3(
     boto3_session: boto3.Session,
     file_path: Path,
     s3_bucket_name: str,
-    s3_prefix: Optional[str] = None,
+    s3_prefix: str | None = None,
 ) -> bool:
     if not file_path.exists():
         logger.error("File not found: %s", file_path)
@@ -168,24 +169,31 @@ def upload_to_s3(
         )
         return False
 
+    except S3UploadFailedError as e:
+        # The high-level ``upload_file`` transfer wraps underlying ClientErrors
+        # (e.g. NoSuchBucket) in S3UploadFailedError, which is NOT a ClientError;
+        # catch it so callers get a uniform False on failure.
+        logger.error("Failed to upload '%s' to S3: %s", file_path, e)
+        return False
+
 
 def wait_for_batch_job_completion(boto3_session: boto3.Session, job_id: str) -> bool:
     batch_client = boto3_session.client("batch")
 
-    print("Waiting for job completion", end="", flush=True)
+    logger.info("Waiting for batch job %s to complete...", job_id)
     while True:
         response = batch_client.describe_jobs(jobs=[job_id])
         if not response["jobs"]:
-            print("\nJob not found")
+            logger.error("Job %s not found", job_id)
             return False
 
         status = response["jobs"][0]["status"]
         if status == "SUCCEEDED":
-            print("\nJob completed successfully!")
+            logger.info("Job %s completed successfully", job_id)
             return True
         elif status in ["FAILED", "CANCELLED"]:
-            print(f"\nJob {status.lower()}!")
+            logger.warning("Job %s %s", job_id, status.lower())
             return False
 
-        print(".", end="", flush=True)
+        logger.debug("Job %s status: %s", job_id, status)
         time.sleep(30)

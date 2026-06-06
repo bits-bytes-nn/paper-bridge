@@ -1,13 +1,15 @@
 from dataclasses import dataclass
-from typing import ClassVar, Dict, Tuple, Type, Union
+from typing import ClassVar
+
 from llama_index.core.prompts import ChatMessage, ChatPromptTemplate, MessageRole
+
 from ..constants import Format, Language
 
 
 @dataclass(frozen=True)
 class BasePrompt:
-    INPUT_VARIABLES: Union[str, Tuple[str, ...]]
-    OUTPUT_VARIABLES: Union[str, Tuple[str, ...]]
+    INPUT_VARIABLES: str | tuple[str, ...]
+    OUTPUT_VARIABLES: str | tuple[str, ...]
     SYSTEM_MESSAGE: str
     HUMAN_MESSAGE: str
 
@@ -22,7 +24,7 @@ class BasePrompt:
 
 
 class FigureAnalysisPrompt(BasePrompt):
-    INPUT_VARIABLES: Tuple[str, ...] = ("caption",)
+    INPUT_VARIABLES: tuple[str, ...] = ("caption",)
     OUTPUT_VARIABLES: str = "analysis"
     SYSTEM_MESSAGE: str = """
     You are an expert AI/ML research paper image analyst specializing in technical figure interpretation. Your key
@@ -55,7 +57,7 @@ class FigureAnalysisPrompt(BasePrompt):
 
 class PaperSummarizationPrompt(BasePrompt):
     INPUT_VARIABLES: str = "content"
-    OUTPUT_VARIABLES: Tuple[str, ...] = ("summary", "tags", "urls")
+    OUTPUT_VARIABLES: tuple[str, ...] = ("summary", "tags", "urls")
     SYSTEM_MESSAGE: str = """
     You are an expert in analyzing and summarizing AI/ML research papers. You excel at conveying complex technical
     content in a clear and structured manner while maintaining technical precision.
@@ -68,7 +70,7 @@ class PaperSummarizationPrompt(BasePrompt):
     - Contextualizing research within broader AI/ML developments
     """
     HUMAN_MESSAGE: str = ""
-    _HUMAN_MESSAGE: ClassVar[Dict[Language, str]] = {
+    _HUMAN_MESSAGE: ClassVar[dict[Language, str]] = {
         Language.EN: """
     Analyze and summarize the following AI/ML research paper with technical precision and clarity:
 
@@ -82,7 +84,7 @@ class PaperSummarizationPrompt(BasePrompt):
     3. Highlight the most significant experimental results
     4. Identify limitations and potential improvements
     5. Connect the research to broader AI/ML applications
-    6. Provide a concise summary (maximum 2 A4 pages)
+    6. Provide a concise summary (maximum 2 A4 pages, approximately 2000 characters)
     7. Include relevant figures to enhance understanding
 
     <Important Note>
@@ -140,7 +142,7 @@ class PaperSummarizationPrompt(BasePrompt):
       </div>
     - Do NOT use \bm{} command as it may break rendering
     - Instead, use \boldsymbol{} for bold symbols: $\boldsymbol{\alpha}$ instead of $\bm{\alpha}$
-    - For simple variables, \mathbf{} can also be used: $\mathbf{A}$ for matrices
+    - For simple variables, \\mathbf{} can also be used: $\\mathbf{A}$ for matrices
     - For vectors, consider using arrow notation: $\vec{v}$ or explicit formatting: $\boldsymbol{v}$
 
     <Content Style>
@@ -202,7 +204,7 @@ class PaperSummarizationPrompt(BasePrompt):
     3. Highlight the most significant experimental results
     4. Identify limitations and potential improvements
     5. Connect the research to broader AI/ML applications
-    6. Provide a concise summary (maximum 2 A4 pages)
+    6. Provide a concise summary (maximum 2 A4 pages, approximately 2000 characters)
     7. Include relevant figures to enhance understanding
 
     <Important Note>
@@ -229,11 +231,14 @@ class PaperSummarizationPrompt(BasePrompt):
 
     <Formatting Guidelines>
     - Write in Korean, keeping English technical terms as-is
+    - End every sentence with a period (.), never a colon (:). Korean prose does
+      not use a colon to end a sentence; rephrase so sentences close naturally.
     - Format your response in clean HTML for optimal readability
     - Use <strong> tags for key concepts and <ul>/<ol> tags for lists
     - Include mathematical formulas in LaTeX ($...$ for inline, $$...$$ for display)
     - IMPORTANT: Avoid using LaTeX environments that start with \\begin{...} as they may break. Instead:
-      * For matrices, use array environments: $$\\left[ \\begin{array}{ccc} a & b & c \\\\ d & e & f \\end{array} \\right]$$
+      * For matrices, use array environments: $$\\left[ \\begin{array}{ccc} a & b & c \\\\ d & e & f \\end{array} 
+      \\right]$$
       * For aligned equations, use aligned notation with &: $$a = b \\\\ c = d$$
       * For complex math structures, break them into multiple display equations
       * If complex environments are absolutely necessary, use \\begin{{aligned}} with double braces
@@ -260,7 +265,7 @@ class PaperSummarizationPrompt(BasePrompt):
       </div>
     - Do NOT use \bm{} command as it may break rendering
     - Instead, use \boldsymbol{} for bold symbols: $\boldsymbol{\alpha}$ instead of $\bm{\alpha}$
-    - For simple variables, \mathbf{} can also be used: $\mathbf{A}$ for matrices
+    - For simple variables, \\mathbf{} can also be used: $\\mathbf{A}$ for matrices
     - For vectors, consider using arrow notation: $\vec{v}$ or explicit formatting: $\boldsymbol{v}$
 
     <Content Style>
@@ -311,7 +316,7 @@ class PaperSummarizationPrompt(BasePrompt):
     @classmethod
     def for_language(
         cls, language: Language = Language.KO
-    ) -> Type["PaperSummarizationPrompt"]:
+    ) -> type["PaperSummarizationPrompt"]:
         prompt_class = type(
             f"{language.name.capitalize()}PaperSummarizationPrompt",
             (cls,),
@@ -325,7 +330,7 @@ class PaperSummarizationPrompt(BasePrompt):
 
 class RetrievalSummarizationPrompt(BasePrompt):
     INPUT_VARIABLES: str = "context"
-    OUTPUT_VARIABLES: Tuple[str, ...] = ("summary", "urls")
+    OUTPUT_VARIABLES: tuple[str, ...] = ("summary", "urls")
     SYSTEM_MESSAGE: str = """
     You are an expert AI/ML research paper analyst specializing in comparative analysis. Your task is to analyze queries
     about AI/ML papers, assess paper content, and integrate retrieved information from knowledge graphs to provide
@@ -334,7 +339,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     """
     HUMAN_MESSAGE: str = ""
 
-    _HUMAN_MESSAGE: ClassVar[Dict[Language, Dict[Format, str]]] = {
+    _HUMAN_MESSAGE: ClassVar[dict[Language, dict[Format, str]]] = {
         Language.EN: {
             Format.HTML: """
     Analyze this AI/ML research paper query along with the provided paper content and knowledge graph information.
@@ -350,7 +355,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     3. Support your analysis with evidence from the provided sources
     4. Maintain technical accuracy while ensuring clarity
     5. Present information in a visually structured format with proper source attribution
-    6. Provide a concise analysis (maximum 1 A4 page)
+    6. Provide a concise analysis (maximum 1 A4 page, approximately 1000 characters)
 
     <Output Structure>
     1. Place the entire analysis within <summary> tags
@@ -461,7 +466,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     3. Support your analysis with evidence from the provided sources
     4. Maintain technical accuracy while ensuring clarity
     5. Present information in a visually structured format with proper source attribution
-    6. Provide a concise analysis (maximum 1 A4 page)
+    6. Provide a concise analysis (maximum 1 A4 page, approximately 1000 characters)
 
     <Output Structure>
     1. Place the entire analysis within <summary> tags
@@ -547,7 +552,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     3. Support your analysis with evidence from the provided sources
     4. Maintain technical accuracy while ensuring clarity
     5. Present information in a visually structured format with proper source attribution
-    6. Provide a concise analysis (maximum 1 A4 page)
+    6. Provide a concise analysis (maximum 1 A4 page, approximately 1000 characters)
 
     <Output Structure>
     1. Place the entire analysis within <summary> tags
@@ -561,6 +566,8 @@ class RetrievalSummarizationPrompt(BasePrompt):
 
     <Formatting Guidelines>
     - Write the response in Korean, but maintain English technical terms as-is
+    - End every sentence with a period (.), never a colon (:). Korean prose does
+      not use a colon to end a sentence; rephrase so sentences close naturally.
     - Format your response in clean HTML for optimal readability
     - Use <strong> tags to emphasize key concepts
     - Use <ul> or <ol> tags for organized lists
@@ -659,7 +666,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     3. Support your analysis with evidence from the provided sources
     4. Maintain technical accuracy while ensuring clarity
     5. Present information in a visually structured format with proper source attribution
-    6. Provide a concise analysis (maximum 1 A4 page)
+    6. Provide a concise analysis (maximum 1 A4 page, approximately 1000 characters)
 
     <Output Structure>
     1. Place the entire analysis within <summary> tags
@@ -673,6 +680,8 @@ class RetrievalSummarizationPrompt(BasePrompt):
 
     <Formatting Guidelines for Slack - VERY IMPORTANT>
     - Write the response in Korean, but maintain English technical terms as-is
+    - End every sentence with a period (.), never a colon (:). Korean prose does
+      not use a colon to end a sentence; rephrase so sentences close naturally.
     - Format your response in Slack markdown for optimal readability
     - Use _text_ for italic emphasis
     - Use *text* for bold emphasis
@@ -732,7 +741,7 @@ class RetrievalSummarizationPrompt(BasePrompt):
     @classmethod
     def for_language_and_format(
         cls, language: Language = Language.KO, output_format: Format = Format.HTML
-    ) -> Type["RetrievalSummarizationPrompt"]:
+    ) -> type["RetrievalSummarizationPrompt"]:
         class_name = f"{language.name.capitalize()}{output_format.name.capitalize()}RetrievalSummarizationPrompt"
         prompt_class = type(
             class_name,

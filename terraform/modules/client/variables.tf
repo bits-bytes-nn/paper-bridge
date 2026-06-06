@@ -4,6 +4,16 @@ variable "project_name" {
   nullable    = false
 }
 
+variable "stage" {
+  description = "Deployment stage; must match the app config (Resources.stage). Used to namespace SSM parameters and their IAM scope as /{project_name}-{stage}/*."
+  type        = string
+  default     = "dev"
+  validation {
+    condition     = contains(["dev", "prod"], var.stage)
+    error_message = "stage must be one of: dev, prod"
+  }
+}
+
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)

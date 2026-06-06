@@ -5,6 +5,16 @@ variable "project_name" {
   default     = "paper-bridge"
 }
 
+variable "stage" {
+  description = "Deployment stage; must match the app config (Resources.stage in config.yaml). Namespaces SSM parameters and their IAM scope as /{project_name}-{stage}/*."
+  type        = string
+  default     = "dev"
+  validation {
+    condition     = contains(["dev", "prod"], var.stage)
+    error_message = "stage must be one of: dev, prod"
+  }
+}
+
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
@@ -223,7 +233,14 @@ variable "neptune_instance_type" {
 variable "neptune_min_capacity" {
   description = "Minimum Neptune Capacity Units (NCU)"
   type        = number
-  default     = 2.5
+  # 32.0: the cleaner's id-collection traversals (notably the entities query with
+  # its per-candidate where(in(...).count())) and the retriever's
+  # connected_facts/connected_entities traversals hit MemoryLimitExceededException
+  # at lower NCU because Neptune Serverless cannot scale up fast enough within a
+  # single query (2.5/8/16 were all insufficient for the cleaner's collection
+  # phase). 32 gives each query enough memory from the start; the two-phase
+  # delete (collect ids -> drop by id in batches) keeps the drop phase light.
+  default = 32.0
 
   validation {
     condition     = var.neptune_min_capacity >= 1.0 && var.neptune_min_capacity <= 128.0
@@ -245,11 +262,35 @@ variable "neptune_max_capacity" {
 variable "neptune_engine_version" {
   description = "Neptune engine version"
   type        = string
-  default     = "1.2.1.0"
+  # graphrag-lexical-graph v3 emits openCypher that calls datetime() over a bound
+  # parameter (e.g. source.base_date = datetime($base_date)). Neptune 1.2.x only
+  # supports datetime() over a static string literal and rejects the build with
+  # UnsupportedOperationException, so the graph write fails after extraction. The
+  # 1.4.x line supports it. 1.4.7.0 (not 1.4.5.0, which is not a valid in-place
+  # upgrade target from 1.2.x) is the latest release and upgrades directly.
+  default = "1.4.7.0"
 }
 
 variable "client_user_name" {
   description = "Username of the IAM user for database access"
   type        = string
   default     = null
+}
+
+variable "opensearch_allow_public_access" {
+  description = "Whether to allow public network access to the OpenSearch Serverless collection. Defaults to false (VPC-only). Enable only for a deliberate opt-in."
+  type        = bool
+  default     = false
+}
+
+variable "neptune_skip_final_snapshot" {
+  description = "Whether to skip the final snapshot when the Neptune cluster is destroyed. Defaults to false (a final snapshot is taken) to prevent data loss. Set true only for disposable/dev clusters."
+  type        = bool
+  default     = false
+}
+
+variable "neptune_enable_audit_log" {
+  description = "Whether to enable Neptune audit logging to CloudWatch Logs."
+  type        = bool
+  default     = true
 }

@@ -4,6 +4,12 @@ variable "project_name" {
   nullable    = false
 }
 
+variable "stage" {
+  description = "Deployment stage; must match the app config (Resources.stage). Namespaces the endpoint SSM parameter as /{project_name}-{stage}/*."
+  type        = string
+  default     = "dev"
+}
+
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
@@ -50,6 +56,17 @@ variable "client_security_group_ids" {
   }
 }
 
+variable "vpn_security_group_ids" {
+  description = "List of VPN security group IDs allowed to reach the OpenSearch VPC endpoint"
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition     = alltrue([for id in var.vpn_security_group_ids : can(regex("^sg-[a-f0-9]{8,}$", id))])
+    error_message = "All VPN security group IDs must be valid sg-* identifiers"
+  }
+}
+
 variable "client_role_arn" {
   description = "ARN of the client IAM role"
   type        = string
@@ -58,6 +75,12 @@ variable "client_role_arn" {
     condition     = can(regex("^arn:aws:iam::[0-9]{12}:role/.+$", var.client_role_arn))
     error_message = "Client role ARN must be a valid IAM role ARN in the format arn:aws:iam::[account-id]:role/[role-name]"
   }
+}
+
+variable "client_role_name" {
+  description = "Name of the client IAM role (for policy attachment)"
+  type        = string
+  default     = null
 }
 
 variable "enable_vpn" {
@@ -75,4 +98,10 @@ variable "client_user_name" {
     condition     = !var.enable_vpn || var.client_user_name != null
     error_message = "client_user_name must be provided when enable_vpn is true"
   }
+}
+
+variable "allow_public_access" {
+  description = "Whether to allow public network access to the OpenSearch Serverless collection. Defaults to false (VPC-only) for least exposure. Set to true only for an explicit, deliberate opt-in."
+  type        = bool
+  default     = false
 }

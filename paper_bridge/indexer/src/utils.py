@@ -1,20 +1,21 @@
 import argparse
-import ast
 import functools
-import json
 import time
-from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
+from collections.abc import Callable
+from typing import Any
+
 from bs4 import BeautifulSoup
 from llama_index.core.types import BaseOutputParser
+
 from .logger import logger
 
 
 class HTMLTagOutputParser(BaseOutputParser):
-    def __init__(self, tag_names: Union[str, Tuple[str, ...]], verbose: bool = False):
+    def __init__(self, tag_names: str | tuple[str, ...], verbose: bool = False):
         self.tag_names = tag_names
         self.verbose = verbose
 
-    def parse(self, text: str) -> Union[str, Dict[str, str]]:
+    def parse(self, text: str) -> str | dict[str, str]:
         if not text:
             return {} if isinstance(self.tag_names, tuple) else ""
 
@@ -22,7 +23,7 @@ class HTMLTagOutputParser(BaseOutputParser):
             logger.debug("Parsing text: %s", text)
 
         soup = BeautifulSoup(text, "html.parser")
-        parsed: Dict[str, str] = {}
+        parsed: dict[str, str] = {}
 
         tag_names = (
             self.tag_names if isinstance(self.tag_names, tuple) else [self.tag_names]
@@ -38,8 +39,8 @@ class HTMLTagOutputParser(BaseOutputParser):
         )
 
     @property
-    def output_type(self) -> Type[Union[str, Dict[str, str]]]:
-        return Dict[str, str] if isinstance(self.tag_names, tuple) else str
+    def output_type(self) -> type[str | dict[str, str]]:
+        return dict[str, str] if isinstance(self.tag_names, tuple) else str
 
 
 def arg_as_bool(value: Any) -> bool:
@@ -54,27 +55,6 @@ def arg_as_bool(value: Any) -> bool:
             return False
 
     raise argparse.ArgumentTypeError("Boolean value expected")
-
-
-def arg_as_list(value: Optional[str]) -> Optional[List[str]]:
-    if value is None:
-        return None
-
-    try:
-        urls = json.loads(value)
-        if isinstance(urls, str):
-            return [urls.strip()]
-        if isinstance(urls, list):
-            return urls
-    except json.JSONDecodeError:
-        if value.strip().startswith("[") and value.strip().endswith("]"):
-            try:
-                urls = ast.literal_eval(value)
-                if isinstance(urls, list):
-                    return urls
-            except (SyntaxError, ValueError):
-                pass
-        return [value.strip()]
 
 
 def measure_execution_time(func: Callable) -> Callable:

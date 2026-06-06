@@ -2,7 +2,7 @@ import io
 import re
 import time
 from pathlib import Path
-from typing import List, Optional, Union
+
 from jinja2 import Environment, FileSystemLoader, Template
 from PIL import Image
 from pydantic import BaseModel, Field
@@ -11,6 +11,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
 from .constants import Language, LocalPaths
 from .fetcher import Paper
 from .logger import logger
@@ -19,9 +20,9 @@ from .logger import logger
 class Result(BaseModel):
     arxiv_id: str
     summary: str
-    retrieval: Optional[str] = Field(default=None)
-    tags: Optional[List[str]] = Field(default=None)
-    urls: Optional[List[str]] = Field(default=None)
+    retrieval: str | None = Field(default=None)
+    tags: list[str] | None = Field(default=None)
+    urls: list[str] | None = Field(default=None)
 
 
 class PaperRenderer:
@@ -53,14 +54,14 @@ class PaperRenderer:
             "title": paper.title,
             "date": paper.published_at.strftime("%Y-%m-%d"),
             "authors": self._format_authors(paper),
-            "summary": result.summary.replace("다:", "다."),
+            "summary": result.summary,
             "tags": result.tags,
             "urls": self._process_urls(result.urls),
             "pdf_url": str(paper.pdf_url) if paper.pdf_url else None,
         }
 
         if result.retrieval:
-            template_data["retrieval"] = result.retrieval.replace("다:", "다.")
+            template_data["retrieval"] = result.retrieval
 
         return self.template.render(**template_data)
 
@@ -89,7 +90,7 @@ class PaperRenderer:
             return f"{', '.join(cleaned_authors[:self.MAX_AUTHORS])} et al."
 
     @staticmethod
-    def _process_urls(urls: Optional[List[str]]) -> Optional[List[str]]:
+    def _process_urls(urls: list[str] | None) -> list[str] | None:
         if not urls:
             return None
 
@@ -118,9 +119,9 @@ class PaperDocumentBuilder:
         self,
         templates_dir: Path,
         outputs_dir: Path,
-        stage: Optional[str] = None,
-        date_suffix: Optional[str] = None,
-        language: Optional[Language] = None,
+        stage: str | None = None,
+        date_suffix: str | None = None,
+        language: Language | None = None,
     ):
         self.templates_dir = templates_dir
         self.outputs_dir = outputs_dir
@@ -155,9 +156,9 @@ class PaperDocumentBuilder:
     @staticmethod
     def _generate_filename(
         arxiv_id: str,
-        stage: Optional[str] = None,
-        date_suffix: Optional[str] = None,
-        language: Optional[Language] = None,
+        stage: str | None = None,
+        date_suffix: str | None = None,
+        language: Language | None = None,
     ) -> str:
         components = ["paper-bridge"]
 
@@ -175,11 +176,11 @@ class PaperDocumentBuilder:
         return f"{'-'.join(components)}.html"
 
     def create_batch_documents(
-        self, papers: List[Paper], results: List[Result]
-    ) -> List[Path]:
+        self, papers: list[Paper], results: list[Result]
+    ) -> list[Path]:
         output_paths = []
 
-        for paper, result in zip(papers, results):
+        for paper, result in zip(papers, results, strict=False):
             try:
                 output_path = self.create_document(paper, result)
                 output_paths.append(output_path)
@@ -202,7 +203,7 @@ class HtmlToImageConverter:
     def __init__(
         self,
         htmls_dir: Path,
-        output_dir: Optional[Path] = None,
+        output_dir: Path | None = None,
         max_height: int = DEFAULT_MAX_HEIGHT,
         overlap: int = DEFAULT_OVERLAP,
         min_last_page_height: int = DEFAULT_MIN_LAST_PAGE_HEIGHT,
@@ -230,11 +231,11 @@ class HtmlToImageConverter:
     def convert(
         self,
         html_file: Path,
-        output_file: Optional[Path] = None,
-        wait_time: Optional[int] = None,
-        width: Optional[int] = None,
+        output_file: Path | None = None,
+        wait_time: int | None = None,
+        width: int | None = None,
         split_pages: bool = False,
-    ) -> Optional[Union[Path, List[Path]]]:
+    ) -> Path | list[Path] | None:
         html_path = self.htmls_dir / html_file
 
         if not html_path.exists():
@@ -249,6 +250,10 @@ class HtmlToImageConverter:
         else:
             return self._convert_single_page(html_file, output_file, wait_time, width)
 
+    # Hard cap on how long to wait for MathJax typesetting + image loading
+    # before screenshotting anyway, so a hung CDN can't stall the job.
+    DEFAULT_RENDER_TIMEOUT = 20
+
     def _create_webdriver(self) -> webdriver.Chrome:
         try:
             service = Service(ChromeDriverManager().install())
@@ -257,9 +262,74 @@ class HtmlToImageConverter:
             logger.error("Failed to create WebDriver: %s", str(e))
             raise
 
+    def _wait_for_content_ready(
+        self, driver: webdriver.Chrome, timeout: int | None = None
+    ) -> None:
+        """Block until MathJax has typeset and images have settled.
+
+        The page loads MathJax from a CDN and may embed external <img> tags.
+        A fixed ``sleep`` screenshots before either finishes, leaving raw
+        ``$...$`` LaTeX and broken-image icons. This polls for:
+          1. MathJax typesetting complete (queue empty), if MathJax is present.
+          2. Every <img> either loaded (naturalWidth>0) or failed; failed ones
+             are hidden so a 404 renders as nothing rather than a broken icon.
+        Falls back to returning after ``timeout`` seconds regardless.
+        """
+        timeout = timeout or self.DEFAULT_RENDER_TIMEOUT
+        # execute_async_script injects the completion callback as the LAST
+        # argument, AFTER any args we pass. We pass `timeout`, so the order is
+        # arguments[0]=timeout, arguments[1]=done-callback.
+        ready_script = """
+        const timeoutSecs = arguments[0];
+        const done = arguments[1];
+        const deadline = Date.now() + timeoutSecs * 1000;
+
+        function imagesSettled() {
+            const imgs = Array.from(document.images || []);
+            let settled = true;
+            for (const img of imgs) {
+                if (img.complete) {
+                    // Hide images that failed to load (naturalWidth === 0).
+                    if (img.naturalWidth === 0) {
+                        img.style.display = 'none';
+                        const cap = img.parentElement &&
+                            img.parentElement.querySelector('.figure-caption');
+                        if (cap) cap.style.display = 'none';
+                    }
+                } else {
+                    settled = false;
+                }
+            }
+            return settled;
+        }
+
+        function mathReady() {
+            if (!window.MathJax) return true;
+            // MathJax v2: Hub.Queue drains after typesetting.
+            if (window.MathJax.Hub && window.MathJax.Hub.queue) {
+                return window.MathJax.Hub.queue.pending === 0 &&
+                       window.MathJax.Hub.queue.running === 0;
+            }
+            return true;
+        }
+
+        (function poll() {
+            if ((mathReady() && imagesSettled()) || Date.now() > deadline) {
+                done(true);
+            } else {
+                setTimeout(poll, 200);
+            }
+        })();
+        """
+        try:
+            driver.set_script_timeout(timeout + 5)
+            driver.execute_async_script(ready_script, timeout)
+        except WebDriverException as e:
+            logger.warning("Content-ready wait failed (continuing): %s", str(e))
+
     def _convert_single_page(
         self, html_file: Path, output_file: Path, wait_time: int, width: int
-    ) -> Optional[Path]:
+    ) -> Path | None:
         html_path = self.htmls_dir / html_file
         output_path = self.output_dir / output_file
         driver = None
@@ -269,6 +339,7 @@ class HtmlToImageConverter:
             driver.get(f"file://{html_path.absolute()}")
 
             time.sleep(wait_time)
+            self._wait_for_content_ready(driver)
 
             total_height = driver.execute_script("return document.body.scrollHeight")
             driver.set_window_size(width, total_height)
@@ -295,7 +366,7 @@ class HtmlToImageConverter:
         output_file: Path,
         wait_time: int,
         width: int,
-    ) -> Optional[List[Path]]:
+    ) -> list[Path] | None:
         html_path = self.htmls_dir / html_file
         output_prefix = output_file.stem
         driver = None
@@ -305,6 +376,7 @@ class HtmlToImageConverter:
             driver = self._create_webdriver()
             driver.get(f"file://{html_path.absolute()}")
             time.sleep(wait_time)
+            self._wait_for_content_ready(driver)
 
             total_height = driver.execute_script(
                 "return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)"
@@ -352,7 +424,7 @@ class HtmlToImageConverter:
         self,
         driver,
         scroll_top: int,
-        split_positions: List[int],
+        split_positions: list[int],
         index: int,
         total_height: int,
         output_prefix: str,
@@ -383,7 +455,7 @@ class HtmlToImageConverter:
 
         return output_path
 
-    def _calculate_split_positions(self, driver, total_height: int) -> List[int]:
+    def _calculate_split_positions(self, driver, total_height: int) -> list[int]:
         split_positions = [0]
 
         potential_breakpoints = self._find_potential_breakpoints(driver)
@@ -416,7 +488,7 @@ class HtmlToImageConverter:
         return sorted(split_positions)
 
     @staticmethod
-    def _find_potential_breakpoints(driver: webdriver.Chrome) -> List[int]:
+    def _find_potential_breakpoints(driver: webdriver.Chrome) -> list[int]:
         script = """
         function findPotentialBreakpoints() {
             const breakpoints = [0];
@@ -538,7 +610,7 @@ class HtmlToImageConverter:
         return screenshot.crop(crop_box)
 
     def merge_images(
-        self, image_paths: List[str], output_file: str, vertical: bool = True
+        self, image_paths: list[str], output_file: str, vertical: bool = True
     ) -> str:
         if not image_paths:
             raise ValueError("No images to merge")
@@ -562,7 +634,7 @@ class HtmlToImageConverter:
             raise
 
     @staticmethod
-    def _merge_vertically(images: List[Image.Image]) -> Image.Image:
+    def _merge_vertically(images: list[Image.Image]) -> Image.Image:
         total_width = max(img.width for img in images)
         total_height = sum(img.height for img in images)
         merged_img = Image.new("RGB", (total_width, total_height))
@@ -575,7 +647,7 @@ class HtmlToImageConverter:
         return merged_img
 
     @staticmethod
-    def _merge_horizontally(images: List[Image.Image]) -> Image.Image:
+    def _merge_horizontally(images: list[Image.Image]) -> Image.Image:
         total_width = sum(img.width for img in images)
         total_height = max(img.height for img in images)
         merged_img = Image.new("RGB", (total_width, total_height))

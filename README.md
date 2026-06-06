@@ -6,28 +6,68 @@
 
 ### Architecture
 
-![Architecture Diagram](assets/paper-bridge.drawio.png)
+![AWS Architecture](assets/paper-bridge-architecture.drawio.png)
+
+#### Workflow (hand-drawn)
+
+![Workflow](assets/paper-bridge-workflow.png)
+
+#### GraphRAG pipeline (hand-drawn)
+
+![GraphRAG pipeline](assets/paper-bridge-pipeline.png)
+
+> **Deep dive:** the full line-by-line technical reference lives in
+> [`assets/tech-doc.md`](assets/tech-doc.md).
 
 #### Infrastructure Components
-- **Network**: VPC, Subnet, Security Group, VPN Client
-- **Database**: Neptune DB, OpenSearch Serverless
-- **Application**: AWS Batch, Lambda (Bedrock, EventBridge)
-- **IaC**: Terraform
+- **Network**: VPC, subnets, security groups, Client VPN, NAT, VPC endpoint
+- **Database**: Neptune DB (graph), OpenSearch Serverless (vectors)
+- **Compute**: AWS Batch (ECS on EC2) for indexer/summarizer, Lambda for cleaner
+- **Integration**: Amazon Bedrock, EventBridge schedules, SSM Parameter Store, S3, ECR
+- **IaC**: Terraform (`terraform/modules/{base,client,neptune,opensearch}`)
 
 ### Workflow
 
-#### Indexing Phase
-1. EventBridge triggers ECS-based Batch jobs at scheduled times
-2. Batch retrieves arXiv IDs of top-voted papers from HF Daily Papers
-3. Downloads PDF files and metadata using [arXiv Python API](https://pypi.org/project/arxiv/)
-4. Parses text using [LlamaParse](https://www.llamaindex.ai/llamaparse) or [Unstructured](https://unstructured.io/)
-5. Removes unnecessary parts (abstracts, references) using LLM
-6. Indexes content in Neptune DB and OpenSearch using [AWS GraphRAG toolkit](https://github.com/awslabs/graphrag-toolkit)
+Models are centralized in shared config: **Claude Sonnet 4.6** (summarize / GraphRAG
+response), **Claude Haiku 4.5** (main-content extraction, figure captions), and
+**Cohere Embed English v3** (1024-dim vectors), all via Amazon Bedrock with
+cross-region inference profiles.
 
-#### Search Phase
-1. EventBridge triggers ECS-based Batch jobs at scheduled times
-2. Batch retrieves arXiv IDs of top-voted papers from HF Daily Papers
-3. Parses HTML version if available, otherwise uses [Upstage's DocumentParse](https://www.upstage.ai/products/document-parse)
-4. Extracts paper images and generates captions using VLM
-5. Summarizes papers and performs search using AWS GraphRAG toolkit
-6. Extracts insights, renders HTML summary reports, and delivers to Slack
+#### Indexing Phase (AWS Batch)
+1. EventBridge triggers the Batch job at scheduled times
+2. Fetches candidate papers from HF Daily Papers, then **selects + de-duplicates
+   across days** with a configurable popularity + recency scorer (`shared/paper_selection.py`)
+3. Downloads PDFs from the static `arxiv.org/pdf` host (Retry-After aware) and
+   fetches metadata in one batched, rate-limit-serialized arXiv API call
+   (`shared/arxiv_client.py`)
+4. Parses text using [LlamaParse](https://www.llamaindex.ai/llamaparse) or [Unstructured](https://unstructured.io/)
+5. Extracts the main content (drops abstract/references) with Haiku 4.5
+6. Indexes into Neptune DB + OpenSearch Serverless using the [AWS GraphRAG toolkit](https://github.com/awslabs/graphrag-toolkit)
+
+#### Search / Summarize Phase (AWS Batch)
+1. EventBridge triggers the Batch job at scheduled times
+2. Selects the day's top papers (same scorer), parses HTML or PDF
+3. Extracts figures and generates captions with a VLM
+4. Summarizes each paper (Sonnet 4.6) and runs GraphRAG retrieval to compare it to
+   related work
+5. Renders an HTML report → image, and delivers via **Slack (Block Kit)** or opens a
+   **GitHub pull request**
+
+#### Cleanup (AWS Lambda)
+A scheduled Lambda prunes documents outside a configurable date window from Neptune
+and OpenSearch.
+
+### Development
+
+```bash
+poetry install            # install deps (incl. dev group: pytest, ruff, black, mypy)
+poetry run pytest         # run the test suite
+poetry run ruff check .   # lint
+poetry run black --check . # format check
+poetry run mypy paper_bridge  # type check
+```
+
+CI (lint, format, type-check, tests + coverage, Docker build, `terraform validate`,
+security scan) runs via GitHub Actions — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+Full build / test / deploy details and the configuration reference are in
+[`assets/tech-doc.md`](assets/tech-doc.md) (§11–§12).

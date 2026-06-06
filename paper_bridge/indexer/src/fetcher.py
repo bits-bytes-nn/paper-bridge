@@ -2,26 +2,32 @@ import os
 import re
 import tempfile
 import time
+from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from enum import Enum, auto
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple, Union, cast
-import arxiv
+from typing import Any, cast
+
 import boto3
 import PyPDF2
 import requests
-from llama_index.llms.bedrock import Bedrock
+from llama_index.llms.bedrock_converse import BedrockConverse
 from llama_parse import LlamaParse
 from llama_parse.base import ResultType
 from pydantic import BaseModel, Field, HttpUrl, field_validator
 from unstructured.partition.pdf import partition_pdf
+
+from paper_bridge.indexer.configs.config import Config
+from paper_bridge.shared import PaperScorer, SelectionConfig
+from paper_bridge.shared.arxiv_client import download_pdf as download_arxiv_pdf
+from paper_bridge.shared.arxiv_client import fetch_metadata as fetch_arxiv_metadata
+
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
 from .constants import EnvVars, SSMParams, URLs
 from .logger import is_aws_env, logger
 from .prompts import MainContentExtractionPrompt
 from .utils import HTMLTagOutputParser, measure_execution_time
-from paper_bridge.indexer.configs.config import Config
 
 
 class PaperStatus(Enum):
@@ -44,19 +50,19 @@ class ArxivNotFoundError(ArxivPaperError):
 
 class Paper(BaseModel):
     arxiv_id: str
-    authors: List[str] = Field(default_factory=list)
+    authors: list[str] = Field(default_factory=list)
     published_at: datetime
     title: str
     summary: str
     upvotes: int = Field(default=0, ge=0)
-    thumbnail: Optional[str] = Field(default=None)
-    content: Optional[str] = Field(default=None)
+    thumbnail: str | None = Field(default=None)
+    content: str | None = Field(default=None)
     base_date: str
-    pdf_url: Optional[HttpUrl] = Field(default=None)
+    pdf_url: HttpUrl | None = Field(default=None)
     status: PaperStatus = Field(default=PaperStatus.PENDING)
 
     @field_validator("authors")
-    def validate_authors(cls, authors: List[str]) -> List[str]:
+    def validate_authors(cls, authors: list[str]) -> list[str]:
         if not authors:
             raise ValueError("Authors list cannot be empty")
         return authors
@@ -68,7 +74,7 @@ class Paper(BaseModel):
             raise ValueError("Base date must be in the format 'YYYY-MM-DD'")
         return base_date
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return self.model_dump()
 
 
@@ -84,8 +90,6 @@ class PaperFetcher:
     LLAMA_PARSE_MAX_RETRIES: int = 5
     LLAMA_PARSE_MAX_TIMEOUT: int = 300
     LLAMA_PARSE_NUM_WORKERS: int = 8
-    ARXIV_DOWNLOAD_MAX_RETRIES: int = 3
-    ARXIV_DOWNLOAD_RETRY_DELAY: int = 2
     MAX_PDF_PAGES: int = 100
     MAX_CONTENT_CHARS: int = 200000
     CONTENT_OFFSET: int = 10000
@@ -93,8 +97,8 @@ class PaperFetcher:
     def __init__(
         self,
         config: Config,
-        boto3_session: Optional[boto3.Session] = None,
-        profile_name: Optional[str] = None,
+        boto3_session: boto3.Session | None = None,
+        profile_name: str | None = None,
         timeout: int = DEFAULT_TIMEOUT,
     ) -> None:
         self.boto3_session = boto3_session or boto3.Session(
@@ -114,6 +118,14 @@ class PaperFetcher:
             else None
         )
         self.timeout = max(1, timeout)
+        self._scorer = PaperScorer(
+            SelectionConfig(
+                popularity_weight=config.indexing.selection_popularity_weight,
+                recency_weight=config.indexing.selection_recency_weight,
+                recency_half_life_days=config.indexing.selection_recency_half_life_days,
+                min_upvotes=self.min_upvotes,
+            )
+        )
 
         llama_cloud_api_key = self._get_llama_cloud_api_key(config, self.boto3_session)
         if llama_cloud_api_key is None:
@@ -127,7 +139,7 @@ class PaperFetcher:
             language="en",
         )
 
-    def _init_llm_components(self, config: Config, profile_name: Optional[str]) -> None:
+    def _init_llm_components(self, config: Config, profile_name: str | None) -> None:
         self.prompt = None
         self.llm = None
         self.output_parser = None
@@ -139,7 +151,7 @@ class PaperFetcher:
                 config.indexing.main_content_extraction_model_id.value,
                 config.resources.bedrock_region_name,
             )
-            self.llm = Bedrock(
+            self.llm = BedrockConverse(
                 model_id,
                 temperature=0.0,
                 max_tokens=4096,
@@ -153,7 +165,7 @@ class PaperFetcher:
     @staticmethod
     def _get_llama_cloud_api_key(
         config: Config, boto3_session: boto3.Session
-    ) -> Optional[str]:
+    ) -> str | None:
         base_path = f"/{config.resources.project_name}-{config.resources.stage}"
         if is_aws_env():
             return get_ssm_param_value(
@@ -164,8 +176,8 @@ class PaperFetcher:
 
     @measure_execution_time
     def fetch_papers_by_arxiv_ids(
-        self, arxiv_ids: List[str], use_llama_parse: bool = False
-    ) -> List[Paper]:
+        self, arxiv_ids: list[str], use_llama_parse: bool = False
+    ) -> list[Paper]:
         try:
             papers = self._fetch_papers_by_arxiv_ids(arxiv_ids)
             return self._process_papers_concurrently(papers, use_llama_parse)
@@ -174,47 +186,46 @@ class PaperFetcher:
             return []
 
     @staticmethod
-    def _fetch_papers_by_arxiv_ids(arxiv_ids: List[str]) -> List[Paper]:
-        papers = []
-        client = arxiv.Client()
+    def _fetch_papers_by_arxiv_ids(arxiv_ids: list[str]) -> list[Paper]:
         logger.info("Fetching papers by arXiv IDs: '%s'", arxiv_ids)
+        # ONE batched, serialized API call for all ids (see shared.arxiv_client),
+        # instead of a per-id loop that triggered 429s.
+        metadata = fetch_arxiv_metadata(arxiv_ids)
+        current_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
+        papers = []
         for arxiv_id in arxiv_ids:
+            paper_result = metadata.get(arxiv_id)
+            if not paper_result:
+                logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
+                continue
             try:
-                search = arxiv.Search(id_list=[arxiv_id])
-                paper_result = next(client.results(search), None)
-
-                if not paper_result:
-                    logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
-                    continue
-
-                current_date = datetime.now(timezone.utc)
-                paper = Paper(
-                    arxiv_id=arxiv_id,
-                    authors=[author.name for author in paper_result.authors],
-                    published_at=paper_result.published,
-                    title=paper_result.title,
-                    summary=paper_result.summary,
-                    upvotes=0,
-                    pdf_url=(
-                        None
-                        if paper_result.pdf_url is None
-                        else HttpUrl(str(paper_result.pdf_url))
-                    ),
-                    base_date=current_date.strftime("%Y-%m-%d"),
+                papers.append(
+                    Paper(
+                        arxiv_id=arxiv_id,
+                        authors=[a.name for a in paper_result.authors],
+                        published_at=paper_result.published,
+                        title=paper_result.title,
+                        summary=paper_result.summary,
+                        upvotes=0,
+                        pdf_url=(
+                            None
+                            if paper_result.pdf_url is None
+                            else HttpUrl(str(paper_result.pdf_url))
+                        ),
+                        base_date=current_date,
+                    )
                 )
-                papers.append(paper)
-
             except Exception as e:
                 logger.error(
-                    "Error fetching paper with arXiv ID '%s': %s", arxiv_id, str(e)
+                    "Error building paper for arXiv ID '%s': %s", arxiv_id, str(e)
                 )
 
         return papers
 
     def _process_papers_concurrently(
-        self, papers: List[Paper], use_llama_parse: bool
-    ) -> List[Paper]:
+        self, papers: list[Paper], use_llama_parse: bool
+    ) -> list[Paper]:
         with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
             futures = {
                 executor.submit(
@@ -240,10 +251,10 @@ class PaperFetcher:
     @measure_execution_time
     def fetch_papers_for_date_range(
         self,
-        target_date: Optional[datetime] = None,
-        days_to_fetch: Optional[int] = None,
+        target_date: datetime | None = None,
+        days_to_fetch: int | None = None,
         use_llama_parse: bool = False,
-    ) -> List[Paper]:
+    ) -> list[Paper]:
         try:
             target_date = self._get_target_date(target_date)
             days_to_fetch = days_to_fetch if days_to_fetch != 0 else None
@@ -251,13 +262,7 @@ class PaperFetcher:
             papers_by_date = self._fetch_papers_by_date_range(
                 target_date, days_to_fetch
             )
-            papers_by_date = self._filter_and_sort_papers(papers_by_date)
-
-            papers = [
-                paper
-                for papers_list in papers_by_date.values()
-                for paper in papers_list
-            ]
+            papers = self._select_papers(papers_by_date, target_date)
             return self._process_papers_concurrently(papers, use_llama_parse)
 
         except Exception as e:
@@ -270,17 +275,17 @@ class PaperFetcher:
             return []
 
     @staticmethod
-    def _get_target_date(target_date: Optional[datetime]) -> datetime:
+    def _get_target_date(target_date: datetime | None) -> datetime:
         if target_date is not None:
-            return target_date.astimezone(timezone.utc)
-        return datetime.now(timezone.utc).replace(
+            return target_date.astimezone(UTC)
+        return datetime.now(UTC).replace(
             hour=0, minute=0, second=0, microsecond=0
-        ).astimezone(timezone.utc) - timedelta(days=1)
+        ).astimezone(UTC) - timedelta(days=1)
 
     def _fetch_papers_by_date_range(
-        self, end_date: datetime, days_to_fetch: Optional[int] = None
-    ) -> Dict[str, List[Paper]]:
-        papers_by_date: Dict[str, List[Paper]] = {}
+        self, end_date: datetime, days_to_fetch: int | None = None
+    ) -> dict[str, list[Paper]]:
+        papers_by_date: dict[str, list[Paper]] = {}
         days = days_to_fetch or self.days_to_fetch
         start_date = end_date - timedelta(days=days - 1)
         logger.info("Fetching papers from '%s' to '%s'", start_date, end_date)
@@ -300,7 +305,7 @@ class PaperFetcher:
             for days in range((end_date - start_date).days + 1)
         ]
 
-    def _fetch_daily_papers(self, date_str: str, current_date: datetime) -> List[Paper]:
+    def _fetch_daily_papers(self, date_str: str, current_date: datetime) -> list[Paper]:
         response = self._make_request(f"{URLs.HF_DAILY_PAPERS.url}?date={date_str}")
         if not response:
             return []
@@ -311,7 +316,7 @@ class PaperFetcher:
                 papers.append(paper)
         return papers
 
-    def _make_request(self, url: str) -> Optional[requests.Response]:
+    def _make_request(self, url: str) -> requests.Response | None:
         for attempt in range(self.MAX_RETRIES):
             try:
                 response = requests.get(url, timeout=self.timeout)
@@ -327,8 +332,8 @@ class PaperFetcher:
         return None
 
     def _process_paper_metadata(
-        self, paper_data: Dict[str, Any], current_date: datetime
-    ) -> Optional[Paper]:
+        self, paper_data: dict[str, Any], current_date: datetime
+    ) -> Paper | None:
         try:
             published_at = self._parse_date(paper_data.get("publishedAt"))
             paper_info = paper_data.get("paper", {})
@@ -353,7 +358,7 @@ class PaperFetcher:
         return None
 
     @staticmethod
-    def _parse_date(date_str: Optional[str]) -> Optional[datetime]:
+    def _parse_date(date_str: str | None) -> datetime | None:
         if not date_str:
             return None
         try:
@@ -363,7 +368,7 @@ class PaperFetcher:
             return None
 
     @staticmethod
-    def _extract_author_names(authors: List[Union[Dict[str, str], str]]) -> List[str]:
+    def _extract_author_names(authors: list[dict[str, str] | str]) -> list[str]:
         author_names = []
         for author in authors:
             if isinstance(author, dict) and "name" in author:
@@ -375,29 +380,37 @@ class PaperFetcher:
     def _meets_upvote_threshold(self, upvotes: int) -> bool:
         return self.min_upvotes is None or upvotes >= self.min_upvotes
 
-    def _filter_and_sort_papers(
-        self, papers_by_date: Dict[str, List[Paper]]
-    ) -> Dict[str, List[Paper]]:
-        return {
-            date: sorted(papers, key=lambda x: (-x.upvotes, x.title))[
-                : self.papers_per_day
-            ]
-            for date, papers in papers_by_date.items()
-        }
+    def _select_papers(
+        self, papers_by_date: dict[str, list[Paper]], reference_date: datetime
+    ) -> list[Paper]:
+        """Pick the top papers per day, then de-duplicate across days.
+
+        Each day keeps its top ``papers_per_day`` by the configurable
+        popularity+recency score (see :class:`PaperScorer`). The per-day picks
+        are then de-duplicated by arxiv_id across the whole range, since the same
+        paper resurfaces on consecutive HuggingFace daily pages — this avoids
+        re-indexing the same paper multiple times.
+        """
+        selected: list[Paper] = []
+        for papers in papers_by_date.values():
+            selected.extend(
+                self._scorer.select(papers, self.papers_per_day, reference_date)
+            )
+        # Cross-day dedup (keeps the highest-upvote instance per arxiv_id).
+        return self._scorer.select(selected, len(selected), reference_date)
 
     def download_and_parse_paper(
         self, arxiv_id: str, use_llama_parse: bool
-    ) -> Optional[str]:
+    ) -> str | None:
         try:
-            paper = self._download_paper(arxiv_id)
-            if not paper:
-                return None
-
             with tempfile.TemporaryDirectory() as temp_dir:
-                paper.download_pdf(temp_dir)
-                pdf_path = self._get_pdf_path(temp_dir, arxiv_id)
-                if not pdf_path:
+                # Download straight from the static arxiv.org/pdf host (not the
+                # rate-limited API) with Retry-After backoff. See
+                # shared.arxiv_client.
+                dest = Path(temp_dir) / f"{arxiv_id}.pdf"
+                if not download_arxiv_pdf(arxiv_id, dest):
                     return None
+                pdf_path = str(dest)
 
                 if not self._check_pdf_page_limit(pdf_path):
                     logger.warning(
@@ -411,41 +424,6 @@ class PaperFetcher:
             logger.error(f"Error downloading/parsing paper '{arxiv_id}': {str(e)}")
             return None
 
-    def _download_paper(self, arxiv_id: str) -> Optional[Any]:
-        for attempt in range(self.ARXIV_DOWNLOAD_MAX_RETRIES):
-            try:
-                client = arxiv.Client()
-                search = arxiv.Search(id_list=[arxiv_id])
-                return next(client.results(search))
-            except StopIteration:
-                logger.error(f"Paper not found: '{arxiv_id}'")
-                return None
-            except (ConnectionResetError, Exception) as e:
-                if attempt == self.ARXIV_DOWNLOAD_MAX_RETRIES - 1:
-                    logger.error(
-                        f"Error downloading paper '{arxiv_id}' after {self.ARXIV_DOWNLOAD_MAX_RETRIES} attempts: {str(e)}"
-                    )
-                    return None
-
-                error_type = (
-                    "Connection reset"
-                    if isinstance(e, ConnectionResetError)
-                    else "Error"
-                )
-                logger.warning(
-                    f"{error_type} while downloading paper '{arxiv_id}', retrying ({attempt+1}/{self.ARXIV_DOWNLOAD_MAX_RETRIES}): {str(e)}"
-                )
-                time.sleep(self.ARXIV_DOWNLOAD_RETRY_DELAY * (2**attempt))
-        return None
-
-    @staticmethod
-    def _get_pdf_path(temp_dir: str, arxiv_id: str) -> Optional[str]:
-        pdf_files = list(Path(temp_dir).glob("*.pdf"))
-        if not pdf_files:
-            logger.error(f"No PDF file found in temp directory for '{arxiv_id}'")
-            return None
-        return str(pdf_files[0])
-
     def _check_pdf_page_limit(self, pdf_path: str) -> bool:
         try:
             with open(pdf_path, "rb") as file:
@@ -453,12 +431,12 @@ class PaperFetcher:
                 num_pages = len(pdf_reader.pages)
                 return num_pages <= self.MAX_PDF_PAGES
         except Exception as e:
-            logger.error(f"Error checking PDF page count: {str(e)}")
-            return True
+            # Fail closed: an unreadable/corrupt PDF we can't page-count should
+            # be skipped, not waved through the page-limit guard.
+            logger.error(f"Error checking PDF page count, skipping: {str(e)}")
+            return False
 
-    def _process_pdf_content(
-        self, pdf_path: str, use_llama_parse: bool
-    ) -> Optional[str]:
+    def _process_pdf_content(self, pdf_path: str, use_llama_parse: bool) -> str | None:
         if use_llama_parse:
             content = self._try_llama_parse(pdf_path)
             if content:
@@ -467,7 +445,7 @@ class PaperFetcher:
         logger.warning("LlamaParse disabled or failed, falling back to unstructured")
         return self._process_pdf_with_unstructured(pdf_path)
 
-    def _try_llama_parse(self, pdf_path: str) -> Optional[str]:
+    def _try_llama_parse(self, pdf_path: str) -> str | None:
         for retry_count in range(self.LLAMA_PARSE_MAX_RETRIES):
             try:
                 documents = self.llama_parser.load_data(file_path=pdf_path)
@@ -485,14 +463,14 @@ class PaperFetcher:
                 break
         return None
 
-    def _process_pdf_with_unstructured(self, pdf_path: str) -> Optional[str]:
+    def _process_pdf_with_unstructured(self, pdf_path: str) -> str | None:
         text_content = self._extract_text_from_pdf(pdf_path)
         if not text_content:
             return None
         return self._extract_main_content(text_content)
 
     @staticmethod
-    def _extract_text_from_pdf(pdf_path: str) -> Optional[str]:
+    def _extract_text_from_pdf(pdf_path: str) -> str | None:
         try:
             elements = partition_pdf(
                 filename=pdf_path,
@@ -519,7 +497,7 @@ class PaperFetcher:
             logger.error(f"Error extracting text from PDF: {str(e)}")
             return None
 
-    def _extract_main_content(self, text_content: str) -> Optional[str]:
+    def _extract_main_content(self, text_content: str) -> str | None:
         if not text_content:
             return None
 
@@ -549,8 +527,8 @@ class PaperFetcher:
             return text_content.strip()
 
     def _find_content_range(
-        self, text_content: str, markers: Dict[str, str]
-    ) -> Optional[Tuple[int, int]]:
+        self, text_content: str, markers: dict[str, str]
+    ) -> tuple[int, int] | None:
         start_marker = markers.get("start_marker", "")
         end_marker = markers.get("end_marker", "")
 

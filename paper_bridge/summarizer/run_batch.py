@@ -1,15 +1,16 @@
 import argparse
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, Optional, Tuple, Any
+from typing import Any
+
 import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from paper_bridge.summarizer.configs import Config
 from paper_bridge.summarizer.src import (
-    EnvVars,
     NULL_STRING,
+    EnvVars,
     SSMParams,
     arg_as_bool,
     get_ssm_param_value,
@@ -21,7 +22,7 @@ from paper_bridge.summarizer.src import (
 
 def main(job_prefix: str, **kwargs) -> None:
     config = Config.load()
-    profile_name = EnvVars.AWS_PROFILE_NAME.value
+    profile_name = EnvVars.AWS_PROFILE_NAME.env_value
 
     boto3_session = boto3.Session(
         region_name=config.resources.default_region_name,
@@ -34,7 +35,7 @@ def main(job_prefix: str, **kwargs) -> None:
             "Batch job queue or definition name not found in SSM parameters"
         )
 
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
     job_name = (
         f"{config.resources.project_name}"
         f"-{config.resources.stage}"
@@ -63,7 +64,7 @@ def main(job_prefix: str, **kwargs) -> None:
     wait_for_batch_job_completion(boto3_session, job_id)
 
 
-def sanitize_parameters(params: Dict[str, Any]) -> Dict[str, str]:
+def sanitize_parameters(params: dict[str, Any]) -> dict[str, str]:
     result = {}
     for key, value in params.items():
         if value is None:
@@ -81,7 +82,7 @@ def sanitize_parameters(params: Dict[str, Any]) -> Dict[str, str]:
 def get_batch_job_names(
     boto3_session: boto3.Session,
     config: Config,
-) -> Tuple[Optional[str], Optional[str]]:
+) -> tuple[str | None, str | None]:
     base_path = f"/{config.resources.project_name}-{config.resources.stage}"
     return (
         get_ssm_param_value(

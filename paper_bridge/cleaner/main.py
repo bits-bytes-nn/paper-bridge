@@ -1,236 +1,216 @@
 import argparse
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any
+
 import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
+
 from paper_bridge.cleaner.configs import Config
 from paper_bridge.cleaner.src import (
+    NULL_STRING,
     Cleaner,
     EnvVars,
-    NULL_STRING,
     SSMParams,
     get_ssm_param_value,
-    is_aws_env,
-    logger,
+    is_running_in_aws,
 )
 
-DEFAULT_BOTO3_SESSION: boto3.Session = boto3.Session(
-    region_name=EnvVars.DEFAULT_REGION_NAME.value,
-)
+# Import the logger INSTANCE explicitly (not via the package's lazy __getattr__),
+# which is ambiguous with the ``logger`` submodule depending on import order —
+# see the note in summarizer/main.py.
+from paper_bridge.cleaner.src.logger import logger
 
 
 class DateFormatError(Exception):
     pass
 
 
-def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Union[int, str]]:
-    target_date = None
+def setup_dependencies() -> tuple[Config, boto3.Session]:
+    config = Config.load()
+    profile_name = EnvVars.AWS_PROFILE_NAME.env_value
+    boto_session = (
+        boto3.Session(region_name=EnvVars.DEFAULT_REGION_NAME.env_value)
+        if is_running_in_aws()
+        else boto3.Session(
+            region_name=config.resources.default_region_name, profile_name=profile_name
+        )
+    )
 
     try:
-        config = Config.load()
-        profile_name = EnvVars.AWS_PROFILE_NAME.value
-        default_boto3_session = (
-            DEFAULT_BOTO3_SESSION
-            if is_aws_env()
-            else boto3.Session(
-                region_name=config.resources.default_region_name,
-                profile_name=profile_name,
-            )
-        )
-
-        target_date_str = event.get("TARGET_DATE")
-        if isinstance(target_date_str, str) and target_date_str.lower() == NULL_STRING:
-            target_date_str = None
-
-        days_back = event.get("DAYS_BACK")
-        if isinstance(days_back, str):
-            try:
-                days_back = int(days_back) if days_back.lower() != NULL_STRING else None
-            except ValueError:
-                logger.warning("Invalid days_back value: %s. Using default.", days_back)
-                days_back = None
-
-        days_range = event.get("DAYS_RANGE")
-        if isinstance(days_range, str):
-            try:
-                days_range = (
-                    int(days_range) if days_range.lower() != NULL_STRING else None
-                )
-            except ValueError:
-                logger.warning(
-                    "Invalid days_range value: %s. Using default.", days_range
-                )
-                days_range = None
-
-        try:
-            target_datetime = parse_target_date(target_date_str)
-        except DateFormatError as e:
-            return {"status": 400, "message": str(e)}
-
-        base_path = f"/{config.resources.project_name}-{config.resources.stage}"
-        neptune_endpoint = get_ssm_param_value(
-            default_boto3_session, f"{base_path}/{SSMParams.NEPTUNE_ENDPOINT.value}"
-        )
-        opensearch_endpoint = get_ssm_param_value(
-            default_boto3_session, f"{base_path}/{SSMParams.OPENSEARCH_ENDPOINT.value}"
-        )
-
-        if neptune_endpoint is None or opensearch_endpoint is None:
-            raise ValueError(
-                "Neptune or OpenSearch endpoint not found in SSM parameters"
-            )
-
-        start_date, end_date = parse_date_range(
-            config, target_datetime, days_back, days_range
-        )
-
-        logger.info("Deleting documents from '%s' to '%s'", start_date, end_date)
-
-        opensearch_indexes = getattr(
-            config.cleaner, "opensearch_indexes", ["chunk", "statement"]
-        )
-
-        cleaner = Cleaner(
-            default_boto3_session,
-            neptune_endpoint,
-            opensearch_endpoint,
-            opensearch_indexes,
-            region_name=config.resources.default_region_name,
-        )
-
-        deletion_result = cleaner.delete_documents_by_date_range(
-            start_date=start_date, end_date=end_date
-        )
-
-        logger.info("Deletion result: %s", deletion_result)
-        return {"status": 200, "message": "Success"}
-
+        sts = boto_session.client("sts")
+        caller_identity = sts.get_caller_identity()
+        logger.info("Python session AWS identity: '%s'", caller_identity.get("Arn"))
+        logger.info("Profile name used: '%s'", profile_name)
+        logger.info("Is AWS env: '%s'", is_running_in_aws())
     except Exception as e:
-        error_message = f"Failed to clean documents: {e}"
-        logger.error(error_message)
+        logger.error("Failed to get session identity: %s", e)
 
-        topic_arn = EnvVars.TOPIC_ARN.value
-        if is_aws_env() and topic_arn:
-            send_failure_notification(
-                DEFAULT_BOTO3_SESSION, topic_arn, target_date, error_message
-            )
-        return {"status": 500, "message": error_message}
+    return config, boto_session
 
 
-def parse_target_date(date_str: Optional[str]) -> datetime:
-    if not date_str or date_str.lower() == NULL_STRING:
-        return datetime.now(timezone.utc).replace(
+def parse_event_params(
+    event: dict[str, Any],
+) -> tuple[str | None, int | None, int | None]:
+    def get_optional_str(key: str) -> str | None:
+        val = event.get(key)
+        return (
+            None
+            if not val or (isinstance(val, str) and val.lower() == NULL_STRING)
+            else str(val)
+        )
+
+    def get_optional_int(key: str) -> int | None:
+        val = get_optional_str(key)
+        if val is None:
+            return None
+        try:
+            return int(val)
+        except (ValueError, TypeError):
+            logger.warning("Invalid integer value for '%s': %s. Ignoring.", key, val)
+            return None
+
+    target_date_str = get_optional_str("TARGET_DATE")
+    days_back = get_optional_int("DAYS_BACK")
+    days_range = get_optional_int("DAYS_RANGE")
+
+    return target_date_str, days_back, days_range
+
+
+def parse_target_date(date_str: str | None) -> datetime:
+    if not date_str:
+        return datetime.now(UTC).replace(
             hour=0, minute=0, second=0, microsecond=0
-        ).astimezone(timezone.utc) - timedelta(days=1)
-
+        ) - timedelta(days=1)
     try:
-        return datetime.strptime(date_str, "%Y-%m-%d").astimezone(timezone.utc)
+        return datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=UTC)
     except ValueError as e:
-        logger.error("Invalid date format: %s", e)
-        raise DateFormatError(f"Invalid date format: {e}")
+        raise DateFormatError(
+            f"Invalid date format for TARGET_DATE: '{date_str}'. Use 'YYYY-MM-DD'."
+        ) from e
 
 
-def parse_date_range(
+def calculate_date_range(
     config: Config,
     target_date: datetime,
-    days_back: Optional[int],
-    days_range: Optional[int],
-) -> Tuple[str, str]:
-    days_back = days_back if days_back is not None else config.cleaner.days_back
-    days_range = days_range if days_range is not None else config.cleaner.days_range
+    days_back: int | None,
+    days_range: int | None,
+) -> tuple[str, str]:
+    effective_days_back = (
+        days_back if days_back is not None else config.cleaner.days_back
+    )
+    effective_days_range = (
+        days_range if days_range is not None else config.cleaner.days_range
+    )
 
-    end_date = target_date - timedelta(days=days_back)
-    start_date = end_date - timedelta(days=days_range)
+    end_date = target_date - timedelta(days=effective_days_back)
+    start_date = end_date - timedelta(days=effective_days_range - 1)
 
     return start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d")
 
 
-def get_formatted_date(target_date: Optional[datetime]) -> str:
-    if target_date:
-        return target_date.strftime("%Y-%m-%d")
-
-    return (
-        datetime.now(timezone.utc)
-        .replace(hour=0, minute=0, second=0, microsecond=0)
-        .astimezone(timezone.utc)
-        - timedelta(days=1)
-    ).strftime("%Y-%m-%d")
-
-
 def send_failure_notification(
-    boto3_session: boto3.Session,
-    topic_arn: str,
-    target_date: Optional[str],
-    error_message: Optional[str] = None,
+    session: boto3.Session, topic_arn: str, date_range: str, error: Exception
 ) -> None:
-    sns = boto3_session.client("sns")
-    date_str = target_date if isinstance(target_date, str) else get_formatted_date(None)
-
+    sns = session.client("sns")
     message = (
-        f"Paper cleaning failed\n"
-        f"Date: {date_str}\n"
-        f"Error: {error_message or 'Unknown error'}"
+        f"Paper Bridge Cleaner Failed\n\n"
+        f"Date Range: {date_range}\n"
+        f"Error: {error}"
+    )
+    sns.publish(
+        TopicArn=topic_arn, Message=message, Subject="Paper Bridge Cleaner Failure"
     )
 
-    sns.publish(TopicArn=topic_arn, Message=message, Subject="Paper Bridge Failure")
+
+def lambda_handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
+    start_date, end_date = "", ""
+    config, boto_session = setup_dependencies()
+    try:
+        target_date_str, days_back, days_range = parse_event_params(event)
+
+        target_datetime = parse_target_date(target_date_str)
+        start_date, end_date = calculate_date_range(
+            config, target_datetime, days_back, days_range
+        )
+        logger.info("Calculated deletion range: '%s' to '%s'", start_date, end_date)
+
+        base_path = f"/{config.resources.project_name}-{config.resources.stage}"
+        neptune_endpoint = get_ssm_param_value(
+            boto_session, f"{base_path}/{SSMParams.NEPTUNE_ENDPOINT.value}"
+        )
+        opensearch_endpoint = get_ssm_param_value(
+            boto_session, f"{base_path}/{SSMParams.OPENSEARCH_ENDPOINT.value}"
+        )
+
+        cleaner = Cleaner(
+            boto_session,
+            neptune_endpoint,
+            opensearch_endpoint.replace("https://", ""),
+            config.cleaner.opensearch_indexes,
+            region_name=config.resources.default_region_name,
+        )
+
+        # Diagnostic escape hatch: run an arbitrary Gremlin query and return its
+        # result. Used to isolate which traversal trips Neptune's memory limit.
+        # Guarded behind an explicit event key so it never runs on the schedule.
+        diag_query = event.get("DIAG_QUERY")
+        if diag_query:
+            logger.info("DIAG query: %s", diag_query)
+            diag_result = cleaner.neptune_client._submit_query(diag_query)
+            return {
+                "statusCode": 200,
+                "body": "diag",
+                "result": str(diag_result)[:2000],
+            }
+
+        result = cleaner.delete_documents_by_date_range(
+            start_date=start_date, end_date=end_date
+        )
+        logger.info("Deletion process completed. Result: '%s'", result)
+
+        return {"statusCode": 200, "body": "Success", "result": result}
+
+    except Exception as e:
+        error_message = (
+            f"Failed to clean documents for range '{start_date}' to '{end_date}': {e}"
+        )
+        logger.exception(error_message)
+
+        topic_arn = EnvVars.TOPIC_ARN.env_value
+        if is_running_in_aws() and topic_arn:
+            send_failure_notification(
+                boto_session, topic_arn, f"'{start_date}' to '{end_date}'", e
+            )
+
+        return {"statusCode": 500, "body": error_message}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Paper Bridge: A service that curates and summarizes arXiv papers daily"
+        description="Clean old documents from Paper Bridge."
     )
     parser.add_argument(
         "--target-date",
         type=str,
-        default=None,
-        help="Target date to fetch papers in 'YYYY-MM-DD' format",
+        help="Target date in 'YYYY-MM-DD' format. Defaults to yesterday.",
     )
     parser.add_argument(
-        "--days-back",
-        type=int,
-        default=None,
-        help="Number of days to go back from target date",
+        "--days-back", type=int, help="Number of days to go back from target date."
     )
     parser.add_argument(
-        "--days-range",
-        type=int,
-        default=None,
-        help="Number of days range to delete",
+        "--days-range", type=int, help="Number of days in the deletion range."
     )
     args = parser.parse_args()
 
-    target_date_str = (
-        None
-        if args.target_date and args.target_date.lower() == NULL_STRING
-        else args.target_date
-    )
-    days_back = (
-        None
-        if args.days_back is not None and str(args.days_back).lower() == NULL_STRING
-        else args.days_back
-    )
-    days_range = (
-        None
-        if args.days_range is not None and str(args.days_range).lower() == NULL_STRING
-        else args.days_range
-    )
-
-    logger.info(
-        "Processing cleaner with target_date='%s', days_back='%s', days_range='%s'",
-        target_date_str or "",
-        days_back or "",
-        days_range or "",
-    )
-
-    event = {
-        "TARGET_DATE": target_date_str,
-        "DAYS_BACK": days_back,
-        "DAYS_RANGE": days_range,
+    event_payload = {
+        "TARGET_DATE": args.target_date,
+        "DAYS_BACK": args.days_back,
+        "DAYS_RANGE": args.days_range,
     }
+    logger.info("Running cleaner locally with payload: '%s'", event_payload)
 
-    result = lambda_handler(event, None)
-    exit_code = 0 if result["status"] == 200 else 1
-    sys.exit(exit_code)
+    result = lambda_handler(event_payload, None)
+    sys.exit(0 if result["statusCode"] == 200 else 1)

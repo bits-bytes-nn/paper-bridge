@@ -1,24 +1,26 @@
 import argparse
 import functools
-import json
 import re
-import requests
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
+from typing import Any
+
+import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from llama_index.core.types import BaseOutputParser
+
 from .logger import logger
 
 DEFAULT_MESSAGE: str = "This is a summary of the paper."
 
 
 class HTMLTagOutputParser(BaseOutputParser):
-    def __init__(self, tag_names: Union[str, Tuple[str, ...]], verbose: bool = False):
+    def __init__(self, tag_names: str | tuple[str, ...], verbose: bool = False):
         self.tag_names = tag_names
         self.verbose = verbose
 
-    def parse(self, text: str) -> Union[str, Dict[str, str]]:
+    def parse(self, text: str) -> str | dict[str, str]:
         if not text:
             return {} if isinstance(self.tag_names, tuple) else ""
 
@@ -26,7 +28,7 @@ class HTMLTagOutputParser(BaseOutputParser):
             logger.debug("Parsing text: %s", text)
 
         soup = BeautifulSoup(text, "html.parser")
-        parsed: Dict[str, str] = {}
+        parsed: dict[str, str] = {}
 
         tag_names = (
             self.tag_names if isinstance(self.tag_names, tuple) else [self.tag_names]
@@ -42,8 +44,8 @@ class HTMLTagOutputParser(BaseOutputParser):
         )
 
     @property
-    def output_type(self) -> Type[Union[str, Dict[str, str]]]:
-        return Dict[str, str] if isinstance(self.tag_names, tuple) else str
+    def output_type(self) -> type[str | dict[str, str]]:
+        return dict[str, str] if isinstance(self.tag_names, tuple) else str
 
 
 def arg_as_bool(value: Any) -> bool:
@@ -58,29 +60,6 @@ def arg_as_bool(value: Any) -> bool:
             return False
 
     raise argparse.ArgumentTypeError("Boolean value expected")
-
-
-def arg_as_list(value: Optional[str]) -> Optional[List[str]]:
-    if value is None or value.lower() == "none":
-        return None
-
-    try:
-        items = json.loads(value)
-        if isinstance(items, str):
-            return [items.strip()]
-        if isinstance(items, list):
-            return items
-    except json.JSONDecodeError:
-        if value.strip().startswith("[") and value.strip().endswith("]"):
-            try:
-                import ast
-
-                items = ast.literal_eval(value)
-                if isinstance(items, list):
-                    return items
-            except (SyntaxError, ValueError):
-                pass
-        return [value.strip()]
 
 
 def extract_text_from_html(html_content: str) -> str:
@@ -149,22 +128,28 @@ def measure_execution_time(func: Callable) -> Callable:
 
 
 def send_files_to_slack(
-    file_paths: List[Path],
+    file_paths: list[Path],
     slack_token: str,
     channel_id: str,
     message: str = DEFAULT_MESSAGE,
+    blocks: list[dict[str, Any]] | None = None,
 ) -> None:
     headers = {
         "Authorization": f"Bearer {slack_token}",
     }
 
-    if message:
+    if message or blocks:
         try:
             message_headers = {
                 "Authorization": f"Bearer {slack_token}",
                 "Content-Type": "application/json",
             }
-            message_payload = {"channel": channel_id, "text": message}
+            message_payload: dict[str, Any] = {
+                "channel": channel_id,
+                "text": message or DEFAULT_MESSAGE,
+            }
+            if blocks:
+                message_payload["blocks"] = blocks
             message_response = requests.post(
                 "https://slack.com/api/chat.postMessage",
                 headers=message_headers,

@@ -4,6 +4,12 @@ variable "project_name" {
   nullable    = false
 }
 
+variable "stage" {
+  description = "Deployment stage; must match the app config (Resources.stage). Namespaces the endpoint SSM parameter as /{project_name}-{stage}/*."
+  type        = string
+  default     = "dev"
+}
+
 variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
@@ -112,8 +118,20 @@ variable "apply_immediately" {
   default     = false
 }
 
+variable "allow_major_version_upgrade" {
+  description = "Allow in-place Neptune major-version upgrades (required by AWS when engine_version crosses a major boundary, e.g. 1.2.x -> 1.4.x)."
+  type        = bool
+  default     = true
+}
+
 variable "enable_audit_log" {
   description = "Enable Neptune audit logging to CloudWatch Logs"
+  type        = bool
+  default     = true
+}
+
+variable "skip_final_snapshot" {
+  description = "Whether to skip the final snapshot when the cluster is destroyed. Defaults to false (a final snapshot is taken) to prevent data loss."
   type        = bool
   default     = false
 }

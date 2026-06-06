@@ -19,6 +19,7 @@ module "client" {
   source = "./modules/client"
 
   project_name                   = var.project_name
+  stage                          = var.stage
   bedrock_region_name            = var.bedrock_region_name
   use_graph_rag                  = var.use_graph_rag
   vpc_id                         = module.base.vpc.id
@@ -44,6 +45,7 @@ module "neptune" {
   source = "./modules/neptune"
 
   project_name              = var.project_name
+  stage                     = var.stage
   vpc_id                    = module.base.vpc.id
   private_subnet_ids        = module.base.private_subnet_ids
   client_security_group_ids = [module.client.security_group_id]
@@ -52,7 +54,13 @@ module "neptune" {
   min_ncu                   = var.neptune_min_capacity
   max_ncu                   = var.neptune_max_capacity
   engine_version            = var.neptune_engine_version
-  tags                      = local.common_tags
+  skip_final_snapshot       = var.neptune_skip_final_snapshot
+  enable_audit_log          = var.neptune_enable_audit_log
+  # Single-instance research/dev cluster with no production traffic: apply engine
+  # and parameter changes immediately rather than deferring to a maintenance
+  # window (so a major-version upgrade actually lands during apply).
+  apply_immediately = true
+  tags              = local.common_tags
 
   depends_on = [module.base, module.client]
 }
@@ -62,12 +70,16 @@ module "opensearch" {
   source = "./modules/opensearch"
 
   project_name              = var.project_name
+  stage                     = var.stage
   vpc_id                    = module.base.vpc.id
   private_subnet_ids        = module.base.private_subnet_ids
   client_security_group_ids = [module.client.security_group_id]
+  vpn_security_group_ids    = var.enable_vpn ? module.base.vpn_security_group_ids : []
   client_role_arn           = module.client.iam_role.arn
+  client_role_name          = module.client.iam_role.name
   enable_vpn                = var.enable_vpn
   client_user_name          = var.enable_vpn ? var.client_user_name : null
+  allow_public_access       = var.opensearch_allow_public_access
   tags                      = local.common_tags
 
   depends_on = [module.base, module.client]

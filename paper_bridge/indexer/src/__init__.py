@@ -6,15 +6,15 @@ from paper_bridge.indexer.src.aws_helpers import (
     wait_for_batch_job_completion,
 )
 from paper_bridge.indexer.src.constants import (
+    NULL_STRING,
     EnvVars,
     LocalPaths,
-    NULL_STRING,
     SSMParams,
 )
 from paper_bridge.indexer.src.fetcher import Paper, PaperFetcher
 from paper_bridge.indexer.src.indexer import run_extract_and_build
 from paper_bridge.indexer.src.logger import is_aws_env, logger
-from paper_bridge.indexer.src.utils import HTMLTagOutputParser, arg_as_bool, arg_as_list
+from paper_bridge.indexer.src.utils import HTMLTagOutputParser, arg_as_bool
 
 __all__ = [
     "EnvVars",
