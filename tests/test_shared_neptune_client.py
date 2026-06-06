@@ -83,6 +83,31 @@ class TestBestEffortDelete:
         assert result["deleted_nodes"]["facts"] == "error"
         assert result["deleted_nodes"]["source"] == 1
 
+    def test_collects_all_before_any_drop(self) -> None:
+        # Regression: chunks must not be dropped before later stages collect,
+        # or the chunk.in(MENTIONED_IN) traversal for statements breaks. Assert
+        # every collect (.fold()) query runs before the first drop (g.V(id).drop).
+        order: list[str] = []
+
+        def submit(query, bindings=None):
+            q = query.strip()
+            if q.endswith(".fold()"):
+                order.append("collect")
+                return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: [["v1"]]))
+            if q.startswith("g.V('v1'") and q.endswith(".drop()"):
+                order.append("drop")
+            return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: []))
+
+        nc = NeptuneClient("x")
+        nc._gremlin_client = MagicMock()
+        nc._gremlin_client.submit.side_effect = submit
+        nc.delete_document("2606.03458")
+
+        # All 5 collects happen before any drop.
+        first_drop = order.index("drop")
+        assert order[:first_drop].count("collect") == 5
+        assert "drop" not in order[:first_drop]
+
     def test_all_stages_succeed_is_success(self) -> None:
         nc = _client_with_submit(
             lambda q: [["v1"]] if q.strip().endswith(".fold()") else []

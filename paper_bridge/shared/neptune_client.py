@@ -206,22 +206,42 @@ class NeptuneClient:
                 """,
             }
 
-            # Best-effort per stage: a stage that exhausts its memory-limit
-            # retries must not abort the others. Otherwise one OOM-prone stage
-            # leaves the rest of this paper's subgraph behind AND the caller
-            # rebuilds on top of it, compounding orphans. Each stage records its
-            # deleted count or an "error" marker; the source vertex is always
-            # attempted last so the paper at least stops being discoverable.
+            # TWO PHASES, STRICTLY ORDERED: collect ALL ids first, THEN drop.
+            # The collect queries walk down from chunks (statements =
+            # chunk.in(MENTIONED_IN), etc.), so we must NOT drop chunks before
+            # the later stages have collected — dropping chunks first severs the
+            # traversal and every downstream stage collects 0 (the bug that left
+            # statements/topics/facts/entities behind).
+            #
+            # Best-effort per stage: a stage that errors (e.g. exhausts its
+            # memory-limit retries) is recorded as "error" and the others still
+            # run, so a re-index removes as much of the prior version as possible.
             deleted: dict[str, Any] = {}
             errors: list[str] = []
+            ids_by_stage: dict[str, list[Any]] = {}
+
+            # Phase 1: collect ids for every stage (no drops yet).
             for name, query in collect_queries.items():
                 try:
                     logger.info(
                         "Collecting '%s' ids for paper_id '%s'", name, paper_id
                     )
                     result = self._submit_query(query)
-                    ids = result[0] if result and result[0] else []
-                    logger.info("Collected %d '%s' ids; dropping", len(ids), name)
+                    ids_by_stage[name] = result[0] if result and result[0] else []
+                    logger.info(
+                        "Collected %d '%s' ids", len(ids_by_stage[name]), name
+                    )
+                except Exception as e:
+                    logger.error(
+                        "Failed to collect '%s' for paper_id '%s': %s", name, paper_id, e
+                    )
+                    deleted[name] = "error"
+                    errors.append(name)
+
+            # Phase 2: drop the collected ids by id (order no longer matters —
+            # the traversal is done).
+            for name, ids in ids_by_stage.items():
+                try:
                     self._drop_vertices_by_id(ids)
                     deleted[name] = len(ids)
                     logger.info(
@@ -229,7 +249,7 @@ class NeptuneClient:
                     )
                 except Exception as e:
                     logger.error(
-                        "Failed to delete '%s' for paper_id '%s': %s", name, paper_id, e
+                        "Failed to drop '%s' for paper_id '%s': %s", name, paper_id, e
                     )
                     deleted[name] = "error"
                     errors.append(name)
