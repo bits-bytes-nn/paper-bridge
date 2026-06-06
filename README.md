@@ -37,7 +37,9 @@ cross-region inference profiles.
 1. EventBridge triggers the Batch job at scheduled times
 2. Fetches candidate papers from HF Daily Papers, then **selects + de-duplicates
    across days** with a configurable popularity + recency scorer (`shared/paper_selection.py`)
-3. Downloads PDFs and metadata via the [arXiv Python API](https://pypi.org/project/arxiv/)
+3. Downloads PDFs from the static `arxiv.org/pdf` host (Retry-After aware) and
+   fetches metadata in one batched, rate-limit-serialized arXiv API call
+   (`shared/arxiv_client.py`)
 4. Parses text using [LlamaParse](https://www.llamaindex.ai/llamaparse) or [Unstructured](https://unstructured.io/)
 5. Extracts the main content (drops abstract/references) with Haiku 4.5
 6. Indexes into Neptune DB + OpenSearch Serverless using the [AWS GraphRAG toolkit](https://github.com/awslabs/graphrag-toolkit)

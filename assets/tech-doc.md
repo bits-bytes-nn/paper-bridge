@@ -59,22 +59,17 @@
 
 ### 다이어그램
 
-**AWS 아키텍처 (draw.io)**
+**AWS 아키텍처**
 
 ![Paper Bridge AWS 아키텍처](./paper-bridge-architecture.drawio.png)
 
-**워크플로 (Excalidraw, 손그림 스타일)**
+**워크플로**
 
 ![Paper Bridge 워크플로](./paper-bridge-workflow.png)
 
-**파이프라인 (Excalidraw, 손그림 스타일)**
+**파이프라인**
 
 ![Paper Bridge 파이프라인](./paper-bridge-pipeline.png)
-
-> 다이어그램 소스(`*.drawio`, `*.excalidraw`)와 렌더링된 PNG가 함께 커밋되어 있으며
-> `README.md`에서도 참조됩니다. PNG를 다시 생성하려면 draw.io는
-> `drawio -x -f png -s 2 -b 10 -o out.png in.drawio`, Excalidraw는
-> [excalidraw.com](https://excalidraw.com)에서 `.excalidraw`를 열어 PNG로 내보내면 됩니다.
 
 ### 컴포넌트 → AWS 매핑
 
@@ -95,24 +90,11 @@
 
 ### 상위 수준 데이터 흐름
 
-```
-EventBridge (cron)
-   │
-   ├── Indexer Batch job ──────────────────────────────────────────────┐
-   │     HF Daily Papers API ─► PaperScorer.select (per-day + cross-day  │
-   │       dedup) ─► arxiv download PDF ─► LlamaParse|Unstructured ─►     │
-   │       LLM main-content extraction (Haiku 4.5) ─► GraphRAG extract    │
-   │       (propositions + topics) ─► build ─► Neptune + OpenSearch ◄─────┘
-   │
-   ├── Summarizer Batch job
-   │     resolve_papers (URL | HF/arxiv) ─► parse HTML|PDF + VLM figure
-   │       captions ─► PaperSummarizer (Sonnet 4.6) ─► [optional]
-   │       PaperRetriever ─► LexicalGraphQueryEngine.query (Neptune+OSS)
-   │       ─► render (HTML→PNG) ─► SlackOutputHandler | GitHubOutputHandler
-   │
-   └── Cleaner Lambda
-         calculate_date_range ─► Neptune + OpenSearch delete-by-date-range
-```
+EventBridge(cron)가 세 워크플로를 각각 독립적으로 트리거합니다. Indexer/Summarizer는
+AWS Batch, Cleaner는 Lambda에서 실행되며, 모두 같은 Neptune + OpenSearch 저장소를
+공유합니다.
+
+![Paper Bridge 데이터 흐름](./paper-bridge-dataflow.drawio.png)
 
 ---
 
@@ -135,20 +117,22 @@ paper-bridge/
 │   ├── indexer_buildspec.yml      # CodeBuild buildspec (docker build+push)
 │   ├── summarizer_buildspec.yml
 │   └── cleaner_buildspec.yml
-├── tests/                         # 23개 테스트 모듈 (pytest); §11 참고
+├── tests/                         # 28개 테스트 모듈 (pytest); §11 참고
 │   └── conftest.py                # 격리(hermetic) 픽스처 (실제 AWS/네트워크 없음)
 │
 ├── paper_bridge/
 │   ├── shared/                    # 서브시스템 공통 라이브러리 (§4)
 │   │   ├── __init__.py            # Re-export 허브
-│   │   ├── constants.py           # Enum: EnvVars, SSMParams, URLs, Format, Language, LanguageModelId
+│   │   ├── constants.py           # Enum: EnvVars(S3_BUCKET_NAME 포함), SSMParams, URLs, Format, Language, LanguageModelId
 │   │   ├── base_models.py         # BaseModelWithDefaults (Pydantic None→default)
-│   │   ├── exceptions.py          # PaperBridgeError 계층
-│   │   ├── logger.py              # create_logger, is_aws_env, 로그 레벨 헬퍼
+│   │   ├── logger.py              # create_logger, is_aws_env, 로그 레벨 헬퍼 ("paper_bridge" 부모 로거도 구성)
 │   │   ├── text_utils.py          # Markdown→Slack 링크 변환, URL 중복 제거
 │   │   ├── paper_selection.py     # PaperScorer / SelectionConfig / ScoredPaper (§4.5)
 │   │   ├── prompt_caching.py      # apply_cache_point (prompt caching, core 0.14에서 활성화, §9.4)
-│   │   └── selection_eval.py      # precision_at_k, ndcg_at_k (오프라인 평가)
+│   │   ├── graph_schema.py        # Vertex/Edge 라벨 enum (어휘 그래프 스키마 단일 출처)
+│   │   ├── neptune_client.py      # NeptuneClient (통합: 2-phase 삭제, MemoryLimit 재시도) — §5.4
+│   │   ├── opensearch_client.py   # OpenSearchClient (통합: delete_by_query) — §5.4
+│   │   └── arxiv_client.py        # download_pdf(정적 호스트) + fetch_metadata(배치/직렬화) — §5.2
 │   │
 │   ├── indexer/                   # Indexing 단계 (§5)
 │   │   ├── main.py                # CLI 엔트리포인트 (Batch 컨테이너)
@@ -161,7 +145,7 @@ paper-bridge/
 │   │   └── src/
 │   │       ├── fetcher.py         # PaperFetcher, Paper, 본문 추출
 │   │       ├── indexer.py         # Extractor / Builder / run_extract_and_build (GraphRAG)
-│   │       ├── aws_helpers.py     # NeptuneClient, OpenSearchClient, SSM/Batch/Bedrock 헬퍼
+│   │       ├── aws_helpers.py     # shared Neptune/OpenSearch 클라이언트 re-export + SSM/Batch/Bedrock 헬퍼
 │   │       ├── constants.py       # ENTITY_CLASSIFICATIONS, LocalPaths
 │   │       ├── utils.py           # HTMLTagOutputParser, 인자 파싱, 타이밍
 │   │       ├── logger.py
@@ -196,11 +180,10 @@ paper-bridge/
 │       ├── requirements.txt
 │       ├── configs/
 │       │   ├── config.py          # Config: resources/cleaner
-│       │   ├── config.yaml
-│       │   └── config-template.yaml
+│       │   └── config.yaml
 │       └── src/
 │           ├── cleaner.py         # Cleaner 오케스트레이터
-│           ├── aws_helpers.py     # NeptuneClient, OpenSearchClient (delete-by-date-range)
+│           ├── aws_helpers.py     # shared Neptune/OpenSearch 클라이언트 re-export + SSM 헬퍼
 │           ├── constants.py
 │           └── logger.py
 │
@@ -231,8 +214,10 @@ paper-bridge/
   (Batch는 진짜 null을 전달할 수 없으므로 `"null"`이 `None`으로 왕복 변환됩니다.)
 - **`AutoNamedEnum`** — 멤버 값이 멤버 이름의 소문자인 `str, Enum`.
 - **`EnvVars`** — 모든 환경 변수 이름(예: `AWS_PROFILE_NAME`, `BEDROCK_REGION_NAME`,
-  `LLAMA_CLOUD_API_KEY`, `UPSTAGE_API_KEY`, `TOPIC_ARN`, personal/business Slack 토큰 & 채널 ID,
-  `GITHUB_TOKEN`, `LOG_LEVEL`). `os.getenv(self.name)`을 읽는 `.env_value`를 노출합니다.
+  `S3_BUCKET_NAME`, `LLAMA_CLOUD_API_KEY`, `UPSTAGE_API_KEY`, `TOPIC_ARN`, personal/business
+  Slack 토큰 & 채널 ID, `GITHUB_TOKEN`, `LOG_LEVEL`). `os.getenv(self.name)`을 읽는
+  `.env_value`를 노출합니다. `S3_BUCKET_NAME`은 계정/리전 종속값이라 config.yaml에 커밋하지 않고
+  Terraform(AWS) 또는 `.env`(로컬)가 주입하며, `Config.load()`가 이 env로 yaml 값을 덮어씁니다.
   > 미묘한 점: `.env_value`는 멤버 **이름**(예: `"AWS_PROFILE_NAME"`)을 키로 삼지만, 여기서는
   > `.value`도 동일한 문자열입니다. PDFParser는 오류 메시지에 환경 변수의 *이름*을 보여주기 위해
   > 의도적으로 `EnvVars.UPSTAGE_API_KEY.value`를 로깅합니다(`fetcher.py`).
@@ -273,11 +258,19 @@ YAML 설정에서 지정된 **활성** 모델은 응답/요약에 **Sonnet 4.6**
 `None`으로 로드하기 때문에 중요합니다. 이것이 없으면 부재한 선택적 키가 기본값으로 폴백되지 않고
 검증에 실패합니다. 모든 config 모델이 이를 상속합니다.
 
-### 4.3 `exceptions.py`
+### 4.3 `graph_schema.py` · 저장소 클라이언트
 
-`PaperBridgeError`(베이스) → `ConfigurationError`, `ValidationError`, `DatabaseError`,
-`ExternalServiceError`. (서브시스템 CLI들은 이 계층과 별개로 자체 로컬 예외인 `DateFormatError` /
-`IndexingError` / `SummarizationError`도 정의합니다.)
+- **`graph_schema.py`** — 어휘 그래프 라벨을 enum 한 곳에 정의: `Vertex`(`Source`, `Chunk`,
+  `Topic`, `Statement`, `Fact`, `Entity`)와 `Edge`(`EXTRACTED_FROM`, `MENTIONED_IN`,
+  `BELONGS_TO`, `SUPPORTS`, `SUBJECT`, `OBJECT`). 이전에는 Gremlin 쿼리 문자열에 흩어져 있던
+  스키마를 단일 출처로 모았습니다.
+- **`neptune_client.py` / `opensearch_client.py`** — indexer·cleaner가 공유하는 단일
+  저장소 클라이언트 구현. 상세는 §5.4. (각 앱의 `aws_helpers.py`가 re-export하는 facade.)
+- **`arxiv_client.py`** — `download_pdf`(정적 `arxiv.org/pdf` 호스트, Retry-After 백오프) +
+  `fetch_metadata`(단일 throttled 클라이언트로 배치 호출). 상세는 §5.2.
+
+> 서브시스템 CLI들은 자체 로컬 예외(`DateFormatError` / `IndexingError` /
+> `SummarizationError`)를 정의해 사용합니다.
 
 ### 4.4 `logger.py`
 
@@ -289,6 +282,10 @@ YAML 설정에서 지정된 **활성** 모델은 응답/요약에 **Sonnet 4.6**
   주어지고 **또한** AWS에서 실행 중이지 않을 때만 추가합니다. 콘솔 핸들러는 `sys.stdout`을 대상으로 하는
   `_FlushingStreamHandler`로, **레코드마다 flush**합니다 — 수명이 짧은 Batch/Lambda 컨테이너가 종료될 때
   버퍼에 남은 로그가 유실되지 않고 CloudWatch에 도달하도록 보장합니다.
+  > `create_logger`는 앱 로거 외에 공통 부모 `"paper_bridge"` 로거에도 핸들러를 붙입니다.
+  > `shared/*`의 모듈들은 `logging.getLogger(__name__)`(예:
+  > `paper_bridge.shared.neptune_client`)를 쓰는데, 이는 앱 로거의 형제라 직접 상속이 안 되므로,
+  > 공통 부모를 구성해 propagation으로 같은 핸들러를 타게 합니다.
 - `get_log_level()` — `LOG_LEVEL` 환경 변수를 읽습니다. `DEBUG` → `logging.DEBUG`, 그 외 `INFO`.
 
 ### 4.5 `paper_selection.py` — `PaperScorer` 알고리즘
@@ -341,17 +338,7 @@ return self._scorer.select(selected, len(selected), reference_date)
 
 즉, 하루별 상위 `papers_per_day`개를 고른 뒤, 전체 범위에 걸쳐 그 합집합을 `arxiv_id`로 중복 제거합니다.
 
-### 4.6 `selection_eval.py` — 오프라인 평가
-
-"랭킹이 좋은가?"를 수치로 바꾸는 순수 함수들입니다(테스트와 `SelectionConfig` 가중치에 대한 임시
-스윕에서 사용).
-
-- `precision_at_k(selected_ids, relevant_ids, k)` — 상위 k개 중 relevant의 비율. `k <= 0`이거나
-  선정이 비어 있으면 `0.0`.
-- `ndcg_at_k(selected_ids, gain_by_id, k)` — 표준 `log2(rank+1)` 할인(rank는 1부터)을 적용하고
-  ideal DCG(gain 내림차순 정렬)로 정규화한 NDCG. `[0, 1]`을 반환하며, ideal DCG가 0이면 `0.0`.
-
-### 4.7 `text_utils.py`
+### 4.6 `text_utils.py`
 
 - `convert_markdown_to_slack_links(text)` — `[text](url)` → Slack mrkdwn `<url|text>`로 재작성.
 - `extract_unique_urls(urls_str)` — 쉼표로 구분된 plain URL 또는 Markdown 링크 문자열을 분리하고,
@@ -389,63 +376,78 @@ main.main(target_date, days_to_fetch, arxiv_ids)
 `batch-job-definition-indexer`를 읽고, 타임스탬프가 붙은 작업 이름 `<project>-<stage>-indexer-<ts>`를
 만들고, 파라미터를 정제(리스트 → 쉼표 결합, `None` → `"null"`)한 뒤 제출하고 완료까지 폴링합니다.
 
-### 5.2 `fetcher.py` — 수집, 선정, 파싱, 추출
+### 5.2 `fetcher.py` — 수집 · 선정 · 파싱 · 본문 추출
 
-**`Paper`** (Pydantic): `arxiv_id`, `authors`(비어 있지 않음 검증), `published_at`, `title`,
-`summary`, `upvotes (≥0)`, `thumbnail?`, `content?`, `base_date`(`YYYY-MM-DD` 검증), `pdf_url?`,
-`status`(`PENDING`/`PROCESSED`/`FAILED`). `PaperLike`를 만족합니다.
+Indexer가 "어떤 논문을, 어떻게 텍스트로 만들지"를 담당하는 모듈입니다. 흐름은 크게
+**① 후보 수집 → ② 선정 → ③ PDF 다운로드+파싱 → ④ 본문 추출** 네 단계입니다.
 
-**`PaperFetcher`** — 주목할 상수: `MAX_WORKERS=4`, `MAX_PDF_PAGES=100`,
-`MAX_CONTENT_CHARS=200000`, `CONTENT_OFFSET=10000`, LlamaParse 재시도/타임아웃 설정,
-`ARXIV_DOWNLOAD_MAX_RETRIES=3`.
+**데이터 모델 — `Paper` (Pydantic).**
+한 편의 논문을 표현합니다. 주요 필드:
 
-- `_configure`는 `papers_per_day`/`days_to_fetch`를 최솟값으로 클램핑하고, config의 선정 가중치 +
-  `min_upvotes`로 `PaperScorer`를 만듭니다. LlamaCloud API 키(AWS에서는 SSM, 그 외에는
-  `LLAMA_CLOUD_API_KEY` 환경 변수)를 요구하며, `use_llama_parse=False`여도 `LlamaParse` 클라이언트를
-  생성합니다(파서는 플래그가 설정된 경우에만 *사용*됨).
-- `_init_llm_components` — `main_content_extraction_model_id`가 설정된 경우에만:
-  `MainContentExtractionPrompt`, cross-inference 모델 ID의 `Bedrock` LLM(temp 0,
-  `max_tokens=4096`), 그리고 `("main_content","start_marker","end_marker")`에 대한
-  `HTMLTagOutputParser`를 구성합니다.
+| 필드 | 설명 |
+|------|------|
+| `arxiv_id`, `title`, `authors`, `summary` | 식별·메타데이터 (authors는 비어 있지 않음 검증) |
+| `upvotes` (≥0), `published_at` | HuggingFace에서 받은 인기도/발행일 |
+| `base_date` (`YYYY-MM-DD` 검증) | 인덱싱 기준일 (삭제·검색의 키) |
+| `content?`, `pdf_url?`, `thumbnail?` | 파싱 후 채워지는 본문/링크 |
+| `status` | `PENDING` → `PROCESSED` / `FAILED` |
 
-**날짜 기준 수집 흐름:**
+**① 후보 수집.** 두 진입점이 있습니다.
 
-1. `_get_target_date` — 기본값은 UTC 자정 기준 **어제**.
-2. `_fetch_papers_by_date_range` — 윈도우 `[end - (days-1), end]`(`days = days_to_fetch or
-   self.days_to_fetch`)를 순회하며, 하루마다 `HF_DAILY_PAPERS?date=YYYY-MM-DD`에 대해
-   `_fetch_daily_papers(date_str)`를 호출(`_make_request`에서 지수 백오프 재시도).
-3. `_process_paper_metadata` — `Paper`를 만들고 upvote 임계값(`min_upvotes`)을 충족하는 경우에만 유지.
-4. `_select_papers` — `PaperScorer`로 하루별 상위 `papers_per_day`개, 그 다음 **cross-day 중복 제거**
-   (§4.5 참고).
-5. `_process_papers_concurrently` — `ThreadPoolExecutor(MAX_WORKERS)`로
-   `download_and_parse_paper(arxiv_id, use_llama_parse)`를 호출; `content`/`status`를 설정.
+- 날짜 기준(스케줄 기본): `_get_target_date`(기본 = UTC 자정 기준 **어제**)로 시작해
+  `_fetch_papers_by_date_range`가 `[end-(days-1), end]` 윈도우를 하루씩 돌며
+  `HF_DAILY_PAPERS?date=YYYY-MM-DD`를 호출합니다. **제목·저자·요약·upvotes를 모두
+  HuggingFace에서** 받으므로 이 경로는 rate-limit이 잦은 arXiv API를 거치지 않습니다.
+- ID 기준(수동): `fetch_papers_by_arxiv_ids`. 이때만 메타데이터를 arXiv에서 가져옵니다
+  (`shared/arxiv_client.fetch_metadata` — 모든 id를 **한 번의 배치 호출**로, 프로세스 전역
+  단일 throttled 클라이언트를 통해 직렬화).
 
-**다운로드 + 파싱:** `download_and_parse_paper`는 `arxiv` 클라이언트로 PDF를 임시 디렉터리에
-다운로드하고, `MAX_PDF_PAGES`(100)를 넘는 PDF는 거부한 뒤 `_process_pdf_content`를 호출합니다.
-- `use_llama_parse`인 경우: `_try_llama_parse`(markdown 결과, 최대 5회 재시도) → 본문 추출.
-- 그 외 / 실패 시: `_process_pdf_with_unstructured`(`partition_pdf`, `strategy="hi_res"`,
-  OCR `--dpi 300 --oem 1 --psm 6`) → 본문 추출.
+**② 선정 (`PaperScorer`).** 하루마다 인기도+최신성 점수로 상위 `papers_per_day`개를 고르고,
+그 다음 여러 날의 후보를 합쳐 **중복 제거(cross-day dedup)** 합니다(§4.5). `min_upvotes`
+미만은 후보에서 제외됩니다.
 
-**본문 추출 (`_extract_main_content`):** LLM 체인이 구성되어 있지 않으면 strip된 원본 텍스트를
-반환합니다. 그렇지 않으면 처음 `MAX_CONTENT_CHARS`(200k) 문자를 추출 LLM에 보내고,
-`start_marker`/`end_marker`(프롬프트상 각각 정확히 20자)를 파싱한 뒤 `text[start:end]`로 슬라이스합니다.
-`_find_content_range`는 start marker 뒤 `CONTENT_OFFSET=10000` 문자부터 end marker를 탐색하여 intro
-안에서 매칭되지 않도록 합니다. 마커가 없으면 `0`/`len(text)`로 폴백합니다.
+**③ 다운로드 + 파싱.** `_process_papers_concurrently`가
+`ThreadPoolExecutor(MAX_WORKERS=4)`로 논문별 `download_and_parse_paper`를 병렬 실행합니다.
+
+- PDF는 **정적 호스트 `arxiv.org/pdf/{id}`** 에서 직접 내려받습니다
+  (`shared/arxiv_client.download_pdf` — `Retry-After` 백오프 + `%PDF` 매직바이트 검증).
+  arXiv API를 안 거치므로 429에 막히지 않습니다.
+- `MAX_PDF_PAGES=100`를 넘는 PDF는 건너뜁니다(페이지 수를 셀 수 없는 손상 PDF도 안전하게 제외).
+- 파서: `use_llama_parse=True`면 **LlamaParse**(markdown, 최대 5회 재시도), 아니면/실패 시
+  **Unstructured**(`partition_pdf`, `strategy="hi_res"`, OCR).
+
+**④ 본문 추출 (`_extract_main_content`).** 초록·참고문헌 등 군더더기를 떼고 핵심 본문만
+남깁니다. 추출 LLM(Haiku 4.5)이 구성돼 있지 않으면 원문을 그대로 반환하고, 구성돼 있으면
+앞부분 `MAX_CONTENT_CHARS=200000`자를 LLM에 보내 `start_marker`/`end_marker`(각 20자)를 받아
+그 구간으로 슬라이스합니다. `_find_content_range`는 start marker 뒤 `CONTENT_OFFSET=10000`자
+지점부터 end marker를 찾아 intro 안에서 오탐하지 않게 하고, 마커가 없으면 전체 텍스트로
+폴백합니다.
+
+> 관련 설정·LLM 구성은 `_configure`(선정 가중치·클램핑·LlamaCloud 키)와
+> `_init_llm_components`(추출 프롬프트 + Bedrock LLM + `HTMLTagOutputParser`)에서 이뤄집니다.
 
 ### 5.3 `indexer.py` — GraphRAG 추출 + 빌드
 
-`run_extract_and_build(papers, config, boto3_session, output_dir, enable_batch_inference)`:
+논문 본문을 받아 어휘 그래프(Neptune)와 벡터 인덱스(OpenSearch)에 쓰는 단계입니다.
+엔트리는 `run_extract_and_build(papers, config, boto3_session, output_dir, enable_batch_inference)`:
 
-1. `_configure_graph_rag(config)` — config로부터 `GraphRAGConfig` 속성 설정: `extraction_llm`,
-   `response_llm`, `embed_model`, `embed_dimensions`(`ModelHandler.get_dimensions` 경유), 추출/빌드
-   worker & batch 크기, `batch_writes_enabled`, `enable_cache`.
-2. `_configure_logging()` — `LOG_LEVEL`로부터 toolkit 로그 레벨 설정.
+1. `_configure_graph_rag` — config 값을 `GraphRAGConfig` 전역에 주입: `extraction_llm`,
+   `response_llm`, `embed_model`, `embed_dimensions`(`ModelHandler.get_dimensions`), 추출/빌드
+   worker·batch 크기, `batch_writes_enabled`, `enable_cache`.
+2. `_configure_logging` — `LOG_LEVEL`로 toolkit 로그 레벨 설정.
 3. `_create_checkpoint` — `Checkpoint("<project>-<YYYY-MM-DD>", output_dir, enabled=True)`.
-4. `_setup_stores` — SSM에서 `neptune-endpoint` / `opensearch-endpoint`를 읽고,
-   `GraphStoreFactory.for_graph_store("neptune-db://<ep>")`,
-   `VectorStoreFactory.for_vector_store("aoss://<ep>")`, `NeptuneClient`, 그리고 인덱스 **`chunk`**와
-   **`statement`**에 대한 두 개의 `OpenSearchClient`를 구성.
-5. `Extractor(...).extract(papers)` → `Builder(...).build(extracted_docs)`.
+4. `_setup_stores` — SSM에서 엔드포인트를 읽어 `GraphStore`(`neptune-db://`),
+   `VectorStore`(`aoss://`), `NeptuneClient`, 그리고 **`chunk`/`statement`** 두 인덱스용
+   `OpenSearchClient`를 구성.
+5. **재색인 정리(추출 *전*)** → **추출** → **빌드**:
+   `builder.clean_existing_documents(papers의 arxiv_ids)` → `extractor.extract(papers)` →
+   `builder.build(extracted_docs)`.
+
+> **정리를 왜 추출보다 먼저 하나?** graphrag의 추출 파이프라인은 topic/entity provider가
+> graph-store-backed라 **추출 도중 이미 그래프에 노드를 씁니다**. 정리를 추출 뒤에 하면 이번
+> 실행이 막 쓴(아직 statement가 안 붙은) 새 chunk를 지우고 *이전* 완성본은 그대로 남겨
+> 고아(orphan)를 누적시킵니다. 그래서 정리는 `run_extract_and_build`에서 추출 이전에,
+> 논문의 `arxiv_id`만으로 수행합니다. 이로써 재색인이 멱등해집니다(중복/고아 없음).
 
 **`Extractor`:**
 
@@ -474,27 +476,56 @@ Architecture, Optimization Method, Performance Result, Prior Work, Research Fiel
 Research Institution, Research Problem, Researcher, Task, Training Data, Use Case, Validation Data`.
 
 **`Builder`:** `GraphConstruction.for_graph_store` + `VectorIndexing.for_vector_store`를
-`BuildPipeline`으로 연결합니다. 빌드 전에 `_clean_existing_documents`가 문서들의 `paper_id`를 수집하여
-Neptune과 두 OpenSearch 인덱스에서 **이전 버전을 모두 삭제**하므로, 논문 재색인이 멱등합니다(중복 없음).
-그 후 `extracted_docs | pipeline | sink`가 쓰기를 실행합니다.
+`BuildPipeline`으로 연결합니다. `build(extracted_docs)`는 `extracted_docs | pipeline | sink`로
+쓰기를 실행합니다. 이전 버전 삭제는 `clean_existing_documents(paper_ids)`가 담당하는데, 위에서
+설명했듯 **추출보다 먼저** 호출됩니다(통합 `NeptuneClient`/`OpenSearchClient` 사용 — §5.4).
 
-### 5.4 `aws_helpers.py`
+### 5.4 저장소 클라이언트 (`shared/neptune_client.py` · `shared/opensearch_client.py`)
 
-- **`NeptuneClient`** — `wss://<endpoint>:8182/gremlin`(`GraphSONSerializersV2d0`) 위로 Gremlin
-  클라이언트를 lazy하게 엽니다. 어휘 그래프 스키마에 대해 신중하게 순서를 잡은 Gremlin traversal로
-  논문별 삭제를 구현하며, 삭제 순서는 `entities → facts → statements → topics → chunks → source`
-  입니다. 다른 논문이 참조하는 **공유** fact/entity는 삭제되지 않도록 안전장치를 둡니다. 또한
-  `delete_documents_by_date` / `delete_documents_by_date_range`(`__Source__.base_date` 질의),
-  `delete_all_documents`, `summarize_deletion_results`를 지원합니다.
-- **`OpenSearchClient`** — `AWS4Auth`를 통한 `aoss` SigV4 인증. `metadata.source.metadata.paper_id`
-  / `.base_date`에 매칭되는 문서를 삭제하며, 날짜 범위 검색은 OpenSearch `range` 쿼리(size 10000)를
-  사용합니다.
-- **`get_account_id`**, **`get_ssm_param_value`**(여기서는 실패 시 raise),
-  **`submit_batch_job`**, **`wait_for_batch_job_completion`**(30초마다 폴링).
-- **`get_cross_inference_model_id(session, model_id, region)`** — cross-region inference 헬퍼(§9
-  참고): 모델 ID 앞에 `apac`(`ap-*` 리전) 또는 리전의 앞 두 글자(예: `us`)를 붙이고,
-  `bedrock:list_inference_profiles(typeEquals=SYSTEM_DEFINED)`를 확인하여 프로필이 있으면 프로필 ID를,
-  없으면 순수 모델 ID를 반환합니다.
+> Neptune/OpenSearch 클라이언트는 indexer와 cleaner가 **공유하는 단일 구현**입니다.
+> `paper_bridge/shared/`에 살고, 각 앱의 `src/aws_helpers.py`는 이를 re-export하는 얇은
+> facade입니다. 그래프 라벨은 `shared/graph_schema.py`의 `Vertex`/`Edge` enum에 한 번만
+> 정의됩니다.
+
+**어휘 그래프 스키마** (엣지 방향 = out → in):
+
+```
+Chunk     ──EXTRACTED_FROM──►  Source      (chunk는 source 하나에 종속)
+Statement ──MENTIONED_IN────►  Chunk
+Statement ──BELONGS_TO──────►  Topic       (topic id는 source_id 해시 → source 고유)
+Fact      ──SUPPORTS────────►  Statement   (fact는 여러 paper가 공유 가능)
+Entity    ──SUBJECT/OBJECT──►  …           (entity도 공유 가능)
+```
+
+**`NeptuneClient`** — `wss://<endpoint>:8182/gremlin`(`GraphSONSerializersV2d0`)로 Gremlin을
+lazy하게 엽니다. 논문별 삭제(`delete_document`)는 메모리 안전성과 공유 노드 보존을 함께
+지키도록 설계됐습니다:
+
+- **2단계 삭제.** 먼저 지울 정점 id를 *모두 수집*하고, 그다음 id로 50개씩 배치 drop합니다.
+  chunk를 먼저 지우면 `chunk.in(MENTIONED_IN)` 같은 하위 traversal이 끊기므로, 수집을 전부
+  마친 뒤에 삭제합니다.
+- **per-hop `dedup()`.** 모든 `.in()`/`.out()` 홉마다 dedup을 넣어, 중복 경로가 곱집합으로
+  불어나 `MemoryLimitExceededException`이 나는 것을 막습니다(Serverless에서 검증).
+- **공유 노드 보존.** chunk/statement/topic은 source 고유라 도달하는 대로 삭제합니다.
+  fact/entity는 공유 가능하므로, 후보를 *그 owner id들과 함께* 수집해(`project('id','owners')`)
+  **owner 집합이 이 논문이 수집한 statement/fact id의 부분집합일 때만** 삭제합니다 —
+  "이 논문만 쓰는가"를 정확히 판정하며, Gremlin `count()`로는 표현할 수 없는 조건입니다.
+- **MemoryLimit 재시도.** Serverless가 버스트에 스케일업하기 전 일시적 OOM은 지수 백오프로
+  재시도합니다. 단계별 best-effort(한 단계 실패가 나머지를 막지 않음).
+- 그 밖에 `delete_documents_by_date(_range)`(Python 측 `base_date` 필터),
+  `delete_all_documents`, `summarize_deletion_results`를 제공합니다.
+
+**`OpenSearchClient`** — `AWS4Auth` 기반 `aoss` SigV4 인증. 모든 삭제는 **`delete_by_query`**
+한 번으로 처리합니다(`metadata.source.metadata.paper_id` term, 또는 `base_date` term/range).
+이전 indexer 구현이 쓰던 "검색 후 id별 삭제"는 기본 10건 cap 때문에 11번째부터 고아 벡터를
+남겼는데, 이를 제거했습니다.
+
+**기타 헬퍼** (`indexer/src/aws_helpers.py`에 잔존):
+`get_account_id`, `get_ssm_param_value`(실패 시 raise), `submit_batch_job`,
+`wait_for_batch_job_completion`(30초 폴링),
+`get_cross_inference_model_id(session, model_id, region)` — 모델 ID 앞에 `apac`(`ap-*`) 또는
+리전 앞 두 글자(`us` 등)를 붙이고 `bedrock:list_inference_profiles`로 확인해 프로필 ID 또는
+순수 모델 ID를 반환(§9).
 
 ### 5.5 Indexer 설정 (`configs/config.py` + `config.yaml`)
 
@@ -1055,7 +1086,7 @@ buildspec이 `docker build -f paper_bridge/<app>/Dockerfile .`를 repo 루트에
 
 | Job | 하는 일 |
 |-----|---------|
-| **lint** | `ruff check`, `black --check`, `mypy`(`continue-on-error`로 비차단). |
+| **lint** | `ruff check`, `black --check`, 그리고 **mypy 2단계**: `paper_bridge/shared`는 **차단(blocking)** 게이트(완전 타입), 나머지 전체는 `continue-on-error` 비차단 — 모듈별로 점진적으로 차단 범위를 넓히는 방식. |
 | **test** | py3.11; `poetry install --with dev`로 설치(단일 진실 공급원, 손으로 큐레이션한 pip 리스트 아님). 무거운 GraphRAG/Bedrock 백엔드는 lazy import되고 단위 테스트가 이를 mock하므로, 라이브 AWS/DB 스택 없이 스위트가 실행됨. 커버리지(term-missing + xml)와 함께 `pytest` 실행, `coverage.xml` 업로드. |
 | **security** | `bandit -r paper_bridge -ll`과 `pip-audit`(둘 다 `continue-on-error`로 비차단/보고 — `\|\| true`로 마스킹하지 않음). |
 | **docker** | Matrix `[cleaner, indexer, summarizer]`; 각 이미지를 **repo 루트** 컨텍스트로 빌드(push 없음, GHA 캐시) 후 smoke-import 단계 실행. shared 패키지 import를 검증하고, summarizer에 대해서는 graphrag + bedrock-converse 백엔드의 공존 import를 검증. |
@@ -1082,12 +1113,12 @@ Pytest 설정(`pyproject.toml`): `testpaths=["tests"]`, `pythonpath=["."]`, `asy
 `unit`/`integration`. 커버리지는 `paper_bridge` 전체(tests + `__init__.py` 제외)입니다.
 `tests/conftest.py`는 테스트를 격리 상태로 유지합니다: AWS 주입 환경 변수를 지우고(`is_aws_env()`를
 결정적으로 만듦), 더미 AWS 자격 증명, `SimpleNamespace` `fake_paper`, `responses` 캡처 리스트를
-제공합니다. 23개 테스트 모듈이 config, scorer, selection eval, pipeline, Slack 블록/파일 업로드, text
-utils, 로거, AWS 통합(moto), 그리고 mock 기반 retriever/summarizer 로직 등을 커버합니다. 현재 스위트는
-**스킵 0건으로 ~344건이 통과**합니다. retriever.py/summarizer.py는 이제 실제 mock 기반 단위 테스트
-커버리지(`tests/test_retriever_logic.py`, `tests/test_summarizer_logic.py`)를 가지며 — 각각 0%에서
-약 54%/약 80%로 향상되었습니다. `tests/test_config_files_parse.py`는 배포되는 config.yaml 파일들을
-파싱합니다.
+제공합니다. 28개 테스트 모듈이 config, scorer, pipeline, Slack 블록/파일 업로드, text utils, 로거,
+AWS 통합(moto), mock 기반 retriever/summarizer 로직, 그리고 공유 저장소·arXiv 클라이언트
+(`test_shared_neptune_client.py`, `test_shared_opensearch_client.py`, `test_arxiv_client.py`)를
+커버합니다. 현재 스위트는 **스킵 1건으로 ~371건이 통과**합니다. 공유 Neptune/OpenSearch 클라이언트는
+2단계 삭제·공유 노드 보존·MemoryLimit 재시도·`delete_by_query` 등을 단위 테스트로 검증하며,
+`tests/test_config_files_parse.py`는 배포되는 config.yaml 파일들을 파싱합니다.
 
 ---
 
