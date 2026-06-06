@@ -8,8 +8,8 @@ PDF URL via the API even though it is derivable.
 This module separates the two needs:
 
 - `download_pdf` pulls bytes straight from the static, un-rate-limited
-  ``arxiv.org/pdf/{id}`` host with a shared httpx client that honors
-  ``Retry-After`` — no API call at all.
+  ``arxiv.org/pdf/{id}`` host over httpx, honoring ``Retry-After`` — no API
+  call at all.
 - `fetch_metadata` uses a single, process-wide, serialized ``arxiv.Client`` and
   batches every id into one ``Search(id_list=[...])`` call, so metadata costs
   O(1) API requests per run instead of O(papers), and never runs concurrently.
@@ -65,6 +65,16 @@ def download_pdf(arxiv_id: str, dest: Path, sleep=time.sleep) -> Path | None:
                 response = client.get(url)
 
             if response.status_code == 200:
+                # arxiv.org/pdf occasionally returns 200 with an HTML "not yet
+                # available" interstitial for very new ids; only accept a real
+                # PDF (magic bytes) so a bad body isn't handed to the parser.
+                if not response.content.startswith(b"%PDF"):
+                    logger.error(
+                        "arXiv PDF '%s' returned non-PDF body (%d bytes); skipping",
+                        arxiv_id,
+                        len(response.content),
+                    )
+                    return None
                 dest.write_bytes(response.content)
                 logger.info("Downloaded arXiv PDF '%s' -> %s", arxiv_id, dest)
                 return dest

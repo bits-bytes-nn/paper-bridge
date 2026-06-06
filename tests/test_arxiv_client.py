@@ -78,6 +78,18 @@ class TestDownloadPdf:
             )
         assert out is None
 
+    def test_non_pdf_200_body_rejected(self, tmp_path: Path) -> None:
+        # arxiv.org/pdf can 200 with an HTML interstitial for brand-new ids;
+        # the magic-byte check must reject it rather than write a bad file.
+        dest = tmp_path / "p.pdf"
+        patcher, _ = _patch_client(
+            lambda url: _response(200, content=b"<html>not ready</html>")
+        )
+        with patcher:
+            out = arxiv_client.download_pdf("2606.03458", dest, sleep=lambda s: None)
+        assert out is None
+        assert not dest.exists()
+
     def test_non_retryable_status_returns_none(self, tmp_path: Path) -> None:
         patcher, _ = _patch_client(lambda url: _response(404))
         with patcher:
