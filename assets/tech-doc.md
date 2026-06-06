@@ -247,11 +247,14 @@ paper-bridge/
 | `CLAUDE_V4_OPUS` | `anthropic.claude-opus-4-20250514-v1:0` |
 | `CLAUDE_V4_1_OPUS` | `anthropic.claude-opus-4-1-20250805-v1:0` |
 | `CLAUDE_V4_5_OPUS` | `anthropic.claude-opus-4-5-20251101-v1:0` |
+| `CLAUDE_V4_6_OPUS` | `anthropic.claude-opus-4-6` |
+| `CLAUDE_V4_7_OPUS` | `anthropic.claude-opus-4-7` |
 | `CLAUDE_V4_8_OPUS` | `anthropic.claude-opus-4-8` |
 
 레지스트리에는 여러 모델이 등록돼 있지만, YAML 설정에서 실제로 **활성화**된 모델은 요약·응답·검색에
 **Sonnet 4.6**, 본문 추출과 그림 캡션에 **Haiku 4.5**입니다. 참고로 `CLAUDE_V4_6_SONNET`과
-`CLAUDE_V4_8_OPUS`는 `:N` 버전 접미사가 없는 순수(bare) ID입니다.
+`CLAUDE_V4_6_OPUS`/`CLAUDE_V4_7_OPUS`/`CLAUDE_V4_8_OPUS`는 `:N` 버전 접미사가 없는 순수(bare)
+ID입니다.
 
 ### 4.2 `base_models.py`
 
