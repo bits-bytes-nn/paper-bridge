@@ -117,7 +117,7 @@ paper-bridge/
 │   ├── indexer_buildspec.yml      # CodeBuild buildspec (docker build+push)
 │   ├── summarizer_buildspec.yml
 │   └── cleaner_buildspec.yml
-├── tests/                         # 28개 테스트 모듈 (pytest); §11 참고
+├── tests/                         # 25개 테스트 모듈 (pytest); §11 참고
 │   └── conftest.py                # 격리(hermetic) 픽스처 (실제 AWS/네트워크 없음)
 │
 ├── paper_bridge/
@@ -794,8 +794,10 @@ lambda_handler(event, context)
 `NeptuneClient`와 하나의 `OpenSearchClient`를 만듭니다. `delete_documents_by_date_range`는 Neptune에서
 (`__Source__.base_date`가 범위 내) 그리고 각 OpenSearch 인덱스에서
 (`metadata.source.metadata.base_date`에 대한 `range` 쿼리) 삭제하고 결합된 결과를 반환합니다. OpenSearch
-인덱스별 오류는 포착되어 한 인덱스 실패가 다른 인덱스를 중단시키지 않습니다. cleaner의 `aws_helpers.py`는
-indexer의 Neptune/OpenSearch 삭제 로직(스키마 인지 Gremlin traversal + AOSS 쿼리)을 미러링합니다.
+인덱스별 오류는 포착되어 한 인덱스 실패가 다른 인덱스를 중단시키지 않습니다. cleaner와 indexer는
+**동일한** `shared/neptune_client.py` · `shared/opensearch_client.py` 구현을 공유하며(각 앱의
+`aws_helpers.py`는 이를 re-export하는 facade), cleaner는 날짜 범위 삭제 메서드를, indexer는
+논문별 삭제 메서드를 호출합니다(§5.4).
 
 ---
 
@@ -1113,7 +1115,7 @@ Pytest 설정(`pyproject.toml`): `testpaths=["tests"]`, `pythonpath=["."]`, `asy
 `unit`/`integration`. 커버리지는 `paper_bridge` 전체(tests + `__init__.py` 제외)입니다.
 `tests/conftest.py`는 테스트를 격리 상태로 유지합니다: AWS 주입 환경 변수를 지우고(`is_aws_env()`를
 결정적으로 만듦), 더미 AWS 자격 증명, `SimpleNamespace` `fake_paper`, `responses` 캡처 리스트를
-제공합니다. 28개 테스트 모듈이 config, scorer, pipeline, Slack 블록/파일 업로드, text utils, 로거,
+제공합니다. 25개 테스트 모듈이 config, scorer, pipeline, Slack 블록/파일 업로드, text utils, 로거,
 AWS 통합(moto), mock 기반 retriever/summarizer 로직, 그리고 공유 저장소·arXiv 클라이언트
 (`test_shared_neptune_client.py`, `test_shared_opensearch_client.py`, `test_arxiv_client.py`)를
 커버합니다. 현재 스위트는 **스킵 1건으로 ~371건이 통과**합니다. 공유 Neptune/OpenSearch 클라이언트는
@@ -1220,11 +1222,11 @@ role 이름).
    `days_range: 365`(코드 기본 `7`, `config.py:20`)로 설정합니다. 이는 버그가 아니라 설정 선택이지만,
    코드상의 "기본값"이 배포 동작과 다르다는 의미입니다.
 
-3. **`get_cross_inference_model_id` / `HTMLTagOutputParser` / Neptune+OpenSearch 클라이언트의 중복.**
-   cross-inference 헬퍼와 `HTMLTagOutputParser`는 indexer와 summarizer의 `src/` 트리에 별도로 존재하고
-   (Neptune/OpenSearch 삭제 로직도 indexer와 cleaner의 `aws_helpers.py` 양쪽에 존재), 오늘은 일관적이지만
-   `shared/`에 중앙화되어 있지 않아 드리프트할 수 있습니다. (indexer의 `get_ssm_param_value`는 실패 시
-   raise하고, summarizer의 것은 `None`을 반환 — 두 복사본 사이의 실제 동작 차이입니다.)
+3. **`get_cross_inference_model_id` / `HTMLTagOutputParser`의 중복.**
+   cross-inference 헬퍼와 `HTMLTagOutputParser`는 아직 indexer와 summarizer의 `src/` 트리에 별도로
+   존재하여 드리프트 여지가 있습니다(향후 `shared/`로 통합 후보). (Neptune/OpenSearch 클라이언트는 이미
+   `shared/`로 통합되었습니다 — §5.4.) 또한 indexer의 `get_ssm_param_value`는 실패 시 raise하고
+   summarizer의 것은 `None`을 반환하는 동작 차이가 있습니다.
 
 4. **E2E 배포 검증 상태 (부분 검증).**
    스택을 실제 AWS 계정에 배포하여 검증했습니다: 인프라(Terraform)와 v3 이미지 빌드가 성공하고, config 로드

@@ -149,6 +149,14 @@ class NeptuneClient:
         return kept
 
     def delete_document(self, paper_id: str) -> dict[str, Any]:
+        # CONCURRENCY: the shared-node (fact/entity) ownership test snapshots
+        # owners during collection and drops later, so it is only correct when no
+        # other writer mutates the graph in that window. The indexer (re-index
+        # cleanup) and the cleaner Lambda must therefore NOT run concurrently
+        # against the same graph — they are scheduled at distinct times. If that
+        # ever changes, serialize them (single-flight) or re-validate ownership
+        # at drop time; otherwise a concurrently-added edge could let a shared
+        # fact be misclassified as solely-owned and deleted.
         if not paper_id:
             raise ValueError("'paper_id' must not be empty.")
         if not _PAPER_ID_RE.match(paper_id):
@@ -280,10 +288,16 @@ class NeptuneClient:
 
             try:
                 logger.info("Collecting 'entities' ids for paper_id '%s'", paper_id)
-                # An entity is deletable iff every fact referencing it is one of
-                # THIS paper's facts. Use the set of facts reachable from this
-                # paper's statements (the candidate facts before the owned-filter)
-                # as the ownership universe, intersected with what we will delete.
+                # An entity is deletable iff EVERY fact referencing it is being
+                # deleted (i.e. its owner set ⊆ fact_ids, the facts we already
+                # determined are owned solely by this paper). This is the
+                # corruption-safe choice: if any owning fact survives (e.g. a
+                # fact shared with another paper), that fact still points at the
+                # entity, so the entity must stay. Widening the universe to "all
+                # candidate facts" would delete entities that a surviving shared
+                # fact still references — leaving dangling edges. The trade-off
+                # is over-retention (entities co-owned by a shared fact are never
+                # reclaimed here), which is a benign leak, not corruption.
                 entity_ids = self._collect_owned(entity_owners_query, set(fact_ids))
                 ids_by_stage["entities"] = entity_ids
                 logger.info("Collected %d 'entities' ids", len(entity_ids))

@@ -5,6 +5,7 @@ After the refactor each subsystem ``logger.py`` is a thin shim over
 import sites rely on (``logger``, ``is_aws_env`` / ``is_running_in_aws``).
 """
 
+import io
 import logging
 from importlib import import_module
 
@@ -47,16 +48,17 @@ class TestSharedLogger:
             create_logger,
         )
 
-        lg = create_logger(
-            LoggerConfig(name="paper_bridge.test.flush2", level=logging.INFO)
-        )
+        create_logger(LoggerConfig(name="paper_bridge.test.flush2", level=logging.INFO))
+        # In-tree loggers attach their handler to the shared "paper_bridge"
+        # parent, not the leaf, so the leaf emits via propagation (no duplicate).
+        parent = logging.getLogger("paper_bridge")
         console = [
             h
-            for h in lg.handlers
+            for h in parent.handlers
             if isinstance(h, logging.StreamHandler)
             and not isinstance(h, logging.FileHandler)
         ]
-        assert len(console) == 1
+        assert len(console) >= 1
         assert isinstance(console[0], _FlushingStreamHandler)
         assert console[0].stream is sys.stdout
 
@@ -65,24 +67,56 @@ class TestSharedLogger:
         # (otherwise every line is logged multiple times).
         from paper_bridge.shared.logger import LoggerConfig, create_logger
 
-        name = "paper_bridge.test.idempotent"
-        cfg = LoggerConfig(name=name, level=logging.INFO)
-        first = create_logger(cfg)
-        console_after_first = [
-            h
-            for h in first.handlers
-            if isinstance(h, logging.StreamHandler)
-            and not isinstance(h, logging.FileHandler)
-        ]
+        cfg = LoggerConfig(name="paper_bridge.test.idempotent", level=logging.INFO)
         create_logger(cfg)
-        console_after_second = [
+        parent = logging.getLogger("paper_bridge")
+        before = sum(
+            isinstance(h, logging.StreamHandler)
+            and not isinstance(h, logging.FileHandler)
+            for h in parent.handlers
+        )
+        create_logger(cfg)
+        after = sum(
+            isinstance(h, logging.StreamHandler)
+            and not isinstance(h, logging.FileHandler)
+            for h in parent.handlers
+        )
+        assert before == 1
+        assert after == 1
+
+    def test_in_tree_leaf_emits_once_not_duplicated(self) -> None:
+        # Regression: an in-tree leaf logger must NOT also carry its own handler,
+        # or records print twice (leaf handler + propagation to the parent).
+        from paper_bridge.shared.logger import LoggerConfig, create_logger
+
+        leaf = create_logger(
+            LoggerConfig(name="paper_bridge.test.dup_check", level=logging.INFO)
+        )
+        leaf_console = [
             h
-            for h in first.handlers
+            for h in leaf.handlers
             if isinstance(h, logging.StreamHandler)
             and not isinstance(h, logging.FileHandler)
         ]
-        assert len(console_after_first) == 1
-        assert len(console_after_second) == 1
+        assert leaf_console == []  # handler lives on the parent, not the leaf
+        assert leaf.propagate is True
+
+        # A sibling shared module logger (getLogger(__name__)) emits once. Count
+        # via a dedicated capture handler on the parent (added/removed locally so
+        # this is isolated from other tests' handlers), with parent propagation
+        # to root disabled for the duration so a root handler can't double-count.
+        captured = io.StringIO()
+        cap_handler = logging.StreamHandler(captured)
+        parent = logging.getLogger("paper_bridge")
+        prev_propagate = parent.propagate
+        parent.propagate = False
+        parent.addHandler(cap_handler)
+        try:
+            logging.getLogger("paper_bridge.shared.neptune_client").info("ONCE")
+        finally:
+            parent.removeHandler(cap_handler)
+            parent.propagate = prev_propagate
+        assert captured.getvalue().count("ONCE") == 1
 
 
 # NOTE: import the submodule via import_module rather than

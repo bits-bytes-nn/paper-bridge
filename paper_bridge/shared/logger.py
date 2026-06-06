@@ -59,27 +59,36 @@ class LoggerConfig:
 
 
 def create_logger(config: LoggerConfig) -> logging.Logger:
-    """Create and configure a logger based on the provided configuration."""
-    logger = logging.getLogger(config.name)
-    logger.setLevel(config.level)
+    """Create and configure a logger based on the provided configuration.
+
+    Handlers are attached to the common ``paper_bridge`` parent logger (not to
+    every leaf), so that:
+      - modules using ``logging.getLogger(__name__)`` under ``paper_bridge.*``
+        (e.g. ``paper_bridge.shared.neptune_client``) emit through them via
+        propagation, and
+      - a leaf logger inside the ``paper_bridge`` tree does NOT get its own
+        duplicate handler (which, combined with propagation to the parent,
+        would print every record twice).
+
+    A configured name OUTSIDE the ``paper_bridge`` tree (e.g. the cleaner's
+    ``"app"``) gets handlers directly and is detached from root propagation.
+    """
     formatter = logging.Formatter(config.log_format)
 
-    _add_console_handler(logger, formatter)
+    # Decide where the handlers live: the shared parent for in-tree names,
+    # otherwise the leaf itself.
+    in_tree = config.name == _SHARED_ROOT or config.name.startswith(_SHARED_ROOT + ".")
+    handler_target = logging.getLogger(_SHARED_ROOT if in_tree else config.name)
+    handler_target.setLevel(config.level)
+    _add_console_handler(handler_target, formatter)
     if config.logs_dir_path and not is_aws_env():
-        _add_file_handler(logger, formatter, config.logs_dir_path)
+        _add_file_handler(handler_target, formatter, config.logs_dir_path)
 
-    # Also configure the shared "paper_bridge" parent logger so that modules
-    # using logging.getLogger(__name__) (e.g. paper_bridge.shared.neptune_client,
-    # which is a sibling — NOT a child — of the app's configured logger) still
-    # emit through the same console/file handlers via propagation. Without this
-    # their records reach only the unconfigured root and are dropped.
-    if config.name != _SHARED_ROOT:
-        shared_root = logging.getLogger(_SHARED_ROOT)
-        shared_root.setLevel(config.level)
-        _add_console_handler(shared_root, formatter)
-        if config.logs_dir_path and not is_aws_env():
-            _add_file_handler(shared_root, formatter, config.logs_dir_path)
-
+    logger = logging.getLogger(config.name)
+    logger.setLevel(config.level)
+    if not in_tree:
+        # Standalone tree (e.g. "app"): don't double-emit via the root logger.
+        logger.propagate = False
     return logger
 
 
