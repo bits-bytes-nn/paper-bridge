@@ -48,6 +48,7 @@ from .aws_helpers import (
     get_account_id,
     get_cross_inference_model_id,
     get_ssm_param_value,
+    summarize_deletion_results,
 )
 from .constants import ENTITY_CLASSIFICATIONS, SSMParams
 from .fetcher import Paper
@@ -340,7 +341,7 @@ class Builder(DocumentProcessor):
         results = self._neptune_client.batch_delete_documents(paper_id_list)
         logger.info(
             "Neptune deletion result: %s",
-            pformat(self._neptune_client.summarize_deletion_results(results)),
+            pformat(summarize_deletion_results(results)),
         )
 
         for client in self._open_search_clients:
@@ -348,7 +349,7 @@ class Builder(DocumentProcessor):
             logger.info(
                 "OpenSearch deletion result for index '%s': %s",
                 client.index,
-                pformat(client.summarize_deletion_results(results)),
+                pformat(summarize_deletion_results(results)),
             )
 
 
