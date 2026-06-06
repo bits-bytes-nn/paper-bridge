@@ -181,7 +181,6 @@ class Paper(BaseModel):
 class BaseParser:
     def __init__(self, timeout: int = 60) -> None:
         self.timeout = timeout
-        self.sync_client = httpx.Client(timeout=timeout, follow_redirects=False)
         self.async_client = httpx.AsyncClient(timeout=timeout, follow_redirects=False)
         self.url = None
 
