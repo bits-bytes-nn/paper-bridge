@@ -1,8 +1,23 @@
+<div align="center">
+
 # 🗞️ Paper Bridge
 
-**Paper Bridge** turns the day's most-discussed AI/ML papers into a short, trustworthy briefing — and, crucially, puts each paper *in context* by comparing it to related work through a knowledge graph.
+**Turns the day's most-discussed AI/ML papers into a short, trustworthy briefing — putting each paper in context against related work through a knowledge graph.**
 
-It reads the [HuggingFace Daily Papers](https://huggingface.co/papers) feed, builds a **GraphRAG lexical graph** from the papers it ingests, and then answers questions like:
+Daily arXiv pipeline on AWS · GraphRAG (Neptune + OpenSearch) · powered by Amazon Bedrock (Claude).
+
+[![CI](https://github.com/bits-bytes-nn/paper-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/bits-bytes-nn/paper-bridge/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC)
+![Bedrock](https://img.shields.io/badge/LLM-Amazon%20Bedrock%20(Claude)-green)
+
+🇰🇷 [한국어 README](./README.ko.md) · 📖 [Technical reference](./docs/tech-doc.md)
+
+</div>
+
+---
+
+**Paper Bridge** reads the [HuggingFace Daily Papers](https://huggingface.co/papers) feed, builds a **GraphRAG lexical graph** from the papers it ingests, and then answers questions like:
 
 - *"What are the recent major developments in this paper's specific technical field?"*
 - *"How does this paper differ from other recent work tackling the same problem?"*
@@ -29,7 +44,7 @@ Paper Bridge is three independent workflows that share one pair of data stores (
 
 ![Data flow](assets/paper-bridge-dataflow.drawio.png)
 
-> **Go deeper:** the full, line-by-line technical reference (every module, config field, and design decision) lives in [`assets/tech-doc.md`](assets/tech-doc.md).
+> **Go deeper:** the full, line-by-line technical reference (every module, config field, and design decision) lives in [`docs/tech-doc.md`](docs/tech-doc.md).
 
 ---
 
@@ -91,8 +106,10 @@ poetry run black --check .  # format check
 poetry run mypy paper_bridge/shared   # type check (shared/ is the blocking gate)
 ```
 
-CI runs on GitHub Actions — lint, format, type-check, tests + coverage, Docker builds, `terraform validate`, and a security scan. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Full build / deploy / configuration details are in [`assets/tech-doc.md`](assets/tech-doc.md) (§11–§12).
+CI runs on GitHub Actions — lint, format, type-check, tests + coverage, Docker builds, `terraform validate`, and a security scan. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Full build / deploy / configuration details are in [`docs/tech-doc.md`](docs/tech-doc.md) (§11–§12).
 
 ---
 
-📄 한국어 안내는 [README.ko.md](README.ko.md)를 참고하세요.
+## License
+
+MIT — see [LICENSE](LICENSE).
