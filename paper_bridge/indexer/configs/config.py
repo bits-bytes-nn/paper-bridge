@@ -45,6 +45,9 @@ _MODEL_INFO: dict[ModelIdType, ModelInfo] = {
     LanguageModelId.CLAUDE_V4_OPUS: ModelInfo(max_sequence_length=200000),
     LanguageModelId.CLAUDE_V4_1_OPUS: ModelInfo(max_sequence_length=200000),
     LanguageModelId.CLAUDE_V4_5_OPUS: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_6_OPUS: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_7_OPUS: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_8_OPUS: ModelInfo(max_sequence_length=200000),
 }
 
 
