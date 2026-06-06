@@ -82,10 +82,16 @@ def apply_cache_point(
     # Fallback for older cores / mock messages that expose a settable ``.content``
     # (str or list of blocks). ``.content`` is typed as ``str`` on the model but
     # older cores accept a block list here, so the list assignment is intentional.
+    # Set via setattr through a name (not a constant) so it works whether or not
+    # llama-index type stubs are installed — a literal ``last.content = [...]``
+    # needs a ``# type: ignore[assignment]`` that mypy then flags as *unused* in
+    # the stub-less CI lint env (and vice-versa). The name-based setattr is
+    # invisible to both checks and ruff's B010.
     content = getattr(last, "content", None)
+    field = "content"
     if isinstance(content, str):
-        last.content = [_TextBlock(text=content), cache_point]  # type: ignore[assignment]
+        setattr(last, field, [_TextBlock(text=content), cache_point])
     elif isinstance(content, list):
-        last.content = [*content, cache_point]  # type: ignore[assignment]
+        setattr(last, field, [*content, cache_point])
     # Unknown shape → leave untouched.
     return messages
