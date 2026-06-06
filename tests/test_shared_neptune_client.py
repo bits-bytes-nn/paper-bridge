@@ -63,7 +63,34 @@ class TestPaperIdValidation:
 
 
 @pytest.mark.unit
-class TestTwoPhaseDelete:
+class TestBestEffortDelete:
+    def test_one_failing_stage_does_not_abort_others(self) -> None:
+        # The 'facts' collect query exhausts retries; the other stages and the
+        # source drop must still run, and the result is marked error with the
+        # failing stage named.
+        def side_effect(q):
+            if "where(out('__SUPPORTS__')" in q:  # the facts collect query
+                raise Exception("MemoryLimitExceededException")
+            return [["v1"]] if q.strip().endswith(".fold()") else []
+
+        nc = _client_with_submit(side_effect)
+        result = nc.delete_document("2606.03458")
+
+        assert result["status"] == "error"
+        assert result["failed_stages"] == ["facts"]
+        # Other stages still deleted, and the source was still dropped.
+        assert result["deleted_nodes"]["chunks"] == 1
+        assert result["deleted_nodes"]["facts"] == "error"
+        assert result["deleted_nodes"]["source"] == 1
+
+    def test_all_stages_succeed_is_success(self) -> None:
+        nc = _client_with_submit(
+            lambda q: [["v1"]] if q.strip().endswith(".fold()") else []
+        )
+        result = nc.delete_document("2606.03458")
+        assert result["status"] == "success"
+        assert "failed_stages" not in result
+
     def test_collects_then_drops_by_id(self) -> None:
         # Each collect query (.fold()) yields a wrapped id list; the source drop
         # and the id-drop queries yield [].

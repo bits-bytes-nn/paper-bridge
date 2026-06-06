@@ -34,8 +34,8 @@ logger = logging.getLogger(__name__)
 # burst of queries (it has not scaled up its NCU yet). Retrying with backoff
 # gives it time to scale — the same query then succeeds.
 _MEM_LIMIT_MARKER = "MemoryLimitExceededException"
-_MEM_RETRY_MAX = 4
-_MEM_RETRY_BASE_DELAY = 3  # seconds; exponential: 3, 6, 12, ...
+_MEM_RETRY_MAX = 6
+_MEM_RETRY_BASE_DELAY = 3  # seconds; exponential: 3, 6, 12, 24, 48, ...
 
 # A paper_id is inlined into Gremlin (bindings unsupported on this endpoint), so
 # it must be validated to a safe character set to prevent query injection.
@@ -188,26 +188,48 @@ class NeptuneClient:
                 """,
             }
 
-            deleted: dict[str, int] = {}
+            # Best-effort per stage: a stage that exhausts its memory-limit
+            # retries must not abort the others. Otherwise one OOM-prone stage
+            # leaves the rest of this paper's subgraph behind AND the caller
+            # rebuilds on top of it, compounding orphans. Each stage records its
+            # deleted count or an "error" marker; the source vertex is always
+            # attempted last so the paper at least stops being discoverable.
+            deleted: dict[str, Any] = {}
+            errors: list[str] = []
             for name, query in collect_queries.items():
-                logger.info("Collecting '%s' ids for paper_id '%s'", name, paper_id)
-                result = self._submit_query(query)
-                ids = result[0] if result and result[0] else []
-                logger.info("Collected %d '%s' ids; dropping", len(ids), name)
-                self._drop_vertices_by_id(ids)
-                deleted[name] = len(ids)
-                logger.info(
-                    "Deleted %d '%s' for paper_id: '%s'", len(ids), name, paper_id
-                )
+                try:
+                    logger.info(
+                        "Collecting '%s' ids for paper_id '%s'", name, paper_id
+                    )
+                    result = self._submit_query(query)
+                    ids = result[0] if result and result[0] else []
+                    logger.info("Collected %d '%s' ids; dropping", len(ids), name)
+                    self._drop_vertices_by_id(ids)
+                    deleted[name] = len(ids)
+                    logger.info(
+                        "Deleted %d '%s' for paper_id: '%s'", len(ids), name, paper_id
+                    )
+                except Exception as e:
+                    logger.error(
+                        "Failed to delete '%s' for paper_id '%s': %s", name, paper_id, e
+                    )
+                    deleted[name] = "error"
+                    errors.append(name)
 
             # The source vertex itself is single and cheap to drop directly.
-            self._submit_query(f"{base_query}.drop()")
-            deleted["source"] = 1
+            try:
+                self._submit_query(f"{base_query}.drop()")
+                deleted["source"] = 1
+            except Exception as e:
+                logger.error("Failed to drop source for '%s': %s", paper_id, e)
+                deleted["source"] = "error"
+                errors.append("source")
 
             return {
-                "status": "success",
+                "status": "error" if errors else "success",
                 "paper_id": paper_id,
                 "deleted_nodes": deleted,
+                **({"failed_stages": errors} if errors else {}),
             }
 
         except Exception as e:
