@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 from typing import Any
 
 from gremlin_python.driver import client, serializer
@@ -28,6 +29,13 @@ from .graph_schema import Edge, Vertex
 # Use a module logger that inherits the handlers/level configured by whichever
 # app (indexer/cleaner) imports this; avoids each app having to inject its own.
 logger = logging.getLogger(__name__)
+
+# Neptune Serverless can transiently raise MemoryLimitExceededException under a
+# burst of queries (it has not scaled up its NCU yet). Retrying with backoff
+# gives it time to scale — the same query then succeeds.
+_MEM_LIMIT_MARKER = "MemoryLimitExceededException"
+_MEM_RETRY_MAX = 4
+_MEM_RETRY_BASE_DELAY = 3  # seconds; exponential: 3, 6, 12, ...
 
 # A paper_id is inlined into Gremlin (bindings unsupported on this endpoint), so
 # it must be validated to a safe character set to prevent query injection.
@@ -84,10 +92,34 @@ class NeptuneClient:
         return self._gremlin_client
 
     def _submit_query(
-        self, query: str, bindings: dict[str, Any] | None = None
+        self,
+        query: str,
+        bindings: dict[str, Any] | None = None,
+        sleep=time.sleep,
     ) -> list[Any]:
-        """Submit a Gremlin query with optional parameter bindings."""
-        return self.client.submit(query, bindings=bindings).all().result()
+        """Submit a Gremlin query, retrying on transient memory-limit errors.
+
+        Neptune Serverless can raise MemoryLimitExceededException during a burst
+        (before it scales NCU up). We retry with exponential backoff so the same
+        query succeeds once capacity is available; other errors propagate
+        immediately. ``sleep`` is injectable for tests.
+        """
+        for attempt in range(_MEM_RETRY_MAX):
+            try:
+                return self.client.submit(query, bindings=bindings).all().result()
+            except Exception as e:
+                if _MEM_LIMIT_MARKER not in str(e) or attempt == _MEM_RETRY_MAX - 1:
+                    raise
+                delay = _MEM_RETRY_BASE_DELAY * (2**attempt)
+                logger.warning(
+                    "Neptune memory limit hit (attempt %d/%d); retrying in %ds",
+                    attempt + 1,
+                    _MEM_RETRY_MAX,
+                    delay,
+                )
+                sleep(delay)
+        # Unreachable: the loop either returns or raises.
+        raise RuntimeError("unreachable")
 
     def _drop_vertices_by_id(self, vertex_ids: list[Any]) -> None:
         """Drop vertices by id in small batches (memory-safe, index-backed)."""

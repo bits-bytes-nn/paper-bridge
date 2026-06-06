@@ -156,6 +156,46 @@ class TestDateRange:
 
 
 @pytest.mark.unit
+class TestMemoryLimitRetry:
+    def test_retries_then_succeeds(self) -> None:
+        calls = {"n": 0}
+
+        def submit(query, bindings=None):
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise Exception("MemoryLimitExceededException: out of memory")
+            return SimpleNamespace(
+                all=lambda: SimpleNamespace(result=lambda: [42])
+            )
+
+        nc = NeptuneClient("x")
+        nc._gremlin_client = MagicMock()
+        nc._gremlin_client.submit.side_effect = submit
+        slept: list[int] = []
+
+        out = nc._submit_query("g.V().count()", sleep=slept.append)
+        assert out == [42]
+        assert calls["n"] == 3
+        assert slept == [3, 6]  # exponential backoff before the 2 retries
+
+    def test_non_memory_error_propagates_immediately(self) -> None:
+        nc = NeptuneClient("x")
+        nc._gremlin_client = MagicMock()
+        nc._gremlin_client.submit.side_effect = ValueError("bad query")
+        with pytest.raises(ValueError, match="bad query"):
+            nc._submit_query("g.bad()", sleep=lambda s: None)
+
+    def test_gives_up_after_max_retries(self) -> None:
+        nc = NeptuneClient("x")
+        nc._gremlin_client = MagicMock()
+        nc._gremlin_client.submit.side_effect = Exception(
+            "MemoryLimitExceededException"
+        )
+        with pytest.raises(Exception, match="MemoryLimitExceeded"):
+            nc._submit_query("g.V().count()", sleep=lambda s: None)
+
+
+@pytest.mark.unit
 class TestSummarize:
     def test_counts_success_and_error(self) -> None:
         results = [
