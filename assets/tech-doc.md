@@ -546,6 +546,14 @@ lazy하게 엽니다. 논문별 삭제(`delete_document`)는 메모리 안전성
 `paper_bridge/summarizer/`는 Batch 컨테이너로 실행됩니다. `main.py`는 **얇은 오케스트레이터**이고,
 실제 로직은 `src/pipeline.py`에 있습니다.
 
+> **이 서브시스템 공통 관례 — lazy import.** `fetcher.py`, `summarizer.py`, `retriever.py`는
+> 무거운 의존성(`BedrockConverse`, graphrag-lexical-graph 등)을 **모듈 상단이 아니라 실제로 쓰는
+> 메서드 안에서** import합니다. 타입 힌트는 `from __future__ import annotations` + `TYPE_CHECKING`
+> 블록으로만 가져옵니다. 덕분에 이 스택을 끌어오지 않고도 모듈을 import할 수 있어 — LLM을 mock하는
+> 단위 테스트가 빨라지고 테스트 수집이 가벼워집니다(§13 #1). graphrag v3와 bedrock-converse가 한
+> venv에 공존하므로 eager import도 동작하지만, 위 이점 때문에 lazy import를 관례로 유지합니다.
+> 아래 절에서는 이 점을 매번 반복하지 않습니다.
+
 ### 6.1 `main.py` → `pipeline.py`
 
 `main.main(...)`은 CLI 인자를 파싱하고 `Config`를 로드한 뒤, `pipeline.build_sessions`를 통해 두 개의
@@ -594,18 +602,11 @@ CLI 인자: `--target-date`, `--days-to-fetch`, `--arxiv-ids`, `--language`(`en`
 `Content`, `Figure`, `Paper`(indexer의 `Paper`에 `figures: list[Figure]` 추가)와 파서/fetcher를
 정의합니다.
 
-> **Lazy import 참고.** `fetcher.py`는 상단에 `from __future__ import annotations`를 두고,
-> `BedrockConverse`(`llama_index.llms.bedrock_converse`)를 `TYPE_CHECKING` 아래에서만 타입 import한 뒤
-> 실제 인스턴스화는 `_initialize_chain` 메서드 안에서 lazy하게 합니다. 이는 무거운 bedrock-converse /
-> aioboto3 스택을 끌어오지 않고도 모듈을 import할 수 있게 하여(LLM을 mock하는 단위 테스트, 빠른 import),
-> 좋은 관행으로 유지됩니다(§13 #1 참고). graphrag v3와 converse가 한 venv에 공존하므로 이는 더 이상
-> *충돌 회피*가 아닙니다.
->
 > **그림 분석은 `BedrockMultiModal`에서 마이그레이션되었습니다.** graphrag v3(core 0.14.20)는
-> `llama-index-multi-modal-llms-bedrock` 패키지(core 0.13.6에 고정 — v3와 비호환)를 제거하게 만들었고,
-> 그림 캡션은 이제 `BedrockConverse`가 `ChatMessage(blocks=[TextBlock, ImageBlock])`로 이미지를 직접
-> 처리합니다. `_initialize_chain`은 cross-region inference 프로필로 단일 `BedrockConverse`를 구성하고,
-> `Figure.from_llm`이 이를 호출합니다.
+> `llama-index-multi-modal-llms-bedrock` 패키지(core 0.13.6에 고정 — v3와 비호환)를 제거하게 만들었습니다.
+> 그래서 그림 캡션은 이제 `BedrockConverse`가 `ChatMessage(blocks=[TextBlock, ImageBlock])`로 이미지를
+> 직접 처리합니다. `_initialize_chain`이 cross-region inference 프로필로 단일 `BedrockConverse`를
+> 구성하고, `Figure.from_llm`이 이를 호출합니다.
 
 - `Figure.from_llm(...)` — async; 로컬/원격 이미지를 base64로 인코딩하고 `BedrockConverse`를
   `ChatMessage(blocks=[TextBlock, ImageBlock])` + `FigureAnalysisPrompt`로 호출하여 3문장의 `analysis`를
@@ -632,21 +633,14 @@ CLI 인자: `--target-date`, `--days-to-fetch`, `--arxiv-ids`, `--language`(`en`
   `HTMLTagOutputParser(("summary","tags","urls"))`로 파싱.
 - `summarize_batch(papers, max_concurrent=5)` — 동시성 제한이 있는 async fan-out; 논문별 실패는
   로깅되고 건너뜁니다(치명적이지 않음).
-- **Lazy import + prompt caching.** `BedrockConverse`는 `TYPE_CHECKING` 아래에서만 타입 import되고,
-  실제 인스턴스화는 `_initialize_llm` 메서드 안에서 lazy하게 이루어집니다. 무거운 bedrock-converse /
-  aioboto3 스택을 모듈 로드 시점에 끌어오지 않아, LLM을 mock하는 단위 테스트에서도 모듈을 import할 수 있고
-  테스트 수집이 빨라집니다(§13 #1). 또한 안정적인 논문 본문 prefix를 캐시하기 위해 `apply_cache_point`를
-  적용합니다(§9.4).
+- **Prompt caching.** 논문 본문은 한 번 정해지면 바뀌지 않는 안정적인 prefix이므로,
+  `apply_cache_point`로 이 구간을 캐시해 반복 호출 비용을 줄입니다(§9.4). (`BedrockConverse`는
+  `_initialize_llm`에서 lazy하게 인스턴스화됩니다 — 위 공통 관례 참고.)
 
 ### 6.5 `retriever.py` — GraphRAG 검색
 
-> **Lazy import 참고.** `retriever.py`는 `from __future__ import annotations`를 사용하고,
-> graphrag-lexical-graph(`set_logging_config`, `GraphStoreFactory`, `VectorStoreFactory`,
-> `LexicalGraphQueryEngine`, 각종 retriever / post-processor — 모두 `graphrag_toolkit.lexical_graph.*`)
-> 와 `BedrockConverse`를 **이를 사용하는 메서드 내부에서** lazy하게 import합니다. `BedrockConverse`는
-> `TYPE_CHECKING` 아래에서만 타입 import됩니다. v3 toolkit과 converse가 한 venv에 공존하므로 eager import도
-> 동작하지만, lazy import는 무거운 graph/embedding 스택 없이 모듈을 import할 수 있게 하여(백엔드를 mock하는
-> 단위 테스트, 빠른 테스트 수집) 좋은 관행으로 유지됩니다(§13 #1).
+> graphrag-lexical-graph(`GraphStoreFactory`, `VectorStoreFactory`, `LexicalGraphQueryEngine`,
+> 각종 retriever / post-processor)와 `BedrockConverse`는 모두 lazy하게 import됩니다 — 위 공통 관례 참고.
 
 이 모듈에는 두 개의 클래스가 있습니다. `Retriever`는 graphrag 쿼리 엔진을 감싼 저수준 래퍼이고,
 `PaperRetriever`는 그 위에서 여러 논문의 검색을 한 번에 처리하는 오케스트레이터입니다.
@@ -706,12 +700,15 @@ CLI 인자: `--target-date`, `--days-to-fetch`, `--arxiv-ids`, `--language`(`en`
   `is_arxiv_url`, `extract_arxiv_id`(`/abs|/pdf|/html/<id>`에 대한 정규식).
 - `ArxivInputHandler` — lazy 초기화된 `PaperFetcher`를 래핑; arXiv URL/ID를 정규화하고
   `fetch_papers_by_arxiv_ids`로 수집.
-- `GenericPDFHandler` — 임의의 PDF를 다운로드(httpx, 브라우저 UA, MD5-hash 임시 디렉터리 선택적)하고
-  `Paper`를 합성(id = URL MD5의 앞 12 hex, author `Unknown`). `parse_content`는 이제 PyMuPDF(`fitz`)로
-  실제 텍스트를 추출합니다(스텁 아님). `MAX_PDF_PAGES=100`, `MAX_CONTENT_CHARS=200_000`으로 상한을 둡니다.
-  generic 소스에는 신뢰할 만한 레이아웃 메타데이터가 없으므로 그림 추출은 시도하지 않으며 `figures`는 항상
-  비어 있습니다. `pipeline.fetch_paper_from_url`이 이를 호출하여 `paper.content`를 설정하므로, generic
-  URL도 arXiv처럼(텍스트만) 요약됩니다.
+- `GenericPDFHandler` — 임의의 PDF를 다운로드(httpx, 브라우저 UA, 선택적 MD5-hash 임시 디렉터리)하고
+  `Paper`를 합성합니다(id = URL MD5의 앞 12 hex). 제목과 저자는 **PDF 메타데이터에서 추출**합니다 —
+  제목은 PDF `/Title` 또는 1페이지의 가장 큰 폰트 텍스트, 저자는 PDF `/Author`를 쉼표·세미콜론·`and`·`&`
+  기준으로 분리. 둘 다 없으면 각각 `"Unknown Paper"` / `["Authors not available"]`로 폴백합니다(예전의
+  하드코딩된 `"Unknown"`을 대체). `parse_content`는 PyMuPDF(`fitz`)로 실제 본문 텍스트를 추출하며
+  (스텁 아님), `MAX_PDF_PAGES=100`·`MAX_CONTENT_CHARS=200_000`으로 상한을 둡니다. generic 소스에는
+  신뢰할 만한 레이아웃 메타데이터가 없어 그림은 추출하지 않으므로 `figures`는 항상 비어 있습니다.
+  `pipeline.fetch_paper_from_url`이 이를 호출해 `paper.content`를 채우므로, generic URL도 arXiv처럼
+  (텍스트만) 요약됩니다.
 
 ### 6.8 출력 핸들러 (`src/output_handlers/`)
 
@@ -1119,7 +1116,7 @@ Pytest 설정(`pyproject.toml`): `testpaths=["tests"]`, `pythonpath=["."]`, `asy
 제공합니다. 25개 테스트 모듈이 config, scorer, pipeline, Slack 블록/파일 업로드, text utils, 로거,
 AWS 통합(moto), mock 기반 retriever/summarizer 로직, 그리고 공유 저장소·arXiv 클라이언트
 (`test_shared_neptune_client.py`, `test_shared_opensearch_client.py`, `test_arxiv_client.py`)를
-커버합니다. 현재 스위트는 **스킵 1건으로 ~371건이 통과**합니다. 공유 Neptune/OpenSearch 클라이언트는
+커버합니다. 현재 스위트는 **스킵 1건으로 ~378건이 통과**합니다. 공유 Neptune/OpenSearch 클라이언트는
 2단계 삭제·공유 노드 보존·MemoryLimit 재시도·`delete_by_query` 등을 단위 테스트로 검증하며,
 `tests/test_config_files_parse.py`는 배포되는 config.yaml 파일들을 파싱합니다.
 
@@ -1211,10 +1208,8 @@ role 이름).
    처리되므로 `llama-index-multi-modal-llms-bedrock`(core 0.13.6 핀, v3와 비호환)이 제거되었습니다(§6.3).
 
    `retriever.py` / `summarizer.py` / `fetcher.py`의 **lazy import는 여전히 유지**되지만, 근거가
-   바뀌었습니다: 더 이상 "두 스택이 공존할 수 없어서"가 아니라(이제 공존함), **단위 테스트에서 무거운 ML
-   스택을 로드하지 않고도 모듈을 import할 수 있게 하고 import를 빠르게 유지**하기 위한 좋은 관행입니다. 세
-   파일 모두 `from __future__ import annotations`를 두고 무거운 타입은 `TYPE_CHECKING` 아래에서만 import하며,
-   인스턴스화는 이를 사용하는 메서드 내부에서 lazy하게 합니다.
+   바뀌었습니다: 더 이상 "두 스택이 공존할 수 없어서"가 아니라(이제 공존함), 단위 테스트 속도와 가벼운
+   import를 위한 관행입니다(§6 도입부의 공통 관례 참고).
 
 2. **Config 기본값 vs YAML 드리프트 (의도적이지만 알아둘 가치 있음).**
    `indexer/configs/config.yaml`은 여러 코드 기본값을 오버라이드합니다 —
@@ -1229,8 +1224,10 @@ role 이름).
    `shared/`로 통합되었습니다 — §5.4.) 또한 indexer의 `get_ssm_param_value`는 실패 시 raise하고
    summarizer의 것은 `None`을 반환하는 동작 차이가 있습니다.
 
-4. **E2E 배포 검증 상태 (부분 검증).**
-   스택을 실제 AWS 계정에 배포하여 검증했습니다: 인프라(Terraform)와 v3 이미지 빌드가 성공하고, config 로드
-   / 논문 수집(fetch) / Haiku 4.5 본문 추출(main-content extraction)이 정상 동작함을 확인했습니다. GraphRAG
-   **build** 단계에서 메모리 부족이 확인되어 indexer Batch 메모리를 8192 → 16384로 상향했습니다(§2, §10.1).
-   라이브 Neptune/OpenSearch에 대한 **GraphRAG build 전체 E2E 재검증은 아직 미완료**입니다.
+4. **E2E 배포 검증 상태 (전체 검증 완료).**
+   스택을 실제 AWS 계정(research / us-west-2)에 배포해 **세 워크플로를 모두 라이브로 검증**했습니다 —
+   indexer가 라이브 Neptune/OpenSearch에 그래프를 쓰고(재색인 후 고아 0개로 깨끗하게 재구축), summarizer가
+   GraphRAG 검색 + 요약을 수행해 Slack으로 전달하고, cleaner가 날짜 범위 삭제를 수행함을 확인했습니다.
+   GraphRAG **build** 단계는 처음 8192MB에서 OOM이 나 indexer Batch 메모리를 16384MB로 상향한 뒤
+   통과했습니다(§2, §10.1). 검증 과정에서 발견한 삭제 로직 버그들(엣지 방향, 정리 시점, 공유 노드 보존)은
+   모두 수정되어 재검증됐습니다(§5.4).

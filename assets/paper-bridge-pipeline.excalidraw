@@ -2,58 +2,721 @@
   "type": "excalidraw",
   "version": 2,
   "source": "paper-bridge",
-  "appState": { "viewBackgroundColor": "#ffffff", "gridSize": null },
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
   "files": {},
   "elements": [
-    { "type": "text", "id": "title", "x": 300, "y": 24, "width": 600, "height": 40, "text": "GraphRAG Pipeline  -  Index & Retrieve", "fontSize": 32, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "text", "id": "ilbl", "x": 70, "y": 96, "width": 280, "height": 28, "text": "INDEXING  (indexer/src/indexer.py)", "fontSize": 21, "fontFamily": 1, "strokeColor": "#1971c2" },
-
-    { "type": "rectangle", "id": "doc", "x": 70, "y": 140, "width": 170, "height": 80, "backgroundColor": "#ffd8a8", "fillStyle": "solid", "strokeColor": "#e8590c", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "doct", "x": 84, "y": 153, "width": 142, "height": 50, "text": "Paper text\n(SourceDocument)", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "chunk", "x": 290, "y": 140, "width": 180, "height": 80, "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeColor": "#1971c2", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "chunkt", "x": 304, "y": 150, "width": 152, "height": 60, "text": "Chunk\nSentenceSplitter\n1024 / 128", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "prop", "x": 520, "y": 140, "width": 200, "height": 80, "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeColor": "#1971c2", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "propt", "x": 534, "y": 150, "width": 172, "height": 60, "text": "Extract propositions\n+ topics + entities\n(Haiku 4.5)", "fontSize": 15, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "build", "x": 770, "y": 140, "width": 190, "height": 80, "backgroundColor": "#d0bfff", "fillStyle": "solid", "strokeColor": "#7048e8", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "buildt", "x": 784, "y": 150, "width": 162, "height": 60, "text": "Build pipeline\nGraphConstruction\n+ VectorIndexing", "fontSize": 15, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "nep", "x": 770, "y": 290, "width": 190, "height": 75, "backgroundColor": "#c3fae8", "fillStyle": "solid", "strokeColor": "#0ca678", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "nept", "x": 784, "y": 305, "width": 162, "height": 45, "text": "Neptune\nlexical graph", "fontSize": 17, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "vec", "x": 1000, "y": 290, "width": 200, "height": 75, "backgroundColor": "#c3fae8", "fillStyle": "solid", "strokeColor": "#0ca678", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "vect", "x": 1014, "y": 298, "width": 172, "height": 60, "text": "OpenSearch\ncohere embed v3\n1024-dim", "fontSize": 15, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "text", "id": "rlbl", "x": 70, "y": 440, "width": 320, "height": 28, "text": "RETRIEVAL  (summarizer/src/retriever.py)", "fontSize": 21, "fontFamily": 1, "strokeColor": "#5f3dc4" },
-
-    { "type": "rectangle", "id": "q", "x": 70, "y": 490, "width": 190, "height": 80, "backgroundColor": "#fff3bf", "fillStyle": "solid", "strokeColor": "#f08c00", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "qt", "x": 84, "y": 500, "width": 162, "height": 60, "text": "Paper + query\n\"compare to\nrelated work\"", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "trav", "x": 310, "y": 490, "width": 210, "height": 80, "backgroundColor": "#d0bfff", "fillStyle": "solid", "strokeColor": "#7048e8", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "travt", "x": 324, "y": 500, "width": 182, "height": 60, "text": "Traversal-based\nsearch over graph\n+ vector store", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "rerank", "x": 570, "y": 490, "width": 200, "height": 80, "backgroundColor": "#d0bfff", "fillStyle": "solid", "strokeColor": "#7048e8", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "rerankt", "x": 584, "y": 500, "width": 172, "height": 60, "text": "Rerank +\npost-process\n(diversity)", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "rectangle", "id": "ans", "x": 820, "y": 490, "width": 200, "height": 80, "backgroundColor": "#b2f2bb", "fillStyle": "solid", "strokeColor": "#2f9e44", "strokeWidth": 2, "roughness": 1, "roundness": { "type": 3 } },
-    { "type": "text", "id": "anst", "x": 834, "y": 500, "width": 172, "height": 60, "text": "Synthesized insight\n(Sonnet 4.6)\n+ references", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e" },
-
-    { "type": "arrow", "id": "a_doc_chunk", "x": 240, "y": 180, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#1971c2", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "doc", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "chunk", "fixedPoint": [0, 0.5] } },
-    { "type": "arrow", "id": "a_chunk_prop", "x": 470, "y": 180, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#1971c2", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "chunk", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "prop", "fixedPoint": [0, 0.5] } },
-    { "type": "arrow", "id": "a_prop_build", "x": 720, "y": 180, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#1971c2", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "prop", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "build", "fixedPoint": [0, 0.5] } },
-    { "type": "arrow", "id": "a_build_nep", "x": 860, "y": 220, "width": 0, "height": 70, "points": [[0,0],[0,70]], "strokeColor": "#0ca678", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "build", "fixedPoint": [0.5, 1] }, "endBinding": { "elementId": "nep", "fixedPoint": [0.5, 0] } },
-    { "type": "arrow", "id": "a_build_vec", "x": 920, "y": 220, "width": 180, "height": 70, "points": [[0,0],[180,70]], "strokeColor": "#0ca678", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "build", "fixedPoint": [0.5, 1] }, "endBinding": { "elementId": "vec", "fixedPoint": [0.5, 0] } },
-
-    { "type": "arrow", "id": "a_nep_trav", "x": 820, "y": 350, "width": -400, "height": 140, "points": [[0,0],[-400,140]], "strokeColor": "#7048e8", "strokeWidth": 2, "roughness": 1, "strokeStyle": "dotted", "endArrowhead": "arrow", "startBinding": { "elementId": "nep", "fixedPoint": [0.3, 1] }, "endBinding": { "elementId": "trav", "fixedPoint": [0.7, 0] } },
-    { "type": "arrow", "id": "a_vec_trav", "x": 1050, "y": 365, "width": -600, "height": 125, "points": [[0,0],[-600,125]], "strokeColor": "#7048e8", "strokeWidth": 2, "roughness": 1, "strokeStyle": "dotted", "endArrowhead": "arrow", "startBinding": { "elementId": "vec", "fixedPoint": [0.3, 1] }, "endBinding": { "elementId": "trav", "fixedPoint": [0.5, 0] } },
-
-    { "type": "arrow", "id": "a_q_trav", "x": 260, "y": 530, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#5f3dc4", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "q", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "trav", "fixedPoint": [0, 0.5] } },
-    { "type": "arrow", "id": "a_trav_rerank", "x": 520, "y": 530, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#5f3dc4", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "trav", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "rerank", "fixedPoint": [0, 0.5] } },
-    { "type": "arrow", "id": "a_rerank_ans", "x": 770, "y": 530, "width": 50, "height": 0, "points": [[0,0],[50,0]], "strokeColor": "#2f9e44", "strokeWidth": 2, "roughness": 1, "endArrowhead": "arrow", "startBinding": { "elementId": "rerank", "fixedPoint": [1, 0.5] }, "endBinding": { "elementId": "ans", "fixedPoint": [0, 0.5] } },
-
-    { "type": "text", "id": "note", "x": 70, "y": 620, "width": 700, "height": 30, "text": "Toolkit: graphrag-toolkit v2.2.1 (Neptune + OpenSearch). v3 upgrade staged - see eval/graphrag-migration.md", "fontSize": 15, "fontFamily": 1, "strokeColor": "#495057" }
+    {
+      "type": "text",
+      "id": "title",
+      "x": 300,
+      "y": 24,
+      "width": 600,
+      "height": 40,
+      "text": "GraphRAG Pipeline  -  Index & Retrieve",
+      "fontSize": 32,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e"
+    },
+    {
+      "type": "text",
+      "id": "ilbl",
+      "x": 70,
+      "y": 96,
+      "width": 280,
+      "height": 28,
+      "text": "INDEXING  (indexer/src/indexer.py)",
+      "fontSize": 21,
+      "fontFamily": 1,
+      "strokeColor": "#1971c2"
+    },
+    {
+      "type": "rectangle",
+      "id": "doc",
+      "x": 70,
+      "y": 140,
+      "width": 170,
+      "height": 80,
+      "backgroundColor": "#ffd8a8",
+      "fillStyle": "solid",
+      "strokeColor": "#e8590c",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "doct",
+      "x": 70,
+      "y": 155.0,
+      "width": 170,
+      "height": 50,
+      "text": "Paper text\n(SourceDocument)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "chunk",
+      "x": 290,
+      "y": 140,
+      "width": 180,
+      "height": 80,
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "chunkt",
+      "x": 290,
+      "y": 150.0,
+      "width": 180,
+      "height": 60,
+      "text": "Chunk\nSentenceSplitter\n1024 / 128",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "prop",
+      "x": 520,
+      "y": 140,
+      "width": 200,
+      "height": 80,
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "propt",
+      "x": 520,
+      "y": 150.0,
+      "width": 200,
+      "height": 60,
+      "text": "Extract propositions\n+ topics + entities\n(Haiku 4.5)",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "build",
+      "x": 770,
+      "y": 140,
+      "width": 190,
+      "height": 80,
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeColor": "#7048e8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "buildt",
+      "x": 770,
+      "y": 150.0,
+      "width": 190,
+      "height": 60,
+      "text": "Build pipeline\nGraphConstruction\n+ VectorIndexing",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "nep",
+      "x": 770,
+      "y": 290,
+      "width": 190,
+      "height": 75,
+      "backgroundColor": "#c3fae8",
+      "fillStyle": "solid",
+      "strokeColor": "#0ca678",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "nept",
+      "x": 770,
+      "y": 305.0,
+      "width": 190,
+      "height": 45,
+      "text": "Neptune\nlexical graph",
+      "fontSize": 17,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "vec",
+      "x": 1000,
+      "y": 290,
+      "width": 200,
+      "height": 75,
+      "backgroundColor": "#c3fae8",
+      "fillStyle": "solid",
+      "strokeColor": "#0ca678",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "vect",
+      "x": 1000,
+      "y": 297.5,
+      "width": 200,
+      "height": 60,
+      "text": "OpenSearch\ncohere embed v3\n1024-dim",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "text",
+      "id": "rlbl",
+      "x": 70,
+      "y": 440,
+      "width": 320,
+      "height": 28,
+      "text": "RETRIEVAL  (summarizer/src/retriever.py)",
+      "fontSize": 21,
+      "fontFamily": 1,
+      "strokeColor": "#5f3dc4"
+    },
+    {
+      "type": "rectangle",
+      "id": "q",
+      "x": 70,
+      "y": 490,
+      "width": 190,
+      "height": 80,
+      "backgroundColor": "#fff3bf",
+      "fillStyle": "solid",
+      "strokeColor": "#f08c00",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "qt",
+      "x": 70,
+      "y": 500.0,
+      "width": 190,
+      "height": 60,
+      "text": "Paper + query\n\"compare to\nrelated work\"",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "trav",
+      "x": 310,
+      "y": 490,
+      "width": 210,
+      "height": 80,
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeColor": "#7048e8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "travt",
+      "x": 310,
+      "y": 500.0,
+      "width": 210,
+      "height": 60,
+      "text": "Traversal-based\nsearch over graph\n+ vector store",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "rerank",
+      "x": 570,
+      "y": 490,
+      "width": 200,
+      "height": 80,
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "strokeColor": "#7048e8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "rerankt",
+      "x": 570,
+      "y": 500.0,
+      "width": 200,
+      "height": 60,
+      "text": "Rerank +\npost-process\n(diversity)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "id": "ans",
+      "x": 820,
+      "y": 490,
+      "width": 200,
+      "height": 80,
+      "backgroundColor": "#b2f2bb",
+      "fillStyle": "solid",
+      "strokeColor": "#2f9e44",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "anst",
+      "x": 820,
+      "y": 500.0,
+      "width": 200,
+      "height": 60,
+      "text": "Synthesized insight\n(Sonnet 4.6)\n+ references",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "arrow",
+      "id": "a_doc_chunk",
+      "x": 240,
+      "y": 180,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "doc",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "chunk",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_chunk_prop",
+      "x": 470,
+      "y": 180,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "chunk",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "prop",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_prop_build",
+      "x": 720,
+      "y": 180,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#1971c2",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "prop",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "build",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_build_nep",
+      "x": 860,
+      "y": 220,
+      "width": 0,
+      "height": 70,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          70
+        ]
+      ],
+      "strokeColor": "#0ca678",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "build",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "nep",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_build_vec",
+      "x": 920,
+      "y": 220,
+      "width": 180,
+      "height": 70,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          180,
+          70
+        ]
+      ],
+      "strokeColor": "#0ca678",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "build",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "vec",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_nep_trav",
+      "x": 820,
+      "y": 350,
+      "width": -400,
+      "height": 140,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -400,
+          140
+        ]
+      ],
+      "strokeColor": "#7048e8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "strokeStyle": "dotted",
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "nep",
+        "fixedPoint": [
+          0.3,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "trav",
+        "fixedPoint": [
+          0.7,
+          0
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_vec_trav",
+      "x": 1050,
+      "y": 365,
+      "width": -600,
+      "height": 125,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -600,
+          125
+        ]
+      ],
+      "strokeColor": "#7048e8",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "strokeStyle": "dotted",
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "vec",
+        "fixedPoint": [
+          0.3,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "trav",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_q_trav",
+      "x": 260,
+      "y": 530,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#5f3dc4",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "q",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "trav",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_trav_rerank",
+      "x": 520,
+      "y": 530,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#5f3dc4",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "trav",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "rerank",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "arrow",
+      "id": "a_rerank_ans",
+      "x": 770,
+      "y": 530,
+      "width": 50,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "strokeColor": "#2f9e44",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "rerank",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "ans",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "x": 70,
+      "y": 620,
+      "width": 700,
+      "height": 30,
+      "text": "Toolkit: graphrag-toolkit v2.2.1 (Neptune + OpenSearch). v3 upgrade staged - see eval/graphrag-migration.md",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "strokeColor": "#495057"
+    }
   ]
 }
