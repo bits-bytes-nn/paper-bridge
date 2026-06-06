@@ -29,13 +29,13 @@ from graphrag_toolkit.lexical_graph.indexing.extract import (
     default_preferred_values,
 )
 from graphrag_toolkit.lexical_graph.indexing.model import SourceDocument
-from graphrag_toolkit.lexical_graph.tenant_id import TenantId
 from graphrag_toolkit.lexical_graph.storage import (
     GraphStoreFactory,
     VectorStoreFactory,
 )
 from graphrag_toolkit.lexical_graph.storage.graph import GraphStore
 from graphrag_toolkit.lexical_graph.storage.vector import VectorStore
+from graphrag_toolkit.lexical_graph.tenant_id import TenantId
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import Document
 from pipe import Pipe
@@ -305,37 +305,30 @@ class Builder(DocumentProcessor):
             logger.warning("No documents provided for building indices")
             return
 
-        self._clean_existing_documents(extracted_docs)
-
         try:
             extracted_docs | self._pipeline | sink
             logger.info("Build pipeline completed successfully")
         except Exception as e:
             raise ProcessingError(f"Build pipeline failed: {str(e)}") from e
 
-    def _clean_existing_documents(self, docs: list[SourceDocument]) -> None:
-        paper_ids = self._extract_paper_ids(docs)
+    def clean_existing_documents(self, paper_ids: list[str]) -> None:
+        """Delete any prior version of these papers from the graph + vectors.
 
+        MUST run BEFORE extraction. The graphrag extraction pipeline already
+        writes chunks/topics/entities to the graph (the topic extractor and
+        entity provider are graph-store-backed), so if cleanup runs after
+        extraction it sees this run's half-written new chunks (no statements
+        linked yet) and deletes those instead of the prior complete version —
+        leaving the old statements/facts/entities as unreachable orphans.
+        """
         if not paper_ids:
             logger.warning("No 'paper_id's found for deletion")
             return
-
-        paper_id_list = list(paper_ids)
-
         try:
-            self._perform_deletion(paper_id_list)
+            self._perform_deletion(paper_ids)
         except Exception as e:
             logger.error("Failed to delete documents: %s", str(e))
             raise
-
-    @staticmethod
-    def _extract_paper_ids(docs: list[SourceDocument]) -> set:
-        paper_ids = set()
-        for doc in docs:
-            for node in doc.nodes:
-                if paper_id := node.metadata.get("paper_id"):
-                    paper_ids.add(paper_id)
-        return paper_ids
 
     def _perform_deletion(self, paper_id_list: list[str]) -> None:
         results = self._neptune_client.batch_delete_documents(paper_id_list)
@@ -376,6 +369,12 @@ def run_extract_and_build(
         )
 
         builder = Builder(*stores, checkpoint=checkpoint)
+
+        # Clean any prior version of these papers BEFORE extraction: the
+        # extraction pipeline itself writes to the graph, so cleaning afterwards
+        # would target this run's half-written nodes and orphan the old ones.
+        paper_ids = [p.arxiv_id for p in papers if p.arxiv_id]
+        builder.clean_existing_documents(paper_ids)
 
         extracted_docs = extractor.extract(papers)
         builder.build(extracted_docs)
