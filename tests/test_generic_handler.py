@@ -109,15 +109,25 @@ class TestUrlHelpers:
 
 
 def _make_pdf_with_title(
-    path: Path, title: str, body: str, *, meta_title: str | None = None
+    path: Path,
+    title: str,
+    body: str,
+    *,
+    meta_title: str | None = None,
+    meta_author: str | None = None,
 ) -> Path:
     """Write a PDF whose first-page title is in a larger font than the body."""
     doc = fitz.open()
     page = doc.new_page()
     page.insert_text((72, 72), title, fontsize=24)
     page.insert_text((72, 140), body, fontsize=11)
+    meta = {}
     if meta_title is not None:
-        doc.set_metadata({"title": meta_title})
+        meta["title"] = meta_title
+    if meta_author is not None:
+        meta["author"] = meta_author
+    if meta:
+        doc.set_metadata(meta)
     doc.save(str(path))
     doc.close()
     return path
@@ -172,3 +182,28 @@ class TestExtractTitle:
         bad = tmp_path / "bad.pdf"
         bad.write_text("not a real pdf")
         assert H._extract_title(bad) is None
+
+
+@pytest.mark.unit
+class TestExtractAuthors:
+    def test_splits_metadata_authors(self, tmp_path: Path) -> None:
+        pdf = _make_pdf_with_title(
+            tmp_path / "a.pdf",
+            "T",
+            "body",
+            meta_author="Ashish Vaswani, Noam Shazeer and Niki Parmar",
+        )
+        assert H._extract_authors(pdf) == [
+            "Ashish Vaswani",
+            "Noam Shazeer",
+            "Niki Parmar",
+        ]
+
+    def test_empty_when_no_author_metadata(self, tmp_path: Path) -> None:
+        pdf = _make_pdf_with_title(tmp_path / "b.pdf", "T", "body")
+        assert H._extract_authors(pdf) == []
+
+    def test_empty_for_unreadable_pdf(self, tmp_path: Path) -> None:
+        bad = tmp_path / "bad.pdf"
+        bad.write_text("not a real pdf")
+        assert H._extract_authors(bad) == []

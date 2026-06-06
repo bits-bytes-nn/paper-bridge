@@ -1,6 +1,7 @@
 """Generic PDF URL handler for non-arXiv sources."""
 
 import hashlib
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -65,11 +66,14 @@ class GenericPDFHandler(BaseInputHandler):
         # page 1) over the URL filename — generic URLs are often opaque hashes
         # (e.g. "<md5>-Paper.pdf"), which render as a meaningless card title.
         title = self._extract_title(pdf_path) or self._extract_title_from_url(url)
+        # Authors from PDF /Author metadata; empty -> renderer shows "Authors
+        # information not available" (truthful) rather than a fabricated name.
+        authors = self._extract_authors(pdf_path)
         paper_id = hashlib.md5(url.encode()).hexdigest()[:12]
 
         paper = Paper(
             arxiv_id=paper_id,
-            authors=["Unknown"],
+            authors=authors or ["Authors not available"],
             published_at=datetime.now(UTC),
             title=title,
             summary="",
@@ -137,6 +141,29 @@ class GenericPDFHandler(BaseInputHandler):
         except Exception as e:
             logger.warning("Could not extract title from %s: %s", pdf_path, e)
             return None
+
+    @classmethod
+    def _extract_authors(cls, pdf_path: Path) -> list[str]:
+        """Best-effort author list from the PDF's ``/Author`` metadata.
+
+        Only the embedded metadata is trusted — author lines on page 1 have no
+        reliable structure (affiliations, emails, superscripts interleave), so
+        guessing from layout would be over-fitting. Returns ``[]`` when no usable
+        metadata exists; the renderer then shows "Authors information not
+        available" rather than a fabricated name.
+        """
+        import fitz
+
+        try:
+            with fitz.open(pdf_path) as doc:
+                raw = (doc.metadata or {}).get("author", "") or ""
+        except Exception as e:
+            logger.warning("Could not extract authors from %s: %s", pdf_path, e)
+            return []
+
+        # PDFs separate multiple authors with commas, semicolons, or " and ".
+        parts = re.split(r"\s*(?:,|;|\band\b|&)\s*", raw.strip())
+        return [p.strip() for p in parts if p.strip()]
 
     @classmethod
     def _title_from_first_page(cls, page: "fitz.Page") -> str | None:
