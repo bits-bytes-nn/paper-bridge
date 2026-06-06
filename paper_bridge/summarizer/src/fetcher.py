@@ -12,7 +12,6 @@ from enum import Enum, auto
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
-import arxiv
 import boto3
 import fitz
 import httpx
@@ -23,6 +22,8 @@ from llama_index.core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field, HttpUrl, field_validator
 
 from paper_bridge.shared import PaperScorer, SelectionConfig
+from paper_bridge.shared.arxiv_client import download_pdf as download_arxiv_pdf
+from paper_bridge.shared.arxiv_client import fetch_metadata as fetch_arxiv_metadata
 from paper_bridge.summarizer.configs import Config
 
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
@@ -653,39 +654,38 @@ class PaperFetcher:
 
     @staticmethod
     def _fetch_papers_by_arxiv_ids(arxiv_ids: list[str]) -> list[Paper]:
-        papers = []
-        client = arxiv.Client()
         logger.info("Fetching papers by arXiv IDs: '%s'", arxiv_ids)
+        # ONE batched, serialized API call for all ids (see shared.arxiv_client),
+        # instead of a per-id loop that triggered 429s.
+        metadata = fetch_arxiv_metadata(arxiv_ids)
+        current_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
+        papers = []
         for arxiv_id in arxiv_ids:
+            paper_result = metadata.get(arxiv_id)
+            if not paper_result:
+                logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
+                continue
             try:
-                search = arxiv.Search(id_list=[arxiv_id])
-                paper_result = next(client.results(search), None)
-
-                if not paper_result:
-                    logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
-                    continue
-
-                current_date = datetime.now(UTC)
-                paper = Paper(
-                    arxiv_id=arxiv_id,
-                    authors=[author.name for author in paper_result.authors],
-                    published_at=paper_result.published,
-                    title=paper_result.title,
-                    summary=paper_result.summary,
-                    upvotes=0,
-                    pdf_url=(
-                        None
-                        if paper_result.pdf_url is None
-                        else HttpUrl(str(paper_result.pdf_url))
-                    ),
-                    base_date=current_date.strftime("%Y-%m-%d"),
+                papers.append(
+                    Paper(
+                        arxiv_id=arxiv_id,
+                        authors=[a.name for a in paper_result.authors],
+                        published_at=paper_result.published,
+                        title=paper_result.title,
+                        summary=paper_result.summary,
+                        upvotes=0,
+                        pdf_url=(
+                            None
+                            if paper_result.pdf_url is None
+                            else HttpUrl(str(paper_result.pdf_url))
+                        ),
+                        base_date=current_date,
+                    )
                 )
-                papers.append(paper)
-
             except Exception as e:
                 logger.error(
-                    "Error fetching paper with arXiv ID '%s': %s", arxiv_id, str(e)
+                    "Error building paper for arXiv ID '%s': %s", arxiv_id, str(e)
                 )
 
         return papers
@@ -924,18 +924,9 @@ class PaperFetcher:
 
     @staticmethod
     def _download_arxiv_pdf(papers_dir: Path, arxiv_id: str) -> Path | None:
-        try:
-            client = arxiv.Client()
-            search = arxiv.Search(id_list=[arxiv_id])
-            paper = next(client.results(search))
-
-            pdf_path = papers_dir / f"{arxiv_id}.pdf"
-            paper.download_pdf(dirpath=str(papers_dir), filename=f"{arxiv_id}.pdf")
-
-            return pdf_path if pdf_path.exists() else None
-        except Exception as e:
-            logger.error("Failed to download PDF for %s: %s", arxiv_id, str(e))
-            return None
+        # Pull straight from the static arxiv.org/pdf host (not the rate-limited
+        # API) with Retry-After-aware backoff. See shared.arxiv_client.
+        return download_arxiv_pdf(arxiv_id, papers_dir / f"{arxiv_id}.pdf")
 
     def _process_paper_with_html(self, paper: Paper) -> bool | None:
         try:

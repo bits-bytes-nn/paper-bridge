@@ -9,7 +9,6 @@ from enum import Enum, auto
 from pathlib import Path
 from typing import Any, cast
 
-import arxiv
 import boto3
 import PyPDF2
 import requests
@@ -21,6 +20,8 @@ from unstructured.partition.pdf import partition_pdf
 
 from paper_bridge.indexer.configs.config import Config
 from paper_bridge.shared import PaperScorer, SelectionConfig
+from paper_bridge.shared.arxiv_client import download_pdf as download_arxiv_pdf
+from paper_bridge.shared.arxiv_client import fetch_metadata as fetch_arxiv_metadata
 
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
 from .constants import EnvVars, SSMParams, URLs
@@ -89,8 +90,6 @@ class PaperFetcher:
     LLAMA_PARSE_MAX_RETRIES: int = 5
     LLAMA_PARSE_MAX_TIMEOUT: int = 300
     LLAMA_PARSE_NUM_WORKERS: int = 8
-    ARXIV_DOWNLOAD_MAX_RETRIES: int = 3
-    ARXIV_DOWNLOAD_RETRY_DELAY: int = 2
     MAX_PDF_PAGES: int = 100
     MAX_CONTENT_CHARS: int = 200000
     CONTENT_OFFSET: int = 10000
@@ -188,39 +187,38 @@ class PaperFetcher:
 
     @staticmethod
     def _fetch_papers_by_arxiv_ids(arxiv_ids: list[str]) -> list[Paper]:
-        papers = []
-        client = arxiv.Client()
         logger.info("Fetching papers by arXiv IDs: '%s'", arxiv_ids)
+        # ONE batched, serialized API call for all ids (see shared.arxiv_client),
+        # instead of a per-id loop that triggered 429s.
+        metadata = fetch_arxiv_metadata(arxiv_ids)
+        current_date = datetime.now(UTC).strftime("%Y-%m-%d")
 
+        papers = []
         for arxiv_id in arxiv_ids:
+            paper_result = metadata.get(arxiv_id)
+            if not paper_result:
+                logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
+                continue
             try:
-                search = arxiv.Search(id_list=[arxiv_id])
-                paper_result = next(client.results(search), None)
-
-                if not paper_result:
-                    logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
-                    continue
-
-                current_date = datetime.now(UTC)
-                paper = Paper(
-                    arxiv_id=arxiv_id,
-                    authors=[author.name for author in paper_result.authors],
-                    published_at=paper_result.published,
-                    title=paper_result.title,
-                    summary=paper_result.summary,
-                    upvotes=0,
-                    pdf_url=(
-                        None
-                        if paper_result.pdf_url is None
-                        else HttpUrl(str(paper_result.pdf_url))
-                    ),
-                    base_date=current_date.strftime("%Y-%m-%d"),
+                papers.append(
+                    Paper(
+                        arxiv_id=arxiv_id,
+                        authors=[a.name for a in paper_result.authors],
+                        published_at=paper_result.published,
+                        title=paper_result.title,
+                        summary=paper_result.summary,
+                        upvotes=0,
+                        pdf_url=(
+                            None
+                            if paper_result.pdf_url is None
+                            else HttpUrl(str(paper_result.pdf_url))
+                        ),
+                        base_date=current_date,
+                    )
                 )
-                papers.append(paper)
-
             except Exception as e:
                 logger.error(
-                    "Error fetching paper with arXiv ID '%s': %s", arxiv_id, str(e)
+                    "Error building paper for arXiv ID '%s': %s", arxiv_id, str(e)
                 )
 
         return papers
@@ -405,15 +403,14 @@ class PaperFetcher:
         self, arxiv_id: str, use_llama_parse: bool
     ) -> str | None:
         try:
-            paper = self._download_paper(arxiv_id)
-            if not paper:
-                return None
-
             with tempfile.TemporaryDirectory() as temp_dir:
-                paper.download_pdf(temp_dir)
-                pdf_path = self._get_pdf_path(temp_dir, arxiv_id)
-                if not pdf_path:
+                # Download straight from the static arxiv.org/pdf host (not the
+                # rate-limited API) with Retry-After backoff. See
+                # shared.arxiv_client.
+                dest = Path(temp_dir) / f"{arxiv_id}.pdf"
+                if not download_arxiv_pdf(arxiv_id, dest):
                     return None
+                pdf_path = str(dest)
 
                 if not self._check_pdf_page_limit(pdf_path):
                     logger.warning(
@@ -427,41 +424,6 @@ class PaperFetcher:
             logger.error(f"Error downloading/parsing paper '{arxiv_id}': {str(e)}")
             return None
 
-    def _download_paper(self, arxiv_id: str) -> Any | None:
-        for attempt in range(self.ARXIV_DOWNLOAD_MAX_RETRIES):
-            try:
-                client = arxiv.Client()
-                search = arxiv.Search(id_list=[arxiv_id])
-                return next(client.results(search))
-            except StopIteration:
-                logger.error(f"Paper not found: '{arxiv_id}'")
-                return None
-            except (ConnectionResetError, Exception) as e:
-                if attempt == self.ARXIV_DOWNLOAD_MAX_RETRIES - 1:
-                    logger.error(
-                        f"Error downloading paper '{arxiv_id}' after {self.ARXIV_DOWNLOAD_MAX_RETRIES} attempts: {str(e)}"
-                    )
-                    return None
-
-                error_type = (
-                    "Connection reset"
-                    if isinstance(e, ConnectionResetError)
-                    else "Error"
-                )
-                logger.warning(
-                    f"{error_type} while downloading paper '{arxiv_id}', retrying ({attempt+1}/{self.ARXIV_DOWNLOAD_MAX_RETRIES}): {str(e)}"
-                )
-                time.sleep(self.ARXIV_DOWNLOAD_RETRY_DELAY * (2**attempt))
-        return None
-
-    @staticmethod
-    def _get_pdf_path(temp_dir: str, arxiv_id: str) -> str | None:
-        pdf_files = list(Path(temp_dir).glob("*.pdf"))
-        if not pdf_files:
-            logger.error(f"No PDF file found in temp directory for '{arxiv_id}'")
-            return None
-        return str(pdf_files[0])
-
     def _check_pdf_page_limit(self, pdf_path: str) -> bool:
         try:
             with open(pdf_path, "rb") as file:
@@ -469,8 +431,10 @@ class PaperFetcher:
                 num_pages = len(pdf_reader.pages)
                 return num_pages <= self.MAX_PDF_PAGES
         except Exception as e:
-            logger.error(f"Error checking PDF page count: {str(e)}")
-            return True
+            # Fail closed: an unreadable/corrupt PDF we can't page-count should
+            # be skipped, not waved through the page-limit guard.
+            logger.error(f"Error checking PDF page count, skipping: {str(e)}")
+            return False
 
     def _process_pdf_content(self, pdf_path: str, use_llama_parse: bool) -> str | None:
         if use_llama_parse:
