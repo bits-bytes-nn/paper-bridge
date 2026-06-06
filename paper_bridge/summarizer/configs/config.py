@@ -1,32 +1,12 @@
-from enum import Enum, auto
+from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional, Union
+from typing import Literal
+
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, FilePath, model_validator
+from pydantic import Field, FilePath
 
-
-class AutoNamedEnum(str, Enum):
-    @staticmethod
-    def _generate_next_value_(
-        name: str, start: int, count: int, last_values: List[str]
-    ) -> str:
-        return name.lower()
-
-
-class Format(AutoNamedEnum):
-    HTML = auto()
-    SLACK = auto()
-
-
-class LanguageModelId(str, Enum):
-    CLAUDE_V3_HAIKU = "anthropic.claude-3-haiku-20240307-v1:0"
-    CLAUDE_V3_5_HAIKU = "anthropic.claude-3-5-haiku-20241022-v1:0"
-    CLAUDE_V3_5_SONNET = "anthropic.claude-3-5-sonnet-20240620-v1:0"
-    CLAUDE_V3_5_SONNET_V2 = "anthropic.claude-3-5-sonnet-20241022-v2:0"
-    CLAUDE_V3_7_SONNET = "anthropic.claude-3-7-sonnet-20250219-v1:0"
-    CLAUDE_V4_SONNET = "anthropic.claude-sonnet-4-20250514-v1:0"
-    CLAUDE_V4_OPUS = "anthropic.claude-opus-4-20250514-v1:0"
+from paper_bridge.shared import BaseModelWithDefaults, EnvVars, Format, LanguageModelId
 
 
 class LocalPaths(str, Enum):
@@ -40,15 +20,48 @@ class LocalPaths(str, Enum):
     TEMPLATE_FILE = "template.html"
 
 
-class BaseModelWithDefaults(BaseModel):
-    @model_validator(mode="before")
-    def set_defaults_for_none_fields(cls, values: Dict[str, Any]) -> Dict[str, Any]:
-        if not isinstance(values, dict):
-            return values
-        for field_name, field in cls.model_fields.items():
-            if values.get(field_name) is None and field.default is not None:
-                values[field_name] = field.default
-        return values
+# Trigger configuration
+class AutoMode(BaseModelWithDefaults):
+    enabled: bool = Field(default=True)
+    source: Literal["huggingface_daily_papers"] = Field(
+        default="huggingface_daily_papers"
+    )
+
+
+class TriggerConfig(BaseModelWithDefaults):
+    auto_mode: AutoMode = Field(default_factory=AutoMode)
+
+
+# Input configuration
+class InputConfig(BaseModelWithDefaults):
+    pdf_download_timeout: int = Field(default=120, ge=10)
+    temp_dir_base: str = Field(default="/tmp/paper-bridge")
+    use_md5_hash_dirs: bool = Field(default=True)
+    arxiv_optimizations: bool = Field(default=True)
+
+
+# Output configuration
+class SlackOutput(BaseModelWithDefaults):
+    enabled: bool = Field(default=True)
+    html_template: str = Field(default="template.html")
+    apply_retrieval: bool = Field(default=True)
+
+
+class GithubOutput(BaseModelWithDefaults):
+    enabled: bool = Field(default=False)
+    repo_name: str | None = Field(default=None)
+    base_branch: str = Field(default="main")
+    branch_prefix: str = Field(default="paper-summaries")
+    author_name: str = Field(default="Paper Bridge Bot")
+    author_email: str | None = Field(default=None)
+    posts_dir: str = Field(default="_posts")
+    assets_dir: str = Field(default="assets")
+
+
+class OutputConfig(BaseModelWithDefaults):
+    mode: Literal["slack", "github"] = Field(default="slack")
+    slack: SlackOutput = Field(default_factory=SlackOutput)
+    github: GithubOutput = Field(default_factory=GithubOutput)
 
 
 class Resources(BaseModelWithDefaults):
@@ -56,21 +69,33 @@ class Resources(BaseModelWithDefaults):
     stage: Literal["dev", "prod"] = Field(default="dev")
     default_region_name: str = Field(default="us-west-2")
     bedrock_region_name: str = Field(default="us-west-2")
-    s3_bucket_name: str = Field(min_length=1)
-    s3_prefix: Optional[str] = Field(default=None)
+    # Account/region-specific; injected via the S3_BUCKET_NAME env var
+    # (Terraform in AWS, .env locally) by Config.load() rather than committed
+    # to config.yaml. Defaults to "" so the model validates before load() fills
+    # it in.
+    s3_bucket_name: str = Field(default="")
+    s3_prefix: str | None = Field(default=None)
+    s3_outputs_path: str = Field(default="outputs")
 
 
 class Summarization(BaseModelWithDefaults):
     papers_per_day: int = Field(default=5, ge=1)
     days_to_fetch: int = Field(default=7, ge=1)
-    min_upvotes: Optional[int] = Field(default=None, ge=0)
+    min_upvotes: int | None = Field(default=None, ge=0)
+    # Paper-selection scoring weights (see shared.paper_selection.PaperScorer).
+    selection_popularity_weight: float = Field(default=0.6, ge=0)
+    selection_recency_weight: float = Field(default=0.4, ge=0)
+    selection_recency_half_life_days: float = Field(default=7.0, gt=0)
     parse_pdf: bool = Field(default=False)
-    figure_analysis_model_id: Optional[LanguageModelId] = Field(default=None)
-    paper_summarization_model_id: Optional[LanguageModelId] = Field(default=None)
+    figure_analysis_model_id: LanguageModelId | None = Field(default=None)
+    figure_analysis_max_tokens: int = Field(default=4096, ge=1)
+    paper_summarization_model_id: LanguageModelId | None = Field(default=None)
+    summarization_max_tokens: int = Field(default=8192, ge=1)
+    enable_prompt_caching: bool = Field(default=True)
 
 
 class Retrieval(BaseModelWithDefaults):
-    output_format: Optional[Format] = Field(default=None)
+    output_format: Format | None = Field(default=None)
     traversal_based_or_semantic_guided: Literal[
         "traversal_based", "semantic_guided"
     ] = Field(default="traversal_based")
@@ -81,31 +106,41 @@ class Retrieval(BaseModelWithDefaults):
     gpu_id: int = Field(default=0, ge=0)
     use_diversity: bool = Field(default=False)
     use_enhancement: bool = Field(default=False)
-    retrieval_summarization_model_id: Optional[LanguageModelId] = Field(default=None)
+    retrieval_summarization_model_id: LanguageModelId | None = Field(default=None)
+    retrieval_max_tokens: int = Field(default=8192, ge=1)
+    enable_prompt_caching: bool = Field(default=True)
 
 
 class Config(BaseModelWithDefaults):
     resources: Resources = Field(
-        default_factory=lambda: Resources(
-            project_name="paper-bridge", s3_bucket_name=""
-        )
+        default_factory=lambda: Resources(project_name="paper-bridge")
     )
     summarization: Summarization = Field(default_factory=lambda: Summarization())
     retrieval: Retrieval = Field(default_factory=lambda: Retrieval())
+    trigger: TriggerConfig = Field(default_factory=TriggerConfig)
+    input: InputConfig = Field(default_factory=InputConfig)
+    output: OutputConfig = Field(default_factory=OutputConfig)
 
     @classmethod
-    def from_yaml(cls, file_path: Union[str, Path, FilePath]) -> "Config":
+    def from_yaml(cls, file_path: str | Path | FilePath) -> "Config":
         try:
             with open(file_path, encoding="utf-8") as file:
                 config_data = yaml.safe_load(file) or {}
             return cls(**config_data)
         except (OSError, yaml.YAMLError) as e:
-            raise ValueError(f"Failed to load config from {file_path}: {str(e)}")
+            raise ValueError(f"Failed to load config from {file_path}: {str(e)}") from e
 
     @classmethod
     def load(cls) -> "Config":
         load_dotenv()
         config_path = Path(__file__).parent / LocalPaths.CONFIG_FILE.value
-        if not config_path.exists():
-            return cls()
-        return cls.from_yaml(config_path)
+        config = cls() if not config_path.exists() else cls.from_yaml(config_path)
+
+        # The S3 bucket is account/region-specific (e.g.
+        # "sagemaker-us-west-2-<acct>"), so it must NOT be committed in
+        # config.yaml. Terraform injects it as S3_BUCKET_NAME into the Batch
+        # job; locally it comes from .env. The env value, when set, wins.
+        bucket = EnvVars.S3_BUCKET_NAME.env_value
+        if bucket:
+            config.resources.s3_bucket_name = bucket
+        return config

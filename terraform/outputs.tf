@@ -5,12 +5,12 @@ output "vpn_endpoint" {
 
 output "neptune_endpoint" {
   description = "Neptune cluster endpoint URL"
-  value       = module.neptune[0].cluster.endpoint
+  value       = var.use_graph_rag ? module.neptune[0].cluster.endpoint : null
 }
 
 output "opensearch_endpoint" {
   description = "OpenSearch Serverless collection endpoint URL"
-  value       = module.opensearch[0].collection.collection_endpoint
+  value       = var.use_graph_rag ? module.opensearch[0].collection.collection_endpoint : null
 }
 
 output "bedrock_inference_role_arn" {

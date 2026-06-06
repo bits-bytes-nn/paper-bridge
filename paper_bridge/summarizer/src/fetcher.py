@@ -1,30 +1,45 @@
+from __future__ import annotations
+
 import asyncio
 import base64
 import json
 import re
 import time
+from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from enum import Enum, auto
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple, Union, cast
+from typing import TYPE_CHECKING, Any, cast
+
 import arxiv
 import boto3
 import fitz
 import httpx
 import requests
 from bs4 import BeautifulSoup, Tag
+from llama_index.core.llms import ChatMessage, ImageBlock, MessageRole, TextBlock
 from llama_index.core.prompts import ChatPromptTemplate
-from llama_index.core.schema import ImageNode
-from llama_index.llms.bedrock import Bedrock
-from llama_index.multi_modal_llms.bedrock import BedrockMultiModal
 from pydantic import BaseModel, Field, HttpUrl, field_validator
+
+from paper_bridge.shared import PaperScorer, SelectionConfig
+from paper_bridge.summarizer.configs import Config
+
 from .aws_helpers import get_cross_inference_model_id, get_ssm_param_value
 from .constants import EnvVars, LanguageModelId, LocalPaths, SSMParams, URLs
+
+if TYPE_CHECKING:
+    # Imported lazily at runtime to keep this module importable for unit tests
+    # without eagerly loading the heavy bedrock-converse / aioboto3 stack.
+    from llama_index.llms.bedrock_converse import BedrockConverse
 from .logger import is_aws_env, logger
 from .prompts import FigureAnalysisPrompt
 from .utils import HTMLTagOutputParser, extract_text_from_html, measure_execution_time
-from paper_bridge.summarizer.configs import Config
+
+# Fallback when a parser is constructed without an explicit limit (e.g. in tests
+# or ad-hoc use). Production paths pass the value from
+# ``config.summarization.figure_analysis_max_tokens``.
+DEFAULT_FIGURE_ANALYSIS_MAX_TOKENS: int = 4096
 
 
 class Content(BaseModel):
@@ -41,8 +56,8 @@ class Content(BaseModel):
 class Figure(BaseModel):
     figure_id: str
     path: str
-    caption: Optional[str] = Field(default=None)
-    analysis: Optional[str] = Field(default=None)
+    caption: str | None = Field(default=None)
+    analysis: str | None = Field(default=None)
 
     def __str__(self) -> str:
         return (
@@ -58,24 +73,35 @@ class Figure(BaseModel):
     async def from_llm(
         cls,
         prompt_template: ChatPromptTemplate,
-        multi_modal_llm: BedrockMultiModal,
+        multi_modal_llm: BedrockConverse,
         output_parser: HTMLTagOutputParser,
         figure_id: str,
         path: str,
-        caption: Optional[str] = None,
+        caption: str | None = None,
         timeout: int = 60,
-    ) -> "Figure":
+    ) -> Figure:
         try:
             image_data = await cls._get_image_data(path, timeout)
             user_message = cls._generate_prompt(prompt_template, caption or "")
 
-            image_node = ImageNode(image=image_data)
-            response = await multi_modal_llm.acomplete(
-                prompt=user_message,
-                image_documents=[image_node],
+            # graphrag v3 forced dropping llama-index-multi-modal-llms-bedrock
+            # (it pins core==0.13.6, conflicting with v3's core==0.14.20). Modern
+            # BedrockConverse handles images natively via chat messages with an
+            # ImageBlock; ``image`` accepts the base64-encoded bytes/str directly
+            # (the mimetype is auto-detected and the converse client forwards the
+            # raw bytes to the Bedrock Converse API).
+            message = ChatMessage(
+                role=MessageRole.USER,
+                blocks=[
+                    TextBlock(text=user_message),
+                    ImageBlock(image=image_data),
+                ],
             )
+            response = await multi_modal_llm.achat([message])
 
-            analysis = cast(str, output_parser.parse(response.text or ""))
+            analysis = cast(
+                str, output_parser.parse(str(response.message.content) or "")
+            )
 
         except Exception as e:
             logger.warning("Failed to analyze figure %s: %s", figure_id, str(e))
@@ -93,7 +119,7 @@ class Figure(BaseModel):
         try:
             return prompt_template.format(caption=caption)
         except Exception as e:
-            logger.warning(f"Error formatting prompt: {e}")
+            logger.warning("Error formatting prompt: %s", str(e))
             return f"Analyze this figure with caption: {caption}"
 
     @staticmethod
@@ -110,7 +136,7 @@ class Figure(BaseModel):
             try:
                 with open(path, "rb") as f:
                     return base64.b64encode(f.read()).decode("utf-8")
-            except IOError as e:
+            except OSError as e:
                 raise Exception(f"Failed to read image file: {str(e)}") from e
 
 
@@ -122,20 +148,20 @@ class PaperStatus(Enum):
 
 class Paper(BaseModel):
     arxiv_id: str
-    authors: List[str]
+    authors: list[str]
     published_at: datetime
     title: str
     summary: str
     upvotes: int
-    thumbnail: Optional[str] = None
-    content: Optional[str] = None
+    thumbnail: str | None = None
+    content: str | None = None
     base_date: str
-    pdf_url: Optional[HttpUrl] = Field(default=None)
-    figures: List[Figure] = Field(default_factory=list)
+    pdf_url: HttpUrl | None = Field(default=None)
+    figures: list[Figure] = Field(default_factory=list)
     status: PaperStatus = Field(default=PaperStatus.PENDING)
 
     @field_validator("authors")
-    def validate_authors(cls, authors: List[str]) -> List[str]:
+    def validate_authors(cls, authors: list[str]) -> list[str]:
         if not authors:
             raise ValueError("Authors list cannot be empty")
         return authors
@@ -147,7 +173,7 @@ class Paper(BaseModel):
             raise ValueError("Base date must be in the format 'YYYY-MM-DD'")
         return base_date
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return self.model_dump()
 
 
@@ -163,7 +189,7 @@ class BaseParser:
         self.multi_modal_llm = None
         self.output_parser = None
 
-    async def __aenter__(self) -> "BaseParser":
+    async def __aenter__(self) -> BaseParser:
         return self
 
     async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
@@ -172,26 +198,34 @@ class BaseParser:
     def _initialize_chain(
         self,
         model_id: LanguageModelId,
-        profile_name: Optional[str],
+        profile_name: str | None,
         region_name: str,
         boto3_session: boto3.Session,
+        max_tokens: int = DEFAULT_FIGURE_ANALYSIS_MAX_TOKENS,
     ) -> None:
+        from llama_index.llms.bedrock_converse import BedrockConverse
+
         self.prompt_template = FigureAnalysisPrompt.get_prompt()
-        self.llm = Bedrock(
-            get_cross_inference_model_id(
-                boto3_session,
-                model_id.value,
-                region_name,
-            ),
+        # Use the cross-region inference profile for both the (kept-for-API)
+        # text LLM and the multimodal figure-analysis LLM. BedrockConverse
+        # handles image input via ChatMessage ImageBlocks (see Figure.from_llm),
+        # which replaces the removed BedrockMultiModal path.
+        cross_region_model_id = get_cross_inference_model_id(
+            boto3_session,
+            model_id.value,
+            region_name,
+        )
+        self.llm = BedrockConverse(
+            cross_region_model_id,
             temperature=0.0,
-            max_tokens=4096,
+            max_tokens=max_tokens,
             profile_name=profile_name,
             region_name=region_name,
         )
-        self.multi_modal_llm = BedrockMultiModal(
-            model=model_id.value,
+        self.multi_modal_llm = BedrockConverse(
+            cross_region_model_id,
             temperature=0.0,
-            max_tokens=4096,
+            max_tokens=max_tokens,
             region_name=region_name,
             profile_name=profile_name,
         )
@@ -204,22 +238,27 @@ class HTMLRichParser(BaseParser):
     def __init__(
         self,
         figure_analysis_model_id: LanguageModelId,
-        profile_name: Optional[str] = None,
-        boto3_session: Optional[boto3.Session] = None,
+        profile_name: str | None = None,
+        boto3_session: boto3.Session | None = None,
         region_name: str = "us-west-2",
         timeout: int = 60,
+        max_tokens: int = DEFAULT_FIGURE_ANALYSIS_MAX_TOKENS,
     ) -> None:
         super().__init__(timeout=timeout)
         self.boto3_session = boto3_session or boto3.Session(
             region_name=region_name, profile_name=profile_name
         )
         self._initialize_chain(
-            figure_analysis_model_id, profile_name, region_name, self.boto3_session
+            figure_analysis_model_id,
+            profile_name,
+            region_name,
+            self.boto3_session,
+            max_tokens,
         )
 
     async def parse(
         self, arxiv_id: str, extract_text: bool = True
-    ) -> Tuple[List[Figure], Content]:
+    ) -> tuple[list[Figure], Content]:
         self.url = f"{URLs.ARXIV_HTML.url}/{arxiv_id}"
 
         try:
@@ -237,7 +276,7 @@ class HTMLRichParser(BaseParser):
             logger.warning("No HTML content found for '%s': %s", arxiv_id, str(e))
             raise
 
-    async def _extract_figures(self, soup: Any) -> List[Figure]:
+    async def _extract_figures(self, soup: Any) -> list[Figure]:
         figure_elements = []
 
         for figure in soup.select(".ltx_figure"):
@@ -321,21 +360,28 @@ class PDFParser(BaseParser):
     def __init__(
         self,
         figure_analysis_model_id: LanguageModelId,
-        boto3_session: Optional[boto3.Session] = None,
-        profile_name: Optional[str] = None,
+        boto3_session: boto3.Session | None = None,
+        profile_name: str | None = None,
         region_name: str = "us-west-2",
         timeout: int = 60,
-        api_key: Optional[str] = None,
+        api_key: str | None = None,
+        max_tokens: int = DEFAULT_FIGURE_ANALYSIS_MAX_TOKENS,
     ):
         super().__init__(timeout=timeout)
         self.boto3_session = boto3_session or boto3.Session(
             region_name=region_name, profile_name=profile_name
         )
         self._initialize_chain(
-            figure_analysis_model_id, profile_name, region_name, self.boto3_session
+            figure_analysis_model_id,
+            profile_name,
+            region_name,
+            self.boto3_session,
+            max_tokens,
         )
-        self.api_key = api_key or EnvVars.UPSTAGE_API_KEY.value
+        self.api_key = api_key or EnvVars.UPSTAGE_API_KEY.env_value
         if not self.api_key:
+            # NOTE: ``.value`` here is intentional — it is the env-var NAME shown
+            # to the user, not the (missing) value.
             raise ValueError(
                 f"{EnvVars.UPSTAGE_API_KEY.value} must be provided or set in environment"
             )
@@ -343,10 +389,10 @@ class PDFParser(BaseParser):
     async def parse(
         self,
         pdf_path: Path,
-        figures_dir: Optional[Path] = None,
+        figures_dir: Path | None = None,
         use_cache: bool = True,
         extract_text: bool = True,
-    ) -> Tuple[List[Figure], Content]:
+    ) -> tuple[list[Figure], Content]:
         try:
             figures_dir = figures_dir or pdf_path.parent / LocalPaths.FIGURES_DIR.value
             figures_dir.mkdir(parents=True, exist_ok=True)
@@ -365,7 +411,7 @@ class PDFParser(BaseParser):
         figures_dir: Path,
         use_cache: bool,
         extract_text: bool,
-    ) -> Tuple[List[Figure], Content]:
+    ) -> tuple[list[Figure], Content]:
         response = await self._get_or_parse_document(pdf_path, use_cache)
         elements = response.get("elements", [])
 
@@ -384,7 +430,7 @@ class PDFParser(BaseParser):
 
     async def _get_or_parse_document(
         self, pdf_path: Path, use_cache: bool
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         parsed_path = pdf_path.parent / LocalPaths.PARSED_FILE.value
 
         if use_cache and parsed_path.exists():
@@ -395,23 +441,23 @@ class PDFParser(BaseParser):
         return response
 
     @staticmethod
-    def _cache_response(path: Path, response: Dict[str, Any]) -> None:
+    def _cache_response(path: Path, response: dict[str, Any]) -> None:
         try:
             path.parent.mkdir(parents=True, exist_ok=True)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(response, f, indent=2, ensure_ascii=False)
-        except IOError as e:
+        except OSError as e:
             logger.warning("Failed to cache response: %s", str(e))
 
     @staticmethod
-    def _load_cached_response(path: Path) -> Dict[str, Any]:
+    def _load_cached_response(path: Path) -> dict[str, Any]:
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 return json.load(f)
-        except (IOError, json.JSONDecodeError) as e:
+        except (OSError, json.JSONDecodeError) as e:
             raise Exception(f"Failed to load cached response: {str(e)}") from e
 
-    def _request_document_parse(self, pdf_path: Path) -> Dict[str, Any]:
+    def _request_document_parse(self, pdf_path: Path) -> dict[str, Any]:
         headers = {"Authorization": f"Bearer {self.api_key}"}
 
         try:
@@ -426,13 +472,13 @@ class PDFParser(BaseParser):
                 response.raise_for_status()
                 return response.json()
 
-        except (IOError, requests.RequestException) as e:
+        except (OSError, requests.RequestException) as e:
             logger.error("Failed to parse document: %s", str(e))
             raise Exception(f"Document parsing failed: {str(e)}") from e
 
     async def _extract_figures(
-        self, elements: List[Dict[str, Any]], pdf_path: Path, figures_dir: Path
-    ) -> List[Figure]:
+        self, elements: list[dict[str, Any]], pdf_path: Path, figures_dir: Path
+    ) -> list[Figure]:
         figure_categories = frozenset({"chart", "figure"})
 
         figure_data = []
@@ -487,7 +533,7 @@ class PDFParser(BaseParser):
                         pix.save(figure_path)
                         paths.append(figure_path)
         except Exception as e:
-            logger.error(f"Failed to extract figures from PDF: {str(e)}")
+            logger.error("Failed to extract figures from PDF: %s", str(e))
             return []
 
         if (
@@ -506,7 +552,7 @@ class PDFParser(BaseParser):
                 path=str(path),
                 caption=fd["caption"] or None,
             )
-            for i, (fd, path) in enumerate(zip(figure_data, paths))
+            for i, (fd, path) in enumerate(zip(figure_data, paths, strict=False))
         ]
 
         return await asyncio.gather(*figure_tasks)
@@ -524,8 +570,8 @@ class PaperFetcher:
     def __init__(
         self,
         config: Config,
-        boto3_session: Optional[boto3.Session] = None,
-        profile_name: Optional[str] = None,
+        boto3_session: boto3.Session | None = None,
+        profile_name: str | None = None,
         timeout: int = DEFAULT_TIMEOUT,
     ) -> None:
         self.boto3_session = boto3_session or boto3.Session(
@@ -548,20 +594,32 @@ class PaperFetcher:
             else None
         )
         self.timeout = max(1, timeout)
+        self._scorer = PaperScorer(
+            SelectionConfig(
+                popularity_weight=config.summarization.selection_popularity_weight,
+                recency_weight=config.summarization.selection_recency_weight,
+                recency_half_life_days=(
+                    config.summarization.selection_recency_half_life_days
+                ),
+                min_upvotes=self.min_upvotes,
+            )
+        )
 
-    def _init_parsers(self, config: Config, profile_name: Optional[str]) -> None:
+    def _init_parsers(self, config: Config, profile_name: str | None) -> None:
         if config.summarization.figure_analysis_model_id is None:
             raise ValueError("'figure_analysis_model_id' is not set")
 
         figure_model_id = LanguageModelId(
             config.summarization.figure_analysis_model_id.value
         )
+        figure_max_tokens = config.summarization.figure_analysis_max_tokens
 
         self.html_parser = HTMLRichParser(
             figure_analysis_model_id=figure_model_id,
             profile_name=profile_name,
             region_name=config.resources.bedrock_region_name,
             timeout=self.timeout,
+            max_tokens=figure_max_tokens,
         )
 
         base_path = f"/{config.resources.project_name}-{config.resources.stage}"
@@ -570,7 +628,7 @@ class PaperFetcher:
                 self.boto3_session, f"{base_path}/{SSMParams.UPSTAGE_API_KEY.value}"
             )
             if is_aws_env()
-            else EnvVars.UPSTAGE_API_KEY.value
+            else EnvVars.UPSTAGE_API_KEY.env_value
         )
 
         self.pdf_parser = PDFParser(
@@ -579,12 +637,13 @@ class PaperFetcher:
             region_name=config.resources.bedrock_region_name,
             timeout=self.timeout,
             api_key=upstage_api_key,
+            max_tokens=figure_max_tokens,
         )
 
     @measure_execution_time
     def fetch_papers_by_arxiv_ids(
-        self, papers_dir: Path, arxiv_ids: List[str], parse_pdf: bool = False
-    ) -> List[Paper]:
+        self, papers_dir: Path, arxiv_ids: list[str], parse_pdf: bool = False
+    ) -> list[Paper]:
         try:
             papers = self._fetch_papers_by_arxiv_ids(arxiv_ids)
             return self._process_papers_concurrently(papers, papers_dir, parse_pdf)
@@ -593,7 +652,7 @@ class PaperFetcher:
             return []
 
     @staticmethod
-    def _fetch_papers_by_arxiv_ids(arxiv_ids: List[str]) -> List[Paper]:
+    def _fetch_papers_by_arxiv_ids(arxiv_ids: list[str]) -> list[Paper]:
         papers = []
         client = arxiv.Client()
         logger.info("Fetching papers by arXiv IDs: '%s'", arxiv_ids)
@@ -607,7 +666,7 @@ class PaperFetcher:
                     logger.warning("Paper not found for arXiv ID: %s", arxiv_id)
                     continue
 
-                current_date = datetime.now(timezone.utc)
+                current_date = datetime.now(UTC)
                 paper = Paper(
                     arxiv_id=arxiv_id,
                     authors=[author.name for author in paper_result.authors],
@@ -632,8 +691,8 @@ class PaperFetcher:
         return papers
 
     def _process_papers_concurrently(
-        self, papers: List[Paper], papers_dir: Path, parse_pdf: bool = False
-    ) -> List[Paper]:
+        self, papers: list[Paper], papers_dir: Path, parse_pdf: bool = False
+    ) -> list[Paper]:
         with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
             futures = {
                 executor.submit(self.process_paper, paper, papers_dir, parse_pdf): paper
@@ -649,7 +708,9 @@ class PaperFetcher:
                     else:
                         paper.status = PaperStatus.FAILED
                 except Exception as e:
-                    logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
+                    logger.error(
+                        "Error processing paper %s: %s", paper.arxiv_id, str(e)
+                    )
                     paper.status = PaperStatus.FAILED
 
         return papers
@@ -658,10 +719,10 @@ class PaperFetcher:
     def fetch_papers_for_date_range(
         self,
         papers_dir: Path,
-        target_date: Optional[datetime] = None,
-        days_to_fetch: Optional[int] = None,
+        target_date: datetime | None = None,
+        days_to_fetch: int | None = None,
         parse_pdf: bool = False,
-    ) -> List[Paper]:
+    ) -> list[Paper]:
         try:
             target_date = self._get_target_date(target_date)
             days_to_fetch = days_to_fetch if days_to_fetch != 0 else None
@@ -669,13 +730,7 @@ class PaperFetcher:
             papers_by_date = self._fetch_papers_by_date_range(
                 target_date, days_to_fetch
             )
-            papers_by_date = self._filter_and_sort_papers(papers_by_date)
-
-            papers = [
-                paper
-                for papers_list in papers_by_date.values()
-                for paper in papers_list
-            ]
+            papers = self._select_papers(papers_by_date, target_date)
             return self._process_papers_concurrently(papers, papers_dir, parse_pdf)
 
         except Exception as e:
@@ -688,17 +743,17 @@ class PaperFetcher:
             return []
 
     @staticmethod
-    def _get_target_date(target_date: Optional[datetime]) -> datetime:
+    def _get_target_date(target_date: datetime | None) -> datetime:
         if target_date is not None:
-            return target_date.astimezone(timezone.utc)
-        return datetime.now(timezone.utc).replace(
+            return target_date.astimezone(UTC)
+        return datetime.now(UTC).replace(
             hour=0, minute=0, second=0, microsecond=0
-        ).astimezone(timezone.utc) - timedelta(days=1)
+        ).astimezone(UTC) - timedelta(days=1)
 
     def _fetch_papers_by_date_range(
-        self, end_date: datetime, days_to_fetch: Optional[int] = None
-    ) -> Dict[str, List[Paper]]:
-        papers_by_date: Dict[str, List[Paper]] = {}
+        self, end_date: datetime, days_to_fetch: int | None = None
+    ) -> dict[str, list[Paper]]:
+        papers_by_date: dict[str, list[Paper]] = {}
         days = days_to_fetch or self.days_to_fetch
         start_date = end_date - timedelta(days=days - 1)
         logger.info("Fetching papers from '%s' to '%s'", start_date, end_date)
@@ -718,7 +773,7 @@ class PaperFetcher:
             for days in range((end_date - start_date).days + 1)
         ]
 
-    def _fetch_daily_papers(self, date_str: str, current_date: datetime) -> List[Paper]:
+    def _fetch_daily_papers(self, date_str: str, current_date: datetime) -> list[Paper]:
         response = self._make_request(f"{URLs.HF_DAILY_PAPERS.url}?date={date_str}")
         if not response:
             return []
@@ -729,7 +784,7 @@ class PaperFetcher:
                 papers.append(paper)
         return papers
 
-    def _make_request(self, url: str) -> Optional[requests.Response]:
+    def _make_request(self, url: str) -> requests.Response | None:
         for attempt in range(self.MAX_RETRIES):
             try:
                 response = requests.get(url, timeout=self.timeout)
@@ -738,15 +793,17 @@ class PaperFetcher:
             except requests.RequestException as e:
                 if attempt == self.MAX_RETRIES - 1:
                     logger.error(
-                        f"Failed to fetch data after {self.MAX_RETRIES} attempts: {e}"
+                        "Failed to fetch data after %d attempts: %s",
+                        self.MAX_RETRIES,
+                        str(e),
                     )
                     return None
                 time.sleep(self.RETRY_DELAY * (2**attempt))
         return None
 
     def _process_paper_metadata(
-        self, paper_data: Dict[str, Any], current_date: datetime
-    ) -> Optional[Paper]:
+        self, paper_data: dict[str, Any], current_date: datetime
+    ) -> Paper | None:
         try:
             published_at = self._parse_date(paper_data.get("publishedAt"))
             paper_info = paper_data.get("paper", {})
@@ -766,22 +823,22 @@ class PaperFetcher:
             if self._meets_upvote_threshold(paper.upvotes):
                 return paper
         except (KeyError, ValueError) as e:
-            logger.error(f"Error creating Paper object: {e}")
+            logger.error("Error creating Paper object: %s", str(e))
 
         return None
 
     @staticmethod
-    def _parse_date(date_str: Optional[str]) -> Optional[datetime]:
+    def _parse_date(date_str: str | None) -> datetime | None:
         if not date_str:
             return None
         try:
             return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
         except ValueError:
-            logger.error(f"Invalid date format: {date_str}")
+            logger.error("Invalid date format: %s", date_str)
             return None
 
     @staticmethod
-    def _extract_author_names(authors: List[Union[Dict[str, str], str]]) -> List[str]:
+    def _extract_author_names(authors: list[dict[str, str] | str]) -> list[str]:
         author_names = []
         for author in authors:
             if isinstance(author, dict) and "name" in author:
@@ -793,15 +850,23 @@ class PaperFetcher:
     def _meets_upvote_threshold(self, upvotes: int) -> bool:
         return self.min_upvotes is None or upvotes >= self.min_upvotes
 
-    def _filter_and_sort_papers(
-        self, papers_by_date: Dict[str, List[Paper]]
-    ) -> Dict[str, List[Paper]]:
-        return {
-            date: sorted(papers, key=lambda x: (-x.upvotes, x.title))[
-                : self.papers_per_day
-            ]
-            for date, papers in papers_by_date.items()
-        }
+    def _select_papers(
+        self, papers_by_date: dict[str, list[Paper]], reference_date: datetime
+    ) -> list[Paper]:
+        """Pick the top papers per day, then de-duplicate across days.
+
+        Each day keeps its top ``papers_per_day`` by the configurable
+        popularity+recency score (see :class:`PaperScorer`). The per-day picks
+        are then de-duplicated by arxiv_id across the whole range, since the same
+        paper resurfaces on consecutive HuggingFace daily pages — this avoids
+        summarizing the same paper multiple times.
+        """
+        selected: list[Paper] = []
+        for papers in papers_by_date.values():
+            selected.extend(
+                self._scorer.select(papers, self.papers_per_day, reference_date)
+            )
+        return self._scorer.select(selected, len(selected), reference_date)
 
     def process_paper(
         self, paper: Paper, papers_dir: Path, parse_pdf: bool = False
@@ -820,10 +885,10 @@ class PaperFetcher:
                 paper.status = PaperStatus.FAILED
 
         except Exception as e:
-            logger.error(f"Error processing paper {paper.arxiv_id}: {str(e)}")
+            logger.error("Error processing paper %s: %s", paper.arxiv_id, str(e))
             paper.status = PaperStatus.FAILED
 
-    def _process_paper_with_pdf(self, paper: Paper, papers_dir: Path) -> Optional[bool]:
+    def _process_paper_with_pdf(self, paper: Paper, papers_dir: Path) -> bool | None:
         try:
             papers_dir = self._get_papers_dir(papers_dir, paper.arxiv_id)
             papers_dir.mkdir(parents=True, exist_ok=True)
@@ -849,7 +914,7 @@ class PaperFetcher:
 
             return True
         except Exception as e:
-            logger.warning(f"PDF parsing failed for {paper.arxiv_id}: {str(e)}")
+            logger.warning("PDF parsing failed for %s: %s", paper.arxiv_id, str(e))
             return False
 
     @staticmethod
@@ -858,7 +923,7 @@ class PaperFetcher:
         return papers_dir / safe_id
 
     @staticmethod
-    def _download_arxiv_pdf(papers_dir: Path, arxiv_id: str) -> Optional[Path]:
+    def _download_arxiv_pdf(papers_dir: Path, arxiv_id: str) -> Path | None:
         try:
             client = arxiv.Client()
             search = arxiv.Search(id_list=[arxiv_id])
@@ -869,10 +934,10 @@ class PaperFetcher:
 
             return pdf_path if pdf_path.exists() else None
         except Exception as e:
-            logger.error(f"Failed to download PDF for {arxiv_id}: {str(e)}")
+            logger.error("Failed to download PDF for %s: %s", arxiv_id, str(e))
             return None
 
-    def _process_paper_with_html(self, paper: Paper) -> Optional[bool]:
+    def _process_paper_with_html(self, paper: Paper) -> bool | None:
         try:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
@@ -888,5 +953,5 @@ class PaperFetcher:
 
             return True
         except Exception as e:
-            logger.warning(f"HTML parsing failed for '{paper.arxiv_id}': {str(e)}")
+            logger.warning("HTML parsing failed for '%s': %s", paper.arxiv_id, str(e))
             return False

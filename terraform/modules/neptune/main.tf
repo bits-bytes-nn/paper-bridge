@@ -14,21 +14,34 @@ resource "aws_neptune_subnet_group" "this" {
 }
 
 resource "aws_neptune_cluster_parameter_group" "this" {
-  name        = local.name_prefix
+  # name_prefix (not a fixed name) + create_before_destroy so an engine-family
+  # change (e.g. neptune1.2 -> neptune1.4) can create the replacement group under
+  # a new unique name and attach it to the cluster BEFORE the old one is deleted.
+  # A fixed name would deadlock: the old group can't be deleted while attached and
+  # the new one can't take the same name.
+  name_prefix = "${local.name_prefix}-"
   family      = local.neptune_family
   description = "Neptune cluster parameter group for ${local.name_prefix}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tags = var.tags
 }
 
 resource "aws_neptune_parameter_group" "this" {
-  name        = local.name_prefix
+  name_prefix = "${local.name_prefix}-"
   family      = local.neptune_family
   description = "Neptune instance parameter group for ${local.name_prefix}"
 
   parameter {
     name  = "neptune_query_timeout"
     value = "60000"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 
   tags = var.tags
@@ -67,10 +80,12 @@ resource "aws_neptune_cluster" "this" {
   enable_cloudwatch_logs_exports       = var.enable_audit_log ? ["audit"] : []
   engine                               = "neptune"
   engine_version                       = var.engine_version
+  allow_major_version_upgrade          = var.allow_major_version_upgrade
   neptune_subnet_group_name            = aws_neptune_subnet_group.this.name
   neptune_cluster_parameter_group_name = aws_neptune_cluster_parameter_group.this.name
   port                                 = 8182
-  skip_final_snapshot                  = true
+  skip_final_snapshot                  = var.skip_final_snapshot
+  final_snapshot_identifier            = var.skip_final_snapshot ? null : "${local.name_prefix}-final"
   storage_encrypted                    = true
   vpc_security_group_ids               = [aws_security_group.neptune.id]
   apply_immediately                    = var.apply_immediately
@@ -108,7 +123,7 @@ resource "aws_neptune_cluster_instance" "this" {
 }
 
 resource "aws_ssm_parameter" "neptune_endpoint" {
-  name  = "/${local.name_prefix}/neptune-endpoint"
+  name  = "/${local.name_prefix}-${var.stage}/neptune-endpoint"
   type  = "String"
   value = aws_neptune_cluster.this.endpoint
   tags  = var.tags

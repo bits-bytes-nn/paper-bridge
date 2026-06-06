@@ -1,56 +1,65 @@
-import nest_asyncio
 import os
-from datetime import datetime, timezone
-from pipe import Pipe
+from datetime import UTC, datetime
 from pprint import pformat
-from typing import List, Optional, Tuple, Union
+
 import boto3
-from graphrag_toolkit import (
+import nest_asyncio
+from graphrag_toolkit.lexical_graph import (
     ExtractionConfig,
-    IndexingConfig,
     GraphRAGConfig,
+    IndexingConfig,
     set_logging_config,
 )
-from graphrag_toolkit.storage import (
-    GraphStore,
-    GraphStoreFactory,
-    VectorStore,
-    VectorStoreFactory,
-)
-from graphrag_toolkit.indexing import sink
-from graphrag_toolkit.indexing.constants import PROPOSITIONS_KEY
-from graphrag_toolkit.indexing.build import (
+from graphrag_toolkit.lexical_graph.indexing import sink
+from graphrag_toolkit.lexical_graph.indexing.build import (
     BuildPipeline,
     Checkpoint,
     GraphConstruction,
     VectorIndexing,
 )
-from graphrag_toolkit.indexing.extract import (
-    DEFAULT_SCOPE,
+from graphrag_toolkit.lexical_graph.indexing.constants import PROPOSITIONS_KEY
+from graphrag_toolkit.lexical_graph.indexing.extract import (
     BatchConfig,
-    BatchLLMPropositionExtractor,
-    BatchTopicExtractor,
+    BatchLLMPropositionExtractorSync,
+    BatchTopicExtractorSync,
     ExtractionPipeline,
-    GraphScopedValueStore,
     LLMPropositionExtractor,
-    ScopedValueProvider,
+    PreferredValuesProvider,
     TopicExtractor,
+    default_preferred_values,
 )
-from graphrag_toolkit.indexing.model import SourceDocument
+from graphrag_toolkit.lexical_graph.indexing.model import SourceDocument
+from graphrag_toolkit.lexical_graph.tenant_id import TenantId
+from graphrag_toolkit.lexical_graph.storage import (
+    GraphStoreFactory,
+    VectorStoreFactory,
+)
+from graphrag_toolkit.lexical_graph.storage.graph import GraphStore
+from graphrag_toolkit.lexical_graph.storage.vector import VectorStore
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.schema import Document
+from pipe import Pipe
+
+from paper_bridge.indexer.configs.config import Config, ModelHandler
+
 from .aws_helpers import (
     NeptuneClient,
     OpenSearchClient,
     get_account_id,
+    get_cross_inference_model_id,
     get_ssm_param_value,
 )
 from .constants import ENTITY_CLASSIFICATIONS, SSMParams
 from .fetcher import Paper
 from .logger import logger
-from paper_bridge.indexer.configs.config import Config, ModelHandler
 
 DEFAULT_CHECKPOINT_DATE_FORMAT: str = "%Y-%m-%d"
+
+# graphrag v3's Extraction/Build pipelines pass tenant_id straight into
+# Checkpoint.add_filter, and CheckpointFilter.tenant_id is now a non-optional
+# TenantId (pydantic rejects the None default). We are single-tenant, so use the
+# default-tenant instance (TenantId() == DEFAULT_TENANT_ID) everywhere.
+DEFAULT_TENANT_ID: TenantId = TenantId()
 
 nest_asyncio.apply()
 
@@ -60,11 +69,11 @@ class ProcessingError(Exception):
 
 
 class DocumentProcessor:
-    def __init__(self, checkpoint: Optional[Checkpoint] = None):
+    def __init__(self, checkpoint: Checkpoint | None = None):
         self._checkpoint = checkpoint
 
     @property
-    def checkpoint(self) -> Optional[Checkpoint]:
+    def checkpoint(self) -> Checkpoint | None:
         return self._checkpoint
 
     def validate_config(self) -> None:
@@ -77,7 +86,7 @@ class Extractor(DocumentProcessor):
         config: Config,
         boto3_session: boto3.Session,
         graph_store: GraphStore,
-        checkpoint: Optional[Checkpoint] = None,
+        checkpoint: Checkpoint | None = None,
         enable_batch_inference: bool = False,
     ):
         super().__init__(checkpoint)
@@ -103,11 +112,11 @@ class Extractor(DocumentProcessor):
     @staticmethod
     def _setup_batch_config(
         config: Config, boto3_session: boto3.Session, enable_batch_inference: bool
-    ) -> Optional[BatchConfig]:
+    ) -> BatchConfig | None:
         if not enable_batch_inference:
             return None
 
-        base_path = f"/{config.resources.project_name}"
+        base_path = f"/{config.resources.project_name}-{config.resources.stage}"
         iam_role_name = get_ssm_param_value(
             boto3_session, f"{base_path}/iam-bedrock-inference"
         )
@@ -151,16 +160,16 @@ class Extractor(DocumentProcessor):
 
     def _create_proposition_extractor(
         self,
-    ) -> Union[BatchLLMPropositionExtractor, LLMPropositionExtractor]:
+    ) -> BatchLLMPropositionExtractorSync | LLMPropositionExtractor:
         return (
-            BatchLLMPropositionExtractor(batch_config=self.batch_config)
+            BatchLLMPropositionExtractorSync(batch_config=self.batch_config)
             if self.batch_config
             else LLMPropositionExtractor()
         )
 
     def _create_topic_extractor(
         self, graph_store: GraphStore
-    ) -> Union[BatchTopicExtractor, TopicExtractor]:
+    ) -> BatchTopicExtractorSync | TopicExtractor:
         entity_provider = self._create_entity_provider(graph_store)
         common_params = {
             "source_metadata_field": PROPOSITIONS_KEY,
@@ -168,19 +177,20 @@ class Extractor(DocumentProcessor):
         }
 
         return (
-            BatchTopicExtractor(batch_config=self.batch_config, **common_params)
+            BatchTopicExtractorSync(batch_config=self.batch_config, **common_params)
             if self.batch_config
             else TopicExtractor(**common_params)
         )
 
     @staticmethod
-    def _create_entity_provider(graph_store: GraphStore) -> ScopedValueProvider:
-        value_store = GraphScopedValueStore(graph_store=graph_store)
-        return ScopedValueProvider(
-            label="EntityClassification",
-            scoped_value_store=value_store,
-            initial_scoped_values={DEFAULT_SCOPE: ENTITY_CLASSIFICATIONS},
-        )
+    def _create_entity_provider(graph_store: GraphStore) -> PreferredValuesProvider:
+        # graphrag v3 replaced the graph-scoped value store
+        # (GraphScopedValueStore + ScopedValueProvider + DEFAULT_SCOPE) with a
+        # static preferred-values provider. ENTITY_CLASSIFICATIONS is a fixed
+        # constant, so this is functionally equivalent (no graph-backed
+        # persistence of the classification scope, which we did not rely on).
+        # ``graph_store`` is retained for call-site / signature compatibility.
+        return default_preferred_values(ENTITY_CLASSIFICATIONS)
 
     def _create_pipeline(self) -> Pipe:
         components = [
@@ -193,6 +203,7 @@ class Extractor(DocumentProcessor):
             num_workers=GraphRAGConfig.extraction_num_workers,
             batch_size=GraphRAGConfig.extraction_batch_size,
             checkpoint=self.checkpoint,
+            tenant_id=DEFAULT_TENANT_ID,
             show_progress=True,
         )
 
@@ -205,7 +216,7 @@ class Extractor(DocumentProcessor):
         ):
             raise ValueError("Worker count and batch size must be positive")
 
-    def extract(self, papers: List[Paper]) -> List[SourceDocument]:
+    def extract(self, papers: list[Paper]) -> list[SourceDocument]:
         if not papers:
             logger.warning("No papers provided for extraction")
             return []
@@ -221,7 +232,7 @@ class Extractor(DocumentProcessor):
             docs = [self._create_document(paper) for paper in valid_papers]
             return list(docs | self._pipeline)
         except Exception as e:
-            raise ProcessingError(f"Document extraction failed: {str(e)}")
+            raise ProcessingError(f"Document extraction failed: {str(e)}") from e
 
     @staticmethod
     def _log_skipped_papers(skipped_count: int) -> None:
@@ -236,7 +247,7 @@ class Extractor(DocumentProcessor):
             "title": paper.title,
             "authors": paper.authors[:max_authors],
             "published_at": paper.published_at.isoformat(),
-            "created_at": datetime.now(timezone.utc).isoformat(),
+            "created_at": datetime.now(UTC).isoformat(),
             "upvotes": paper.upvotes,
             "pdf_url": str(paper.pdf_url or ""),
             "base_date": paper.base_date,
@@ -250,8 +261,8 @@ class Builder(DocumentProcessor):
         graph_store: GraphStore,
         vector_store: VectorStore,
         neptune_client: NeptuneClient,
-        open_search_clients: List[OpenSearchClient],
-        checkpoint: Optional[Checkpoint] = None,
+        open_search_clients: list[OpenSearchClient],
+        checkpoint: Checkpoint | None = None,
     ):
         super().__init__(checkpoint)
         self._init_components(graph_store, vector_store)
@@ -284,10 +295,11 @@ class Builder(DocumentProcessor):
             batch_size=GraphRAGConfig.build_batch_size,
             batch_writes_enabled=GraphRAGConfig.batch_writes_enabled,
             checkpoint=self.checkpoint,
+            tenant_id=DEFAULT_TENANT_ID,
             show_progress=True,
         )
 
-    def build(self, extracted_docs: List[SourceDocument]) -> None:
+    def build(self, extracted_docs: list[SourceDocument]) -> None:
         if not extracted_docs:
             logger.warning("No documents provided for building indices")
             return
@@ -298,9 +310,9 @@ class Builder(DocumentProcessor):
             extracted_docs | self._pipeline | sink
             logger.info("Build pipeline completed successfully")
         except Exception as e:
-            raise ProcessingError(f"Build pipeline failed: {str(e)}")
+            raise ProcessingError(f"Build pipeline failed: {str(e)}") from e
 
-    def _clean_existing_documents(self, docs: List[SourceDocument]) -> None:
+    def _clean_existing_documents(self, docs: list[SourceDocument]) -> None:
         paper_ids = self._extract_paper_ids(docs)
 
         if not paper_ids:
@@ -316,7 +328,7 @@ class Builder(DocumentProcessor):
             raise
 
     @staticmethod
-    def _extract_paper_ids(docs: List[SourceDocument]) -> set:
+    def _extract_paper_ids(docs: list[SourceDocument]) -> set:
         paper_ids = set()
         for doc in docs:
             for node in doc.nodes:
@@ -324,7 +336,7 @@ class Builder(DocumentProcessor):
                     paper_ids.add(paper_id)
         return paper_ids
 
-    def _perform_deletion(self, paper_id_list: List[str]) -> None:
+    def _perform_deletion(self, paper_id_list: list[str]) -> None:
         results = self._neptune_client.batch_delete_documents(paper_id_list)
         logger.info(
             "Neptune deletion result: %s",
@@ -341,14 +353,14 @@ class Builder(DocumentProcessor):
 
 
 def run_extract_and_build(
-    papers: List[Paper],
+    papers: list[Paper],
     config: Config,
     boto3_session: boto3.Session,
-    output_dir: Optional[str] = None,
+    output_dir: str | None = None,
     enable_batch_inference: bool = False,
 ) -> None:
     try:
-        _configure_graph_rag(config)
+        _configure_graph_rag(config, boto3_session)
         _configure_logging()
 
         checkpoint = _create_checkpoint(config, output_dir or "output")
@@ -373,10 +385,21 @@ def run_extract_and_build(
         raise
 
 
-def _configure_graph_rag(config: Config) -> None:
+def _configure_graph_rag(config: Config, boto3_session: boto3.Session) -> None:
+    # graphrag invokes these LLMs directly via BedrockConverse with the bare model
+    # id. Claude 4.x models are not available on-demand and must be addressed by a
+    # cross-region inference profile (e.g. "us.anthropic.claude-haiku-4-5-..."),
+    # so resolve the profile id here exactly as the fetcher does for its own LLMs.
+    region_name = config.resources.bedrock_region_name
+    extraction_llm = get_cross_inference_model_id(
+        boto3_session, config.indexing.extraction_model_id.value, region_name
+    )
+    response_llm = get_cross_inference_model_id(
+        boto3_session, config.indexing.response_model_id.value, region_name
+    )
     graph_rag_config = {
-        "extraction_llm": config.indexing.extraction_model_id.value,
-        "response_llm": config.indexing.response_model_id.value,
+        "extraction_llm": extraction_llm,
+        "response_llm": response_llm,
         "embed_model": config.indexing.embeddings_model_id.value,
         "embed_dimensions": ModelHandler.get_dimensions(
             config.indexing.embeddings_model_id
@@ -407,7 +430,7 @@ def _create_checkpoint(config: Config, output_dir: str) -> Checkpoint:
 def _setup_stores(
     config: Config,
     boto3_session: boto3.Session,
-) -> Tuple[GraphStore, VectorStore, NeptuneClient, List[OpenSearchClient]]:
+) -> tuple[GraphStore, VectorStore, NeptuneClient, list[OpenSearchClient]]:
     base_path = f"/{config.resources.project_name}-{config.resources.stage}"
     graph_endpoint = get_ssm_param_value(
         boto3_session, f"{base_path}/{SSMParams.NEPTUNE_ENDPOINT.value}"

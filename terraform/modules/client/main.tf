@@ -1,10 +1,55 @@
 data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
 
 locals {
-  name_prefix               = var.project_name
-  batch_environment_prefix  = "${local.name_prefix}-batch"
-  ssm_param_prefix          = "/${local.name_prefix}"
-  lambda_runtime            = "python3.10"
+  name_prefix              = var.project_name
+  batch_environment_prefix = "${local.name_prefix}-batch"
+  # The application reads SSM parameters under "/{project_name}-{stage}" (see
+  # Resources.stage in the app config, default "dev"), so the param names AND the
+  # IAM scope derived from this prefix must include the stage suffix — otherwise
+  # the Batch job role is denied ssm:GetParameter on /paper-bridge-dev/* while the
+  # params live at /paper-bridge/*. Keep this in lockstep with config.yaml stage.
+  ssm_param_prefix = "/${local.name_prefix}-${var.stage}"
+  lambda_runtime   = "python3.10"
+
+  # Identity/region values used to scope IAM policies to this account/region/project.
+  partition  = data.aws_partition.current.partition
+  account_id = data.aws_caller_identity.current.account_id
+  region     = data.aws_region.current.name
+
+  # ARN scopes derived from the project naming convention. These keep IAM
+  # permissions least-privilege without requiring new required variables.
+  project_resource_arns = {
+    # SSM parameters under the project path, e.g. /paper-bridge/*
+    ssm_params = "arn:${local.partition}:ssm:${local.region}:${local.account_id}:parameter${local.ssm_param_prefix}/*"
+    # ECR repositories prefixed with the project name, e.g. paper-bridge-indexer
+    ecr_repos = "arn:${local.partition}:ecr:${local.region}:${local.account_id}:repository/${local.name_prefix}-*"
+    # CloudWatch log groups for the project's Batch jobs, Lambda, and CodeBuild
+    log_groups = [
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/batch/${local.name_prefix}-*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/batch/${local.name_prefix}-*:*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/lambda/${local.name_prefix}-*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/lambda/${local.name_prefix}-*:*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/codebuild/${local.name_prefix}-*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/codebuild/${local.name_prefix}-*:*",
+    ]
+    # Batch job queues and job definitions for this project
+    batch_resources = [
+      "arn:${local.partition}:batch:${local.region}:${local.account_id}:job-queue/${local.name_prefix}-*",
+      "arn:${local.partition}:batch:${local.region}:${local.account_id}:job-definition/${local.name_prefix}-*",
+      "arn:${local.partition}:batch:${local.region}:${local.account_id}:job/${local.name_prefix}-*",
+    ]
+    # Neptune cluster for this project
+    neptune_cluster = "arn:${local.partition}:neptune-db:${local.region}:${local.account_id}:*/*"
+    # S3: the CodeBuild source bucket (objects scoped to project prefix).
+    # Use "${name_prefix}*" (not "${name_prefix}/*") so the scope covers BOTH the
+    # build-source prefix "paper-bridge/" AND the stage-namespaced runtime output
+    # prefix "paper-bridge-dev/outputs/..." that the summarizer writes to.
+    # Without the stage suffix the summarizer's result upload gets AccessDenied.
+    s3_source_bucket     = "arn:${local.partition}:s3:::${var.codebuild_source_bucket}"
+    s3_source_bucket_obj = "arn:${local.partition}:s3:::${var.codebuild_source_bucket}/${local.name_prefix}*"
+  }
 
   # Common compute resources for batch environments
   common_compute_resources = {
@@ -16,9 +61,18 @@ locals {
   }
 
   # Source files for Docker builds with more explicit file patterns
+  # The shared package is COPYied into every image, so it participates in each
+  # subsystem's source hash (a shared/ change must trigger a rebuild). fileset
+  # yields paths relative to its root, so prefix them back to absolute for filemd5.
+  shared_source_files = [
+    for f in tolist(fileset("${var.root_dir}/paper_bridge/shared", "**/*.py")) :
+    "${var.root_dir}/paper_bridge/shared/${f}"
+  ]
+
   indexer_source_files = concat(
-    tolist(fileset("${var.root_dir}/paper_bridge/indexer/configs", "**/*.{py,yaml,yml}")),
-    tolist(fileset("${var.root_dir}/paper_bridge/indexer/src", "**/*.py")),
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/indexer/configs", "**/*.{py,yaml,yml}")) : "${var.root_dir}/paper_bridge/indexer/configs/${f}"],
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/indexer/src", "**/*.py")) : "${var.root_dir}/paper_bridge/indexer/src/${f}"],
+    local.shared_source_files,
     ["${var.root_dir}/paper_bridge/indexer/main.py"],
     ["${var.root_dir}/paper_bridge/indexer/Dockerfile"],
     ["${var.root_dir}/paper_bridge/indexer/requirements.txt"]
@@ -29,8 +83,9 @@ locals {
   ]))
 
   cleaner_source_files = concat(
-    tolist(fileset("${var.root_dir}/paper_bridge/cleaner/configs", "**/*.{py,yaml,yml}")),
-    tolist(fileset("${var.root_dir}/paper_bridge/cleaner/src", "**/*.py")),
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/cleaner/configs", "**/*.{py,yaml,yml}")) : "${var.root_dir}/paper_bridge/cleaner/configs/${f}"],
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/cleaner/src", "**/*.py")) : "${var.root_dir}/paper_bridge/cleaner/src/${f}"],
+    local.shared_source_files,
     ["${var.root_dir}/paper_bridge/cleaner/main.py"],
     ["${var.root_dir}/paper_bridge/cleaner/Dockerfile"],
     ["${var.root_dir}/paper_bridge/cleaner/requirements.txt"]
@@ -41,9 +96,10 @@ locals {
   ]))
 
   summarizer_source_files = concat(
-    tolist(fileset("${var.root_dir}/paper_bridge/summarizer/configs", "**/*.{py,yaml,yml}")),
-    tolist(fileset("${var.root_dir}/paper_bridge/summarizer/src", "**/*.py")),
-    tolist(fileset("${var.root_dir}/paper_bridge/summarizer", "**/*.html")),
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/summarizer/configs", "**/*.{py,yaml,yml}")) : "${var.root_dir}/paper_bridge/summarizer/configs/${f}"],
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/summarizer/src", "**/*.py")) : "${var.root_dir}/paper_bridge/summarizer/src/${f}"],
+    [for f in tolist(fileset("${var.root_dir}/paper_bridge/summarizer", "**/*.html")) : "${var.root_dir}/paper_bridge/summarizer/${f}"],
+    local.shared_source_files,
     ["${var.root_dir}/paper_bridge/summarizer/main.py"],
     ["${var.root_dir}/paper_bridge/summarizer/Dockerfile"],
     ["${var.root_dir}/paper_bridge/summarizer/requirements.txt"]
@@ -53,56 +109,50 @@ locals {
     for f in local.summarizer_source_files : fileexists(f) ? filemd5(f) : ""
   ]))
 
-  # IAM policy attachments map with more specific naming
-  client_policy_attachments = {
-    batch      = "arn:aws:iam::aws:policy/AWSBatchFullAccess"
-    bedrock    = "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
-    cloudwatch = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
-    ec2        = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-    ecr        = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
-    ecs        = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
-    neptune    = "arn:aws:iam::aws:policy/NeptuneFullAccess"
-    s3         = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-    ssm        = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
-  }
-
   # Resource naming convention
   resource_names = {
-    security_group      = "${local.name_prefix}-client"
-    iam_role_client     = "${local.name_prefix}-client"
-    iam_role_bedrock    = "${local.name_prefix}-bedrock-inference"
-    iam_role_codebuild  = "${local.name_prefix}-codebuild"
-    iam_role_event_rule = "${local.name_prefix}-event"
+    security_group            = "${local.name_prefix}-client"
+    iam_role_client           = "${local.name_prefix}-client"
+    iam_role_bedrock          = "${local.name_prefix}-bedrock-inference"
+    iam_role_codebuild        = "${local.name_prefix}-codebuild"
+    iam_role_event_rule       = "${local.name_prefix}-event"
     ecr_repository_indexer    = "${local.name_prefix}-indexer"
     ecr_repository_cleaner    = "${local.name_prefix}-cleaner"
     ecr_repository_summarizer = "${local.name_prefix}-summarizer"
-    job_queue_indexer   = "${local.name_prefix}-indexer"
-    job_queue_summarizer = "${local.name_prefix}-summarizer"
-    job_definition_indexer = "${local.name_prefix}-indexer"
+    job_queue_indexer         = "${local.name_prefix}-indexer"
+    job_queue_summarizer      = "${local.name_prefix}-summarizer"
+    job_definition_indexer    = "${local.name_prefix}-indexer"
     job_definition_summarizer = "${local.name_prefix}-summarizer"
-    lambda_function_cleaner    = "${local.name_prefix}-cleaner"
-    cloudwatch_indexer    = "${local.name_prefix}-indexer"
-    cloudwatch_cleaner    = "${local.name_prefix}-cleaner"
-    cloudwatch_summarizer = "${local.name_prefix}-summarizer"
-    codebuild_indexer    = "${local.name_prefix}-indexer"
-    codebuild_cleaner    = "${local.name_prefix}-cleaner"
-    codebuild_summarizer = "${local.name_prefix}-summarizer"
-    sns_topic = local.name_prefix
+    lambda_function_cleaner   = "${local.name_prefix}-cleaner"
+    cloudwatch_indexer        = "${local.name_prefix}-indexer"
+    cloudwatch_cleaner        = "${local.name_prefix}-cleaner"
+    cloudwatch_summarizer     = "${local.name_prefix}-summarizer"
+    codebuild_indexer         = "${local.name_prefix}-indexer"
+    codebuild_cleaner         = "${local.name_prefix}-cleaner"
+    codebuild_summarizer      = "${local.name_prefix}-summarizer"
+    sns_topic                 = local.name_prefix
   }
 
   # Default resource configurations
   default_configs = {
     indexer_batch = {
-      vcpu        = 4
-      memory      = 8192
-      retry       = 2
-      timeout     = 10800
+      # 8192 MB fits a single m5.xlarge (4 vCPU / 16 GB) under the "optimal"
+      # compute environment (maxvCpus = 4). An earlier 16384 bump was made on an
+      # OOM hypothesis that turned out to be wrong — the real E2E failure was an
+      # ssm:GetParameter AccessDenied (stage-prefix mismatch, since fixed), which
+      # crashed the job in ~9s before GraphRAG ever loaded. With no evidence of an
+      # actual OOM, this stays at the original 8192; revisit only if a real run
+      # gets SIGKILLed during run_extract_and_build.
+      vcpu    = 4
+      memory  = 8192
+      retry   = 2
+      timeout = 10800
     }
     summarizer_batch = {
-      vcpu        = 2
-      memory      = 4096
-      retry       = 2
-      timeout     = 10800
+      vcpu    = 2
+      memory  = 4096
+      retry   = 2
+      timeout = 10800
     }
 
     cleaner_lambda = {
@@ -157,7 +207,8 @@ resource "aws_iam_role" "client" {
             "ec2.amazonaws.com",
             "ecs-tasks.amazonaws.com",
             "lambda.amazonaws.com",
-            "sagemaker.amazonaws.com"
+            "sagemaker.amazonaws.com",
+            "spotfleet.amazonaws.com"
           ]
         }
         Action = ["sts:AssumeRole"]
@@ -173,10 +224,188 @@ resource "aws_iam_instance_profile" "client" {
   role = aws_iam_role.client.name
 }
 
-resource "aws_iam_role_policy_attachment" "client_policies" {
-  for_each   = local.client_policy_attachments
+# Least-privilege policy for the multi-purpose client role. This role is used as
+# the Batch job role, Lambda execution role, ECS task role, EC2 instance profile,
+# and Spot fleet role. Permissions are scoped to this project's resources where an
+# ARN can be derived; the few genuinely account/region-wide describe/list calls
+# (which do not support resource-level scoping) are isolated and commented below.
+data "aws_iam_policy_document" "client" {
+  # --- Bedrock model invocation ---
+  # Model ARNs (foundation models / inference profiles) are dynamic and live in
+  # var.bedrock_region_name; scope the actions but allow any model resource.
+  statement {
+    sid    = "BedrockInvoke"
+    effect = "Allow"
+    actions = [
+      "bedrock:InvokeModel",
+      "bedrock:InvokeModelWithResponseStream",
+      "bedrock:CreateModelInvocationJob",
+      "bedrock:GetModelInvocationJob",
+      "bedrock:StopModelInvocationJob",
+      "bedrock:ListFoundationModels",
+      "bedrock:GetFoundationModel",
+      # The app resolves cross-region inference-profile IDs at runtime
+      # (get_cross_inference_model_id -> list_inference_profiles); without these
+      # the indexer/summarizer log "Error checking cross-inference support".
+      "bedrock:ListInferenceProfiles",
+      "bedrock:GetInferenceProfile",
+    ]
+    resources = ["*"] # Bedrock model/inference-profile ARNs are dynamic; action-scoped only.
+  }
+
+  # --- S3: CodeBuild source bucket (project prefix only) ---
+  statement {
+    sid    = "S3Objects"
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
+    ]
+    resources = [local.project_resource_arns.s3_source_bucket_obj]
+  }
+
+  statement {
+    sid    = "S3ListBucket"
+    effect = "Allow"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+    ]
+    resources = [local.project_resource_arns.s3_source_bucket]
+  }
+
+  # --- SSM: project parameters only ---
+  statement {
+    sid    = "SSMParameters"
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameter",
+      "ssm:GetParameters",
+      "ssm:GetParametersByPath",
+    ]
+    resources = [local.project_resource_arns.ssm_params]
+  }
+
+  # --- ECR: pull project images (auth token is account-wide by design) ---
+  statement {
+    sid       = "ECRAuthToken"
+    effect    = "Allow"
+    actions   = ["ecr:GetAuthorizationToken"]
+    resources = ["*"] # GetAuthorizationToken does not support resource-level scoping.
+  }
+
+  statement {
+    sid    = "ECRPull"
+    effect = "Allow"
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+    ]
+    resources = [local.project_resource_arns.ecr_repos]
+  }
+
+  # --- AWS Batch: submit/describe project jobs ---
+  statement {
+    sid    = "BatchSubmit"
+    effect = "Allow"
+    actions = [
+      "batch:SubmitJob",
+      "batch:TerminateJob",
+      "batch:CancelJob",
+    ]
+    resources = local.project_resource_arns.batch_resources
+  }
+
+  statement {
+    sid    = "BatchDescribe"
+    effect = "Allow"
+    actions = [
+      "batch:DescribeJobs",
+      "batch:DescribeJobQueues",
+      "batch:DescribeJobDefinitions",
+      "batch:DescribeComputeEnvironments",
+      "batch:ListJobs",
+    ]
+    resources = ["*"] # Batch describe/list APIs do not support resource-level scoping.
+  }
+
+  # --- Neptune: connect to the cluster ---
+  statement {
+    sid    = "NeptuneConnect"
+    effect = "Allow"
+    actions = [
+      "neptune-db:connect",
+      "neptune-db:ReadDataViaQuery",
+      "neptune-db:WriteDataViaQuery",
+      "neptune-db:DeleteDataViaQuery",
+      "neptune-db:GetQueryStatus",
+      "neptune-db:CancelQuery",
+    ]
+    resources = [local.project_resource_arns.neptune_cluster]
+  }
+
+  # --- CloudWatch Logs: project log groups ---
+  statement {
+    sid    = "CloudWatchLogs"
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams",
+    ]
+    resources = local.project_resource_arns.log_groups
+  }
+
+  # --- SNS: publish to the project topic ---
+  statement {
+    sid       = "SNSPublish"
+    effect    = "Allow"
+    actions   = ["sns:Publish"]
+    resources = [aws_sns_topic.this.arn]
+  }
+
+  # --- EC2 ENI management for the VPC-attached cleaner Lambda ---
+  # These ENI lifecycle calls do not support resource-level scoping; required so
+  # the Lambda can attach to the private subnets. Replaces former AmazonEC2FullAccess.
+  statement {
+    sid    = "LambdaVpcEni"
+    effect = "Allow"
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface",
+      "ec2:AssignPrivateIpAddresses",
+      "ec2:UnassignPrivateIpAddresses",
+    ]
+    resources = ["*"] # EC2 ENI APIs do not support resource-level permissions.
+  }
+}
+
+resource "aws_iam_role_policy" "client_scoped" {
+  name   = "${local.name_prefix}-client-scoped"
+  role   = aws_iam_role.client.name
+  policy = data.aws_iam_policy_document.client.json
+}
+
+# Batch on EC2 launches container instances that must register with ECS. This is
+# the AWS-managed role purpose-built for ECS-on-EC2 container instances; its
+# actions (ECS register/poll, ECR pull, logs) are the standard, minimal set and
+# several of them do not support resource-level scoping. Kept as-is by design.
+resource "aws_iam_role_policy_attachment" "client_ecs_instance" {
   role       = aws_iam_role.client.name
-  policy_arn = each.value
+  policy_arn = "arn:${local.partition}:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+}
+
+# This role is also used as the Spot fleet role for Batch Spot compute
+# environments (see spot_iam_fleet_role). The AWS-managed Spot fleet tagging role
+# is the minimal, purpose-built policy for requesting/tagging Spot instances;
+# replaces the former broad AmazonEC2FullAccess attachment.
+resource "aws_iam_role_policy_attachment" "client_spot_fleet" {
+  role       = aws_iam_role.client.name
+  policy_arn = "arn:${local.partition}:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
 }
 
 resource "aws_iam_role_policy" "client_pass_role_policy" {
@@ -214,9 +443,34 @@ resource "aws_iam_role" "bedrock_inference" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "s3_to_bedrock_inference" {
-  role       = aws_iam_role.bedrock_inference.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+# Bedrock batch inference reads inputs from / writes outputs to the project's S3
+# bucket. Scoped to that bucket (project prefix) instead of AmazonS3FullAccess.
+data "aws_iam_policy_document" "bedrock_inference_s3" {
+  statement {
+    sid    = "S3Objects"
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+    ]
+    resources = [local.project_resource_arns.s3_source_bucket_obj]
+  }
+
+  statement {
+    sid    = "S3ListBucket"
+    effect = "Allow"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+    ]
+    resources = [local.project_resource_arns.s3_source_bucket]
+  }
+}
+
+resource "aws_iam_role_policy" "s3_to_bedrock_inference" {
+  name   = "${local.name_prefix}-bedrock-inference-s3"
+  role   = aws_iam_role.bedrock_inference.name
+  policy = data.aws_iam_policy_document.bedrock_inference_s3.json
 }
 
 resource "aws_ssm_parameter" "bedrock_inference" {
@@ -228,8 +482,11 @@ resource "aws_ssm_parameter" "bedrock_inference" {
 
 # ECR Repositories
 resource "aws_ecr_repository" "indexer" {
-  count                = var.use_graph_rag ? 1 : 0
-  name                 = local.resource_names.ecr_repository_indexer
+  count = var.use_graph_rag ? 1 : 0
+  name  = local.resource_names.ecr_repository_indexer
+  # force_delete so `terraform destroy` can remove the repo even when it still
+  # holds pushed images (otherwise destroy fails with RepositoryNotEmptyException).
+  force_delete         = true
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -242,6 +499,7 @@ resource "aws_ecr_repository" "indexer" {
 resource "aws_ecr_repository" "cleaner" {
   count                = var.use_graph_rag ? 1 : 0
   name                 = local.resource_names.ecr_repository_cleaner
+  force_delete         = true
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -253,6 +511,7 @@ resource "aws_ecr_repository" "cleaner" {
 
 resource "aws_ecr_repository" "summarizer" {
   name                 = local.resource_names.ecr_repository_summarizer
+  force_delete         = true
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -260,6 +519,66 @@ resource "aws_ecr_repository" "summarizer" {
   }
 
   tags = var.tags
+}
+
+# ECR Lifecycle Policies - keep only the most recent images
+resource "aws_ecr_lifecycle_policy" "indexer" {
+  count      = var.use_graph_rag ? 1 : 0
+  repository = aws_ecr_repository.indexer[0].name
+
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "Keep only the 5 most recent images"
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = 5
+      }
+      action = {
+        type = "expire"
+      }
+    }]
+  })
+}
+
+resource "aws_ecr_lifecycle_policy" "cleaner" {
+  count      = var.use_graph_rag ? 1 : 0
+  repository = aws_ecr_repository.cleaner[0].name
+
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "Keep only the 5 most recent images"
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = 5
+      }
+      action = {
+        type = "expire"
+      }
+    }]
+  })
+}
+
+resource "aws_ecr_lifecycle_policy" "summarizer" {
+  repository = aws_ecr_repository.summarizer.name
+
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = "Keep only the 5 most recent images"
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = 5
+      }
+      action = {
+        type = "expire"
+      }
+    }]
+  })
 }
 
 resource "aws_iam_role" "codebuild" {
@@ -281,15 +600,64 @@ resource "aws_iam_role" "codebuild" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "codebuild_policies" {
-  for_each = {
-    ecr        = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
-    s3         = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-    cloudwatch = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
+# Least-privilege policy for the CodeBuild role: pull/push project ECR images,
+# read the project source from S3, and write to the project's CodeBuild log groups.
+data "aws_iam_policy_document" "codebuild" {
+  statement {
+    sid       = "ECRAuthToken"
+    effect    = "Allow"
+    actions   = ["ecr:GetAuthorizationToken"]
+    resources = ["*"] # GetAuthorizationToken does not support resource-level scoping.
   }
 
-  role       = aws_iam_role.codebuild.name
-  policy_arn = each.value
+  statement {
+    sid    = "ECRPushPull"
+    effect = "Allow"
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload",
+      "ecr:PutImage",
+    ]
+    resources = [local.project_resource_arns.ecr_repos]
+  }
+
+  statement {
+    sid       = "S3Source"
+    effect    = "Allow"
+    actions   = ["s3:GetObject", "s3:GetObjectVersion"]
+    resources = [local.project_resource_arns.s3_source_bucket_obj]
+  }
+
+  statement {
+    sid       = "S3ListSource"
+    effect    = "Allow"
+    actions   = ["s3:ListBucket", "s3:GetBucketLocation"]
+    resources = [local.project_resource_arns.s3_source_bucket]
+  }
+
+  statement {
+    sid    = "CloudWatchLogs"
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+    resources = [
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/codebuild/${local.name_prefix}-*",
+      "arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:/aws/codebuild/${local.name_prefix}-*:*",
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "codebuild_scoped" {
+  name   = "${local.name_prefix}-codebuild-scoped"
+  role   = aws_iam_role.codebuild.name
+  policy = data.aws_iam_policy_document.codebuild.json
 }
 
 resource "null_resource" "upload_indexer_source" {
@@ -301,7 +669,7 @@ resource "null_resource" "upload_indexer_source" {
   provisioner "local-exec" {
     command = <<EOF
       cd ${var.root_dir}
-      find paper_bridge/indexer -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip indexer_source.zip -@
+      find paper_bridge/indexer paper_bridge/shared -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip indexer_source.zip -@
       aws s3 cp indexer_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/indexer_source.zip
     EOF
   }
@@ -316,7 +684,7 @@ resource "null_resource" "upload_cleaner_source" {
   provisioner "local-exec" {
     command = <<EOF
       cd ${var.root_dir}
-      find paper_bridge/cleaner -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip cleaner_source.zip -@
+      find paper_bridge/cleaner paper_bridge/shared -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "Dockerfile" \) | zip cleaner_source.zip -@
       aws s3 cp cleaner_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/cleaner_source.zip
     EOF
   }
@@ -330,7 +698,7 @@ resource "null_resource" "upload_summarizer_source" {
   provisioner "local-exec" {
     command = <<EOF
       cd ${var.root_dir}
-      find paper_bridge/summarizer -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "*.html" -o -name "Dockerfile" \) | zip summarizer_source.zip -@
+      find paper_bridge/summarizer paper_bridge/shared -type f \( -name "*.py" -o -name "*.yaml" -o -name "*.yml" -o -name "*.txt" -o -name "*.html" -o -name "Dockerfile" \) | zip summarizer_source.zip -@
       aws s3 cp summarizer_source.zip s3://${var.codebuild_source_bucket}/${local.name_prefix}/summarizer_source.zip
     EOF
   }
@@ -473,24 +841,30 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
   provisioner "local-exec" {
     command = <<EOF
       set -e
-      # Start build
-      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.indexer[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
-      echo "Started build with ID: $BUILD_ID"
-
-      # Poll for build completion
-      echo "Waiting for build to complete..."
-      STATUS="IN_PROGRESS"
-      while [ "$STATUS" = "IN_PROGRESS" ]; do
-        sleep 10
-        STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
-        echo "Current build status: $STATUS"
+      # Retry once on transient IAM-propagation failure (see cleaner trigger note).
+      ATTEMPT=0
+      MAX_ATTEMPTS=2
+      while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
+        ATTEMPT=$((ATTEMPT + 1))
+        BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.indexer[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+        echo "Attempt $ATTEMPT: started build $BUILD_ID"
+        STATUS="IN_PROGRESS"
+        while [ "$STATUS" = "IN_PROGRESS" ]; do
+          sleep 10
+          STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
+          echo "Current build status: $STATUS"
+        done
+        if [ "$STATUS" = "SUCCEEDED" ]; then
+          break
+        fi
+        echo "Build failed with status: $STATUS (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+        if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+          echo "Waiting 30s for IAM propagation before retry..."
+          sleep 30
+        else
+          exit 1
+        fi
       done
-
-      # Check build status
-      if [ "$STATUS" != "SUCCEEDED" ]; then
-        echo "Build failed with status: $STATUS"
-        exit 1
-      fi
 
       echo "Build completed successfully"
 
@@ -510,6 +884,7 @@ resource "null_resource" "trigger_and_wait_indexer_build" {
 
   depends_on = [
     aws_codebuild_project.indexer,
+    aws_iam_role_policy.codebuild_scoped,
     null_resource.upload_indexer_source
   ]
 }
@@ -523,24 +898,33 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
   provisioner "local-exec" {
     command = <<EOF
       set -e
-      # Start build
-      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.cleaner[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
-      echo "Started build with ID: $BUILD_ID"
-
-      # Poll for build completion
-      echo "Waiting for build to complete..."
-      STATUS="IN_PROGRESS"
-      while [ "$STATUS" = "IN_PROGRESS" ]; do
-        sleep 10
-        STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
-        echo "Current build status: $STATUS"
+      # Run the build, retrying once: the FIRST CodeBuild run of a fresh apply can
+      # hit an IAM eventual-consistency error (the codebuild role's logs:CreateLogStream
+      # permission may not have propagated yet), which surfaces as a build FAILED in
+      # the QUEUED phase. A short wait + one retry clears it.
+      ATTEMPT=0
+      MAX_ATTEMPTS=2
+      while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
+        ATTEMPT=$((ATTEMPT + 1))
+        BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.cleaner[0].name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+        echo "Attempt $ATTEMPT: started build $BUILD_ID"
+        STATUS="IN_PROGRESS"
+        while [ "$STATUS" = "IN_PROGRESS" ]; do
+          sleep 10
+          STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
+          echo "Current build status: $STATUS"
+        done
+        if [ "$STATUS" = "SUCCEEDED" ]; then
+          break
+        fi
+        echo "Build failed with status: $STATUS (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+        if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+          echo "Waiting 30s for IAM propagation before retry..."
+          sleep 30
+        else
+          exit 1
+        fi
       done
-
-      # Check build status
-      if [ "$STATUS" != "SUCCEEDED" ]; then
-        echo "Build failed with status: $STATUS"
-        exit 1
-      fi
 
       echo "Build completed successfully"
 
@@ -560,6 +944,7 @@ resource "null_resource" "trigger_and_wait_cleaner_build" {
 
   depends_on = [
     aws_codebuild_project.cleaner,
+    aws_iam_role_policy.codebuild_scoped,
     null_resource.upload_cleaner_source
   ]
 }
@@ -572,24 +957,30 @@ resource "null_resource" "trigger_and_wait_summarizer_build" {
   provisioner "local-exec" {
     command = <<EOF
       set -e
-      # Start build
-      BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.summarizer.name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
-      echo "Started build with ID: $BUILD_ID"
-
-      # Poll for build completion
-      echo "Waiting for build to complete..."
-      STATUS="IN_PROGRESS"
-      while [ "$STATUS" = "IN_PROGRESS" ]; do
-        sleep 10
-        STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
-        echo "Current build status: $STATUS"
+      # Retry once on transient IAM-propagation failure (see cleaner trigger note).
+      ATTEMPT=0
+      MAX_ATTEMPTS=2
+      while [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; do
+        ATTEMPT=$((ATTEMPT + 1))
+        BUILD_ID=$(aws codebuild start-build --project-name ${aws_codebuild_project.summarizer.name} --region ${data.aws_region.current.name} --query 'build.id' --output text)
+        echo "Attempt $ATTEMPT: started build $BUILD_ID"
+        STATUS="IN_PROGRESS"
+        while [ "$STATUS" = "IN_PROGRESS" ]; do
+          sleep 10
+          STATUS=$(aws codebuild batch-get-builds --ids $BUILD_ID --region ${data.aws_region.current.name} --query 'builds[0].buildStatus' --output text)
+          echo "Current build status: $STATUS"
+        done
+        if [ "$STATUS" = "SUCCEEDED" ]; then
+          break
+        fi
+        echo "Build failed with status: $STATUS (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+        if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+          echo "Waiting 30s for IAM propagation before retry..."
+          sleep 30
+        else
+          exit 1
+        fi
       done
-
-      # Check build status
-      if [ "$STATUS" != "SUCCEEDED" ]; then
-        echo "Build failed with status: $STATUS"
-        exit 1
-      fi
 
       echo "Build completed successfully"
 
@@ -609,6 +1000,7 @@ resource "null_resource" "trigger_and_wait_summarizer_build" {
 
   depends_on = [
     aws_codebuild_project.summarizer,
+    aws_iam_role_policy.codebuild_scoped,
     null_resource.upload_summarizer_source
   ]
 }
@@ -890,6 +1282,10 @@ resource "aws_batch_job_definition" "indexer" {
         value = aws_sns_topic.this.arn
       },
       {
+        name  = "S3_BUCKET_NAME"
+        value = var.codebuild_source_bucket
+      },
+      {
         name  = "IMAGE_VERSION"
         value = local.indexer_hash
       }
@@ -950,6 +1346,10 @@ resource "aws_batch_job_definition" "summarizer" {
       {
         name  = "TOPIC_ARN"
         value = aws_sns_topic.this.arn
+      },
+      {
+        name  = "S3_BUCKET_NAME"
+        value = var.codebuild_source_bucket
       },
       {
         name  = "IMAGE_VERSION"
@@ -1059,14 +1459,29 @@ resource "aws_iam_role" "event_rule" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "event_rule_policies" {
-  for_each = {
-    batch  = "arn:aws:iam::aws:policy/AWSBatchFullAccess"
-    lambda = "arn:aws:iam::aws:policy/service-role/AWSLambdaRole"
+# Least-privilege policy for the EventBridge rule role: submit the project's Batch
+# jobs and invoke the project's Lambda functions. Replaces AWSBatchFullAccess +
+# AWSLambdaRole managed policies.
+data "aws_iam_policy_document" "event_rule" {
+  statement {
+    sid       = "BatchSubmit"
+    effect    = "Allow"
+    actions   = ["batch:SubmitJob"]
+    resources = local.project_resource_arns.batch_resources
   }
 
-  role       = aws_iam_role.event_rule.name
-  policy_arn = each.value
+  statement {
+    sid       = "LambdaInvoke"
+    effect    = "Allow"
+    actions   = ["lambda:InvokeFunction"]
+    resources = ["arn:${local.partition}:lambda:${local.region}:${local.account_id}:function:${local.name_prefix}-*"]
+  }
+}
+
+resource "aws_iam_role_policy" "event_rule_scoped" {
+  name   = "${local.name_prefix}-event-scoped"
+  role   = aws_iam_role.event_rule.name
+  policy = data.aws_iam_policy_document.event_rule.json
 }
 
 resource "aws_cloudwatch_event_rule" "indexer" {
@@ -1132,11 +1547,11 @@ resource "aws_cloudwatch_event_target" "summarizer" {
 
   input = jsonencode({
     Parameters = {
-      target_date     = "null",
-      days_to_fetch   = "0",
-      arxiv_ids       = "null",
-      language        = "ko",
-      apply_retrieval = "true",
+      target_date         = "null",
+      days_to_fetch       = "0",
+      arxiv_ids           = "null",
+      language            = "ko",
+      apply_retrieval     = "true",
       send_business_slack = "true"
     }
   })

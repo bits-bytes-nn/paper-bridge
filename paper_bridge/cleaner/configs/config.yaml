@@ -3,6 +3,6 @@ resources:
   stage: dev
   default_region_name: us-west-2
 
-cleaning:
+cleaner:
   days_back: 365
-  days_range: 7
+  days_range: 365

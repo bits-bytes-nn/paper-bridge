@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  name_prefix    = var.project_name
+  name_prefix = var.project_name
   az_names    = slice(data.aws_availability_zones.available.names, 0, var.max_azs)
   vpn_enabled = var.enable_vpn ? 1 : 0
 }

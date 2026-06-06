@@ -1,14 +1,15 @@
 from .aws_helpers import get_ssm_param_value
 from .cleaner import Cleaner
-from .constants import EnvVars, NULL_STRING, SSMParams
-from .logger import is_aws_env, logger
+from .constants import NULL_STRING, EnvVars, LocalPaths, SSMParams
+from .logger import is_running_in_aws, logger
 
 __all__ = [
+    "NULL_STRING",
     "Cleaner",
     "EnvVars",
-    "NULL_STRING",
+    "LocalPaths",
     "SSMParams",
     "get_ssm_param_value",
-    "is_aws_env",
+    "is_running_in_aws",
     "logger",
 ]

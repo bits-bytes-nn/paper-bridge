@@ -1,22 +1,26 @@
 import argparse
 import sys
-import boto3
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from pprint import pformat
-from typing import List, Optional
+
+import boto3
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from paper_bridge.indexer.configs import Config
 from paper_bridge.indexer.src import (
-    EnvVars,
     NULL_STRING,
+    EnvVars,
     Paper,
     PaperFetcher,
     is_aws_env,
-    logger,
     run_extract_and_build,
 )
+
+# Import the logger INSTANCE explicitly (not via the package's lazy __getattr__),
+# which is ambiguous with the ``logger`` submodule depending on import order —
+# see the note in summarizer/main.py.
+from paper_bridge.indexer.src.logger import logger
 
 
 class DateFormatError(Exception):
@@ -28,18 +32,18 @@ class IndexingError(Exception):
 
 
 def main(
-    target_date: Optional[str],
+    target_date: str | None,
     days_to_fetch: int,
-    arxiv_ids: Optional[List[str]],
+    arxiv_ids: list[str] | None,
 ) -> None:
     boto3_session = None
-    papers: List[Paper] = []
+    papers: list[Paper] = []
     success = False
     error_message = None
 
     try:
         config = Config.load()
-        profile_name = EnvVars.AWS_PROFILE_NAME.value
+        profile_name = EnvVars.AWS_PROFILE_NAME.env_value
 
         boto3_session = boto3.Session(
             region_name=config.resources.default_region_name,
@@ -88,10 +92,10 @@ def main(
         logger.error("Failed to process papers: %s", e)
         error_message = str(e)
         success = False
-        raise IndexingError(f"Failed to process papers: {e}")
+        raise IndexingError(f"Failed to process papers: {e}") from e
 
     finally:
-        topic_arn = EnvVars.TOPIC_ARN.value
+        topic_arn = EnvVars.TOPIC_ARN.env_value
         target_datetime = None
         try:
             target_datetime = parse_target_date(target_date)
@@ -108,24 +112,24 @@ def main(
             )
 
 
-def parse_target_date(date_str: Optional[str]) -> Optional[datetime]:
+def parse_target_date(date_str: str | None) -> datetime | None:
     if not date_str or date_str.lower() == NULL_STRING:
         return None
     try:
         return datetime.strptime(date_str, "%Y-%m-%d")
     except ValueError as e:
         logger.error("Invalid date format: %s", e)
-        raise DateFormatError(f"Invalid date format: {e}")
+        raise DateFormatError(f"Invalid date format: {e}") from e
 
 
 def fetch_papers(
     config: Config,
     boto3_session: boto3.Session,
-    profile_name: Optional[str],
-    target_datetime: Optional[datetime],
-    days_to_fetch: Optional[int],
-    arxiv_ids: Optional[List[str]],
-) -> List[Paper]:
+    profile_name: str | None,
+    target_datetime: datetime | None,
+    days_to_fetch: int | None,
+    arxiv_ids: list[str] | None,
+) -> list[Paper]:
     fetcher = PaperFetcher(
         config, boto3_session=boto3_session, profile_name=profile_name
     )
@@ -146,9 +150,9 @@ def fetch_papers(
 def send_failure_notification(
     boto3_session: boto3.Session,
     topic_arn: str,
-    target_date: Optional[datetime],
-    papers: List[Paper],
-    error_message: Optional[str] = None,
+    target_date: datetime | None,
+    papers: list[Paper],
+    error_message: str | None = None,
 ) -> None:
     sns = boto3_session.client("sns")
     date_str = get_formatted_date(target_date)
@@ -163,14 +167,14 @@ def send_failure_notification(
     sns.publish(TopicArn=topic_arn, Message=message, Subject="Paper Bridge Failure")
 
 
-def get_formatted_date(target_date: Optional[datetime]) -> str:
+def get_formatted_date(target_date: datetime | None) -> str:
     if target_date:
         return target_date.strftime("%Y-%m-%d")
 
     return (
-        datetime.now(timezone.utc)
+        datetime.now(UTC)
         .replace(hour=0, minute=0, second=0, microsecond=0)
-        .astimezone(timezone.utc)
+        .astimezone(UTC)
         - timedelta(days=1)
     ).strftime("%Y-%m-%d")
 

@@ -1,46 +1,31 @@
-import os
+"""Constants for the cleaner module.
+
+Re-exports common constants from shared module and defines module-specific ones.
+"""
+
 from enum import Enum
-from typing import Optional
 
-NULL_STRING: str = "null"
+from paper_bridge.shared import (
+    NULL_STRING,
+    EnvVars,
+    SSMParams,
+)
 
-
-class EnvVars(str, Enum):
-    AWS_PROFILE_NAME = "AWS_PROFILE_NAME"
-    BEDROCK_REGION_NAME = "BEDROCK_REGION_NAME"
-    DEFAULT_REGION_NAME = "DEFAULT_REGION_NAME"
-    LLAMA_CLOUD_API_KEY = "LLAMA_CLOUD_API_KEY"
-    SLACK_BOT_TOKEN = "SLACK_BOT_TOKEN"
-    SLACK_CHANNEL_ID = "SLACK_CHANNEL_ID"
-    TOPIC_ARN = "TOPIC_ARN"
-    UPSTAGE_API_KEY = "UPSTAGE_API_KEY"
-
-    @property
-    def value(self) -> Optional[str]:
-        return os.getenv(self.name)
+__all__ = [
+    "NULL_STRING",
+    "EnvVars",
+    "LocalPaths",
+    "SSMParams",
+]
 
 
 class LocalPaths(str, Enum):
+    """Module-specific local paths for cleaner."""
+
     FIGURES_DIR = "figures"
     LOGS_DIR = "logs"
     PAPERS_DIR = "papers"
     OUTPUTS_DIR = "outputs"
-    TEMPLATES_DIR = "summarizer/templates"
 
     CONFIG_FILE = "config.yaml"
     LOGS_FILE = "logs.txt"
-    PARSED_FILE = "parsed.json"
-    TEMPLATE_FILE = "template.html"
-
-
-class SSMParams(str, Enum):
-    BATCH_JOB_DEFINITION_INDEXER = "batch-job-definition-indexer"
-    BATCH_JOB_DEFINITION_SUMMARIZER = "batch-job-definition-summarizer"
-    BATCH_JOB_QUEUE_INDEXER = "batch-job-queue-indexer"
-    BATCH_JOB_QUEUE_SUMMARIZER = "batch-job-queue-summarizer"
-    LLAMA_CLOUD_API_KEY = "llama-cloud-api-key"
-    OPENSEARCH_ENDPOINT = "opensearch-endpoint"
-    NEPTUNE_ENDPOINT = "neptune-endpoint"
-    SLACK_BOT_TOKEN = "slack-bot-token"
-    SLACK_CHANNEL_ID = "slack-channel-id"
-    UPSTAGE_API_KEY = "upstage-api-key"

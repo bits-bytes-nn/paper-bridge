@@ -1,11 +1,13 @@
 import re
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any
+
 import boto3
 from botocore.exceptions import ClientError
 from gremlin_python.driver import client, serializer
-from opensearchpy import OpenSearch, RequestsHttpConnection, NotFoundError
+from opensearchpy import NotFoundError, OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
+
 from .logger import logger
 
 
@@ -33,27 +35,31 @@ class NeptuneClient:
                 raise
         return self._client
 
-    def delete_document(self, paper_id: str) -> Dict[str, Any]:
+    def delete_document(self, paper_id: str) -> dict[str, Any]:
         if not paper_id:
             raise ValueError("'paper_id' must not be empty")
 
         try:
+            # dedup() after EVERY .in() hop. Without it, chained .in().in().in()
+            # multiplies duplicate traversal paths and blows Neptune
+            # MemoryLimitExceededException even when the distinct node counts are
+            # tiny (same failure mode fixed in the cleaner). Per-hop dedup bounds
+            # each step to the distinct set.
             connect_queries = {
                 "connected_facts": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
-                .in('__BELONGS_TO__').hasLabel('__Statement__')
-                .in('__SUPPORTS__').hasLabel('__Fact__')
-                .dedup()
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
+                .in('__BELONGS_TO__').dedup().hasLabel('__Statement__')
+                .in('__SUPPORTS__').dedup().hasLabel('__Fact__')
                 .count()
                 """,
                 "connected_entities": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
-                .in('__BELONGS_TO__').hasLabel('__Statement__')
-                .in('__SUPPORTS__').hasLabel('__Fact__')
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
+                .in('__BELONGS_TO__').dedup().hasLabel('__Statement__')
+                .in('__SUPPORTS__').dedup().hasLabel('__Fact__')
                 .union(
                     __.out('__SUBJECT__'),
                     __.out('__OBJECT__')
@@ -66,11 +72,10 @@ class NeptuneClient:
             delete_queries = {
                 "entities": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
-                .in('__BELONGS_TO__').hasLabel('__Statement__')
-                .dedup()
-                .in('__SUPPORTS__').hasLabel('__Fact__')
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
+                .in('__BELONGS_TO__').dedup().hasLabel('__Statement__')
+                .in('__SUPPORTS__').dedup().hasLabel('__Fact__')
                 .filter(
                     __.out('__SUPPORTS__')
                     .filter(
@@ -96,11 +101,10 @@ class NeptuneClient:
                 """,
                 "facts": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
-                .in('__BELONGS_TO__').hasLabel('__Statement__')
-                .dedup()
-                .in('__SUPPORTS__').hasLabel('__Fact__')
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
+                .in('__BELONGS_TO__').dedup().hasLabel('__Statement__')
+                .in('__SUPPORTS__').dedup().hasLabel('__Fact__')
                 .filter(
                     __.out('__SUPPORTS__')
                     .filter(
@@ -117,21 +121,20 @@ class NeptuneClient:
                 """,
                 "statements": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
-                .in('__BELONGS_TO__').hasLabel('__Statement__')
-                .dedup()
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
+                .in('__BELONGS_TO__').dedup().hasLabel('__Statement__')
                 .drop()
                 """,
                 "topics": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
-                .in('__MENTIONED_IN__').hasLabel('__Topic__')
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
+                .in('__MENTIONED_IN__').dedup().hasLabel('__Topic__')
                 .drop()
                 """,
                 "chunks": f"""
                 g.V().has('__Source__', 'paper_id', '{paper_id}')
-                .in('__EXTRACTED_FROM__').hasLabel('__Chunk__')
+                .in('__EXTRACTED_FROM__').dedup().hasLabel('__Chunk__')
                 .drop()
                 """,
                 "source": f"""
@@ -162,47 +165,48 @@ class NeptuneClient:
 
             for entity_type in execution_order:
                 delete_query = delete_queries[entity_type]
-                count_query = delete_query.replace(".drop()", ".count()")
-                count = self.client.submit(count_query).all().result()
-                count_value = count[0] if count else 0
-
-                if count_value > 0:
+                # Run drop() directly (no count()-then-drop() pair): the pair ran
+                # each heavy multi-hop traversal twice, doubling the load. Wrap
+                # each stage in its own try/except so this stays best-effort: a
+                # single stage that trips Neptune's intermittent
+                # MemoryLimitExceededException no longer aborts the whole cleanup
+                # (which only runs to clear a prior version before re-indexing).
+                try:
                     self.client.submit(delete_query).all().result()
-                    results[entity_type] = count_value
-                else:
-                    results[entity_type] = 0
+                    results[entity_type] = "dropped"
+                except Exception as e:
+                    logger.warning(
+                        "Failed to drop '%s' for paper_id '%s': %s",
+                        entity_type,
+                        paper_id,
+                        str(e),
+                    )
+                    results[entity_type] = "error"
 
-                logger.debug(
-                    "Deleted %d %s for 'paper_id': '%s'",
-                    count_value,
-                    entity_type,
-                    paper_id,
+            if all(v == "error" for v in results.values()):
+                logger.warning(
+                    "All delete stages errored for 'paper_id': '%s'", paper_id
                 )
 
-            if all(count == 0 for count in results.values()):
-                logger.warning("No data found for 'paper_id': '%s'", paper_id)
-
             logger.debug(
-                "Successfully deleted document with 'paper_id': '%s'", paper_id
+                "Completed delete for 'paper_id': '%s' -> %s", paper_id, results
             )
 
             return {
                 "status": "success",
                 "paper_id": paper_id,
                 "deleted": results,
-                "shared_nodes": {
-                    "facts": connection_stats.get("connected_facts", 0)
-                    - results.get("facts", 0),
-                    "entities": connection_stats.get("connected_entities", 0)
-                    - results.get("entities", 0),
-                },
+                # connection_stats are diagnostic counts of how many fact/entity
+                # nodes were connected before deletion ("Error" string if that
+                # probe query itself failed); surfaced as-is for observability.
+                "connected": connection_stats,
             }
 
         except Exception as e:
             logger.error("Error deleting document '%s': %s", paper_id, str(e))
             raise
 
-    def batch_delete_documents(self, paper_ids: List[str]) -> List[Dict[str, Any]]:
+    def batch_delete_documents(self, paper_ids: list[str]) -> list[dict[str, Any]]:
         if not paper_ids:
             logger.warning("No 'paper_id's provided for batch deletion")
             return []
@@ -220,7 +224,7 @@ class NeptuneClient:
 
         return results
 
-    def delete_documents_by_date(self, base_date: str) -> Dict[str, Any]:
+    def delete_documents_by_date(self, base_date: str) -> dict[str, Any]:
         if not self._is_valid_date_format(base_date):
             raise ValueError("'base_date' must be in the format 'YYYY-MM-DD'")
 
@@ -233,25 +237,37 @@ class NeptuneClient:
         results = self.batch_delete_documents(paper_ids)
         return self.summarize_deletion_results(results, base_date=base_date)
 
-    def _find_paper_ids_by_date(self, base_date: str) -> List[str]:
+    def _find_paper_ids_by_date(self, base_date: str) -> list[str]:
         if not self._is_valid_date_format(base_date):
             raise ValueError("'base_date' must be in the format 'YYYY-MM-DD'")
 
         try:
-            query = f"""
-            g.V().hasLabel('__Source__')
-              .has('base_date', '{base_date}')
-              .values('paper_id')
-              .dedup()
-              .fold()
-            """
+            # base_date is stored as a datetime (the build Cypher uses
+            # datetime(...)), so a string equality has('base_date', '2026-06-03')
+            # never matches. Pull (paper_id, base_date) per __Source__ and compare
+            # the YYYY-MM-DD prefix in Python. __Source__ is one-per-paper (small).
+            query = (
+                "g.V().hasLabel('__Source__')"
+                ".valueMap('paper_id', 'base_date')"
+            )
+            rows = self.client.submit(query).all().result()
 
-            result = self.client.submit(query).all().result()
-            paper_ids = result[0] if result else []
+            paper_ids = []
+            seen = set()
+            for row in rows:
+                pid_v = row.get("paper_id")
+                bd_v = row.get("base_date")
+                pid = pid_v[0] if isinstance(pid_v, list) and pid_v else pid_v
+                bd = bd_v[0] if isinstance(bd_v, list) and bd_v else bd_v
+                if pid is None or bd is None:
+                    continue
+                if str(bd)[:10] == base_date and pid not in seen:
+                    seen.add(pid)
+                    paper_ids.append(pid)
+
             logger.info(
                 "Found %d documents with 'base_date': %s", len(paper_ids), base_date
             )
-
             return paper_ids
         except Exception as e:
             logger.error(
@@ -263,7 +279,7 @@ class NeptuneClient:
 
     def delete_documents_by_date_range(
         self, start_date: str, end_date: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         if not (
             self._is_valid_date_format(start_date)
             and self._is_valid_date_format(end_date)
@@ -289,7 +305,7 @@ class NeptuneClient:
 
     def _find_paper_ids_by_date_range(
         self, start_date: str, end_date: str
-    ) -> List[str]:
+    ) -> list[str]:
         if not (
             self._is_valid_date_format(start_date)
             and self._is_valid_date_format(end_date)
@@ -326,8 +342,8 @@ class NeptuneClient:
 
     @staticmethod
     def summarize_deletion_results(
-        results: List[Dict[str, Any]], **context: Any
-    ) -> Dict[str, Any]:
+        results: list[dict[str, Any]], **context: Any
+    ) -> dict[str, Any]:
         success_count = sum(
             1 for result in results if result.get("status") == "success"
         )
@@ -352,7 +368,7 @@ class NeptuneClient:
         pattern = r"^\d{4}-\d{2}-\d{2}$"
         return bool(re.match(pattern, date_str))
 
-    def delete_all_documents(self) -> Dict[str, Any]:
+    def delete_all_documents(self) -> dict[str, Any]:
         try:
             vertex_query = "g.V().count()"
             edge_query = "g.E().count()"
@@ -427,7 +443,7 @@ class OpenSearchClient:
             logger.error("Failed to initialize OpenSearch client: %s", str(e))
             raise
 
-    def delete_document(self, paper_id: str) -> Dict[str, Any]:
+    def delete_document(self, paper_id: str) -> dict[str, Any]:
         if not paper_id:
             raise ValueError("'paper_id' must not be empty")
 
@@ -480,7 +496,7 @@ class OpenSearchClient:
                 "error": str(e),
             }
 
-    def batch_delete_documents(self, paper_ids: List[str]) -> List[Dict[str, Any]]:
+    def batch_delete_documents(self, paper_ids: list[str]) -> list[dict[str, Any]]:
         if not paper_ids:
             logger.warning("No 'paper_id's provided for batch deletion")
             return []
@@ -500,8 +516,8 @@ class OpenSearchClient:
 
     @staticmethod
     def summarize_deletion_results(
-        results: List[Dict[str, Any]], **context: Any
-    ) -> Dict[str, Any]:
+        results: list[dict[str, Any]], **context: Any
+    ) -> dict[str, Any]:
         success_count = sum(
             1 for result in results if result.get("status") == "success"
         )
@@ -519,7 +535,7 @@ class OpenSearchClient:
 
         return summary
 
-    def delete_documents_by_date(self, base_date: str) -> Dict[str, Any]:
+    def delete_documents_by_date(self, base_date: str) -> dict[str, Any]:
         if not self._is_valid_date_format(base_date):
             raise ValueError("'base_date' must be in the format 'YYYY-MM-DD'")
 
@@ -538,7 +554,7 @@ class OpenSearchClient:
         results = self.batch_delete_documents(paper_ids)
         return self.summarize_deletion_results(results, base_date=base_date)
 
-    def _find_paper_ids_by_date(self, base_date: str) -> List[str]:
+    def _find_paper_ids_by_date(self, base_date: str) -> list[str]:
         if not self._is_valid_date_format(base_date):
             raise ValueError("'base_date' must be in the format 'YYYY-MM-DD'")
 
@@ -555,7 +571,7 @@ class OpenSearchClient:
             )
             raise
 
-    def _get_paper_ids_from_query(self, query: Dict[str, Any]) -> List[str]:
+    def _get_paper_ids_from_query(self, query: dict[str, Any]) -> list[str]:
         if not self._check_index_exists():
             logger.warning("Index '%s' does not exist", self.index)
             return []
@@ -602,7 +618,7 @@ class OpenSearchClient:
 
     def delete_documents_by_date_range(
         self, start_date: str, end_date: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         if not (
             self._is_valid_date_format(start_date)
             and self._is_valid_date_format(end_date)
@@ -628,7 +644,7 @@ class OpenSearchClient:
 
     def _find_paper_ids_by_date_range(
         self, start_date: str, end_date: str
-    ) -> List[str]:
+    ) -> list[str]:
         if not (
             self._is_valid_date_format(start_date)
             and self._is_valid_date_format(end_date)
@@ -709,7 +725,7 @@ def submit_batch_job(
     job_name: str,
     job_queue_name: str,
     job_definition_name: str,
-    parameters: Optional[Dict[str, str]] = None,
+    parameters: dict[str, str] | None = None,
 ) -> str:
     batch_client = boto3_session.client("batch")
     try:

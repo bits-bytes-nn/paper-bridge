@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from typing import Tuple, Union
+
 from llama_index.core.prompts import ChatMessage, ChatPromptTemplate, MessageRole
 
 
 @dataclass(frozen=True)
 class BasePrompt:
-    INPUT_VARIABLES: Union[str, Tuple[str, ...]]
-    OUTPUT_VARIABLES: Union[str, Tuple[str, ...]]
+    INPUT_VARIABLES: str | tuple[str, ...]
+    OUTPUT_VARIABLES: str | tuple[str, ...]
     SYSTEM_MESSAGE: str
     HUMAN_MESSAGE: str
 
@@ -22,7 +22,7 @@ class BasePrompt:
 
 class MainContentExtractionPrompt(BasePrompt):
     INPUT_VARIABLES: str = "text"
-    OUTPUT_VARIABLES: Tuple[str, ...] = ("main_content", "start_marker", "end_marker")
+    OUTPUT_VARIABLES: tuple[str, ...] = ("main_content", "start_marker", "end_marker")
 
     SYSTEM_MESSAGE: str = """
     You are a specialized content extractor for English academic papers. Your task is to precisely identify the 

@@ -20,6 +20,45 @@ resource "aws_opensearchserverless_security_policy" "encryption" {
   })
 }
 
+# Security group for the OpenSearch Serverless VPC endpoint.
+# Allows inbound HTTPS only from the client (and optional VPN) security groups,
+# keeping the collection reachable exclusively from within the VPC.
+resource "aws_security_group" "opensearch_vpce" {
+  name        = "${local.name_prefix}-opensearch-vpce"
+  description = "Security group for the OpenSearch Serverless VPC endpoint"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = concat(var.client_security_group_ids, var.vpn_security_group_ids)
+    description     = "Allow inbound HTTPS from client/VPN security groups"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow all outbound traffic"
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# VPC endpoint that makes the collection reachable privately from inside the VPC.
+resource "aws_opensearchserverless_vpc_endpoint" "this" {
+  name               = "${local.name_prefix}-vpce"
+  vpc_id             = var.vpc_id
+  subnet_ids         = var.private_subnet_ids
+  security_group_ids = [aws_security_group.opensearch_vpce.id]
+}
+
 resource "aws_opensearchserverless_security_policy" "network" {
   name        = "${local.name_prefix}-network"
   type        = "network"
@@ -35,7 +74,10 @@ resource "aws_opensearchserverless_security_policy" "network" {
         Resource     = [local.collection_resource]
       }
     ]
-    AllowFromPublic = true
+    # VPC-only by default: access is restricted to the VPC endpoint above.
+    # Public access is gated behind an explicit opt-in (default false).
+    AllowFromPublic = var.allow_public_access
+    SourceVPCEs     = var.allow_public_access ? null : [aws_opensearchserverless_vpc_endpoint.this.id]
   }])
 }
 
@@ -46,14 +88,26 @@ resource "aws_opensearchserverless_access_policy" "data" {
   policy = jsonencode([{
     Rules = [
       {
+        # Collection-level: describe only. Item/index mutation is granted at the
+        # index scope below (least-privilege over the former "aoss:*").
         ResourceType = "collection"
         Resource     = [local.collection_resource]
-        Permission   = ["aoss:*"]
+        Permission   = ["aoss:DescribeCollectionItems"]
       },
       {
+        # Index-level: the GraphRAG toolkit creates/updates indices and
+        # reads/writes documents (indexer writes + cleaner deletes; retriever
+        # reads). This is the full set of data-plane actions actually used.
         ResourceType = "index"
         Resource     = [local.index_resource]
-        Permission   = ["aoss:*"]
+        Permission = [
+          "aoss:CreateIndex",
+          "aoss:DeleteIndex",
+          "aoss:UpdateIndex",
+          "aoss:DescribeIndex",
+          "aoss:ReadDocument",
+          "aoss:WriteDocument",
+        ]
       }
     ]
     Principal = concat(
@@ -72,8 +126,8 @@ resource "aws_iam_policy" "opensearch_access" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = [
+        Effect = "Allow"
+        Action = [
           "aoss:APIAccessAll",
           "aoss:DashboardsAccessAll"
         ]
@@ -93,7 +147,7 @@ resource "aws_iam_user_policy_attachment" "client_user_attachment" {
 }
 
 resource "aws_iam_role_policy_attachment" "client_role_attachment" {
-  role       = split("/", var.client_role_arn)[1]
+  role       = var.client_role_name != null ? var.client_role_name : split("/", var.client_role_arn)[1]
   policy_arn = aws_iam_policy.opensearch_access.arn
 }
 
@@ -112,8 +166,8 @@ resource "aws_opensearchserverless_collection" "this" {
 }
 
 resource "aws_ssm_parameter" "opensearch_endpoint" {
-  name        = "/${local.name_prefix}/opensearch-endpoint"
-  type        = "String"
-  value       = aws_opensearchserverless_collection.this.collection_endpoint
-  tags        = var.tags
+  name  = "/${local.name_prefix}-${var.stage}/opensearch-endpoint"
+  type  = "String"
+  value = aws_opensearchserverless_collection.this.collection_endpoint
+  tags  = var.tags
 }

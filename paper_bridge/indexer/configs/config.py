@@ -1,9 +1,12 @@
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional, Union
+from typing import Literal
+
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, FilePath, model_validator
+from pydantic import BaseModel, Field, FilePath
+
+from paper_bridge.shared import BaseModelWithDefaults, EnvVars, LanguageModelId
 
 
 class EmbeddingsModelId(str, Enum):
@@ -12,25 +15,15 @@ class EmbeddingsModelId(str, Enum):
     TITAN_EMBED_TEXT_V2 = "amazon.titan-embed-text-v2"
 
 
-class LanguageModelId(str, Enum):
-    CLAUDE_V3_HAIKU = "anthropic.claude-3-haiku-20240307-v1:0"
-    CLAUDE_V3_5_HAIKU = "anthropic.claude-3-5-haiku-20241022-v1:0"
-    CLAUDE_V3_5_SONNET = "anthropic.claude-3-5-sonnet-20240620-v1:0"
-    CLAUDE_V3_5_SONNET_V2 = "anthropic.claude-3-5-sonnet-20241022-v2:0"
-    CLAUDE_V3_7_SONNET = "anthropic.claude-3-7-sonnet-20250219-v1:0"
-    CLAUDE_V4_SONNET = "anthropic.claude-sonnet-4-20250514-v1:0"
-    CLAUDE_V4_OPUS = "anthropic.claude-opus-4-20250514-v1:0"
-
-
-ModelIdType = Union[EmbeddingsModelId, LanguageModelId]
+ModelIdType = EmbeddingsModelId | LanguageModelId
 
 
 class ModelInfo(BaseModel):
-    dimensions: Optional[Union[int, List[int]]] = Field(default=None)
+    dimensions: int | list[int] | None = Field(default=None)
     max_sequence_length: int = Field(gt=0)
 
 
-_MODEL_INFO: Dict[ModelIdType, ModelInfo] = {
+_MODEL_INFO: dict[ModelIdType, ModelInfo] = {
     EmbeddingsModelId.COHERE_EMBED_TEXT_V3: ModelInfo(
         dimensions=1024, max_sequence_length=512
     ),
@@ -44,21 +37,29 @@ _MODEL_INFO: Dict[ModelIdType, ModelInfo] = {
     LanguageModelId.CLAUDE_V3_5_HAIKU: ModelInfo(max_sequence_length=200000),
     LanguageModelId.CLAUDE_V3_5_SONNET: ModelInfo(max_sequence_length=200000),
     LanguageModelId.CLAUDE_V3_5_SONNET_V2: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V3_7_SONNET: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_5_HAIKU: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_SONNET: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_5_SONNET: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_6_SONNET: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_OPUS: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_1_OPUS: ModelInfo(max_sequence_length=200000),
+    LanguageModelId.CLAUDE_V4_5_OPUS: ModelInfo(max_sequence_length=200000),
 }
 
 
 class ModelHandler:
     @staticmethod
-    def get_model_info(model_id: ModelIdType) -> Optional[ModelInfo]:
+    def get_model_info(model_id: ModelIdType) -> ModelInfo | None:
         return _MODEL_INFO.get(model_id)
 
     @classmethod
     def get_dimensions(
         cls,
         model_id: ModelIdType,
-        mode: Optional[str] = None,
-        index: Optional[int] = None,
-    ) -> Optional[Union[int, List[int]]]:
+        mode: str | None = None,
+        index: int | None = None,
+    ) -> int | list[int] | None:
         model_info = cls.get_model_info(model_id)
         if not model_info or model_info.dimensions is None:
             return None
@@ -80,8 +81,8 @@ class ModelHandler:
         cls,
         model_id: ModelIdType,
         as_chars: bool = False,
-        chars_per_token: Optional[float] = None,
-    ) -> Optional[int]:
+        chars_per_token: float | None = None,
+    ) -> int | None:
         model_info = cls.get_model_info(model_id)
         if not model_info:
             return None
@@ -92,7 +93,7 @@ class ModelHandler:
         return max_length
 
     @staticmethod
-    def get_provider_name(model_id: ModelIdType) -> Optional[str]:
+    def get_provider_name(model_id: ModelIdType) -> str | None:
         return model_id.split(".")[0] if "." in model_id else None
 
 
@@ -107,32 +108,25 @@ class LocalPaths(str, Enum):
     PARSED_FILE = "parsed.json"
 
 
-class BaseModelWithDefaults(BaseModel):
-    @model_validator(mode="before")
-    def set_defaults_for_none_fields(cls, values: Dict[str, Any]) -> Dict[str, Any]:
-        if not isinstance(values, dict):
-            return values
-        for field_name, field in cls.model_fields.items():
-            if values.get(field_name) is None and field.default is not None:
-                values[field_name] = field.default
-        return values
-
-
 class Resources(BaseModelWithDefaults):
     project_name: str = Field(min_length=1)
     stage: Literal["dev", "prod"] = Field(default="dev")
     default_region_name: str = Field(default="us-west-2")
     bedrock_region_name: str = Field(default="us-west-2")
-    s3_bucket_name: Optional[str] = Field(default=None)
-    s3_key_prefix: Optional[str] = Field(default=None)
+    s3_bucket_name: str | None = Field(default=None)
+    s3_key_prefix: str | None = Field(default=None)
 
 
 class Indexing(BaseModelWithDefaults):
     papers_per_day: int = Field(default=5, ge=1)
     days_to_fetch: int = Field(default=7, ge=1)
-    min_upvotes: Optional[int] = Field(default=None, ge=0)
+    min_upvotes: int | None = Field(default=None, ge=0)
+    # Paper-selection scoring weights (see shared.paper_selection.PaperScorer).
+    selection_popularity_weight: float = Field(default=0.6, ge=0)
+    selection_recency_weight: float = Field(default=0.4, ge=0)
+    selection_recency_half_life_days: float = Field(default=7.0, gt=0)
     use_llama_parse: bool = Field(default=False)
-    main_content_extraction_model_id: Optional[LanguageModelId] = Field(default=None)
+    main_content_extraction_model_id: LanguageModelId | None = Field(default=None)
     extraction_model_id: LanguageModelId
     response_model_id: LanguageModelId
     embeddings_model_id: EmbeddingsModelId
@@ -155,25 +149,32 @@ class Config(BaseModelWithDefaults):
     )
     indexing: Indexing = Field(
         default_factory=lambda: Indexing(
-            extraction_model_id=LanguageModelId.CLAUDE_V3_5_HAIKU,
-            response_model_id=LanguageModelId.CLAUDE_V3_5_SONNET_V2,
+            extraction_model_id=LanguageModelId.CLAUDE_V4_5_HAIKU,
+            response_model_id=LanguageModelId.CLAUDE_V4_6_SONNET,
             embeddings_model_id=EmbeddingsModelId.COHERE_EMBED_TEXT_V3,
         )
     )
 
     @classmethod
-    def from_yaml(cls, file_path: Union[str, Path, FilePath]) -> "Config":
+    def from_yaml(cls, file_path: str | Path | FilePath) -> "Config":
         try:
             with open(file_path, encoding="utf-8") as file:
                 config_data = yaml.safe_load(file) or {}
             return cls(**config_data)
         except (OSError, yaml.YAMLError) as e:
-            raise ValueError(f"Failed to load config from {file_path}: {str(e)}")
+            raise ValueError(f"Failed to load config from {file_path}: {str(e)}") from e
 
     @classmethod
     def load(cls) -> "Config":
         load_dotenv()
         config_path = Path(__file__).parent / LocalPaths.CONFIG_FILE.value
-        if not config_path.exists():
-            return cls()
-        return cls.from_yaml(config_path)
+        config = cls() if not config_path.exists() else cls.from_yaml(config_path)
+
+        # The S3 bucket is account/region-specific (e.g.
+        # "sagemaker-us-west-2-<acct>"), so it must NOT be committed in
+        # config.yaml. Terraform injects it as S3_BUCKET_NAME into the Batch
+        # job; locally it comes from .env. The env value, when set, wins.
+        bucket = EnvVars.S3_BUCKET_NAME.env_value
+        if bucket:
+            config.resources.s3_bucket_name = bucket
+        return config

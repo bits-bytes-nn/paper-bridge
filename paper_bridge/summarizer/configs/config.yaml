@@ -3,16 +3,23 @@ resources:
   stage: dev
   default_region_name: us-west-2
   bedrock_region_name: us-west-2
-  s3_bucket_name: sagemaker-us-west-2-998601677581
+  # s3_bucket_name is injected via the S3_BUCKET_NAME env var (Terraform in AWS,
+  # .env locally) — it is account/region-specific and must not be committed.
   s3_prefix: paper-bridge-dev
 
 summarization:
   papers_per_day: 1
   days_to_fetch: 1
   min_upvotes: 10
+  selection_popularity_weight: 0.6
+  selection_recency_weight: 0.4
+  selection_recency_half_life_days: 7.0
   parse_pdf: False
-  figure_analysis_model_id: anthropic.claude-3-haiku-20240307-v1:0
-  paper_summarization_model_id: anthropic.claude-3-7-sonnet-20250219-v1:0
+  figure_analysis_model_id: anthropic.claude-haiku-4-5-20251001-v1:0
+  figure_analysis_max_tokens: 4096
+  paper_summarization_model_id: anthropic.claude-sonnet-4-6
+  summarization_max_tokens: 8192
+  enable_prompt_caching: true
 
 retrieval:
   output_format: slack
@@ -24,4 +31,32 @@ retrieval:
   gpu_id: 0
   use_diversity: False
   use_enhancement: False
-  retrieval_summarization_model_id: anthropic.claude-3-7-sonnet-20250219-v1:0
+  retrieval_summarization_model_id: anthropic.claude-sonnet-4-6
+  retrieval_max_tokens: 8192
+  enable_prompt_caching: true
+
+trigger:
+  auto_mode:
+    enabled: true
+    source: huggingface_daily_papers
+
+input:
+  pdf_download_timeout: 120
+  temp_dir_base: /tmp/paper-bridge
+  use_md5_hash_dirs: true
+  arxiv_optimizations: true
+
+output:
+  mode: slack
+  slack:
+    enabled: true
+    html_template: template.html
+    apply_retrieval: true
+  github:
+    enabled: false
+    repo_name: null
+    base_branch: main
+    branch_prefix: paper-summaries
+    author_name: Paper Bridge Bot
+    posts_dir: _posts
+    assets_dir: assets
