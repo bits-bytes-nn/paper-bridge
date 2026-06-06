@@ -172,9 +172,7 @@ class TestCreateSlackBlocks:
         }
         blocks = H._create_slack_blocks(H.__new__(H), _paper(), retrieval)
         joined = str(blocks)
-        assert (
-            "<https://arxiv.org/abs/2404.00456|QuaRot (Hadamard rotation)>" in joined
-        )
+        assert "<https://arxiv.org/abs/2404.00456|QuaRot (Hadamard rotation)>" in joined
         # The mangled form (bare angle-bracketed text) must NOT appear.
         assert "<QuaRot (Hadamard rotation)>" not in joined
 

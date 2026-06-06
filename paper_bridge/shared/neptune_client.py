@@ -223,17 +223,16 @@ class NeptuneClient:
             # Phase 1: collect ids for every stage (no drops yet).
             for name, query in collect_queries.items():
                 try:
-                    logger.info(
-                        "Collecting '%s' ids for paper_id '%s'", name, paper_id
-                    )
+                    logger.info("Collecting '%s' ids for paper_id '%s'", name, paper_id)
                     result = self._submit_query(query)
                     ids_by_stage[name] = result[0] if result and result[0] else []
-                    logger.info(
-                        "Collected %d '%s' ids", len(ids_by_stage[name]), name
-                    )
+                    logger.info("Collected %d '%s' ids", len(ids_by_stage[name]), name)
                 except Exception as e:
                     logger.error(
-                        "Failed to collect '%s' for paper_id '%s': %s", name, paper_id, e
+                        "Failed to collect '%s' for paper_id '%s': %s",
+                        name,
+                        paper_id,
+                        e,
                     )
                     deleted[name] = "error"
                     errors.append(name)
@@ -290,9 +289,7 @@ class NeptuneClient:
                 )
         return results
 
-    def _find_paper_ids_in_range(
-        self, start_date: str, end_date: str
-    ) -> list[str]:
+    def _find_paper_ids_in_range(self, start_date: str, end_date: str) -> list[str]:
         """Return paper_ids whose base_date falls in [start_date, end_date].
 
         Enumerates __Source__ vertices and filters by date in Python rather than

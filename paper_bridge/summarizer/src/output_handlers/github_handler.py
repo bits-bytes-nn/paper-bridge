@@ -12,9 +12,6 @@ from github import Auth, Github, GithubException
 
 from paper_bridge.shared import extract_unique_urls
 
-if TYPE_CHECKING:
-    from git import Repo
-
 from ..aws_helpers import get_ssm_param_value
 from ..constants import EnvVars, SSMParams
 from ..logger import is_aws_env, logger

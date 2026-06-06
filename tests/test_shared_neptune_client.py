@@ -45,9 +45,7 @@ class TestPaperIdValidation:
         with pytest.raises(ValueError, match="must not be empty"):
             nc.delete_document("")
 
-    @pytest.mark.parametrize(
-        "bad", ["a b", "drop')", "a;b", "x'y", "../etc", "a*"]
-    )
+    @pytest.mark.parametrize("bad", ["a b", "drop')", "a;b", "x'y", "../etc", "a*"])
     def test_injection_shaped_paper_id_raises(self, bad: str) -> None:
         nc = _client_with_submit([])
         with pytest.raises(ValueError, match="Invalid 'paper_id'"):
@@ -93,7 +91,9 @@ class TestBestEffortDelete:
             q = query.strip()
             if q.endswith(".fold()"):
                 order.append("collect")
-                return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: [["v1"]]))
+                return SimpleNamespace(
+                    all=lambda: SimpleNamespace(result=lambda: [["v1"]])
+                )
             if q.startswith("g.V('v1'") and q.endswith(".drop()"):
                 order.append("drop")
             return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: []))
@@ -119,10 +119,6 @@ class TestBestEffortDelete:
     def test_collects_then_drops_by_id(self) -> None:
         # Each collect query (.fold()) yields a wrapped id list; the source drop
         # and the id-drop queries yield [].
-        ids_by_kind = {
-            "EXTRACTED_FROM__').dedup().id().fold()": ["c1", "c2"],
-        }
-
         def side_effect(q):
             if q.strip().endswith(".fold()"):
                 # Return a distinct id list per collect query so we can total it.
@@ -138,9 +134,7 @@ class TestBestEffortDelete:
         assert result["deleted_nodes"]["entities"] == 3
         assert result["deleted_nodes"]["source"] == 1
         # A drop-by-id query must have been issued (g.V('v1','v2',...).drop()).
-        assert any(
-            ".drop()" in q and "g.V('v1'" in q for q in nc._submitted
-        )
+        assert any(".drop()" in q and "g.V('v1'" in q for q in nc._submitted)
 
     def test_drop_batches_respect_size_limit(self) -> None:
         # 120 ids with _DROP_BATCH_SIZE=50 -> 3 drop batches per collect kind.
@@ -216,9 +210,7 @@ class TestMemoryLimitRetry:
             calls["n"] += 1
             if calls["n"] < 3:
                 raise Exception("MemoryLimitExceededException: out of memory")
-            return SimpleNamespace(
-                all=lambda: SimpleNamespace(result=lambda: [42])
-            )
+            return SimpleNamespace(all=lambda: SimpleNamespace(result=lambda: [42]))
 
         nc = NeptuneClient("x")
         nc._gremlin_client = MagicMock()

@@ -127,9 +127,7 @@ def _get_metadata_client() -> Any:
 
         # delay_seconds=3 is the arXiv-requested floor; num_retries gives the
         # library its own 429 backoff on top of our serialization.
-        _metadata_client = arxiv.Client(
-            page_size=100, delay_seconds=3.0, num_retries=5
-        )
+        _metadata_client = arxiv.Client(page_size=100, delay_seconds=3.0, num_retries=5)
     return _metadata_client
 
 

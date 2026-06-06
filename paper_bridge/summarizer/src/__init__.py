@@ -82,8 +82,10 @@ def __dir__() -> list[str]:
 
 
 # Eagerly bind the logger instance + is_aws_env (cheap shim) so they are never
-# shadowed by the same-named ``logger`` submodule via import-order races.
-from .logger import is_aws_env, logger  # noqa: E402, F401
+# shadowed by the same-named ``logger`` submodule via import-order races. This is
+# deliberately placed after the module body (not at the top), so suppress import
+# ordering/placement lints too.
+from .logger import is_aws_env, logger  # noqa: E402, F401, I001
 
 
 if TYPE_CHECKING:  # pragma: no cover - import-time hints for type checkers only

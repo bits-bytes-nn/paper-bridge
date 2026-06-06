@@ -137,6 +137,4 @@ class OpenSearchClient:
         body = {
             "query": {"range": {_BASE_DATE_FIELD: {"gte": start_date, "lte": end_date}}}
         }
-        return self._delete_by_query(
-            body, date_range=f"{start_date} to {end_date}"
-        )
+        return self._delete_by_query(body, date_range=f"{start_date} to {end_date}")

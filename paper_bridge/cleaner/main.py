@@ -160,7 +160,11 @@ def lambda_handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
         if diag_query:
             logger.info("DIAG query: %s", diag_query)
             diag_result = cleaner.neptune_client._submit_query(diag_query)
-            return {"statusCode": 200, "body": "diag", "result": str(diag_result)[:2000]}
+            return {
+                "statusCode": 200,
+                "body": "diag",
+                "result": str(diag_result)[:2000],
+            }
 
         result = cleaner.delete_documents_by_date_range(
             start_date=start_date, end_date=end_date
