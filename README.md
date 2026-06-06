@@ -11,7 +11,7 @@ Daily arXiv pipeline on AWS · GraphRAG (Neptune + OpenSearch) · powered by Ama
 ![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC)
 ![Bedrock](https://img.shields.io/badge/LLM-Amazon%20Bedrock%20(Claude)-green)
 
-🇰🇷 [한국어 README](./README.ko.md) · 📖 [Technical reference](./docs/tech-doc.md)
+🇰🇷 [한국어 README](./README.ko.md)
 
 </div>
 
@@ -43,8 +43,6 @@ Paper Bridge is three independent workflows that share one pair of data stores (
 ### Data flow
 
 ![Data flow](assets/paper-bridge-dataflow.drawio.png)
-
-> **Go deeper:** the full, line-by-line technical reference (every module, config field, and design decision) lives in [`docs/tech-doc.md`](docs/tech-doc.md).
 
 ---
 
@@ -106,7 +104,7 @@ poetry run black --check .  # format check
 poetry run mypy paper_bridge/shared   # type check (shared/ is the blocking gate)
 ```
 
-CI runs on GitHub Actions — lint, format, type-check, tests + coverage, Docker builds, `terraform validate`, and a security scan. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Full build / deploy / configuration details are in [`docs/tech-doc.md`](docs/tech-doc.md) (§11–§12).
+CI runs on GitHub Actions — lint, format, type-check, tests + coverage, Docker builds, `terraform validate`, and a security scan. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ---
 
