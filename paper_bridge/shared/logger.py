@@ -87,8 +87,15 @@ def create_logger(config: LoggerConfig) -> logging.Logger:
     logger = logging.getLogger(config.name)
     logger.setLevel(config.level)
     if not in_tree:
-        # Standalone tree (e.g. "app"): don't double-emit via the root logger.
+        # Standalone tree (e.g. the cleaner's "app"): handle records here and
+        # don't propagate to root.
         logger.propagate = False
+    # In-tree leaves keep propagate=True so they reach the shared parent handler
+    # (and pytest's caplog, which captures at the root). NOTE: when graphrag's
+    # set_logging_config() has added a handler to the ROOT logger, paper_bridge
+    # records are then ALSO emitted by it (graphrag's format), producing a second
+    # copy of each line in CloudWatch. This is cosmetic log noise only; we keep
+    # propagation on rather than break root-based log capture.
     return logger
 
 
