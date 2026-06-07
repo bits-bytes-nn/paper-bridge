@@ -15,9 +15,9 @@
       "y": 24,
       "width": 540,
       "height": 40,
-      "text": "Paper Bridge  -  End-to-End Workflow",
+      "text": "Paper Bridge — End-to-End Workflow",
       "fontSize": 32,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e"
     },
     {
@@ -45,7 +45,7 @@
       "height": 50,
       "text": "HuggingFace\nDaily Papers API",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -75,7 +75,7 @@
       "height": 40,
       "text": "EventBridge\n(scheduled cron)",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -89,7 +89,7 @@
       "height": 28,
       "text": "INDEXING  PHASE  (AWS Batch)",
       "fontSize": 22,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1971c2"
     },
     {
@@ -134,7 +134,7 @@
       "height": 50,
       "text": "Select + dedup\n(PaperScorer)",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -164,7 +164,7 @@
       "height": 50,
       "text": "Download PDF\n+ parse",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -194,7 +194,7 @@
       "height": 50,
       "text": "Extract main\ncontent (Haiku 4.5)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -224,7 +224,7 @@
       "height": 50,
       "text": "GraphRAG\nindex build",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -254,7 +254,7 @@
       "height": 50,
       "text": "Neptune DB\n(lexical graph)",
       "fontSize": 19,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -284,7 +284,7 @@
       "height": 50,
       "text": "OpenSearch Serverless\n(vector store)",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -298,7 +298,7 @@
       "height": 28,
       "text": "SEARCH / SUMMARIZE  PHASE  (AWS Batch)",
       "fontSize": 22,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#5f3dc4"
     },
     {
@@ -343,7 +343,7 @@
       "height": 50,
       "text": "Summarize\n(Sonnet 4.6)",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -373,7 +373,7 @@
       "height": 50,
       "text": "GraphRAG\nretrieve (compare)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -403,7 +403,7 @@
       "height": 50,
       "text": "Render HTML\n-> image",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -433,7 +433,7 @@
       "height": 50,
       "text": "Output:\nSlack / GitHub PR",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -463,7 +463,7 @@
       "height": 50,
       "text": "Cleaner Lambda\n(prune old docs)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -946,7 +946,7 @@
       "height": 60,
       "text": "Models centralized in shared config:\nSonnet 4.6 (summarize/respond),\nHaiku 4.5 (extract/figures),\ncohere embed v3 (1024-dim).",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#495057"
     }
   ]
