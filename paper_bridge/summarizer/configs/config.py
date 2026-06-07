@@ -143,4 +143,12 @@ class Config(BaseModelWithDefaults):
         bucket = EnvVars.S3_BUCKET_NAME.env_value
         if bucket:
             config.resources.s3_bucket_name = bucket
+
+        # The GitHub target repo (owner/name) is deployment-specific, so — like the
+        # S3 bucket — it is injected via the GITHUB_REPO_NAME env var (Terraform in
+        # AWS, .env locally) rather than committed to config.yaml. The env value,
+        # when set, wins over any config.yaml value.
+        github_repo = EnvVars.GITHUB_REPO_NAME.env_value
+        if github_repo:
+            config.output.github.repo_name = github_repo
         return config

@@ -4,6 +4,7 @@ import pytest
 
 from paper_bridge.shared.constants import (
     NULL_STRING,
+    EnvVars,
     Format,
     Language,
     LanguageModelId,
@@ -53,3 +54,15 @@ class TestEnums:
 
     def test_ssm_param_is_str_enum(self) -> None:
         assert SSMParams.NEPTUNE_ENDPOINT.value == "neptune-endpoint"
+
+    def test_github_token_ssm_param(self) -> None:
+        # The summarizer's GitHub PR path reads the token from this SSM parameter
+        # (Terraform provisions /{project}-{stage}/github-token as a SecureString).
+        # github_handler.py depends on this exact member existing.
+        assert SSMParams.GITHUB_TOKEN.value == "github-token"
+
+    def test_github_env_vars(self) -> None:
+        # GITHUB_TOKEN is the local-dev secret fallback; GITHUB_REPO_NAME is the
+        # deployment-specific target repo injected like S3_BUCKET_NAME.
+        assert EnvVars.GITHUB_TOKEN.name == "GITHUB_TOKEN"
+        assert EnvVars.GITHUB_REPO_NAME.name == "GITHUB_REPO_NAME"

@@ -182,3 +182,16 @@ variable "upstage_api_key" {
     error_message = "Upstage API key must be in the format 'up_' followed by 29 alphanumeric characters"
   }
 }
+
+variable "github_token" {
+  description = "GitHub personal access token used by the summarizer to open paper-summary PRs. Only needed when output.mode = 'github'."
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
+variable "github_repo_name" {
+  description = "Target GitHub repository in 'owner/name' form where the summarizer opens paper-summary PRs. Only needed when output.mode = 'github'."
+  type        = string
+  default     = null
+}

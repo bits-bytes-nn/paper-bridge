@@ -55,11 +55,7 @@ class GitHubOutputHandler(BaseOutputHandler):
                 try:
                     self._github_token = get_ssm_param_value(
                         self.boto3_session,
-                        (
-                            f"{base_path}/{SSMParams.GITHUB_TOKEN.value}"
-                            if hasattr(SSMParams, "GITHUB_TOKEN")
-                            else f"{base_path}/github-token"
-                        ),
+                        f"{base_path}/{SSMParams.GITHUB_TOKEN.value}",
                     )
                 except Exception as e:
                     logger.warning("Failed to get GitHub token from SSM: %s", e)
