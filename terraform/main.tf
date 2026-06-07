@@ -36,6 +36,8 @@ module "client" {
   personal_slack_bot_token       = var.personal_slack_bot_token
   personal_slack_channel_id      = var.personal_slack_channel_id
   upstage_api_key                = var.upstage_api_key
+  github_token                   = var.github_token
+  github_repo_name               = var.github_repo_name
   tags                           = local.common_tags
 
   depends_on = [module.base]

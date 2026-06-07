@@ -219,6 +219,29 @@ variable "upstage_api_key" {
   }
 }
 
+variable "github_token" {
+  description = "GitHub personal access token used by the summarizer to open paper-summary PRs (classic 'ghp_'/'gho_'/'ghs_'/'ghu_' or fine-grained 'github_pat_'). Only needed when output.mode = 'github'."
+  type        = string
+  default     = null
+  sensitive   = true
+
+  validation {
+    condition     = var.github_token == null || can(regex("^(gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]+)$", var.github_token))
+    error_message = "GitHub token must be a classic PAT ('ghp_'/'gho_'/'ghs_'/'ghu_' + 36+ alphanumerics) or a fine-grained token ('github_pat_' + alphanumerics/underscores)"
+  }
+}
+
+variable "github_repo_name" {
+  description = "Target GitHub repository in 'owner/name' form where the summarizer opens paper-summary PRs. Only needed when output.mode = 'github'."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.github_repo_name == null || can(regex("^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$", var.github_repo_name))
+    error_message = "GitHub repository must be in 'owner/name' form (e.g. 'bits-bytes-nn/paper-bridge')"
+  }
+}
+
 variable "neptune_instance_type" {
   description = "Neptune database instance type"
   type        = string

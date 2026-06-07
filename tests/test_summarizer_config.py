@@ -106,3 +106,25 @@ class TestFromYaml:
         path.write_text(yaml_text, encoding="utf-8")
         cfg = Config.from_yaml(path)
         assert cfg.summarization.summarization_max_tokens == 8192
+
+
+@pytest.mark.unit
+class TestEnvInjection:
+    """Config.load() injects deployment-specific values from the environment so
+    they are NOT committed to config.yaml (Terraform sets them on the Batch job,
+    .env locally). The env value wins over any config.yaml value."""
+
+    def test_github_repo_name_injected_from_env(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.setenv("GITHUB_REPO_NAME", "owner/some-repo")
+        cfg = Config.load()
+        assert cfg.output.github.repo_name == "owner/some-repo"
+
+    def test_github_repo_name_unset_keeps_config_default(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        monkeypatch.delenv("GITHUB_REPO_NAME", raising=False)
+        cfg = Config.load()
+        # config.yaml ships github.repo_name: null, so it stays None when unset.
+        assert cfg.output.github.repo_name is None

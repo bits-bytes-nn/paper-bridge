@@ -1203,6 +1203,15 @@ resource "aws_ssm_parameter" "upstage_api_key" {
   tags        = var.tags
 }
 
+resource "aws_ssm_parameter" "github_token" {
+  count       = var.github_token != null ? 1 : 0
+  name        = "${local.ssm_param_prefix}/github-token"
+  description = "GitHub token for the summarizer's paper-summary PR workflow"
+  type        = "SecureString"
+  value       = var.github_token
+  tags        = var.tags
+}
+
 # Notification resources
 resource "aws_sns_topic" "this" {
   name         = local.resource_names.sns_topic
@@ -1334,7 +1343,7 @@ resource "aws_batch_job_definition" "summarizer" {
       }
     }
 
-    environment = [
+    environment = concat([
       {
         name  = "AWS_DEFAULT_REGION"
         value = data.aws_region.current.name
@@ -1355,7 +1364,11 @@ resource "aws_batch_job_definition" "summarizer" {
         name  = "IMAGE_VERSION"
         value = local.summarizer_hash
       }
-    ]
+      ],
+      var.github_repo_name != null ? [{
+        name  = "GITHUB_REPO_NAME"
+        value = var.github_repo_name
+    }] : [])
   })
 
   retry_strategy {
