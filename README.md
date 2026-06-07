@@ -38,11 +38,11 @@ Paper Bridge is three independent workflows that share one pair of data stores (
 
 ### Architecture
 
-![AWS Architecture](assets/paper-bridge-architecture.drawio.png)
+![AWS Architecture](docs/diagrams/paper-bridge-architecture.drawio.png)
 
 ### Data flow
 
-![Data flow](assets/paper-bridge-dataflow.drawio.png)
+![Data flow](docs/diagrams/paper-bridge-dataflow.drawio.png)
 
 ---
 

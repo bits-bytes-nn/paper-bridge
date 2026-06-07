@@ -15,9 +15,9 @@
       "y": 24,
       "width": 600,
       "height": 40,
-      "text": "GraphRAG Pipeline  -  Index & Retrieve",
+      "text": "GraphRAG Pipeline — Index & Retrieve",
       "fontSize": 32,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e"
     },
     {
@@ -29,7 +29,7 @@
       "height": 28,
       "text": "INDEXING  (indexer/src/indexer.py)",
       "fontSize": 21,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1971c2"
     },
     {
@@ -57,7 +57,7 @@
       "height": 50,
       "text": "Paper text\n(SourceDocument)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -87,7 +87,7 @@
       "height": 60,
       "text": "Chunk\nSentenceSplitter\n1024 / 128",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -117,7 +117,7 @@
       "height": 60,
       "text": "Extract propositions\n+ topics + entities\n(Haiku 4.5)",
       "fontSize": 15,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -147,7 +147,7 @@
       "height": 60,
       "text": "Build pipeline\nGraphConstruction\n+ VectorIndexing",
       "fontSize": 15,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -177,7 +177,7 @@
       "height": 45,
       "text": "Neptune\nlexical graph",
       "fontSize": 17,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -207,7 +207,7 @@
       "height": 60,
       "text": "OpenSearch\ncohere embed v3\n1024-dim",
       "fontSize": 15,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -221,7 +221,7 @@
       "height": 28,
       "text": "RETRIEVAL  (summarizer/src/retriever.py)",
       "fontSize": 21,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#5f3dc4"
     },
     {
@@ -249,7 +249,7 @@
       "height": 60,
       "text": "Paper + query\n\"compare to\nrelated work\"",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -279,7 +279,7 @@
       "height": 60,
       "text": "Traversal-based\nsearch over graph\n+ vector store",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -309,7 +309,7 @@
       "height": 60,
       "text": "Rerank +\npost-process\n(diversity)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -339,7 +339,7 @@
       "height": 60,
       "text": "Synthesized insight\n(Sonnet 4.6)\n+ references",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#1e1e1e",
       "textAlign": "center",
       "verticalAlign": "middle"
@@ -715,7 +715,7 @@
       "height": 30,
       "text": "Toolkit: graphrag-toolkit v2.2.1 (Neptune + OpenSearch). v3 upgrade staged - see eval/graphrag-migration.md",
       "fontSize": 15,
-      "fontFamily": 1,
+      "fontFamily": 5,
       "strokeColor": "#495057"
     }
   ]

@@ -3,7 +3,7 @@
     <mxCell id="0"/>
     <mxCell id="1" parent="0"/>
 
-    <mxCell id="title" value="Paper Bridge — AWS Architecture" style="text;html=1;fontSize=26;fontStyle=1;align=center;verticalAlign=middle;fontColor=#232F3E;" vertex="1" parent="1">
+    <mxCell id="title" value="Paper Bridge — AWS Architecture" style="text;html=1;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;fontColor=#232F3E;" vertex="1" parent="1">
       <mxGeometry x="560" y="24" width="620" height="40" as="geometry"/>
     </mxCell>
 
@@ -98,62 +98,62 @@
 
     <!-- ===== Edges ===== -->
     <!-- EventBridge triggers both compute jobs -->
-    <mxCell id="e_eb_batch" value="trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#C7157B;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="batch">
+    <mxCell id="e_eb_batch" value="trigger" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#C7157B;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="batch">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="e_eb_lambda" value="trigger" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#C7157B;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="lambda">
+    <mxCell id="e_eb_lambda" value="trigger" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#C7157B;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="lambda">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="599" y="610"/><mxPoint x="479" y="610"/></Array>
       </mxGeometry>
     </mxCell>
 
     <!-- External inputs into Batch -->
-    <mxCell id="e_hf_batch" value="fetch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#D79B00;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="hf" target="batch">
+    <mxCell id="e_hf_batch" value="fetch" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#D79B00;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="hf" target="batch">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="e_arxiv_batch" value="PDF + metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#D79B00;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="arxiv" target="batch">
+    <mxCell id="e_arxiv_batch" value="PDF + metadata" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#D79B00;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="arxiv" target="batch">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
 
     <!-- Batch -> data stores -->
-    <mxCell id="e_batch_neptune" value="index / query" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="neptune">
+    <mxCell id="e_batch_neptune" value="index / query" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="neptune">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="e_batch_vpce" value="vectors" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="vpce">
+    <mxCell id="e_batch_vpce" value="vectors" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="vpce">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="479" y="699"/></Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="e_vpce_aoss" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vpce" target="aoss">
+    <mxCell id="e_vpce_aoss" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="vpce" target="aoss">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
 
     <!-- Lambda (cleaner) prunes both stores -->
-    <mxCell id="e_lambda_neptune" value="prune" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="lambda" target="neptune">
+    <mxCell id="e_lambda_neptune" value="prune" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="lambda" target="neptune">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="635" y="699"/></Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="e_lambda_vpce" value="prune" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="lambda" target="vpce">
+    <mxCell id="e_lambda_vpce" value="prune" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="lambda" target="vpce">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
 
     <!-- Batch -> Bedrock (top lane) -->
-    <mxCell id="e_batch_bedrock" value="InvokeModel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#01A88D;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="bedrock">
+    <mxCell id="e_batch_bedrock" value="InvokeModel" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#01A88D;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="bedrock">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="479" y="150"/><mxPoint x="1399" y="150"/></Array>
       </mxGeometry>
     </mxCell>
 
     <!-- Batch -> deliver (bottom-left lane) -->
-    <mxCell id="e_batch_deliver" value="deliver" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#82B366;fontSize=11;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="deliver">
+    <mxCell id="e_batch_deliver" value="deliver" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#82B366;fontSize=11;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="batch" target="deliver">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="285" y="484"/><mxPoint x="285" y="592"/></Array>
       </mxGeometry>
     </mxCell>
 
     <!-- Compute -> Supporting services (single grouped IAM edge) -->
-    <mxCell id="e_svc" value="uses (IAM)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#9E9E9E;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="neptune" target="svcs">
+    <mxCell id="e_svc" value="uses (IAM)" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#9E9E9E;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="neptune" target="svcs">
       <mxGeometry relative="1" as="geometry">
         <Array as="points"><mxPoint x="900" y="800"/><mxPoint x="1200" y="800"/><mxPoint x="1200" y="615"/></Array>
       </mxGeometry>

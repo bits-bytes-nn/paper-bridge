@@ -157,6 +157,17 @@ jobs:
           docker run --rm --entrypoint python pb-${{ matrix.app }}:ci \
             -c "import paper_bridge.shared; print('shared OK')"
 
+      # The cleaner is a Lambda container: it copies main.py to LAMBDA_TASK_ROOT
+      # and runs the handler via CMD ["main.lambda_handler"]. Import that exact
+      # module + attribute so a broken handler chain (bad import, renamed handler)
+      # fails CI, not the first scheduled invocation — symmetric with the
+      # summarizer pipeline-entrypoint smoke-import below.
+      - name: Smoke-import (cleaner lambda handler)
+        if: matrix.app == 'cleaner'
+        run: |
+          docker run --rm --entrypoint python pb-cleaner:ci \
+            -c "import main; assert callable(main.lambda_handler); print('cleaner handler OK')"
+
       - name: Smoke-import (summarizer backends co-import)
         if: matrix.app == 'summarizer'
         run: |
