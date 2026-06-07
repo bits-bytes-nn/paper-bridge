@@ -203,7 +203,7 @@ class NeptuneClient:
             #                                           => per-source, NOT shared)
             #   Fact      -SUPPORTS->       Statement  (fact id = hash(value)
             #                                           => SHARED across papers)
-            #   Entity    -SUBJECT/OBJECT-> ...        (entity id = hash(value,cls)
+            #   Entity    -SUBJECT/OBJECT-> Fact       (entity id = hash(value,cls)
             #                                           => SHARED across papers)
             #
             # chunks/statements/topics are per-source: every one reachable from
@@ -233,11 +233,21 @@ class NeptuneClient:
                 f".by(id()).by(out('{sup}').id().fold())"
                 ".fold()"
             )
+            # Entities are the OUT side of SUBJECT/OBJECT (Entity -SUBJECT/OBJECT->
+            # Fact), so from a fact we reach its entities with .in(), and an
+            # entity's owning facts with .out() — the mirror of the fact query
+            # above (which reaches facts from statements via .in(SUPPORTS) and
+            # their owners via .out(SUPPORTS)). Using out()/in() here (the old
+            # code) walks the edges backwards: .union(out(subj),out(obj)) from a
+            # fact matches nothing, so no entity was ever collected — and had the
+            # first hop matched, the .in() owner projection would have returned an
+            # empty owner set, making every entity look "wholly owned" and get
+            # dropped even when a surviving shared fact still pointed at it.
             entity_owners_query = (
                 f"{statements}.in('{sup}').dedup().hasLabel('{fact}')"
-                f".union(out('{subj}'), out('{obj}')).dedup().hasLabel('{entity}')"
+                f".union(in('{subj}'), in('{obj}')).dedup().hasLabel('{entity}')"
                 f".project('id', 'owners')"
-                f".by(id()).by(in('{subj}', '{obj}').id().fold())"
+                f".by(id()).by(out('{subj}', '{obj}').id().fold())"
                 ".fold()"
             )
 

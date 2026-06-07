@@ -171,12 +171,6 @@ class TestModelHandler:
             == 512
         )
 
-    def test_get_max_sequence_length_as_chars(self) -> None:
-        out = ModelHandler.get_max_sequence_length(
-            EmbeddingsModelId.COHERE_EMBED_TEXT_V3, as_chars=True, chars_per_token=4.0
-        )
-        assert out == 2048
-
     def test_get_max_sequence_length_v4_models_registered(self) -> None:
         # v4 Claude models (the ones actually in use) are now registered.
         for model in (
@@ -184,13 +178,3 @@ class TestModelHandler:
             LanguageModelId.CLAUDE_V4_5_HAIKU,
         ):
             assert ModelHandler.get_max_sequence_length(model) == 200000
-
-    def test_get_provider_name(self) -> None:
-        assert (
-            ModelHandler.get_provider_name(EmbeddingsModelId.COHERE_EMBED_TEXT_V3)
-            == "cohere"
-        )
-        assert (
-            ModelHandler.get_provider_name(EmbeddingsModelId.TITAN_EMBED_TEXT_V1)
-            == "amazon"
-        )

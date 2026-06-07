@@ -84,49 +84,49 @@
     </mxCell>
 
     <!-- ===== trigger edges ===== -->
-    <mxCell id="t1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneI">
+    <mxCell id="t1" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneI">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="210" y="155"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="t2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneS">
+    <mxCell id="t2" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneS">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="570" y="155"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="t3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneC">
+    <mxCell id="t3" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#E7157B;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="eb" target="laneC">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="930" y="155"/></Array></mxGeometry>
     </mxCell>
 
     <!-- ===== Indexer step edges ===== -->
-    <mxCell id="ei12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i1" target="i2"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="ei23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i2" target="i3"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="ei34" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i3" target="i4"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="ei45" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i4" target="i5"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="ei56" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i5" target="i6"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ei12" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i1" target="i2"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ei23" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i2" target="i3"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ei34" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i3" target="i4"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ei45" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i4" target="i5"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ei56" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#A85100;" edge="1" parent="1" source="i5" target="i6"><mxGeometry relative="1" as="geometry"/></mxCell>
 
     <!-- ===== Summarizer step edges ===== -->
-    <mxCell id="es12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="es23" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="es34" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="es45" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
-    <mxCell id="es56" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="es12" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="es23" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s2" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="es34" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="es45" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s4" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="es56" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#1F5FA8;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
 
     <!-- ===== Cleaner step edge ===== -->
-    <mxCell id="ec12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#5A2EBF;" edge="1" parent="1" source="c1" target="c2"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="ec12" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#5A2EBF;" edge="1" parent="1" source="c1" target="c2"><mxGeometry relative="1" as="geometry"/></mxCell>
 
     <!-- ===== to stores: all enter the store icons from the LEFT (entryX=0),
          routed up a shared vertical channel at x=1200 so no line crosses an
          icon or its caption. ===== -->
-    <mxCell id="ei_write" value="write graph" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i6" target="neptune">
+    <mxCell id="ei_write" value="write graph" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i6" target="neptune">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="628"/><mxPoint x="1200" y="256"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="ei_write_v" value="+ vectors" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i6" target="aoss">
+    <mxCell id="ei_write_v" value="+ vectors" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i6" target="aoss">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1220" y="628"/><mxPoint x="1220" y="406"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="es_read" value="read (retrieval)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s4" target="aoss">
+    <mxCell id="es_read" value="read (retrieval)" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#8C4FFF;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s4" target="aoss">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="476"/><mxPoint x="1200" y="406"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="es_llm" value="InvokeModel" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#01A88D;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="bedrock">
+    <mxCell id="es_llm" value="InvokeModel" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;strokeColor=#01A88D;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="bedrock">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1180" y="398"/><mxPoint x="1180" y="561"/></Array></mxGeometry>
     </mxCell>
-    <mxCell id="ec_del" value="delete (date range)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="neptune">
+    <mxCell id="ec_del" value="delete (date range)" style="edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;rounded=1;html=1;endArrow=block;dashed=1;strokeColor=#C925D1;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="neptune">
       <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1180" y="354"/><mxPoint x="1180" y="256"/></Array></mxGeometry>
     </mxCell>
   </root>

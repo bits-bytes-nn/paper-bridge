@@ -247,14 +247,16 @@ def run_summarization_pipeline(
     retrievals: dict[str, dict[str, str] | str] = {}
     try:
         if apply_retrieval:
-            retriever = PaperRetriever(
+            # Context manager so the retriever's query thread pool is shut down
+            # when the batch completes (no leaked worker threads / FDs).
+            with PaperRetriever(
                 config,
                 boto3_session=default_boto3_session,
                 profile_name=profile_name,
                 language=language_enum,
                 output_format=output_format_enum,
-            )
-            retrievals = asyncio.run(retriever.retrieve_batch(papers))
+            ) as retriever:
+                retrievals = asyncio.run(retriever.retrieve_batch(papers))
     except Exception as e:
         logger.warning("Retrieval failed: %s. Proceeding with summaries only.", e)
 
