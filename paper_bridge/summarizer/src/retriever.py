@@ -260,7 +260,9 @@ class PaperRetriever:
             profile_name=profile_name,
             region_name=config.resources.bedrock_region_name,
         )
-        self._executor = ThreadPoolExecutor(max_workers=self.MAX_WORKERS)
+        self._executor: ThreadPoolExecutor | None = ThreadPoolExecutor(
+            max_workers=self.MAX_WORKERS
+        )
 
         if self.config.retrieval.retrieval_summarization_model_id is None:
             raise ValueError("'retrieval_summarization_model_id' is not set")
@@ -280,6 +282,24 @@ class PaperRetriever:
         self.output_parser = HTMLTagOutputParser(
             tag_names=RetrievalSummarizationPrompt.OUTPUT_VARIABLES
         )
+
+    def close(self) -> None:
+        """Shut down the query thread pool. Idempotent."""
+        executor = getattr(self, "_executor", None)
+        if executor is not None:
+            executor.shutdown(wait=False)
+            self._executor = None
+
+    def __enter__(self) -> PaperRetriever:
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        self.close()
+
+    def __del__(self) -> None:
+        # Safety net if the caller forgets the context manager; GC'ing a
+        # PaperRetriever should not leak the 4 worker threads.
+        self.close()
 
     def _initialize_llm(self, model_id: str) -> BedrockConverse:
         from llama_index.llms.bedrock_converse import BedrockConverse

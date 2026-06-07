@@ -189,6 +189,34 @@ class TestBestEffortDelete:
             if q.startswith("g.V('id"):
                 assert q.count("'id") <= NeptuneClient._DROP_BATCH_SIZE
 
+    def test_entity_collect_query_traverses_edges_in_schema_direction(self) -> None:
+        # Regression: the schema is Entity -SUBJECT/OBJECT-> Fact, so from a Fact
+        # the entities are reached with .in(SUBJECT/OBJECT) and an entity's owning
+        # facts with .out(SUBJECT/OBJECT) -- the mirror of the fact query (facts =
+        # statements.in(SUPPORTS); owners = fact.out(SUPPORTS)). A prior bug walked
+        # both hops backwards (out()/in()), so the candidate hop matched nothing
+        # (no entity ever deleted) and, had it matched, the owner set would have
+        # been empty -> every entity wrongly treated as wholly owned. The other
+        # tests match queries by structural markers and cannot catch a direction
+        # inversion, so assert the exact traversal here.
+        captured: list[str] = []
+
+        def side_effect(q):
+            captured.append(q)
+            return [[]] if q.strip().endswith(".fold()") else []
+
+        nc = _client_with_submit(side_effect)
+        nc.delete_document("2606.03458")
+
+        entity_q = next(q for q in captured if _is_entity_project(q))
+        # Candidate entities: reached from facts via .in(SUBJECT)/.in(OBJECT).
+        assert ".union(in('__SUBJECT__'), in('__OBJECT__'))" in entity_q
+        # Owning facts of an entity: reached via .out(SUBJECT, OBJECT).
+        assert ".by(out('__SUBJECT__', '__OBJECT__').id().fold())" in entity_q
+        # The backwards forms must be gone.
+        assert "union(out('__SUBJECT__'), out('__OBJECT__'))" not in entity_q
+        assert "in('__SUBJECT__', '__OBJECT__').id().fold()" not in entity_q
+
     def test_per_hop_dedup_present_in_collect_queries(self) -> None:
         # Guards the MemoryLimitExceeded fix: every .in() hop must be deduped.
         captured = []

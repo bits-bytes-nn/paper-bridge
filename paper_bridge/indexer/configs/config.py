@@ -80,24 +80,9 @@ class ModelHandler:
         return dimensions
 
     @classmethod
-    def get_max_sequence_length(
-        cls,
-        model_id: ModelIdType,
-        as_chars: bool = False,
-        chars_per_token: float | None = None,
-    ) -> int | None:
+    def get_max_sequence_length(cls, model_id: ModelIdType) -> int | None:
         model_info = cls.get_model_info(model_id)
-        if not model_info:
-            return None
-
-        max_length = model_info.max_sequence_length
-        if as_chars and chars_per_token:
-            return int(max_length * chars_per_token)
-        return max_length
-
-    @staticmethod
-    def get_provider_name(model_id: ModelIdType) -> str | None:
-        return model_id.split(".")[0] if "." in model_id else None
+        return model_info.max_sequence_length if model_info else None
 
 
 class LocalPaths(str, Enum):
