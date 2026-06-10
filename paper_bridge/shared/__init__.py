@@ -12,6 +12,7 @@ from .constants import (
     URLs,
 )
 from .logger import LoggerConfig, create_logger, is_aws_env
+from .notifications import format_alarm
 from .paper_selection import (
     PaperLike,
     PaperScorer,
@@ -37,6 +38,8 @@ __all__ = [
     "LoggerConfig",
     "create_logger",
     "is_aws_env",
+    # Notifications
+    "format_alarm",
     # Text utils
     "convert_markdown_to_slack_links",
     "extract_unique_urls",

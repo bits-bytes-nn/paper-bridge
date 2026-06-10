@@ -22,6 +22,7 @@ from paper_bridge.cleaner.src import (
 # which is ambiguous with the ``logger`` submodule depending on import order —
 # see the note in summarizer/main.py.
 from paper_bridge.cleaner.src.logger import logger
+from paper_bridge.shared import format_alarm
 
 
 class DateFormatError(Exception):
@@ -115,14 +116,12 @@ def send_failure_notification(
     session: boto3.Session, topic_arn: str, date_range: str, error: Exception
 ) -> None:
     sns = session.client("sns")
-    message = (
-        f"Paper Bridge Cleaner Failed\n\n"
-        f"Date Range: {date_range}\n"
-        f"Error: {error}"
+    subject, message = format_alarm(
+        event="Cleaner",
+        status="FAILED",
+        fields={"Date Range": date_range, "Error": str(error)},
     )
-    sns.publish(
-        TopicArn=topic_arn, Message=message, Subject="Paper Bridge Cleaner Failure"
-    )
+    sns.publish(TopicArn=topic_arn, Message=message, Subject=subject)
 
 
 def lambda_handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
