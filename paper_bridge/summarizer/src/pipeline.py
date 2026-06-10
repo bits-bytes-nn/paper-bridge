@@ -21,7 +21,7 @@ from pathlib import Path
 
 import boto3
 
-from paper_bridge.shared import extract_unique_urls
+from paper_bridge.shared import extract_unique_urls, format_alarm
 from paper_bridge.summarizer.configs import Config
 from paper_bridge.summarizer.src import (
     ArxivInputHandler,
@@ -395,13 +395,13 @@ def send_failure_notification(
     date_str = get_formatted_date(target_date)
     paper_ids = [paper.arxiv_id for paper in papers]
 
-    message = (
-        f"Paper summarization failed\n"
-        f"Date: {date_str}\n"
-        f"Paper IDs: {', '.join(paper_ids)}\n"
-        f"Error: {error_message or 'Unknown error'}"
-    )
-    sns.publish(TopicArn=topic_arn, Message=message, Subject="Paper Bridge Failure")
+    fields = {"Date": date_str}
+    if paper_ids:
+        fields["Paper IDs"] = ", ".join(paper_ids)
+    fields["Error"] = error_message or "Unknown error"
+
+    subject, message = format_alarm(event="Summarizer", status="FAILED", fields=fields)
+    sns.publish(TopicArn=topic_arn, Message=message, Subject=subject)
 
 
 def get_formatted_date(target_date: datetime | None) -> str:

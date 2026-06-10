@@ -21,6 +21,7 @@ from paper_bridge.indexer.src import (
 # which is ambiguous with the ``logger`` submodule depending on import order —
 # see the note in summarizer/main.py.
 from paper_bridge.indexer.src.logger import logger
+from paper_bridge.shared import format_alarm
 
 
 class DateFormatError(Exception):
@@ -158,13 +159,13 @@ def send_failure_notification(
     date_str = get_formatted_date(target_date)
     paper_ids = [paper.arxiv_id for paper in papers]
 
-    message = (
-        f"Paper indexing failed\n"
-        f"Date: {date_str}\n"
-        f"Paper IDs: {', '.join(paper_ids)}\n"
-        f"Error: {error_message or 'Unknown error'}"
-    )
-    sns.publish(TopicArn=topic_arn, Message=message, Subject="Paper Bridge Failure")
+    fields = {"Date": date_str}
+    if paper_ids:
+        fields["Paper IDs"] = ", ".join(paper_ids)
+    fields["Error"] = error_message or "Unknown error"
+
+    subject, message = format_alarm(event="Indexer", status="FAILED", fields=fields)
+    sns.publish(TopicArn=topic_arn, Message=message, Subject=subject)
 
 
 def get_formatted_date(target_date: datetime | None) -> str:
